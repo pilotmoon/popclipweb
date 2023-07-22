@@ -92,7 +92,7 @@ In consideration of the subscription fees paid by you to Setapp, I grant you a n
 
 ## Extensions
 
-I (and others) may publish downloadable add-on extensions that add functionality to the product. For the purposes of these terms, extensions are separate software applications, and are not part of the product. Extensions are subject to their own license terms (see the extension documentation for details).
+I and others may publish downloadable add-on extensions that add functionality to the product and may contain executable code. For the purposes of these terms, such extensions are separate software applications, and are not part of the product. Extensions are subject to their own license terms (see the extension documentation for details).
 
 ## Changes to these terms
 
