@@ -10,7 +10,7 @@
 
 *You*: a customer who has bought a license for a product.
 
-*Product*: The PopClip software application. The scope of the product does not include any extensions or other software I make available as free downloadable add-ons (see [Extensions](#extensions) below).
+*Product*: The PopClip software application. The scope of the product does not include any extensions (see [Extensions](#extensions) below).
 
 *App Store*: Apple's Mac App Store.
 
