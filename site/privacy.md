@@ -47,11 +47,11 @@ My websites are:
 
 When you access my websites, your visit will be recorded in my server logs. The logs include your IP address, referrer URL, browser and operating system identifier, date and time, and error code.
 
-My websites carry no advertising and set no tracking or analytics cookies. Session cookies are used only to provide functionality such as user preferences and login session. I do not use any external analytics services.
+My websites carry no advertising and set no tracking or analytics cookies. Session cookies are used to provide functionality such as user preferences and login session. I do not use any external analytics services.
 
 ### Forum
 
-The [PopClip forum](https://forum.popclip.app/) is self-hosted using [Discourse](https://www.discourse.org/) forum software. The forum contains its own [privacy notice](https://forum.popclip.app/privacy).
+The PopClip forum (<https://forum.popclip.app>) is self-hosted using [Discourse](https://www.discourse.org/) forum software. The forum contains its own [privacy notice](https://forum.popclip.app/privacy).
 
 ## Mailing list
 

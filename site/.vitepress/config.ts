@@ -38,10 +38,9 @@ export default defineConfig({
           },
           {
             text: "Policies",
-            link: "/guide/basics",
             items: [
-              { text: "Terms of license", link: "/terms.md" },
-              { text: "Privacy policy", link: "/privacy.md" },
+              { text: "Terms of License", link: "/terms.md" },
+              { text: "Privacy Policy", link: "/privacy.md" },
             ],
           },
         ],
