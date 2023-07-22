@@ -100,8 +100,8 @@ I may update these terms from time to time, and I will publish the latest versio
 
 ## Appendix A: Authorized resellers and subscription services
 
-* Worldwide: Paddle.com Market Limited, UK (<https://paddle.com>)
+* Worldwide: Paddle (<https://paddle.com>)
 
-* Worldwide (subscriptions): Setapp Limited, Ireland (<https://setapp.com>)
+* Worldwide (subscriptions): Setapp (<https://setapp.com>)
 
-* In China: Digitalychee Technology Co, Ltd (<https://lizhi.io>) - [certificate](/lizhi)
+* In China: Digitalychee (<https://lizhi.io>) - [certificate](/lizhi)
