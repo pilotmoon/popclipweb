@@ -10,7 +10,29 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     logo: "/icon128.png",
     nav: [
-      { text: "Documentation", link: "/guide/" },
+      {
+        text: "Documentation",
+        activeMatch: "^(/guide/|/ref/|/changelog)",
+        items: [
+          { text: "User Guide", link: "/guide/" },
+          { text: "Developer Reference", link: "/ref/" },
+        ],
+      },
+      {
+        text: "Extensions",
+        items: [
+          { text: "Directory", link: "/x/" },          
+          { text: "Create Your Own", link: "/create/" },          
+        ],
+      },
+      {
+        text: "Support",
+        items: [
+          { text: "Support & Feedback", link: "/guide/support" },
+          { text: "PopClip Forum", link: "https://forum.popclip.app/" },
+        ],
+      },
+     
     ],
     sidebar: [
       {
@@ -32,17 +54,14 @@ export default defineConfig({
           {
             text: "Version History",
             link: "/changelog",
-            // items: [
-            //   { text: "Version History (Beta)", link: "/changelog-beta" },
-            // ],
           },
-          {
-            text: "Policies",
-            items: [
-              { text: "Terms of License", link: "/terms.md" },
-              { text: "Privacy Policy", link: "/privacy.md" },
-            ],
-          },
+        ],
+      },
+      {
+        text: "Policies",
+        items: [
+          { text: "Terms of License", link: "/terms.md" },
+          { text: "Privacy Policy", link: "/privacy.md" },
         ],
       },
       {
