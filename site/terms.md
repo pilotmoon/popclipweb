@@ -8,9 +8,9 @@
 
 *I*, *me*: Nicholas Moore, a sole trader in the United Kingdom doing business using the the trading name [Pilotmoon Software](https://pilotmoon.com/about).
 
-*You*: a customer who has bought a license for a product.
+*Product*: the PopClip software application. The scope of the product does not include any extensions (see [Extensions](#extensions) below).
 
-*Product*: The PopClip software application. The scope of the product does not include any extensions (see [Extensions](#extensions) below).
+*You*: a free trial user or a licensed user of the product.
 
 *App Store*: Apple's Mac App Store.
 
