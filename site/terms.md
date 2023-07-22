@@ -104,4 +104,4 @@ I may update these terms from time to time, and I will publish the latest versio
 
 * Worldwide (subscriptions): Setapp Limited, Ireland (<https://setapp.com>)
 
-* In China: DIGITALYCHEE TECHNOLOGY CO, LTD (<https://lizhi.io>) - [certificate](/lizhi)
+* In China: Digitalychee Technology Co, Ltd (<https://lizhi.io>) - [certificate](/lizhi)
