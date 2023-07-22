@@ -2,9 +2,9 @@
 outline: deep
 ---
 
-# PopClip User Guide
+# Introduction
 
-This guide aims to help you understand, explore, and get the most out of PopClip.
+This documentation aims to help you understand, explore, and get the most out of PopClip.
 
 ## What is PopClip?
 

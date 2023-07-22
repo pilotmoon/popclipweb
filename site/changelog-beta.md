@@ -6,6 +6,6 @@
 import { data } from './changelog.data.ts'
 </script>
 
-# Version History (Beta)
+# Beta Version History
 
 <span v-html="data.htmlBeta"></span>

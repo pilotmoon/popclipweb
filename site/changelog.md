@@ -8,6 +8,6 @@ import { data } from './changelog.data.ts'
 
 # Version History
 
-See also: [Version History (Beta)](/changelog-beta)
+See also: [Beta Version History](/changelog-beta)
 
 <span v-html="data.html"></span>
