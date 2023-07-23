@@ -12,9 +12,7 @@ head:
 PopClip is available to buy as one-time purchase, either by buying a license
 key, or via the Mac App Store.
 
-<!-- markdownlint-disable MD033 -->
-- <a href="#buy" id="buy_license_link">Buy License Key</a>
-<!-- markdownlint-enable MD033 -->
+- <a href ="#!" id="buy_license_link">Buy License Key</a>
 - [Buy from Mac App Store](https://pilotmoon.com/link/popclip/mas)
 
 ## Subscribe
@@ -44,64 +42,49 @@ Students can get a discount on PopClip via
 and Setapp edition?** The editions are identical in features and abilities. The
 only difference is the way you obtain the app and how you buy it.
 
-<!-- markdownlint-disable MD033 -->
-<!-- markdownlint-disable MD010 -->
 <script setup>
 import { onMounted } from 'vue'
 
 function setupPaddle() {
 	console.log("setupPaddle");
+	const buyLink = document.getElementById('buy_license_link');
 	Paddle.Setup({ vendor: 161988, eventCallback: function(args) {
 		console.log("Paddle event", args);
-		if (args.event === "Checkout.Close") {
-			// remove the `#buy` fragment from the URL
-			window.location.hash = "";
+		if (args.event === 'Checkout.Close') {
+			// window.location.hash = "";
 		}
 	}});
+	function openCheckout() {
+		console.log("openCheckout");
+		Paddle.Checkout.open({ product: 818494 });
+	}
+	buyLink.addEventListener('click', openCheckout);
+
 	Paddle.Product.Prices(818494, function(prices) {
 		console.log(prices);
 		let price = prices.price.gross;
 		if (price.endsWith('.00')) {
 			price = price.substring(0, price.length - 3);
 		}
-		function openCheckout(coupon) {
-			Paddle.Checkout.open({ product: 818494, coupon });
-		}
 		if(prices.country === 'CN') {
-			document.getElementById('buy_license_link').textContent = 'Buy License Key (¥89)';
-			document.getElementById('buy_license_link').href = 'https://store.lizhi.io/site/products/id/612?cid=pchuiuf8';
+			buyLink.textContent = 'Buy License Key (¥89)';
+			buyLink.href = 'https://store.lizhi.io/site/products/id/612?cid=pchuiuf8';
+			buyLink.removeEventListener('click', openCheckout);
 		} else {
-			document.getElementById('buy_license_link').textContent = `Buy License Key (${price})`;
-		}
-		function checkHash() {
-			console.log("checkHash", window.location.hash)
-			const parts = /#buy(?:\?coupon=([A-Za-z0-9]+))?/.exec(window.location.hash);
-			if (parts) {
-				openCheckout(parts[1]);
-			}
-		}
-		checkHash();
-		window.addEventListener('hashchange', checkHash);
+			buyLink.textContent = `Buy License Key (${price})`;
+		}		
 	});
 }
 
-onMounted(() => {
-	console.log(`onMounted`);
-    const paddleScript = document.createElement("script");
-    paddleScript.setAttribute(
-        "src",
-        "https://cdn.paddle.com/paddle/paddle.js"
-    );
-    paddleScript.setAttribute(
-        'language',
-        'javascript'
-    )
-    paddleScript.defer = true
-    paddleScript.onload = () => {
-        setupPaddle()
-    }
+function loadPaddleScript() {
+	console.log("loadPaddleScript");
+	const paddleScript = document.createElement("script");
+	paddleScript.setAttribute("src", "https://cdn.paddle.com/paddle/paddle.js");
+	paddleScript.defer = true
+	paddleScript.onload = setupPaddle
 	document.head.appendChild(paddleScript);
-});
+}
+
+onMounted(loadPaddleScript);
 
 </script>
-<!-- markdownlint-enable MD033 -->
