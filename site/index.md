@@ -6,13 +6,16 @@ hero:
   name: "PopClip for Mac"
   text: "Instant text actions"
   tagline: TEMPORARY PAGE. PopClip appears when you select text in any app, giving you instant access to useful actions.
+  image:
+    src: /Hero.png
+    alt: PopClip screenshot
   actions:
     - theme: brand
       text: Download Free Trial
-      link: \#download
+      link: /download
     - theme: alt
       text: Buy
-      link: \#buy
+      link: /buy
 
 features:
   - title: Feature A

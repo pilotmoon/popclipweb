@@ -1,5 +1,4 @@
 import { defineConfig } from "vitepress";
-import { getSidebar } from "vitepress-plugin-auto-sidebar";
 import imageFigures from "markdown-it-image-figures";
 
 // https://vitepress.dev/reference/site-config
@@ -43,14 +42,14 @@ export default defineConfig({
           { text: "Basics", link: "/guide/basics" },
           { text: "Settings", link: "/guide/settings" },
           { text: "Extensions", link: "/guide/extensions" },
-          { text: "Support and Feedback", link: "/guide/support" },
+          { text: "Support & Feedback", link: "/guide/support" },
         ],
       },
       {
         text: "App Information",
         items: [
           { text: "Download", link: "" },
-          { text: "Purchase", link: "" },
+          { text: "Purchase", link: "/buy" },
           {
             text: "Version History",
             link: "/changelog",
@@ -73,6 +72,10 @@ export default defineConfig({
           { text: "Browsers", link: "/kb/compatibility" },
         ],
       },
+      {
+        text: 'Developer Reference',
+        link: '/ref/'
+      }
     ],
     // socialLinks: [
     //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
