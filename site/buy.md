@@ -2,52 +2,7 @@
 head:
 - - script
   - src: https://developer.setapp.com/setapp-banner/index.js
-- - script
-  - src: https://cdn.paddle.com/paddle/paddle.js   
-- - script	
-  - {}
-  - |
-    function setupPaddle() {
-    Paddle.Setup({ vendor: 161988, eventCallback: function(args) {
-    console.log("Paddle event", args);
-    if (args.event === "Checkout.Close") {
-    // remove the `#buy` fragment from the URL
-    window.location.hash = "";
-    }
-    }});
-    Paddle.Product.Prices(818494, function(prices) {
-    console.log(prices);
-    let price = prices.price.gross;
-    if (price.endsWith('.00')) {
-    price = price.substring(0, price.length - 3);
-    }
-    function openCheckout(coupon) {
-    Paddle.Checkout.open({ product: 818494, coupon });
-    }
-    if(prices.country === 'CN') {
-    document.getElementById('buy_license_link').textContent = 'Buy License Key (¥89)';
-    document.getElementById('buy_license_link').href = 'https://store.lizhi.io/site/products/id/612?cid=pchuiuf8';
-    } else {
-    document.getElementById('buy_license_link').textContent = `Buy License Key (${price})`;
-    }
-    function checkHash() {
-    console.log("checkHash", window.location.hash)
-    const parts = /#buy(?:\?coupon=([A-Za-z0-9]+))?/.exec(window.location.hash);
-    if (parts) {
-    openCheckout(parts[1]);
-    }
-    }
-    checkHash();
-    window.addEventListener('hashchange', checkHash);		
-    });
-    }
-    if (document.readyState === 'loading') {
-    console.log("LOADINGG");
-    document.addEventListener('DOMContentLoaded', setupPaddle);
-    } else {
-    console.log("GONOW");
-    setupPaddle();
-    }	  
+    async: true
 
 ---
 # Purchase PopClip
@@ -88,3 +43,65 @@ Students can get a discount on PopClip via
 **What are the differences between the Mac App Store edition, Standalone edition
 and Setapp edition?** The editions are identical in features and abilities. The
 only difference is the way you obtain the app and how you buy it.
+
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD010 -->
+<script setup>
+import { onMounted } from 'vue'
+
+function setupPaddle() {
+	console.log("setupPaddle");
+	Paddle.Setup({ vendor: 161988, eventCallback: function(args) {
+		console.log("Paddle event", args);
+		if (args.event === "Checkout.Close") {
+			// remove the `#buy` fragment from the URL
+			window.location.hash = "";
+		}
+	}});
+	Paddle.Product.Prices(818494, function(prices) {
+		console.log(prices);
+		let price = prices.price.gross;
+		if (price.endsWith('.00')) {
+			price = price.substring(0, price.length - 3);
+		}
+		function openCheckout(coupon) {
+			Paddle.Checkout.open({ product: 818494, coupon });
+		}
+		if(prices.country === 'CN') {
+			document.getElementById('buy_license_link').textContent = 'Buy License Key (¥89)';
+			document.getElementById('buy_license_link').href = 'https://store.lizhi.io/site/products/id/612?cid=pchuiuf8';
+		} else {
+			document.getElementById('buy_license_link').textContent = `Buy License Key (${price})`;
+		}
+		function checkHash() {
+			console.log("checkHash", window.location.hash)
+			const parts = /#buy(?:\?coupon=([A-Za-z0-9]+))?/.exec(window.location.hash);
+			if (parts) {
+				openCheckout(parts[1]);
+			}
+		}
+		checkHash();
+		window.addEventListener('hashchange', checkHash);
+	});
+}
+
+onMounted(() => {
+	console.log(`onMounted`);
+    const paddleScript = document.createElement("script");
+    paddleScript.setAttribute(
+        "src",
+        "https://cdn.paddle.com/paddle/paddle.js"
+    );
+    paddleScript.setAttribute(
+        'language',
+        'javascript'
+    )
+    paddleScript.defer = true
+    paddleScript.onload = () => {
+        setupPaddle()
+    }
+	document.head.appendChild(paddleScript);
+});
+
+</script>
+<!-- markdownlint-enable MD033 -->
