@@ -44,20 +44,24 @@ only difference is the way you obtain the app and how you buy it.
 
 <script setup>
 import { onMounted } from 'vue'
+import { loadScript } from '/loadScript'
 
-function setupPaddle() {
-	console.log("setupPaddle");
-	const buyLink = document.getElementById('buy_license_link');
-	Paddle.Setup({ vendor: 161988, eventCallback: function(args) {
-		console.log("Paddle event", args);
-		if (args.event === 'Checkout.Close') {
-			// window.location.hash = "";
-		}
-	}});
+onMounted(async () => {
+	console.log("onMounted");
+
+	if (typeof Paddle === "undefined") {
+		await loadScript("https://cdn.paddle.com/paddle/paddle.js");
+		Paddle.Setup({ vendor: 161988, eventCallback: function(args) {
+			console.log("Paddle event", args);
+		}});
+	}
+
 	function openCheckout() {
 		console.log("openCheckout");
 		Paddle.Checkout.open({ product: 818494 });
 	}
+
+	const buyLink = document.getElementById('buy_license_link');
 	buyLink.addEventListener('click', openCheckout);
 
 	Paddle.Product.Prices(818494, function(prices) {
@@ -74,17 +78,5 @@ function setupPaddle() {
 			buyLink.textContent = `Buy License Key (${price})`;
 		}		
 	});
-}
-
-function loadPaddleScript() {
-	console.log("loadPaddleScript");
-	const paddleScript = document.createElement("script");
-	paddleScript.setAttribute("src", "https://cdn.paddle.com/paddle/paddle.js");
-	paddleScript.defer = true
-	paddleScript.onload = setupPaddle
-	document.head.appendChild(paddleScript);
-}
-
-onMounted(loadPaddleScript);
-
+});
 </script>
