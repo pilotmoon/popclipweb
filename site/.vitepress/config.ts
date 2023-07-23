@@ -1,5 +1,4 @@
 import { defineConfig } from "vitepress";
-import imageFigures from "markdown-it-image-figures";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

@@ -8,14 +8,16 @@
  * -------------------------------------------------------------------------- */
 
  :root {
-  --vp-c-brand: #646cff;
-  --vp-c-brand-light: #747bff;
-  --vp-c-brand-lighter: #9499ff;
-  --vp-c-brand-lightest: #bcc0ff;
-  --vp-c-brand-dark: #535bf2;
-  --vp-c-brand-darker: #454ce1;
-  --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
+  --vp-c-brand: rgb(32, 105, 231);
+  --vp-c-brand-light: rgb(66, 142, 237);
+  --vp-c-brand-lighter: rgb(100, 178, 244);
+  --vp-c-brand-lightest: rgb(165, 206, 250);
+  --vp-c-brand-dark: rgb(21, 83, 179);
+  --vp-c-brand-darker: rgb(16, 64, 154);
+  --vp-c-brand-dimm: rgba(32, 105, 231, 0.08);
 }
+
+
 
 /**
  * Component: Button

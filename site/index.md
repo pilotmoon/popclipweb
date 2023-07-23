@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "PopClip for Mac"
   text: "Instant text actions"
-  tagline: TEMPORARY PAGE. PopClip appears when you select text in any app, giving you instant access to useful actions.
+  tagline: PopClip appears when you select text in any app, giving you instant access to useful actions.
   image:
     src: /Hero.png
     alt: PopClip screenshot
@@ -18,11 +18,11 @@ hero:
       link: /buy
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: A multi-tool for text
+    details: Whether it's copying, pasting, searching, or sharing, PopClip streamlines your workflow and saves you time.
+  - title: Rich extension library
+    details:  From productivity boosters to language translation, the library of extensions has tools for a huge range of tasks..
+  - title: Make it yours
+    details: Create your own custom extensions to make PopClip do just what you want.
 ---
 
