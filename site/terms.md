@@ -28,8 +28,8 @@ Products you buy through the App Store are delivered to you by Apple using the A
 
 App Store purchases are subject to Apple's [standard End User License Agreement (EULA)](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/).
 
-::: info
-The Apple standard EULA entitles you to install and use the product on any Mac that you own or control.
+::: tip App store purchases and multiple Macs
+The App Store EULA lets you install and use the product on any Mac that you own or control. You can install PopClip on a new Mac by signing in to the store with the same Apple ID you used to purchase the product.
 :::
 
 ## License key purchases
@@ -50,7 +50,7 @@ The license key is unique to you and may only be used by you and, for a multi us
 
 * Multi user license: A multi user license is purchased when you specify a quantity of 2 or more at the checkout. You may use it to activate the product on any number of machines, for use by no more than the specified number of people simulaneously.
 
-::: info
+::: tip About Multi-user Licenses
  A multi user license is appropriate for a business who wants to buy a product for use by several employees. Please specify the number of users in the quantity field at checkout. You will receive a single license key to be shared between the licensed users.
 :::
 
@@ -64,7 +64,7 @@ Your App Store or license key purchase entitles you to lifetime use of the versi
 
 App Store and license key purchases are separate license agreements and are not transferable between each other. Purchasing on the App Store does not entitle you to receive a license key for the same product. If you wish, you may buy a license key separately, in addition to your App Store purchase.
 
-::: info
+::: tip Discount for App Store customers
 I am currently offering a 50% discount on license key purchase to existing App Store customers of the same product. Please email proof of your App Store purchase to <a href="mailto:support@pilotmoon.com">support@pilotmoon.com</a> and I will send you a coupon code.
 :::
 
@@ -80,7 +80,7 @@ For license key purchases, you may request a refund from from me for 30 days fro
 
 You may also have the right to request a refund directly from the reseller, according to the reseller's terms and conditions.
 
-::: info
+::: tip Please try before you buy
 I make a loss on all refunds due to transaction fees. Therefore, I ask that you make use of the free trial before buying, and only ask for a refund in exceptional circumstances.
 :::
 
