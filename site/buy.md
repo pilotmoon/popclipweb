@@ -1,10 +1,4 @@
----
-head:
-- - script
-  - src: https://developer.setapp.com/setapp-banner/index.js
-    async: true
 
----
 # Purchase PopClip
 
 ## One-time Purchase
@@ -20,12 +14,7 @@ key, or via the Mac App Store.
 PopClip is also available as part of a
 [Setapp subscription](https://go.setapp.com/stp304?refAppId=159&refVendorId=92).
 
-<setapp-custom-banner
- iconUrl="https://store.setapp.com/app/159/7358/icon-1674034338-63c7bca20925e.png"
- appName="PopClip"
- appId="159"
- vendorId="92"
-></setapp-custom-banner>
+<setapp-custom-banner iconUrl="/icon512.png" appName="PopClip" appId="159" vendorId="92"></setapp-custom-banner>
 
 ## Terms and Conditions
 
@@ -42,15 +31,15 @@ Students can get a discount on PopClip via
 and Setapp edition?** The editions are identical in features and abilities. The
 only difference is the way you obtain the app and how you buy it.
 
-<script setup>
+<script setup language="ts">
 import { onMounted } from 'vue'
 import { loadScript } from '/loadScript'
 
 onMounted(async () => {
-	console.log("onMounted");
+	loadScript("/external-js/setapp.js");
 
-	if (typeof Paddle === "undefined") {
-		await loadScript("https://cdn.paddle.com/paddle/paddle.js");
+  // only call paddle setup when script is first loaded, not on subsequent navigations
+	if (await loadScript("/external-js/paddle.js")) {
 		Paddle.Setup({ vendor: 161988, eventCallback: function(args) {
 			console.log("Paddle event", args);
 		}});
