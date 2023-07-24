@@ -4,8 +4,6 @@
 
 # DIGITALYCHEE
 
-![](digitalychee@3x.webp)
-
 ## 授权证明
 
 **Pilotmoon Software** 授权 **苏州荔枝数码科技有限公司** 为中国区官方合作伙伴，  
