@@ -6,8 +6,14 @@
 PopClip is available to buy as one-time purchase, either by buying a license
 key, or via the Mac App Store.
 
-- <a href ="#!" id="buy_license_link">Buy License Key</a>
-- [Buy from Mac App Store](https://pilotmoon.com/link/popclip/mas)
+<div class="container">
+    <div class="box">
+			<a href="#!" id="buy_license_link">Buy License Key</a>
+		</div>
+    <div class="box">
+			<a href="https://apps.apple.com/app/popclip/id445189367?mt=12" id="buy_mas_link">Buy from Mac App Store</a>
+		</div>
+</div>
 
 ## Subscribe
 
@@ -31,29 +37,33 @@ Students can get a discount on PopClip via
 and Setapp edition?** The editions are identical in features and abilities. The
 only difference is the way you obtain the app and how you buy it.
 
-<script setup language="ts">
+<script setup>
 import { onMounted } from 'vue'
-import { loadScript } from '/loadScript'
+import { loadScript } from '/buy-src/loadScript.ts'
+import { masInfo } from '/buy-src/appstore.ts'
+import * as config from '/buy-src/config.json'
 
 onMounted(async () => {
 	loadScript("/external-js/setapp.js");
 
   // only call paddle setup when script is first loaded, not on subsequent navigations
 	if (await loadScript("/external-js/paddle.js")) {
-		Paddle.Setup({ vendor: 161988, eventCallback: function(args) {
+		Paddle.Setup({ vendor: config.paddle.vendorId, eventCallback: function(args) {
 			console.log("Paddle event", args);
 		}});
 	}
 
 	function openCheckout() {
 		console.log("openCheckout");
-		Paddle.Checkout.open({ product: 818494 });
+		Paddle.Checkout.open({ product: config.paddle.productId });
 	}
 
 	const buyLink = document.getElementById('buy_license_link');
+	const masLink = document.getElementById('buy_mas_link');
+
 	buyLink.addEventListener('click', openCheckout);
 
-	Paddle.Product.Prices(818494, function(prices) {
+	Paddle.Product.Prices(config.paddle.productId, function(prices) {
 		console.log(prices);
 		let price = prices.price.gross;
 		if (price.endsWith('.00')) {
@@ -65,7 +75,11 @@ onMounted(async () => {
 			buyLink.removeEventListener('click', openCheckout);
 		} else {
 			buyLink.textContent = `Buy License Key (${price})`;
-		}		
+		}
+
+		const info = masInfo(config.appstore.appId, prices.country);
+		console.log(info);
+		masLink.href = info.url;
 	});
 });
 </script>
