@@ -32,41 +32,43 @@ Your purchase is subject to the [Terms of License](/terms).
 Students can get a discount on PopClip via
 [Student App Centre](https://studentappcentre.com/app/popclip).
 
-## Purchase FAQs
+<!-- ## Purchase FAQs
 
 **What are the differences between the Mac App Store edition, Standalone edition
 and Setapp edition?** The editions are identical in features and abilities. The
-only difference is the way you obtain the app and how you buy it.
+only difference is the way you obtain the app and how you buy it. -->
 
 <script setup>
-	import { onMounted, ref, computed } from 'vue'
+	import { onMounted, reactive, computed } from 'vue'
 	import { loadScript } from '/buy-src/loadScript.ts'
 	import { getCountryInfo } from '/buy-src/getCountryInfo.ts'
 	import { getMacAppStoreLink } from '/buy-src/getMacAppStoreLink.ts'
+	import { getFlagEmoji } from '/buy-src/getFlagEmoji.ts'
 	import * as config from '/buy-src/config.json'
 
-	// vue refs
-	const countryCode = ref("")
-	const countryName = ref("")
-	const appStoreCode = ref("")
-	const paddlePrice = ref("")
+	const info = reactive({
+		countryCode: "",
+		countryName: "",
+		appStoreCode: "",
+		paddlePrice: "",
+	});
 
-	const isLizhi = computed(() => config.lizhi.countries.includes(countryCode.value));
+	const isLizhi = computed(() => config.lizhi.countries.includes(info.countryCode));
+	const buyLink = computed(() => isLizhi.value ? config.lizhi.storeUrl : "#!");
+	const buyTarget = computed(() => isLizhi.value ? "_blank" : "");
+	const masLink = computed(() => getMacAppStoreLink(
+		config.apple.appId, config.apple.slug, info.appStoreCode
+	));
 	const priceDisplay = computed(() => {
-  	if (countryCode.value === "") {
+  	if (!info.countryCode) {
 			return "Loading price..."
 		}
 		function adjustPriceForDisplay(price) {
 			return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
 		}
-		const price = isLizhi.value ? config.lizhi.price : adjustPriceForDisplay(paddlePrice.value);
-		return `${getFlagEmoji(countryCode.value)} ${price}`
+		const price = isLizhi.value ? config.lizhi.price : adjustPriceForDisplay(info.paddlePrice);
+		return `${getFlagEmoji(info.countryCode)} ${price}`
 	});
-	const buyLink = computed(() => isLizhi.value ? config.lizhi.storeUrl : "#!");
-	const buyTarget = computed(() => isLizhi.value ? "_blank" : "");
-	const masLink = computed(() => getMacAppStoreLink(
-		config.apple.appId, config.apple.slug, appStoreCode.value
-	));
 
 	function buyClicked(event) {
 		if (isLizhi.value) {
@@ -75,14 +77,6 @@ only difference is the way you obtain the app and how you buy it.
 			console.log("Opening Paddle checkout");
 			Paddle.Checkout.open({ product: config.paddle.productId });
 		}
-	}
-
-	function getFlagEmoji(countryCode) {
-		const codePoints = countryCode
-			.toUpperCase()
-			.split('')
-			.map(char => 127397 + char.charCodeAt());
-		return String.fromCodePoint(...codePoints);
 	}
 
 	onMounted(async () => {
@@ -95,14 +89,14 @@ only difference is the way you obtain the app and how you buy it.
 			}});
 		}
 
-		Paddle.Product.Prices(config.paddle.productId, function(prices) {
-			console.log("paddle prices", prices);
-			countryCode.value = prices.country;
-			paddlePrice.value = prices.price.gross;
-			const info = getCountryInfo(prices.country);
-			console.log("getCountryInfo", info);
-			countryName.value = info.countryName;
-			appStoreCode.value = info.appStoreCode;
+		Paddle.Product.Prices(config.paddle.productId, function(paddlePrices) {
+			console.log("paddle prices", paddlePrices);
+			const countryInfo = getCountryInfo(paddlePrices.country);
+			console.log("info", info);
+			info.countryCode = paddlePrices.country;
+			info.paddlePrice = paddlePrices.price.gross;
+			info.countryName = countryInfo.countryName;
+			info.appStoreCode = countryInfo.appStoreCode;
 		});
 	});
 </script>

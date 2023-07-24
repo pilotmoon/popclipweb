@@ -22,7 +22,6 @@ export function getCountryInfo(countryCode: any) {
   }  
   const itunesInfo = itunesCountries.find((x) => x[1] === countryCode);
   return {
-    countryCode,
     appStoreCode: itunesInfo?.[1] ?? "",
     countryName: paddleCountries[countryCode] ?? "Unknown country"
   };
