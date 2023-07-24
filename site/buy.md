@@ -1,66 +1,3 @@
-<style module>
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-	width: 100%;
-}
-
-.box {
-  background-color: var(--vp-c-bg-soft);
-	border-radius: 8px;
-  width: 49%; /* slightly less than half to allow some room for margins */
-  padding: 16px;
-  margin: 8px 0;
-	text-align: center;
-  box-sizing: border-box;
-}
-
-.box a.button {
-	text-decoration: none;
-	margin: 8px 0 6px 0;
-	background-color: var(--vp-button-brand-bg);
-	color: var(--vp-button-brand-text);
-	border-radius: 20px;
-	padding: 0 20px;
-	line-height: 38px;
-	font-size: 14px;
-	font-weight: 600;
-	border: 1px solid var(--vp-button-brand-border);
-	display: inline-block;
-}
-
-.box span.price {
-	font-size: 14px;
-	display: inline-block;
-}
-
-.box a.button:hover {
-	background-color: var(--vp-button-brand-hover-bg);
-	color: var(--vp-button-brand-hover-text);
-	border: 1px solid var(--vp-button-brand-hover-border);
-}
-
-.box a.button:active {
-	text-decoration: none;
-	background-color: var(--vp-button-brand-active-bg);
-	color: var(--vp-button-brand-active-text);
-	border: 1px solid var(--vp-button-brand-active-border);
-}
-
-.box img.buybadge {
-	display: inline-block;
-	margin-top: 8px;
-	height: 40px;
-}
-
-@media (max-width: 768px) {
-  .box {
-    width: 100%;
-  }
-}
-</style>
-
 # Buy PopClip
 
 ## One-time Purchase
@@ -173,3 +110,66 @@ only difference is the way you obtain the app and how you buy it. -->
 		});
 	});
 </script>
+
+<style module>
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+	width: 100%;
+}
+
+.box {
+  background-color: var(--vp-c-bg-soft);
+	border-radius: 8px;
+  width: 49%; /* slightly less than half to allow some room for margins */
+  padding: 16px;
+  margin: 8px 0;
+	text-align: center;
+  box-sizing: border-box;
+}
+
+.box a.button {
+	text-decoration: none;
+	margin: 8px 0 6px 0;
+	background-color: var(--vp-button-brand-bg);
+	color: var(--vp-button-brand-text);
+	border-radius: 20px;
+	padding: 0 20px;
+	line-height: 38px;
+	font-size: 14px;
+	font-weight: 600;
+	border: 1px solid var(--vp-button-brand-border);
+	display: inline-block;
+}
+
+.box span.price {
+	font-size: 14px;
+	display: inline-block;
+}
+
+.box a.button:hover {
+	background-color: var(--vp-button-brand-hover-bg);
+	color: var(--vp-button-brand-hover-text);
+	border: 1px solid var(--vp-button-brand-hover-border);
+}
+
+.box a.button:active {
+	text-decoration: none;
+	background-color: var(--vp-button-brand-active-bg);
+	color: var(--vp-button-brand-active-text);
+	border: 1px solid var(--vp-button-brand-active-border);
+}
+
+.box img.buybadge {
+	display: inline-block;
+	margin-top: 8px;
+	height: 40px;
+}
+
+@media (max-width: 768px) {
+  .box {
+    width: 100%;
+  }
+}
+</style>
