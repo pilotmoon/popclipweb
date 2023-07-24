@@ -3,6 +3,7 @@ import { onMounted, reactive, computed } from 'vue'
 import { loadScript } from '../loadScript.ts'
 import { getCountryInfo } from './getCountryInfo.ts'
 import { getMacAppStoreLink } from './getMacAppStoreLink.ts'
+import Button from '../Button.vue'
 import * as config from '../config.json'
 
 const info = reactive({
@@ -57,7 +58,8 @@ onMounted(async () => {
             <span>Buy from the Mac App Store</span><br>
             <a :href="masLink" target="_blank">
                 <img :class="$style.buybadge" src="/masbadge.svg" alt="Download on the Mac App Store">
-            </a>
+            </a><br>
+            <span :class="$style.price"></span>
         </div>
         <div :class="$style.box" :hidden="!isLizhi || !isInfoLoaded">
             <span>Buy License Key from DIGITALYCHEE</span><br>
@@ -68,9 +70,7 @@ onMounted(async () => {
         </div>
         <div :class="$style.box">
             <span>Buy License Key from Paddle</span><br>
-            <a :class="$style.button" href="#!" @click="openPaddleCheckout">
-                Buy
-            </a><br>
+            <Button :class="$style.buybutton" text="Buy" href="#!" @click="openPaddleCheckout" theme="brand" /><br>
             <span :class="$style.price">{{ isInfoLoaded ? "" : "Loading price..." }}{{ roundPrice(info.paddlePrice)
             }}</span>
         </div>
@@ -95,18 +95,9 @@ onMounted(async () => {
     box-sizing: border-box;
 }
 
-.box a.button {
-    text-decoration: none;
+.box .buybutton {
     margin: 8px 0 6px 0;
-    background-color: var(--vp-button-brand-bg);
-    color: var(--vp-button-brand-text);
-    border-radius: 20px;
-    padding: 0 20px;
-    line-height: 38px;
-    font-size: 14px;
-    font-weight: 600;
-    border: 1px solid var(--vp-button-brand-border);
-    display: inline-block;
+    text-decoration: none;
 }
 
 .box span.price {
@@ -114,24 +105,16 @@ onMounted(async () => {
     display: inline-block;
 }
 
-.box a.button:hover {
-    background-color: var(--vp-button-brand-hover-bg);
-    color: var(--vp-button-brand-hover-text);
-    border: 1px solid var(--vp-button-brand-hover-border);
-}
-
-.box a.button:active {
-    text-decoration: none;
-    background-color: var(--vp-button-brand-active-bg);
-    color: var(--vp-button-brand-active-text);
-    border: 1px solid var(--vp-button-brand-active-border);
-}
-
 .box img.buybadge {
-    display: inline-block;
-    margin-top: 8px;
+    display: block;
+    margin: 8px 0 0px 0;
     height: 40px;
 }
+
+.box a {
+    display: inline-block;    
+}
+
 
 @media (max-width: 768px) {
     .box {
