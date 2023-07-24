@@ -1,7 +1,8 @@
 {
     "paddle": {
         "vendorId": 161988,
-        "productId": 818494
+        "productId": 818494,
+        "script": "/external-js/paddle.js"
     },
     "apple": {
         "appId": "445189367",
@@ -11,5 +12,8 @@
         "storeUrl": "https://lizhi.shop/site/products/id/612?cid=pchuiuf8",
         "price": "CN¥89",
         "countries": ["CN", "TW", "MO", "HK"]
+    },
+    "setapp": {
+        "script": "/external-js/setapp.js"
     }
 }
