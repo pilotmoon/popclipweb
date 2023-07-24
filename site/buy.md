@@ -63,11 +63,10 @@ only difference is the way you obtain the app and how you buy it. -->
   	if (!info.countryCode) {
 			return "Loading price..."
 		}
-		function adjustPriceForDisplay(price) {
-			return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
-		}
-		const price = isLizhi.value ? config.lizhi.price : adjustPriceForDisplay(info.paddlePrice);
-		return `${getFlagEmoji(info.countryCode)} ${price}`
+		const price = isLizhi.value ? config.lizhi.price : info.paddlePrice;
+		return `${getFlagEmoji(info.countryCode)} ${
+			price.endsWith('.00') ? price.substring(0, price.length - 3) : price
+		}`
 	});
 
 	function buyClicked(event) {
