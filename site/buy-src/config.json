@@ -3,7 +3,13 @@
         "vendorId": 161988,
         "productId": 818494
     },
-    "appstore": {
-        "appId": 445189367
+    "apple": {
+        "appId": "445189367",
+        "slug": "popclip"
+    },
+    "lizhi": {
+        "storeUrl": "https://lizhi.shop/site/products/id/612?cid=pchuiuf8",
+        "price": "¥89",
+        "countries": ["CN"]
     }
 }

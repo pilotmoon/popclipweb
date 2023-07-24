@@ -1,5 +1,4 @@
-{
-  "data": [
+[
     [1, "AF", "AFG", "Afghanistan"],
     [2, "AL", "ALB", "Albania"],
     [3, "DZ", "DZA", "Algeria"],
@@ -172,5 +171,4 @@
     [170, "YE", "YEM", "Yemen"],
     [171, "ZM", "ZMB", "Zambia"],
     [172, "ZW", "ZWE", "Zimbabwe"]
-  ]
-}
+]

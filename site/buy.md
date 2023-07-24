@@ -1,4 +1,3 @@
-
 # Purchase PopClip
 
 ## One-time Purchase
@@ -8,10 +7,12 @@ key, or via the Mac App Store.
 
 <div class="container">
     <div class="box">
-			<a href="#!" id="buy_license_link">Buy License Key</a>
+			<a :href="buyLink" :target="buyTarget" @click="buyClicked">
+				Buy License Key ({{ priceDisplay }})
+			</a>
 		</div>
     <div class="box">
-			<a href="https://apps.apple.com/app/popclip/id445189367?mt=12" id="buy_mas_link">Buy from Mac App Store</a>
+			<a :href="masLink" target="_blank">Buy from Mac App Store</a>
 		</div>
 </div>
 
@@ -38,48 +39,70 @@ and Setapp edition?** The editions are identical in features and abilities. The
 only difference is the way you obtain the app and how you buy it.
 
 <script setup>
-import { onMounted } from 'vue'
-import { loadScript } from '/buy-src/loadScript.ts'
-import { masInfo } from '/buy-src/appstore.ts'
-import * as config from '/buy-src/config.json'
+	import { onMounted, ref, computed } from 'vue'
+	import { loadScript } from '/buy-src/loadScript.ts'
+	import { getCountryInfo } from '/buy-src/getCountryInfo.ts'
+	import { getMacAppStoreLink } from '/buy-src/getMacAppStoreLink.ts'
+	import * as config from '/buy-src/config.json'
 
-onMounted(async () => {
-	loadScript("/external-js/setapp.js");
+	// vue refs
+	const countryCode = ref("")
+	const countryName = ref("")
+	const appStoreCode = ref("")
+	const paddlePrice = ref("")
 
-  // only call paddle setup when script is first loaded, not on subsequent navigations
-	if (await loadScript("/external-js/paddle.js")) {
-		Paddle.Setup({ vendor: config.paddle.vendorId, eventCallback: function(args) {
-			console.log("Paddle event", args);
-		}});
-	}
-
-	function openCheckout() {
-		console.log("openCheckout");
-		Paddle.Checkout.open({ product: config.paddle.productId });
-	}
-
-	const buyLink = document.getElementById('buy_license_link');
-	const masLink = document.getElementById('buy_mas_link');
-
-	buyLink.addEventListener('click', openCheckout);
-
-	Paddle.Product.Prices(config.paddle.productId, function(prices) {
-		console.log(prices);
-		let price = prices.price.gross;
-		if (price.endsWith('.00')) {
-			price = price.substring(0, price.length - 3);
+	const isLizhi = computed(() => config.lizhi.countries.includes(countryCode.value));
+	const priceDisplay = computed(() => {
+  	if (countryCode.value === "") {
+			return "Loading price..."
 		}
-		if(prices.country === 'CN') {
-			buyLink.textContent = 'Buy License Key (¥89)';
-			buyLink.href = 'https://store.lizhi.io/site/products/id/612?cid=pchuiuf8';
-			buyLink.removeEventListener('click', openCheckout);
-		} else {
-			buyLink.textContent = `Buy License Key (${price})`;
+		function adjustPriceForDisplay(price) {
+			return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
 		}
-
-		const info = masInfo(config.appstore.appId, prices.country);
-		console.log(info);
-		masLink.href = info.url;
+		const price = isLizhi.value ? config.lizhi.price : adjustPriceForDisplay(paddlePrice.value);
+		return `${getFlagEmoji(countryCode.value)} ${price}`
 	});
-});
+	const buyLink = computed(() => isLizhi.value ? config.lizhi.storeUrl : "#!");
+	const buyTarget = computed(() => isLizhi.value ? "_blank" : "");
+	const masLink = computed(() => getMacAppStoreLink(
+		config.apple.appId, config.apple.slug, appStoreCode.value
+	));
+
+	function buyClicked(event) {
+		if (isLizhi.value) {
+			console.log(`Not opening Paddle checkout`);
+		} else {
+			console.log("Opening Paddle checkout");
+			Paddle.Checkout.open({ product: config.paddle.productId });
+		}
+	}
+
+	function getFlagEmoji(countryCode) {
+		const codePoints = countryCode
+			.toUpperCase()
+			.split('')
+			.map(char => 127397 + char.charCodeAt());
+		return String.fromCodePoint(...codePoints);
+	}
+
+	onMounted(async () => {
+		loadScript("/external-js/setapp.js");
+
+		// only call paddle setup when script is first loaded, not on subsequent navigations
+		if (await loadScript("/external-js/paddle.js")) {
+			Paddle.Setup({ vendor: config.paddle.vendorId, eventCallback: function(args) {
+				console.log("Paddle event", args);
+			}});
+		}
+
+		Paddle.Product.Prices(config.paddle.productId, function(prices) {
+			console.log("paddle prices", prices);
+			countryCode.value = prices.country;
+			paddlePrice.value = prices.price.gross;
+			const info = getCountryInfo(prices.country);
+			console.log("getCountryInfo", info);
+			countryName.value = info.countryName;
+			appStoreCode.value = info.appStoreCode;
+		});
+	});
 </script>
