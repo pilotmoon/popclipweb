@@ -1,3 +1,61 @@
+<style module>
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+	width: 100%;
+}
+
+.box {
+  background-color: var(--vp-c-bg-soft);
+	border-radius: 8px;
+  width: 49%; /* slightly less than half to allow some room for margins */
+  padding: 16px;
+  margin: 8px 0;
+	text-align: center;
+  box-sizing: border-box;
+}
+
+.box a.button {
+	text-decoration: none;
+	margin-top: 8px;
+	background-color: var(--vp-button-brand-bg);
+	color: var(--vp-button-brand-text);
+	border-radius: 20px;
+	padding: 0 20px;
+	line-height: 38px;
+	font-size: 14px;
+	font-weight: 600;
+	border: 1px solid var(--vp-button-brand-border);
+	display: inline-block;
+}
+
+.box a.button:hover {
+	background-color: var(--vp-button-brand-hover-bg);
+	color: var(--vp-button-brand-hover-text);
+	border: 1px solid var(--vp-button-brand-hover-border);
+}
+
+.box a.button:active {
+	text-decoration: none;
+	background-color: var(--vp-button-brand-active-bg);
+	color: var(--vp-button-brand-active-text);
+	border: 1px solid var(--vp-button-brand-active-border);
+}
+
+.box img.masbadge {
+	display: inline-block;
+	margin-top: 8px;
+	height: 40px;
+}
+
+@media (max-width: 768px) {
+  .box {
+    width: 100%;
+  }
+}
+</style>
+
 # Purchase PopClip
 
 ## One-time Purchase
@@ -5,14 +63,18 @@
 PopClip is available to buy as one-time purchase, either by buying a license
 key, or via the Mac App Store.
 
-<div class="container">
-    <div class="box">
-			<a :href="buyLink" :target="buyTarget" @click="buyClicked">
-				Buy License Key ({{ priceDisplay }})
+<div :class="$style.container">
+    <div :class="$style.box">
+		<span>Buy License Key from Paddle</span><br>
+			<a :class="$style.button" :href="buyLink" :target="buyTarget" @click="buyClicked">
+				{{ priceDisplay }}
 			</a>
 		</div>
-    <div class="box">
-			<a :href="masLink" target="_blank">Buy from Mac App Store</a>
+    <div :class="$style.box">
+			<span>Buy from the Mac App Store</span><br>
+			<a :href="masLink" target="_blank">
+				<img :class="$style.masbadge" src="/masbadge.svg" alt="Download on the Mac App Store" />
+			</a>
 		</div>
 </div>
 
@@ -64,7 +126,7 @@ only difference is the way you obtain the app and how you buy it. -->
 			return "Loading price..."
 		}
 		const price = isLizhi.value ? config.lizhi.price : info.paddlePrice;
-		return `${getFlagEmoji(info.countryCode)} ${
+		return `${getFlagEmoji(info.countryCode)} Buy for ${
 			price.endsWith('.00') ? price.substring(0, price.length - 3) : price
 		}`
 	});
