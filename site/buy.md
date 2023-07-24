@@ -8,13 +8,13 @@ PopClip is available to buy as one-time purchase, either from the Mac App Store 
     <div :class="$style.box">
 			<span>Buy from the Mac App Store</span><br>
 			<a :href="masLink" target="_blank">
-				<img :class="$style.buybadge" src="/masbadge.svg" alt="Download on the Mac App Store" />
+				<img :class="$style.buybadge" src="/masbadge.svg" alt="Download on the Mac App Store">
 			</a>
 		</div>
 		<div :class="$style.box" :hidden="!isLizhi || !isInfoLoaded">
 			<span>Buy License Key from DIGITALYCHEE</span><br>
 			<a :href="info.lizhiUrl" target="_blank">
-				<img :class="$style.buybadge" src="/lizhibadge.svg" alt="Buy from DIGITALYCHEE Store" />
+				<img :class="$style.buybadge" src="/lizhibadge.svg" alt="Buy from DIGITALYCHEE Store">
 			</a><br>
 			<span :class="$style.price">{{ info.lizhiPrice }}</span>
 		</div>
