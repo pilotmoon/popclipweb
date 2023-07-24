@@ -18,7 +18,7 @@
 
 .box a.button {
 	text-decoration: none;
-	margin-top: 8px;
+	margin: 8px 0 6px 0;
 	background-color: var(--vp-button-brand-bg);
 	color: var(--vp-button-brand-text);
 	border-radius: 20px;
@@ -27,6 +27,11 @@
 	font-size: 14px;
 	font-weight: 600;
 	border: 1px solid var(--vp-button-brand-border);
+	display: inline-block;
+}
+
+.box span.price {
+	font-size: 14px;
 	display: inline-block;
 }
 
@@ -43,7 +48,7 @@
 	border: 1px solid var(--vp-button-brand-active-border);
 }
 
-.box img.masbadge {
+.box img.buybadge {
 	display: inline-block;
 	margin-top: 8px;
 	height: 40px;
@@ -64,16 +69,28 @@ PopClip is available to buy as one-time purchase, either by buying a license
 key, or via the Mac App Store.
 
 <div :class="$style.container">
-    <div :class="$style.box">
+    <!-- <div :class="$style.box" :hxidden="isInfoLoaded">
+		<span>Buy License Key</span><br>
+		<span :class="$style.price">Loading price...</span>
+		</div> -->
+		<div :class="$style.box">
 		<span>Buy License Key from Paddle</span><br>
-			<a :class="$style.button" :href="buyLink" :target="buyTarget" @click="buyClicked">
-				{{ priceDisplay }}
-			</a>
+			<a :class="$style.button" href="#!" @click="openPaddleCheckout">
+				Buy
+			</a><br>
+			<span :class="$style.price">{{ isInfoLoaded ? "" : "Loading price..." }}{{ roundedPaddlePrice }}</span>
+		</div>
+		<div :class="$style.box" :hidden="!isLizhi || !isInfoLoaded">
+			<span>Buy License Key from DIGITALYCHEE</span><br>
+			<a :href="info.lizhiUrl" target="_blank">
+				<img :class="$style.buybadge" src="/lizhibadge.svg" alt="Buy from DIGITALYCHEE Store" />
+			</a><br>
+			<span :class="$style.price">{{ info.lizhiPrice }}</span>
 		</div>
     <div :class="$style.box">
 			<span>Buy from the Mac App Store</span><br>
 			<a :href="masLink" target="_blank">
-				<img :class="$style.masbadge" src="/masbadge.svg" alt="Download on the Mac App Store" />
+				<img :class="$style.buybadge" src="/masbadge.svg" alt="Download on the Mac App Store" />
 			</a>
 		</div>
 </div>
@@ -113,31 +130,31 @@ only difference is the way you obtain the app and how you buy it. -->
 		countryName: "",
 		appStoreCode: "",
 		paddlePrice: "",
+		lizhiPrice: config.lizhi.price,
+		lizhiUrl: config.lizhi.storeUrl,
 	});
 
+  const isInfoLoaded = computed(() => !!info.countryCode);
 	const isLizhi = computed(() => config.lizhi.countries.includes(info.countryCode));
-	const buyLink = computed(() => isLizhi.value ? config.lizhi.storeUrl : "#!");
-	const buyTarget = computed(() => isLizhi.value ? "_blank" : "");
 	const masLink = computed(() => getMacAppStoreLink(
 		config.apple.appId, config.apple.slug, info.appStoreCode
 	));
-	const priceDisplay = computed(() => {
-  	if (!info.countryCode) {
+	const roundedPaddlePrice = computed(() => {
+		if (!info.countryCode) {
+			return ""
+		}
+		const price = info.paddlePrice;
+		return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
+	});
+	const paddleButtonText = computed(() => {
+  	if (!roundedPaddlePrice.value) {
 			return "Loading price..."
 		}
-		const price = isLizhi.value ? config.lizhi.price : info.paddlePrice;
-		return `${getFlagEmoji(info.countryCode)} Buy for ${
-			price.endsWith('.00') ? price.substring(0, price.length - 3) : price
-		}`
+		return `${getFlagEmoji(info.countryCode)} Buy for ${roundedPaddlePrice.value}`;
 	});
-
-	function buyClicked(event) {
-		if (isLizhi.value) {
-			console.log(`Not opening Paddle checkout`);
-		} else {
+	function openPaddleCheckout(event) {
 			console.log("Opening Paddle checkout");
 			Paddle.Checkout.open({ product: config.paddle.productId });
-		}
 	}
 
 	onMounted(async () => {
