@@ -65,16 +65,14 @@
 
 ## One-time Purchase
 
-PopClip is available to buy as one-time purchase, either by buying a license
-key, or via the Mac App Store.
+PopClip is available to buy as one-time purchase, either from the Mac App Store or by buying a license key.
 
 <div :class="$style.container">
-		<div :class="$style.box">
-		<span>Buy License Key from Paddle</span><br>
-			<a :class="$style.button" href="#!" @click="openPaddleCheckout">
-				Buy
-			</a><br>
-			<span :class="$style.price">{{ isInfoLoaded ? "" : "Loading price..." }}{{ roundedPaddlePrice }}</span>
+    <div :class="$style.box">
+			<span>Buy from the Mac App Store</span><br>
+			<a :href="masLink" target="_blank">
+				<img :class="$style.buybadge" src="/masbadge.svg" alt="Download on the Mac App Store" />
+			</a>
 		</div>
 		<div :class="$style.box" :hidden="!isLizhi || !isInfoLoaded">
 			<span>Buy License Key from DIGITALYCHEE</span><br>
@@ -83,11 +81,12 @@ key, or via the Mac App Store.
 			</a><br>
 			<span :class="$style.price">{{ info.lizhiPrice }}</span>
 		</div>
-    <div :class="$style.box">
-			<span>Buy from the Mac App Store</span><br>
-			<a :href="masLink" target="_blank">
-				<img :class="$style.buybadge" src="/masbadge.svg" alt="Download on the Mac App Store" />
-			</a>
+		<div :class="$style.box">
+		<span>Buy License Key from Paddle</span><br>
+			<a :class="$style.button" href="#!" @click="openPaddleCheckout">
+				Buy
+			</a><br>
+			<span :class="$style.price">{{ isInfoLoaded ? "" : "Loading price..." }}{{ roundedPaddlePrice }}</span>
 		</div>
 </div>
 
@@ -104,7 +103,7 @@ Your purchase is subject to the [Terms of License](/terms).
 
 ## Student Discount
 
-Students can get a discount on PopClip via
+Students can get a discount on a PopClip license key purchase{{ isLizhi ? " (from Paddle)" : ""}}, via
 [Student App Centre](https://studentappcentre.com/app/popclip).
 
 <!-- ## Purchase FAQs
