@@ -61,7 +61,7 @@
 }
 </style>
 
-# Purchase PopClip
+# Buy PopClip
 
 ## One-time Purchase
 
@@ -69,10 +69,6 @@ PopClip is available to buy as one-time purchase, either by buying a license
 key, or via the Mac App Store.
 
 <div :class="$style.container">
-    <!-- <div :class="$style.box" :hxidden="isInfoLoaded">
-		<span>Buy License Key</span><br>
-		<span :class="$style.price">Loading price...</span>
-		</div> -->
 		<div :class="$style.box">
 		<span>Buy License Key from Paddle</span><br>
 			<a :class="$style.button" href="#!" @click="openPaddleCheckout">

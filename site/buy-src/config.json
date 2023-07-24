@@ -9,7 +9,7 @@
     },
     "lizhi": {
         "storeUrl": "https://lizhi.shop/site/products/id/612?cid=pchuiuf8",
-        "price": "¥89",
-        "countries": ["CN"]
+        "price": "CN¥89",
+        "countries": ["CN", "TW", "MO", "HK"]
     }
 }

@@ -48,7 +48,7 @@ export default defineConfig({
         text: "App Information",
         items: [
           { text: "Download", link: "" },
-          { text: "Purchase", link: "/buy" },
+          { text: "Buy", link: "/buy" },
           {
             text: "Version History",
             link: "/changelog",
