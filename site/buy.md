@@ -1,7 +1,6 @@
 <script setup>
 import Buy from '/components/buy/Buy.vue'
 import Setapp from '/components/Setapp.vue'
-import Button from '/components/Button.vue'
 </script>
 
 # Buy PopClip
