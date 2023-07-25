@@ -1,13 +1,9 @@
----
-
----
-
 <script setup>
-import { data } from './changelog.data.ts'
+import Changelog from '/components/changelog/Changelog.vue'
 </script>
 
 # Version History
 
-See also: [Beta Version History](/changelog-beta)
+See also: [Beta Version History](/changelog-beta).
 
-<span v-html="data.html"></span>
+<Changelog />

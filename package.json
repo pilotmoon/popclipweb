@@ -9,5 +9,8 @@
     "docs:dev": "vitepress dev site",
     "docs:build": "vitepress build site",
     "docs:preview": "vitepress preview site"
+  },
+  "dependencies": {
+    "zod": "3.21.4"
   }
 }

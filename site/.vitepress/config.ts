@@ -11,17 +11,19 @@ export default defineConfig({
       {
         text: "Documentation",
         activeMatch: "^(/guide/|/ref/|/changelog)",
-        items: [
-          { text: "User Guide", link: "/guide/" },
-          { text: "Developer Reference", link: "/ref/" },
-        ],
+        link: "/guide/",
+        // items: [
+        //   { text: "User Guide", link: "/guide/" },
+        //   { text: "Developer Reference", link: "/ref/" },
+        // ],
       },
       {
         text: "Extensions",
-        items: [
-          { text: "Directory", link: "/x/" },          
-          { text: "Create Your Own", link: "/create/" },          
-        ],
+        link: "https://pilotmoon.com/popclip/extensions/"
+        // items: [
+        //   { text: "Directory", link: "/x/" },          
+        //   { text: "Create Your Own", link: "/create/" },          
+        // ],
       },
       {
         text: "Support",

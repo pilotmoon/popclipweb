@@ -1,11 +1,9 @@
----
-
----
-
 <script setup>
-import { data } from './changelog.data.ts'
+import Changelog from '/components/changelog/Changelog.vue'
 </script>
 
 # Beta Version History
 
-<span v-html="data.htmlBeta"></span>
+This is the history of beta releases, which are more frequent and with more detailed changelog entries. See also [Version History](/changelog).
+
+<Changelog channel="beta" />
