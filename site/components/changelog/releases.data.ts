@@ -9,11 +9,12 @@ export const ZRelease = z.object({
   url: z.string().url(),
   description: z.string(),
   size: z.number().int().nullish(),
-  pin: z.boolean().nullish(),
+  pin: z.boolean().nullish(), // pin means should be make available for download
+  zap: z.boolean().nullish(), // zap means do not make available for download (e.g. has a bug)
   minimumSystemVersion: z.string().nullish(),
   archs: z.array(z.string()).nullish(),
   eddsaSignature: z.string().nullish(),
-  latest: z.boolean().nullish(),
+
 });
 export type Release = z.infer<typeof ZRelease>
 

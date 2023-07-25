@@ -23,7 +23,7 @@ function formatDate(dateString: string) {
     year: "numeric",
     month: "short",
     day: "numeric",
-    timeZone: "UTC",
+    timeZone: "Europe/London",
   });
 }
 
@@ -33,20 +33,19 @@ function formatSize(size: number) {
 }
 
 const releases = computed(() => {
-  const x = data[props.channel ?? "production"];
-  x[0].latest = true;
-  return x;
+  return data[props.channel ?? "production"];
 });
 
 </script>
 
 <template>
     <div :class="$style.changelog">
-        <div v-for="release in releases" :key="release.versionString" :class="$style.changelogEntry">
+        <div v-for="(release, index) in releases" :key="release.versionString" :class="$style.changelogEntry">
             <h2>{{ release.versionString }}
               <span v-if="release.version && !release.versionString.endsWith(String(release.version))" :class="$style.smaller">({{ release.version }})&nbsp;</span>
-              <span :class="$style.smaller"> {{ formatDate(release.date) }}</span></h2>
-            <span v-if="release.url && (release.pin || release.latest)">
+              <span :class="$style.smaller"> {{ formatDate(release.date) }}</span>
+            </h2>
+            <span v-if="release.url && release.size && !release.zap && (release.pin || index<8)">
                 <Button :href="release.url" theme="alt" size="small" text="Download"></Button>&nbsp;                
                 <span  v-if="release.size"><span>{{ formatSize(release.size) }}</span>&nbsp;</span>
             </span>            
