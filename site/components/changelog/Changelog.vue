@@ -45,7 +45,7 @@ const releases = computed(() => {
               <span v-if="release.version && !release.versionString.endsWith(String(release.version))" :class="$style.smaller">({{ release.version }})&nbsp;</span>
               <span :class="$style.smaller"> {{ formatDate(release.date) }}</span>              
             </h2>            
-            <span v-if="release.url && release.size && !release.zap && (release.pin || index<8)">
+            <span v-if="release.url && release.size && !release.zap && (release.pin || index<5)">
                 <Button :href="release.url" theme="alt" size="small" text="Download"></Button>&nbsp;                
                 <span  v-if="release.size"><span>{{ formatSize(release.size) }}</span>&nbsp;</span>
             </span>            

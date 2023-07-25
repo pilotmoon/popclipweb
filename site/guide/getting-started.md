@@ -10,7 +10,7 @@ This page will guide you through the process of obtaining and installing PopClip
 
 There are 3 ways to obtain PopClip:
 
-* **Direct download (free trial, unlockable with license key)**: Download PopClip from the [Downloads]() page on this website. The download is a zip file containing the PopClip app. Unzip the file and drag the PopClip app to your Applications folder. 
+* **Direct download (free trial, unlockable with license key)**: Download PopClip from the [downloads](/download) page on this website. The download is a zip file containing the PopClip app. Unzip the file and drag the PopClip app to your Applications folder. 
 
 * **Mac App Store**: PopClip is available to buy on the Mac App Store as a one-time purchase. [View PopClip on Mac App Store]().
 

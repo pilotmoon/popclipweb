@@ -10,7 +10,7 @@ export default defineConfig({
     nav: [
       {
         text: "Documentation",
-        activeMatch: "^(/guide/|/ref/|/changelog)",
+        activeMatch: "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download)",
         link: "/guide/",
         // items: [
         //   { text: "User Guide", link: "/guide/" },
@@ -49,7 +49,7 @@ export default defineConfig({
       {
         text: "App Information",
         items: [
-          { text: "Download", link: "" },
+          { text: "Download", link: "/download" },
           { text: "Buy", link: "/buy" },
           {
             text: "Version History",

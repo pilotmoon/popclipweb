@@ -3,11 +3,12 @@ import axios from "axios";
 import { z } from 'zod'
 
 export const ZRelease = z.object({  
-  version: z.number().int().nullish(),
   versionString: z.string(),
   date: z.string(),
-  url: z.string().url(),
   description: z.string(),
+  
+  version: z.number().int().nullish(),
+  url: z.string().url().nullish(),
   size: z.number().int().nullish(),
   pin: z.boolean().nullish(), // pin means should be make available for download
   zap: z.boolean().nullish(), // zap means do not make available for download (e.g. has a bug)
