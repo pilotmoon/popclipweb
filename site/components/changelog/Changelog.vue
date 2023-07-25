@@ -43,16 +43,17 @@ const releases = computed(() => {
         <div v-for="(release, index) in releases" :key="release.versionString" :class="$style.changelogEntry">
             <h2>{{ release.versionString }}
               <span v-if="release.version && !release.versionString.endsWith(String(release.version))" :class="$style.smaller">({{ release.version }})&nbsp;</span>
-              <span :class="$style.smaller"> {{ formatDate(release.date) }}</span>
-            </h2>
+              <span :class="$style.smaller"> {{ formatDate(release.date) }}</span>              
+            </h2>            
             <span v-if="release.url && release.size && !release.zap && (release.pin || index<8)">
-                <Button :href="release.url" theme="alt" size="small" text="Download"></Button>&nbsp;                
+                <Button :href="release.url" :theme="index == 0 ? 'brand' : 'alt'" size="small" text="Download"></Button>&nbsp;                
                 <span  v-if="release.size"><span>{{ formatSize(release.size) }}</span>&nbsp;</span>
             </span>            
             <span  v-if="release.minimumSystemVersion"><span :class="$style.info">≥ macOS {{ release.minimumSystemVersion }}</span>&nbsp;</span>         
             <span  v-if="release.archs?.includes('i386')"><span :class="$style.info">Intel 32-bit</span>&nbsp;</span>         
             <span  v-if="release.archs?.includes('x86_64')"><span :class="$style.info">Intel 64-bit</span>&nbsp;</span>         
             <span  v-if="release.archs?.includes('arm64')"><span :class="$style.info">Apple Silicon</span>&nbsp;</span>         
+            
             <div v-html="renderMarkdown(release.description)"></div>
         </div>
     </div>
@@ -67,6 +68,7 @@ const releases = computed(() => {
   font-size: 0.9em;
   font-weight: 400;
 }
+
 .changelogEntry ul {
   left: 1em;
 }
