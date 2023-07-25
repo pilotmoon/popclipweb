@@ -69,7 +69,7 @@ onMounted(async () => {
             <span :class="$style.price">{{ info.lizhiPrice }}</span>
         </div>
         <div :class="$style.box">
-            <span>Buy License Key from Paddle</span><br>
+            <span>Buy License Key{{ isLizhi ? " from Paddle" : ""}}</span><br>
             <Button :class="$style.buybutton" text="Buy" href="#!" @click="openPaddleCheckout" theme="brand" /><br>
             <span :class="$style.price">{{ isInfoLoaded ? "" : "Loading price..." }}{{ roundPrice(info.paddlePrice)
             }}</span>
