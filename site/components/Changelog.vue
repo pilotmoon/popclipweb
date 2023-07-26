@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import MarkdownIt from 'markdown-it';
 import Button from './Button.vue';
 import { computed } from 'vue';
 import { data } from './data/releases.data';
-import MarkdownIt from 'markdown-it';
-
+import { formatDate, formatSize } from './helpers/formatters';
 const props = defineProps<{
   channel?: "production" | "beta"
 }>();
@@ -14,21 +14,6 @@ const md = new MarkdownIt({
 });
 function renderMarkdown(markdown: string) {
   return md.render(markdown);
-}
-
-// date formetter for headings
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    timeZone: "Europe/London",
-  });
-}
-
-// format size in bytes to megabytes with 2 decimal places
-function formatSize(size: number) {
-  return size ? (size / 1024 / 1024).toFixed(2) + " Mb" : "";
 }
 
 const releases = computed(() => {
