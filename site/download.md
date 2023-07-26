@@ -17,7 +17,7 @@ const pinned = data.production.filter((r) => r.pin);
 
 <Download
 name="PopClip"
-:title="prod.versionString"
+:ver="prod.versionString"
 :date="prod.date"
 :size="prod.size"
 :os="prod.minimumSystemVersion"
@@ -42,7 +42,7 @@ If you use [Homebrew](https://brew.sh/), you can install PopClip with the comman
 
 <Download
 name="PopClip"
-:title="beta.versionString"
+:ver="beta.versionString"
 :date="beta.date"
 :size="beta.size"
 :os="beta.minimumSystemVersion"
