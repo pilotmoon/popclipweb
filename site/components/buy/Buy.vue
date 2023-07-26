@@ -22,9 +22,23 @@ const masLink = computed(() => getMacAppStoreLink(
     config.apple.appId, config.apple.slug, info.appStoreCode
 ));
 
-function openPaddleCheckout(event) {
+async function openPaddleCheckout(event) {
+    // only call paddle setup when script is first loaded, not on subsequent calls
+    const sandbox = window.location.hostname === "localhost";
+    if (await loadScript(config.paddle.script)) {
+        if (sandbox) {
+            Paddle.Environment.set('sandbox');
+        }
+        Paddle.Setup({
+            vendor: config.paddle.vendorId, eventCallback: function (args) {
+                console.log("Paddle event", args);
+            }
+        });
+        await new Promise(resolve => setTimeout(resolve, 150));
+    }
+    const product = sandbox ? config.paddle.sandboxProductId : config.paddle.productId;
     console.log("Opening Paddle checkout");
-    Paddle.Checkout.open({ product: config.paddle.productId });
+    Paddle.Checkout.open({ product });
 }
 
 function roundPrice(price) {
@@ -32,28 +46,17 @@ function roundPrice(price) {
 };
 
 onMounted(async () => {
-
-    const px = await fetch("https://checkout.paddle.com/api/2.0/prices?product_ids=818494").json;
-    console.log("px", px);
-
-    // only call paddle setup when script is first loaded, not on subsequent navigations
-    if (await loadScript(config.paddle.script)) {
-        Paddle.Setup({
-            vendor: config.paddle.vendorId, eventCallback: function (args) {
-                console.log("Paddle event", args);
-            }
-        });
-    }
-
-    Paddle.Product.Prices(config.paddle.productId, function (paddlePrices) {
-        console.log("paddle prices", paddlePrices);
-        const countryInfo = getCountryInfo(paddlePrices.country);
-        console.log("info", info);
-        info.countryCode = paddlePrices.country;
-        info.paddlePrice = paddlePrices.price.gross;
+    const fetchResponse = await fetch("https://api.pilotmoon.com/webhooks/store/getPrices?product=" + config.pilotmoon.product);
+    const { country, prices } = await fetchResponse.json();
+    console.log("prices", prices);
+    if (country) {
+        const countryInfo = getCountryInfo(country);
+        console.log("getCountryInfo", info);
+        info.countryCode = country;
         info.countryName = countryInfo.countryName;
         info.appStoreCode = countryInfo.appStoreCode;
-    });
+        info.paddlePrice = prices.paddle.formatted;
+    }
 });
 </script>
 
@@ -80,7 +83,9 @@ onMounted(async () => {
             }}</span>
         </div>
     </div>
-    <div :class="$style.infoLine" v-if="info.countryName">Showing prices for {{ getFlagEmoji(info.countryCode) }} {{ info.countryName}}</div>
+    <div :class="$style.infoLine" v-if="info.countryName">
+        Showing prices for {{ getFlagEmoji(info.countryCode) }} {{ info.countryName }}
+    </div>
 </template>
 
 <style module>
@@ -118,7 +123,7 @@ onMounted(async () => {
 }
 
 .box a {
-    display: inline-block;    
+    display: inline-block;
 }
 
 .infoLine {

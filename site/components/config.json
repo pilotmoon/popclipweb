@@ -1,7 +1,11 @@
 {
+    "pilotmoon": {
+        "product": "popclip"
+    },
     "paddle": {
         "vendorId": 161988,
         "productId": 818494,
+        "sandboxProductId": 41687,
         "script": "/external-js/paddle.js"
     },
     "apple": {
