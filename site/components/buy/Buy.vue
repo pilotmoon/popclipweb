@@ -2,6 +2,7 @@
 import { onMounted, reactive, computed } from 'vue'
 import { loadScript } from '../loadScript.ts'
 import { getCountryInfo } from './getCountryInfo.ts'
+import { getFlagEmoji } from './getFlagEmoji.ts'
 import { getMacAppStoreLink } from './getMacAppStoreLink.ts'
 import Button from '../Button.vue'
 import * as config from '../config.json'
@@ -31,6 +32,10 @@ function roundPrice(price) {
 };
 
 onMounted(async () => {
+
+    const px = await fetch("https://checkout.paddle.com/api/2.0/prices?product_ids=818494").json;
+    console.log("px", px);
+
     // only call paddle setup when script is first loaded, not on subsequent navigations
     if (await loadScript(config.paddle.script)) {
         Paddle.Setup({
@@ -75,6 +80,7 @@ onMounted(async () => {
             }}</span>
         </div>
     </div>
+    <div :class="$style.infoLine" v-if="info.countryName">Showing prices for {{ getFlagEmoji(info.countryCode) }} {{ info.countryName}}</div>
 </template>
 
 <style module>
@@ -113,6 +119,11 @@ onMounted(async () => {
 
 .box a {
     display: inline-block;    
+}
+
+.infoLine {
+    text-align: center;
+    margin-bottom: -24px;
 }
 
 
