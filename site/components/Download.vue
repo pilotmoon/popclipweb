@@ -20,11 +20,11 @@ const theme = computed(() => props.channel === "production" ? "brand" : "alt");
 
 <template>
     <div :class="$style.downloadBox">
-        <div><span :class="$style.promote">
+        <div ><span :class="$style.promote">
             {{ props.name }} {{ props.ver }}</span> &ensp;{{ formatDate(props.date) }}&ensp;
             <a :href="props.notes">Release notes</a>
         </div>
-        <div>Requires macOS {{ props.os }}  or above. {{ formatArchs(props.archs) }}.</div>
+        <div style="margin: 6px 0 0 0">Requires macOS {{ props.os }}  or above. {{ formatArchs(props.archs) }}.</div>
         <div style="margin: 8px 0 0 0"
             ><Button size=small :theme="theme" text="Download" :href="props.url" />&ensp;
             Zip file, {{ formatSize(props.size) }}
