@@ -24,7 +24,7 @@ name="PopClip"
 :archs="prod.archs"
 :url="prod.url"
 notes="/changelog"
-type="production"
+channel="production"
 />
 
 **Installation:** Unzip and move the PopClip app to your Applications folder. See [Getting Started](/guide/getting-started#first-launch) for next steps.
@@ -50,7 +50,7 @@ name="PopClip"
 :archs="beta.archs"
 :url="beta.url"
 notes="/changelog-beta"
-type="beta"
+channel="beta"
 />
 
 

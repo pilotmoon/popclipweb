@@ -9,12 +9,12 @@ const props = defineProps<{
   notes: string
   os: string
   url: string
-  type: "production" | "beta"
+  channel: "production" | "beta"
   size: number,
   archs: string[]
 }>();
 
-const theme = computed(() => props.type === "production" ? "brand" : "alt");
+const theme = computed(() => props.channel === "production" ? "brand" : "alt");
 
 </script>
 
