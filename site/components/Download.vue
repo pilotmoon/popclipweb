@@ -8,6 +8,7 @@ const props = defineProps<{
   date: string
   notes: string
   os: string
+  url: string
   type: "production" | "beta"
   size: number,
   archs: string[]
@@ -19,11 +20,15 @@ const theme = computed(() => props.type === "production" ? "brand" : "alt");
 
 <template>
     <div :class="$style.downloadBox">
-        <div><span :class="$style.promote">{{ props.name }} {{ props.ver }}</span> &ensp;{{ formatDate(props.date) }}&ensp;
+        <div><span :class="$style.promote">
+            {{ props.name }} {{ props.ver }}</span> &ensp;{{ formatDate(props.date) }}&ensp;
             <a :href="props.notes">Release notes</a>
         </div>
         <div>Requires macOS {{ props.os }}  or above. {{ formatArchs(props.archs) }}</div>
-        <div style="margin: 8px 0 0 0"><Button size=small :theme="theme" text="Download" />&ensp;Zip file, {{ formatSize(props.size) }}</div>
+        <div style="margin: 8px 0 0 0"
+            ><Button size=small :theme="theme" text="Download" :href="props.url" />&ensp;
+            Zip file, {{ formatSize(props.size) }}
+        </div>
     </div>
 </template>
 
