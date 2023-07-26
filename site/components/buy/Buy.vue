@@ -2,11 +2,10 @@
 import { onMounted, reactive, computed } from 'vue'
 import { loadScript } from '../loadScript.ts'
 import { getFlagEmoji } from './getFlagEmoji.ts'
-import { store, loadStore } from './store.ts'
+import { store, loadStore, isLoaded } from './store.ts'
 import Button from '../Button.vue'
 import * as config from '../config.json'
 
-const isInfoLoaded = computed(() => !!store.countryCode);
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode));
 
 async function openPaddleCheckout(event) {
@@ -47,7 +46,7 @@ onMounted(() => {
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice) }}</span>
         </div>
-        <div :class="$style.box" :hidden="!isLizhi || !isInfoLoaded">
+        <div :class="$style.box" :hidden="!isLizhi || !isLoaded">
             <span>Buy License Key from DIGITALYCHEE</span><br>
             <a :href="store.lizhiUrl" target="_blank">
                 <img :class="$style.buybadge" src="./lizhibadge.svg" alt="Buy from DIGITALYCHEE Store">
@@ -60,8 +59,8 @@ onMounted(() => {
             <span :class="$style.price">{{ roundPrice(store.paddlePrice) }}</span>
         </div>
     </div>
-    <div :class="isInfoLoaded ? $style.infoLine : $style.infoLineLoading">
-        {{ isInfoLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode)} ${store.countryName}` :
+    <div :class="isLoaded ? $style.infoLine : $style.infoLineLoading">
+        {{ isLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode)} ${store.countryName}` :
             `Loading prices...` }}
     </div>
 </template>

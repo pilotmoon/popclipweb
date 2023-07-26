@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as config from './config.json';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { store, loadStore } from './buy/store';
 
 const props = defineProps<{
@@ -13,7 +13,6 @@ console.log('props.key', props.k);
 const href = computed(() => {
     // special case for mas.storeUrl, so it points to correct country
     if (props.k === 'mas.storeUrl') {
-        loadStore();
         return store.masUrl;
     }
 
@@ -25,7 +24,11 @@ const href = computed(() => {
     }
     return typeof value === 'string' ? value : '';
 });
-    
+
+onMounted(() => {
+    loadStore();
+});
+
 </script>
 
 <template>

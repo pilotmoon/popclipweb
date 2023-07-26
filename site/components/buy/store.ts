@@ -1,6 +1,6 @@
 // common module for loading and storing price and purchase information
 
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { getCountryInfo } from './getCountryInfo'
 import { getMacAppStoreUrl } from './getMacAppStoreUrl'
 import * as config from '../config.json'
@@ -15,8 +15,11 @@ export const store = reactive({
   lizhiUrl: config.lizhi.storeUrl,
 });
 
+export const isLoaded = computed(() => store.countryCode !== "");
+
+// don't call this during SSR!
 export async function loadStore() {
-  if (store.countryCode) {
+  if (isLoaded.value) {
     console.log(`Store already loaded for ${store.countryCode}`);
     return;
   }
