@@ -1,9 +1,9 @@
 <script setup type="ts">
-import { onMounted, reactive, computed } from 'vue'
-import { loadScript } from '../loadScript.ts'
-import { getFlagEmoji } from './getFlagEmoji.ts'
-import { store, loadStore, isLoaded } from './store.ts'
-import Button from '../Button.vue'
+import { onMounted, computed } from 'vue'
+import { loadScript } from './helpers/loadScript.ts'
+import { getFlagEmoji } from './helpers/getFlagEmoji.ts'
+import { store, loadStore, isLoaded } from './store/store.ts'
+import Button from './Button.vue'
 import * as config from '../config.json'
 
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode));
@@ -42,14 +42,14 @@ onMounted(() => {
         <div :class="$style.box">
             <span>Buy from the Mac App Store</span><br>
             <a :href="store.masUrl" target="_blank">
-                <img :class="$style.buybadge" src="./masbadge.svg" alt="Download on the Mac App Store">
+                <img :class="$style.buybadge" src="./static/masbadge.svg" alt="Download on the Mac App Store">
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice) }}</span>
         </div>
         <div :class="$style.box" :hidden="!isLizhi || !isLoaded">
             <span>Buy License Key from DIGITALYCHEE</span><br>
             <a :href="store.lizhiUrl" target="_blank">
-                <img :class="$style.buybadge" src="./lizhibadge.svg" alt="Buy from DIGITALYCHEE Store">
+                <img :class="$style.buybadge" src="./static/lizhibadge.svg" alt="Buy from DIGITALYCHEE Store">
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.lizhiPrice) }}</span>
         </div>

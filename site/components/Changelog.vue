@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Button from '../Button.vue';
+import Button from './Button.vue';
 import { computed } from 'vue';
-import { data } from './releases.data';
+import { data } from './data/releases.data';
 import MarkdownIt from 'markdown-it';
 
 const props = defineProps<{

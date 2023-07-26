@@ -1,5 +1,5 @@
 <script setup>
-import Buy from '/components/buy/Buy.vue'
+import Buy from '/components/Buy.vue'
 import Setapp from '/components/Setapp.vue'
 </script>
 

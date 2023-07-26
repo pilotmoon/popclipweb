@@ -3,7 +3,7 @@
 import { reactive, computed } from 'vue'
 import { getCountryInfo } from './getCountryInfo'
 import { getMacAppStoreUrl } from './getMacAppStoreUrl'
-import * as config from '../config.json'
+import * as config from '../../config.json'
 
 export const store = reactive({
   countryCode: "",
