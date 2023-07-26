@@ -4,6 +4,7 @@ import { loadScript } from '../loadScript.ts'
 import { getCountryInfo } from './getCountryInfo.ts'
 import { getFlagEmoji } from './getFlagEmoji.ts'
 import { getMacAppStoreLink } from './getMacAppStoreLink.ts'
+import { store } from '../store.ts'
 import Button from '../Button.vue'
 import * as config from '../config.json'
 
@@ -46,6 +47,10 @@ function roundPrice(price) {
 };
 
 onMounted(async () => {
+    if (store.priceInfo) { // global store to cache price info between navigations
+        Object.assign(info, store.priceInfo);
+        return;
+    }
     const fetchResponse = await fetch("https://api.pilotmoon.com/webhooks/store/getPrices?product=" + config.pilotmoon.product);
     const { country, prices } = await fetchResponse.json();
     console.log("prices", prices);
@@ -57,6 +62,7 @@ onMounted(async () => {
         info.appStoreCode = countryInfo.appStoreCode;
         info.paddlePrice = prices.paddle.formatted;
     }
+    store.priceInfo = info;
 });
 </script>
 
@@ -79,12 +85,12 @@ onMounted(async () => {
         <div :class="$style.box">
             <span>Buy License Key from Paddle</span><br>
             <Button :class="$style.buybutton" text="Buy" @click="openPaddleCheckout" theme="brand" /><br>
-            <span :class="$style.price">{{ isInfoLoaded ? "" : "Loading price..." }}{{ roundPrice(info.paddlePrice)
-            }}</span>
+            <span :class="$style.price">{{ roundPrice(info.paddlePrice) }}</span>
         </div>
     </div>
-    <div :class="$style.infoLine" v-if="info.countryName">
-        Showing prices for {{ getFlagEmoji(info.countryCode) }} {{ info.countryName }}
+    <div :class="isInfoLoaded ? $style.infoLine : $style.infoLineLoading">
+        {{ isInfoLoaded ? `Showing prices for ${getFlagEmoji(info.countryCode)} ${info.countryName}` :
+            `Loading prices...` }}
     </div>
 </template>
 
@@ -113,6 +119,13 @@ onMounted(async () => {
 
 .box span.price {
     font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.box span.priceLoading {
+    font-size: 14px;
+    color: var(--vp-c-text-2);
     display: inline-block;
 }
 
@@ -129,6 +142,12 @@ onMounted(async () => {
 .infoLine {
     text-align: center;
     margin-bottom: -24px;
+}
+
+.infoLineLoading {
+    text-align: center;
+    margin-bottom: -24px;
+    color: var(--vp-c-text-2);
 }
 
 
