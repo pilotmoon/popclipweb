@@ -1,5 +1,6 @@
 <script setup>
-import Button from '/components/Button.vue'
+import Button from '/components/Button.vue';
+import Link from "/components/Link.vue";
 </script>
 
 # Download PopClip
@@ -19,11 +20,11 @@ import Button from '/components/Button.vue'
 **Free Trial:** PopClip operates in free trial mode until you register a license key. The trial is fully functional and includes all features for 150 uses.
 
 ::: tip Other ways to get PopClip
-If you already bought PopClip from the [Mac App Store](), you can sign in to the store and install PopClip again for free.
+If you already bought PopClip from the <Link k="mas.storeUrl">Mac App Store</Link>, you can sign in to the store and install PopClip again for free.
 
-If you're a [Setapp]() subscriber, PopClip is included in your subscription. You can install PopClip from the Setapp app.
+If you're a <Link k="setapp.referralUrl">Setapp</Link> subscriber, PopClip is included in your subscription. You can install PopClip from the Setapp app.
 
-If you use [Homebrew](), you can install PopClip with the command `brew install popclip`.
+If you use [Homebrew](https://brew.sh/), you can install PopClip with the command `brew install popclip`.
 :::
 
 ## Beta Release

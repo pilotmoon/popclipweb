@@ -8,10 +8,9 @@
         "sandboxProductId": 41687,
         "script": "/external-js/paddle.js"
     },
-    "apple": {
+    "mas": {
         "appId": "445189367",
-        "slug": "popclip",
-        "masUrl": "https://apps.apple.com/app/popclip/id445189367?mt=12"
+        "slug": "popclip"
     },
     "lizhi": {
         "storeUrl": "https://lizhi.shop/site/products/id/612?cid=pchuiuf8",

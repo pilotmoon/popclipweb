@@ -1,27 +1,13 @@
 <script setup type="ts">
 import { onMounted, reactive, computed } from 'vue'
 import { loadScript } from '../loadScript.ts'
-import { getCountryInfo } from './getCountryInfo.ts'
 import { getFlagEmoji } from './getFlagEmoji.ts'
-import { getMacAppStoreLink } from './getMacAppStoreLink.ts'
-import { store } from '../store.ts'
+import { store, loadStore } from './store.ts'
 import Button from '../Button.vue'
 import * as config from '../config.json'
 
-const info = reactive({
-    countryCode: "",
-    countryName: "",
-    appStoreCode: "",
-    paddlePrice: "",
-    lizhiPrice: config.lizhi.price,
-    lizhiUrl: config.lizhi.storeUrl,
-});
-
-const isInfoLoaded = computed(() => !!info.countryCode);
-const isLizhi = computed(() => config.lizhi.countries.includes(info.countryCode));
-const masLink = computed(() => getMacAppStoreLink(
-    config.apple.appId, config.apple.slug, info.appStoreCode
-));
+const isInfoLoaded = computed(() => !!store.countryCode);
+const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode));
 
 async function openPaddleCheckout(event) {
     // only call paddle setup when script is first loaded, not on subsequent calls
@@ -46,50 +32,36 @@ function roundPrice(price) {
     return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
 };
 
-onMounted(async () => {
-    if (store.priceInfo) { // global store to cache price info between navigations
-        Object.assign(info, store.priceInfo);
-        return;
-    }
-    const fetchResponse = await fetch("https://api.pilotmoon.com/webhooks/store/getPrices?product=" + config.pilotmoon.product);
-    const { country, prices } = await fetchResponse.json();
-    console.log("prices", prices);
-    if (country) {
-        const countryInfo = getCountryInfo(country);
-        console.log("getCountryInfo", info);
-        info.countryCode = country;
-        info.countryName = countryInfo.countryName;
-        info.appStoreCode = countryInfo.appStoreCode;
-        info.paddlePrice = prices.paddle.formatted;
-    }
-    store.priceInfo = info;
+onMounted(() => {
+    loadStore();
 });
+
 </script>
 
 <template>
     <div :class="$style.container">
         <div :class="$style.box">
             <span>Buy from the Mac App Store</span><br>
-            <a :href="masLink" target="_blank">
+            <a :href="store.masUrl" target="_blank">
                 <img :class="$style.buybadge" src="./masbadge.svg" alt="Download on the Mac App Store">
             </a><br>
-            <span :class="$style.price"></span>
+            <span :class="$style.price">{{ roundPrice(store.masPrice) }}</span>
         </div>
         <div :class="$style.box" :hidden="!isLizhi || !isInfoLoaded">
             <span>Buy License Key from DIGITALYCHEE</span><br>
-            <a :href="info.lizhiUrl" target="_blank">
+            <a :href="store.lizhiUrl" target="_blank">
                 <img :class="$style.buybadge" src="./lizhibadge.svg" alt="Buy from DIGITALYCHEE Store">
             </a><br>
-            <span :class="$style.price">{{ info.lizhiPrice }}</span>
+            <span :class="$style.price">{{ roundPrice(store.lizhiPrice) }}</span>
         </div>
         <div :class="$style.box">
             <span>Buy License Key from Paddle</span><br>
             <Button :class="$style.buybutton" text="Buy" @click="openPaddleCheckout" theme="brand" /><br>
-            <span :class="$style.price">{{ roundPrice(info.paddlePrice) }}</span>
+            <span :class="$style.price">{{ roundPrice(store.paddlePrice) }}</span>
         </div>
     </div>
     <div :class="isInfoLoaded ? $style.infoLine : $style.infoLineLoading">
-        {{ isInfoLoaded ? `Showing prices for ${getFlagEmoji(info.countryCode)} ${info.countryName}` :
+        {{ isInfoLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode)} ${store.countryName}` :
             `Loading prices...` }}
     </div>
 </template>

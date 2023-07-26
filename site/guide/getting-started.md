@@ -21,7 +21,7 @@ There are 3 ways to obtain PopClip:
   to your Applications folder.
 
 - **Mac App Store**: PopClip is available to buy on the Mac App Store as a
-  one-time purchase. <Link k="apple.masUrl">View PopClip on Mac App Store</Link>.
+  one-time purchase. <Link k="mas.storeUrl">View PopClip on Mac App Store</Link>.
 
 - **Setapp**: <Link k="setapp.referralUrl">Setapp</Link> is a subscription service for Mac apps, offering access
   to hundreds of Mac apps for $9.99 per month. If you're a Setapp customer,
@@ -52,7 +52,7 @@ the [downloads](/download) page.
 When you first install the Standalone edition of PopClip, it operates in free
 trial mode. The free trial mode includes all features, but after you have used
 150 PopClip actions it will nag you to buy the app. You can
-[buy a license key]() to unlock the app and remove the nagging. The Mac App
+[buy a license key](/buy) to unlock the app and remove the nagging. The Mac App
 Store and Setapp editions do not have a free trial mode.
 
 #### Registering the license key
@@ -85,7 +85,7 @@ you cannot use PopClip without enabling Accessibility access.
 PopClip only uses the Accessibility API to read the text you select. All
 processing is done locally on your Mac and no information is stored or
 transmitted anywhere, except when you explicitly invoke an internet-connected
-action such as a web search. See also [Privacy policy]().
+action such as a web search. See also [Privacy Policy](/privacy).
 
 #### How to grant Accessibility permission
 

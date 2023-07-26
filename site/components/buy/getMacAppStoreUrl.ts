@@ -1,4 +1,4 @@
-export function getMacAppStoreLink(appId: string, slug: string, countryCode?: string) {
+export function getMacAppStoreUrl(appId: string, slug: string, countryCode?: string) {
     if (typeof countryCode === "string" && countryCode.length === 2) {
         countryCode = countryCode.toLowerCase() + "/";
     } else {
