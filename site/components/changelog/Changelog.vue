@@ -3,10 +3,9 @@ import Button from '../Button.vue';
 import { computed } from 'vue';
 import { data } from './releases.data';
 import MarkdownIt from 'markdown-it';
-import releasesData from './releases.data';
 
 const props = defineProps<{
-  channel: "production" | "beta"
+  channel?: "production" | "beta"
 }>();
 
 // markdown rendering (with html passed through)

@@ -10,7 +10,8 @@
     },
     "apple": {
         "appId": "445189367",
-        "slug": "popclip"
+        "slug": "popclip",
+        "masUrl": "https://apps.apple.com/app/popclip/id445189367?mt=12"
     },
     "lizhi": {
         "storeUrl": "https://lizhi.shop/site/products/id/612?cid=pchuiuf8",
@@ -18,6 +19,7 @@
         "countries": ["CN", "TW", "MO", "HK"]
     },
     "setapp": {
-        "script": "/external-js/setapp.js"
+        "script": "/external-js/setapp.js",
+        "referralUrl": "https://go.setapp.com/stp304?refAppId=159&refVendorId=92"
     }
 }
