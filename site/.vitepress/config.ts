@@ -96,4 +96,11 @@ export default defineConfig({
     //   });
     // },
   },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => tag === "setapp-custom-banner",
+      },
+    }
+  }
 });
