@@ -24,7 +24,7 @@ const theme = computed(() => props.type === "production" ? "brand" : "alt");
             {{ props.name }} {{ props.ver }}</span> &ensp;{{ formatDate(props.date) }}&ensp;
             <a :href="props.notes">Release notes</a>
         </div>
-        <div>Requires macOS {{ props.os }}  or above. {{ formatArchs(props.archs) }}</div>
+        <div>Requires macOS {{ props.os }}  or above. {{ formatArchs(props.archs) }}.</div>
         <div style="margin: 8px 0 0 0"
             ><Button size=small :theme="theme" text="Download" :href="props.url" />&ensp;
             Zip file, {{ formatSize(props.size) }}

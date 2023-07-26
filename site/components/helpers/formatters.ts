@@ -14,7 +14,7 @@ export function formatSize(size: number) {
 }
 
 export function formatArchs(archs) {
-  return "Processors: " + archs.map((a) => {
+  return `Processor${archs.length > 1 ? 's' : ''}: ` + archs.map((a) => {
     if (a === "arm64") return "Apple Silicon";
     if (a === "x86_64") return "Intel 64-bit";
     if (a === "i386") return "Intel 32-bit";
