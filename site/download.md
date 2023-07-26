@@ -3,9 +3,12 @@ import Button from '/components/Button.vue';
 import Download from '/components/Download.vue';
 import Link from "/components/Link.vue";
 import { data } from "/components/data/releases.data";
+import { formatDate, formatSize, formatArchs } from "/components/helpers/formatters";
 
 const prod = data.production[0];
 const beta = data.beta[0];
+const pinned = data.production.filter((r) => r.pin);
+
 </script>
 
 # Download PopClip
@@ -18,8 +21,8 @@ name="PopClip"
 :date="prod.date"
 :size="prod.size"
 :os="prod.minimumSystemVersion"
+:archs="prod.archs"
 notes="/changelog"
-reqsBefore="Universal for Apple Silicon and Intel; "
 type="production"
 />
 
@@ -43,8 +46,8 @@ name="PopClip"
 :date="beta.date"
 :size="beta.size"
 :os="beta.minimumSystemVersion"
+:archs="beta.archs"
 notes="/changelog-beta"
-reqsBefore="Universal for Apple Silicon and Intel; "
 type="beta"
 />
 
@@ -57,18 +60,10 @@ Anyone is welcome to download and use the beta release, which is a preview of th
 
 This list gives the last supported release for each macOS version or processor type.
 
-<!-- - **PopClip 2021.4** (30 Apr 2021)<br>
-  Requires macOS 10.12.6 or above. Processors: Apple Silicon, Intel 64-bit.<br>
-  [Download]() <span :class="$style.diminish">(Zip file, 2.73 Mb)</span>
-
-- **PopClip 2021.4** (30 Apr 2021)<br>
-  Requires macOS 10.12.6 or above. Processors: Apple Silicon, Intel 64-bit.<br>
-  [Download]() <span :class="$style.diminish">(Zip file, 2.73 Mb)</span>
-
-- **PopClip 2021.4** (30 Apr 2021)<br>
-  Requires macOS 10.12.6 or above. Processors: Apple Silicon, Intel 64-bit.<br>
-  [Download]() <span :class="$style.diminish">(Zip file, 2.73 Mb)</span>
-
-- **PopClip 2021.4** (30 Apr 2021)<br>
-  Requires macOS 10.12.6 or above. Processors: Apple Silicon, Intel 64-bit.<br>
-  [Download]() <span :class="$style.diminish">(Zip file, 2.73 Mb)</span> -->
+<ul>
+  <li v-for="r in pinned">
+    <b>PopClip {{ r.versionString }}</b> ({{ formatDate(r.date) }})<br>
+    Requires macOS {{ r.minimumSystemVersion }} or above. {{ formatArchs(r.archs) }}.<br>
+    <a :href="r.url">Download</a> (Zip file, {{ formatSize(r.size) }})
+  </li>
+</ul>

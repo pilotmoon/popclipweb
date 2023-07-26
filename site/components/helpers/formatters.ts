@@ -12,3 +12,12 @@ export function formatDate(dateString: string) {
 export function formatSize(size: number) {
   return size ? (size / 1024 / 1024).toFixed(2) + " Mb" : "";
 }
+
+export function formatArchs(archs) {
+  return "Processors: " + archs.map((a) => {
+    if (a === "arm64") return "Apple Silicon";
+    if (a === "x86_64") return "Intel 64-bit";
+    if (a === "i386") return "Intel 32-bit";
+    return a;
+  }).join(", ");
+}
