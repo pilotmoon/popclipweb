@@ -23,7 +23,7 @@ export async function loadStore() {
     console.log(`Store already loaded for ${store.countryCode}`);
     return;
   }
-  const fetchResponse = await fetch("https://api.pilotmoon.com/webhooks/store/getPrices?product=" + config.pilotmoon.product);
+  const fetchResponse = await fetch("https://api.pilotmoon.com/www/store/getPrices?product=" + config.pilotmoon.product);
   const { country, prices } = await fetchResponse.json();
   console.log("prices", prices);
   if (country) {
