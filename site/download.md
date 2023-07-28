@@ -69,3 +69,5 @@ This list gives the last supported release for each macOS version or processor t
     <a :href="r.url">Download</a> (Zip file, {{ formatSize(r.size) }})
   </li>
 </ul>
+
+Dwnload links for some more recent old versions are available on the [Version History](/changelog) page.
