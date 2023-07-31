@@ -1,14 +1,16 @@
-# Using Actions
+# Actions
 
-PopClip comes with a set of built-in actions, which are described below. You can add more actions by installing [extensions]().
+The buttons that appear in the PopClip bar perform **actions**. PopClip comes with a set of built-in actions, which are described below. You can add more actions by installing [extensions]().
 
-To perform an action, click its button in the PopClip bar. If you hover the pointer over a button without clicking, you will see **tooltip** with the action's name.
+Actions are context-sensitive, meaning that they only appear when they are relevant. So you won't always see all the actions. (See also: [Actions not appearing]().)
+
+**Settings** for actions can be accessed in the [actions pane]() of PopClip settings.
 
 Some actions respond to **modifier keys**. Hold down the modifier key while clicking the action's button to perform the action with the modifier.
 
-**Settings** for actions can be accessed in the [actions section of PopClip settings]().
+If you hover the pointer over an icon button, you will see **tooltip** with the action's name.
 
-:::tip Actions not appearing?
+<!-- :::tip Actions not appearing?
 PopClip is context-sensitive, meaning that the actions that appear are dependent on the the text content, as well as other context.
 
 Examples:
@@ -18,7 +20,7 @@ Examples:
 - The Dictionary action only appears if the text is a dictionary word.
 - The Reveal in Finder action only appears if the text is a file path.
 - Spelling correction actions only appear if the text is misspelled and there are suggestions available.
-:::
+::: -->
 
 ## Cut, Copy and Paste
 
