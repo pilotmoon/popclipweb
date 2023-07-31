@@ -62,7 +62,7 @@ For integration with other tools, you can make PopClip appear using an AppleScri
 After PopClip appears it will stay on screen until you select an action. You can make it disappear without selecting an action by doing one of the following:
 
 - **Click anywhere** outside the PopClip bar.
-- **Press any key**: PopClip will disappear and the key you pressed will be sent to the app underneath. (In keyboard control mode, some keys will perform actions within PopClip.)
+- **Press any key**: PopClip will disappear and the key you pressed will be sent to the app underneath. (Note: in keyboard control mode, some keys will perform actions within PopClip.)
 - **Move the pointer** away from the PopClip bar.
 - **Scroll** with the mouse wheel or trackpad.
 
