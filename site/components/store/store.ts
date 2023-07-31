@@ -23,7 +23,9 @@ export async function loadStore() {
     console.log(`Store already loaded for ${store.countryCode}`);
     return;
   }
-  const fetchResponse = await fetch("https://api.pilotmoon.com/frontend/store/getPrices?product=" + config.pilotmoon.product);
+  const fetchResponse = await fetch(
+    config.pilotmoon.apiRoot + "/frontend/store/getPrices?product=" + config.pilotmoon.product
+  );
   const { country, prices } = await fetchResponse.json();
   console.log("prices", prices);
   if (country) {

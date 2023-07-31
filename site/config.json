@@ -1,6 +1,7 @@
 {
     "pilotmoon": {
-        "product": "popclip"
+        "product": "popclip",
+        "apiRoot": "https://api.pilotmoon.com"
     },
     "paddle": {
         "vendorId": 161988,
