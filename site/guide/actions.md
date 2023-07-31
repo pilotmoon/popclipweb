@@ -43,6 +43,8 @@ The Cut, Copy and Paste actions work just like the usual clipboard functions on 
 
 The Search action opens a web search for the selected text. The default search engine is Google, but you can change this in the actions's settings.
 
+The search opens in the default browser, unless the current app is a browser in which case the current browser is used instead.
+
 **Availability:**
 
 - Always available, subject to a maximum length limit.
@@ -57,11 +59,11 @@ The Search action opens a web search for the selected text. The default search e
 
 ## Open Link
 
-The Open Link action opens any URLs detected in the selected text, in the default browser or associated app. If the text contains multiple web URLs, all of them will open in separate browser tabs.
+The Open Link action opens any web URLs (`http:` and `https:`) detected in the selected text. If the text contains multiple web URLs, all of them will open in separate tabs. The action will also detect "URL-like" text lacking a scheme prefix and add `https:` when opening it.
 
-In addition to `http:` and `https:`, PopClip detects following URL schemes: `evernote:`, `omnifocus:`, `spotify:`, `ftp:`, `bluesky:`, `hook:`, `craftdocs:`, `x-devonthink-item`.
+The URLs open in the default browser, unless the current app is a browser in which case the current browser is used instead.
 
-The action will also detect "URL-like" text lacking a scheme prefix and add `https:` when opening it.
+In addition to web URLs, PopClip detects single instances of the following URL schemes: `evernote:`, `omnifocus:`, `spotify:`, `ftp:`, `bluesky:`, `hook:`, `craftdocs:`, `x-devonthink-item`.
 
 **Try it:** `https://apple.com` `xkcd.com` `spotify:track:421Gp1eSmOIcD6alTWowFR`
 
