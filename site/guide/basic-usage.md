@@ -66,10 +66,15 @@ After PopClip appears it will stay on screen until you select an action. You can
 - **Move the pointer** away from the PopClip bar.
 - **Scroll** with the mouse wheel or trackpad.
 
-<!-- 
-::: tip Turning off auto-appear
-You can turn off PopClip in the settings, either globally or just for specific apps. While disabled, PopClip won't pop-up automatically, but you can still make it appear by pressing the keyboard shortcut.
-::: -->
+## Prevent PopClip appearing
+
+Sometimes, you might want to prevent PopClip from appearing automatically. There are a few ways to do this:
+
+- Turn off PopClip completely by clicking the on/off button in the settings.
+
+- Disable PopClip in a particular application, by adding it to the [Excluded Apps]() list in PopClip settings.
+
+- To suppress PopClip at any time, Hold down the Command (⌘) key while selecting text with the mouse or trackpad.
 
 <!-- ## **How does PopClip work?**
 
