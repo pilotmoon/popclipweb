@@ -40,9 +40,9 @@ export default defineConfig({
         items: [
           { text: "Introduction", link: "/guide/" },
           { text: "Getting Started", link: "/guide/getting-started" },
-          { text: "Basics", link: "/guide/basics" },
+          { text: "Basic Usage", link: "/guide/basics" },
           { text: "Settings", link: "/guide/settings" },
-          { text: "Extensions", link: "/guide/extensions" },
+          { text: "Using Extensions", link: "/guide/extensions" },
           { text: "Support & Feedback", link: "/guide/support" },
         ],
       },

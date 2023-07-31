@@ -20,7 +20,7 @@ PopClip is a [paid](/buy) app, with a [free trial](/download) available. It has 
 
 The user guide is divided into the following sections:
 
-1. **Getting Started**: Step-by-step instructions on how to obtain PopClip and get it up and running on your Mac.
+1. [**Getting Started**](getting-started): Step-by-step instructions on how to obtain PopClip and get it up and running on your Mac.
 
 2. **Basics**: The fundamentals of PopClip: how to get the PopClip bar to appear and disappear, and a tour of the built-in actions.
 
@@ -33,7 +33,7 @@ The user guide is divided into the following sections:
 
 Beyond the user guide, the documentation includes:
 
-* **App Information** including download links, version history, and purchase and licensing information.
+* **App Information** including download links, version history, and purchase information.
 
 * The **Knowledge Base** section, with detailed information about compatibility with other apps, troubleshooting tips, FAQs and technical information.
 

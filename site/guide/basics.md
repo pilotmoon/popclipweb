@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Basics
+# Basic Usage
 
 This section will teach you the fundamentals of PopClip: how to get the PopClip bar to appear and disappear, and a tour of the built-in actions.
 
