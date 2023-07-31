@@ -24,11 +24,16 @@ Examples:
 
 ## Cut, Copy and Paste
 
-The Cut, Copy and Paste actions work just like the corresponding menu items in most apps. Cut and Paste are only available when the text is editable.
+The Cut, Copy and Paste actions work just like the usual clipboard functions on your Mac.
+
+**Availablilty:**
+
+- Copy and Cut require a text selection.
+- Cut and Paste require an editable text field.
 
 **Modifiers:**
 
-- Hold down the **Shift (⌥)** to perform the action with plain text only. This will remove any formatting from the text when copying or pasting.
+- Hold down **Shift (⌥)** to perform the action with plain text only. This will remove any formatting from the text.
 
 **Settings:**
 
@@ -38,6 +43,10 @@ The Cut, Copy and Paste actions work just like the corresponding menu items in m
 
 The Search action opens a web search for the selected text. The default search engine is Google, but you can change this in the actions's settings.
 
+**Availability:**
+
+- Always available, subject to a maximum length limit.
+
 **Modifiers:**
 
 - Hold down the **Shift (⇧)** key to copy the search URL instead of opening it.
@@ -45,3 +54,27 @@ The Search action opens a web search for the selected text. The default search e
 **Settings:**
 
 - **Search URL**: The URL of the search engine. The placeholder `***` will be replaced with the selected text. For example, the default Google search URL is `https://www.google.com/search?q=***`.
+
+## Open Link
+
+The Open Link action opens any URLs detected in the selected text, in the default browser or associated app. If the text contains multiple web URLs, all of them will open in separate browser tabs.
+
+In addition to `http:` and `https:`, PopClip detects following URL schemes: `evernote:`, `omnifocus:`, `spotify:`, `ftp:`, `bluesky:`, `hook:`, `craftdocs:`, `x-devonthink-item`.
+
+The action will also detect "URL-like" text lacking a scheme prefix and add `https:` when opening it.
+
+**Try it:** `https://apple.com` `xkcd.com` `spotify:track:421Gp1eSmOIcD6alTWowFR`
+
+**Availability:**
+
+- Only available if the selected text contains URL. The URL must appear in the text itself; links that are behind hyperlinks cannot be detected. 
+
+**Modifiers:**
+
+- Hold down the **Shift (⇧)** key to copy the URLs as a list, instead of opening them.
+
+## Dictionary
+
+## Reveal in Finder
+
+## Spelling
