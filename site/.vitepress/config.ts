@@ -43,6 +43,7 @@ export default defineConfig({
           { text: "Introduction", link: "/guide/" },
           { text: "Installation", link: "/guide/installation" },
           { text: "Basic Usage", link: "/guide/basic-usage" },
+          { text: "Using Actions", link: "/guide/actions" },
           { text: "Settings", link: "/guide/settings" },
           { text: "Using Extensions", link: "/guide/extensions" },
           { text: "Support & Feedback", link: "/guide/support" },

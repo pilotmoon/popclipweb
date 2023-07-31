@@ -4,9 +4,9 @@ outline: deep
 
 # Basic Usage
 
-This section will teach you the fundamentals of PopClip: how to get the PopClip bar to appear and disappear, and a tour of the built-in actions.
+This page will teach you the fundamentals of PopClip: how to get the PopClip bar to appear and disappear, and control when it can show up.
 
-## Making PopClip appear
+## Make PopClip appear
 
 ### Select text with the mouse or trackpad
 
@@ -53,11 +53,11 @@ When activated with the keyboard shortcut, PopClip appears in keyboard control m
 PopClip's keyboard shortcut works even when PopClip is turned off, or disabled in the current app.
 :::
 
-### AppleScript
+<!-- ### AppleScript
 
-For integration with other tools, you can make PopClip appear using an AppleScript command. See the [AppleScript]() page for details.
+For integration with other tools, you can make PopClip appear using an AppleScript command. See the [AppleScript]() page for details. -->
 
-## Making PopClip disappear
+## Make PopClip disappear
 
 After PopClip appears it will stay on screen until you select an action. You can make it disappear without selecting an action by doing one of the following:
 
@@ -70,16 +70,8 @@ After PopClip appears it will stay on screen until you select an action. You can
 
 Sometimes, you might want to prevent PopClip from appearing automatically. There are a few ways to do this:
 
-- Turn off PopClip completely by clicking the on/off button in the settings.
+- **Disable auto-appear completely**, by turning PopClip off in settings.
 
-- Disable PopClip in a particular application, by adding it to the [Excluded Apps]() list in PopClip settings.
+- **Disable auto-appear in a particular application**, by adding it to the [Excluded Apps]() list in PopClip settings.
 
-- To suppress PopClip at any time, Hold down the Command (⌘) key while selecting text with the mouse or trackpad.
-
-<!-- ## **How does PopClip work?**
-
-PopClip runs in the background and waits for you to select text in another app. PopClip will appear automatically when you select text with your mouse, and can also be made to appear by pressing a [keyboard shortcut]().
-
-When PopClip appears, it will show a menu of actions that you can perform on the selected text. It is context-sensitive, meaning that the actions that appear are dependent on the text you select. For example, actions that operate on URLs will only appear when the text you select contains a URL.
-
-PopClip works in most apps but there are some [apps that PopClip is not compatible with](). -->
+- To suppress PopClip temporarily, **Hold down the Command (⌘) key** while selecting text with the mouse or trackpad.
