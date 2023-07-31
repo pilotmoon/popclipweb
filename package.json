@@ -1,18 +1,16 @@
 {
-  "devDependencies": {
+  "scripts": {
+    "docs:dev": "vitepress dev site",
+    "docs:build": "npx patch-package; vitepress build site",
+    "docs:preview": "vitepress preview site"
+  },
+  "dependencies": {
+    "markdown-it-html5-media": "0.7.1",
+    "zod": "3.21.4",
     "axios": "1.4.0",
     "markdown-it-image-figures": "2.1.1",
     "patch-package": "8.0.0",
     "vitepress": "1.0.0-beta.6",
     "vue": "3.3.4"
-  },
-  "scripts": {
-    "docs:dev": "vitepress dev site",
-    "docs:build": "vitepress build site",
-    "docs:preview": "vitepress preview site"
-  },
-  "dependencies": {
-    "markdown-it-html5-media": "0.7.1",
-    "zod": "3.21.4"
   }
 }
