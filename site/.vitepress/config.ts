@@ -1,4 +1,6 @@
 import { defineConfig } from "vitepress";
+import imageFigures from 'markdown-it-image-figures';
+const { html5Media } = require('markdown-it-html5-media');
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -39,8 +41,8 @@ export default defineConfig({
         text: "User Guide",
         items: [
           { text: "Introduction", link: "/guide/" },
-          { text: "Getting Started", link: "/guide/getting-started" },
-          { text: "Basic Usage", link: "/guide/basics" },
+          { text: "Installation", link: "/guide/installation" },
+          { text: "Basic Usage", link: "/guide/basic-usage" },
           { text: "Settings", link: "/guide/settings" },
           { text: "Using Extensions", link: "/guide/extensions" },
           { text: "Support & Feedback", link: "/guide/support" },
@@ -89,12 +91,15 @@ export default defineConfig({
     ],
   ],
   markdown: {
-    // config: (md) => {
-    //   md.use(imageFigures, {
-    //     figcaption: 'title',
-    //     copyAttrs: '^class$',
-    //   });
-    // },
+    config: (md) => {
+      md.use(html5Media, {
+        videoAttrs: 'autoplay loop muted playsinline',
+      });
+      md.use(imageFigures, {
+        figcaption: 'title',
+        copyAttrs: '^class$',
+      });
+    },
   },
   vue: {
     template: {

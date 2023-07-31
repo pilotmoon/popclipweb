@@ -91,3 +91,22 @@
   --docsearch-primary-color: var(--vp-c-brand) !important;
 }
 
+/* Custom CSS */
+
+.main figure {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--vp-c-bg-soft);
+  margin: 1rem 0;
+}
+
+.main figure figcaption {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+  color: var(--vp-c-text-soft);
+}
+
+.main figure img, .main figure video {
+  clip-path: inset(1px 1px);
+}

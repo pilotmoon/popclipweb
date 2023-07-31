@@ -6,7 +6,7 @@ outline: deep
   import Link from "/components/Link.vue";
 </script>
 
-# Getting Started
+# Installation
 
 This page will guide you through the process of obtaining and installing PopClip
 on your Mac.
@@ -103,7 +103,7 @@ to confirm the change.
 
 Finally, PopClip will show the Welcome to PopClip message:
 
-![Welcome to PopClip](shot-welcome.png "Welcome to PopClip")
+![Welcome to PopClip](shot-welcome.png "Welcome to PopClip message")
 
 Next, we will put PopClip though its paces!
 

@@ -27,7 +27,7 @@ notes="/changelog"
 channel="production"
 />
 
-**Installation:** Unzip and move the PopClip app to your Applications folder. See [Getting Started](/guide/getting-started#first-launch) for next steps.
+**Installation:** Unzip and move the PopClip app to your Applications folder. See [First Launch](/guide/installation#first-launch) for next steps.
 
 **Free Trial:** PopClip operates in free trial mode until you register a license key. The trial is fully functional and includes all features for 150 uses.
 
@@ -70,4 +70,4 @@ This list gives the last supported release for each macOS version or processor t
   </li>
 </ul>
 
-Dwnload links for some more recent old versions are available on the [Version History](/changelog) page.
+Dwnload links for some other old versions are available on the [Version History](/changelog) page.

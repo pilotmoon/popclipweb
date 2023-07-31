@@ -6,7 +6,7 @@ outline: deep
 
 ## What is PopClip?
 
-![PopClip screenshot](./shot-general-4.png)
+![PopClip screenshot](./shot-general-4.png "Screenshot of PopClip")
 
 **PopClip is a Mac utility tool that pops up with a menu of actions when you select text on your screen.**
 
@@ -20,9 +20,9 @@ PopClip is a [paid](/buy) app, with a [free trial](/download) available. It has 
 
 The user guide is divided into the following sections:
 
-1. [**Getting Started**](getting-started): Step-by-step instructions on how to obtain PopClip and get it up and running on your Mac.
+1. [**Installation**](installation): Step-by-step instructions on how to obtain PopClip and get it up and running on your Mac.
 
-2. **Basics**: The fundamentals of PopClip: how to get the PopClip bar to appear and disappear, and a tour of the built-in actions.
+2. [**Basic Usage**](basic-usage): The fundamentals of PopClip: how to get the PopClip bar to appear and disappear, and a tour of the built-in actions.
 
 3. **Settings**: Comprehensive overview of PopClip's settings. Learn how to customise PopClip to suit your needs.
 
