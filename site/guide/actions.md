@@ -15,9 +15,9 @@ Examples:
 
 - The Paste and Cut actions only appear when the text is editable.
 - The Open Link action only appears if the selected text contains a link.
-- The Dictionary action only appear if the text is a dictionary word.
+- The Dictionary action only appears if the text is a dictionary word.
 - The Reveal in Finder action only appears if the text is a file path.
-- Spelling suggestions only appear if the text is misspelled.
+- Spelling correction actions only appear if the text is misspelled and there are suggestions available.
 :::
 
 ## Cut, Copy and Paste

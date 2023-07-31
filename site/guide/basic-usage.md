@@ -74,4 +74,4 @@ Sometimes, you might want to prevent PopClip from appearing automatically. There
 
 - **Disable auto-appear in a particular application**, by adding it to the [Excluded Apps]() list in PopClip settings.
 
-- To suppress PopClip temporarily, **Hold down the Command (⌘) key** while selecting text with the mouse or trackpad.
+- To suppress PopClip temporarily, **Hold down the Command (⌘) key** or the **Fn key** while selecting text with the mouse or trackpad.
