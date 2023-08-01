@@ -32,7 +32,7 @@ export default defineConfig({
       {
         text: "Support",
         items: [
-          { text: "Support & Feedback", link: "/guide/support" },
+          { text: "Support & Feedback", link: "/support" },
           { text: "PopClip Forum", link: "https://forum.popclip.app/" },
         ],
       },
@@ -44,8 +44,8 @@ export default defineConfig({
           text: "User Guide",
           collapsed: false,
           items: [            
-            { text: "Installation", link: "/guide/installation" },
-            { text: "Basic Usage", link: "/guide/basic-usage" },
+            { text: "Installation", link: "/guide/install" },
+            { text: "Basic Usage", link: "/guide/basics" },
             { text: "Actions", link: "/guide/actions" },
             { text: "Settings", link: "/guide/settings" },
             { text: "Extensions", link: "/guide/extensions" },
