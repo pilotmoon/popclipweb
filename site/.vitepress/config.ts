@@ -40,14 +40,14 @@ export default defineConfig({
     sidebar: [
       {
         text: "User Guide",
+        collapsed: false,
         items: [
           { text: "Introduction", link: "/guide/" },
           { text: "Installation", link: "/guide/installation" },
           { text: "Basic Usage", link: "/guide/basic-usage" },
           { text: "Actions", link: "/guide/actions" },
           { text: "Settings", link: "/guide/settings" },
-          { text: "Extensions", link: "/guide/extensions" },
-          { text: "Support & Feedback", link: "/guide/support" },
+          { text: "Extensions", link: "/guide/extensions" },          
         ],
       },
       {
@@ -59,27 +59,35 @@ export default defineConfig({
             text: "Version History",
             link: "/changelog",
           },
+          { text: "Support & Feedback", link: "/guide/support" },
+        ],
+      },
+      {
+        text: "Knowledge Base",
+        items: [          
+          { text: "Troubleshooting", link: "/guide/troubleshooting" },
+          { text: "Known Issues", link: "/kb/compatibility" },
+          { text: "FAQ", link: "/guide/faq" },
+          {
+            text: "Articles",
+            collapsed: true,
+            items: [
+              { text: "Browsers", link: "/kb/compatibility" },              
+            ],
+          },
         ],
       },
       {
         text: "Policies",
+        collapsed: true,
         items: [
           { text: "Terms of License", link: "/terms.md" },
           { text: "Privacy Policy", link: "/privacy.md" },
         ],
       },
       {
-        text: "Knowledge Base",
-        items: [
-          { text: "Known Issues", link: "/kb/compatibility" },
-          { text: "Troubleshooting", link: "/guide/troubleshooting" },
-          { text: "FAQ", link: "/guide/faq" },
-          { text: "Browsers", link: "/kb/compatibility" },
-        ],
-      },
-      {
         text: 'Developer Reference',
-        link: '/ref/'
+        link: 'https://github.com/pilotmoon/PopClip-Extensions'
       }
     ],
     // socialLinks: [

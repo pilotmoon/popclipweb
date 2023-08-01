@@ -18,30 +18,19 @@ PopClip is a [paid](/buy) app, with a [free trial](/download) available. It has 
 
 ## **Contents**
 
-The user guide is divided into the following sections:
+The documentation includes the following sections:
 
-1. [**Installation**](installation): Step-by-step instructions on how to obtain PopClip and get it up and running on your Mac.
+* The **User Guide** is a complete introduction to PopClip. [Install]() PopClip and learn the [basic concepts]() of the user interface. Take a tour of the [built-in actions](), see how to customize the [settings]() and manage [extensions]().
 
-2. [**Basic Usage**](basic-usage): The fundamentals of PopClip: how to get the PopClip bar to appear and disappear, and a tour of the built-in actions.
-
-3. **Settings**: Comprehensive overview of PopClip's settings. Learn how to customise PopClip to suit your needs.
-
-4. **Extensions**: Learn how to enhance PopClip with the addition of extensions. I guide you on how to install and manage these extensions.
-
-5. **Support & Feedback**: Details on how you can reach out for help or provide feedback.
-
-
-Beyond the user guide, the documentation includes:
-
-* **App Information** including download links, version history, and purchase information.
+* **App Information** including [download links](), [purchase information](), [version history]() and [support]() details.
 
 * The **Knowledge Base** section, with detailed information about compatibility with other apps, troubleshooting tips, FAQs and technical information.
 
-* **Developer Reference** documentation for creating your own PopClip extensions.
-  
-All the documentaiton can be found in the sidebar.
+* **Policies** including [license terms]() and [privacy]() policy.
 
- <!-- **Troubleshooting & FAQs**: Solutions to common problems you might face while using PopClip, as well as answers to frequently asked questions. -->
+* **Developer Reference** documentation for creating your own PopClip extensions. This is hosted on GitHub at <https://github.com/pilotmoon/PopClip-Extensions>.
+  
+All the documentaiton can be found linked in the sidebar.
 
 ## About this app
 
