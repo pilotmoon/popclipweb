@@ -28,13 +28,11 @@ There are 3 ways to obtain PopClip:
   PopClip is included in your subscription. Simply search for "PopClip" in the
   Setapp interface and click Install.
 
-### Editions
-
 I refer to the above three variants of PopClip as **editions**. They are the
 _Standalone edition_ (the direct download), the _Mac App Store edition_ and the
 _Setapp edition_ of PopClip. The editions all share the same features and
 abilities, and the only significant difference is the way you obtain the app and
-how you buy it. There are some minor technical differences, which I will point
+how you buy it. There are some minor differences, which I will point
 out in this guide where relevant.
 
 ### Requirements

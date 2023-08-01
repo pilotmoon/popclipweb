@@ -1,14 +1,21 @@
+---
+outline: deep
+---
 # Actions
+
+On this page you will learn about actions in PopClip and take a tour of the built-in actions.
+
+## About actions
 
 The buttons that appear in the PopClip bar perform **actions**. PopClip comes with a set of built-in actions, which are described below. You can add more actions by installing [extensions]().
 
 Actions are context-sensitive, meaning that they only appear when they are relevant. So you won't always see all the actions. (See also: [Actions not appearing]().)
 
-**Settings** for actions can be accessed in the [actions pane]() of PopClip settings.
+Settings for actions can be accessed in the [actions pane]() of PopClip settings.
 
 Some actions respond to **modifier keys**. Hold down the modifier key while clicking the action's button to perform the action with the modifier.
 
-If you hover the pointer over an icon button, you will see **tooltip** with the action's name.
+With actions whose buttons show an icon only, you can hover the pointer over the button to see the action's name.
 
 <!-- :::tip Actions not appearing?
 PopClip is context-sensitive, meaning that the actions that appear are dependent on the the text content, as well as other context.
@@ -22,7 +29,9 @@ Examples:
 - Spelling correction actions only appear if the text is misspelled and there are suggestions available.
 ::: -->
 
-## ![Cut icon](./icon-cut.svg#iconleft) ![Copy icon](./icon-copy.svg#iconleft) ![Paste icon](./icon-paste.svg#iconleft) Cut, Copy and Paste
+## Built-in actions
+
+### ![Cut icon](./icon-cut.svg#iconleft) ![Copy icon](./icon-copy.svg#iconleft) ![Paste icon](./icon-paste.svg#iconleft) Cut, Copy and Paste
 
 The Cut, Copy and Paste actions work just like the usual clipboard functions on your Mac.
 
@@ -41,7 +50,7 @@ Hold down **Shift (⌥)** to perform the action with plain text only. This will 
 
 - **Show as Icon**: When enabled, shows the actions's button as an icon instead of text.
 
-## ![Search icon](./icon-search.svg#iconleft) Search
+### ![Search icon](./icon-search.svg#iconleft) Search
 
 The Search action opens a web search for the selected text. The default search engine is Google, but you can change this in the actions's settings.
 
@@ -61,7 +70,7 @@ Hold **Shift (⇧)** to copy the search URL instead of opening it.
 
 - **Search URL**: The URL of the search engine. The placeholder `***` will be replaced with the selected text. For example, the default Google search URL is `https://www.google.com/search?q=***`.
 
-## ![Open Link icon](./icon-link.svg#iconleft) Open Link
+### ![Open Link icon](./icon-link.svg#iconleft) Open Link
 
 The Open Link action opens any web URLs (`http:` and `https:`) detected in the selected text. If the text contains multiple web URLs, all of them will open in separate tabs. The action will also detect "URL-like" text lacking a scheme prefix and add `https:` when opening it.
 
@@ -83,7 +92,7 @@ Hold **Shift (⇧)** to copy the URLs to the clipboard as a list, instead of ope
 
 None.
 
-## ![Dictionary icon](./icon-dict.svg#iconleft) Dictionary
+### ![Dictionary icon](./icon-dict.svg#iconleft) Dictionary
 
 The Dictionary action looks up the selected text in the macOS Dictionary app. The Dictionary app will open and show the definition of the word.
 
@@ -101,7 +110,7 @@ The action has no settings, but you can change the dictionaries that are enabled
 
 ![](./shot-macos-dict-1.png "macOS Dictionary app settings.")
 
-## ![Reveal in Finder icon](./icon-finder.svg#iconleft) Reveal in Finder
+### ![Reveal in Finder icon](./icon-finder.svg#iconleft) Reveal in Finder
 
 The Reveal in Finder action opens the folder containing the selected file path, or, if the selected text is a folder path, opens the folder itself.
 
@@ -119,7 +128,7 @@ None.
 
 None.
 
-## ![Spelling icon](./icon-spelling.svg#iconleft) Spelling
+### ![Spelling icon](./icon-spelling.svg#iconleft) Spelling
 
 ![](./anim-spelling-3.mp4 "The Spelling action in use.")
 
@@ -150,4 +159,4 @@ Hold **Shift (⇧)** to copy the spelling suggestion to the clipboard instead of
 **Settings:**
 
 ![](./shot-prefs-spelling-3.png#pref "Spelling settings.")
-- *Languages (1,2)*: You can set two different languages for spelling, choosing from any spellchecking languages that are available in macOS.
+- **Languages**: You can select up to two languages for spellchecking, choosing from any that are available on the operating system. If you only want to check spelling in one language, leave the second language set to "None".
