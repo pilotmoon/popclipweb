@@ -59,8 +59,10 @@ channel="beta"
 Anyone is welcome to download and use the beta release, which is a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find.
 
 :::tip Mac App Store and Setapp customers
-- Mac App Store customers can download and use the beta release. See [About the Standalone edition](#about-the-standalone-edition) below.
+- Mac App Store customers can download and use the beta release.
 - Using the beta release is not recommended for Setapp customers.
+
+For more infromation, see [About the Standalone edition](#about-the-standalone-edition) below.
 :::
 ## Older Releases
 
