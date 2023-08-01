@@ -56,7 +56,11 @@ channel="beta"
 
 **Beta installation:** Install in the Applications folder, replacing any existing copy of the PopClip app. (Settings and extensions will be preserved.)
 
-Anyone is welcome to download and use the beta release, which is a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find. 
+Anyone is welcome to download and use the beta release, which is a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find.
+
+**Mac App Store customers:** You can use this beta release interchangably with the Mac App Store edition. The beta release will see your existing settings and extensions, and will detect your Mac App Store purchase.
+
+**Setapp customers:** If you wish to use the beta release, you must uninstall the Setapp edition first. The beta release will not see your existing settings and extensions, and will not detect your Setapp subscription.
 
 ## Older Releases
 

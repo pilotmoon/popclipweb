@@ -8,7 +8,7 @@ outline: deep
 
 PopClip is a Mac utility tool that pops up with a menu of actions when you select text on your screen.
 
-![PopClip screenshot](./shot-popclip.jpg "Screenshot of PopClip")
+![PopClip screenshot](./popclip.jpg "Screenshot of PopClip")
 
 Actions range from simple copy and paste to more complex tasks such as translating text. Using [extensions](/guide/extensions), you can add actions to PopClip to adapt it your needs. Extensions can connect to various apps and services directly, allowing you to perform actions such as sending text to a note-taking app or searching for text on a search engine.
 

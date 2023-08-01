@@ -53,9 +53,9 @@ When activated with the keyboard shortcut, PopClip appears in keyboard control m
 PopClip's keyboard shortcut works even when PopClip is turned off, or disabled in the current app.
 :::
 
-<!-- ### AppleScript
+### Activate with AppleScript
 
-For integration with other tools, you can make PopClip appear using an AppleScript command. See the [AppleScript]() page for details. -->
+For integration with other tools, you can also [make PopClip appear using AppleScript]().
 
 ## Make PopClip disappear
 

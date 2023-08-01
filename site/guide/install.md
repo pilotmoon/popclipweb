@@ -60,6 +60,14 @@ Your license key will be delivered to you as file whose name ends with
 PopClip will automatically open the file and register itself with the license
 key.
 
+<!-- #### Standalone edition will detect Mac App Store purchase
+
+If you bought PopClip on the Mac App Store, then on first launch PopClip will save a separate copy of your Mac App Store receipt to your Mac. This receipt will be detected by the Standalone edition of PopClip if you ever switch to it, for example to test a beta. This means that you can switch between the Mac App Store and Standalone editions without having to buy a license. -->
+
+:::tip Your license is in iCloud
+If you have iCloud enabled on your Mac, PopClip will automatically save your license key to iCloud. If you have multiple Macs signed in to the same iCloud account, the license key will be shared between them. It will also be waiting for you when you install PopClip on a new Mac.
+:::
+
 ## First launch
 
 By now, you should have a copy of the PopClip app in the Applications folder (or
@@ -107,15 +115,10 @@ Next, we will put PopClip though its paces!
 
 ## Uninstalling PopClip
 
-Before we move on, let's take a moment to learn how to uninstall PopClip. First
-quit PopClip if it is running, then:
+Before we move on, let's take a moment to learn how to uninstall PopClip.
 
-- To uninstall the Standalone edition or Mac App Store edition of PopClip, drag
-  the PopClip app from your Applications folder to the Trash.
+1. First, quit PopClip if it is running.
 
-- To uninstall the Setapp edition, use the "Uninstall" option on the PopClip
-  page in the Setapp app.
+2. Drag the PopClip app from your Applications folder (or the Setapp folder inside the Applications folder) to the Trash.
 
-You can also delete the preferences file, application support folder and caches
-folder if you wish to remove all traces of PopClip from your Mac. See
-[File locations]().
+3. Optionally, to remove all traces of PopClip from your Mac, delete the preferences file, application support folder and caches folder. See: [File locations]().

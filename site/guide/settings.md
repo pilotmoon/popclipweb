@@ -5,7 +5,7 @@ outline: deep
 
 This page will give you a comprehensive overview of PopClip's settings.
 
-## The Settings menu
+## The settings menu
 
 PopClip's settings menu is accessed by clicking the ![PopClip menu bar icon](./icon-status.png#icon) icon in the menu bar.
 

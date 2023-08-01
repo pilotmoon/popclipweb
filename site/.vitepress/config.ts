@@ -69,10 +69,13 @@ export default defineConfig({
             { text: "Known Issues", link: "/kb/compatibility" },
             { text: "FAQ", link: "/guide/faq" },
             {
-              text: "Articles",
+              text: "In-depth topics",
               collapsed: true,
               items: [
-                { text: "Browsers", link: "/kb/compatibility" },
+                { text: "AppleScript interface", link: "/kb/applescript" },
+                { text: "Browser compatibilty", link: "/kb/browsers" },          
+                { text: "File locations", link: "/kb/editions" },
+                { text: "Hidden settings", link: "/kb/hidden-settings" },
               ],
             },
           ],
