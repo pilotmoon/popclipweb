@@ -27,7 +27,7 @@ notes="/changelog"
 channel="production"
 />
 
-**Installation:** Unzip and move the PopClip app to your Applications folder. See [First Launch](/guide/installation#first-launch) for next steps.
+**Installation:** Unzip and move the PopClip app to your Applications folder. See [First Launch](/guide/install#first-launch) for next steps.
 
 **Free Trial:** PopClip operates in free trial mode until you register a license key. The trial is fully functional and includes all features for 150 uses.
 

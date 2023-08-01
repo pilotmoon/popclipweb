@@ -20,13 +20,13 @@ PopClip is a [paid](/buy) app, with a [free trial](/download) available. It has 
 
 The documentation includes the following sections:
 
-* The **User Guide** is a complete introduction to PopClip. [Install]() PopClip and learn the [basic concepts]() of the user interface. Take a tour of the [built-in actions](), see how to customize the [settings]() and manage [extensions]().
+* The **User Guide** is a complete introduction to PopClip. [Install](/guide/install) PopClip and learn the [basic concepts](/guide/basics) of the user interface. Take a tour of the [built-in actions](/guide/actions), see how to customize the [settings](/guide/settings) and manage [extensions](/guide/extensions).
 
-* **App Information** including [download links](), [purchase information](), [version history]() and [support]() details.
+* **App Information** including [download links](/download), [purchase information](/buy), [version history](/changelog) and [support](/support) details.
 
 * The **Knowledge Base** section, with detailed information about compatibility with other apps, troubleshooting tips, FAQs and technical information.
 
-* **Policies** including [license terms]() and [privacy]() policy.
+* **Policies** including [license terms](/terms) and [privacy](/privacy) policy.
 
 * **Developer Reference** documentation for creating your own PopClip extensions. This is hosted on GitHub at <https://github.com/pilotmoon/PopClip-Extensions>.
   
