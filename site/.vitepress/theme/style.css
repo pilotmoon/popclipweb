@@ -109,4 +109,9 @@
 
 .main figure img, .main figure video {
   clip-path: inset(1px 1px);
+  margin: 0 auto;
+}
+
+.main figure img[src*="#pref"] {
+  max-width: 280px;
 }

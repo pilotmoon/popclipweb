@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import imageFigures from 'markdown-it-image-figures';
 const { html5Media } = require('markdown-it-html5-media');
+import { imgSize } from "@mdit/plugin-img-size";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -100,6 +101,7 @@ export default defineConfig({
         figcaption: 'title',
         copyAttrs: '^class$',
       });
+      // md.use(imgSize);
     },
   },
   vue: {

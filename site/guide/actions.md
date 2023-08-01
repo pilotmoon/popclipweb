@@ -33,9 +33,11 @@ The Cut, Copy and Paste actions work just like the usual clipboard functions on 
 
 **Modifiers:**
 
-- Hold down **Shift (⌥)** to perform the action with plain text only. This will remove any formatting from the text.
+Hold down **Shift (⌥)** to perform the action with plain text only. This will remove any formatting from the text.
 
 **Settings:**
+
+![](./shot-prefs-copy-2.png#pref "Copy settings.")
 
 - **Show as Icon**: When enabled, shows the actions's button as an icon instead of text.
 
@@ -47,13 +49,15 @@ The search opens in the default browser, unless the current app is a browser in 
 
 **Availability:**
 
-- Always available, subject to a maximum length limit.
+Always available, subject to a maximum length limit.
 
 **Modifiers:**
 
-- Hold down the **Shift (⇧)** key to copy the search URL instead of opening it.
+Hold **Shift (⇧)** to copy the search URL instead of opening it.
 
 **Settings:**
+
+![](./shot-prefs-search-1.png#pref "Search settings.")
 
 - **Search URL**: The URL of the search engine. The placeholder `***` will be replaced with the selected text. For example, the default Google search URL is `https://www.google.com/search?q=***`.
 
@@ -69,14 +73,81 @@ In addition to web URLs, PopClip detects single instances of the following URL s
 
 **Availability:**
 
-- Only available if the selected text contains URL. The URL must appear in the text itself; links that are behind hyperlinks cannot be detected. 
+Only available if the selected text contains URL. The URL must appear in the text itself; links that are behind hyperlinks cannot be detected. 
 
 **Modifiers:**
 
-- Hold down the **Shift (⇧)** key to copy the URLs as a list, instead of opening them.
+Hold **Shift (⇧)** to copy the URLs to the clipboard as a list, instead of opening them.
+
+**Settings:**
+
+None.
 
 ## Dictionary
 
+The Dictionary action looks up the selected text in the macOS Dictionary app. The Dictionary app will open and show the definition of the word.
+
+**Availability:**
+
+Only available if the selected text is a word in one of the dictionaries enabled within the macOS Dictionary app. (PopClip restart may be needed after enabling new dictionaries.)
+
+**Modifiers:**
+
+Hold **Shift (⇧)** to copy the dictionary definition to the clipboard instead of opening in the Dictionary app.
+
+**Settings:**
+
+The action has no settings, but you can change the dictionaries that are enabled in the settings of macOS Dictionary app.
+
+![](./shot-macos-dict-1.png "macOS Dictionary app settings.")
+
 ## Reveal in Finder
 
+The Reveal in Finder action opens the folder containing the selected file path, or, if the selected text is a folder path, opens the folder itself.
+
+**Try it:** `~/Documents` `/Applications/`
+
+**Availability:**
+
+Only available if the selected text is a file or folder path.
+
+**Modifiers:**
+
+None.
+
+**Settings:**
+
+None.
+
 ## Spelling
+
+![](./anim-spelling-3.mp4 "The Spelling action in use.")
+
+
+The Spelling action shows a list of spelling suggestions for the selected word. Click a suggestion to replace the selected text with it.
+
+Spelling may be checked against up to two different languages, configurable in settings.
+
+This action has a special behaviour such that it will appear as a submenu in place of the regular PopClip bar. You can click the arrow button to return to the regular PopClip bar.
+
+The action uses the macOS system spellchecker behind the scenes, so the spelling suggestions will be similar those that appear in other places in macOS.
+
+**Availability:**
+
+Available if the the selected text is:
+
+- a single word,
+- misspelled in at least one of the enabled languages,
+- the spellchecker has spelling suggestions, and
+- the text is editable.
+
+If the selected text is a valid word in one of the enabled languages, the action will appear in the regular PopClip bar only. Otherwise, the spelling suggestions submenu will appear directly.
+
+**Modifiers:**
+
+Hold **Shift (⇧)** to copy the spelling suggestion to the clipboard instead of replacing the text.
+
+**Settings:**
+
+![](./shot-prefs-spelling-3.png#pref "Spelling settings.")
+- *Languages (1,2)*: You can set two different languages for spelling, choosing from any spellchecking languages that are available in macOS.

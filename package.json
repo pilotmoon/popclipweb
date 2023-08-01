@@ -5,12 +5,13 @@
     "docs:preview": "vitepress preview site"
   },
   "dependencies": {
-    "markdown-it-html5-media": "0.7.1",
-    "zod": "3.21.4",
+    "@mdit/plugin-img-size": "0.4.8",
     "axios": "1.4.0",
+    "markdown-it-html5-media": "0.7.1",
     "markdown-it-image-figures": "2.1.1",
     "patch-package": "8.0.0",
     "vitepress": "1.0.0-beta.6",
-    "vue": "3.3.4"
+    "vue": "3.3.4",
+    "zod": "3.21.4"
   }
 }
