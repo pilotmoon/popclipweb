@@ -1,6 +1,6 @@
 import { defineConfig } from "vitepress";
-import imageFigures from 'markdown-it-image-figures';
-const { html5Media } = require('markdown-it-html5-media');
+import imageFigures from "markdown-it-image-figures";
+const { html5Media } = require("markdown-it-html5-media");
 import { imgSize } from "@mdit/plugin-img-size";
 
 // https://vitepress.dev/reference/site-config
@@ -13,7 +13,8 @@ export default defineConfig({
     nav: [
       {
         text: "Documentation",
-        activeMatch: "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download)",
+        activeMatch:
+          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download)",
         link: "/guide/",
         // items: [
         //   { text: "User Guide", link: "/guide/" },
@@ -22,10 +23,10 @@ export default defineConfig({
       },
       {
         text: "Extensions",
-        link: "https://pilotmoon.com/popclip/extensions/"
+        link: "https://pilotmoon.com/popclip/extensions/",
         // items: [
-        //   { text: "Directory", link: "/x/" },          
-        //   { text: "Create Your Own", link: "/create/" },          
+        //   { text: "Directory", link: "/x/" },
+        //   { text: "Create Your Own", link: "/create/" },
         // ],
       },
       {
@@ -35,61 +36,62 @@ export default defineConfig({
           { text: "PopClip Forum", link: "https://forum.popclip.app/" },
         ],
       },
-     
     ],
-    sidebar: [
-      {
-        text: "User Guide",
-        collapsed: false,
-        items: [
-          { text: "Introduction", link: "/guide/" },
-          { text: "Installation", link: "/guide/installation" },
-          { text: "Basic Usage", link: "/guide/basic-usage" },
-          { text: "Actions", link: "/guide/actions" },
-          { text: "Settings", link: "/guide/settings" },
-          { text: "Extensions", link: "/guide/extensions" },          
-        ],
-      },
-      {
-        text: "App Information",
-        items: [
-          { text: "Download", link: "/download" },
-          { text: "Buy", link: "/buy" },
-          {
-            text: "Version History",
-            link: "/changelog",
-          },
-          { text: "Support & Feedback", link: "/guide/support" },
-        ],
-      },
-      {
-        text: "Knowledge Base",
-        items: [          
-          { text: "Troubleshooting", link: "/guide/troubleshooting" },
-          { text: "Known Issues", link: "/kb/compatibility" },
-          { text: "FAQ", link: "/guide/faq" },
-          {
-            text: "Articles",
-            collapsed: true,
-            items: [
-              { text: "Browsers", link: "/kb/compatibility" },              
-            ],
-          },
-        ],
-      },
-      {
-        text: "Policies",
-        collapsed: true,
-        items: [
-          { text: "Terms of License", link: "/terms.md" },
-          { text: "Privacy Policy", link: "/privacy.md" },
-        ],
-      },
-      {
-        text: 'Developer Reference',
-        link: 'https://github.com/pilotmoon/PopClip-Extensions'
-      }
-    ],
+    sidebar: {
+      "/": [
+        {
+          text: "User Guide",
+          collapsed: false,
+          items: [
+            { text: "Introduction", link: "/guide/" },
+            { text: "Installation", link: "/guide/installation" },
+            { text: "Basic Usage", link: "/guide/basic-usage" },
+            { text: "Actions", link: "/guide/actions" },
+            { text: "Settings", link: "/guide/settings" },
+            { text: "Extensions", link: "/guide/extensions" },
+          ],
+        },
+        {
+          text: "App Information",
+          items: [
+            { text: "Download", link: "/download" },
+            { text: "Buy", link: "/buy" },
+            {
+              text: "Version History",
+              link: "/changelog",
+            },
+            { text: "Support & Feedback", link: "/guide/support" },
+          ],
+        },
+        {
+          text: "Knowledge Base",
+          items: [
+            { text: "Troubleshooting", link: "/kb/troubleshooting" },
+            { text: "Known Issues", link: "/kb/compatibility" },
+            { text: "FAQ", link: "/guide/faq" },
+            {
+              text: "Articles",
+              collapsed: true,
+              items: [
+                { text: "Browsers", link: "/kb/compatibility" },
+              ],
+            },
+          ],
+        },
+        {
+          text: "Policies",
+          collapsed: true,
+          items: [
+            { text: "Terms of License", link: "/terms.md" },
+            { text: "Privacy Policy", link: "/privacy.md" },
+          ],
+        },
+        {
+          text: "Developer Reference",
+          link: "https://github.com/pilotmoon/PopClip-Extensions",
+        },
+      ],
+    },
     // socialLinks: [
     //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     // ]
@@ -103,11 +105,11 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(html5Media, {
-        videoAttrs: 'autoplay loop muted playsinline',
+        videoAttrs: "autoplay loop muted playsinline",
       });
       md.use(imageFigures, {
-        figcaption: 'title',
-        copyAttrs: '^class$',
+        figcaption: "title",
+        copyAttrs: "^class$",
       });
       // md.use(imgSize);
     },
@@ -117,6 +119,6 @@ export default defineConfig({
       compilerOptions: {
         isCustomElement: (tag) => tag === "setapp-custom-banner",
       },
-    }
-  }
+    },
+  },
 });
