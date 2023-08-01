@@ -39,11 +39,11 @@ export default defineConfig({
     ],
     sidebar: {
       "/": [
+        { text: "Introduction", link: "/guide/" },
         {
           text: "User Guide",
           collapsed: false,
-          items: [
-            { text: "Introduction", link: "/guide/" },
+          items: [            
             { text: "Installation", link: "/guide/installation" },
             { text: "Basic Usage", link: "/guide/basic-usage" },
             { text: "Actions", link: "/guide/actions" },
@@ -53,6 +53,7 @@ export default defineConfig({
         },
         {
           text: "App Information",
+          collapsed: false,
           items: [
             { text: "Download", link: "/download" },
             { text: "Buy", link: "/buy" },
@@ -65,6 +66,7 @@ export default defineConfig({
         },
         {
           text: "Knowledge Base",
+          collapsed: false,
           items: [
             { text: "Troubleshooting", link: "/kb/troubleshooting" },
             { text: "Known Issues", link: "/kb/compatibility" },
