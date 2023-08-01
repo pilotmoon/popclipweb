@@ -58,10 +58,10 @@ channel="beta"
 
 Anyone is welcome to download and use the beta release, which is a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find.
 
-**Mac App Store customers:** You can use this beta release interchangably with the Mac App Store edition. The beta release will see your existing settings and extensions, and will detect your Mac App Store purchase.
-
-**Setapp customers:** If you wish to use the beta release, you must uninstall the Setapp edition first. The beta release will not see your existing settings and extensions, and will not detect your Setapp subscription.
-
+:::tip Mac App Store and Setapp customers
+- Mac App Store customers can download and use the beta release. See [About the Standalone edition](#about-the-standalone-edition) below.
+- Using the beta release is not recommended for Setapp customers.
+:::
 ## Older Releases
 
 This list gives the last supported release for each macOS version or processor type.
@@ -74,4 +74,12 @@ This list gives the last supported release for each macOS version or processor t
   </li>
 </ul>
 
-Dwnload links for some other old versions are available on the [Version History](/changelog) page.
+Download links for some further old versions are available on the [Version History](/changelog) page.
+
+## About the Standalone edition
+
+When you download PopClip from this website you get the Standalone edition. (For more about editions, see [Obtaining PopClip](/guide/install#obtaining-popclip).)
+
+**Mac App Store customers:** You can use the Standalone edition interchangably with the Mac App Store edition. The Standalone edition will see your existing settings and extensions. It will detect your Mac App Store purchase, so you do not need a license key.
+
+**Setapp customers:** Using the Standalone edition is not recommended. If you do wish to use the Standalone edition, you must uninstall the Setapp edition first. The Standalone edition will not see your existing settings and extensions, and will not detect your Setapp subscription.

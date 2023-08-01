@@ -15,7 +15,7 @@ on your Mac.
 
 There are 3 ways to obtain PopClip:
 
-- **Direct download (free trial, unlockable with license key)**: Download
+- **Standalone (free trial, unlockable with license key)**: Download
   PopClip from the [downloads](/download) page on this website. The download is
   a zip file containing the PopClip app. Unzip the file and drag the PopClip app
   to your Applications folder.
@@ -28,12 +28,10 @@ There are 3 ways to obtain PopClip:
   PopClip is included in your subscription. Simply search for "PopClip" in the
   Setapp interface and click Install.
 
-I refer to the above three variants of PopClip as **editions**. They are the
-_Standalone edition_ (the direct download), the _Mac App Store edition_ and the
-_Setapp edition_ of PopClip. The editions all share the same features and
+I refer to the above three variants of PopClip as **editions**. The editions all share the same features and
 abilities, and the only significant difference is the way you obtain the app and
 how you buy it. There are some minor differences, which I will point
-out in this guide where relevant.
+out where relevant.
 
 ### Requirements
 
