@@ -22,7 +22,7 @@ Examples:
 - Spelling correction actions only appear if the text is misspelled and there are suggestions available.
 ::: -->
 
-## Cut, Copy and Paste
+## ![Cut icon](./icon-cut.svg#iconleft) ![Copy icon](./icon-copy.svg#iconleft) ![Paste icon](./icon-paste.svg#iconleft) Cut, Copy and Paste
 
 The Cut, Copy and Paste actions work just like the usual clipboard functions on your Mac.
 
@@ -41,7 +41,7 @@ Hold down **Shift (⌥)** to perform the action with plain text only. This will 
 
 - **Show as Icon**: When enabled, shows the actions's button as an icon instead of text.
 
-## Search
+## ![Search icon](./icon-search.svg#iconleft) Search
 
 The Search action opens a web search for the selected text. The default search engine is Google, but you can change this in the actions's settings.
 
@@ -61,7 +61,7 @@ Hold **Shift (⇧)** to copy the search URL instead of opening it.
 
 - **Search URL**: The URL of the search engine. The placeholder `***` will be replaced with the selected text. For example, the default Google search URL is `https://www.google.com/search?q=***`.
 
-## Open Link
+## ![Open Link icon](./icon-link.svg#iconleft) Open Link
 
 The Open Link action opens any web URLs (`http:` and `https:`) detected in the selected text. If the text contains multiple web URLs, all of them will open in separate tabs. The action will also detect "URL-like" text lacking a scheme prefix and add `https:` when opening it.
 
@@ -83,7 +83,7 @@ Hold **Shift (⇧)** to copy the URLs to the clipboard as a list, instead of ope
 
 None.
 
-## Dictionary
+## ![Dictionary icon](./icon-dict.svg#iconleft) Dictionary
 
 The Dictionary action looks up the selected text in the macOS Dictionary app. The Dictionary app will open and show the definition of the word.
 
@@ -101,7 +101,7 @@ The action has no settings, but you can change the dictionaries that are enabled
 
 ![](./shot-macos-dict-1.png "macOS Dictionary app settings.")
 
-## Reveal in Finder
+## ![Reveal in Finder icon](./icon-finder.svg#iconleft) Reveal in Finder
 
 The Reveal in Finder action opens the folder containing the selected file path, or, if the selected text is a folder path, opens the folder itself.
 
@@ -119,7 +119,7 @@ None.
 
 None.
 
-## Spelling
+## ![Spelling icon](./icon-spelling.svg#iconleft) Spelling
 
 ![](./anim-spelling-3.mp4 "The Spelling action in use.")
 
@@ -128,7 +128,7 @@ The Spelling action shows a list of spelling suggestions for the selected word. 
 
 Spelling may be checked against up to two different languages, configurable in settings.
 
-This action has a special behaviour such that it will appear as a submenu in place of the regular PopClip bar. You can click the arrow button to return to the regular PopClip bar.
+This action has a special behaviour, appearing as a submenu in place of the regular PopClip bar. You can click the up-arrow button to return to the regular PopClip bar.
 
 The action uses the macOS system spellchecker behind the scenes, so the spelling suggestions will be similar those that appear in other places in macOS.
 

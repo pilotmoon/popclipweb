@@ -27,7 +27,7 @@ PopClip will respond when selecting text by the following methods:
 - **Triple-click** to select a whole paragraph.
 - Click once, then **hold Shift (⇧) and click** elsewhere to select between the two points.
   
-When you select text using the keyboard only, such as by holding Shift and using the arrow keys, PopClip will not appear automatically. Use the [keyboard shortcut](#keyboard-shortcut) to make PopClip appear.
+When you select text using the keyboard only, such as by holding Shift and using the arrow keys, PopClip will not appear automatically. Use the [keyboard shortcut](#activate-with-a-keyboard-shortcut) to make PopClip appear.
 
 ### Long press with the mouse or trackpad
 
@@ -35,9 +35,9 @@ To make PopClip appear without selecting text, you can **long press** the mouse 
 
 ![](./anim-insert-1.mp4 "A long press makes PopClip appear without a a selection.")
 
-### Keyboard shortcut
+### Activate with a keyboard shortcut
 
-In PopClip's [settings](./settings), you can set a keyboard shortcut for making PopClip appear.
+In PopClip's settings, you can [set a keyboard shortcut](./settings#keyboard-shortcut) for making PopClip appear.
 
 When activated with the keyboard shortcut, PopClip appears in keyboard control mode. PopClip's bar will respond to keyboard input as follows:
 

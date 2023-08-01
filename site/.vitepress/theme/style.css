@@ -93,11 +93,25 @@
 
 /* Custom CSS */
 
+.main img[src*="#icon"] {
+  width: 1.5em;
+  display: inline-block;
+  margin: 0 0.2em -0.35em 0.2em;
+  background-color: #f6f6f6;
+  padding: 0.3em;
+  border-radius: 0.2em;
+}
+
+.main img[src*="#iconleft"] {
+  margin-left: 0;
+}
+
 .main figure {
   padding: 8px;
   border-radius: 8px;
   background-color: var(--vp-c-bg-soft);
   margin: 1rem 0;
+  text-align: center;
 }
 
 .main figure figcaption {
@@ -114,4 +128,6 @@
 
 .main figure img[src*="#pref"] {
   max-width: 280px;
+  display: inline-block;
+  vertical-align: middle;
 }

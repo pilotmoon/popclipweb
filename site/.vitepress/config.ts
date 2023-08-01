@@ -14,8 +14,8 @@ export default defineConfig({
       {
         text: "Documentation",
         activeMatch:
-          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download)",
-        link: "/guide/",
+          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download|/docs)",
+        link: "/docs.html",
         // items: [
         //   { text: "User Guide", link: "/guide/" },
         //   { text: "Developer Reference", link: "/ref/" },
@@ -39,7 +39,7 @@ export default defineConfig({
     ],
     sidebar: {
       "/": [
-        { text: "Introduction", link: "/guide/" },
+        { text: "Introduction", link: "/docs.html" },
         {
           text: "User Guide",
           collapsed: false,
