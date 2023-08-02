@@ -58,12 +58,12 @@ channel="beta"
 
 Anyone is welcome to download and use the beta release, which is a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find.
 
-:::tip Mac App Store and Setapp customers
+<!-- :::tip Mac App Store and Setapp customers
 - There is no beta release on the Mac App Store, but customers can download and use the beta from this website.
 - Using the beta release is not recommended for Setapp customers.
 
 For more infromation, see [About the Standalone edition](#about-the-standalone-edition) below.
-:::
+::: -->
 ## Older Releases
 
 This list gives the last supported release for each macOS version or processor type.
@@ -78,10 +78,10 @@ This list gives the last supported release for each macOS version or processor t
 
 Download links for some further old versions are available on the [Version History](/changelog) page.
 
-## About the Standalone edition
+<!-- ## About the Standalone edition
 
 When you download PopClip from this website you get the Standalone edition. (For more about editions, see [Obtaining PopClip](/guide/install#obtaining-popclip).)
 
 **Mac App Store customers:** You can use the Standalone edition interchangably with the Mac App Store edition. The Standalone edition will see your existing settings and extensions. It will detect your Mac App Store purchase, so you do not need a license key.
 
-**Setapp customers:** Using the Standalone edition is not recommended. If you do wish to use the Standalone edition, you must uninstall the Setapp edition first. The Standalone edition will not see your existing settings and extensions, and will not detect your Setapp subscription.
+**Setapp customers:** Using the Standalone edition is not recommended. If you do wish to use the Standalone edition, you must uninstall the Setapp edition first. The Standalone edition will not see your existing settings and extensions, and will not detect your Setapp subscription. -->
