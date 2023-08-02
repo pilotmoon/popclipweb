@@ -119,4 +119,4 @@ Before we move on, let's take a moment to learn how to uninstall PopClip.
 
 2. Drag the PopClip app from your Applications folder (or the Setapp folder inside the Applications folder) to the Trash.
 
-3. Optionally, to remove all traces of PopClip from your Mac, delete the preferences file, application support folder and caches folder. See: [File locations]().
+3. Optionally, to remove all traces of PopClip from your Mac, delete the preferences file, application support folder and caches folder. See: [File locations](/).

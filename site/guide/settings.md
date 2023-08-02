@@ -19,7 +19,7 @@ The large button at the top showing **ON** and **OFF** controls whether PopClip 
 
 As a short-cut, you can also toggle PopClip on and off by secondary clicking (Right-click or Control-click) the PopClip icon in the menu bar.
 
-On/off state can also be set with [AppleScript]().
+On/off state can also be set with [AppleScript](/).
 
 :::tip Still works when off!
 Even when PopClip is turned off, you can use the [keyboard shortcut](./basics#activate-with-a-keyboard-shortcut) to make PopClip appear.

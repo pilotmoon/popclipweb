@@ -55,7 +55,7 @@ PopClip's keyboard shortcut works even when PopClip is turned off, or disabled i
 
 ### Activate with AppleScript
 
-For integration with other tools, you can also [make PopClip appear using AppleScript]().
+For integration with other tools, you can also [make PopClip appear using AppleScript](/).
 
 ## Make PopClip disappear
 
@@ -72,6 +72,6 @@ Sometimes, you might want to prevent PopClip from appearing automatically. There
 
 - **Disable auto-appear completely**, by turning PopClip off in settings.
 
-- **Disable auto-appear in a particular application**, by adding it to the [Excluded Apps]() list in PopClip settings.
+- **Disable auto-appear in a particular application**, by adding it to the [Excluded Apps](/) list in PopClip settings.
 
 - To suppress PopClip temporarily, **Hold down the Command (⌘) key** or the **Fn key** while selecting text with the mouse or trackpad.

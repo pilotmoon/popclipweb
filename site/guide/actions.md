@@ -7,11 +7,11 @@ On this page you will learn about actions in PopClip and take a tour of the buil
 
 ## About actions
 
-The buttons that appear in the PopClip bar perform **actions**. PopClip comes with a set of [built-in actions](#built-in-actions). You can add more actions by installing [extensions]().
+The buttons that appear in the PopClip bar perform **actions**. PopClip comes with a set of [built-in actions](#built-in-actions). You can add more actions by installing [extensions](/).
 
-Actions are context-sensitive, meaning that they only appear when they are relevant. So you won't always see all the actions. (See also: [Actions not appearing]().)
+Actions are context-sensitive, meaning that they only appear when they are relevant. So you won't always see all the actions. (See also: [Actions not appearing](/).)
 
-Settings for actions can be accessed in the [actions pane]() of PopClip settings.
+Settings for actions can be accessed in the [actions pane](/) of PopClip settings.
 
 Some actions respond to modifier keys. Hold down the modifier key while clicking the action's button to perform the action with the modifier.
 
