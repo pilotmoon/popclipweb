@@ -43,7 +43,6 @@ export default defineLoader({
         production: ZReleases.parse(dataProd),
         beta: ZReleases.parse(dataBeta),
     };
-    console.log(result);
     return result;
   }
 });

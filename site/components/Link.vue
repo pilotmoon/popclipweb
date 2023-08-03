@@ -7,16 +7,12 @@ const props = defineProps<{
     k: string
 }>()
 
-console.log('config', config);
-console.log('props.key', props.k);
-
 const href = computed(() => {
     // special case for mas.storeUrl, so it points to correct country
     if (props.k === 'mas.storeUrl') {
         return store.masUrl;
     }
 
-    console.log('props.key', props.k);
     const keyPath = props.k.split('.');
     let value = config;
     for (const key of keyPath) {
