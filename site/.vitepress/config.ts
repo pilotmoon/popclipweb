@@ -59,6 +59,7 @@ export default defineConfig({
             { text: "Download", link: "/download" },
             { text: "Buy", link: "/buy" },
             { text: "Version History", link: "/changelog", },
+            // { text: "Beta", link: "/beta", },
             { text: "Support & Feedback", link: "/support" },
           ],
         },

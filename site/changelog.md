@@ -4,6 +4,4 @@ import Changelog from '/components/Changelog.vue'
 
 # Version History
 
-See also: [Beta Version History](/changelog-beta).
-
 <Changelog />
