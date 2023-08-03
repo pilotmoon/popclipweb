@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "PopClip for Mac"
+  name: "PopClip for Mac!"
   text: "Instant text actions"
   tagline: PopClip appears when you select text in any app, giving you instant access to useful actions.
   image:
