@@ -1,6 +1,8 @@
 {
   "buildCommand": "npm run dpcs:build",
   "outputDirectory": "site/.vitepress/dist",
+  "installCommand": "npm install",
+  "devCommand": "",
   "cleanUrls": true,
   "headers": [
     {
