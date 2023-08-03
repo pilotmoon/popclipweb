@@ -7,6 +7,7 @@ import { imgSize } from "@mdit/plugin-img-size";
 export default defineConfig({
   title: "PopClip",
   description: "Instant text actions for macOS",
+  cleanUrls: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: "/icon128.png",
