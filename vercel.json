@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run dpcs:build",
+  "buildCommand": "npm run docs:build",
   "outputDirectory": "site/.vitepress/dist",
   "installCommand": "npm install",
   "devCommand": "",
