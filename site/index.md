@@ -20,6 +20,8 @@ hero:
 features:
   - title: A multi-tool for text
     details: Whether it's copying, pasting, searching, or sharing, PopClip streamlines your workflow and saves you time.
+    link: /docs
+    linkText: Learn More
   - title: Rich extension library
     details:  From productivity boosters to language translation, the library of extensions has tools for a huge range of tasks..
     link: /extensions/
