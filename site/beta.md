@@ -7,7 +7,13 @@ const beta = data.beta[0];
 
 # PopClip Beta
 
-Anyone is welcome to download and use the beta release, which is a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find.
+Anyone is welcome to use the beta release, which is a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find.
+
+:::tip Beta access for Mac App Store and Setapp customers
+* Mac App Store customers can download and use the beta from this page. It will pick up your existing settings and detect your purchase.
+* Setapp users should *not* download this beta. Instead, enable the beta updates option in Setapp settings, then click "Check for Updates..." in the Setapp menu.
+
+:::
 
 ## Latest Beta
 
