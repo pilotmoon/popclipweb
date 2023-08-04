@@ -9,11 +9,12 @@ import Button from './Button.vue';
     <h1>PopClip Extensions Directory</h1>
     <div v-for="(extension, index) in data.extensions" :key="extension.handle" :class="$style.changelogEntry">
         <h2><img v-if="extension.image" :src="extension.image + '#iconleft'" /> {{ extension.title }}</h2>
-        <div v-html="extension.description"></div>
-        <div v-html="extension.hash"></div>
-        <div v-if="extension.download">
+        <div v-if="extension.download" style="float: right; margin-left: 16px">
             <Button size=small theme="brand" text="Download" :href="extension.download" />
         </div>
+        <div v-html="extension.description"></div>
+        <!-- <div v-html="extension.hash"></div> -->
+
     </div>
 </div>
 </template>
