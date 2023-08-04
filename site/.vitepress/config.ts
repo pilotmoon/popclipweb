@@ -11,6 +11,9 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: "/icon128.png",
+    // editLink: {
+    //   pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path'
+    // },
     nav: [
       {
         text: "Documentation",
