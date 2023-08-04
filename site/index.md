@@ -22,7 +22,11 @@ features:
     details: Whether it's copying, pasting, searching, or sharing, PopClip streamlines your workflow and saves you time.
   - title: Rich extension library
     details:  From productivity boosters to language translation, the library of extensions has tools for a huge range of tasks..
-  - title: Make it yours
-    details: Create your own custom extensions to make PopClip do just what you want.
+    link: /extensions/
+    linkText: Browse Extensions
+  # - title: Customize for you
+  #   details: Create your own extensions to make PopClip work just the way you want.
+  #   link: /extensions/create
+  #   linkText: Try Extension Creator
 ---
 

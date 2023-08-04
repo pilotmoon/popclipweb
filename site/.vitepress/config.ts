@@ -24,10 +24,11 @@ export default defineConfig({
       },
       {
         text: "Extensions",
-        link: "https://pilotmoon.com/popclip/extensions/",
+        link: "/extensions/",
+        // link: "https://pilotmoon.com/popclip/extensions/",
         // items: [
         //   { text: "Directory", link: "/x/" },
-        //   { text: "Create Your Own", link: "/create/" },
+        //   { text: "Creator", link: "/create/" },
         // ],
       },
       {
@@ -44,7 +45,7 @@ export default defineConfig({
         {
           text: "User Guide",
           collapsed: false,
-          items: [            
+          items: [
             { text: "Installation", link: "/guide/install" },
             { text: "Basic Usage", link: "/guide/basics" },
             { text: "Actions", link: "/guide/actions" },
@@ -56,10 +57,16 @@ export default defineConfig({
           text: "App Information",
           collapsed: false,
           items: [
-            { text: "Download", link: "/download" },
-            { text: "Buy", link: "/buy" },
-            { text: "Version History", link: "/changelog", },
-            // { text: "Beta", link: "/beta", },
+            {
+              text: "Download",
+              link: "/download",
+              collapsed: true,
+              items: [
+                { text: "Version History", link: "/changelog" },
+                { text: "Beta", link: "/beta" },
+              ],
+            },
+            { text: "Buy", link: "/buy" },            
             { text: "Support & Feedback", link: "/support" },
           ],
         },
@@ -75,7 +82,7 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: "AppleScript interface", link: "/kb/applescript" },
-                { text: "Browser compatibilty", link: "/kb/browsers" },          
+                { text: "Browser compatibilty", link: "/kb/browsers" },
                 { text: "File locations", link: "/kb/editions" },
                 { text: "Hidden settings", link: "/kb/hidden-settings" },
               ],
