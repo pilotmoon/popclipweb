@@ -38,14 +38,19 @@ export default defineLoader({
     );
     const data = await response.json();
     const hashes = new Set<string>();
-    const extensions = data
-      .map((extension: any) => {
-        const hash = "1" + sha256Base(extension.handle).substring(0, 4);
+    const extensions = data      
+      .flatMap((extension: any) => {
+        if (!extension.identifier) {
+          console.log(`Missing identifier for ${extension.handle}`);
+          return [];
+        }
+        let hash: any = "1" + sha256Base(extension.identifier).substring(0, 4);
         if (hashes.has(hash)) {
-          throw new Error(`Duplicate hash: ${hash} for ${extension.handle}`);
+          console.log(`Duplicate hash: ${hash} for ${extension.handle}`);
+          return [];
         }
         hashes.add(hash);
-        return ZExtension.safeParse({...extension, hash})
+        return [ZExtension.safeParse({...extension, hash})]
       })
       .filter((result) => result.success)
       .map((result) => result.data );
