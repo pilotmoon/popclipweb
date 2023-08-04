@@ -14,5 +14,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:match*",
+      "destination": "https://api.pilotmoon.com/frontend/:match*"
+    }
   ]
 }
