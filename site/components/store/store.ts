@@ -24,7 +24,7 @@ export async function loadStore() {
     return;
   }
   const fetchResponse = await fetch(
-    config.pilotmoon.apiRoot + "/frontend/store/getPrices?product=" + config.pilotmoon.product
+    "/api/store/getPrices?product=" + config.pilotmoon.product
   );
   const { country, prices } = await fetchResponse.json();
   console.log("prices", prices);
