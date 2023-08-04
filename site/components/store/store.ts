@@ -24,9 +24,10 @@ export async function loadStore() {
     return;
   }
 
+  console.log("hostname", window.location.hostname);
   const apiRoot = window.location.hostname === "localhost" ? config.pilotmoon.apiRoot : "/api";
   const fetchResponse = await fetch(
-    apiRoot + "/store/getPrices?product=" + config.pilotmoon.product
+    apiRoot + "/frontend/store/getPrices?product=" + config.pilotmoon.product
   );
   const { country, prices } = await fetchResponse.json();
   console.log("prices", prices);
