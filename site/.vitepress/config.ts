@@ -8,6 +8,9 @@ export default defineConfig({
   title: "PopClip",
   description: "Instant text actions for macOS",
   cleanUrls: true,
+  sitemap: {
+    hostname: 'https://www.popclip.app'
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: "/icon128.png",
