@@ -1,4 +1,5 @@
 ---
+title: PopClip Extensions
 layout: docs
 sidebar: false
 aside: false
