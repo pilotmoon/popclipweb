@@ -1,6 +1,6 @@
 import { defineLoader } from "vitepress";
 import { z } from "zod";
-import { alphabets, baseDecode, baseEncode } from "@pilotmoon/chewit";
+import { alphabets, baseEncode } from "@pilotmoon/chewit";
 import { createHash } from "node:crypto";
 
 // simple sha256 wrapper that generates a hex string
