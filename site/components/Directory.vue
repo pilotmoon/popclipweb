@@ -12,6 +12,7 @@ import Button from './Button.vue';
         <div v-if="extension.download" style="float: right; margin-left: 16px">
             <Button size=small theme="brand" text="Download" :href="extension.download" />
         </div>
+        <a :href="'x/' + extension.hash">Link</a>
         <div v-html="extension.description"></div>
         <!-- <div v-html="extension.hash"></div> -->
 
