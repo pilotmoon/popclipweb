@@ -12,6 +12,9 @@ export default defineConfig({
     hostname: 'https://www.popclip.app'
   },
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
     // https://vitepress.dev/reference/default-theme-config
     logo: "/icon128.png",
     // editLink: {
