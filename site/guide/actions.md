@@ -35,6 +35,9 @@ Examples:
 
 The Cut, Copy and Paste actions work just like the usual clipboard functions on your Mac.
 
+:::tip Paste without selecting text
+To make PopClip appear without selecting any text, [long press](/guide/basics#long-press-with-the-mouse-or-trackpad) the mouse or trackpad button.
+:::
 **Availablilty:**
 
 - Copy and Cut require a text selection.
