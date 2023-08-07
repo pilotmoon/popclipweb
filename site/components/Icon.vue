@@ -12,8 +12,7 @@ const props = defineProps<{
 
 const src = computed(() => {
     const url = (isDark.value ? props.srcDark : props.srcLight) || "";
-    if (typeof url === 'string' && window?.location?.hostname === 'localhost') {
-        console.log("oioioioio");
+    if (typeof url === 'string' && typeof window === 'object' && window.location.hostname === 'localhost') {        
         return url.replace(/^\/content/, config.pilotmoon.cdnRoot);
     }
     return url;

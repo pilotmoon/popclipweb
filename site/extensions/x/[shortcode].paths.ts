@@ -13,10 +13,8 @@ export default {
 
     return exts.flatMap((ext) => {
       if (!ext.identifier) {
-        //console.log(`Missing identifier for ${ext.handle}`);
         return [];
       }
-      console.log(ext);
       let hash: any = "1" + sha256Base(ext.identifier).substring(0, 4);
       return [{
         params: {
