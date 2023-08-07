@@ -8,7 +8,9 @@ import Icon from './Icon.vue';
     <div :class="$style.Directory">
         <div v-for="(extension, index) in data.extensions" :key="extension.handle" :class="$style.DirectoryEntry">
             <div :class="$style.EntryLeft" >  
-                <Icon v-if="extension.imageDark && extension.imageLight" :srcDark="extension.imageDark" :srcLight="extension.imageLight" />&ensp;
+                <a :href="'x/' + extension.hash">
+                    <Icon v-if="extension.imageDark && extension.imageLight" :srcDark="extension.imageDark" :srcLight="extension.imageLight" />
+                </a>
             </div>
             <div :class="$style.EntryMain">                           
                 <div :class="$style.EntryHeader">
@@ -19,7 +21,7 @@ import Icon from './Icon.vue';
                 <div v-html="extension.description"></div>
             </div>
             <div :class="$style.EntryRight">
-                <Button v-if="extension.download" :class="$style.DownloadButton" size=small theme="alt" text="Download" :href="extension.download" />
+                <Button v-if="extension.download" :class="$style.DownloadButton" size=smaller theme="alt" text="Download" :href="extension.download" />
             </div>
         </div>
     </div>

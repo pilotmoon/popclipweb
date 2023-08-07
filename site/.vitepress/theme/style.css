@@ -17,6 +17,7 @@
   --vp-c-brand-dimm: rgba(32, 105, 231, 0.08);
 }
 
+/* my overrides */
 .dark {
   --vp-c-brand: rgb(63, 162, 243);
 --vp-c-brand-light: rgb(92, 181, 247);
@@ -26,6 +27,7 @@
 --vp-c-brand-darker: rgb(20, 103, 157);
 --vp-c-brand-dimm: rgba(63, 162, 243, 0.08);
 
+--vp-c-border: rgba(147, 147, 163, 0.68);
 }
 
 
@@ -50,6 +52,8 @@
   --vp-button-brand-border: var(--vp-c-brand-light);
   --vp-button-brand-text: var(--vp-c-white);
   --vp-button-brand-bg: var(--vp-c-brand-darker);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-dark);
+  
 }
 
 /**

@@ -3,7 +3,7 @@ import { computed } from 'vue'
 /* This is ripped from VPButton in default theme */
 const props = defineProps<{
   tag?: string
-  size?: 'small' | 'medium' | 'big'
+  size?: 'smaller' | 'small' | 'medium' | 'big'
   theme?: 'brand' | 'alt' | 'sponsor'
   text: string
   href?: string
@@ -66,6 +66,14 @@ const component = computed(() => {
   padding: 0 16px;
   line-height: 30px;
   font-size: 14px;
+}
+
+.Button.smaller {
+  border-radius: 12px;
+  padding: 0 12px;
+  line-height: 24px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .Button.brand {
