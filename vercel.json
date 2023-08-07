@@ -19,11 +19,6 @@
     {
       "source": "/api/:match*",
       "destination": "https://api.pilotmoon.com/:match*"
-    },
-    {
-      "source": "/content/:match*",
-      "destination": "https://pilotmoon1.ams3.cdn.digitaloceanspaces.com/:match*"
     }
-
   ]
 }
