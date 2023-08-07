@@ -71,9 +71,6 @@ export default defineLoader({
 
       try {
         let apiRoot = config.pilotmoon.apiRoot;
-        if (typeof window === "object" && window.location.hostname === "localhost") {
-          apiRoot = "http://localhost:1235";
-        }
         const apiResponse = await fetch(
           apiRoot + "/frontend/icon",
           {
