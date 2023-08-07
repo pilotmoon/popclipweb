@@ -11,9 +11,9 @@ export default defineConfig({
     hostname: 'https://www.popclip.app'
   },
   themeConfig: {
-    search: {
-      provider: 'local'
-    },
+    // search: {
+    //   provider: 'local'
+    // },
     // https://vitepress.dev/reference/default-theme-config
     logo: "/icon128.png",
     // editLink: {
@@ -23,7 +23,7 @@ export default defineConfig({
       {
         text: "Documentation",
         activeMatch:
-          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download|/docs)",
+          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download|/docs|/support)",
         link: "/docs.html",
         // items: [
         //   { text: "User Guide", link: "/guide/" },
@@ -33,6 +33,8 @@ export default defineConfig({
       {
         text: "Extensions",
         link: "/extensions/",
+        activeMatch:
+          "^(/extensions/)",
         // link: "https://pilotmoon.com/popclip/extensions/",
         // items: [
         //   { text: "Directory", link: "/x/" },
@@ -48,6 +50,16 @@ export default defineConfig({
       },
     ],
     sidebar: {
+      "/extensions/": [
+        {
+          text: "PopClip Extensions",
+          items: [
+            { text: "Directory", link: "/extensions/" },
+            { text: "Create", link: "/extensions/create" },
+            
+          ],
+        },
+      ],
       "/": [
         { text: "Introduction", link: "/docs.html" },
         {

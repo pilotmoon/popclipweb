@@ -138,11 +138,11 @@ export default defineLoader({
       }
     }
 
-    await Promise.all(
-      crumbs.map(({ descriptor, key, url }) => postIcon(descriptor, url)),
-    ).then(() => {
-      console.log("done posting icons");
-    });
+    // await Promise.all(
+    //   crumbs.map(({ descriptor, key, url }) => postIcon(descriptor, url)),
+    // ).then(() => {
+    //   console.log("done posting icons");
+    // });
 
     return { extensions: result };
   },
