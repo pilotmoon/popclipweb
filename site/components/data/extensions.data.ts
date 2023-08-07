@@ -70,9 +70,12 @@ export default defineLoader({
       // post icon to cdn
 
       try {
+        let apiRoot = config.pilotmoon.apiRoot;
+        if (typeof window === "object" && window.location.hostname === "localhost") {
+          apiRoot = "http://localhost:1235";
+        }
         const apiResponse = await fetch(
-          //config.pilotmoon.apiRoot + "/frontend/icon",
-          "http://localhost:1235" + "/frontend/icon",
+          apiRoot + "/frontend/icon",
           {
             method: "POST",
             headers: {
