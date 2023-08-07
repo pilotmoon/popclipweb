@@ -25,6 +25,9 @@ import Icon from './Icon.vue';
             </div>
         </div>
     </div>
+    <div :class="$style.Footer">
+    Total: {{ data.extensions.length }}
+    </div>
 </template>
 
 <style module>
@@ -71,6 +74,22 @@ import Icon from './Icon.vue';
 .EntryName {
     font-weight: 600;
     font-size: 1.1em;
+}
+
+.EntryDescription {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  .EntryRight {
+    display: none;
+  }
+}
+
+.Footer {
+    margin-top: 16px;
+    font-size: 0.8em;
 }
 
 </style>
