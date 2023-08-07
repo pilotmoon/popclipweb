@@ -91,12 +91,14 @@ export default defineLoader({
       }
     }
 
+    const crumbs: {
+      descriptor: IconDescriptor;
+      key: IconKey;
+      url: string;
+    }[] = [];
+    
     async function generateIconUrls(imageUrl: string) {
-      const crumbs: {
-        descriptor: IconDescriptor;
-        key: IconKey;
-        url: string;
-      }[] = [];
+
       const result = { black: undefined, white: undefined };
       if (imageUrl) {
         for (const color of ["black", "white"]) {
@@ -108,9 +110,6 @@ export default defineLoader({
           crumbs.push({ descriptor, key, url: spacesUrl });
         }
       }
-      Promise.all(
-        crumbs.map(({ descriptor, key, url }) => postIcon(descriptor, url)),
-      );
       return result;
     }
 
@@ -138,6 +137,13 @@ export default defineLoader({
         result.push(parsed.data);
       }
     }
+
+    await Promise.all(
+      crumbs.map(({ descriptor, key, url }) => postIcon(descriptor, url)),
+    ).then(() => {
+      console.log("done posting icons");
+    });
+
     return { extensions: result };
   },
 });
