@@ -17,6 +17,17 @@
   --vp-c-brand-dimm: rgba(32, 105, 231, 0.08);
 }
 
+.dark {
+  --vp-c-brand: rgb(63, 162, 243);
+--vp-c-brand-light: rgb(92, 181, 247);
+--vp-c-brand-lighter: rgb(121, 200, 251);
+--vp-c-brand-lightest: rgb(173, 220, 255);
+--vp-c-brand-dark: rgb(41, 132, 199);
+--vp-c-brand-darker: rgb(20, 103, 157);
+--vp-c-brand-dimm: rgba(63, 162, 243, 0.08);
+
+}
+
 
 
 /**
@@ -33,6 +44,12 @@
   --vp-button-brand-active-border: var(--vp-c-brand-light);
   --vp-button-brand-active-text: var(--vp-c-white);
   --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+}
+
+.dark {
+  --vp-button-brand-border: var(--vp-c-brand-light);
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-bg: var(--vp-c-brand-darker);
 }
 
 /**
