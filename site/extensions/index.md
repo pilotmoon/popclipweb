@@ -10,6 +10,8 @@ next: false
 import Directory from '/components/Directory.vue'
 </script>
 
+# PopClip Extensions Directory
+
 <Directory />
 
 <style module>
