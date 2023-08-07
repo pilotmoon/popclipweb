@@ -21,6 +21,7 @@ const src = computed(() => {
 
 <style scoped>
 .Icon {
+    opacity: 0.85;
     width: 1.2em;
     display: inline-block;
     margin-bottom: -0.2em
