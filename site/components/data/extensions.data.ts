@@ -102,9 +102,10 @@ export default defineLoader({
         for (const color of ["black", "white"]) {
           const descriptor = canonicalize({ specifier: imageUrl, color });
           const key = await generateKey(descriptor);
-          result[color] =  "/content/icons/" + key.opaque;
-          const url = config.pilotmoon.spacesRoot + "/icons/" + key.opaque;
-          crumbs.push({ descriptor, key, url });
+          const cdnUrl = config.pilotmoon.cdnRoot + "/icons/" + key.opaque;
+          const spacesUrl = config.pilotmoon.spacesRoot + "/icons/" + key.opaque;
+          result[color] = cdnUrl;          
+          crumbs.push({ descriptor, key, url: spacesUrl });
         }
       }
       Promise.all(
