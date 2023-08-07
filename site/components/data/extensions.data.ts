@@ -17,7 +17,6 @@ export const ZExtension = z.object({
   download: z.string().url(),
   size: z.number(),
   image: z.string().url().nullish(),
-  iconspec: z.string().nullish(),
   note: z.string().nullable().nullish(),
   demogif: z.string().url().nullish(),
   readme: z.string().nullish(),
@@ -50,14 +49,9 @@ export default defineLoader({
           console.log(`Duplicate hash: ${hash} for ${extension.handle}`);
           return [];
         }
-        let iconspec = null;
-        const folder="https://pilotmoon.com/popclip/extensions/icon/";
-        if (extension.image?.startsWith(folder)) {
-          iconspec=extension.image.replace(folder, "pcx:");
-        }
-        console.log(`iconspec: ${iconspec} for ${extension.handle}`);
+        
         hashes.add(hash);
-        return [ZExtension.safeParse({...extension, hash, iconspec})]
+        return [ZExtension.safeParse({...extension, hash})]
       })
       .filter((result) => result.success)
       .map((result) => result.data );

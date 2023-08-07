@@ -8,13 +8,13 @@ import Icon from './Icon.vue';
 <div :class="$style.Directory">
     <h1>PopClip Extensions Directory</h1>
     <div v-for="(extension, index) in data.extensions" :key="extension.handle" :class="$style.changelogEntry">        
-        <h2><Icon v-if="extension.iconspec" :spec="extension.iconspec" /> {{ extension.title }}</h2>
+        <h2><Icon v-if="extension.image" :spec="extension.image" /> {{ extension.title }}</h2>
         <div v-if="extension.download" style="float: right; margin-left: 16px">
             <Button size=small theme="brand" text="Download" :href="extension.download" />
         </div>
         <a :href="'x/' + extension.hash">Link</a>
         <div v-html="extension.description"></div>
-        <div>{{extension.iconspec}}</div>
+        <div>{{extension.image}}</div>
         <!-- <div v-html="extension.hash"></div> -->
 
     </div>

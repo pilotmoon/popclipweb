@@ -10,8 +10,8 @@ const props = defineProps<{
 }>()
 
 const src = computed(() => {
-    const apiRoot = window.location.hostname === "localhost" ? config.pilotmoon.apiRoot : "/api";
-    const result = apiRoot +  '/frontend/icon/' + props.spec + '?color=' + (isDark.value ? 'fff' : '000');
+    const apiRoot = window.location.hostname === "localhost" ? "http://localhost:1235" : "/api";
+    const result = apiRoot +  '/frontend/icon/' + encodeURIComponent(props.spec) + '?color=' + (isDark.value ? 'white' : 'black');
     console.log("Icon src:", result);
     return result;
 })
