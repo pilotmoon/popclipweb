@@ -79,6 +79,7 @@ const releases = computed(() => {
 }
 
 .changelog .info {
+  word-wrap: no-wrap;
   color: var(--vp-c-text-2);
   background-color: var(--vp-c-bg-soft);
   padding: 0.1em 0.5em;
