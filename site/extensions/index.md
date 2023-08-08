@@ -1,7 +1,7 @@
 ---
 title: PopClip Extensions
 layout: docs
-sidebar: true
+sidebar: false
 aside: false
 prev: false
 next: false
@@ -20,6 +20,6 @@ import Directory from '/components/Directory.vue'
 <style module>
 .Directory {
     width: 100%;
-    max-width: 800px;
+    max-width: 768px;
 }
 </style>

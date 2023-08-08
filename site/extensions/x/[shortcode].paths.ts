@@ -20,6 +20,8 @@ export default {
         params: {
           shortcode: hash,
           title: ext.title,
+          imageDark: ext.imageDark,
+          imageLight: ext.imageLight,
         }
       }];
     })

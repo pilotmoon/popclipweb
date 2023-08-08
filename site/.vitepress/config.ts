@@ -23,7 +23,7 @@ export default defineConfig({
       {
         text: "Documentation",
         activeMatch:
-          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download|/docs|/support)",
+          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download|/docs|/support|/beta)",
         link: "/docs.html",
         // items: [
         //   { text: "User Guide", link: "/guide/" },
@@ -61,9 +61,10 @@ export default defineConfig({
         },
       ],
       "/": [
-        { text: "Introduction", link: "/docs.html" },
+        { text: "Introduction", link: "/docs" },
         {
           text: "User Guide",
+          // link: "/docs",
           collapsed: false,
           items: [
             { text: "Installation", link: "/guide/install" },
