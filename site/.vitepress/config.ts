@@ -75,7 +75,7 @@ export default defineConfig({
           ],
         },
         {
-          text: "App Information",
+          text: "App Vitals",
           collapsed: false,
           items: [
             {
