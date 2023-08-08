@@ -7,9 +7,14 @@ import { Input, Button, RadioButton, RadioGroup, Space } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
 
 const filter = ref("");
+
+const flatIndex = computed(() => {
+    return Object.values(data.extensions);
+});
+
 const filteredList = computed(() => {
-    return data.extensions.filter((ext) =>
-        ext.title.toLowerCase().includes(filter.value.toLowerCase())
+    return flatIndex.value.filter((ext) =>
+        ext.name.toLowerCase().includes(filter.value.toLowerCase())
     );
 });
 const arrange = ref("categories");
@@ -33,23 +38,23 @@ const arrange = ref("categories");
                     <Input type="text" v-model:value="filter" placeholder="Type to filter" />
                 </Space>
             </div>
-            <div v-for="(extension, index) in filteredList" :key="extension.hash" :class="$style.DirectoryEntry">
+            <div v-for="(extension, index) in filteredList" :key="extension.identifier" :class="$style.DirectoryEntry">
                 <div :class="$style.EntryLeft">
-                    <a :href="'x/' + extension.hash">
-                        <Icon v-if="extension.imageDark && extension.imageLight" :srcDark="extension.imageDark"
-                            :srcLight="extension.imageLight" />
+                    <a :href="'x/' + extension.shortcode">
+                        <Icon v-if="extension.iconUrlWhite && extension.iconUrlBlack" :srcDark="extension.iconUrlWhite"
+                            :srcLight="extension.iconUrlBlack" />
                     </a>
                 </div>
                 <div :class="$style.EntryMain">
                     <div :class="$style.EntryHeader">
-                        <a :href="'x/' + extension.hash">
-                            <span :class="$style.EntryName">{{ extension.title }}</span>
+                        <a :href="'x/' + extension.shortcode">
+                            <span :class="$style.EntryName">{{ extension.name }}</span>
                         </a>
                     </div>
                     <div v-html="extension.description"></div>
                 </div>
                 <div :class="$style.EntryRight">                    
-                    <DownloadButton v-if="extension.download" type="icon" size="small" :url="extension.download" />
+                    <DownloadButton v-if="extension.downloadUrl" type="icon" size="small" :url="extension.downloadUrl" />
                 </div>
             </div>
         </div>

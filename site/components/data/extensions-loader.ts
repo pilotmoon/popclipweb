@@ -7,6 +7,8 @@ import {
   IconDescriptor,
   IconKey,
 } from "../helpers/iconKeyBrowser.js";
+import { omit } from "lodash"
+
 import * as config from "../../config.json";
 
 // simple sha256 wrapper that generates a hex string
@@ -18,95 +20,86 @@ export function sha256Base(message: string) {
 }
 
 export const ZExtension = z.object({
-  handle: z.string(),
-  hash: z.string(),
-  title: z.string(),
-  identifier: z.string(),
+  identifier: z.string(), // e.g. com.pilotmoon.select-all
+  handle: z.string(), // e.g. SelectAll
+  shortcode: z.string(), // eg 1sA3e
+  name: z.string(), // extension name
   description: z.string(),
-  download: z.string().url(),
   size: z.number(),
-  image: z.string().url().nullish(),
-  imageDark: z.string().url().nullish(),
-  imageLight: z.string().url().nullish(),
+  downloadUrl: z.string().url(),  
+  iconSpecifier: z.string().nullish(),
+  iconUrlWhite: z.string().url().nullish(),
+  iconUrlBlack: z.string().url().nullish(),
   note: z.string().nullable().nullish(),
+  timestamp: z.number().int().positive(),
   demogif: z.string().url().nullish(),
   readme: z.string().nullish(),
 });
 
 export type Extension = z.infer<typeof ZExtension>;
 export interface ExtensionsData {
-  extensions: Extension[];
+  extensions: Record<string, Extension>; // map of identifier to extension
+  index: Index;
 }
 
-// trim the array to just the fields we need for the directory
+export type Section = {
+  title: string;
+  members: string[]; // will be the hash
+};
+export type Index = Section[];
+
 export async function loadIndex(): Promise<ExtensionsData> {
-    const { extensions } = await load();
-    return { extensions: extensions.map((ext) => {
-        const { handle, hash, identifier, title, description, download, size, imageDark, imageLight } = ext;
-        return { handle, hash, identifier, title, description, download, size, imageDark, imageLight };
-    }) };
+  const { extensionsArray, index } = await load();
+  const extensions: Record<string, Extension> = {};
+  for (const ext of extensionsArray) {
+    extensions[ext.identifier] = omit(ext, ["readme"]); // don't need it for index
+  }
+  return { extensions, index };
 }
 
-let savedResult: { extensions: Extension[] };
-let count=0;
-export async function load(): Promise<ExtensionsData> {
+export async function loadPages(): Promise<Extension[]> {
+  const { extensionsArray } = await load();
+  console.log("returning extensionsArray", extensionsArray);
+  return extensionsArray;
+}
+
+let savedResult: { extensionsArray: Extension[]; index: Index };
+
+let count = 0;
+export async function load(): Promise<
+  { extensionsArray: Extension[]; index: Index }
+> {
   console.log("!!load called!!", ++count);
   if (savedResult) {
     console.log("returning saved result");
     return savedResult;
   }
+  const extensionsArray = await processExtensions();
+  const index = await processIndex(extensionsArray);
+  savedResult = { extensionsArray, index };
+  return savedResult;
+}
+
+async function processIndex(extensions: Extension[]): Promise<Index> {
+  const response = await fetch(
+    "https://pilotmoon.com/popclip/extensions/index.json",
+  );
+  return [];
+}
+
+async function processExtensions() {
   const response = await fetch(
     "https://pilotmoon.com/popclip/extensions/extensions.json",
   );
   const extensionsArray = await response.json();
-  const hashes = new Set<string>();
+  const shortcodes = new Set<string>();
   const result: Extension[] = [];
-
-  async function postIcon(
-    descriptor: IconDescriptor,
-    url: string,
-  ) {
-    // check if icon exists in cdn
-    try {
-      const cdnResponse = await fetch(url);
-      if (cdnResponse.ok) {
-        console.log("icon exists in space", url);
-        return;
-      }
-    } catch (e) {
-      console.log("fetch exception", e);
-    }
-    console.log("icon does not exist in space", url);
-    // post icon to cdn
-
-    try {
-      let apiRoot = config.pilotmoon.apiRoot;
-      const apiResponse = await fetch(
-        apiRoot + "/frontend/icon",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(descriptor),
-        },
-      );
-      if (!apiResponse.ok) {
-        console.log("icon post failed", url);
-        return;
-      }
-      console.log("icon post succeeded", url);
-    } catch (e) {
-      console.log("fetch exception", e);
-    }
-  }
 
   const crumbs: {
     descriptor: IconDescriptor;
     key: IconKey;
     url: string;
   }[] = [];
-
   async function generateIconUrls(imageUrl: string) {
     const result = { black: undefined, white: undefined };
     if (imageUrl) {
@@ -128,20 +121,24 @@ export async function load(): Promise<ExtensionsData> {
       // console.log(`Missing identifier for ${extension.handle}`);
       continue;
     }
-    let hash: any = "1" + sha256Base(extension.identifier).substring(0, 4);
-    if (hashes.has(hash)) {
-      console.log(`Duplicate hash: ${hash} for ${extension.handle}`);
+    let shortcode: any = "1" + sha256Base(extension.identifier).substring(0, 4);
+    if (shortcodes.has(shortcode)) {
+      console.log(`Duplicate shortcode: ${shortcode} for ${extension.handle}`);
       continue;
     }
     const { black: imageLight, white: imageDark } = await generateIconUrls(
       extension.image,
     );
-    hashes.add(hash);
+    shortcodes.add(shortcode);
     const parsed = ZExtension.safeParse({
       ...extension,
-      hash,
-      imageDark,
-      imageLight,
+      name: extension.title,
+      shortcode,
+      iconSpecifier: extension.image,
+      iconUrlWhite: imageDark,
+      iconUrlBlack: imageLight,      
+      downloadUrl: extension.download,
+      timestamp: extension.date,
     });
     if (parsed.success) {
       result.push(parsed.data);
@@ -154,6 +151,44 @@ export async function load(): Promise<ExtensionsData> {
   //   console.log("done posting icons");
   // });
 
-  savedResult = { extensions: result };
-  return savedResult;
+  return result;
+}
+
+async function postIcon(
+  descriptor: IconDescriptor,
+  url: string,
+) {
+  // check if icon exists in cdn
+  try {
+    const cdnResponse = await fetch(url);
+    if (cdnResponse.ok) {
+      console.log("icon exists in space", url);
+      return;
+    }
+  } catch (e) {
+    console.log("fetch exception", e);
+  }
+  console.log("icon does not exist in space", url);
+  // post icon to cdn
+
+  try {
+    let apiRoot = config.pilotmoon.apiRoot;
+    const apiResponse = await fetch(
+      apiRoot + "/frontend/icon",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(descriptor),
+      },
+    );
+    if (!apiResponse.ok) {
+      console.log("icon post failed", url);
+      return;
+    }
+    console.log("icon post succeeded", url);
+  } catch (e) {
+    console.log("fetch exception", e);
+  }
 }
