@@ -9,7 +9,7 @@
         "vendorId": 161988,
         "productId": 818494,
         "sandboxProductId": 41687,
-        "script": "/external-js/paddle.js"
+        "script": "https://cdn.paddle.com/paddle/paddle.js"
     },
     "mas": {
         "appId": "445189367",
@@ -21,7 +21,7 @@
         "countries": ["CN", "TW", "MO", "HK"]
     },
     "setapp": {
-        "script": "/external-js/setapp.js",
+        "script": "https://developer.setapp.com/setapp-banner/index.js",
         "referralUrl": "https://go.setapp.com/stp304?refAppId=159&refVendorId=92"
     }
 }
