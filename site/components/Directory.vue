@@ -4,6 +4,7 @@ import Icon from './Icon.vue';
 import Theme from './Theme.vue';
 import { Input, Button, RadioButton, RadioGroup, Space } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
+import { DownloadOutlined, ThunderboltFilled } from '@ant-design/icons-vue';
 
 const filter = ref("");
 const filteredList = computed(() => {
@@ -18,19 +19,19 @@ const arrange = ref("categories");
     <Theme>
         <div :class="$style.Directory">
             <div :class="$style.Header">
-                <div :class="$style.ControlGroup">
+                <Space>
                     Arrange:
                     <RadioGroup v-model:value="arrange">
                         <RadioButton value="categories">Categories</RadioButton>
                         <RadioButton value="alpha">A-Z</RadioButton>
                         <RadioButton value="newest">Newest</RadioButton>
                     </RadioGroup>
-                </div>
+                </Space>
 
-                <div :class="$style.ControlGroup">
+                <Space>
                     Filter:
                     <Input type="text" v-model:value="filter" placeholder="Type to filter" />
-                </div>
+                </Space>
             </div>
             <div v-for="(extension, index) in filteredList" :key="extension.hash" :class="$style.DirectoryEntry">
                 <div :class="$style.EntryLeft">
@@ -48,12 +49,14 @@ const arrange = ref("categories");
                     <div v-html="extension.description"></div>
                 </div>
                 <div :class="$style.EntryRight">
-                    <Button v-if="extension.download" type="primary" text="Download" :href="extension.download" />
+                    <Button v-if="extension.download" type="primary" shape="round" size="small" :href="extension.download">
+                        <DownloadOutlined />
+                    </Button>
                 </div>
             </div>
         </div>
         <div :class="$style.Footer">
-            Swowing {{ filteredList.length }} of {{ data.extensions.length }}.
+            Showing {{ filteredList.length }} of {{ data.extensions.length }}.
         </div>
     </Theme>
 </template>
