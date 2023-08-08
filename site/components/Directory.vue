@@ -22,7 +22,8 @@ const arrange = ref("categories");
 
 <template>
     <Theme>
-        <div :class="$style.Directory">
+        <h1>PopClip Extensions Directory</h1>
+        <div :class="$style.Directory">            
             <div :class="$style.Header">
                 <Space>
                     Arrange:
@@ -53,7 +54,7 @@ const arrange = ref("categories");
                     </div>
                     <div v-html="extension.description"></div>
                 </div>
-                <div :class="$style.EntryRight">                    
+                <div :class="$style.EntryRight">
                     <DownloadButton v-if="extension.downloadUrl" type="icon" size="small" :url="extension.downloadUrl" />
                 </div>
             </div>
@@ -66,6 +67,7 @@ const arrange = ref("categories");
 
 <style module>
 .Directory {
+    /* max-width: 768px; */
     margin-top: 32px;
     width: 100%;
 }
@@ -123,7 +125,7 @@ const arrange = ref("categories");
     opacity: 0.8;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 550px) {
     .EntryRight {
         display: none;
     }
