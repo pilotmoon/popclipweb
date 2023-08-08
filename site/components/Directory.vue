@@ -90,7 +90,7 @@ const filteredIndex = computed(() => {
                         <div v-html="ext.description"></div>
                     </div>
                     <div :class="$style.EntryRight">
-                        <DownloadButton v-if="ext.downloadUrl" type="icon" size="small" :url="ext.downloadUrl" />
+                        <DownloadButton type="icon" size="small" :url="ext.downloadUrl" />
                     </div>
                 </div>
             </div>
