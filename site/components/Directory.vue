@@ -1,35 +1,68 @@
 <script setup lang="ts">
-import { data } from './data/extensions.data';
+import extensionsData, { data } from './data/extensions.data';
 import Icon from './Icon.vue';
 import Theme from './Theme.vue';
 import DownloadButton from './DownloadButton.vue';
 import { Input, Button, RadioButton, RadioGroup, Space } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
+import { Extension, Section } from './data/extensions-loader.js';
 
 const filter = ref("");
 
-const flatIndex = computed(() => {
-    return Object.values(data.extensions);
+const total = computed(() => {
+    return Object.keys(data.extensions).length;
 });
 
-const filteredList = computed(() => {
-    return flatIndex.value.filter((ext) =>
-        ext.name.toLowerCase().includes(filter.value.toLowerCase())
-    );
+const alphaIndex = computed(() => [{ title: "All Extensions (Alphabetical)", members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier) }]);
+const newestIndex = computed(() => [{ title: "All Extensions (Newest first)", members: Object.values(data.extensions).sort((a, b) => b.timestamp - a.timestamp).map(e => e.identifier) }]);
+const selectedIndexName = ref("categories");
+const selectedIndex = computed(() => {
+    if (selectedIndexName.value === "categories") {
+        return data.index;
+    } else if (selectedIndexName.value === "alpha") {
+        return alphaIndex.value;
+    } else if (selectedIndexName.value === "newest") {
+        return newestIndex.value;
+    } else {
+        return [];
+    }
 });
-const arrange = ref("categories");
+
+const filteredIndex = computed(() => {
+    let count = 0;
+    const index: { title: string, extensions: Extension[] }[] = [];
+    for (const section of selectedIndex.value) {
+        const extensions: Extension[] = [];
+        for (const identifier of section.members) {
+            const ext = data.extensions[identifier];
+            if (ext.name.toLowerCase().includes(filter.value.toLowerCase())) {
+                extensions.push(ext);
+            }
+        }
+        if (extensions.length > 0) {
+            count += extensions.length;
+            index.push({
+                title: section.title,
+                extensions
+            });
+        }
+    }
+    return { index, count }
+});
+
+
 </script>
 
 <template>
     <Theme>
         <h1>PopClip Extensions Directory</h1>
-        <div :class="$style.Directory">            
+        <div :class="$style.Directory">
             <div :class="$style.Header">
                 <Space>
                     Arrange:
-                    <RadioGroup v-model:value="arrange">
+                    <RadioGroup v-model:value="selectedIndexName">
                         <RadioButton value="categories">Categories</RadioButton>
-                        <RadioButton value="alpha">A-Z</RadioButton>
+                        <RadioButton value="alpha">A–Z</RadioButton>
                         <RadioButton value="newest">Newest</RadioButton>
                     </RadioGroup>
                 </Space>
@@ -39,28 +72,31 @@ const arrange = ref("categories");
                     <Input type="text" v-model:value="filter" placeholder="Type to filter" />
                 </Space>
             </div>
-            <div v-for="(extension, index) in filteredList" :key="extension.identifier" :class="$style.DirectoryEntry">
-                <div :class="$style.EntryLeft">
-                    <a :href="'x/' + extension.shortcode">
-                        <Icon v-if="extension.iconUrlWhite && extension.iconUrlBlack" :srcDark="extension.iconUrlWhite"
-                            :srcLight="extension.iconUrlBlack" />
-                    </a>
-                </div>
-                <div :class="$style.EntryMain">
-                    <div :class="$style.EntryHeader">
-                        <a :href="'x/' + extension.shortcode">
-                            <span :class="$style.EntryName">{{ extension.name }}</span>
+            <div v-for="{ title, extensions } in filteredIndex.index">
+                <h2>{{ title }}</h2>
+                <div v-for="ext in extensions" :key="ext.identifier" :class="$style.DirectoryEntry">
+                    <div :class="$style.EntryLeft">
+                        <a :href="'x/' + ext.shortcode">
+                            <Icon v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcDark="ext.iconUrlWhite"
+                                :srcLight="ext.iconUrlBlack" />
                         </a>
                     </div>
-                    <div v-html="extension.description"></div>
-                </div>
-                <div :class="$style.EntryRight">
-                    <DownloadButton v-if="extension.downloadUrl" type="icon" size="small" :url="extension.downloadUrl" />
+                    <div :class="$style.EntryMain">
+                        <div :class="$style.EntryHeader">
+                            <a :href="'x/' + ext.shortcode">
+                                <span :class="$style.EntryName">{{ ext.name }}</span>
+                            </a>
+                        </div>
+                        <div v-html="ext.description"></div>
+                    </div>
+                    <div :class="$style.EntryRight">
+                        <DownloadButton v-if="ext.downloadUrl" type="icon" size="small" :url="ext.downloadUrl" />
+                    </div>
                 </div>
             </div>
         </div>
         <div :class="$style.Footer">
-            Showing {{ filteredList.length }} of {{ data.extensions.length }}.
+            Showing {{ filteredIndex.count }} of {{ total }}.
         </div>
     </Theme>
 </template>
@@ -70,6 +106,13 @@ const arrange = ref("categories");
     /* max-width: 768px; */
     margin-top: 32px;
     width: 100%;
+}
+
+.Directory h2 {
+    border: none;
+    font-size: 1.2rem;
+    margin: 0.5em 0 0.25em 0;
+    padding: 0;
 }
 
 .Header {

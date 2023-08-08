@@ -39,14 +39,13 @@ export const ZExtension = z.object({
 export type Extension = z.infer<typeof ZExtension>;
 export interface ExtensionsData {
   extensions: Record<string, Extension>; // map of identifier to extension
-  index: Index;
+  index: Section[];
 }
 
 export type Section = {
   title: string;
   members: string[]; // will be the hash
 };
-export type Index = Section[];
 
 export async function loadIndex(): Promise<ExtensionsData> {
   const { extensionsArray, index } = await load();
@@ -59,15 +58,14 @@ export async function loadIndex(): Promise<ExtensionsData> {
 
 export async function loadPages(): Promise<Extension[]> {
   const { extensionsArray } = await load();
-  console.log("returning extensionsArray", extensionsArray);
   return extensionsArray;
 }
 
-let savedResult: { extensionsArray: Extension[]; index: Index };
+let savedResult: { extensionsArray: Extension[]; index: Section[] };
 
 let count = 0;
 export async function load(): Promise<
-  { extensionsArray: Extension[]; index: Index }
+  { extensionsArray: Extension[]; index: Section[] }
 > {
   console.log("!!load called!!", ++count);
   if (savedResult) {
@@ -80,11 +78,32 @@ export async function load(): Promise<
   return savedResult;
 }
 
-async function processIndex(extensions: Extension[]): Promise<Index> {
-  const response = await fetch(
+async function processIndex(extensions: Extension[]): Promise<Section[]> {
+  const rawIndex = await (await fetch(
     "https://pilotmoon.com/popclip/extensions/index.json",
-  );
-  return [];
+  )).json();
+
+  // make a lookup table mapping handle to identifier
+  const handleToIdentifier: Record<string, string> = {};
+  for (const ext of extensions) {
+    handleToIdentifier[ext.handle] = ext.identifier;
+  }
+
+  // re-make the index replacing the handles with identifiers
+  const result: Section[] = [];
+  for (const section of rawIndex) {
+    const members: string[] = [];
+    for (const handle of section.Members) {
+      const identifier = handleToIdentifier[handle];
+      if (identifier) {
+        members.push(identifier);
+      } else {
+        console.log(`Missing identifier for ${handle}`);
+      }
+    }
+    result.push({ title: section.Title, members });
+  }
+  return result;
 }
 
 async function processExtensions() {
