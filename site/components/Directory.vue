@@ -2,11 +2,20 @@
 import { data } from './data/extensions.data';
 import Button from './Button.vue';
 import Icon from './Icon.vue';
+import { computed, ref, watch } from 'vue';
+const filter = ref("");
+const filteredList = computed(() => {
+    return data.extensions.filter((ext) =>
+        ext.title.toLowerCase().includes(filter.value.toLowerCase())
+    );
+});
+
 </script>
 
 <template>
+    <input type="text" v-model="filter" placeholder="Type to filter" />
     <div :class="$style.Directory">
-        <div v-for="(extension, index) in data.extensions" :key="extension.handle" :class="$style.DirectoryEntry">
+        <div v-for="(extension, index) in filteredList" :key="extension.hash" :class="$style.DirectoryEntry">
             <div :class="$style.EntryLeft" >  
                 <a :href="'x/' + extension.hash">
                     <Icon v-if="extension.imageDark && extension.imageLight" :srcDark="extension.imageDark" :srcLight="extension.imageLight" />
@@ -26,7 +35,7 @@ import Icon from './Icon.vue';
         </div>
     </div>
     <div :class="$style.Footer">
-    Total: {{ data.extensions.length }}
+    Swowing {{ filteredList.length }} of {{ data.extensions.length }}.
     </div>
 </template>
 
