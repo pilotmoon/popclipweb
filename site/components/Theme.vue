@@ -5,12 +5,21 @@
 import { ConfigProvider, StyleProvider, theme } from 'ant-design-vue';
 import { computed } from 'vue';
 import { useData } from 'vitepress';
+import { isTypedArray } from 'util/types';
 
 const { isDark } = useData();
 const antTheme = computed(() => {
     console.log("isDark", isDark.value);
-    return {
-      algorithm: isDark.value ? theme.darkAlgorithm : theme.defaultAlgorithm,
+    return isDark.value ? {
+        algorithm: theme.darkAlgorithm,
+        token: {
+            colorPrimary: 'rgb(63, 162, 243)',
+        }
+    } : {
+        algorithm: theme.defaultAlgorithm,
+        token: {
+            colorPrimary: 'rgb(50, 117, 231)',
+        }
     }
 });
 </script>
@@ -18,7 +27,7 @@ const antTheme = computed(() => {
 <template>
     <ConfigProvider :theme="antTheme">
         <StyleProvider hash-priority="high">
-        <slot />
+            <slot />
         </StyleProvider>
     </ConfigProvider>
 </template>

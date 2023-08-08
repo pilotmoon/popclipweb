@@ -12,26 +12,25 @@ const filteredList = computed(() => {
     );
 });
 const arrange = ref("categories");
-
-
 </script>
 
 <template>
     <Theme>
         <div :class="$style.Directory">
-            <div :class="$style.Header">                
-                <Space>
+            <div :class="$style.Header">
+                <div :class="$style.ControlGroup">
                     Arrange:
                     <RadioGroup v-model:value="arrange">
                         <RadioButton value="categories">Categories</RadioButton>
                         <RadioButton value="alpha">A-Z</RadioButton>
                         <RadioButton value="newest">Newest</RadioButton>
                     </RadioGroup>
-                </Space>
+                </div>
 
-                <Space>
-                    Filter: <Input type="text" v-model:value="filter" placeholder="Type to filter" />
-                </Space>                
+                <div :class="$style.ControlGroup">
+                    Filter:
+                    <Input type="text" v-model:value="filter" placeholder="Type to filter" />
+                </div>
             </div>
             <div v-for="(extension, index) in filteredList" :key="extension.hash" :class="$style.DirectoryEntry">
                 <div :class="$style.EntryLeft">
@@ -71,6 +70,12 @@ const arrange = ref("categories");
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 8px;
+}
+
+.ControlGroup {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .DirectoryEntry {
