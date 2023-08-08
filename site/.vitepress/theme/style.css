@@ -49,10 +49,10 @@
 }
 
 .dark {
-  --vp-button-brand-border: var(--vp-c-brand-light);
+  /* --vp-button-brand-border: var(--vp-c-brand-light);
   --vp-button-brand-text: var(--vp-c-white);
   --vp-button-brand-bg: var(--vp-c-brand-darker);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-dark);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-dark); */
   
 }
 
