@@ -9,7 +9,7 @@ import { isTypedArray } from 'util/types';
 
 const { isDark } = useData();
 const antTheme = computed(() => {
-    console.log("isDark", isDark.value);
+    // console.log("isDark", isDark.value);
     return isDark.value ? {
         algorithm: theme.darkAlgorithm,
         token: {

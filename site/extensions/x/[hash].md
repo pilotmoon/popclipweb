@@ -12,5 +12,5 @@ import Icon from '/components/Icon.vue';
 ← [Back to Directory](/extensions/)
 <h1><Icon v-if="$params.imageDark && $params.imageLight" :srcLight="$params.imageLight" :srcDark="$params.imageDark" />&ensp;{{ $params.title}}</h1>
 
-Shortcode: {{ $params.shortcode }}
+Shortcode: {{ $params.hash }}
 Dark: {{ $params.imageDark }}
