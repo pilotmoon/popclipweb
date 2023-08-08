@@ -8,6 +8,7 @@
   "dependencies": {
     "@mdit/plugin-img-size": "0.4.8",
     "@pilotmoon/chewit": "0.3.0",
+    "ant-design-vue": "4.0.0",
     "axios": "1.4.0",
     "markdown-it-html5-media": "0.7.1",
     "markdown-it-image-figures": "2.1.1",

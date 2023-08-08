@@ -152,3 +152,15 @@
   display: inline-block;
   vertical-align: middle;
 }
+
+/* The below applies to 'page' layout e.g. extensions */
+/* 
+a {
+  color: var(--vp-c-brand);
+}
+a:hover {
+  text-decoration: underline;
+}
+a.ant-btn:hover {
+  text-decoration: none;
+}  */
