@@ -1,4 +1,5 @@
 ---
+layout: docs
 sidebar: false
 aside: false
 pref: false
@@ -10,6 +11,7 @@ import Icon from '/components/Icon.vue';
 </script>
 
 ← [Back to Directory](/extensions/)
+
 <h1><Icon v-if="$params.imageDark && $params.imageLight" :srcLight="$params.imageLight" :srcDark="$params.imageDark" />&ensp;{{ $params.title}}</h1>
 
 Shortcode: {{ $params.hash }}

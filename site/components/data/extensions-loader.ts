@@ -38,9 +38,23 @@ export interface ExtensionsData {
   extensions: Extension[];
 }
 
+// trim the array to just the fields we need for the directory
+export async function loadIndex(): Promise<ExtensionsData> {
+    const { extensions } = await load();
+    return { extensions: extensions.map((ext) => {
+        const { handle, hash, identifier, title, description, download, size, imageDark, imageLight } = ext;
+        return { handle, hash, identifier, title, description, download, size, imageDark, imageLight };
+    }) };
+}
+
+let savedResult: { extensions: Extension[] };
 let count=0;
 export async function load(): Promise<ExtensionsData> {
   console.log("!!load called!!", ++count);
+  if (savedResult) {
+    console.log("returning saved result");
+    return savedResult;
+  }
   const response = await fetch(
     "https://pilotmoon.com/popclip/extensions/extensions.json",
   );
@@ -140,5 +154,6 @@ export async function load(): Promise<ExtensionsData> {
   //   console.log("done posting icons");
   // });
 
-  return { extensions: result };
+  savedResult = { extensions: result };
+  return savedResult;
 }
