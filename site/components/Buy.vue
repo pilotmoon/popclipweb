@@ -3,7 +3,8 @@ import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript.ts'
 import { getFlagEmoji } from './helpers/getFlagEmoji.ts'
 import { store, loadStore, isLoaded } from './store/store.ts'
-import Button from './Button.vue'
+import { Button } from 'ant-design-vue'
+import { ShoppingOutlined } from '@ant-design/icons-vue'
 import * as config from '../config.json'
 
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode));
@@ -55,7 +56,7 @@ onMounted(() => {
         </div>
         <div :class="$style.box">
             <span>Buy License Key from Paddle</span><br>
-            <Button :class="$style.buybutton" text="Buy" @click="openPaddleCheckout" theme="brand" /><br>
+            <Theme><Button :class="$style.buybutton" @click="openPaddleCheckout" type="primary" size="large"><ShoppingOutlined /> Buy</Button></Theme><br>
             <span :class="$style.price">{{ roundPrice(store.paddlePrice) }}</span>
         </div>
     </div>

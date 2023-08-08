@@ -1,35 +1,36 @@
 <script setup lang="ts">
-import Button from './Button.vue';
-import { computed } from 'vue'
+import DownloadButton from './DownloadButton.vue'
 import { formatDate, formatSize, formatArchs } from './helpers/formatters';
+import { DownloadOutlined } from '@ant-design/icons-vue';
 const props = defineProps<{
-  name: string,
-  ver: string,
-  date: string
-  notes: string
-  os: string
-  url: string
-  channel: "production" | "beta"
-  size: number,
-  archs: string[]
+    name: string,
+    ver: string,
+    date: string
+    notes: string
+    os: string
+    url: string
+    channel: "production" | "beta"
+    size: number,
+    archs: string[]
 }>();
-
-const theme = "brand";
 
 </script>
 
 <template>
-    <div :class="$style.downloadBox">
-        <div ><span :class="$style.promote">
-            {{ props.name }} {{ props.ver }}</span><span v-if="channel!=='production'" :class="$style.splash">&ensp; {{ channel }}</span>&ensp;{{ formatDate(props.date) }}&ensp;
-            <a :href="props.notes">Release notes</a>
+    <Theme>
+        <div :class="$style.downloadBox">
+            <div><span :class="$style.promote">
+                    {{ props.name }} {{ props.ver }}</span><span v-if="channel !== 'production'" :class="$style.splash">&ensp;
+                    {{ channel }}</span>&ensp;{{ formatDate(props.date) }}&ensp;
+                <a :href="props.notes">Release notes</a>
+            </div>
+            <div style="margin: 6px 0 0 0">Requires macOS {{ props.os }} or above. {{ formatArchs(props.archs) }}.</div>
+            <div style="margin: 8px 0 0 0">
+                <DownloadButton :url="props.url" />&ensp;
+                Zip file, {{ formatSize(props.size) }}
+            </div>
         </div>
-        <div style="margin: 6px 0 0 0">Requires macOS {{ props.os }}  or above. {{ formatArchs(props.archs) }}.</div>
-        <div style="margin: 8px 0 0 0"
-            ><Button size=small :theme="theme" text="Download" :href="props.url" />&ensp;
-            Zip file, {{ formatSize(props.size) }}
-        </div>
-    </div>
+    </Theme>
 </template>
 
 <style module>
@@ -43,6 +44,7 @@ span.promote {
     font-size: 1.2em;
     font-weight: 600;
 }
+
 span.diminish {
     font-size: 0.9em;
 }

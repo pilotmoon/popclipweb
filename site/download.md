@@ -1,5 +1,5 @@
 <script setup>
-import Button from '/components/Button.vue';
+import DownloadButton from '/components/DownloadButton.vue';
 import Download from '/components/Download.vue';
 import Link from "/components/Link.vue";
 import { data } from "/components/data/releases.data";
@@ -47,7 +47,7 @@ This list gives the last supported release for each macOS version or processor t
   <li v-for="r in pinned">
     <b>PopClip {{ r.versionString }}</b> ({{ formatDate(r.date) }})<br>
     Requires macOS {{ r.minimumSystemVersion }} or above. {{ formatArchs(r.archs) }}.<br>
-    <a :href="r.url">Download</a> (Zip file, {{ formatSize(r.size) }})
+    <DownloadButton :url="r.url" type="icon" size="small" /> (Zip file, {{ formatSize(r.size) }})
   </li>
 </ul>
 

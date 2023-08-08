@@ -2,9 +2,9 @@
 import { data } from './data/extensions.data';
 import Icon from './Icon.vue';
 import Theme from './Theme.vue';
+import DownloadButton from './DownloadButton.vue';
 import { Input, Button, RadioButton, RadioGroup, Space } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
-import { DownloadOutlined, ThunderboltFilled } from '@ant-design/icons-vue';
 
 const filter = ref("");
 const filteredList = computed(() => {
@@ -48,10 +48,8 @@ const arrange = ref("categories");
                     </div>
                     <div v-html="extension.description"></div>
                 </div>
-                <div :class="$style.EntryRight">
-                    <Button v-if="extension.download" type="primary" shape="round" size="small" :href="extension.download">
-                        <DownloadOutlined />
-                    </Button>
+                <div :class="$style.EntryRight">                    
+                    <DownloadButton v-if="extension.download" type="icon" size="small" :url="extension.download" />
                 </div>
             </div>
         </div>
