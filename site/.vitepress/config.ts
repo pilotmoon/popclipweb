@@ -52,7 +52,7 @@ export default defineConfig({
     sidebar: {
       "/extensions/": [
         {
-          text: "PopClip Extensions",
+          text: "Extensions",
           items: [
             { text: "Directory", link: "/extensions/" },
             { text: "Create", link: "/extensions/create" },
