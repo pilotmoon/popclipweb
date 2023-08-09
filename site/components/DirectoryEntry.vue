@@ -35,8 +35,8 @@ defineProps<{
     gap: 12px;
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
-    padding: 6px 12px;
-    margin-bottom: 6px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
     position: relative;
 }
 
