@@ -27,13 +27,22 @@ const component = computed(() => {
     :is="component"
     class="Button"
     :class="classes"
-    :href="href"
-  >
-    <slot />
+    :href="href">
+    <div class="ButtonInner">
+      <slot />
+    </div>
   </component>
 </template>
 
 <style scoped>
+
+.ButtonInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
 .Button {
   display: inline-block;
   border: 1px solid transparent;
@@ -51,6 +60,10 @@ const component = computed(() => {
   padding: 0 20px;
   line-height: 38px;
   font-size: 14px;
+
+  .ButtonInner {
+    height: 38px;
+  }
 }
 
 .Button.big {
@@ -58,6 +71,10 @@ const component = computed(() => {
   padding: 0 24px;
   line-height: 46px;
   font-size: 16px;
+
+  .ButtonInner {
+    height: 46px;
+  }
 }
 
 .Button.small {
@@ -65,6 +82,10 @@ const component = computed(() => {
   padding: 0 16px;
   line-height: 30px;
   font-size: 14px;
+
+  .ButtonInner {
+    height: 30px;
+  }
 }
 
 .Button.smaller {
@@ -73,7 +94,15 @@ const component = computed(() => {
   line-height: 24px;
   font-size: 13px;
   font-weight: 500;
+
+  .ButtonInner {
+    height: 24px;
+  }
 }
+
+
+
+
 
 .Button.brand {
   border-color: var(--vp-button-brand-border);

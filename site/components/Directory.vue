@@ -93,7 +93,7 @@ const filteredIndex = computed(() => {
                         <div v-html="ext.description"></div>
                     </div>
                     <div :class="$style.EntryRight">
-                        <DownloadButton type="minimal" :url="ext.downloadUrl" />
+                        <DownloadButton theme="brand" size="smaller" :href="ext.downloadUrl" icon-only/>
                     </div>
                 </div>
             </div>

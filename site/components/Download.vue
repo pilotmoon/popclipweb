@@ -25,7 +25,7 @@ const props = defineProps<{
         </div>
         <div style="margin: 6px 0 0 0">Requires macOS {{ props.os }} or above. {{ formatArchs(props.archs) }}.</div>
         <div style="margin: 8px 0 0 0">
-            <DownloadButton :url="props.url" />&ensp;
+            <DownloadButton :href="props.url" size="small"/>&ensp;
             Zip file, {{ formatSize(props.size) }}
         </div>
     </div>

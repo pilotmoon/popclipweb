@@ -31,7 +31,7 @@ const releases = computed(() => {
           <span :class="$style.smaller"> {{ formatDate(release.date) }}</span>
         </h2>
         <span v-if="release.url && release.size && !release.zap && (release.pin || index < 5)">
-          <DownloadButton :url="release.url" type="secondary" />&nbsp;
+          <DownloadButton :href="release.url" size="smaller" theme="alt" />&nbsp;
           <span v-if="release.size"><span>{{ formatSize(release.size) }}</span>&nbsp;</span>
         </span>
         <span v-if="release.minimumSystemVersion"><span :class="$style.info">≥ macOS {{ release.minimumSystemVersion
