@@ -21,7 +21,7 @@ defineProps<{
                     <span :class="$style.EntryName">{{ ext.name }}</span>
                 </a>
             </div>
-            <div v-html="ext.description"></div>
+            <div v-html="ext.description" :class="$style.EntryDescription"></div>
         </div>
         <div :class="$style.EntryRight">
             <DownloadButton theme="brand" size="smaller" :href="ext.downloadUrl" icon-only />
@@ -44,6 +44,7 @@ defineProps<{
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
+    min-width: 0; /* Somehow this makes the truncation on the child element work */
 }
 
 .EntryLeft,
@@ -58,17 +59,21 @@ defineProps<{
 .EntryLeft {
     width: 30px;
     font-size: 24px;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 .EntryName {
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 16px;
 }
 
 .EntryDescription {
-    font-size: 0.9em;
-    opacity: 0.8;
+    font-size: 14px;
+    
+    /* Truncate text with ellipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media (max-width: 550px) {

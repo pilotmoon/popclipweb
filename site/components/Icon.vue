@@ -21,14 +21,8 @@ const src = computed(() => {
 
 <style scoped>
 .Icon {
-    opacity: 0.85;
     width: 1.2em;
     display: inline-block;
     margin-bottom: -0.2em
-        /* margin: 0 0.2em -0.35em 0.2em; */
-        /*background-color: #f6f6f6;*/
-        /* background-color: red;
-    padding: 0.3em;
-    border-radius: 0.2em; */
 }
 </style>
