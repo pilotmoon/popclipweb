@@ -73,7 +73,7 @@ const filteredIndex = computed(() => {
                         <Input type="text" v-model:value="filter" placeholder="Type to filter" />
                     </Space>
                 </div>
-                <Pagination :total="100" />
+                <!-- <Pagination :total="100" /> -->
             </ClientOnly>
             <div v-for="{ title, extensions } in filteredIndex.index">
                 <h2>{{ title }}</h2>
