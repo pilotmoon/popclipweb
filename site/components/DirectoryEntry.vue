@@ -35,8 +35,8 @@ defineProps<{
     gap: 12px;
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 8px;
+    padding: 6px 12px;
+    margin-bottom: 6px;
     position: relative;
 }
 
@@ -48,6 +48,8 @@ defineProps<{
 
 .EntryLeft,
 .EntryRight {
+    display: flex;
+    align-items: center;
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: auto;
