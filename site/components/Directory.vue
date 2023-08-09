@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import extensionsData, { data } from './data/extensions.data';
-import Icon from './Icon.vue';
+import { data } from './data/extensions.data';
 import Theme from './Theme.vue';
-import DownloadButton from './DownloadButton.vue';
-import { Input, Button, RadioButton, RadioGroup, Space, Pagination } from 'ant-design-vue';
-import { computed, ref, watch } from 'vue';
-import { Extension, Section } from './data/extensions-loader.js';
+import DirectoryEntry from './DirectoryEntry.vue';
+import { Input, RadioButton, RadioGroup, Space } from 'ant-design-vue';
+import { computed, ref } from 'vue';
+import { Extension } from './data/extensions-loader.js';
 
 const filter = ref("");
 
@@ -49,8 +48,6 @@ const filteredIndex = computed(() => {
     }
     return { index, count }
 });
-
-
 </script>
 
 <template>
@@ -72,30 +69,11 @@ const filteredIndex = computed(() => {
                         Filter:
                         <Input type="text" v-model:value="filter" placeholder="Type to filter" />
                     </Space>
-                </div>
-                <!-- <Pagination :total="100" /> -->
+                </div>                
             </ClientOnly>
             <div v-for="{ title, extensions } in filteredIndex.index">
                 <h2>{{ title }}</h2>
-                <div v-for="ext in extensions" :key="ext.identifier" :class="$style.DirectoryEntry">
-                    <div :class="$style.EntryLeft">
-                        <a :href="'x/' + ext.shortcode">
-                            <Icon v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcDark="ext.iconUrlWhite"
-                                :srcLight="ext.iconUrlBlack" />
-                        </a>
-                    </div>
-                    <div :class="$style.EntryMain">
-                        <div :class="$style.EntryHeader">
-                            <a :href="'x/' + ext.shortcode">
-                                <span :class="$style.EntryName">{{ ext.name }}</span>
-                            </a>
-                        </div>
-                        <div v-html="ext.description"></div>
-                    </div>
-                    <div :class="$style.EntryRight">
-                        <DownloadButton theme="brand" size="smaller" :href="ext.downloadUrl" icon-only/>
-                    </div>
-                </div>
+                <DirectoryEntry v-for="ext in extensions" :key="ext.identifier" :ext="ext" />
             </div>
         </div>
         <div :class="$style.Footer">
@@ -130,51 +108,6 @@ const filteredIndex = computed(() => {
     display: flex;
     gap: 8px;
     align-items: center;
-}
-
-.DirectoryEntry {
-    display: flex;
-    gap: 12px;
-    background-color: var(--vp-c-bg-soft);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 8px;
-    position: relative;
-}
-
-.EntryMain {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0;
-}
-
-.EntryLeft,
-.EntryRight {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: auto;
-}
-
-.EntryLeft {
-    width: 30px;
-    font-size: 24px;
-    opacity: 0.7;
-}
-
-.EntryName {
-    font-weight: 600;
-    font-size: 1.1em;
-}
-
-.EntryDescription {
-    font-size: 0.9em;
-    opacity: 0.8;
-}
-
-@media (max-width: 550px) {
-    .EntryRight {
-        display: none;
-    }
 }
 
 .Footer {
