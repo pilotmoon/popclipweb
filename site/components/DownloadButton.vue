@@ -1,25 +1,37 @@
 <script setup lang="ts">
-import { Button } from 'ant-design-vue';
+import MyButton from './Button.vue';
 import { DownloadOutlined } from '@ant-design/icons-vue';
-import Theme from './Theme.vue'
 import { computed } from 'vue';
 const props = defineProps<{
-  size?: "small" | "middle" | "large",
-  type?: "full" | "icon"
-  url: string
+    type?: "primary" | "secondary" | "minimal"
+    url: string
 }>();
-const size = computed(() => {
-    return props.size || "middle"
+const btnType = computed(() => {
+    if (props.type === 'secondary' || props.type === 'minimal') {
+        return 'alt'
+    } else {
+        return 'brand'
+    }
 })
-const showText = computed(() => {
-    return props.type !== 'icon';
+const btnSize = computed(() => {
+    if (props.type === 'secondary' || props.type === 'minimal') {
+        return 'smaller'
+    } else {
+        return 'small'
+    }
 })
-
 </script>
 
 <template>
-    <Theme>
-        <Button type="primary" shape="default" :size="size" :href="props.url"><DownloadOutlined /><span v-if="showText">Download</span></Button>
-    </Theme>
+    <MyButton :theme="btnType" :size="btnSize" :href="props.url" itemscope>
+        <div :class="$style.Inner"><DownloadOutlined /> Download</div>
+    </MyButton>
 </template>
 
+<style module>
+div.Inner {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+</style>

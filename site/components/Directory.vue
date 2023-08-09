@@ -3,7 +3,7 @@ import extensionsData, { data } from './data/extensions.data';
 import Icon from './Icon.vue';
 import Theme from './Theme.vue';
 import DownloadButton from './DownloadButton.vue';
-import { Input, Button, RadioButton, RadioGroup, Space } from 'ant-design-vue';
+import { Input, Button, RadioButton, RadioGroup, Space, Pagination } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
 import { Extension, Section } from './data/extensions-loader.js';
 
@@ -57,21 +57,24 @@ const filteredIndex = computed(() => {
     <Theme>
         <h1>PopClip Extensions Directory</h1>
         <div :class="$style.Directory">
-            <div :class="$style.Header">
-                <Space>
-                    Arrange:
-                    <RadioGroup v-model:value="selectedIndexName">
-                        <RadioButton value="categories">Categories</RadioButton>
-                        <RadioButton value="alpha">A–Z</RadioButton>
-                        <RadioButton value="newest">Newest</RadioButton>
-                    </RadioGroup>
-                </Space>
+            <ClientOnly>
+                <div :class="$style.Header">
+                    <Space>
+                        Arrange:
+                        <RadioGroup v-model:value="selectedIndexName">
+                            <RadioButton value="categories">Categories</RadioButton>
+                            <RadioButton value="alpha">A–Z</RadioButton>
+                            <RadioButton value="newest">Newest</RadioButton>
+                        </RadioGroup>
+                    </Space>
 
-                <Space>
-                    Filter:
-                    <Input type="text" v-model:value="filter" placeholder="Type to filter" />
-                </Space>
-            </div>
+                    <Space>
+                        Filter:
+                        <Input type="text" v-model:value="filter" placeholder="Type to filter" />
+                    </Space>
+                </div>
+                <Pagination :total="100" />
+            </ClientOnly>
             <div v-for="{ title, extensions } in filteredIndex.index">
                 <h2>{{ title }}</h2>
                 <div v-for="ext in extensions" :key="ext.identifier" :class="$style.DirectoryEntry">
@@ -90,7 +93,7 @@ const filteredIndex = computed(() => {
                         <div v-html="ext.description"></div>
                     </div>
                     <div :class="$style.EntryRight">
-                        <DownloadButton type="icon" size="small" :url="ext.downloadUrl" />
+                        <DownloadButton type="minimal" :url="ext.downloadUrl" />
                     </div>
                 </div>
             </div>

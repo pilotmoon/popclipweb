@@ -5,7 +5,6 @@ const props = defineProps<{
   tag?: string
   size?: 'smaller' | 'small' | 'medium' | 'big'
   theme?: 'brand' | 'alt' | 'sponsor'
-  text: string
   href?: string
 }>()
 
@@ -30,7 +29,7 @@ const component = computed(() => {
     :class="classes"
     :href="href"
   >
-    {{ text }}
+    <slot />
   </component>
 </template>
 
