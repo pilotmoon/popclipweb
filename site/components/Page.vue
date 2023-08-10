@@ -15,10 +15,6 @@ import Theme from './Theme.vue';
 .Page {
     padding: 32px 24px 96px;
     width: 100%;
-    /* max-width: 1000px; */
-}
-
-.Container {
     max-width: 700px;
     margin: 0 auto;
 }
