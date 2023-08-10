@@ -156,4 +156,9 @@ export default defineConfig({
       },
     },
   },
+  transformPageData: (pageData, { siteConfig }) => {
+    if (pageData.frontmatter.isExtensionPage) {
+      pageData.title = pageData.params?.name;
+    }
+  }
 });

@@ -4,10 +4,7 @@ import Page from './Page.vue';
 const props=defineProps<{
   params: Extension
 }>();
-import { useData } from 'vitepress';
 import { Extension } from './data/extensions-loader.js';
-const data = useData();
-data.page.value.title = "x";
 </script>
 
 <template>

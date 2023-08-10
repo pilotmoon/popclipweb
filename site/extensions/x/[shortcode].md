@@ -1,6 +1,7 @@
 ---
 titleTemplate: "PopClip Extensions"
-title: $params.title
+title: "Extension"
+isExtensionPage: true # needed for transformSiteData title setting
 layout: page
 sidebar: false
 aside: false
