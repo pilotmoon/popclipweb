@@ -26,8 +26,8 @@ export default defineConfig({
       {
         text: "Documentation",
         activeMatch:
-          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download|/docs|/support|/beta)",
-        link: "/docs.html",
+          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download|/support|/beta)",
+        link: "/guide/",
         // items: [
         //   { text: "User Guide", link: "/guide/" },
         //   { text: "Developer Reference", link: "/ref/" },
@@ -37,12 +37,18 @@ export default defineConfig({
         text: "Extensions",
         link: "/extensions/",
         activeMatch:
-          "^(/extensions/)",
+          "(^/extensions/$)|(^/extensions/x)",
         // link: "https://pilotmoon.com/popclip/extensions/",
         // items: [
         //   { text: "Directory", link: "/x/" },
         //   { text: "Creator", link: "/create/" },
         // ],
+      },
+      {
+        text: "Create",
+        link: "/extensions/create",
+        activeMatch:
+          "^(/extensions/create)",
       },
       {
         text: "Support",
@@ -74,7 +80,7 @@ export default defineConfig({
         },
       ],
       "/": [
-        { text: "Introduction", link: "/docs" },
+        { text: "What is PopClip?", link: "/guide/" },
         {
           text: "User Guide",
           // link: "/docs",
@@ -88,7 +94,7 @@ export default defineConfig({
           ],
         },
         {
-          text: "App Vitals",
+          text: "App Info",
           collapsed: false,
           items: [
             {

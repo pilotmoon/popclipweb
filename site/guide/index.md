@@ -2,9 +2,7 @@
 outline: deep
 ---
 
-# Introduction
-
-## What is PopClip?
+# What is PopClip?
 
 PopClip is a Mac utility tool that pops up with a menu of actions when you select text on your screen.
 
@@ -16,34 +14,35 @@ Think of PopClip as a context-aware assistant that provides you with tools you c
 
 PopClip is a [paid](/buy) app with a [free trial](/download) available. It is available for macOS only.
 
-## **Contents**
+## **Site Contents**
 
-This documentation includes the following sections:
+This website aims to be a complete resource for PopClip users. It contains all the documentation for PopClip in one place, with the following sections:
 
 * The **User Guide** is a complete introduction to PopClip. [Install](/guide/install) PopClip and learn the [basic concepts](/guide/basics) of the user interface. Take a tour of the [built-in actions](/guide/actions), see how to customize the [settings](/guide/settings) and manage [extensions](/guide/extensions).
 
-* **App Information** including [download links](/download), [purchase information](/buy), [version history](/changelog) and [support](/support) details.
+* Vital **App Info** including [download links](/download), [purchase information](/buy), [version history](/changelog) and [support](/support) details.
 
 * The **Knowledge Base** section, with detailed information about compatibility with other apps, troubleshooting tips, FAQs and technical information.
 
 * **Policies** including [license terms](/terms) and [privacy](/privacy) policy.
 
-* **Developer Reference** documentation for creating your own PopClip extensions. This is hosted on GitHub at <https://github.com/pilotmoon/PopClip-Extensions>.
-  
-All the documentaiton can be found linked in the sidebar.
+* A **Developer Reference** section with [detailed technical documentation](/ref/) on how to create PopClip extensions.
 
-## About this app
+Extensions are a key part of PopClip and the site contains two key resources for you to explore:
+
+* The [Extensions Directory](/extensions/) is a searchable catalog of ready-made extensions.
+
+* Create your own extensions with a graphical interface, using the [Extension Creator](/extensions/create).
+
+
+## About PopClip
 
 ### About the developer
 
-PopClip is not made by a large company or even a small team; it's made by one person. [Pilotmoon Software](https://pilotmoon.com/about/) is a name I use for my business but it's just me, a solo developer, Nick Moore. I'm also the one writing this user guide. I had the idea for PopClip in 2011 and I've been working on it ever since. I'm from the UK and my native language is English.
+PopClip is not made by a large company or even a small team; it's made by one person. [Pilotmoon Software](https://pilotmoon.com/about/) is a name I use for my business but it's just me, a solo developer, Nick Moore. I'm also the one writing this user guide. I had the idea for PopClip in 2011 and I've been working on it ever since. I'm from the UK and my native language is English. For contact details, see [Support and Feedback](/support).
 
 ### Languages
 
-PopClip's user interface is available in the following languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Simplified Chinese, Slovak, Spanish, Traditional Chinese and Turkish. The language is automatically selected based on your Mac's language settings.
+PopClip's user interface is available English, Chinese (Traditional and Simplified), French, German, Italian, Japanese, Korean, Portuguese, Russian, Slovak, Spanish, and Turkish.
 
 The documentation only available in English.
-
-### Version
-
-This documentation is written for PopClip version 2023.7.
