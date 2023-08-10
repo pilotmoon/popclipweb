@@ -28,12 +28,7 @@ This website aims to be a complete resource for PopClip users. It contains all t
 
 * A **Developer Reference** section with [detailed technical documentation](/ref/) on how to create PopClip extensions.
 
-Extensions are a key part of PopClip and the site contains two key resources for you to explore:
-
-* The [Extensions Directory](/extensions/) is a searchable catalog of ready-made extensions.
-
-* Create your own extensions with a graphical interface, using the [Extension Creator](/extensions/create).
-
+Finally, there is the [Extensions Directory](/extensions/), a dedicated section of the site for browsing and searching for ready-made extensions to add to PopClip.
 
 ## About PopClip
 

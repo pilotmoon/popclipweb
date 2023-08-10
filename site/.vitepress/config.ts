@@ -44,12 +44,12 @@ export default defineConfig({
         //   { text: "Creator", link: "/create/" },
         // ],
       },
-      {
-        text: "Create",
-        link: "/extensions/create",
-        activeMatch:
-          "^(/extensions/create)",
-      },
+      // {
+      //   text: "Create",
+      //   link: "/extensions/create",
+      //   activeMatch:
+      //     "^(/extensions/create)",
+      // },
       {
         text: "Support",
         items: [
