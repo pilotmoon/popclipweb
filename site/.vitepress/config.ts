@@ -15,6 +15,9 @@ export default defineConfig({
     //   provider: 'local'
     // },
     // https://vitepress.dev/reference/default-theme-config
+    notFound: {
+      quote: "Sorry about that.",
+    },
     logo: "/icon128.png",
     // editLink: {
     //   pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path'
