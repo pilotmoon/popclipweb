@@ -53,6 +53,16 @@ export default defineConfig({
       },
     ],
     sidebar: {
+      // "/ref/": [
+      //   { text: "Guide", link: "/docs" },
+      //   {
+      //     text: "Developer Reference",
+      //     items: [
+      //       { text: "Introduction", link: "/ref/" },
+      //       { text: "Page 1", link: "/ref/page1" },            
+      //     ],
+      //   },
+      // ],
       "/extensions/": [
         {
           text: "Extensions",
@@ -121,9 +131,20 @@ export default defineConfig({
             { text: "Privacy Policy", link: "/privacy.md" },
           ],
         },
+        // {
+        //   text: "Developer Reference",
+        //   link: "https://github.com/pilotmoon/PopClip-Extensions",
+        // },
+        // {
+        //   text: "Developer Reference",
+        //   link: "/ref/",
+        // },
         {
           text: "Developer Reference",
-          link: "https://github.com/pilotmoon/PopClip-Extensions",
+          items: [
+            { text: "Introduction", link: "/ref/" },
+            { text: "Changelog", link: "/ref/changelog" },            
+          ],
         },
       ],
     },

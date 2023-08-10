@@ -1,3 +1,7 @@
+---
+prev: false
+next: false
+---
 # Privacy Policy
 
 ## Introduction
