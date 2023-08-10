@@ -1,5 +1,6 @@
 ---
 title: PopClip Extensions
+titleTemplate: false
 layout: page
 sidebar: false
 aside: false
