@@ -47,7 +47,7 @@ This list gives the last supported release for each macOS version or processor t
   <li v-for="r in pinned">
     <b>PopClip {{ r.versionString }}</b> ({{ formatDate(r.date) }})<br>
     Requires macOS {{ r.minimumSystemVersion }} or above. {{ formatArchs(r.archs) }}.<br>
-    <DownloadButton :href="r.url" size="smaller" theme="alt" />&ensp;Zip file, {{ formatSize(r.size) }}
+    <DownloadButton :href="r.url" size="smaller" theme="outline" />&ensp;Zip file, {{ formatSize(r.size) }}
   </li>
 </ul>
 
