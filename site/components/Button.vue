@@ -23,11 +23,7 @@ const component = computed(() => {
 </script>
 
 <template>
-  <component
-    :is="component"
-    class="Button"
-    :class="classes"
-    :href="href">
+  <component :is="component" class="Button" :class="classes" :href="href">
     <div class="ButtonInner">
       <slot />
     </div>
@@ -35,7 +31,6 @@ const component = computed(() => {
 </template>
 
 <style scoped>
-
 .ButtonInner {
   display: flex;
   align-items: center;
@@ -60,10 +55,10 @@ const component = computed(() => {
   padding: 0 20px;
   line-height: 38px;
   font-size: 14px;
+}
 
-  .ButtonInner {
-    height: 38px;
-  }
+.Button.medium .ButtonInner {
+  height: 38px;
 }
 
 .Button.big {
@@ -71,10 +66,10 @@ const component = computed(() => {
   padding: 0 24px;
   line-height: 46px;
   font-size: 16px;
+}
 
-  .ButtonInner {
-    height: 46px;
-  }
+.Button.big .ButtonInner {
+  height: 46px;
 }
 
 .Button.small {
@@ -83,9 +78,11 @@ const component = computed(() => {
   line-height: 30px;
   font-size: 14px;
 
-  .ButtonInner {
-    height: 30px;
-  }
+
+}
+
+.Button.small .ButtonInner {
+  height: 30px;
 }
 
 .Button.smaller {
@@ -95,11 +92,12 @@ const component = computed(() => {
   font-size: 13px;
   font-weight: 500;
 
-  .ButtonInner {
-    height: 24px;
-  }
+
 }
 
+.Button.smaller .ButtonInner {
+  height: 24px;
+}
 
 
 

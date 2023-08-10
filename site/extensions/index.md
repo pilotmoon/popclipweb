@@ -1,6 +1,6 @@
 ---
 title: PopClip Extensions
-layout: doc
+layout: page
 sidebar: false
 aside: false
 prev: false

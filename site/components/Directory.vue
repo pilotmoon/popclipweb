@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { data } from './data/extensions.data';
-import Theme from './Theme.vue';
+import Page from './Page.vue';
 import DirectoryEntry from './DirectoryEntry.vue';
 import { Input, RadioButton, RadioGroup, Space } from 'ant-design-vue';
 import { computed, ref } from 'vue';
@@ -51,7 +51,7 @@ const filteredIndex = computed(() => {
 </script>
 
 <template>
-    <Theme>
+    <Page>
         <h1>PopClip Extensions Directory</h1>
         <div :class="$style.Directory">
             <ClientOnly>
@@ -69,7 +69,7 @@ const filteredIndex = computed(() => {
                         Filter:
                         <Input type="text" v-model:value="filter" placeholder="Type to filter" />
                     </Space>
-                </div>                
+                </div>
             </ClientOnly>
             <div v-for="{ title, extensions } in filteredIndex.index">
                 <h2>{{ title }}</h2>
@@ -79,15 +79,10 @@ const filteredIndex = computed(() => {
         <div :class="$style.Footer">
             Showing {{ filteredIndex.count }} of {{ total }}.
         </div>
-    </Theme>
+    </Page>
 </template>
 
 <style module>
-.Directory {
-    /* max-width: 768px; */
-    margin-top: 32px;
-    width: 100%;
-}
 
 .Directory h2 {
     border: none;
@@ -97,7 +92,7 @@ const filteredIndex = computed(() => {
 }
 
 .Header {
-    margin-bottom: 16px;
+    margin: 24px 0 16px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

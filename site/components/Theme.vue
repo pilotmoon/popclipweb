@@ -5,7 +5,6 @@
 import { ConfigProvider, StyleProvider, theme } from 'ant-design-vue';
 import { computed } from 'vue';
 import { useData } from 'vitepress';
-import { isTypedArray } from 'util/types';
 
 const { isDark } = useData();
 const antTheme = computed(() => {
@@ -26,8 +25,8 @@ const antTheme = computed(() => {
 
 <template>
     <ConfigProvider :theme="antTheme">
-        <StyleProvider hash-priority="high">
+        <!-- <StyleProvider hash-priority="high"> -->
             <slot />
-        </StyleProvider>
+        <!-- </StyleProvider> -->
     </ConfigProvider>
 </template>

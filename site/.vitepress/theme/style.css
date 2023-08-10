@@ -153,14 +153,15 @@
   vertical-align: middle;
 }
 
-/* The below applies to 'page' layout e.g. extensions.
+/* 
 Here we are fixing glitches caused when the ant design components
-inherit styles from vitepress styling. */
+inherit styles from vitepress styling. 
+Only needed for "doc" layout. */
 
-a.ant-btn:hover {
+/* a.ant-btn:hover {
   text-decoration: none;
 }
 
 ul.ant-pagination li + li {
   margin-top: 0;
-}
+} */

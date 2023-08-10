@@ -1,23 +1,25 @@
 <script setup lang="ts">
 import Icon from './Icon.vue';
-const props = defineProps<{
+import Page from './Page.vue';
+defineProps<{
   params: any
 }>();
 </script>
 
 <template>
+  <Page>
+    <div :class="$style.Breadcrumb">
+      ← <a href="/extensions/">Back to Directory</a>
+    </div>
 
-<div :class="$style.Breadcrumb">
-← <a href="/extensions/">Back to Directory</a>
-</div>
+    <h1>
+      <Icon :class="$style.HeaderIcon" v-if="params.iconUrlWhite && params.iconUrlBlack" :srcLight="params.iconUrlBlack"
+        :srcDark="params.iconUrlWhite" />
+      {{ params.name }}
+    </h1>
 
-<h1>
-  <Icon :class="$style.HeaderIcon" v-if="params.iconUrlWhite && params.iconUrlBlack" :srcLight="params.iconUrlBlack" :srcDark="params.iconUrlWhite" />
-  {{ params.name }}
-</h1>
-
-<p>Shortcode: {{ params.shortcode }}</p>
-
+    <p>Shortcode: {{ params.shortcode }}</p>
+  </Page>
 </template>
 
 <style module>
