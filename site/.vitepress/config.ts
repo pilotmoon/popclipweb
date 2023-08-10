@@ -1,6 +1,6 @@
 import { defineConfig } from "vitepress";
 import imageFigures from "markdown-it-image-figures";
-const { html5Media } = require("markdown-it-html5-media");
+import { html5Media } from "markdown-it-html5-media";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

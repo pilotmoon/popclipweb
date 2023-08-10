@@ -7,7 +7,6 @@ import {
   IconDescriptor,
   IconKey,
 } from "../helpers/iconKeyBrowser.js";
-import { omit } from "lodash"
 
 import * as config from "../../config.json";
 
@@ -51,7 +50,10 @@ export async function loadIndex(): Promise<ExtensionsData> {
   const { extensionsArray, index } = await load();
   const extensions: Record<string, Extension> = {};
   for (const ext of extensionsArray) {
-    extensions[ext.identifier] = omit(ext, ["readme"]); // don't need it for index
+    const extCopy = { ...ext };
+    delete extCopy.readme;
+    delete extCopy.demogif;
+    extensions[ext.identifier] = extCopy;
   }
   return { extensions, index };
 }
