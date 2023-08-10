@@ -24,7 +24,7 @@ defineProps<{
             <div v-html="ext.description" :class="$style.EntryDescription"></div>
         </div>
         <div :class="$style.EntryRight">
-            <DownloadButton theme="brand" size="smaller" :href="ext.downloadUrl" icon-only />
+            <DownloadButton theme="outline" size="smaller" :href="ext.downloadUrl" icon-only />
         </div>
     </div>
 </template>

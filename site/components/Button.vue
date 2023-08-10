@@ -4,7 +4,7 @@ import { computed } from 'vue'
 const props = defineProps<{
   tag?: string
   size?: 'smaller' | 'small' | 'medium' | 'big'
-  theme?: 'brand' | 'alt' | 'sponsor'
+  theme?: 'brand' | 'alt' | 'outline'
   href?: string
 }>()
 
@@ -138,21 +138,21 @@ const component = computed(() => {
   background-color: var(--vp-button-alt-active-bg);
 }
 
-.Button.sponsor {
-  border-color: var(--vp-button-sponsor-border);
-  color: var(--vp-button-sponsor-text);
-  background-color: var(--vp-button-sponsor-bg);
+.Button.outline {
+  border-color: var(--vp-c-brand);
+  color: var(--vp-c-brand);
+  background-color: transparent;
 }
 
-.Button.sponsor:hover {
-  border-color: var(--vp-button-sponsor-hover-border);
-  color: var(--vp-button-sponsor-hover-text);
-  background-color: var(--vp-button-sponsor-hover-bg);
+.Button.outline:hover {
+  border-color: var(--vp-c-brand-light);
+  color: var(--vp-c-brand-light);
+  background-color: transparent;
 }
 
-.Button.sponsor:active {
-  border-color: var(--vp-button-sponsor-active-border);
-  color: var(--vp-button-sponsor-active-text);
-  background-color: var(--vp-button-sponsor-active-bg);
+.Button.outline:active {
+  border-color: var(--vp-c-brand);
+  color: var(--vp-c-brand);
+  background-color: transparent;
 }
 </style>
