@@ -12,7 +12,7 @@ Actions range from simple copy and paste to more complex tasks such as translati
 
 Think of PopClip as a context-aware assistant that provides you with tools you can use instantly, without having to switch between apps or windows.
 
-PopClip is a [paid](/buy) app with a [free trial](/download) available. It is available for macOS only.
+PopClip is available for macOS only. It is a [paid](/buy) app with a [free trial](/download). It has been in continuous development since 2011.
 
 ## **Site Contents**
 
@@ -34,7 +34,11 @@ Finally, there is the [Extensions Directory](/extensions/), a dedicated section 
 
 ### About the developer
 
-PopClip is not made by a large company or even a small team; it's made by one person. [Pilotmoon Software](https://pilotmoon.com/about/) is a name I use for my business but it's just me, a solo developer, Nick Moore. I'm also the one writing this user guide. I had the idea for PopClip in 2011 and I've been working on it ever since. I'm from the UK and my native language is English. For contact details, see [Support and Feedback](/support).
+PopClip is not made by a large company or even a small team; it's made by one person. Nick Moore. I'm also the one writing this user guide. I'm from the UK and my native language is English. To get in touch, see [Support and Feedback](/support).
+
+#### About "Pilotmoon Software"
+
+Pilotmoon Software (website: [pilotmoon.com](https://pilotmoon.com/)) is not actually a company but just business name that I chose when starting out. I have put out a few other apps over the years, but these days I focus on PopClip. PopClip's home page used to be over at pilotmoon.com/popclip, so you'll see that domain name in various places. Hopefully, everything redirects to the right place here on the new site, but if you find a broken link, please let me know.
 
 ### Languages
 
