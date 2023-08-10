@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: doc
 sidebar: false
 aside: false
 pref: false
