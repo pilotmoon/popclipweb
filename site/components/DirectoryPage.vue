@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import Icon from './Icon.vue';
 import Page from './Page.vue';
-defineProps<{
-  params: any
+const props=defineProps<{
+  params: Extension
 }>();
+import { useData } from 'vitepress';
+import { Extension } from './data/extensions-loader.js';
+const data = useData();
+data.page.value.title = "x";
 </script>
 
 <template>

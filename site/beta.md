@@ -1,3 +1,6 @@
+---
+titleTemplate: false
+---
 <script setup>
 import Changelog from '/components/Changelog.vue'
 import Download from '/components/Download.vue';

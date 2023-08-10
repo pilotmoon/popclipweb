@@ -1,3 +1,6 @@
+---
+titleTemplate: false
+---
 <script setup>
 import Buy from '/components/Buy.vue'
 import Setapp from '/components/Setapp.vue'

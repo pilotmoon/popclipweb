@@ -1,3 +1,6 @@
+---
+titleTemplate: false
+---
 <script setup>
 import DownloadButton from '/components/DownloadButton.vue';
 import Download from '/components/Download.vue';

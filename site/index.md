@@ -1,7 +1,8 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
-
+title: PopClip for Mac
+titleTemplate: false
 hero:
   name: "PopClip for Mac"
   text: "Instant text actions"
