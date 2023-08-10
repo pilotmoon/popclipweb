@@ -1,5 +1,5 @@
 ---
-title: PopClip Extensions
+title: PopClip Extensions Directory
 titleTemplate: false
 layout: page
 sidebar: false
