@@ -4,7 +4,7 @@ prev: false
 ---
 # PopClip Extensions Developer Reference
 
-This document applies to PopClip 2022.12 (4069), which was released on 6 Dec 2022.
+<!-- This document applies to PopClip 2022.12 (4069), which was released on 6 Dec 2022.
 
 See also:
 
@@ -15,17 +15,17 @@ Check the [*PopClip Forum*](https://forum.popclip.app/) to keep up-to date about
 
 **Note: The repo is currently closed for new extension contributions. I am working on a new, improved extension directory that will let people publish extensions to a central directory from their own Github repos. Please bear with me!**
 
-## Introduction
+## Introduction -->
 
 PopClip Extensions add extra actions to [PopClip](http://pilotmoon.com/popclip).
 
 ![Screenshot showing extensions in use.](https://raw.github.com/pilotmoon/PopClip-Extensions/master/docs-assets/example.png)
 
 This repository contains the documentation for making your own extensions (this readme file) as well as the source files for the extensions published on the official [PopClip Extensions](http://pilotmoon.com/popclip/extensions) page.
-
+<!-- 
 ### License
 
-All extension source files are published under the MIT License (see [LICENSE.txt](/LICENSE.txt)) unless noted otherwise in the readme files of individual extensions.
+All extension source files are published under the MIT License (see [LICENSE.txt](/LICENSE.txt)) unless noted otherwise in the readme files of individual extensions. -->
 
 ### Credits
 

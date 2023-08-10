@@ -12,4 +12,5 @@ next: false
 import DirectoryPage from '/components/DirectoryPage.vue';
 </script>
 
-<DirectoryPage :params="$params"/>
+<DirectoryPage>
+</DirectoryPage>

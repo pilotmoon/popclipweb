@@ -15,6 +15,8 @@
     "markdown-it-html5-media": "0.7.1",
     "markdown-it-image-figures": "2.1.1",
     "patch-package": "8.0.0",
+    "sanitize-html": "2.11.0",
+    "turndown": "7.1.2",
     "vitepress": "1.0.0-rc.4",
     "vue": "3.3.4",
     "zod": "3.21.4"
