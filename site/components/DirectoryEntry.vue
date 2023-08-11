@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-    <div :class="$style.DirectoryEntry">
+    <div :class="$style.DirectoryEntry" v-once>
         <div :class="$style.EntryLeft">
             <a :href="'x/' + ext.shortcode">
                 <Icon v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcDark="ext.iconUrlWhite"

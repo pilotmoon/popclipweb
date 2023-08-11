@@ -8,7 +8,7 @@ const ext: Extension = params.value as Extension;
 </script>
 
 <template>
-  <Page>
+  <Page v-once>
     <div :class="$style.Breadcrumb">
       ← <a href="/extensions/">Back to Directory</a>
     </div>
