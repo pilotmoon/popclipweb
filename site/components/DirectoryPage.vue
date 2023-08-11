@@ -20,9 +20,9 @@ const ext: Extension = params.value as Extension;
     </h1>
 
     <p>Shortcode: {{ ext.shortcode }}</p>
-    <div :class="$style.Readme" v-html="ext.readme" />
-    <!-- <slot /> -->
-    <!-- </div> -->
+    <div :class="$style.Readme">
+      <slot />
+    </div>
   </Page>
 </template>
 
@@ -45,5 +45,9 @@ div.Readme {
 div.Readme h1 {
   font-size: 24px;
 
+}
+
+div.Readme pre {
+  font-size: 14px;
 }
 </style>

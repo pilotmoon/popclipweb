@@ -16,14 +16,11 @@ const md = new MarkdownIt({
 });
 function renderMarkdown(markdown: string) {
   //return markdown;
-  const html = sanitizeHtml(md.render(markdown));
-  console.log(html);
-  
+  let html = sanitizeHtml(md.render(markdown));
+
+  // insert newline before any <pre> -- due to https://github.com/markdown-it/markdown-it/issues/951
+  html = html.replace(/<pre/g, "\n<pre");  
   return html
-
-
-  //return turndownService.turndown(html).trim();
-
 }
 
 export default {
@@ -31,12 +28,12 @@ export default {
     console.log("calling load from paths");
     const extensions = await loadPages();
     return extensions.map((ext) => {
-      //const extCopy = { ...ext };
-      //delete extCopy.readme;      
+      const extCopy = { ...ext };
+      delete extCopy.readme;      
       console.log("Rendering readme for extension", ext.name);
       return {
-        params: { ...ext, readme: ext.readme ? renderMarkdown(ext.readme) : "no readme" },
-        //content: ext.readme ? renderMarkdown(ext.readme) : "",
+        params: extCopy,
+        content: ext.readme ? renderMarkdown(ext.readme) : "",
       };
     })
   }

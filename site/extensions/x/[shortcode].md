@@ -12,5 +12,4 @@ next: false
 import DirectoryPage from '/components/DirectoryPage.vue';
 </script>
 
-<DirectoryPage>
-</DirectoryPage>
+<DirectoryPage><!-- @content --></DirectoryPage>
