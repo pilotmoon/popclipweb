@@ -2,7 +2,7 @@
     "pilotmoon": {
         "product": "popclip",
         "apiRoot": "https://api.pilotmoon.com",
-        "cdnRoot": "https://pilotmoon1.ams3.cdn.digitaloceanspaces.com",
+        "cdnRoot": "https://cdn.pilotmoon.com",
         "spacesRoot": "https://pilotmoon1.ams3.digitaloceanspaces.com"
     },
     "paddle": {
