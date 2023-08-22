@@ -9,7 +9,7 @@ This page will give you a comprehensive overview of PopClip's settings.
 
 PopClip's settings menu is accessed by clicking the ![PopClip menu bar icon](./icon-status.png#icon) icon in the menu bar.
 
-![](./shot-settings-general-2.png "PopClip menu bar icon and settings menu.")
+![](./shot-settings-general-2.png "PopClip menu bar icon and s  ettings menu.")
 
 The settings menu has five panes:<br>[![Home icon](./icon-home.png#icon) Home](#home-pane), [![Options icon](./icon-options.png#icon) Options](#options-pane), [![Actions icon](./icon-exts.png#icon) Actions](#actions-pane), [![Excluded Apps icon](./icon-apps.png#icon) Excluded Apps](#excluded-apps-pane) and [![About icon](./icon-about.png#icon) About](#about-pane).
 
@@ -35,9 +35,9 @@ Even when PopClip is turned off, you can use the [keyboard shortcut](./basics#ac
 
 ### App settings
 
-- **Start at login:** When enabled, PopClip will start automatically when you log in to your Mac.
-- **Show in menu bar:** When disabled, the icon will be hidden from the menu bar. To show PopClip's settings when the icon is hidden, double-click the PopClip app in your Applications folder.
-- **Check for updates** (Standalone edition only): When enabled, PopClip will check for updates automatically in the background. You can trigger an immediate update check by un-checking and re-checking this option.
+- **Start at login:** When enabled, PopClip will start automatically when you log in to your Mac. *(Default: Off)*
+- **Show in menu bar:** When disabled, the icon will be hidden from the menu bar. To show PopClip's settings when the icon is hidden, double-click the PopClip app in your Applications folder. *(Default: On)*
+- **Check for updates** (Standalone edition only): When enabled, PopClip will check for updates automatically in the background. You can trigger an immediate update check by un-checking and re-checking this option. *(Default: On)*
 
 :::tip Mac App Store and Setapp editions
 If you have the Mac App Store or Setapp edition, you will not see the *Check for updates* option. Updates are managed by the Mac App Store or Setapp.
@@ -49,17 +49,23 @@ At the bottom of the Home pane is the **Quit** button. Click this button to quit
 
 ## ![Options icon](./icon-options.png#iconleft) Options pane
 
-![](./shot-settings-options-2.png#pref "Options pane.")
+![](./shot-settings-options-3.png#pref "Options pane.")
 
 ### Appearance settings
 
-- **Size:** Choose the size of the PopClip bar, with 4 presets from smallest to largest.
+- **Size:** Choose the size of the PopClip bar, with presets 1—4 from smallest to largest. *(Default: Size 2)*
 
 - **Color:** Choose the color of the PopClip bar:
   - **Dark:** Dark appearance.
   - **Light:** Light appearance.
-  - **Auto:** Automatically switch between dark and light appearance based on the system setting.
-  - **Auto (Inverse):** Automatically switch between dark and light appearance based on the system setting, with the color opposite to the system.
+  - **Auto:** *(Default)* Automatically set dark or light appearance to match the system setting.
+  - **Auto (Inverse):** Automatically set dark or light appearance opposite to the system setting.
+
+:::details How to set the system dark/light mode
+The system dark/light mode is controlled by the Appearance pane in System Settings. PopClip will also follow the system accent color for both the settings window and the PopClip bar.
+
+![](./shot-system-appearance-1.png "Appearance pane in System Settings.")
+:::
 
 ### Keyboard Shortcut
 
@@ -72,3 +78,40 @@ Set a keyboard shortcut for making PopClip appear. See [Activate with a keyboard
 :::tip Choosing a keyboard shortcut
 You can use any key combination you like, but it's good to pick somehting that's easy to remember and doesn't conflict with other common shortcuts. Personally, I use ⌃⌘P.
 :::
+
+## ![Actions icon](./icon-exts.png#iconleft) Actions pane
+
+![](./shot-settings-actions-1.png#pref "Actions pane, showing the built-in actions in their default order.")
+
+The Actions pane lists all the actions that are currently installed.
+
+:::tip Built-in actions
+For details about the built-in actions and their settings, see [Actions](/guide/actions).
+:::
+
+### Action settings
+
+You can enable or disable actions by checking or un-checking the box next to the action name. Click the cog icon (![Cog icon](./icon-options.png#icon)) next to the action name to access that action's settings.
+
+Clicking the Plus (![Plus icon](./icon-plus.png#icon)) button will take you to the [extensions directory](/extensions/).
+
+#### Re-ordering actions
+
+To re-order the actions, drag an action's icon up or down in the list.
+
+![](./anim-actions-reorder-1.mp4 "Re-ordering the actions.")
+
+::: info Spelling action
+The Spelling action is always at the top of the list and can't be moved.
+:::
+
+#### Deleting actions
+
+To delete an action, first click the Pencil icon (![Pencil icon](./icon-pencil.png#icon)) to enter edit mode. Then click the Delete button (![Delete icon](./icon-deletex.png#icon)) next to the action you want to delete. Click the Done button to exit edit mode.
+
+![](./anim-actions-delete-1.mp4 "Deleting an action.")
+
+::: info Actions that can't be deleted
+The Delete button is shown for extensions only. You cannot delete the built-in actions.
+:::
+

@@ -11,11 +11,13 @@ The buttons that appear in the PopClip bar perform **actions**. PopClip comes wi
 
 Actions are context-sensitive, meaning that they only appear when they are relevant. So you won't always see all the actions. (See also: [Actions not appearing](/).)
 
-Settings for actions can be accessed in the [actions pane](/) of PopClip settings.
-
 Some actions respond to modifier keys. Hold down the modifier key while clicking the action's button to perform the action with the modifier.
 
 With actions whose buttons show an icon only, you can hover the pointer over the button to see the action's name.
+
+:::tip Action settings
+Settings for actions can be accessed in the [actions pane](settings#actions-pane) of PopClip settings.
+:::
 
 <!-- :::tip Actions not appearing?
 PopClip is context-sensitive, meaning that the actions that appear are dependent on the the text content, as well as other context.

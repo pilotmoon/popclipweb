@@ -11,9 +11,9 @@ export default defineConfig({
     hostname: 'https://www.popclip.app'
   },
   themeConfig: {
-    // search: {
-    //   provider: 'local'
-    // },
+    search: {
+      provider: 'local'
+    },
     // https://vitepress.dev/reference/default-theme-config
     notFound: {
       quote: "Sorry about that.",

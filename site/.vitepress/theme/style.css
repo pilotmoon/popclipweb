@@ -153,6 +153,11 @@
   vertical-align: middle;
 }
 
+.main h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 /* 
 Here we are fixing glitches caused when the ant design components
 inherit styles from vitepress styling. 
