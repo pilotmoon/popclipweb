@@ -115,7 +115,7 @@
 /* Custom CSS */
 
 .main img[src*="#icon"] {
-  width: 1.5em;
+  height: 1.5em;
   display: inline-block;
   margin: 0 0.2em -0.35em 0.2em;
   background-color: #f6f6f6;
