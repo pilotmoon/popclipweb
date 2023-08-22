@@ -131,10 +131,10 @@ Even when PopClip is excluded from an app, you can still use the [keyboard short
 
 ## ![About icon](./icon-about.png#iconleft) About pane
 
-<figure>
-  <img src="./shot-settings-about-sa-trial-1.png#pref" />
+<figure>  
   <img src="./shot-settings-about-mas-1.png#pref" />
-  <figcaption>About pane: Standalone edition in trial mode (left), Mac App Store  edition (right).</figcaption>
+  <img src="./shot-settings-about-sa-trial-1.png#pref" />
+  <figcaption>About pane: Mac App Store  edition (left), Standalone edition in trial mode (right).</figcaption>
 </figure>
 
 The About pane shows information about the version and edition of PopClip you are using.
@@ -148,13 +148,9 @@ Beta versions have versions such as `Build 4151` which are not related to the re
 The number in parentheses after the version number is the build number which is consistent across all editions and release channels except that the Mac App Store edition build number is always 1000000 higher than the other editions. For example, `2023.7 (4151) Standalone Edition` is the same version as `2023.7 (1004151) Mac App Store Edition`.
 :::
 
-### Trial mode (Standalone edition only)
-
-In trial mode, the Standalone edition of PopClip will show the number of uses remaining before the trial expires. The Buy icon (![](icon-buy-tag.svg#icon)) Opens the [buy](/buy) page in your browser.
-
 ### Licensed mode
 
-There are three icon buttons at the bottom of the About pane:
+When you are running a licensed copy of PopClip, there are three icon buttons at the bottom of the About pane:
 
 - ![](icon-help.png#icon) Help button: Opens this user guide in your browser.
 - ![](icon-envelope.png#icon) Envelope button: Open a new email message to send to the developer.
@@ -165,3 +161,7 @@ The text button at the bottom of the About pane differs between editions:
 - **View License** (Standalone edition): Opens a window showing your license details.
 - **Rate on App Store** (Mac App Store edition): Opens the Mac App Store page for PopClip.
 - **Release Notes** (Setapp edition): Opens the Setapp release notes window.
+
+### Trial mode
+
+In trial mode (Standalone edition only), the About pane will instead show the number of uses remaining before the trial expires. The Buy button (![](icon-buy-tag.svg#icon)) Opens the [buy](/buy) page in your browser.
