@@ -42,8 +42,9 @@ To make PopClip appear without selecting any text, [long press](/guide/basics#lo
 :::
 **Availablilty:**
 
-- Copy and Cut require a text selection.
-- Cut and Paste require an editable text field.
+- Copy requires a text selection.
+- Paste requires an editable text field and content on the clipboard that can be pasted.
+- Cut requires a text selection and an editable text field.
 
 **Modifiers:**
 
