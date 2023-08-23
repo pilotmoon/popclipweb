@@ -90,7 +90,7 @@ export default defineConfig({
             { text: "Basic Usage", link: "/guide/basics" },
             { text: "Actions", link: "/guide/actions" },
             { text: "Settings", link: "/guide/settings" },
-            { text: "Extensions", link: "/guide/extensions" },
+            { text: "Adding Extensions", link: "/guide/extensions" },
           ],
         },
         {
