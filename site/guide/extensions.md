@@ -18,7 +18,6 @@ When you download a ready-made extension it will have the file extension `.popcl
 
 ![](./anim-extension-install-4.mp4 "Installing an extension from the directory")
 
-
 ### Unsigned Extensions
 
 If you see an "Unsigned Extension" warning it means the extension is not from PopClip's developer. You will need to confirm whether you want to install the extension.
