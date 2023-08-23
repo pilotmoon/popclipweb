@@ -115,8 +115,8 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: "Troubleshooting", link: "/kb/troubleshooting" },
-            { text: "Known Issues", link: "/kb/compatibility" },
-            { text: "FAQ", link: "/guide/faq" },
+            { text: "Known Issues", link: "/kb/known-issues" },
+            { text: "FAQ", link: "/kb/faq" },
             {
               text: "In-depth topics",
               collapsed: true,
