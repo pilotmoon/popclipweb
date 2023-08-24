@@ -143,14 +143,18 @@
 }
 
 .main figure img, .main figure video {
+  display: inline-block;
+  vertical-align: middle;
   clip-path: inset(1px 1px);
   margin: 0 auto;
 }
 
 .main figure img[src*="#pref"] {
   max-width: 280px;
-  display: inline-block;
-  vertical-align: middle;
+}
+
+.main figure img[src*="#h400"] {
+  max-height: 400px;
 }
 
 .main h4 {

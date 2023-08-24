@@ -22,7 +22,7 @@ This website aims to be a complete resource for PopClip users. It contains all t
 
 * Vital **App Info** including [download links](/download), [purchase information](/buy), [version history](/changes) and [support](/support) details.
 
-* The **Knowledge Base** section, with detailed information about compatibility with other apps, troubleshooting tips, FAQs and technical information.
+* The **Knowledge Base** section, with detailed [troubleshooting guide](/kb/troubleshooting) and in-depth articles.
 
 * **Policies** including [license terms](/terms) and [privacy](/privacy) policy.
 
