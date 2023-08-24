@@ -5,7 +5,6 @@ aside: true
 <script setup lang="ts">
 import EditionSwitcher from "../components/EditionSwitcher.vue";
 import Ed from "../components/Ed.vue";
-import EdLabel from "../components/EdLabel.vue";
 </script>
 
 # Paths and identifiers
@@ -16,7 +15,7 @@ This page lists the various file and folder paths and identifiers used by PopCli
 
 ## File and folder paths
 
-Showing details for <b><EdLabel /></b>.
+Showing details for <b><Ed /></b>.
 
 | File or folder             | Path                                                                                                                                   | Description                                                                                                         |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -27,7 +26,7 @@ Showing details for <b><EdLabel /></b>.
 
 ## Identifiers
 
-Showing details for <b><EdLabel /></b>.
+Showing details for <b><Ed /></b>.
 
 | Identifier         | Value                                                                          | Description                                                                                        |
 | ------------------ | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |

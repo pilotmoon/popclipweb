@@ -8,9 +8,11 @@ const props = defineProps({
     },
     base: {
         type: String,
+        default: "Standalone and Mac App Store editions",
     },
     setapp: {
         type: String,
+        default: "Setapp edition",
     },
 });
 const element=computed(() => props.code ? "code" : "span");
