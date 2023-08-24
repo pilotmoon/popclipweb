@@ -88,7 +88,7 @@ To keep visual clutter down, PopClip's bar is intelligent; it only displays
 actions relevant to your current text selection and context. Here's a quick
 rundown:
 
-- **Cut & Paste:** They'll show up when you use PopClip in text-editing zones,
+- **Cut & Paste:** They'll show up when you use PopClip in text-editing apps,
   like Mail or TextEdit. Don't expect them when selecting read-only text on
   webpages.
 
@@ -114,7 +114,7 @@ in, and the exact text selected.
 
 The following procedure can help if PopClip is not working properly. It removes
 PopClip from the Accessibility permission list and then adds it again. It is
-most likely to be required after upgrading macOS from one version ot another.
+most likely to be required after upgrading macOS from one version to another.
 
 1. Quit PopClip
 
