@@ -113,6 +113,7 @@ export default defineConfig({
                 { text: "Browser support", link: "/kb/browsers" },
                 // { text: "Hidden settings", link: "/kb/hidden-settings" },                
                 { text: "Paths and identifiers", link: "/kb/identifiers" },                
+                // { text: "Release labelling", link: "/kb/labels" },                
               ],
             },
           ],
