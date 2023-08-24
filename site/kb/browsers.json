@@ -78,7 +78,7 @@
     "supportsAddressBar": true,
     "supportsOpenIn": false,
     "bundleId": "com.google.Chrome.canary",
-    "homepageUrl": null
+    "homepageUrl": "https://www.google.com/chrome/canary/"
   },
   {
     "name": "Microsoft Edge",
@@ -96,7 +96,7 @@
     "supportsAddressBar": false,
     "supportsOpenIn": false,
     "bundleId": "com.microsoft.edgemac.Beta",
-    "homepageUrl": null
+    "homepageUrl": "https://www.microsoftedgeinsider.com/welcome"
   },
   {
     "name": "Microsoft Edge Canary",
@@ -105,7 +105,7 @@
     "supportsAddressBar": false,
     "supportsOpenIn": false,
     "bundleId": "com.microsoft.edgemac.Canary",
-    "homepageUrl": null
+    "homepageUrl": "https://www.microsoftedgeinsider.com/welcome?channel=canary"
   },
   {
     "name": "Microsoft Edge Dev",
@@ -114,7 +114,7 @@
     "supportsAddressBar": false,
     "supportsOpenIn": false,
     "bundleId": "com.microsoft.edgemac.Dev",
-    "homepageUrl": null
+    "homepageUrl": "https://www.microsoftedgeinsider.com/welcome?channel=dev"
   },
   {
     "name": "Mozilla Firefox",
@@ -132,7 +132,7 @@
     "supportsAddressBar": false,
     "supportsOpenIn": false,
     "bundleId": "org.mozilla.firefoxdeveloperedition",
-    "homepageUrl": null
+    "homepageUrl": "https://www.mozilla.org/firefox/developer/"
   },
   {
     "name": "Mozilla Firefox Nightly",
@@ -141,7 +141,7 @@
     "supportsAddressBar": false,
     "supportsOpenIn": false,
     "bundleId": "org.mozilla.nightly",
-    "homepageUrl": null
+    "homepageUrl": "https://www.mozilla.org/firefox/channel/desktop/"
   },
   {
     "name": "Mullvad",

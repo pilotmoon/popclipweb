@@ -28,6 +28,8 @@ export default defineLoader({
         browsers.push(browser);
       }
     }
+    // sort by name
+    browsers.sort((a, b) => a.name.localeCompare(b.name));
     return { browsers };
   },
 });
