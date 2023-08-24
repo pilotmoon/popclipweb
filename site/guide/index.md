@@ -14,7 +14,7 @@ Think of PopClip as a context-aware assistant that provides you with tools you c
 
 PopClip is available for macOS only. It is a [paid](/buy) app with a [free trial](/download). It has been in continuous development since 2011.
 
-## **Site Contents**
+## **Site contents**
 
 This website aims to be a complete resource for PopClip users. It contains all the documentation for PopClip in one place, with the following sections:
 
@@ -30,15 +30,7 @@ This website aims to be a complete resource for PopClip users. It contains all t
 
 Finally, there is the [Extensions Directory](/extensions/), a dedicated section of the site for browsing and searching for ready-made extensions to add to PopClip.
 
-## Languages and Translation
-
-PopClip's user interface is developed in English and is translated into Chinese (Traditional and Simplified), French, German, Italian, Japanese, Korean, Portuguese, Russian, Slovak, Spanish, and Turkish. These translations have been produced by a mix of paid translation services and volunteer users.
-
-Users can contribute translations in their own language using the CrowdIn platform. If you would like to add or suggest changes to translations please go to: [Pilotmoon Apps project on CrowdIn](https://crowdin.com/project/pilotmoon-apps). If your language does not exist in the project, send me an email so I can add it.
-
-The documentation only available in English.
-
-## Frequently Asked Questions
+## Frequently asked questions
 
 *See also [Troubleshooting](/kb/troubleshooting) if you have questions about technical issues.*
 
@@ -50,6 +42,14 @@ The documentation only available in English.
 
 * **Can you make the Dictionary action use the macOS pop-up dictionary instead of the Dictionary app?**
   I'd love it to do this, but it is technically not possible (as far as I know).
+
+## Languages and translation
+
+PopClip's user interface is developed in English and is translated into Chinese (Traditional and Simplified), French, German, Italian, Japanese, Korean, Portuguese, Russian, Slovak, Spanish, and Turkish. These translations have been produced by a mix of paid translation services and volunteer users.
+
+Users can contribute translations in their own language using the CrowdIn platform. If you would like to add or suggest changes to translations please go to: [Pilotmoon Apps project on CrowdIn](https://crowdin.com/project/pilotmoon-apps). If your language does not exist in the project, send me an email so I can add it.
+
+The documentation only available in English.
 
 ## About the developer
 
