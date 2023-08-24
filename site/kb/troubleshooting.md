@@ -95,4 +95,4 @@ most likely to be required after upgrading macOS from one version ot another.
 
 4. Use the "+" (plus) button add PopClip again to the list.
 
-![](./shot-ax-remove-1.png#h400 "Remove and re-add to the list with minus button")
+![](./media/shot-ax-remove-1.png#h400 "Remove and re-add to the list with minus button")

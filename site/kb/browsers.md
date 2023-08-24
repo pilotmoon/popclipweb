@@ -1,6 +1,11 @@
 ---
-aside: false
+aside: true
 ---
+<script setup lang="ts">
+import { data } from './browsers.data';
+const yes = '✅';
+const no = '';
+</script>
 
 # Browser support
 
@@ -11,7 +16,9 @@ Apps not on this list will be treated as regular apps. PopClip will pop-up in
 the app but will not apply browser-specific features. To suggest additional
 browsers please [get in touch](/support).
 
-## Key to columns
+## Supported features
+
+The table contains columns for each of the following features:
 
 - **Aware:** PopClip knows that the app is a browser, and URL-opening actions
   triggered in the app will stay in the same app.
@@ -29,32 +36,27 @@ browsers please [get in touch](/support).
 
 ## Browser table
 
-| Browser                               | Aware | Page Info | Address Bar | Open In | Bundle ID                             | Homepage                                                 |
-| ------------------------------------- | :---: | :-------: | :---------: | :-----: | ------------------------------------- | -------------------------------------------------------- |
-| **Arc**                               |  ✅   |           |             |   ✅    | `company.thebrowser.Browser`          | <https://arc.net>                                        |
-| **Brave**                             |  ✅   |    ✅     |     ✅      |   ✅    | `com.brave.Browser`                   | <https://brave.com/>                                     |
-| **Brave Beta**                        |  ✅   |    ✅     |     ✅      |         | `com.brave.Browser.beta`              | <https://brave.com/download-beta/>                       |
-| **Brave Nightly**                     |  ✅   |    ✅     |     ✅      |         | `com.brave.Browser.nightly`           | <https://brave.com/download-nightly/>                    |
-| **Chromium**                          |  ✅   |    ✅     |     ✅      |         | `org.chromium.Chromium`               | <https://www.chromium.org/>                              |
-| **DEVONagent Pro**                    |  ✅   |           |             |   ✅    | `com.devon-technologies.agent`        | <https://devontechnologies.com/apps/devonagent>          |
-| **DuckDuckGo Browser**                |  ✅   |           |             |   ✅    | `com.duckduckgo.macos.browser`        | <https://duckduckgo.com/mac>                             |
-| **Google Chrome**                     |  ✅   |    ✅     |     ✅      |   ✅    | `com.google.Chrome`                   | <https://www.google.com/chrome/>                         |
-| **Google Chrome Canary**              |  ✅   |    ✅     |     ✅      |         | `com.google.Chrome.canary`            |                                                          |
-| **Microsoft Edge**                    |  ✅   |    ✅     |             |   ✅    | `com.microsoft.edgemac`               | <https://www.microsoft.com/edge>                         |
-| **Microsoft Edge Beta**               |  ✅   |    ✅     |             |         | `com.microsoft.edgemac.Beta`          |                                                          |
-| **Microsoft Edge Canary**             |  ✅   |    ✅     |             |         | `com.microsoft.edgemac.Canary`        |                                                          |
-| **Microsoft Edge Dev**                |  ✅   |    ✅     |             |         | `com.microsoft.edgemac.Dev`           |                                                          |
-| **Mozilla Firefox**                   |  ✅   |           |             |   ✅    | `org.mozilla.firefox`                 | <https://www.mozilla.org/firefox/>                       |
-| **Mozilla Firefox Developer Edition** |  ✅   |           |             |         | `org.mozilla.firefoxdeveloperedition` |                                                          |
-| **Mozilla Firefox Nightly**           |  ✅   |           |             |         | `org.mozilla.nightly`                 |                                                          |
-| **Mullvad**                           |  ✅   |           |             |   ✅    | `net.mullvad.mullvadbrowser`          | <https://mullvad.net/browser>                            |
-| **Opera**                             |  ✅   |    ✅     |     ✅      |   ✅    | `com.operasoftware.Opera`             | <https://www.opera.com>                                  |
-| **Opera Beta**                        |  ✅   |    ✅     |     ✅      |         | `com.operasoftware.OperaNext`         | <https://www.opera.com/browsers/opera/beta>              |
-| **Opera Developer**                   |  ✅   |    ✅     |     ✅      |         | `com.operasoftware.OperaDeveloper`    | <https://www.opera.com/browsers/opera/beta>              |
-| **Opera GX**                          |  ✅   |    ✅     |     ✅      |         | `com.operasoftware.OperaGX`           | <https://www.opera.com/gx>                               |
-| **Orion**                             |  ✅   |    ✅     |     ✅      |   ✅    | `com.kagi.kagimacOS`                  | <https://browser.kagi.com>                               |
-| **Safari**                            |  ✅   |    ✅     |     ✅      |   ✅    | `com.apple.Safari`                    | <https://www.apple.com/safari/>                          |
-| **Safari Technology Preview**         |  ✅   |    ✅     |     ✅      |         | `com.apple.SafariTechnologyPreview`   | <https://developer.apple.com/safari/technology-preview/> |
-| **Sidekick**                          |  ✅   |    ✅     |     ✅      |         | `com.pushplaylabs.sidekick`           | <https://www.meetsidekick.com/>                          |
-| **Tor Browser**                       |  ✅   |           |             |   ✅    | `org.torproject.torbrowser`           | <https://www.torproject.org/>                            |
-| **Vivaldi**                           |  ✅   |    ✅     |             |   ✅    | `com.vivaldi.Vivaldi`                 | <https://vivaldi.com>                                    |
+<table>
+<thead>
+<tr>
+<th>Browser</th>
+<th style="text-align: center">Aware</th>
+<th style="text-align: center">Page Info</th>
+<th style="text-align: center">Address Bar</th>
+<th style="text-align: center">Open In</th>
+</tr>
+</thead>
+<tbody>
+<tr v-for="browser in data.browsers">
+<td>
+  <a v-if="browser.homepageUrl" :href="browser.homepageUrl">{{ browser.name }}</a>
+  <span v-else>{{ browser.name }}</span>
+  <br><code>{{ browser.bundleId }}</code>
+</td>
+<td style="text-align: center">{{ browser.supportsAware ? yes : no }}</td>
+<td style="text-align: center">{{ browser.supportsPageInfo ? yes : no }}</td>
+<td style="text-align: center">{{ browser.supportsAddressBar ? yes : no }}</td>
+<td style="text-align: center">{{ browser.supportsOpenIn ? yes : no }}</td>
+</tr>
+</tbody>
+</table>
