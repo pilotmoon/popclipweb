@@ -99,12 +99,6 @@ const filteredIndex = computed(() => {
     gap: 8px;
 }
 
-.ControlGroup {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
 .Footer {
     margin-top: 16px;
     font-size: 0.8em;

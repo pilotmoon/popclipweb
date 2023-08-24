@@ -110,9 +110,9 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: "AppleScript interface", link: "/kb/applescript" },
-                { text: "Browser compatibilty", link: "/kb/browsers" },
-                { text: "File locations", link: "/kb/editions" },
-                { text: "Hidden settings", link: "/kb/hidden-settings" },
+                { text: "Browser support", link: "/kb/browsers" },
+                // { text: "Hidden settings", link: "/kb/hidden-settings" },                
+                { text: "Paths and identifiers", link: "/kb/identifiers" },                
               ],
             },
           ],

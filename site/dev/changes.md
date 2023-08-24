@@ -7,7 +7,7 @@ aside: false
 }
 -->
 
-# Changelog
+# Developer Changelog
 
 Detailed notes on changes to PopClip's extensions programming interface will be kept in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
@@ -37,7 +37,7 @@ There were no changes to extension programming interface in this release.
 - The `script interpreter` field has been renamed to `interpreter`.
 - Shell script files are no longer executed with `/bin/sh` by default. An interpreter must be explicitly specified.
 - The `preserve image color` field has been renamed to `preserve color`.
-- The `parameters` field has in the `applescript call` dictionary has been renamed to `params`.
+- The `parameters` field in the `applescript call` dictionary has been renamed to `params`.
 - Icons are now drawn in a square canvas with uniform height and width, unless the new `preserve aspect` flag is set.
 - PopClip now enforces that the extension identifier may contain only A-Z, a-z, 0-9, period (.), and hyphen (-).
 - Updated the versions of several of the built in NPM modules.

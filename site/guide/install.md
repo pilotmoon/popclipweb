@@ -28,7 +28,7 @@ There are 3 ways to obtain PopClip:
   PopClip is included in your subscription. Simply search for "PopClip" in the
   Setapp interface and click Install.
 
-I refer to the above three variants of PopClip as **editions**. The editions all share the same features and
+I refer to the above three variants of PopClip as *editions*. The editions all share the same features and
 abilities, and the only significant difference is the way you obtain the app and
 how you buy it. There are some minor differences, which I will point
 out where relevant.
@@ -119,4 +119,4 @@ Before we move on, let's take a moment to learn how to uninstall PopClip.
 
 2. Drag the PopClip app from your Applications folder (or the Setapp folder inside the Applications folder) to the Trash.
 
-3. Optionally, to remove all traces of PopClip from your Mac, delete the preferences file, application support folder and caches folder. See: [File locations](/).
+3. Optionally, to remove all traces of PopClip from your Mac, delete the preferences file, application support folder and caches folder. See: [Identifiers and file paths](/kb/files).
