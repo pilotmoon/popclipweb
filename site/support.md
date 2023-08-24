@@ -6,7 +6,7 @@ outline: deep
 
 ## Self-help
 
-If you have a problem, please read the [Troubleshooting](/kb/troubleshooting) page first.
+If you're having a problem, please read the [Troubleshooting](/kb/troubleshooting) page first.
 
 ## Email
 

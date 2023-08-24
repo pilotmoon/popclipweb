@@ -30,19 +30,11 @@ This website aims to be a complete resource for PopClip users. It contains all t
 
 Finally, there is the [Extensions Directory](/extensions/), a dedicated section of the site for browsing and searching for ready-made extensions to add to PopClip.
 
-## About PopClip
+## Languages and Translation
 
-### About the developer
+PopClip's user interface is developed in English and is translated into Chinese (Traditional and Simplified), French, German, Italian, Japanese, Korean, Portuguese, Russian, Slovak, Spanish, and Turkish. These translations have been produced by a mixture of paid professional translators and volunteer users.
 
-PopClip is not made by a large company or even a small team; it's made by one person. Nick Moore. I'm also the one writing this user guide. I'm from the UK and my native language is English. To get in touch, see [Support and Feedback](/support).
-
-#### About "Pilotmoon Software"
-
-Pilotmoon Software (website: [pilotmoon.com](https://pilotmoon.com/)) is not actually a company but just business name that I chose when starting out. I have put out a few other apps over the years, but these days I focus on PopClip. PopClip's home page used to be over at pilotmoon.com/popclip, so you'll see that domain name in various places. Hopefully, everything redirects to the right place here on the new site, but if you find a broken link, please let me know.
-
-### Languages
-
-PopClip's user interface is available English, Chinese (Traditional and Simplified), French, German, Italian, Japanese, Korean, Portuguese, Russian, Slovak, Spanish, and Turkish.
+Users can contribute translations in their own language using the CrowdIn platform. If you would like to add or suggest changes to translations please go to: [Pilotmoon Apps project on CrowdIn](https://crowdin.com/project/pilotmoon-apps). If your language does not exist in the project, send me an email so I can add it.
 
 The documentation only available in English.
 
@@ -50,11 +42,17 @@ The documentation only available in English.
 
 *See also [Troubleshooting](/kb/troubleshooting) if you have questions about technical issues.*
 
-- **Is there / will you make a version of PopClip for iPhone or iPad?**
+* **Is there / will you make a version of PopClip for iPhone or iPad?**
   Unfortunately PopClip would not be possible on iOS, due to the way iOS apps work.
 
-- **Is there / will you make a version of PopClip for Windows?**
+* **Is there / will you make a version of PopClip for Windows?**
   I don't make a Windows version of PopClip and I have no plans to do so. There is a similar app for Windows called [SnipDo](https://snipdo-app.com/) (formerly Pantherbar), which the developer says was was inspired by PopClip. However, I have no involvement with that app at all.
 
-- **Can you make the Dictionary action use the macOS pop-up dictionary instead of the Dictionary app?**
+* **Can you make the Dictionary action use the macOS pop-up dictionary instead of the Dictionary app?**
   I'd love it to do this, but it is technically not possible (as far as I know).
+
+## About the developer
+
+PopClip is not made by a large company or even a small team; it's made by one person. Nick Moore. I'm also the one writing this user guide. I'm from the UK and my native language is English. To get in touch, see [Support and Feedback](/support).
+
+[Pilotmoon Software](https://pilotmoon.com/) is the business name under which I have published my apps. You will see some links and references to `pilotmoon.com` in various places, and I use the `@pilotmoon` handle on GitHub and elsewhere.

@@ -113,7 +113,6 @@ export default defineConfig({
                 { text: "Browser compatibilty", link: "/kb/browsers" },
                 { text: "File locations", link: "/kb/editions" },
                 { text: "Hidden settings", link: "/kb/hidden-settings" },
-                { text: "FAQ", link: "/kb/faq" },
               ],
             },
           ],
