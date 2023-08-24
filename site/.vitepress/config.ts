@@ -112,7 +112,7 @@ export default defineConfig({
                 { text: "AppleScript interface", link: "/kb/applescript" },
                 { text: "Browser support", link: "/kb/browsers" },
                 // { text: "Hidden settings", link: "/kb/hidden-settings" },                
-                { text: "Paths and identifiers", link: "/kb/identifiers" },                
+                { text: "Paths and identifiers", link: "/kb/paths" },                
                 // { text: "Release labelling", link: "/kb/labels" },                
               ],
             },
