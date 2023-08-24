@@ -10,7 +10,7 @@ import EdLabel from "../components/EdLabel.vue";
 
 # Paths and identifiers
 
-This page gives the various file paths and identifiers used by PopClip.
+This page lists the various file and folder paths and identifiers used by PopClip.
 
 <EditionSwitcher />
 
