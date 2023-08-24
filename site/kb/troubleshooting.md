@@ -2,10 +2,10 @@
 aside: false
 ---
 
-# PopClip Troubleshooting
+# Troubleshooting
 
 This page lists common problems and their possible solutions, as well as known
-issues with specific apps. See also [FAQ](./faq).
+issues with specific apps.
 
 ## Solutions to common problems
 

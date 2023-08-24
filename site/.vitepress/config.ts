@@ -26,11 +26,11 @@ export default defineConfig({
       {
         text: "Documentation",
         activeMatch:
-          "^(/guide/|/ref/|/changelog|/dowload|/buy|/kb/|/terms|/privacy|/download|/support|/beta)",
+          "^(/guide/|/dev/|/changes|/dowload|/buy|/kb/|/terms|/privacy|/download|/support|/beta)",
         link: "/guide/",
         // items: [
         //   { text: "User Guide", link: "/guide/" },
-        //   { text: "Developer Reference", link: "/ref/" },
+        //   { text: "Developer Reference", link: "/dev/" },
         // ],
       },
       {
@@ -59,16 +59,6 @@ export default defineConfig({
       },
     ],
     sidebar: {
-      // "/ref/": [
-      //   { text: "Guide", link: "/docs" },
-      //   {
-      //     text: "Developer Reference",
-      //     items: [
-      //       { text: "Introduction", link: "/ref/" },
-      //       { text: "Page 1", link: "/ref/page1" },            
-      //     ],
-      //   },
-      // ],
       "/extensions/": [
         {
           text: "Extensions",
@@ -102,7 +92,7 @@ export default defineConfig({
               link: "/download",
               collapsed: true,
               items: [
-                { text: "Version History", link: "/changelog" },
+                { text: "Version History", link: "/changes" },
                 { text: "Beta", link: "/beta" },
               ],
             },
@@ -114,8 +104,7 @@ export default defineConfig({
           text: "Knowledge Base",
           collapsed: false,
           items: [
-            { text: "Troubleshooting", link: "/kb/troubleshooting" },
-            { text: "FAQ", link: "/kb/faq" },
+            { text: "Troubleshooting", link: "/kb/troubleshooting" },            
             {
               text: "In-depth topics",
               collapsed: true,
@@ -124,6 +113,7 @@ export default defineConfig({
                 { text: "Browser compatibilty", link: "/kb/browsers" },
                 { text: "File locations", link: "/kb/editions" },
                 { text: "Hidden settings", link: "/kb/hidden-settings" },
+                { text: "FAQ", link: "/kb/faq" },
               ],
             },
           ],
@@ -147,8 +137,8 @@ export default defineConfig({
         {
           text: "Developer Reference",
           items: [
-            { text: "Introduction", link: "/ref/" },
-            { text: "Changelog", link: "/ref/changelog" },            
+            { text: "Introduction", link: "/dev/" },
+            { text: "Changelog", link: "/dev/changes" },            
           ],
         },
       ],

@@ -1,3 +1,6 @@
+---
+aside: false
+---
 <!-- markdownlint-configure-file
 {
   "no-duplicate-header": false
@@ -6,15 +9,15 @@
 
 # Changelog
 
-All notable changes to PopClip's extensions programming interface will be documented in this file.
+Detailed notes on changes to PopClip's extensions programming interface will be kept in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-Version numbers correspond to [PopClip](https://pilotmoon.com/popclip) releases. (Version numbers are
-[calendar based](https://calver.org).)
+See also [Version History](/changes) for a list of user-facing changes to the PopClip app itself.
+
+## PopClip 2023.7 (4151)
+
+There were no changes to extension programming interface in this release.
 
 ## PopClip 2022.12 (4069)
-
-Released on 6 Dec 2022.
 
 ### Added
 

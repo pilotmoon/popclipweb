@@ -18,15 +18,15 @@ PopClip is available for macOS only. It is a [paid](/buy) app with a [free trial
 
 This website aims to be a complete resource for PopClip users. It contains all the documentation for PopClip in one place, with the following sections:
 
-* The **User Guide** is a complete introduction to PopClip. [Install](/guide/install) PopClip and learn the [basic concepts](/guide/basics) of the user interface. Take a tour of the [built-in actions](/guide/actions), see how to customize the [settings](/guide/settings) and manage [extensions](/guide/extensions).
+* The **User Guide** is a complete introduction to PopClip. [Install](/guide/install) PopClip and learn the [basic concepts](/guide/basics) of the user interface. Take a tour of the [built-in actions](/guide/actions), see how to customize the [settings](/guide/settings) and add [extensions](/guide/extensions).
 
-* Vital **App Info** including [download links](/download), [purchase information](/buy), [version history](/changelog) and [support](/support) details.
+* Vital **App Info** including [download links](/download), [purchase information](/buy), [version history](/changes) and [support](/support) details.
 
 * The **Knowledge Base** section, with detailed information about compatibility with other apps, troubleshooting tips, FAQs and technical information.
 
 * **Policies** including [license terms](/terms) and [privacy](/privacy) policy.
 
-* A **Developer Reference** section with [detailed technical documentation](/ref/) on how to create PopClip extensions.
+* A **Developer Reference** section with [detailed technical documentation](/dev/) on how to create PopClip extensions.
 
 Finally, there is the [Extensions Directory](/extensions/), a dedicated section of the site for browsing and searching for ready-made extensions to add to PopClip.
 
@@ -45,3 +45,16 @@ Pilotmoon Software (website: [pilotmoon.com](https://pilotmoon.com/)) is not act
 PopClip's user interface is available English, Chinese (Traditional and Simplified), French, German, Italian, Japanese, Korean, Portuguese, Russian, Slovak, Spanish, and Turkish.
 
 The documentation only available in English.
+
+## Frequently Asked Questions
+
+*See also [Troubleshooting](/kb/troubleshooting) if you have questions about technical issues.*
+
+- **Is there / will you make a version of PopClip for iPhone or iPad?**
+  Unfortunately PopClip would not be possible on iOS, due to the way iOS apps work.
+
+- **Is there / will you make a version of PopClip for Windows?**
+  I don't make a Windows version of PopClip and I have no plans to do so. There is a similar app for Windows called [SnipDo](https://snipdo-app.com/) (formerly Pantherbar), which the developer says was was inspired by PopClip. However, I have no involvement with that app at all.
+
+- **Can you make the Dictionary action use the macOS pop-up dictionary instead of the Dictionary app?**
+  I'd love it to do this, but it is technically not possible (as far as I know).

@@ -26,7 +26,7 @@ name="PopClip"
 :os="prod.minimumSystemVersion"
 :archs="prod.archs"
 :url="prod.url"
-notes="/changelog"
+notes="/changes"
 channel="production"
 />
 
@@ -54,7 +54,7 @@ This list gives the last supported release for each macOS version or processor t
   </li>
 </ul>
 
-Download links for some further old versions are available on the [Version History](/changelog) page.
+Download links for some further old versions are available on the [Version History](/changes) page.
 
 ## Beta Release
 

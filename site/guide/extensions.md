@@ -51,4 +51,4 @@ Notice that the first line of the snippet starts with `#popclip`. This is a spec
 
 ## Creating your own extension
 
-For more about creating both snippets and downloadable extensions, see [Extensions Developer Reference](/ref/).
+For more about creating both snippets and downloadable extensions, see [Extensions Developer Reference](/dev/).

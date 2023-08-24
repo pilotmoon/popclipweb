@@ -4,6 +4,10 @@ outline: deep
 
 # Support & Feedback
 
+## Self-help
+
+If you have a problem, please read the [Troubleshooting](/kb/troubleshooting) page first.
+
 ## Email
 
 To contact the developer directly, email Nick Moore at <support@pilotmoon.com>.
