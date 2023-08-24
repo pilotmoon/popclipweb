@@ -157,6 +157,10 @@
   max-height: 400px;
 }
 
+.main figure img[src*="#bar"] {
+  max-height: 100px;
+}
+
 .main h4 {
   margin-top: 1rem;
   margin-bottom: 0.5rem;

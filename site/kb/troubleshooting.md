@@ -11,7 +11,7 @@ issues with specific apps.
 
 | Problem                                                          | Possible Solution                                                                                                                                                                                                                                                                                                                                                    |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Not all of the enabled actions are appearing in the PopClip bar. | This is normal, because actions only appear when they are applicable in the context.                                                                                                                                                                                                                                                                                 |
+| Not all of the enabled actions are appearing in the PopClip bar. | This is normal, because actions only appear when they are applicable. See: [Why are some actions not appearing?](#why-are-some-actions-not-appearing)                                                                                                                                                                                                                |
 | PopClip bar appears, but actions are not working properly.       | This is a common problem just after upgrading macOS. Solution: [Remove and re-add Accessibility permission](#remove-and-re-add-accessibility-permission).                                                                                                                                                                                                            |
 | Problem using PopClip in a specific app.                         | Check the [App compatibility](#app-compatibility) section to see if there is a known problem with that specific app.                                                                                                                                                                                                                                                 |
 |                                                                  | Check whether you have excluded the app from PopClip. See: [Excluded Apps pane](/guide/settings#excluded-apps-pane).                                                                                                                                                                                                                                                 |
@@ -78,7 +78,40 @@ The following table lists apps that are known to have problems with PopClip.
 | VMWare                                                              | PopClip will not work in this app.                                                                                                                                                                                       | Can't fix                                                 |
 | VS Code                                                             | Cut and Paste not appearing in PopClip bar.                                                                                                                                                                              | Affects PopClip 2023.7. Fixed in PopClip beta, Build 4163 |
 
-## Detailed procedures
+## Further information
+
+### Why are some actions not appearing?
+
+![](media/shot-missing-actions-1.png#bar "Only Search and Copy are appearing! Is there something wrong?")
+
+It is normal for only some of the enabled actions to appear in the PopClip bar.
+This is because PopClip only shows those actions that are applicable to the
+current text selection and context. For example:
+
+- The Cut and Paste actions will only appear if you have invoked PopClip in a
+  place where text can be cut or pasted. So they won't appear when selecting
+  normal text on a webpage, for example. But they would appear when writing text
+  in an app like Mail or TextEdit.
+
+- The Open Link action will only appear if you have selected a URL, for example:
+  `https://apple.com/mac/`.
+
+- The Dictionary action will only appear if you have selected a dictionary word.
+
+- The Reveal in Finder action will only appear if you have selected a file or
+  folder path that exists locally, for example: `~/Documents/`.
+
+- The Spelling action will only appear if you have selected editable text that
+  is misspelled and for which there are suggestions available in at least one of
+  the enabled languages.
+
+- Actions added by extensions have similar conditions that determine whether
+  they appear, on a per-action basis.
+
+If, given the above explanation, you are still sure that an action is failing to
+appear when it should, please [let me know](/support). Be specific about action
+that isn't appearing, the app you are selecting text in, and the exact text you
+have selected.
 
 ### Remove and re-add Accessibility permission
 
