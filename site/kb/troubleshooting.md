@@ -84,34 +84,31 @@ The following table lists apps that are known to have problems with PopClip.
 
 ![](media/shot-missing-actions-1.png#bar "Only Search and Copy are appearing! Is there something wrong?")
 
-It is normal for only some of the enabled actions to appear in the PopClip bar.
-This is because PopClip only shows those actions that are applicable to the
-current text selection and context. For example:
+To keep visual clutter down, PopClip's bar is intelligent; it only displays
+actions relevant to your current text selection and context. Here's a quick
+rundown:
 
-- The Cut and Paste actions will only appear if you have invoked PopClip in a
-  place where text can be cut or pasted. So they won't appear when selecting
-  normal text on a webpage, for example. But they would appear when writing text
-  in an app like Mail or TextEdit.
+- **Cut & Paste:** They'll show up when you use PopClip in text-editing zones,
+  like Mail or TextEdit. Don't expect them when selecting read-only text on
+  webpages.
 
-- The Open Link action will only appear if you have selected a URL, for example:
+- **Open Link:** Only visible when a URL is selected, e.g.,
   `https://apple.com/mac/`.
 
-- The Dictionary action will only appear if you have selected a dictionary word.
+- **Dictionary:** Appears when a dictionary word is highlighted.
 
-- The Reveal in Finder action will only appear if you have selected a file or
-  folder path that exists locally, for example: `~/Documents/`.
+- **Reveal in Finder:** This pops up for valid local file or folder paths, like
+  `~/Documents/`.
 
-- The Spelling action will only appear if you have selected editable text that
-  is misspelled and for which there are suggestions available in at least one of
-  the enabled languages.
+- **Spelling:** For editable, misspelled words when there are correction
+  suggestions in your set languages.
 
-- Actions added by extensions have similar conditions that determine whether
-  they appear, on a per-action basis.
+- **Extension-added actions:** These also have specific conditions; they show up
+  depending on their designed context.
 
-If, given the above explanation, you are still sure that an action is failing to
-appear when it should, please [let me know](/support). Be specific about action
-that isn't appearing, the app you are selecting text in, and the exact text you
-have selected.
+If, after understanding the above, you believe an action should be visible but
+isn't, please [provide details](/support). Specify the action, the app you're
+in, and the exact text selected.
 
 ### Remove and re-add Accessibility permission
 
