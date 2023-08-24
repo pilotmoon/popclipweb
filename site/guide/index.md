@@ -22,7 +22,7 @@ This website aims to be a complete resource for PopClip users. It contains all t
 
 * Vital **App Info** including [download links](/download), [purchase information](/buy), [version history](/changes) and [support](/support) details.
 
-* The **Knowledge Base** section, with detailed [troubleshooting guide](/kb/troubleshooting) and in-depth articles.
+* The **Knowledge Base** section, with detailed [troubleshooting guide](/kb/troubleshooting) and in-depth\ articles.
 
 * **Policies** including [license terms](/terms) and [privacy](/privacy) policy.
 
@@ -32,7 +32,7 @@ Finally, there is the [Extensions Directory](/extensions/), a dedicated section 
 
 ## Languages and Translation
 
-PopClip's user interface is developed in English and is translated into Chinese (Traditional and Simplified), French, German, Italian, Japanese, Korean, Portuguese, Russian, Slovak, Spanish, and Turkish. These translations have been produced by a mixture of paid professional translators and volunteer users.
+PopClip's user interface is developed in English and is translated into Chinese (Traditional and Simplified), French, German, Italian, Japanese, Korean, Portuguese, Russian, Slovak, Spanish, and Turkish. These translations have been produced by a mix of paid translation services and volunteer users.
 
 Users can contribute translations in their own language using the CrowdIn platform. If you would like to add or suggest changes to translations please go to: [Pilotmoon Apps project on CrowdIn](https://crowdin.com/project/pilotmoon-apps). If your language does not exist in the project, send me an email so I can add it.
 
