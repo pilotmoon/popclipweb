@@ -33,7 +33,7 @@ export default {
       console.log("Rendering readme for extension", ext.name);
       return {
         params: extCopy,
-        content: ext.readme ? renderMarkdown(ext.readme) : "<div>This extension has no Readme.md file.</div>",
+        content: ext.readme ? renderMarkdown(ext.readme) : "",
       };
     })
   }

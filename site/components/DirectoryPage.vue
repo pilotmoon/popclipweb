@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { useData } from 'vitepress';
+import { useSlots } from 'vue';
 import Icon from './Icon.vue';
 import Page from './Page.vue';
 import DownloadButton from './DownloadButton.vue';
 import { Extension } from './data/extensions-loader.js';
+import { formatDate } from './helpers/formatters.js';
+import { GithubFilled } from '@ant-design/icons-vue';
 const { params } = useData();
 const ext: Extension = params.value as Extension;
+const slots = useSlots();
+const hasReadme = typeof slots.default?.()?.[0]?.type === 'string';
+const dateString = new Date(ext.timestamp * 1000).toISOString();
+console.log('dateString', dateString);
 </script>
 
 <template>
@@ -22,30 +29,36 @@ const ext: Extension = params.value as Extension;
       </h1>
 
       <div :class="$style.Container">
-        <div :class="$style.Description">
-          {{ ext.description }}
-        </div>
+        <div :class="$style.Description" v-html="ext.description"></div>
         <div :class="$style.DownloadContainer">
-          <DownloadButton :href="ext.downloadUrl" />
+          <DownloadButton size="small" :href="ext.downloadUrl" />
         </div>
       </div>
-
-      <div v-if="ext.demogif" :class="$style.Demo">
-        <img :src="ext.demogif" alt="Demo GIF" />
-      </div>
-
     </div>
 
-    <div :class="$style.Card">
+    <div v-if="ext.demogif" :class="$style.Card">
+      <div :class="$style.CardHeader">Demo</div>
+      <img :class="$style.Demo" :src="ext.demogif" alt="Demo GIF" />
+    </div>
+
+    <div v-if="hasReadme" :class="$style.Card">
       <div :class="$style.CardHeader">Readme</div>
-      <div :class="$style.Readme">
+      <div v-if="hasReadme" :class="$style.Readme">
         <slot />
       </div>
+      <div v-else>
+        The extension author did not provide a Readme file.
+      </div>
     </div>
 
     <div :class="$style.Card">
-      <div :class="$style.CardHeader">Source Code</div>
-      <div>View the <a :href="ext.repoUrl">source code</a> for this extension.</div>
+      <div :class="$style.CardHeader">Info</div>
+      <ul :class="$style.Data">        
+        <li><span :class="$style.Label">First published</span><br><span>{{ formatDate(dateString) }}</span></li>
+        <!-- <li><span :class="$style.Label">Maintainer</span><br><a href="https://github.com/pilotmoon">Nick Moore</a></li> -->
+        <!-- <li><span :class="$style.Label">Identifier</span><br><code>{{ ext.identifier }}</code></li> -->
+        <li><span :class="$style.Label">Source</span><br><GithubFilled /> <a :href="ext.repoUrl">pilotmoon/PopClip-Extensions/<span>{{ ext.handle }}</span>.popclipext</a></li>
+      </ul>
     </div>
 
     
@@ -53,6 +66,7 @@ const ext: Extension = params.value as Extension;
 </template>
 
 <style module>
+
 div.Breadcrumb {
   margin-bottom: 32px;
 }
@@ -70,8 +84,22 @@ div.Card {
 }
 
 
+ul.Data {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 6px 24px;
+  
+}
+span.Label {
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+}
+
+
 .CardHeader {
-  color: var(--vp-c-text-1);
+  color: var(--vp-c-text-2);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.08em;
@@ -92,12 +120,7 @@ img.HeaderIcon {
   margin: 24px 0 0px;
 }
 
-
-
 .Description {
-  display: flex;
-  
-  justify-content: flex-start;
   font-size: 18px;
   line-height: 28px;
   font-weight: 400;
@@ -121,14 +144,15 @@ img.HeaderIcon {
         flex-direction: column;
     }
     .DownloadContainer {
+        display: flex;        
+        justify-content: flex-end;
         padding: 0;
     }
 }
 
-.Demo img {
-  width: 100%;
-  margin: 16px 0 0;
+img.Demo  {
   border-radius: 8px;
+  display: inline-block;
 }
 
 
@@ -268,11 +292,11 @@ div.Readme {
 
 /** Code */
 
-.Readme :not(pre, h1, h2, h3, h4, h5, h6)>code {
+.Card :not(pre, h1, h2, h3, h4, h5, h6)>code {
   font-size: var(--vp-code-font-size);
 }
 
-.Readme :not(pre)>code {
+.Card :not(pre)>code {
   border-radius: 4px;
   padding: 3px 6px;
   color: var(--vp-c-text-code);
