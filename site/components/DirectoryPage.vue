@@ -14,35 +14,69 @@ const ext: Extension = params.value as Extension;
       ← <a href="/extensions/">Back to Directory</a>
     </div>
 
-    <h1>
-      <Icon :class="$style.HeaderIcon" v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcLight="ext.iconUrlBlack"
-        :srcDark="ext.iconUrlWhite" />
-      {{ ext.name }}
-    </h1>
+    <div :class="[$style.Main]">
+      <h1>
+        <Icon :class="$style.HeaderIcon" v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcLight="ext.iconUrlBlack"
+          :srcDark="ext.iconUrlWhite" />
+        {{ ext.name }}
+      </h1>
 
-    <div :class="$style.ButtonContainer">
-      <DownloadButton :href="ext.downloadUrl"/>
+      <div :class="$style.Container">
+        <div :class="$style.Description">
+          {{ ext.description }}
+        </div>
+        <div :class="$style.DownloadContainer">
+          <DownloadButton :href="ext.downloadUrl" />
+        </div>
+      </div>
+
+      <div v-if="ext.demogif" :class="$style.Demo">
+        <img :src="ext.demogif" alt="Demo GIF" />
+      </div>
+
     </div>
+
+    <div :class="$style.Card">
+      <div :class="$style.CardHeader">Readme</div>
+      <div :class="$style.Readme">
+        <slot />
+      </div>
+    </div>
+
+    <div :class="$style.Card">
+      <div :class="$style.CardHeader">Source Code</div>
+      <div>View the <a :href="ext.repoUrl">source code</a> for this extension.</div>
+    </div>
+
     
-    <div :class="$style.Description">
-      {{  ext.description }}
-    </div>
-
-    <div v-if="ext.demogif" :class="$style.Demo">
-      <img :src="ext.demogif" alt="Demo GIF" />
-    </div>
-
-
-
-    <div class="box" :class="$style.Readme">      
-      <slot />
-    </div>
   </Page>
 </template>
 
 <style module>
 div.Breadcrumb {
-  margin-bottom: 1em;
+  margin-bottom: 32px;
+}
+
+div.Main {
+  margin-bottom: 32px;
+}
+
+div.Card {
+  margin: 16px 0 0;
+
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+
+.CardHeader {
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 img.HeaderIcon {
@@ -50,34 +84,72 @@ img.HeaderIcon {
   opacity: 0.7;
 }
 
-h1 {
-  margin: 32px 0 24px;
+.Container {
+  display: flex;
+  justify-content: space-between;
+  align-items: bottom;
+  gap: 16px;
+  margin: 24px 0 0px;
 }
 
+
+
 .Description {
+  display: flex;
+  
+  justify-content: flex-start;
   font-size: 18px;
-  line-height: 26px;
+  line-height: 28px;
   font-weight: 400;
-  margin: 16px 0;
+  margin: 0;
+
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+
+.DownloadContainer {
+  padding-top: 8px;
+
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
+@media (max-width: 550px) {
+    .Container {
+        flex-direction: column;
+    }
+    .DownloadContainer {
+        padding: 0;
+    }
 }
 
 .Demo img {
   width: 100%;
+  margin: 16px 0 0;
   border-radius: 8px;
 }
 
-.ButtonContainer {
-  text-align: left;
-  margin: 16px 0;
-}
+
 
 /* Based on
 https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/components/vp-doc.css */
 
-div.Readme {
-  margin: 32px 0 0;
+div.Footer {
+  margin-top: 32px;
+
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  padding: 16px;
 }
 
+
+div.Readme {
+  background-color: var(--vp-c-bg);
+  padding: 16px;
+  border-radius: 8px;
+}
 .Readme h1 {
   margin: 12px 0 24px;
   line-height: 30px;
@@ -117,7 +189,7 @@ div.Readme {
   padding-left: 16px;
 }
 
-.Readme blockquote > p {
+.Readme blockquote>p {
   margin: 0;
   font-size: 16px;
   color: var(--vp-c-text-2);
@@ -158,7 +230,7 @@ div.Readme {
  * Table
  * -------------------------------------------------------------------------- */
 
- .Readme table {
+.Readme table {
   display: block;
   border-collapse: collapse;
   margin: 20px 0;
@@ -192,23 +264,15 @@ div.Readme {
   font-size: 14px;
 }
 
-/**
- * Decorational elements
- * -------------------------------------------------------------------------- */
 
- .Readme hr {
-  margin: 16px 0;
-  border: none;
-  border-top: 1px solid var(--vp-c-divider);
-}
 
 /** Code */
 
-.Readme :not(pre, h1, h2, h3, h4, h5, h6) > code {
+.Readme :not(pre, h1, h2, h3, h4, h5, h6)>code {
   font-size: var(--vp-code-font-size);
 }
 
-.Readme :not(pre) > code {
+.Readme :not(pre)>code {
   border-radius: 4px;
   padding: 3px 6px;
   color: var(--vp-c-text-code);

@@ -26,6 +26,7 @@ export const ZExtension = z.object({
   description: z.string(),
   size: z.number(),
   downloadUrl: z.string().url(),  
+  repoUrl: z.string().url(),  
   iconSpecifier: z.string().nullish(),
   iconUrlWhite: z.string().url().nullish(),
   iconUrlBlack: z.string().url().nullish(),
@@ -160,6 +161,7 @@ async function processExtensions() {
       iconUrlBlack: imageLight,      
       downloadUrl: extension.download,
       timestamp: extension.date,
+      repoUrl: `https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/${extension.handle}.popclipext`,
     });
     if (parsed.success) {
       result.push(parsed.data);

@@ -60,4 +60,15 @@ import Theme from './Theme.vue';
 .Page strong {
     font-weight: 600;
 }
+
+/**
+ * Decorational elements
+ * -------------------------------------------------------------------------- */
+
+.Page hr {
+  margin: 16px 0;
+  border: none;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
 </style>
