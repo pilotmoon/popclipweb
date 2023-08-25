@@ -14,7 +14,7 @@ Welcome to the official website for PopClip, the Mac utility tool that pops up w
 
 ![PopClip screenshot](/popclip.jpg "Screenshot of PopClip")
 
-PopClip's [actions](/guide/actions) range from simple copy and paste to more complex tasks such as translating text. Using [extensions](/guide/extensions), you can add actions to PopClip to adapt it your needs. Think of PopClip as a context-aware assistant that provides tools you can use instantly, without having to switch between apps or windows.
+PopClip's [actions](/guide/actions) range from simple copy-paste and web searches to complex tasks such as translating text. Using [extensions](/guide/extensions), you can add actions to PopClip to adapt it your needs. Think of PopClip as a context-aware assistant that provides a set of tools you can use instantly in any app.
 
 
 PopClip is available for macOS only. It is a [paid](/buy) app with a [free trial](/download). It has been in continuous development since 2011.

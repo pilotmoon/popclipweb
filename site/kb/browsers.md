@@ -20,7 +20,7 @@ browsers please [get in touch](/support).
 
 The table contains columns for each of the following features:
 
-- **Aware:** PopClip knows that the app is a browser, and URL-opening actions
+- **Basic:** PopClip knows that the app is a browser, and URL-opening actions
   triggered in the app will stay in the same app.
 
 - **Page Info:** PopClip can read the current page URL and/or page title
@@ -40,7 +40,7 @@ The table contains columns for each of the following features:
 <thead>
 <tr>
 <th>Browser</th>
-<th style="text-align: center">Aware</th>
+<th style="text-align: center">Basic</th>
 <th style="text-align: center">Page Info</th>
 <th style="text-align: center">Address Bar</th>
 <th style="text-align: center">Open In</th>
