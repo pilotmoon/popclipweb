@@ -114,6 +114,12 @@
 
 /* Custom CSS */
 
+div.box {
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  padding: 16px;
+}
+
 .main img[src*="#icon"] {
   height: 1.5em;
   display: inline-block;

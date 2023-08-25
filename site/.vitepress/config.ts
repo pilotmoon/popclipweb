@@ -14,35 +14,25 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
-    // https://vitepress.dev/reference/default-theme-config
     notFound: {
       quote: "Sorry about that.",
     },
     logo: "/icon128.png",
-    // editLink: {
-    //   pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path'
-    // },
+    editLink: {
+      pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path'
+    },
     nav: [
       {
         text: "Documentation",
         activeMatch:
-          "^(/guide/|/dev/|/changes|/dowload|/buy|/kb/|/terms|/privacy|/download|/support|/beta)",
-        link: "/guide/",
-        // items: [
-        //   { text: "User Guide", link: "/guide/" },
-        //   { text: "Developer Reference", link: "/dev/" },
-        // ],
+          "^(/welcome|/guide/|/dev/|/changes|/dowload|/buy|/kb/|/terms|/privacy|/download|/support|/beta)",
+        link: "/welcome",
       },
       {
         text: "Extensions",
         link: "/extensions/",
         activeMatch:
           "(^/extensions/$)|(^/extensions/x)",
-        // link: "https://pilotmoon.com/popclip/extensions/",
-        // items: [
-        //   { text: "Directory", link: "/x/" },
-        //   { text: "Creator", link: "/create/" },
-        // ],
       },
       // {
       //   text: "Create",
@@ -70,7 +60,7 @@ export default defineConfig({
         },
       ],
       "/": [
-        { text: "What is PopClip?", link: "/guide/" },
+        { text: "Welcome", link: "/welcome" },
         {
           text: "User Guide",
           // link: "/docs",

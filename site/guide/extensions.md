@@ -4,9 +4,9 @@ import DirectoryCount from '../components/DirectoryCount.vue'
 
 # Adding Extensions
 
-Extensions add new actions to PopClip. You can install ready-made extensions and also create your own.
+Extensions add new actions to PopClip. You can install ready-made extensions and also create your own. 
 
-You can install up to a maximum of 30 extensions. You can configure, re-order and remove extensions in the [Actions pane](./settings#action-settings).
+Configure, re-order and remove extensions in the [Actions pane](./settings#action-settings).
 
 :::tip Get stuck in!
 Browse the [PopClip Extensions Directory](/extensions/) which currently contains <DirectoryCount /> extensions.

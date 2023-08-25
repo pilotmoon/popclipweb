@@ -8,6 +8,7 @@ const ZTopic = z.object({
     fancy_title: z.string(),
     created_at: z.coerce.date(),
     slug: z.string(),
+    excerpt: z.string().nullish(),
     category_id: z.number(),
   });
 const ZTopicsRaw = z.object({
@@ -19,6 +20,7 @@ const ZNewsItem = z.object({
   url: z.string().url(),
   title: z.string(),
   date: z.string(),
+  excerpt: z.string().nullish(),
 });
 
 type Topic = z.infer<typeof ZTopic>;
@@ -31,11 +33,12 @@ interface NewsData {
 
 function processTopics(topics: Topic[]): NewsItem[] {
   return topics.filter((topic) => {
-    return topic.category_id === 9;
+    return topic.id !== 91; // exclude the "About The Announcements category" topic
   }).map((topic) => ({
     url: `https://forum.popclip.app/t/${topic.slug}/${topic.id}`,
     title: topic.title,
     date: topic.created_at.toISOString(),
+    excerpt: topic.excerpt,
   }));
 }
 
