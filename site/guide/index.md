@@ -73,4 +73,3 @@ PopClip would not be possible without the work of many other people who have cre
 * [sanitize-html](https://github.com/apostrophecms/sanitize-html) (MIT license) by P'unk Avenue LLC.
 * [turndown](https://github.com/mixmark-io/turndown) (MIT license) by Dom Christie.
 * [linkedom](https://github.com/WebReflection/linkedom) (ISC License) by Andrea Giammarchi.
-

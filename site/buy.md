@@ -29,3 +29,7 @@ Your purchase is subject to the [Terms of License](/terms).
 
 Students can get a discount on a PopClip license key purchase, via
 [Student App Centre](https://studentappcentre.com/app/popclip).
+
+## Free
+
+If you cannot afford to buy PopClip, [send me an email](/support) and I will send you a 1-year license for free.
