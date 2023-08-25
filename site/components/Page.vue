@@ -48,11 +48,6 @@ import Theme from './Theme.vue';
  * Paragraph and inline elements
  * -------------------------------------------------------------------------- */
 
-.Page p {
-    margin: 16px 0;
-    line-height: 28px;
-}
-
 .Page a {
     font-weight: 500;
     color: var(--vp-c-brand);
@@ -62,7 +57,6 @@ import Theme from './Theme.vue';
     text-decoration: underline dotted;
     text-underline-offset: 2px;
 }
-
 .Page strong {
     font-weight: 600;
 }

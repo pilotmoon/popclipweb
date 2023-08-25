@@ -6,7 +6,7 @@ import { formatDate } from './helpers/formatters'
 <template>
     <div class="box" :class="$style.NewsBox">        
         <div :class="$style.Header">
-            <div :class="$style.Title">Latest News:</div><div :class="$style.Link"><a href="https://forum.popclip.app/c/announce/9/none">More news</a></div>
+            <div :class="$style.Title"><b>Latest News</b></div><div :class="$style.Link"><a href="https://forum.popclip.app/c/announce/9/none">More news</a></div>
         </div>
         <ul>
             <li v-for="item, index in data.news.slice(0,3)">
