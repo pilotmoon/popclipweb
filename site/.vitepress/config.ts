@@ -11,6 +11,7 @@ export default defineConfig({
     hostname: 'https://www.popclip.app'
   },
   themeConfig: {
+    // logoLink: "/home",
     search: {
       provider: 'local'
     },
@@ -25,8 +26,8 @@ export default defineConfig({
       {
         text: "Documentation",
         activeMatch:
-          "^(/welcome|/guide/|/dev/|/changes|/dowload|/buy|/kb/|/terms|/privacy|/download|/support|/beta)",
-        link: "/welcome",
+          "^(/home|/guide/|/dev/|/changes|/dowload|/buy|/kb/|/terms|/privacy|/download|/support|/beta)",
+        link: "/home",
       },
       {
         text: "Extensions",
@@ -60,7 +61,7 @@ export default defineConfig({
         },
       ],
       "/": [
-        { text: "Welcome", link: "/welcome" },
+        { text: "Start Here", link: "/home" },
         {
           text: "User Guide",
           collapsed: false,

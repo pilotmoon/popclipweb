@@ -5,11 +5,11 @@ outline: deep
 import NewsBox from './components/NewsBox.vue'
 </script>
 
+# PopClip Documentation Homepage
+
 <NewsBox />
 
-# Welcome
-
-Welcome to the official website for PopClip, the Mac utility tool that pops up with a menu of actions when you select text on your screen.
+**Welcome** to the official website for PopClip, the Mac utility tool that pops up with a menu of actions when you select text on your screen.
 
 
 ![PopClip screenshot](/popclip.jpg "Screenshot of PopClip")
@@ -62,7 +62,7 @@ PopClip is not made by a large company or even a small team; it's made by one pe
 
 [Pilotmoon Software](https://pilotmoon.com/) is the business name under which I have published my apps. You will see some links and references to `pilotmoon.com` in various places, and I use the `@pilotmoon` handle on GitHub and elsewhere.
 
-## Open-source acknowledgements
+## Acknowledgements
 
 PopClip would not be possible without the work of many other people who have created open source software and freely shared their work. My thanks to the following people and projects:
 

@@ -19,7 +19,8 @@ import { formatDate } from './helpers/formatters'
 
 <style module>
 div.NewsBox {
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     font-size: 14px;
 }
 div.NewsBox ul {
