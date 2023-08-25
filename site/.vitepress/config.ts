@@ -18,9 +18,9 @@ export default defineConfig({
       quote: "Sorry about that.",
     },
     logo: "/icon128.png",
-    editLink: {
-      pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path'
-    },
+    // editLink: {
+    //   pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path'
+    // },
     nav: [
       {
         text: "Documentation",
@@ -63,7 +63,6 @@ export default defineConfig({
         { text: "Welcome", link: "/welcome" },
         {
           text: "User Guide",
-          // link: "/docs",
           collapsed: false,
           items: [
             { text: "Installation", link: "/guide/install" },
@@ -100,10 +99,8 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: "AppleScript interface", link: "/kb/applescript" },
-                { text: "Browser support", link: "/kb/browsers" },
-                // { text: "Hidden settings", link: "/kb/hidden-settings" },                
+                { text: "Browser support", link: "/kb/browsers" },                
                 { text: "Paths and identifiers", link: "/kb/paths" },                
-                // { text: "Release labelling", link: "/kb/labels" },                
               ],
             },
           ],
@@ -116,14 +113,6 @@ export default defineConfig({
             { text: "Privacy Policy", link: "/privacy.md" },
           ],
         },
-        // {
-        //   text: "Developer Reference",
-        //   link: "https://github.com/pilotmoon/PopClip-Extensions",
-        // },
-        // {
-        //   text: "Developer Reference",
-        //   link: "/ref/",
-        // },
         {
           text: "Developer Reference",
           items: [
@@ -133,9 +122,6 @@ export default defineConfig({
         },
       ],
     },
-    // socialLinks: [
-    //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    // ]
   },
   head: [
     [
@@ -152,7 +138,6 @@ export default defineConfig({
         figcaption: "title",
         copyAttrs: "^class$",
       });
-      // md.use(imgSize);
     },
   },
   vue: {
