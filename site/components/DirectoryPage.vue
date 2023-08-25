@@ -18,10 +18,12 @@ console.log('dateString', dateString);
 <template>
   <Page v-once>
     <div :class="$style.Breadcrumb">
-      ← <a href="/extensions/">Back to Directory</a>
+      <!-- ← <a href="/extensions/">Back to Directory</a> -->
+       <a href="/extensions/">← PopClip Extensions Directory</a>
     </div>
 
     <div :class="[$style.Main]">
+      <!-- <div :class="$style.CardHeader">PopClip Extension</div> -->
       <h1>
         <Icon :class="$style.HeaderIcon" v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcLight="ext.iconUrlBlack"
           :srcDark="ext.iconUrlWhite" />
@@ -56,8 +58,8 @@ console.log('dateString', dateString);
       <ul :class="$style.Data">        
         <li><span :class="$style.Label">First published</span><br><span>{{ formatDate(dateString) }}</span></li>
         <!-- <li><span :class="$style.Label">Maintainer</span><br><a href="https://github.com/pilotmoon">Nick Moore</a></li> -->
-        <!-- <li><span :class="$style.Label">Identifier</span><br><code>{{ ext.identifier }}</code></li> -->
-        <li><span :class="$style.Label">Source</span><br><GithubFilled /> <a :href="ext.repoUrl">pilotmoon/PopClip-Extensions/<span>{{ ext.handle }}</span>.popclipext</a></li>
+        <li><span :class="$style.Label">Identifier</span><br><code>{{ ext.identifier }}</code></li>
+        <li><span :class="$style.Label">Source</span><br><GithubFilled /> <a :href="ext.repoUrl">pilotmoon/PopClip-Extensions/<span>{{ ext.handle }}</span>.popclipext/</a></li>
       </ul>
     </div>
 
@@ -68,6 +70,7 @@ console.log('dateString', dateString);
 <style module>
 
 div.Breadcrumb {
+  color: var(--vp-c-text-2);
   margin-bottom: 32px;
 }
 
