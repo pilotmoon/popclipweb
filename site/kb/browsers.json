@@ -241,5 +241,14 @@
     "supportsOpenIn": true,
     "bundleId": "com.vivaldi.Vivaldi",
     "homepageUrl": "https://vivaldi.com"
+  },
+  {
+    "name": "Waterfox",
+    "supportsAware": false,
+    "supportsPageInfo": false,
+    "supportsAddressBar": false,
+    "supportsOpenIn": false,
+    "bundleId": "net.waterfox.waterfox",
+    "homepageUrl": "https://www.waterfox.net/"
   }
 ]
