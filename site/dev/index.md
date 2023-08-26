@@ -3,18 +3,32 @@ outline: deep
 prev: false
 ---
 
-# PopClip Extensions Developer Reference
+# Developer Reference
 
-This section of the documentation provides a detailed specificarion of the
-format and capabilities of PopClip Extensions, so that you to create your own.
-Whilst developing complex extensions demands some programming expertise, you can
-craft simple extensions with just a few lines of text.
+This section of the documentation provides a detailed specification for developing
+PopClip extensions.
 
 <!--
 If you are not a programmer, you may find it easier to use the
 [PopClip Extension Creator](https://pilotmoon.com/popclip/extensions/create/). -->
 
-## Overview
+## Extensions Overview
+
+### Snippets and Packages
+
+A PopClip extension can be either a [snippet](./snippets.md) or a
+[package](./packages.md).
+
+|                 | Snippet                                                                       | Package                                                                                            |
+| --------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| What is it?     | Plain text in YAML format.                                                    | A folder containing a config file plus other files such as icons, source files, and a readme file. |
+| Install method  | PopClip can load it directly from a text selection.                           | Double-clicking it will open it in PopClip.                                                        |
+| Distribution    | Can be shared as text, e.g. on forums, pastebins, etc.                        | Can be downloaded as a file.                                                                       |
+| File extensions | None (direct selection)<br> `.popcliptxt` (text file)                         | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
+| Signing         | Not signed.                                                                   | Can be signed.                                                                                     |
+| Advantages      | Easy to create and share. No need for separate files.                         | Easy to install. Allows custom icons, modular structure, documentation, unit tests, etc.           |
+| Disadvantages   | Limited to what can be done with a single text file.                          | More complex to create.                                                                            |
+| Philosophy      | "Hacker / Power User" mentality. Visibility of text format promotes learning. | "Developer" mentality. Opaque format keeps everything hidden from end user.                        |
 
 ### Types of actions
 
@@ -30,25 +44,48 @@ An extension defines one or more actions. Each action can be one of seven types:
 | [Shell Script](./shell-script-actions.md) | Run a shell script.                                          |
 | [JavaScript](./javascript-actions.md)     | Run a JavaScript script.                                     |
 
-### Filtering
+### Icons
+
+An important aspect of an extension is its icon. There are several ways to
+specify an icon, as described in the [Icons](./icons.md) section.
+
+### Filter rules
 
 Extensions have access to the following filtering mechanisms, to help prevent
 actions appearing when they are not useful:
 
-- Filter by matching a regular expression.
 - Filter by application (either include or exclude).
-- Filter by whether cut, copy or paste is available.
+- Filter by matching a regular expression.
+- Filter by whether cut, paste or formatting is available.
 - Filter by whether the text contains a URL, email address or file path.
 - Filter by the current values of the extensions's options.
+- Custom filtering via a JavaScript function (dynamic JavaScript extensions
+  only).
 
----
+## Extension Signing
 
-### Extension Signing
+Please be aware that PopClip extensions can contain arbitrary executable code.
+Be careful about the extensions you create, and be wary about loading extensions
+you get from someone else.
 
-By default, PopClip will display a warning dialog when you try to install your
-own extension, because it is not digitally signed.
+PopClip extensions published in the [directory](/extensions/) are digitally
+signed. PopClip will install them directly without showing any warning to the
+user. If you create your own extension, it will not be signed. PopClip will
+display a warning dialog when you try to install it:
 
 ![Example unsigned warning.](../guide/media/shot-unsigned-warning.png#h400)
+
+::: tip Snippets
+
+Snippets cannot be signed, but only snippets containing Shell Script actions,
+AppleScript actions or JavaScript actions with the network entitlement will
+trigger the unsigned warning.
+
+:::
+
+## Development environment
+
+### Turn off unsigned warning
 
 If you find this gets annoying while you are testing your work, you can turn off
 the warning. Run the following command at the Terminal, then Quit and restart
@@ -57,15 +94,6 @@ PopClip:
 ```zsh
 defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES
 ```
-
-Please be aware that PopClip extensions can contain arbitrary executable code.
-Be careful about the extensions you create, and be wary about loading extensions
-you get from someone else.
-
-(PopClip will never load unsigned extensions whose identifier has a
-`com.pilotmoon.` prefix, which is reserved for 'official' extensions. When
-basing your own extension off such an extension, you will need to change the
-identifier.)
 
 ### Debug Output
 
@@ -76,6 +104,8 @@ command in Terminal, then Quit and restart PopClip:
 ```zsh
 defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES
 ```
+
+---
 
 ## Key name mapping
 
