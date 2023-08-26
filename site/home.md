@@ -2,7 +2,7 @@
 outline: deep
 ---
 <script setup lang="ts">
-import NewsBox from './components/NewsBox.vue'
+import NewsBox from './src/NewsBox.vue'
 </script>
 
 # PopClip Documentation Homepage
@@ -12,7 +12,7 @@ import NewsBox from './components/NewsBox.vue'
 **Welcome** to the official website for PopClip, the Mac utility tool that pops up with a menu of actions when you select text on your screen.
 
 
-![PopClip screenshot](/popclip.jpg "Screenshot of PopClip")
+![PopClip screenshot](/media/popclip.jpg "Screenshot of PopClip")
 
 PopClip's [actions](/guide/actions) range from simple copy-paste and web searches to complex tasks such as translating text. Using [extensions](/guide/extensions), you can add actions to PopClip to adapt it your needs. Think of PopClip as a context-aware assistant that provides a set of tools you can use instantly in any app.
 

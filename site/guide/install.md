@@ -3,7 +3,7 @@ outline: deep
 ---
 
 <script setup>
-  import Link from "/components/Link.vue";
+  import Link from "/src/Link.vue";
 </script>
 
 # Installation

@@ -9,7 +9,7 @@ pref: false
 next: false
 ---
 <script setup lang="ts">
-import DirectoryPage from '/components/DirectoryPage.vue';
+import DirectoryPage from '/src/DirectoryPage.vue';
 </script>
 
 <DirectoryPage><!-- @content --></DirectoryPage>

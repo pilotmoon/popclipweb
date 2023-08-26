@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { data } from '../components/data/extensions.data';
+import { data } from '../src/data/extensions.data';
 </script>
 
 <template>

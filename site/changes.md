@@ -1,5 +1,5 @@
 <script setup>
-import Changelog from '/components/Changelog.vue'
+import Changelog from '/src/Changelog.vue'
 </script>
 
 # Version History

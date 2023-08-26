@@ -43,14 +43,14 @@ onMounted(() => {
         <div :class="$style.box">
             <span>Buy from the Mac App Store</span><br>
             <a :href="store.masUrl" target="_blank">
-                <img :class="$style.buybadge" src="./static/masbadge.svg" alt="Download on the Mac App Store">
+                <img :class="$style.buybadge" src="/badge-mas.svg" alt="Download on the Mac App Store">
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice) }}</span>
         </div>
         <div :class="$style.box" :hidden="!isLizhi || !isLoaded">
             <span>Buy License Key from DIGITALYCHEE</span><br>
             <a :href="store.lizhiUrl" target="_blank">
-                <img :class="$style.buybadge" src="./static/lizhibadge.svg" alt="Buy from DIGITALYCHEE Store">
+                <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store">
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.lizhiPrice) }}</span>
         </div>

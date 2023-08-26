@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DirectoryCount from '../components/DirectoryCount.vue'
+import DirectoryCount from '../src/DirectoryCount.vue'
 </script>
 
 # Adding Extensions

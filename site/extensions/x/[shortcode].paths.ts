@@ -1,4 +1,4 @@
-import { Extension, loadPages } from "../../components/data/extensions-loader.js";
+import { Extension, loadPages } from "../../src/data/extensions-loader.js";
 import MarkdownIt from 'markdown-it';
 import sanitizeHtml from 'sanitize-html';
 import TurndownService from 'turndown';

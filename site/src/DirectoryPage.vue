@@ -158,7 +158,7 @@ img.Demo  {
 
 
 /* Based on
-https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/components/vp-doc.css */
+https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/src/vp-doc.css */
 
 div.Footer {
   margin-top: 32px;

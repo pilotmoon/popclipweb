@@ -2,9 +2,9 @@
 titleTemplate: false
 ---
 <script setup>
-import Changelog from '/components/Changelog.vue'
-import Download from '/components/Download.vue';
-import { data } from "/components/data/releases.data";
+import Changelog from '/src/Changelog.vue'
+import Download from '/src/Download.vue';
+import { data } from "/src/data/releases.data";
 const beta = data.beta[0];
 </script>
 

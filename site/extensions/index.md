@@ -8,7 +8,7 @@ prev: false
 next: false
 ---
 <script setup>
-import Directory from '/components/Directory.vue'
+import Directory from '/src/Directory.vue'
 </script>
 
 <Directory />

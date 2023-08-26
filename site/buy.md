@@ -2,8 +2,8 @@
 titleTemplate: false
 ---
 <script setup>
-import Buy from '/components/Buy.vue'
-import Setapp from '/components/Setapp.vue'
+import Buy from '/src/Buy.vue'
+import Setapp from '/src/Setapp.vue'
 </script>
 
 # Buy PopClip

@@ -2,11 +2,11 @@
 titleTemplate: false
 ---
 <script setup>
-import DownloadButton from '/components/DownloadButton.vue';
-import Download from '/components/Download.vue';
-import Link from "/components/Link.vue";
-import { data } from "/components/data/releases.data";
-import { formatDate, formatSize, formatArchs } from "/components/helpers/formatters";
+import DownloadButton from '/src/DownloadButton.vue';
+import Download from '/src/Download.vue';
+import Link from "/src/Link.vue";
+import { data } from "/src/data/releases.data";
+import { formatDate, formatSize, formatArchs } from "/src/helpers/formatters";
 
 const prod = data.production[0];
 const beta = data.beta[0];
