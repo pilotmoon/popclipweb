@@ -26,7 +26,7 @@ export default defineConfig({
       {
         text: "Documentation",
         activeMatch:
-          "^(/home|/guide/|/dev/|/changes|/dowload|/buy|/kb/|/terms|/privacy|/download|/support|/beta)",
+          "^(/home|/guide/|/dev/|/changes|/download|/buy|/kb/|/terms|/privacy|/support|/beta)",
         link: "/home",
       },
       {
