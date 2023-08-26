@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted } from 'vue'
-import { loadScript } from './helpers/loadScript.ts'
+import { loadScript } from './helpers/loadScript'
 import * as config from './config/config.json'
 
 onMounted(() => {
