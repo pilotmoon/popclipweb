@@ -12,9 +12,9 @@ export default defineConfig({
   },
   themeConfig: {
     // logoLink: "/home",
-    search: {
-      provider: 'local'
-    },
+    // search: {
+    //   provider: 'local'
+    // },
     notFound: {
       quote: "Sorry about that.",
     },
