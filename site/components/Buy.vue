@@ -78,7 +78,7 @@ onMounted(() => {
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
     width: 49%;
-    padding: 16px;
+    padding: 12px;
     margin: 8px 0;
     text-align: center;
     box-sizing: border-box;
