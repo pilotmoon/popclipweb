@@ -1,11 +1,11 @@
 <script setup type="ts">
 import { onMounted, computed } from 'vue'
-import { loadScript } from './helpers/loadScript.ts'
-import { getFlagEmoji } from './helpers/getFlagEmoji.ts'
-import { store, loadStore, isLoaded } from './store/store.ts'
+import { loadScript } from './helpers/loadScript'
+import { getFlagEmoji } from './helpers/getFlagEmoji'
+import { store, loadStore, isLoaded } from './helpers/store/store'
 import Button from './Button.vue'
 import { ShoppingOutlined } from '@ant-design/icons-vue'
-import * as config from '../config.json'
+import * as config from './config/config.json'
 
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode));
 

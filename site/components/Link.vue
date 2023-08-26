@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import * as config from '../config.json';
+import * as config from './config/config.json';
 import { computed, onMounted } from 'vue';
-import { store, loadStore } from './store/store';
+import { store, loadStore } from './helpers/store/store';
 
 const props = defineProps<{
     k: string

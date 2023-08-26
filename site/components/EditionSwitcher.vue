@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Theme from './Theme.vue';
 import { RadioButton, RadioGroup, Space } from 'ant-design-vue';
-import { useGlobalState } from './state/state'
+import { useGlobalState } from './helpers/state'
 const { edition } = useGlobalState();
 </script>
 
