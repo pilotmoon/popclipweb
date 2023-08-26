@@ -8,7 +8,7 @@ hero:
   text: "Instant text actions"
   tagline: PopClip appears when you select text in any app, giving you instant access to useful actions.
   image:
-    src: /Hero.png
+    src: /hero-1.png
     alt: PopClip screenshot
   actions:
     - theme: brand

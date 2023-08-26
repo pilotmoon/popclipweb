@@ -33,7 +33,7 @@ Examples:
 
 ## Built-in actions
 
-### ![Cut icon](./icon-cut.svg#iconleft) ![Copy icon](./icon-copy.svg#iconleft) ![Paste icon](./icon-paste.svg#iconleft) Cut, Copy and Paste
+### ![Cut icon](./media/icon-cut.svg#iconleft) ![Copy icon](./media/icon-copy.svg#iconleft) ![Paste icon](./media/icon-paste.svg#iconleft) Cut, Copy and Paste
 
 The Cut, Copy and Paste actions work just like the usual clipboard functions on your Mac.
 
@@ -52,11 +52,11 @@ Hold down **Shift (⌥)** to perform the action with plain text only. This will 
 
 **Settings:**
 
-![](./shot-prefs-copy-2.png#pref "Copy settings.")
+![](./media/shot-prefs-copy-2.png#pref "Copy settings.")
 
 - **Show as Icon**: When enabled, shows the actions's button as an icon instead of text.
 
-### ![Search icon](./icon-search.svg#iconleft) Search
+### ![Search icon](./media/icon-search.svg#iconleft) Search
 
 The Search action opens a web search for the selected text. The default search engine is Google, but you can change this in the actions's settings.
 
@@ -72,11 +72,11 @@ Hold **Shift (⇧)** to copy the search URL instead of opening it.
 
 **Settings:**
 
-![](./shot-prefs-search-1.png#pref "Search settings.")
+![](./media/shot-prefs-search-1.png#pref "Search settings.")
 
 - **Search URL**: The URL of the search engine. The placeholder `***` will be replaced with the selected text. For example, the default Google search URL is `https://www.google.com/search?q=***`.
 
-### ![Open Link icon](./icon-link.svg#iconleft) Open Link
+### ![Open Link icon](./media/icon-link.svg#iconleft) Open Link
 
 The Open Link action opens any web URLs (`http:` and `https:`) detected in the selected text. If the text contains multiple web URLs, all of them will open in separate tabs. The action will also detect "URL-like" text lacking a scheme prefix and add `https:` when opening it.
 
@@ -98,7 +98,7 @@ Hold **Shift (⇧)** to copy the URLs to the clipboard as a list, instead of ope
 
 None.
 
-### ![Dictionary icon](./icon-dict.svg#iconleft) Dictionary
+### ![Dictionary icon](./media/icon-dict.svg#iconleft) Dictionary
 
 The Dictionary action looks up the selected text in the macOS Dictionary app. The Dictionary app will open and show the definition of the word.
 
@@ -114,9 +114,9 @@ Hold **Shift (⇧)** to copy the dictionary definition to the clipboard instead 
 
 The action has no settings, but you can change the dictionaries that are enabled in the settings of macOS Dictionary app.
 
-![](./shot-macos-dict-1.png "macOS Dictionary app settings.")
+![](./media/shot-macos-dict-1.png "macOS Dictionary app settings.")
 
-### ![Reveal in Finder icon](./icon-finder.svg#iconleft) Reveal in Finder
+### ![Reveal in Finder icon](./media/icon-finder.svg#iconleft) Reveal in Finder
 
 The Reveal in Finder action opens the folder containing the selected file path, or, if the selected text is a folder path, opens the folder itself.
 
@@ -134,9 +134,9 @@ None.
 
 None.
 
-### ![Spelling icon](./icon-spelling.svg#iconleft) Spelling
+### ![Spelling icon](./media/icon-spelling.svg#iconleft) Spelling
 
-![](./anim-spelling-3.mp4 "The Spelling action in use.")
+![](./media/anim-spelling-3.mp4 "The Spelling action in use.")
 
 
 The Spelling action shows a list of spelling suggestions for the selected word. Click a suggestion to replace the selected text with it.
@@ -164,5 +164,5 @@ Hold **Shift (⇧)** to copy the spelling suggestion to the clipboard instead of
 
 **Settings:**
 
-![](./shot-prefs-spelling-3.png#pref "Spelling settings.")
+![](./media/shot-prefs-spelling-3.png#pref "Spelling settings.")
 - **Languages**: You can select up to two languages for spellchecking, choosing from any that are available on the operating system. If you only want to check spelling in one language, leave the second language set to "None".

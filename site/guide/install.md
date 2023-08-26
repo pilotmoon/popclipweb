@@ -78,7 +78,7 @@ When you first launch PopClip, its icon (initially greyed out) will appear in
 the menu bar and a message will appear on screen: _To continue, PopClip needs to
 enable Accessibility access._
 
-![Accessibility request message](shot-ax-request.png "PopClip requesting Accessibility permission")
+![Accessibility request message]./media/shot-ax-request.png "PopClip requesting Accessibility permission")
 
 #### Why is Accessibility permission needed?
 
@@ -95,19 +95,19 @@ action such as a web search. See also [Privacy Policy](/privacy).
 
 Click the Enable PopClip button and a macOS dialog appears:
 
-![Accessibility request dialog](shot-ax-dialog.jpg "macOS Accessibility Access dialog")
+![Accessibility request dialog]./media/shot-ax-dialog.jpg "macOS Accessibility Access dialog")
 
 Now click Open System Settings and you will be taken to the Security & Privacy
 pane of System Preferences. On macOS 13.0 and above it looks like this:
 
-![Accessibility settings](shot-ax-settings.png "macOS Accessibility settings in the Privacy & Security pane")
+![Accessibility settings]./media/shot-ax-settings.png "macOS Accessibility settings in the Privacy & Security pane")
 
 Toggle the slider for PopClip to on. You will be prompted to enter your password
 to confirm the change.
 
 Finally, PopClip will show the Welcome to PopClip message:
 
-![Welcome to PopClip](shot-welcome.png "Welcome to PopClip message")
+![Welcome to PopClip]./media/shot-welcome.png "Welcome to PopClip message")
 
 Next, we will put PopClip though its paces!
 

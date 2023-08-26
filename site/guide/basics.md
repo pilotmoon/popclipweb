@@ -14,7 +14,7 @@ PopClip runs in the background and waits for you to select text with your mouse 
 
 **Try it:** Drag the pointer over some text to select it. PopClip will appear automatically.
 
-![](./anim-basic-5.mp4 "PopClip appears when text is selected using the pointer.")
+![](./media/anim-basic-5.mp4 "PopClip appears when text is selected using the pointer.")
 
 :::tip Didn't work?
 If PopClip doesn't appear, check the [Troubleshooting](/kb/troubleshooting) page for help.
@@ -33,7 +33,7 @@ When you select text using the keyboard only, such as by holding Shift and using
 
 To make PopClip appear without selecting text, you can **long press** the mouse or trackpad button. PopClip appears after you hold the button for 0.5 seconds.
 
-![](./anim-insert-1.mp4 "A long press makes PopClip appear without a a selection.")
+![](./media/anim-insert-1.mp4 "A long press makes PopClip appear without a a selection.")
 
 ### Activate with a keyboard shortcut
 
@@ -47,7 +47,7 @@ When activated with the keyboard shortcut, PopClip appears in keyboard control m
 |Return (↵), Space bar|Perform the highlighted action|
 |Esc key|Dismiss PopClip|
 
-![](./anim-keyboard-2.mp4 "Selecting actions using the arrow keys and Return.")
+![](./media/anim-keyboard-2.mp4 "Selecting actions using the arrow keys and Return.")
 
 :::tip Works always!
 PopClip's keyboard shortcut works even when PopClip is turned off, or disabled in the current app.

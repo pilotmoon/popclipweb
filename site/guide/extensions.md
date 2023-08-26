@@ -16,13 +16,13 @@ Browse the [PopClip Extensions Directory](/extensions/) which currently contains
 
 When you download a ready-made extension it will have the file extension `.popclipextz` or `.popcliptxt`. Simply open the file to add the extension to PopClip.
 
-![](./anim-extension-install-4.mp4 "Installing an extension from the directory")
+![](./media/anim-extension-install-4.mp4 "Installing an extension from the directory")
 
 ### Unsigned Extensions
 
 If you see an "Unsigned Extension" warning it means the extension is not from PopClip's developer. You will need to confirm whether you want to install the extension.
 
-![](./shot-unsigned-warning.png#pref "Unsigned extension warning")
+![](./media/shot-unsigned-warning.png#pref "Unsigned extension warning")
 
 :::warning
 Beware of extensions from untrusted sources as they can potentially be malicious.
@@ -43,7 +43,7 @@ url: https://emojipedia.org/search/?q=***
 
 To install that, you select the text and then click the action *Install Extension "Emojipedia"* that appears in the PopClip bar.
 
-![](./anim-extension-snippet-2.mp4 "Installing an extension snippet")
+![](./media/anim-extension-snippet-2.mp4 "Installing an extension snippet")
 
 :::tip About Snippets
 Notice that the first line of the snippet starts with `#popclip`. This is a special marker that tells PopClip that this is a snippet. For more about snippets, see [TODO](#) in the developer reference.
