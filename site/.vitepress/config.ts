@@ -8,7 +8,7 @@ export default defineConfig({
   description: "Instant text actions for macOS",
   cleanUrls: true,
   sitemap: {
-    hostname: 'https://www.popclip.app'
+    hostname: "https://www.popclip.app",
   },
   themeConfig: {
     // logoLink: "/home",
@@ -32,8 +32,7 @@ export default defineConfig({
       {
         text: "Extensions",
         link: "/extensions/",
-        activeMatch:
-          "(^/extensions/$)|(^/extensions/x)",
+        activeMatch: "(^/extensions/$)|(^/extensions/x)",
       },
       // {
       //   text: "Create",
@@ -56,7 +55,6 @@ export default defineConfig({
           items: [
             { text: "Directory", link: "/extensions/" },
             { text: "Create", link: "/extensions/create" },
-            
           ],
         },
       ],
@@ -86,7 +84,7 @@ export default defineConfig({
                 { text: "Beta", link: "/beta" },
               ],
             },
-            { text: "Buy", link: "/buy" },            
+            { text: "Buy", link: "/buy" },
             { text: "Support & Feedback", link: "/support" },
           ],
         },
@@ -94,14 +92,14 @@ export default defineConfig({
           text: "Knowledge Base",
           collapsed: false,
           items: [
-            { text: "Troubleshooting", link: "/kb/troubleshooting" },            
+            { text: "Troubleshooting", link: "/kb/troubleshooting" },
             {
               text: "In-depth topics",
               collapsed: true,
               items: [
                 { text: "AppleScript interface", link: "/kb/applescript" },
-                { text: "Browser support", link: "/kb/browsers" },                
-                { text: "Paths and identifiers", link: "/kb/paths" },                
+                { text: "Browser support", link: "/kb/browsers" },
+                { text: "Paths and identifiers", link: "/kb/paths" },
               ],
             },
           ],
@@ -116,9 +114,31 @@ export default defineConfig({
         },
         {
           text: "Developer Reference",
+          collapsed: true,
           items: [
             { text: "Introduction", link: "/dev/" },
-            { text: "Changelog", link: "/dev/changes" },            
+            { text: "Snippet format", link: "/dev/snippets" },
+            { text: "Package format", link: "/dev/packages" },
+            { text: "Icons", link: "/dev/icons" },
+            { text: "Config", link: "/dev/config" },
+            {
+              items: [
+                { text: "Shortcut actions", link: "/dev/shortcut-actions" },
+                { text: "Service actions", link: "/dev/service-actions" },
+                { text: "URL actions", link: "/dev/url-actions" },
+                { text: "Key Press actions", link: "/dev/key-press-actions" },
+                {
+                  text: "AppleScript actions",
+                  link: "/dev/applescript-actions",
+                },
+                {
+                  text: "Shell Script actions",
+                  link: "/dev/shell-script-actions",
+                },
+                { text: "JavaScript actions", link: "/dev/javascript-actions" },
+              ],
+            },
+            { text: "Changelog", link: "/dev/changes" },
           ],
         },
       ],
@@ -152,5 +172,5 @@ export default defineConfig({
     if (pageData.frontmatter.isExtensionPage) {
       pageData.title = pageData.params?.name;
     }
-  }
+  },
 });
