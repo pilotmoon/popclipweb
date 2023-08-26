@@ -153,7 +153,6 @@ img.HeaderIcon {
 
 img.Demo  {
   border-radius: 8px;
-  display: inline-block;
 }
 
 
@@ -172,7 +171,7 @@ div.Footer {
 
 div.Readme {
   background-color: var(--vp-c-bg);
-  padding: 16px;
+  padding: 12px;
   border-radius: 8px;
 }
 .Readme h1 {
