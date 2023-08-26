@@ -83,7 +83,7 @@ div.Card {
 
   background-color: var(--vp-c-bg-soft);
   border-radius: 8px;
-  padding: 16px;
+  padding: 12px;
 }
 
 
@@ -99,8 +99,6 @@ span.Label {
   color: var(--vp-c-text-2);
   font-size: 14px;
 }
-
-
 .CardHeader {
   color: var(--vp-c-text-2);
   font-weight: 600;
