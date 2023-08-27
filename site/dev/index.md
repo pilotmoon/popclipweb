@@ -105,32 +105,3 @@ output and debug info to be viewed with the Console app. To enable it, run this
 command in Terminal, then Quit and restart PopClip:
 
 <Ed code base="defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp EnableExtensionDebug -bool YES"/> 
-
----
-
-## Key name mapping
-
-Some field names were different in older versions of PopClip. Others have
-alternative allowable forms to avoid confusion when expressed camel case, e.g.
-`appleScriptFile` is mapped to `applescriptFile`.
-
-PopClip applies the following mapping to field names loaded from the config
-file:
-
-| Old/Alternative name      | Canonical name   |
-| ------------------------- | ---------------- |
-| image file                | icon             |
-| required software version | popclip version  |
-| pop clip version          | popclip version  |
-| required os version       | macos version    |
-| mac os version            | macos version    |
-| pass html                 | capture html     |
-| blocked apps              | excluded apps    |
-| regular expression        | regex            |
-| apple script              | applescript      |
-| apple script file         | applescript file |
-| apple script call         | applescript call |
-| java script               | javascript       |
-| java script file          | javascript file  |
-
-Also, if the field name has the prefix `extension` or `option`, it is removed.

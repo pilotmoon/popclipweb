@@ -10,27 +10,28 @@ underlying structure is the same.
 
 ::: tip Key names
 
-PopClip is very flexible about how you name keys. In this documentation you'll
-see keys named in lowercase with spaces, for example `required apps`.
+PopClip is very flexible about how you name keys.
 
-However, PopClip will treat `Required Apps`, `requiredApps`, `RequiredApps`,
-`required_apps`, `required-apps` and `REQUIRED_APPS` as equivalents. It doesn't
-matter what form you use and you can mix formats in the same file.
+In this documentation you'll see keys named in lowercase with spaces, for
+example `required apps`. However, PopClip will treat `Required Apps`,
+`requiredApps`, `RequiredApps`, `required_apps`, `required-apps` and
+`REQUIRED_APPS` as equivalents. It doesn't matter what form you use and you can
+mix formats in the same file.
 
 The full range of formats is as defined by
 [case-anything](https://github.com/mesqueeb/case-anything), which PopClip uses
 internally.
 
-Additonally, older versions of PopClip used different names for some fields.
+Additonally, older versions of PopClip used different names for some keys.
 Where there is a new name, the old name is also still accepted. A table of old
-and new names is given in [Key name mapping](/).
+and new names is given in [Key name mapping](#key-name-mapping).
 
 :::
 
-## Top level config fields
+## Top level properties
 
-The following fields are used at the top level of the config to define
-properties of the extension itself. All fields are optional except `name`.
+The following keys are used at the top level of the config to define
+properties of the extension itself. All properties are optional except `name`.
 
 | Key               | Type                 | Description                                                                                                                                                                                                                                                                                                               |
 | ----------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -44,12 +45,11 @@ properties of the extension itself. All fields are optional except `name`.
 | `options title`   | String (Localizable) | Title to appear at the top of the options window. Default is `Options for <extension name>`.                                                                                                                                                                                                                              |
 | `entitlements`    | Array                | Only applies to JavaScript extensions. The possible values are `network` (allows use of XMLHttpRequest) and `dynamic` (allows dynamically generated actions).                                                                                                                                                             |
 | `actions`         | Array                | Array of dictionaries defining the actions for this extension. See [Action properties](#action-properties).                                                                                                                                                                                                               |
-| `action`          | Dictionary           | A dictionary defining a single action for this extension. See [Action properties](#action-properties).                                                                                                                                                                                                                    |
 
-If neither `actions` nor `action` is defined, PopClip will look at the top level
-of the plist for an action definition.
+If no `actions` array is defined, PopClip will look for action properties at the
+top level of the config. This the usual way to define a single action.
 
-### Identifier field
+### Identifier
 
 An identifier may contains only alphanumeric characters (A-Z, a-z, 0-9), period
 (.), and hyphen (-). Use your own prefix, which could be a reverse DNS-style
@@ -65,19 +65,20 @@ error.
 
 :::
 
-## Action config fields
+## Action properties
 
-The following fields define properties common to all actions. All fields are
+The following keys define properties common to all actions. All properties are
 optional.
 
-Action properties can also be set in the extension properties section.
-Properties set at the top level will apply to all actions (unless overridden in
-the individual action )
+Action properties can be placed at the top level. Properties set at the top
+level will apply to all actions (unless overridden in the individual action). If
+the extension only needs to define a single action, you can place the action
+properties at the top level instead of in an `action` dictionary.
 
 | Key                  | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | -------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `title`              | String (Localizable) | The title is displayed on the action button if there is no icon. For extensions with icons, the title is displayed in the tooltip. If omitted, the action will take the extension name as its title.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `icon`               | String               | The icon to show on the action button. See [Icons](#icons) for the icon specification format. If omitted, the action will take the extension icon as its icon. To explicitly specify no icon, set this field either to boolean `false` (in a plist) or to `null` (in JSON/YAML).                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `icon`               | String               | The icon to show on the action button. See [Icons](#icons) for the icon specification format. If omitted, the action will take the extension icon as its icon. To explicitly specify no icon, set this field to `null`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `identifier`         | String               | A string to identify this action. In shell script and AppleScript actions, the identifier is passed to the script.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `requirements`       | Array                | Array consisting of zero or more of the strings listed in [the `requirements` array](#the-requirements-array). All the requirements in the array must be satisfied for the action to appear. If the array is omitted, the requirement `text` is applied by default.                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `before`             | String               | String to indicate an action PopClip should take _before_ performing the main action. See [The `before` and `after` strings](#the-before-and-after-strings).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -184,7 +185,7 @@ following structure.
 | `inset`         | Boolean              | Optional                     | If true, the option field will be shown inset to the right of the label, instead of under it. Default is false.                                                                                                                                                                                                                         |
 | `icon`          | String               | Optional                     | For `boolean` options only. Specify an icon to appear next to the check box.                                                                                                                                                                                                                                                            |
 
-## Format
+## Notes
 
 ### Localizable Strings
 
@@ -195,8 +196,34 @@ to strings, and PopClip will display the string for the user's preferred
 language if possible, with fallback to the `en` string, which is always
 required.
 
-### Null values
+### Null values in Plist
 
 Plist does not have a native way to represent the `null` value of JSON and YAML.
-In PopClip extensions, you use `<false />` in a Plist where you would use `null`
-in JSON or YAML.
+Use `<false />` in a Plist where you would use `null` in JSON or YAML.
+
+### Key name mapping
+
+Some field names were different in older versions of PopClip. Others have
+alternative allowable forms to avoid confusion when expressed camel case, e.g.
+`appleScriptFile` is mapped to `applescriptFile`.
+
+PopClip applies the following mapping to field names loaded from the config
+file:
+
+| Old/Alternative name      | Canonical name   |
+| ------------------------- | ---------------- |
+| image file                | icon             |
+| required software version | popclip version  |
+| pop clip version          | popclip version  |
+| required os version       | macos version    |
+| mac os version            | macos version    |
+| pass html                 | capture html     |
+| blocked apps              | excluded apps    |
+| regular expression        | regex            |
+| apple script              | applescript      |
+| apple script file         | applescript file |
+| apple script call         | applescript call |
+| java script               | javascript       |
+| java script file          | javascript file  |
+
+Also, if the field name has the prefix `extension` or `option`, it is removed.
