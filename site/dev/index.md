@@ -27,7 +27,7 @@ An extension defines one or more actions. Each action can be one of seven types:
 | [Shortcut](./shortcut-actions)            | Send the selected text to a macOS Shortcut.                  |
 | [Service](./service-actions)              | Send the selected text to a macOS Service.                   |
 | [URL](./url-actions.md)                   | Open a URL, with the selected text URL-encoded and inserted. |
-| [Key Press](./keypress-actions.md)        | Press a key combination.                                     |
+| [Key Press](./key-press-actions.md)        | Press a key combination.                                     |
 | [AppleScript](./applescript-actions.md)   | Run an AppleScript script.                                   |
 | [Shell Script](./shell-script-actions.md) | Run a shell script.                                          |
 | [JavaScript](./javascript-actions.md)     | Run a JavaScript script.                                     |
