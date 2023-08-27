@@ -42,16 +42,16 @@ A PopClip extension can be either a [snippet](./snippets.md) or a
 | What is it?     | Plain text in YAML format.                                | A folder containing a config file plus other files such as icons, source files, and a readme file. |
 | Install method  | PopClip can load it directly from a text selection.       | Double-clicking it will open it in PopClip.                                                        |
 | Distribution    | Can be shared as text, e.g. on forums, pastebins, etc.    | Can be downloaded as a file.                                                                       |
-| File extensions | None (direct selection)<br> `.popcliptxt` (text file)     | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
 | Signing         | Not signed.                                               | Can be signed.                                                                                     |
 | Advantages      | Easy to create and share. No need for separate files.     | Easy for end user to install. Allows modular source code with complex functionality.               |
 | Disadvantages   | Limited to what can be done with a single text file.      | More complex to create. Steeper learning curve.                                                    |
-| Philosophy      | "Empowered user" mentality. Visibility promotes learning. | "Developer" mentality. Opaque format keeps everything hidden from end user.                        |
+| File extensions | None (direct selection)<br> `.popcliptxt` (text file)     | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
+<!-- | Philosophy      | "Empowered user" mentality. Visibility promotes learning. | "Developer" mentality. Opaque format keeps everything hidden from end user.                        | -->
 
 ### Icons
 
 An important aspect of an extension is its icon. There are several ways to
-specify an icon, as described in [Icons](./icons.md) section.
+specify an icon, as described in [Icons](./icons.md).
 
 <!-- ### Filter rules
 

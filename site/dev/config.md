@@ -47,7 +47,7 @@ properties of the extension itself. All properties are optional except `name`.
 | `actions`         | Array                | Array of dictionaries defining the actions for this extension. See [Action properties](#action-properties).                                                                                                                                                                                                               |
 
 If no `actions` array is defined, PopClip will look for action properties at the
-top level of the config. This the usual way to define a single action.
+top level of the config. This simplifies defining an extension with only a single action.
 
 ### Identifier
 
@@ -184,6 +184,11 @@ following structure.
 | `value labels`  | Array                | Optional                     | Array of "human friendly" strings corresponding to the multiple choice values. This is used only in the PopClip options UI, and is not passed to the script. If omitted, the option values themselves are shown.                                                                                                                        |
 | `inset`         | Boolean              | Optional                     | If true, the option field will be shown inset to the right of the label, instead of under it. Default is false.                                                                                                                                                                                                                         |
 | `icon`          | String               | Optional                     | For `boolean` options only. Specify an icon to appear next to the check box.                                                                                                                                                                                                                                                            |
+
+## Examples
+
+
+
 
 ## Notes
 

@@ -25,11 +25,11 @@ Note that `#` begins a YAML comment. Thus, the entire snippet including the `#po
 
 :::
 
-The body of the snippet defines the extension [config](./config.md).
+The body of the snippet defines the extension's [config dictionary](./config.md).
 
-If the extension is of type Shortcut, Service, URL, Key Combo or JavaScript (without network entitlement), the extension snippet will install without the usual "unsigned extension" prompt. Shell Script snippets, AppleScript snippets and JavaScript snippets with the network entitlement will still give the unsigned warning.
+If the extension is of type Shortcut, Service, URL, Key Combo or JavaScript (without network entitlement), the extension snippet will install without the usual "unsigned extension" warning. Shell Script snippets, AppleScript snippets and JavaScript snippets with the network entitlement will still give the unsigned warning.
 
-In snippets, `name` is a required field. Installing another extension with the same name will overwrite an existing one with the same name, but you can avoid this by specifying a unique `identifier` field.
+Installing another extension with the same name will overwrite an existing one with the same name, but you can avoid this by specifying a unique `identifier` field.
 
 ## More examples
 
