@@ -4,46 +4,10 @@ outline: deep
 
 # The config dictionary
 
-Every extension is defined by a config dictionary. This can be provided either by a
-a [package](./packages) or a [snippet](./snippets), but in each case the underlying structure
-is the same.
-
-## Format
-
-The config may be provided in YAML, JSON or Plist format, depending on how the
-extension is packaged. The specific formats supported are:
-
-| Format | Definition                                                                               |
-| ------ | ---------------------------------------------------------------------------------------- |
-| YAML   | YAML 1.2 as per <https://yaml.org>.<br>See also <https://quickref.me/yaml>.              |
-| JSON   | JSON as per <https://www.json.org/json-en.html>.<br>See also <https://quickref.me/json>. |
-| Plist  | Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) format.           |
-
-
-::: info Historical note
-
-Plist was the original format for PopClip extensions.
-Support for JSON and YAML was added later.
-
-:::
-
-Regardless of format, the config must define a dictionary at its root. Values
-can be strings, numbers, booleans, `null`, arrays or other dictionaries.
-
-### Localizable Strings
-
-Fields shown as "String (Localizable)" type may be either a string or a
-dictionary. If you supply a string, that string is always used. Alternatively,
-you can supply a dictionary mapping language codes (`en`, `fr`, `zh-hans`, etc.)
-to strings, and PopClip will display the string for the user's preferred
-language if possible, with fallback to the `en` string, which is always
-required.
-
-### Null values
-
-Plist does not have a native way to represent the `null` value
-of JSON and YAML. In PopClip extensions, you use `<false />` in a Plist where
-you would use `null` in JSON or YAML.
+Every extension is defined by a config dictionary. This can be provided either
+by a a [package](./packages) or a [snippet](./snippets), but in each case the
+underlying structure is the same. Values can be strings, numbers, booleans,
+`null`, arrays or other dictionaries.
 
 ::: tip Key names
 
@@ -96,9 +60,9 @@ this field, PopClip will identify the extension by its package name (e.g.
 
 ::: warning Reserved identifier
 
-The identifier prefix `com.pilotmoon.` is
-reserved for signed extensions published by me. If you try to use it for your
-own extensions, you'll get an error.
+The identifier prefix `com.pilotmoon.` is reserved for signed extensions
+published by me. If you try to use it for your own extensions, you'll get an
+error.
 
 :::
 
@@ -127,7 +91,8 @@ the individual action )
 | `capture html`       | Boolean              | If `true`, PopClip will attempt to capture HTML and Markdown for the selection. PopClip makes its best attempt to extract HTML, first of all from the selection's HTML source itself, if available. Failing that, it will convert any RTF text to HTML. And failing that, it will generate an HTML version of the plain text. It will then generate Markdown from the final HTML. Default is `false`.                                                                                                                                                                                                                                                                                   |             |
 | `restore pasteboard` | Boolean              | If true, then PopClip will restore the pasteboard to its previous contents after pasting text in the `paste-result` after-step. Default is `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |             |
 
-Additionally, there will be action-specific properties as defined in the documentation for each action type.
+Additionally, there will be action-specific properties as defined in the
+documentation for each action type.
 
 ### The `requirements` array
 
@@ -218,3 +183,20 @@ following structure.
 | `values`        | Array                | Required for `multiple` type | Array of strings representing the possible values for the multiple choice option.                                                                                                                                                                                                                                                       |
 | `value labels`  | Array                | Optional                     | Array of "human friendly" strings corresponding to the multiple choice values. This is used only in the PopClip options UI, and is not passed to the script. If omitted, the option values themselves are shown.                                                                                                                        |
 | `inset`         | Boolean              | Optional                     | If true, the option field will be shown inset to the right of the label, instead of under it. Default is false.                                                                                                                                                                                                                         |
+
+## Format
+
+### Localizable Strings
+
+Fields shown as "String (Localizable)" type may be either a string or a
+dictionary. If you supply a string, that string is always used. Alternatively,
+you can supply a dictionary mapping language codes (`en`, `fr`, `zh-hans`, etc.)
+to strings, and PopClip will display the string for the user's preferred
+language if possible, with fallback to the `en` string, which is always
+required.
+
+### Null values
+
+Plist does not have a native way to represent the `null` value of JSON and YAML.
+In PopClip extensions, you use `<false />` in a Plist where you would use `null`
+in JSON or YAML.
