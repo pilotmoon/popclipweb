@@ -119,7 +119,7 @@ export default defineConfig({
             { text: "Introduction", link: "/dev/" },
             { text: "Snippets", link: "/dev/snippets" },
             { text: "Packages", link: "/dev/packages" },            
-            { text: "Config", link: "/dev/config" },
+            { text: "The config dictionary", link: "/dev/config" },
             {
               items: [
                 { text: "Shortcut actions", link: "/dev/shortcut-actions" },

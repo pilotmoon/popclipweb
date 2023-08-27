@@ -1,6 +1,7 @@
 # Packages
 
-A PopClip extension package bundles together all the files needed for an extension in a folder.
+A PopClip extension package bundles together all the files needed for an
+extension in a folder.
 
 ## The package folder
 
@@ -35,17 +36,24 @@ extension `.popclipextz`. You can examine an existing PopClip extension by
 renaming it with a `.zip` extension and unzipping it, to reveal a `.popclipext`
 package.
 
-## The Config file
+## The config file
 
-Every extension must define a configuration dictionary. This can be provided in
-a file called either `Config.yaml`, `Config.json`, `Config.plist`, or
-`Config.js`.
+Every extension must define a [config dictionary](./config.md). PopClip will look for
+its config in the following files:
 
-| Format     | File Name      | Description                                                                              |
-| ---------- | -------------- | ---------------------------------------------------------------------------------------- |
-| YAML       | `Config.yaml`  | A [YAML 1.2](https://yaml.org) file ([quickref](https://quickref.me/yaml)).              |
-| JSON       | `Config.json`  | A [JSON](https://www.json.org/json-en.html) file ([quickref](https://quickref.me/json)). |
-| Plist      | `Config.plist` | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file.  |
-| JavaScript | `Config.js`    | A JavaScript source file exporting an object. (See #TODO).                               |
+| Format                                            | File Name           | Description                                                                              |
+| ------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------- |
+| Plist                                             | `Config.plist`      | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file.          |
+| JSON                                              | `Config.json`       | A [JSON](https://www.json.org/json-en.html) file ([quickref](https://quickref.me/json)). |
+| YAML                                              | `Config.yaml`       | A [YAML 1.2](https://yaml.org) file ([quickref](https://quickref.me/yaml)).              |
+| JavaScript                                        | `Config.js`         | A JavaScript source file exporting an object. (See #TODO).                               |
 
-The contents of the configuration file are as defined in [Config](./config.md).
+If multiple config files are present, PopClip will add the contents of each file
+to the config dictionary in the order listed above.
+
+::: info Historical note
+
+Plist was the original format for PopClip extensions. Support for YAML, JSON,
+and JavaScript was added later.
+
+:::
