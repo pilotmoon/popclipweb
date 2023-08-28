@@ -1,9 +1,7 @@
-# Using Scripts
+# Script fields
 
-## Script Fields
-
-These strings are available in Shell Script and AppleScript extensions. Where no
-value is available, the field will be set to an empty string.
+These values are available in Shell Script and AppleScript extensions. Where no
+value is available, it will be set to an empty string.
 
 | Field Name             | Shell Script Variable                | AppleScript Placeholder                | Description                                                                                                                                                                                                                   |
 | ---------------------- | ------------------------------------ | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -23,7 +21,7 @@ value is available, the field will be set to an empty string.
 | `browser url`          | `POPCLIP_BROWSER_URL`                | `{popclip browser url}`                | The URL of the web page that the text was selected from. (Supported browsers only.)                                                                                                                                           |
 | `option *`             | `POPCLIP_OPTION_*` _(all UPPERCASE)_ | `{popclip option *}` _(all lowercase)_ | One such value is generated for each option specified in `Options`, where `*` represents the `Option Identifier`. For boolean options, the value with be a string, either `0` or `1`.                                         |
 
-### Indicating Errors
+## Indicating errors
 
 Scripts may indicate success or failure as follows:
 
