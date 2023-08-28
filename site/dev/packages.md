@@ -1,6 +1,7 @@
 ---
 outline: deep
 ---
+
 # Packages
 
 A PopClip extension package bundles together all the files needed for an
@@ -22,7 +23,9 @@ package, right-click it in Finder and choose Show Package Contents.
 
 :::
 
-Here is an example package structure, the [Say](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Say.popclipext) extension:
+Here is an example package structure, the
+[Say](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Say.popclipext)
+extension:
 
 ```
 Say.popclipext/                -- Package folder
@@ -45,12 +48,12 @@ package.
 Every extension must define a [config dictionary](./config.md). PopClip will try
 looking in the root of the package directory for the following named files:
 
-| Format     | File Name      | Description                                                                              |
-| ---------- | -------------- | ---------------------------------------------------------------------------------------- |
-| Plist      | `Config.plist` | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file.          |
-| JSON       | `Config.json`  | A [JSON](https://www.json.org/json-en.html) file ([quickref](https://quickref.me/json)). |
-| YAML       | `Config.yaml`  | A [YAML 1.2](https://yaml.org) file ([quickref](https://quickref.me/yaml)).              |
-| JavaScript | `Config.js`    | A JavaScript source file exporting an object. (See TODO.)                                |
+| Format      | File Name      | Description                                                                                                                                                     |
+| ----------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Plist       | `Config.plist` | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file.                                                                                 |
+| JSON        | `Config.json`  | A [JSON](https://www.json.org/json-en.html) file ([quickref](https://quickref.me/json)).                                                                        |
+| YAML        | `Config.yaml`  | A [YAML 1.2](https://yaml.org) file ([quickref](https://quickref.me/yaml)).                                                                                     |
+| Source code | `Config[.*]`   | Shell script, JavaScript or AppleScript file with config header as per [inverted snippet syntax](./snippets.md#inverted-syntax). Any file extension is allowed. |
 
 If multiple config files are present, PopClip will load them all, in the order
 listed above, and merge them into a single config dictionary.
@@ -74,3 +77,10 @@ was added later. I recommend using JSON or YAML for new extensions as they are
 easier for a human to read and write.
 
 :::
+
+## Other files
+
+Apart from the config file, an extension package may contain any number of other
+files. You are free to name these however you like, except for the reserved
+names `Config[.*]` and `_Signature.plist`. You can also use subfolders to
+organise your files.

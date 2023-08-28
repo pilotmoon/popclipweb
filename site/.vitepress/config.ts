@@ -119,11 +119,11 @@ export default defineConfig({
             { text: "Introduction", link: "/dev/" },
             // {
             //   items: [
-                
+
             //   ]
             // },
             { text: "Snippets", link: "/dev/snippets" },
-            { text: "Packages", link: "/dev/packages" },            
+            { text: "Packages", link: "/dev/packages" },
             { text: "The config dictionary", link: "/dev/config" },
             {
               items: [
@@ -132,17 +132,17 @@ export default defineConfig({
                 { text: "URL actions", link: "/dev/url-actions" },
                 { text: "Key Press actions", link: "/dev/key-press-actions" },
                 {
-                  text: "AppleScript actions",
-                  link: "/dev/applescript-actions",
-                },
-                {
                   text: "Shell Script actions",
                   link: "/dev/shell-script-actions",
+                },
+                {
+                  text: "AppleScript actions",
+                  link: "/dev/applescript-actions",
                 },
                 { text: "JavaScript actions", link: "/dev/javascript-actions" },
               ],
             },
-            { text: "Icons", link: "/dev/icons" },            
+            { text: "Icons", link: "/dev/icons" },
             { text: "Changelog", link: "/dev/changes" },
           ],
         },

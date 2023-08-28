@@ -5,26 +5,23 @@ outline: deep
 # The config dictionary
 
 Every extension is defined by a config dictionary. This can be provided either
-by a a [package](./packages) or a [snippet](./snippets), but in each case the
+by a [snippet](./snippets) or a [package](./packages), but in each case the
 underlying structure is the same.
 
 ::: tip Key names
 
-PopClip is very flexible about how you name keys.
-
-In this documentation you'll see keys named in lowercase with spaces, for
+PopClip is very flexible about how you name keys. In this documentation you'll see keys named in lowercase with spaces, for
 example `required apps`. However, PopClip will treat `Required Apps`,
 `requiredApps`, `RequiredApps`, `required_apps`, `required-apps` and
-`REQUIRED_APPS` as equivalents. It doesn't matter what form you use and you can
-mix formats in the same file.
+`REQUIRED_APPS` as equivalents. It doesn't matter which convention you use.
 
-The full range of formats is as defined by
+<!-- The full range of formats is as defined by
 [case-anything](https://github.com/mesqueeb/case-anything), which PopClip uses
-internally.
+internally. -->
 
-Additonally, older versions of PopClip used different names for some keys. Where
-there is a new name, the old name is also still accepted. A table of old and new
-names is given in [Key name mapping](#key-name-mapping).
+Additionally, older versions of PopClip used different names for some keys.
+Where there is a new name, the old name is also still accepted. A table of old
+and new names is given in [Key name mapping](#key-name-mapping).
 
 :::
 
@@ -186,18 +183,55 @@ following structure.
 | `inset`         | Boolean              | Optional                     | If true, the option field will be shown inset to the right of the label, instead of under it. Default is false.                                                                                                                                                                                                                         |
 | `icon`          | String               | Optional                     | For `boolean` options only. Specify an icon to appear next to the check box.                                                                                                                                                                                                                                                            |
 
-## Examples
-
 ## Notes
 
-### Localizable Strings
+### Localizable strings
 
 Fields shown as "String (Localizable)" type may be either a string or a
 dictionary. If you supply a string, that string is always used. Alternatively,
-you can supply a dictionary mapping language codes (`en`, `fr`, `zh-hans`, etc.)
-to strings, and PopClip will display the string for the user's preferred
-language if possible, with fallback to the `en` string, which is always
-required.
+you can supply a dictionary mapping language codes to strings, and PopClip will
+display the string for the user's preferred language if possible, with fallback
+to the `en` string, which is always required.
+
+The following language codes are supported:
+
+::: details Language codes table
+
+| Language Code | Language Name         |
+| ------------- | --------------------- |
+| `en`          | English               |
+| `en-gb`       | English (UK)          |
+| `da`          | Danish                |
+| `de`          | German                |
+| `es`          | Spanish               |
+| `fr`          | French                |
+| `it`          | Italian               |
+| `ja`          | Japanese              |
+| `ko`          | Korean                |
+| `nl`          | Dutch                 |
+| `pl`          | Polish                |
+| `pt-br`       | Portuguese (BR)       |
+| `ru`          | Russian               |
+| `sk`          | Slovak                |
+| `tr`          | Turkish               |
+| `vi`          | Vietnamese            |
+| `zh-hans`     | Chinese (Simplified)  |
+| `zh-hant`     | Chinese (Traditional) |
+
+:::
+
+::: info Example of localized string
+
+```yaml
+#popclip
+name: 
+  en: My Extension
+  fr: Mon Extension
+  zh-hans: 我的扩展
+action: {}
+```
+
+:::
 
 ### Null values in Plist
 
@@ -207,26 +241,48 @@ Use `<false />` in a Plist where you would use `null` in JSON or YAML.
 ### Key name mapping
 
 Some field names were different in older versions of PopClip. Others have
-alternative allowable forms to avoid confusion when expressed camel case, e.g.
-`appleScriptFile` is mapped to `applescriptFile`.
+alternative allowable spellings.
 
-PopClip applies the following mapping to field names loaded from the config
-file:
+To preserve backwards comptibility, key names in the config are transformed to
+their canonical form as follows:
+
+1. Firstly, the naming convention is standardized to lowercase with spaces. For
+   example, `RequiredApps` becomes `required apps`.
+
+2. Then, if the field name has the prefix `extension` or `option` (which were
+   expected by older versions of PopClip), it is removed.
+
+3. Finally, PopClip applies the following mapping:
+
+::: details Key name mapping table
 
 | Old/Alternative name      | Canonical name   |
 | ------------------------- | ---------------- |
-| image file                | icon             |
-| required software version | popclip version  |
-| pop clip version          | popclip version  |
-| required os version       | macos version    |
-| mac os version            | macos version    |
-| pass html                 | capture html     |
-| blocked apps              | excluded apps    |
-| regular expression        | regex            |
 | apple script              | applescript      |
-| apple script file         | applescript file |
 | apple script call         | applescript call |
+| apple script file         | applescript file |
+| blocked apps              | excluded apps    |
+| image file                | icon             |
 | java script               | javascript       |
 | java script file          | javascript file  |
+| js                        | javascript       |
+| lang                      | language         |
+| mac os version            | macos version    |
+| params                    | parameters       |
+| pass html                 | capture html     |
+| pop clip version          | popclip version  |
+| preserve image color      | preserve color   |
+| regular expression        | regex            |
+| required os version       | macos version    |
+| required software version | popclip version  |
+| script interpreter        | interpreter      |
 
-Also, if the field name has the prefix `extension` or `option`, it is removed.
+:::
+
+::: info Example
+
+An old extension uses the key `Extension Image File` to define its icon. PopClip
+will first standardize the case to `extension image file`. Then it will remove
+the `extension` prefix, leaving `image file`. Then it will map this to `icon`.
+
+:::
