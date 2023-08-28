@@ -307,11 +307,11 @@ file and install it. When using this method:
 
 ## Further examples
 
-There are lots of snippet examples posted in the [PopClip Forum](https://forum.popclip.app/c/extensions/6). Here are a few
+There are lots of snippet examples posted in the [PopClip Forum](https://forum.popclip.app/). Here are a few
 interesting ones that demonstrate various techniques:
 
 - [Markdown highlighting](https://forum.popclip.app/t/markdown-highlighting/556)
 - [A PopClip Extension for ChatGPT](https://forum.popclip.app/t/a-popclip-extension-for-chatgpt/1283)
 - [Text-to-speech with Azure API](https://forum.popclip.app/t/new-snippet-azure-text-to-speech/1790)
-- [Search DuchDuckGo in DuckDuckGo browser](https://forum.popclip.app/t/snippet-search-duckduckgo-in-duckduckgo-browser/1763)
+- [Search DuchDuckGo in DuckDuckGo Browser](https://forum.popclip.app/t/snippet-search-duckduckgo-in-duckduckgo-browser/1763)
 - [S p a c e d w o r d s](https://forum.popclip.app/t/s-p-a-c-e-d-w-o-r-d-s/1705)
