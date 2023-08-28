@@ -136,6 +136,25 @@ print("Hello, \(text)!")
 
 :::
 
+Example with options:
+
+```zsh
+#!/bin/zsh
+# #popclip
+# name: Optional Helloworld
+# after: show-result
+# options:
+# - type: multiple
+#   identifier: greeting
+#   label: Greeting
+#   values:
+#   - Hello
+#   - Goodbye
+echo -n "${POPCLIP_OPTION_GREETING}, ${POPCLIP_TEXT}!"
+```
+
+
+
 ## Script development tips
 
 While developing a script, you can test it from the command line by setting the
