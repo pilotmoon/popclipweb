@@ -67,6 +67,16 @@ The system dark/light mode is controlled by the Appearance pane in System Settin
 ![](./media/shot-system-appearance-1.png "Appearance pane in System Settings.")
 :::
 
+- **Position:** Choose where the PopClip bar should appear:
+  - **Above:** *(Default)* Bar appears above the pointer.
+  - **Below:** Bar appears below the pointer.
+
+::: info Note on position
+
+The above/below setting only applies when you select a single line of text. If the selection includes multiple lines, the bar will appear below the pointer if you made the selection by moving the mouse downwards, and above the selection if you made the selection by moving the mouse upwards. This is to avoid the bar obscuring the selection.
+
+:::
+
 ### Keyboard Shortcut
 
 Set a keyboard shortcut for making PopClip appear. See [Activate with a keyboard shortcut](./basics#activate-with-a-keyboard-shortcut) for details on using it.
