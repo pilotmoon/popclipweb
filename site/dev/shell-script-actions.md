@@ -72,13 +72,13 @@ print 'Hello, ' + ENV['POPCLIP_TEXT'] + ', from Ruby'
 While developing a script, you can test it from the command line by setting the
 required variables in the call. For example:
 
-```shell-script
+```bash
 POPCLIP_TEXT="my test text" POPCLIP_OPTION_FOO="foo" ./myscript
 ```
 
 Or export them before calling the script:
 
-```shell-script
+```bash
 export POPCLIP_TEXT="my test text"
 export POPCLIP_OPTION_FOO="foo"
 ./myscript

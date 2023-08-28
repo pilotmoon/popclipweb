@@ -170,7 +170,7 @@ code in PopClip's environment, with the same libraries, globals etc. It is
 activated by calling PopClip's executable (inside the PopCLip.app package) with
 the parameter `runjs` followed by the file name to run.
 
-```shell-script
+```bash
 /Application/PopClip.app/Contents/MacOS/PopClip runjs test.js
 ```
 
