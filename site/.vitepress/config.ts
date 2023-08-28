@@ -142,7 +142,7 @@ export default defineConfig({
                 { text: "JavaScript actions", link: "/dev/javascript-actions" },                           
               ],
             },
-            { text: "Script fields", link: "/dev/script-fields" },
+            { text: "Script variables", link: "/dev/script-variables" },
             { text: "Icons", link: "/dev/icons" },
             { text: "Changelog", link: "/dev/changes" },
           ],
