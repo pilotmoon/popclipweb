@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # Snippets
 
 A snippet is the simplest kind of PopClip extension, because it is just plain
@@ -160,22 +164,20 @@ not use tabs for indenting. YAML does not allow it — use spaces instead.
 
 ## Inverted syntax
 
-When writing a snippet containing shell script, AppleScript or JavaScript
-action, we can an use an alternative, "inside-out" format. This is recommend for
-everything other than trivial one-liner scripts.
-
-As an example, consider this regular YAML snippet defining a JavaScript action:
+When writing a snippet containing a script action, we often need to include a
+multi-line string for the script. Here's how this is done in pure YAML:
 
 ```yaml
 #popclip multi-line script with YAML syntax
 name: Hello JS
 icon: Hi!
 javascript: |
-  const greeting = 'Hello ' + popclip.input.text
-  popclip.showText(greeting)
+  const greeting = "Hello " + popclip.input.text;
+  popclip.showText(greeting);
 ```
 
-Using the inverted syntax, you can write the same thing like this:
+In contrast, PopClip also supports an "inside out" approach, which looks like
+this:
 
 ```javascript
 // #popclip multi-line script with inverted syntax
@@ -186,25 +188,35 @@ const greeting = "Hello " + popclip.input.text;
 popclip.showText(greeting);
 ```
 
-Much better! The config dictionary is now part of the source code header. We get
+This method, which I call **inverted syntax**, offers several benefits: we get
 code syntax highlighting and autocomplete from our text editor, and we don't
 have to indent the script awkwardly in the YAML.
 
-When using the inverted syntax, the whole text becomes the `shell script file`,
-`javascript file` or `applescript file` for the extension, as appropriate.
+The inverted syntax is supported for JavaScript, AppleScript and shell script
+actions.
 
-The config header should be added using the appropriate comment style for the
-source language.
+When using the inverted syntax, the snippet's whole text becomes the
+`javascript file`, `applescript file` or `shell script file` for the extension,
+accordingly. The config header should be added using the appropriate comment
+style for the source language (see [examples](#inverted-syntax-examples) below).
+
+::: info When to use inverted syntax?
+
+Inverted syntax is most useful for snippets that are primarily scripts. In cases
+where the config is quite extensive or where the script is very short, the YAML
+approach might still be preferable.
+
+:::
 
 ### Required fields
 
 So that PopClip knows what language the source file is in, you must always
 specify either a `language` or `interpreter`, as follows:
 
-| Key           | Description                                                                                        |
-| ------------- | -------------------------------------------------------------------------------------------------- |
-| `language`    | For JavaScript or AppleScript actions. Specify the language: either `javascript` or `applescript`. |
-| `interpreter` | As per [Shell Script actions](./shell-script-actions).                                             |
+| Key           | Description                                                                                              |
+| ------------- | -------------------------------------------------------------------------------------------------------- |
+| `language`    | For JavaScript or AppleScript actions, specify the language: either `javascript` or `applescript`.       |
+| `interpreter` | For shell script actions, specify the interpreter as per [Shell Script actions](./shell-script-actions). |
 
 ::: tip Language field shorthand
 
@@ -213,10 +225,9 @@ You can use `lang` as shorthand for `language`, and `js` as shorthand for
 
 :::
 
-### Examples
+### Inverted syntax examples
 
-Here is Python example (this time with a compact single-line header, using
-braces):
+Here is Python example:
 
 ```python
 # #popclip
@@ -225,8 +236,8 @@ import os
 print('Hello, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
 ```
 
-An alternative way to specify a shell script is to put a shebang (`#!`) line at
-the top, in which case, the `interpreter` field is not needed:
+An alternative way to specify a shell script's interpreter is to put a shebang
+(`#!`) line at the top, in which case, the `interpreter` field is not needed:
 
 ```python
 #!/usr/bin/env python3
@@ -303,12 +314,13 @@ you double-click such a file in Finder, PopClip will load the snippet from the
 file and install it. When using this method:
 
 - There is no size limit on the snippet.
-- The unsigned extension warining will always be shown.
+- The unsigned extension warning will always be shown.
 
 ## Further examples
 
-There are lots of snippet examples posted in the [PopClip Forum](https://forum.popclip.app/). Here are a few
-interesting ones that demonstrate various techniques:
+There are lots of snippet examples posted in the
+[PopClip Forum](https://forum.popclip.app/). Here are a few interesting ones
+that demonstrate various techniques:
 
 - [Markdown highlighting](https://forum.popclip.app/t/markdown-highlighting/556)
 - [A PopClip Extension for ChatGPT](https://forum.popclip.app/t/a-popclip-extension-for-chatgpt/1283)

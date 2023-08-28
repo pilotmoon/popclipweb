@@ -48,12 +48,12 @@ package.
 Every extension must define a [config dictionary](./config.md). PopClip will try
 looking in the root of the package directory for the following named files:
 
-| Format      | File Name      | Description                                                                                                                                                     |
-| ----------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Plist       | `Config.plist` | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file.                                                                                 |
-| JSON        | `Config.json`  | A [JSON](https://www.json.org/json-en.html) file ([quickref](https://quickref.me/json)).                                                                        |
-| YAML        | `Config.yaml`  | A [YAML 1.2](https://yaml.org) file ([quickref](https://quickref.me/yaml)).                                                                                     |
-| Source code | `Config[.*]`   | Shell script, JavaScript or AppleScript file with config header as per [inverted snippet syntax](./snippets.md#inverted-syntax). Any file extension is allowed. |
+| Format      | File Name                                         | Description                                                                                                                                                                                                                                       |
+| ----------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Plist       | `Config.plist`                                    | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file.                                                                                                                                                                   |
+| JSON        | `Config.json`                                     | A [JSON](https://www.json.org/json-en.html) file ([quickref](https://quickref.me/json)).                                                                                                                                                          |
+| YAML        | `Config.yaml`                                     | A [YAML 1.2](https://yaml.org) file ([quickref](https://quickref.me/yaml)).                                                                                                                                                                       |
+| Source code | `Config.*` (any other file extension) or `Config` | Shell script, AppleScript or JavaScript file with config header using [inverted snippet syntax](./snippets.md#inverted-syntax). See [Example](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source-contrib/IconPreview.popclipext). |
 
 If multiple config files are present, PopClip will load them all, in the order
 listed above, and merge them into a single config dictionary.
