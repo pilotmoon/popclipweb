@@ -47,11 +47,11 @@ step.
 Shell scripts may indicate success or specific failures by the use of exit
 codes:
 
-| Result                                       | Exit code |
-| -------------------------------------------- | --------- |
-| Success                                      | `0`       |
-| General error                                | `1`       |
-| Error with user's settings, or not signed in | `2`       |
+| Result                                                                   | Exit code |
+| ------------------------------------------------------------------------ | --------- |
+| Success                                                                  | `0`       |
+| General error<br>(PopClip will display 'X')                              | `1`       |
+| Error with user's settings<br>(PopClip will show the extension settings) | `2`       |
 
 Any other exit code will be treated as a general error.
 
@@ -59,7 +59,8 @@ Any other exit code will be treated as a general error.
 
 ::: info About these examples
 
-The examples are given using the [inverted snippet syntax](./snippets#inverted-syntax). 
+The examples are given using the
+[inverted snippet syntax](./snippets#inverted-syntax).
 
 :::
 
@@ -67,15 +68,15 @@ Example of passing the selected text to the `say` command to be spoken aloud:
 
 ::: code-group
 
-```bash [Using variable]
-#!/bin/bash
+```zsh [Using variable]
+#!/bin/zsh
 # #popclip
 # name: Say (variable)
 echo "$POPCLIP_TEXT" | say
 ```
 
-```bash [Using stdin]
-#!/bin/bash
+```zsh [Using stdin]
+#!/bin/zsh
 # #popclip
 # name: Say (stdin)
 # stdin: text
@@ -89,10 +90,10 @@ languages:
 
 ::: code-group
 
-```bash
-#!/bin/bash
+```zsh
+#!/bin/zsh
 # #popclip
-# name: Helloworld in bash
+# name: Helloworld in zsh
 # after: show-result
 echo -n "Hello, ${POPCLIP_TEXT}!"  # `-n` for no newline at end
 ```
