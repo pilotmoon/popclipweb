@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 # Packages
 
 A PopClip extension package bundles together all the files needed for an
@@ -19,14 +22,15 @@ package, right-click it in Finder and choose Show Package Contents.
 
 :::
 
-Here is an example package structure, the 'Say' extension:
+Here is an example package structure, the [Say](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Say.popclipext) extension:
 
 ```
-Say.popclipext                  -- Containing folder
-   _Signature.plist             -- Signature (signed extensions only)
-   Config.plist                 -- Main configuration file
-   say.sh                       -- Script file
-   speechicon.png               -- Icon file
+Say.popclipext/                -- Package folder
+│
+├── _Signature.plist           -- Signature (signed extensions only)
+├── Config.plist               -- Config file
+├── say.sh                     -- Script file
+└── speechicon.png             -- Icon file
 ```
 
 ### Zipped `.popclipextz` files
@@ -38,22 +42,35 @@ package.
 
 ## The config file
 
-Every extension must define a [config dictionary](./config.md). PopClip will look for
-its config in the following files:
+Every extension must define a [config dictionary](./config.md). PopClip will try
+looking in the root of the package directory for the following named files:
 
-| Format                                            | File Name           | Description                                                                              |
-| ------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------- |
-| Plist                                             | `Config.plist`      | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file.          |
-| JSON                                              | `Config.json`       | A [JSON](https://www.json.org/json-en.html) file ([quickref](https://quickref.me/json)). |
-| YAML                                              | `Config.yaml`       | A [YAML 1.2](https://yaml.org) file ([quickref](https://quickref.me/yaml)).              |
-| JavaScript                                        | `Config.js`         | A JavaScript source file exporting an object. (See #TODO).                               |
+| Format     | File Name      | Description                                                                              |
+| ---------- | -------------- | ---------------------------------------------------------------------------------------- |
+| Plist      | `Config.plist` | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file.          |
+| JSON       | `Config.json`  | A [JSON](https://www.json.org/json-en.html) file ([quickref](https://quickref.me/json)). |
+| YAML       | `Config.yaml`  | A [YAML 1.2](https://yaml.org) file ([quickref](https://quickref.me/yaml)).              |
+| JavaScript | `Config.js`    | A JavaScript source file exporting an object. (See TODO.)                                |
 
-If multiple config files are present, PopClip will add the contents of each file
-to the config dictionary in the order listed above.
+If multiple config files are present, PopClip will load them all, in the order
+listed above, and merge them into a single config dictionary.
+
+::: info Technical note
+
+In recent versions of PopClip, `.json` files are actually parsed with a YAML
+parser. This is because valid JSON is valid YAML too. Therefore, technically you
+can use YAML syntax in a `.json` file, and it will be parsed without errors.
+However, it is recommended to use the correct file extension for clarity.
+
+:::
 
 ::: info Historical note
 
-Plist was the original format for PopClip extensions. Support for YAML, JSON,
-and JavaScript was added later.
+Plist was the original format for PopClip extensions, and many of the older
+extensions in
+<a style="white-space: nowrap" href="https://github.com/pilotmoon/PopClip-Extensions"><GithubFilled />
+pilotmoon/PopClip-Extensions</a> are in Plist format. Support for JSON and YAML
+was added later. I recommend using JSON or YAML for new extensions as they are
+easier for a human to read and write.
 
 :::

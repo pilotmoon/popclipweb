@@ -1,54 +1,80 @@
 # Snippets
 
-A snippet is the simplest kind of PopClip extension, because it is just plain text. PopClip can load a snippet directly from a text selection, without the need for separate files or folders.
+A snippet is the simplest kind of PopClip extension, because it is just plain
+text. PopClip can load a snippet directly from a text selection, without the
+need for separate files or folders.
 
 ## Example
 
 It is easiest to start with an example:
 
 ```yaml
-#popclip extension to search Emojipedia
-name: Emojipedia
-icon: search filled E
-url: https://emojipedia.org/search/?q=***
+#popclip
+name: Urban Dictionary
+icon: UD
+url: https://www.urbandictionary.com/define.php?term=***
 ```
 
-When you select the above text, PopClip will detect the snippet and offer an "Install Extension" action. Clicking this will install the extension, like magic!
+When you select whole block of text above, PopClip will detect the snippet and
+offer an "Install Extension" action.
+
+![](./media/shot-snippet-install-3.png "Installing a snippet.")
 
 ## Format
 
-A snippet always begins with `#popclip` (or `# popclip`) and can be up to 5000 characters long. It is parsed as YAML.
+A snippet always begins with `#popclip` (or `# popclip`) and can be up to 5000
+characters long. It is parsed as [YAML 1.2](https://yaml.org/spec/1.2.2/). The
+body of the snippet defines the extension's [config dictionary](./config.md).
 
 ::: tip Commments in snippets
 
-Note that `#` begins a YAML comment. Thus, the entire snippet including the `#popclip` line parses as valid YAML.
+Note that `#` begins a YAML comment. Thus the entire snippet including the
+`#popclip` line parses as valid YAML.
 
 :::
 
-The body of the snippet defines the extension's [config dictionary](./config.md).
+::: tip Writing snippets in JSON
 
-If the extension is of type Shortcut, Service, URL, Key Combo or JavaScript (without network entitlement), the extension snippet will install without the usual "unsigned extension" warning. Shell Script snippets, AppleScript snippets and JavaScript snippets with the network entitlement will still give the unsigned warning.
+If you prefer, you can write your snippets in JSON syntax. (From PopClip's point
+of view it's still YAML, since JSON is a subset of YAML.)
 
-Installing another extension with the same name will overwrite an existing one with the same name, but you can avoid this by specifying a unique `identifier` field.
-
-::: tip Using JSON in snippets
-
-If you prefer, you can write your snippet in JSON format. This is because JSON is actually a subset of YAML so it is valid YAML too. The following snippet is equivalent to the one above:
+The following snippet is equivalent to the example above:
 
 ```json
-#popclip extension to search Emojipedia
+#popclip (JSON example)
 {
-  "name": "Emojipedia",
-  "icon": "search filled E",
-  "url": "https://emojipedia.org/search/?q=***"
+  "name": "Urban Dictionary",
+  "icon": "UD",
+  "url": "https://www.urbandictionary.com/define.php?term=***"
 }
 ```
 
+Most of the examples in this guide are written in block-style YAML, but I've
+included JSON syntax here and there too.
+
 :::
+
+## Creating snippets
+
+PopClip will display any errors it encounters while trying to load the snippet
+in the PopClip bar itself.
+
+![](./media/shot-snippet-error-3.png "PopClip bar showing error message.")
+
+If the extension is of type Shortcut, Service, URL, Key Combo or JavaScript
+(without network entitlement), the snippet will install without the usual
+"unsigned extension" warning.
+
+In the absence of an `identifier` field, the `name` acts as the identifier for
+the extension. Installing a snippet with the same name as an existing snippet
+will replace it.
+
+A snippet can do everything that a [package](./packages) extension can do. The
+only limitation is that it can't refer to any external files.
 
 ## More examples
 
-A Shortcuts example:
+A [Shortcuts](./shortcut-actions) example:
 
 ```yaml
 # popclip shortcuts example
@@ -58,31 +84,34 @@ macos version: '12.0' # shortcuts only work on Monterey and above!
 shortcut name: My Shortcut Name
 ```
 
-A Key Press example:
+A [Service](./service-actions) example (this time using flow-style YAML markup,
+with braces):
 
 ```yaml
-#popclip
+#popclip service example
+{ name: Make Sticky, service name: Make Sticky }
+```
+
+A [Key Press](./key-press-actions) example:
+
+```yaml
+#popclip key press example
 name: Key Press Example
 key combo: command option J
 ```
 
-A Service example -- this time using flow-style YAML markup with braces.
-
-```yaml
-#popclip
-{ name: Make Sticky, service name: Make Sticky }
-```
-
-An shell script example (new in PopClip 2022.12):
+An [shell script](./shell-script-actions) example:
 
 ```yaml
 #popclip shellscript example  
 name: Say
-shell script: say -v Daniel $POPCLIP_TEXT
 interpreter: zsh
+shell script: say -v Daniel $POPCLIP_TEXT
 ```
 
-A JavaScript example, including multiple actions:
+A [JavaScript](./javascript-actions) example, including multiple actions:
+
+::: code-group
 
 ```yaml
 #popclip js + multi action example
@@ -94,30 +123,51 @@ actions:
   javascript: popclip.pasteText('**' + popclip.input.text + '**')
 - title: Markdown Italic
   icon: circle filled I
-  javascript: popclip.pasteText('*' + popclip.input.text + '*')  
+  javascript: popclip.pasteText('*' + popclip.input.text + '*')
 ```
 
-A more complex Key Combo example with a raw key code and using some more fields:
-
-```yaml
-# popclip extension snippet - more complex example
-name: Paste and Enter
-icon: square monospaced ↵
-requirements: [paste]
-before: paste
-key combo: 0x24
+```json
+#popclip js + multi action example
+{
+  "name": "Markdown Formatting",
+  "requirements": [
+    "text",
+    "paste"
+  ],
+  "actions": [
+    {
+      "title": "Markdown Bold",
+      "icon": "circle filled B",
+      "javascript": "popclip.pasteText('**' + popclip.input.text + '**')"
+    },
+    {
+      "title": "Markdown Italic",
+      "icon": "circle filled I",
+      "javascript": "popclip.pasteText('*' + popclip.input.text + '*')"
+    }
+  ]
+}
 ```
+
+:::
+
+::: warning #1 rule of YAML: Do not indent with tabs!
+
+When writing snippets in YAML with indented parts, as in the example above, do
+not use tabs for indenting. YAML does not allow it — use spaces instead.
+
+:::
 
 ## Inverted syntax
 
-When making a snippet that contains a script, you an use an alternative, "inside-out" format. Add the YAML config as the header to any source code, and PopClip will see the whole file as a snippet.
+When writing a snippet containing shell script, AppleScript or JavaScript
+action, we can an use an alternative, "inside-out" format. This is recommend for
+everything other than trivial one-liner scripts.
 
-When using this format you must specify either the `interpreter` (for a shell script) or `language` (for JavaScript or AppleScript). The whole text will then become the `shell script file`, `javascript file` or `applescript file` for the extension, as appropriate.
-
-As an example, consider this regular YAML snippet for a JavaScript extension:
+As an example, consider this regular YAML snippet defining a JavaScript action:
 
 ```yaml
-#popclip - classic YAML snippet
+#popclip multi-line script with YAML syntax
 name: Hello JS
 icon: Hi!
 javascript: |
@@ -125,20 +175,48 @@ javascript: |
   popclip.showText(greeting)
 ```
 
-Using the inverted syntax, You can write the same thing like this:
+Using the inverted syntax, you can write the same thing like this:
 
 ```javascript
-// #popclip - source code with snippet header
+// #popclip multi-line script with inverted syntax
 // name: Hello JS
 // icon: Hi!
 // language: javascript
-const greeting = 'Hello ' + popclip.input.text
-popclip.showText(greeting)
+const greeting = "Hello " + popclip.input.text;
+popclip.showText(greeting);
 ```
 
-The snippet header should be added using the comment style of the source language, using the same comment prefix on every line. (That is, whatever characters precede `#popclip`, must also precede the other lines.)
+Much better! The config dictionary is now part of the source code header. We get
+code syntax highlighting and autocomplete from our text editor, and we don't
+have to indent the script awkwardly in the YAML.
 
-Here is Python example, this time with a compact single line snippet, using braces (YAML flow-style):
+The config header should be added using the appropriate comment style of the
+source language.
+
+When using the inverted syntax, the whole text becomes the `shell script file`,
+`javascript file` or `applescript file` for the extension, as appropriate.
+
+### Required fields
+
+So that PopClip knows what language the source file is in, you must always
+specify either a `language` or `interpreter`, as follows:
+
+| Key           | Description                                                                                        |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| `language`    | For JavaScript or AppleScript actions. Specify the language: either `javascript` or `applescript`. |
+| `interpreter` | As per [Shell Script actions](./shell-script-actions).                                             |
+
+::: tip Language field shorthand
+
+You can use `lang` as shorthand for `language`, and `js` as shorthand for
+`javascript`.
+
+:::
+
+### Examples
+
+Here is Python example (this time with a compact single-line header, using
+braces):
 
 ```python
 # #popclip
@@ -147,7 +225,8 @@ import os
 print('Hello, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
 ```
 
-An alternative way to specify a shell script is to put a shebang (`#!`) line at the top, in which case, the `interpreter` field is not needed:
+An alternative way to specify a shell script is to put a shebang (`#!`) line at
+the top, in which case, the `interpreter` field is not needed:
 
 ```python
 #!/usr/bin/env python3
@@ -169,4 +248,9 @@ end tell
 
 ## `.popcliptxt` files
 
-You can save a snippet to a plain text file with a `.popcliptxt` extension. When you double-click such a file in Finder, PopClip will load the snippet from the file and install it. The 5000 character limit does not apply.
+You can save a snippet to a plain text file with a `.popcliptxt` extension. When
+you double-click such a file in Finder, PopClip will load the snippet from the
+file and install it. When using this method:
+
+- There is no size limit on the snippet.
+- The unsigned extension warining will always be shown.

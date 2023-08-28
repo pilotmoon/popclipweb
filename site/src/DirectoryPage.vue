@@ -6,7 +6,6 @@ import Page from './Page.vue';
 import DownloadButton from './DownloadButton.vue';
 import { Extension } from './data/extensions-loader.js';
 import { formatDate } from './helpers/formatters.js';
-import { GithubFilled } from '@ant-design/icons-vue';
 const { params } = useData();
 const ext: Extension = params.value as Extension;
 const slots = useSlots();

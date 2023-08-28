@@ -61,50 +61,34 @@ url: maps://?q={popclip text}
 
 ### Use of option parameter
 
-The following snippet opens an Amazon search page for the selected text, with the site domain as set in the action's settings:
+The following snippet opens a Wiktionary search page, with the site domain specified as an option parameter:
 
 ::: code-group
 
-```yaml [YAML]
-#popclip Amazon multi-domain example
-name: Amazon
-url: http://{popclip option domain}/s?k={popclip text}
+```yaml
+#popclip Wiktionary search with subdomain option
+name: Wiktionary
+icon: iconify:ooui:logo-wiktionary
+url: https://{popclip option subdomain}.wiktionary.org/wiki/{popclip text}
 options:
-- identifier: domain
-  label: Amazon Site
-  default value: www.amazon.com
-  type: multiple
-  values:
-  - www.amazon.ae
-  - www.amazon.ca
-  - www.amazon.cn
-  - www.amazon.co.jp
-  - www.amazon.co.uk
-  - www.amazon.com.au
-  - www.amazon.com
-  # ... and so on
+- type: string
+  identifier: subdomain
+  label: Site subdomain
+  defaultValue: en
 ```
 
-```json [JSON]
-#popclip
+```json
+#popclip Wiktionary search with subdomain option
 {
-  "name": "Amazon",
-  "url": "http://{popclip option domain}/s?k={popclip text}",
+  "name": "Wiktionary",
+  "icon": "iconify:ooui:logo-wiktionary",
+  "url": "https://{popclip option subdomain}.wiktionary.org/wiki/{popclip text}",
   "options": [
     {
-      "identifier": "domain",
-      "label": "Amazon Site",
-      "defaultValue": "www.amazon.com",
-      "type": "multiple",
-      "values": [
-        "www.amazon.ae",
-        "www.amazon.ca",
-        "www.amazon.cn",
-        "www.amazon.co.jp",
-        "www.amazon.co.uk",
-        "www.amazon.com.au",
-        "www.amazon.com"
-      ]
+      "type": "string",
+      "identifier": "subdomain",
+      "label": "Site subdomain",
+      "defaultValue": "en"
     }
   ]
 }

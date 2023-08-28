@@ -44,6 +44,25 @@ The **modifiers** are specified with the following keywords:
 | Control (⌃)    | `control`, `ctrl` or `^` |
 | Shift (⇧)      | `shift` or `⇧`           |
 | Numeric Keypad | `numpad`                 |
+
+## Examples
+
+A "highlight" extension supporting a couple of different apps:
+
+
+
+A more complex example with a raw key code and using some more fields:
+
+```yaml
+# popclip extension snippet - more complex example
+name: Paste and Enter
+icon: square monospaced ↵
+requirements: [paste]
+before: paste
+key combo: 0x24
+```
+
+
 <!-- 
 ## Modifier values
 

@@ -117,6 +117,11 @@ export default defineConfig({
           collapsed: true,
           items: [
             { text: "Introduction", link: "/dev/" },
+            // {
+            //   items: [
+                
+            //   ]
+            // },
             { text: "Snippets", link: "/dev/snippets" },
             { text: "Packages", link: "/dev/packages" },            
             { text: "The config dictionary", link: "/dev/config" },
@@ -137,7 +142,7 @@ export default defineConfig({
                 { text: "JavaScript actions", link: "/dev/javascript-actions" },
               ],
             },
-            { text: "Icons", link: "/dev/icons" },
+            { text: "Icons", link: "/dev/icons" },            
             { text: "Changelog", link: "/dev/changes" },
           ],
         },

@@ -11,11 +11,11 @@ import Ed from "../src/Ed.vue";
 
 # PopClip Extensions Developer Reference
 
-This section of the documentation provides a detailed specification for
-developing PopClip extensions.
+This section of the documentation provides a detailed specification of PopClip's
+extensions architecture. With this information, you can create your own
+extensions.
 
-<!--
-If you are not a programmer, you may find it easier to use the
+<!-- If you are not a programmer, you may find it easier to use the
 [PopClip Extension Creator](https://pilotmoon.com/popclip/extensions/create/). -->
 
 ## Extensions Overview
@@ -62,7 +62,8 @@ appearing when they are not useful:
 - Filter by whether the text contains a URL, email address or file path
 - Filter by the current values of the extensions's options
 
-Filter rules are defined in the [action properties](./config.md#action-properties) under the `regex` key,
+Filter rules are defined in the
+[action properties](./config.md#action-properties) under the `regex` key,
 `requirements` key and `required apps`/`excluded apps` keys.
 
 ## Extension signing
@@ -88,20 +89,38 @@ trigger the unsigned warning.
 
 ## Development environment
 
+You can create extensions using any text editor. The macOS included app TextEdit
+will suffice for simple snippets, but otherwise I recommend using a dedicated
+code editor such as [VS Code](https://code.visualstudio.com/),
+[Sublime Text](https://www.sublimetext.com/),
+[BBEdit](https://www.barebones.com/products/bbedit/) or
+[Nova](https://nova.app/).
+
 <EditionSwitcher />
 
 ### Turn off unsigned warning
 
-If you find the unsigned extension warning gets annoying while you are testing
-your work, you can turn ot off. Run the following command at the Terminal, then
-Quit and restart PopClip:
+If the unsigned extension warning gets annoying while you are testing your work,
+you can turn it off. Run the following command at the Terminal, then Quit and
+restart PopClip:
 
 <Ed code base="defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp LoadUnsignedExtensions -bool YES"/>
 
-### Debug Output
+### Debug output
 
-To help you when creating extensions, PopClip can be configured to write script
-output and debug info to be viewed with the Console app. To enable it, run this
-command in Terminal, then Quit and restart PopClip:
+To help you when creating extensions, PopClip can be configured to send script
+outputs and other debug info to the Console app. To enable it, run this command
+in Terminal, then Quit and restart PopClip:
 
 <Ed code base="defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp EnableExtensionDebug -bool YES"/>
+
+You can then view the debug output in the Console app.
+
+![Console app screenshot](./media/shot-console-window-1.png "Viewing PopClip debug output in Console app.")
+
+To filter the Console to show just PopClip extensions, enter Process "PopClip"
+and Category "Extension" in the Search field.
+
+You can add this as a saved search by clicking the Save button in the toolbar:
+
+![Add Console app preset](./media/shot-console-preset-1.png "Adding a preset to the Console app.")

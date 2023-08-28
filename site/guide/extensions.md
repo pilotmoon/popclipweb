@@ -35,7 +35,7 @@ PopClip can load extensions directly from a special plain text format called a "
 Here is an example snippet, which defines an action for searching Emojipedia for the selected text:
 
 ```
-#popclip
+#popclip extension to search Emojipedia
 name: Emojipedia
 icon: search filled E
 url: https://emojipedia.org/search/?q=***
@@ -45,8 +45,8 @@ To install that, you select the text and then click the action *Install Extensio
 
 ![](./media/anim-extension-snippet-2.mp4 "Installing an extension snippet")
 
-:::tip About Snippets
-Notice that the first line of the snippet starts with `#popclip`. This is a special marker that tells PopClip that this is a snippet. For more about snippets, see [TODO](#) in the developer reference.
+:::tip Snippet format
+Notice that the first line of the snippet starts with `#popclip`. This is a special marker that tells PopClip that this is a snippet. For more about snippets, see [Snippets](/dev/snippets) in the developer reference.
 :::
 
 ## Creating your own extension
