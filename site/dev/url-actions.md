@@ -39,13 +39,13 @@ Option parameters can be inserted in the URL, in the same format as for AppleScr
 
 ### Simple web search
 
-The following snippet defines an extension with a single URL action that opens a search for the selected text on Emojipedia:
+The following snippet defines an extension with a single URL action that opens a search for the selected text on the movie review site, Rotten Tomatoes:
 
 ```yaml
-#popclip extension to search Emojipedia
-name: Emojipedia
-icon: search filled E
-url: https://emojipedia.org/search/?q=***
+#popclip extension to search Rotten Tomatoes
+name: Rotten Tomatoes
+icon: iconify:simple-icons:rottentomatoes
+url: https://www.rottentomatoes.com/search?search=***
 ```
 
 ### Custom URL scheme
