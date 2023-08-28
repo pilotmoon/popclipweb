@@ -9,12 +9,12 @@ line, such as Bash, Python, Ruby, Perl, etc.
 A Shell Script action is defined by the presence of either a `shell script` or
 `shell script file` field, as follows:
 
-| Key                 | Type              | Description                                                                                                                                                                                                                                                                                   |
-| ------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `shell script`      | String            | A string to be run as a shell script. The string will be passed via standard input to the specified `interpreter`, invoked without arguments.                                                                                                                                                 |
-| `shell script file` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                                    |
-| `interpreter`       | String (optional) | Specify the interpreter to use for `shell script` or `shell script file`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`.             |
-| `stdin`             | String (optional) | For script specified as `shell script file` only. The name of a [script field](./script-fields.md) whose value should be passed via standard input. For example, `text` to pass the matched text (same as `$POPCLIP_TEXT` variable). If omitted, no standard input is provided to the script. |
+| Key                 | Type              | Description                                                                                                                                                                                                                                                                       |
+| ------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shell script`      | String            | A string to be run as a shell script. The string will be passed via standard input to the specified `interpreter`, invoked without arguments.                                                                                                                                     |
+| `shell script file` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                        |
+| `interpreter`       | String (optional) | Specify the interpreter to use for `shell script` or `shell script file`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`. |
+| `stdin`             | String (optional) | For script specified as `shell script file` only. Set to `text` to pass the contents of `POPCLIP_TEXT` variable via standard input. If omitted, no standard input is provided to the script.                                                                                             |
 
 ### Shell script file execution
 
@@ -152,8 +152,6 @@ Example with options:
 #   - Goodbye
 echo -n "${POPCLIP_OPTION_GREETING}, ${POPCLIP_TEXT}!"
 ```
-
-
 
 ## Script development tips
 
