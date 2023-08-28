@@ -31,6 +31,21 @@ If the extension is of type Shortcut, Service, URL, Key Combo or JavaScript (wit
 
 Installing another extension with the same name will overwrite an existing one with the same name, but you can avoid this by specifying a unique `identifier` field.
 
+::: tip Using JSON in snippets
+
+If you prefer, you can write your snippet in JSON format. This is because JSON is actually a subset of YAML so it is valid YAML too. The following snippet is equivalent to the one above:
+
+```json
+#popclip extension to search Emojipedia
+{
+  "name": "Emojipedia",
+  "icon": "search filled E",
+  "url": "https://emojipedia.org/search/?q=***"
+}
+```
+
+:::
+
 ## More examples
 
 A Shortcuts example:
@@ -154,4 +169,4 @@ end tell
 
 ## `.popcliptxt` files
 
-You can save a snippet to a plain text file with a `.popcliptxt` extension. When you double-click such a file in Finder, PopClip will load the snippet from the file and install it. The 5000 character limit does not apply to files.
+You can save a snippet to a plain text file with a `.popcliptxt` extension. When you double-click such a file in Finder, PopClip will load the snippet from the file and install it. The 5000 character limit does not apply.

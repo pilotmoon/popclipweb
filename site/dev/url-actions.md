@@ -63,7 +63,9 @@ url: maps://?q={popclip text}
 
 The following snippet opens an Amazon search page for the selected text, with the site domain as set in the action's settings:
 
-```yaml
+::: code-group
+
+```yaml [YAML]
 #popclip Amazon multi-domain example
 name: Amazon
 url: http://{popclip option domain}/s?k={popclip text}
@@ -83,3 +85,29 @@ options:
   # ... and so on
 ```
 
+```json [JSON]
+#popclip
+{
+  "name": "Amazon",
+  "url": "http://{popclip option domain}/s?k={popclip text}",
+  "options": [
+    {
+      "identifier": "domain",
+      "label": "Amazon Site",
+      "defaultValue": "www.amazon.com",
+      "type": "multiple",
+      "values": [
+        "www.amazon.ae",
+        "www.amazon.ca",
+        "www.amazon.cn",
+        "www.amazon.co.jp",
+        "www.amazon.co.uk",
+        "www.amazon.com.au",
+        "www.amazon.com"
+      ]
+    }
+  ]
+}
+```
+
+:::
