@@ -307,15 +307,13 @@ The following language codes are supported:
 
 :::
 
-::: info Example usage of localized string
+::: info Example of localized string
 
 ```yaml
-#popclip
 name: 
   en: My Extension
   fr: Mon Extension
   zh-hans: 我的扩展
-action: {}
 ```
 
 :::
