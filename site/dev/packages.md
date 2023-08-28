@@ -71,10 +71,10 @@ However, it is recommended to use the correct file extension for clarity.
 
 Plist was the original format for PopClip extensions, and many of the older
 extensions in
-<a style="white-space: nowrap" href="https://github.com/pilotmoon/PopClip-Extensions"><GithubFilled />
-pilotmoon/PopClip-Extensions</a> are in Plist format. Support for JSON and YAML
-was added later. I recommend using JSON or YAML for new extensions as they are
-easier for a human to read and write.
+<span style="white-space: nowrap"><GithubFilled />&nbsp;<a href="https://github.com/pilotmoon/PopClip-Extensions">pilotmoon/PopClip-Extensions</a></span>
+are in Plist format. Support for JSON and YAML was added later. I recommend
+using JSON or YAML for new extensions as they are easier for a human to read and
+write.
 
 :::
 
@@ -84,3 +84,8 @@ Apart from the config file, an extension package may contain any number of other
 files. You are free to name these however you like, except for the reserved
 names `Config[.*]` and `_Signature.plist`. You can also use subfolders to
 organise your files.
+
+## Examples
+
+For a whole bunch of example extension packages, see
+<span style="white-space: nowrap"><GithubFilled />&nbsp;<a href="https://github.com/pilotmoon/PopClip-Extensions/tree/master/source">pilotmoon/PopClip-Extensions/source</a></span>.

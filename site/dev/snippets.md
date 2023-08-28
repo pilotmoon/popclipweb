@@ -190,11 +190,11 @@ Much better! The config dictionary is now part of the source code header. We get
 code syntax highlighting and autocomplete from our text editor, and we don't
 have to indent the script awkwardly in the YAML.
 
-The config header should be added using the appropriate comment style of the
-source language.
-
 When using the inverted syntax, the whole text becomes the `shell script file`,
 `javascript file` or `applescript file` for the extension, as appropriate.
+
+The config header should be added using the appropriate comment style for the
+source language.
 
 ### Required fields
 
@@ -246,6 +246,56 @@ tell application "LaunchBar"
 end tell
 ```
 
+An example of a long zsh script:
+
+::: details Long zsh script example
+
+```zsh
+#!/bin/zsh
+# Download an Iconify icon to Downloads folder as SVG
+# Example input: simple-icons:vivaldi
+#
+# #popclip
+# popclip version: 4050
+# name: GetIcon
+# regex: ([a-z0-9]+(?:-[a-z0-9]+)*):([a-z0-9]+(?:-[a-z0-9]+)*)
+# stdin: text
+# after: copy-result
+#
+set -e # exit on errors
+eval "$(/opt/homebrew/bin/brew shellenv)"
+log() { # print named params to stderr
+  for name in $*; do
+    echo ${(r:8:)name} ${(P)name} >>/dev/stderr
+  done
+}
+
+# get input from stdin
+input=$(cat); log input
+
+# parse the input
+parts=(${(s(:))input}) # split on :
+prefix=$parts[1]
+icon=$parts[2]
+url="https://api.iconify.design/${prefix}.json?icons=${icon}"; log url
+
+# get svg string (`brew install httpie`, `brew install jq`)
+svg=$(http get $url | jq -r ".icons.\"$icon\".body")
+
+# wrap in svg tag
+svg="<svg xmlns=\"http://www.w3.org/2000/svg\">${svg}</svg>"
+
+# save to file
+svg_name="${prefix}-${icon}.svg"
+out_file="${HOME}/Downloads/${svg_name}"; log out_file
+echo -n $svg > $out_file
+
+# return the file name
+echo -n $svg_name
+```
+
+:::
+
 ## `.popcliptxt` files
 
 You can save a snippet to a plain text file with a `.popcliptxt` extension. When
@@ -254,3 +304,14 @@ file and install it. When using this method:
 
 - There is no size limit on the snippet.
 - The unsigned extension warining will always be shown.
+
+## Further examples
+
+There are lots of snippet examples posted in the [PopClip Forum](https://forum.popclip.app/c/extensions/6). Here are a few
+interesting ones that demonstrate various techniques:
+
+- [Markdown highlighting](https://forum.popclip.app/t/markdown-highlighting/556)
+- [A PopClip Extension for ChatGPT](https://forum.popclip.app/t/a-popclip-extension-for-chatgpt/1283)
+- [Text-to-speech with Azure API](https://forum.popclip.app/t/new-snippet-azure-text-to-speech/1790)
+- [Search DuchDuckGo in DuckDuckGo browser](https://forum.popclip.app/t/snippet-search-duckduckgo-in-duckduckgo-browser/1763)
+- [S p a c e d w o r d s](https://forum.popclip.app/t/s-p-a-c-e-d-w-o-r-d-s/1705)
