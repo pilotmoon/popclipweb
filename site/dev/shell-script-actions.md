@@ -9,12 +9,12 @@ line, such as Bash, Python, Ruby, Perl, etc.
 A Shell Script action is defined by the presence of either a `shell script` or
 `shell script file` field, as follows:
 
-| Key                 | Type              | Description                                                                                                                                                                                                                                                                       |
-| ------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `shell script`      | String            | A string to be run as a shell script. The string will be passed via standard input to the specified `interpreter`, invoked without arguments.                                                                                                                                     |
-| `shell script file` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                        |
-| `interpreter`       | String (optional) | Specify the interpreter to use for `shell script` or `shell script file`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`. |
-| `stdin`             | String (optional) | Name of a [script field](./script-fields.md) whose value should be passed to the script via standard input. For example, `text` to pass the matched text (same as `$POPCLIP_TEXT` variable). If omitted, no standard input is provided to the script.                             |
+| Key                 | Type              | Description                                                                                                                                                                                                                                                                                   |
+| ------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shell script`      | String            | A string to be run as a shell script. The string will be passed via standard input to the specified `interpreter`, invoked without arguments.                                                                                                                                                 |
+| `shell script file` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                                    |
+| `interpreter`       | String (optional) | Specify the interpreter to use for `shell script` or `shell script file`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`.             |
+| `stdin`             | String (optional) | For script specified as `shell script file` only. The name of a [script field](./script-fields.md) whose value should be passed via standard input. For example, `text` to pass the matched text (same as `$POPCLIP_TEXT` variable). If omitted, no standard input is provided to the script. |
 
 ### Shell script file execution
 
@@ -57,24 +57,42 @@ Any other exit code will be treated as a general error.
 
 ## Examples
 
-Here is a simple example shell script [snippet](./snippets):
+::: info About these examples
 
-```yaml
-#popclip
-name: Say
-interpreter: sh
-shell script: echo "$POPCLIP_TEXT" | say # pipe text to `say` command
-```
+The examples are given using the [inverted snippet syntax](./snippets#inverted-syntax). 
 
-Some examples of return a string back to PopClip via stdout, in different
-languages, using the [inverted snippet syntax](./snippets#inverted-syntax):
+:::
+
+Example of passing the selected text to the `say` command to be spoken aloud:
 
 ::: code-group
 
-```sh
-#!/bin/sh
+```bash [Using variable]
+#!/bin/bash
 # #popclip
-# name: Helloworld zsh
+# name: Say (variable)
+echo "$POPCLIP_TEXT" | say
+```
+
+```bash [Using stdin]
+#!/bin/bash
+# #popclip
+# name: Say (stdin)
+# stdin: text
+say
+```
+
+:::
+
+Some examples of returning a string back to PopClip via stdout, in different
+languages:
+
+::: code-group
+
+```bash
+#!/bin/bash
+# #popclip
+# name: Helloworld in bash
 # after: show-result
 echo -n "Hello, ${POPCLIP_TEXT}!"  # `-n` for no newline at end
 ```
@@ -82,7 +100,7 @@ echo -n "Hello, ${POPCLIP_TEXT}!"  # `-n` for no newline at end
 ```python
 #!/usr/bin/env python3
 # #popclip
-# name: Helloworld python
+# name: Helloworld in python
 # after: show-result
 import os
 print('Hello, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
@@ -92,7 +110,7 @@ print('Hello, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
 ```ruby
 #!/usr/bin/env ruby
 # #popclip
-# name: Helloworld ruby
+# name: Helloworld in ruby
 # after: show-result
 print 'Hello, ' + ENV['POPCLIP_TEXT'] + '!'
 ```
@@ -100,7 +118,7 @@ print 'Hello, ' + ENV['POPCLIP_TEXT'] + '!'
 ```perl
 #!/usr/bin/env perl
 # #popclip
-# name: Helloworld perl
+# name: Helloworld in perl
 # after: show-result
 print "Hello, $ENV{'POPCLIP_TEXT'}!\n";
 ```
@@ -108,7 +126,7 @@ print "Hello, $ENV{'POPCLIP_TEXT'}!\n";
 ```swift
 #!/usr/bin/env swift
 // #popclip
-// name: Helloworld swift
+// name: Helloworld in swift
 // after: show-result
 import Foundation
 let text = ProcessInfo.processInfo.environment["POPCLIP_TEXT"]!
