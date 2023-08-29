@@ -113,7 +113,7 @@ interpreter: zsh
 shell script: say -v Daniel $POPCLIP_TEXT
 ```
 
-A [JavaScript](./javascript-actions) example, including multiple actions:
+A [JavaScript](./js-actions) example, including multiple actions:
 
 ::: code-group
 

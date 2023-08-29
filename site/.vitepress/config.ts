@@ -139,10 +139,23 @@ export default defineConfig({
                   text: "AppleScript actions",
                   link: "/dev/applescript-actions",
                 },
-                { text: "JavaScript actions", link: "/dev/javascript-actions" },                           
+                {
+                  items: [
+                    { text: "Script variables", link: "/dev/script-variables" },
+                  ],
+                },
+                { text: "JavaScript actions", link: "/dev/js-actions" },
+                {
+                  items: [
+                    {
+                      text: "JS environment",
+                      link: "/dev/js-environment",
+                    },
+                  ],
+                },
               ],
             },
-            { text: "Script variables", link: "/dev/script-variables" },
+
             { text: "Icons", link: "/dev/icons" },
             { text: "Changelog", link: "/dev/changes" },
           ],

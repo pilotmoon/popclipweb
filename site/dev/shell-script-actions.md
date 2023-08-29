@@ -14,7 +14,7 @@ A Shell Script action is defined by the presence of either a `shell script` or
 | `shell script`      | String            | A string to be run as a shell script. The string will be passed via standard input to the specified `interpreter`, invoked without arguments.                                                                                                                                     |
 | `shell script file` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                        |
 | `interpreter`       | String (optional) | Specify the interpreter to use for `shell script` or `shell script file`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`. |
-| `stdin`             | String (optional) | For script specified as `shell script file` only. Set the name of a [script variable](./script-variables) to pass via standard input (stdin). If omitted, no standard input is provided to the script.                                                            |
+| `stdin`             | String (optional) | For script specified as `shell script file` only. Set the name of a [script variable](./script-variables) to pass via standard input (stdin). If omitted, no standard input is provided to the script.                                                                            |
 
 ### Shell script file execution
 
@@ -50,16 +50,12 @@ to the `after` step.
 
 ## Indicating errors
 
-Shell scripts may indicate success or specific failures by the use of exit
-codes:
+Shell scripts should indicate success with an exit code of `0`, and should
+indicate failure with a non-zero exit code. On failure, PopClip will display the
+shaking-'X'.
 
-| Result                                                                   | Exit code |
-| ------------------------------------------------------------------------ | --------- |
-| Success                                                                  | `0`       |
-| General error<br>(PopClip will display 'X')                              | `1`       |
-| Error with user's settings<br>(PopClip will show the extension settings) | `2`       |
-
-Any other exit code will be treated as a general error.
+Scripts may signal that there is an error with the user's settings with specific
+error code `2`. In this case, PopClip will pop up the extension settings UI.
 
 ## Examples
 

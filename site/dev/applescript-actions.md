@@ -1,8 +1,11 @@
 # AppleScript actions
 
-An AppleScript action runs an AppleScript. The script may be supplied either as
-a plain text script (`.applescript` file), or as a compiled script (`.scpt`
-file, created in the Script Editor app).
+An AppleScript action runs AppleScript code. AppleScript's strength is in
+automation, since it can be used to control other apps. Thus it's a good choice
+for extensions that need to interact with other apps.
+
+The script may be supplied either as a plain text script (`.applescript` file),
+or as a compiled script (`.scpt` file, created in the Script Editor app).
 
 ## Properties
 
@@ -51,20 +54,14 @@ Any text returned by the script will be made available to the `after` step.
 
 ## Indicating errors
 
-Shell scripts may indicate failure by signalling an error.
+AppleScripts should indicate success by exiting normally, and should indicate
+failure by signalling an error. On error, PopClip will display the shaking-'X'.
 
-| Result                                                                   | Exit code                        |
-| ------------------------------------------------------------------------ | -------------------------------- |
-| Success                                                                  | Complete without throwing error. |
-| General error<br>(PopClip will display 'X')                              | Signal an error with code `501`. |
-| Error with user's settings<br>(PopClip will show the extension settings) | Signal an error with code `502`. |
-
-Any other error code will be treated as a general error.
-
-An example command to signal an error is:
+To indicate an error with the user's settings, and pop up the extension's
+options UI, signal the specific error code `502`. For example:
 
 ```applescript
-error "Something went wrong" number 501
+error "Missing foo parameter" number 502
 ```
 
 ## Examples
