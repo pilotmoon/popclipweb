@@ -257,56 +257,6 @@ tell application "LaunchBar"
 end tell
 ```
 
-An example of a long zsh script:
-
-::: details Long zsh script example
-
-```zsh
-#!/bin/zsh
-# Download an Iconify icon to Downloads folder as SVG
-# Example input: simple-icons:vivaldi
-#
-# #popclip
-# popclip version: 4050
-# name: GetIcon
-# regex: ([a-z0-9]+(?:-[a-z0-9]+)*):([a-z0-9]+(?:-[a-z0-9]+)*)
-# stdin: text
-# after: copy-result
-#
-set -e # exit on errors
-eval "$(/opt/homebrew/bin/brew shellenv)"
-log() { # print named params to stderr
-  for name in $*; do
-    echo ${(r:8:)name} ${(P)name} >>/dev/stderr
-  done
-}
-
-# get input from stdin
-input=$(cat); log input
-
-# parse the input
-parts=(${(s(:))input}) # split on :
-prefix=$parts[1]
-icon=$parts[2]
-url="https://api.iconify.design/${prefix}.json?icons=${icon}"; log url
-
-# get svg string (`brew install httpie`, `brew install jq`)
-svg=$(http get $url | jq -r ".icons.\"$icon\".body")
-
-# wrap in svg tag
-svg="<svg xmlns=\"http://www.w3.org/2000/svg\">${svg}</svg>"
-
-# save to file
-svg_name="${prefix}-${icon}.svg"
-out_file="${HOME}/Downloads/${svg_name}"; log out_file
-echo -n $svg > $out_file
-
-# return the file name
-echo -n $svg_name
-```
-
-:::
-
 ## `.popcliptxt` files
 
 You can save a snippet to a plain text file with a `.popcliptxt` extension. When

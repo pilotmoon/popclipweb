@@ -96,7 +96,7 @@ say $POPCLIP_TEXT
 say
 ```
 
-```zsh [With voice option]
+```zsh [With option]
 #!/bin/zsh
 # #popclip
 # name: Say (option)
@@ -159,44 +159,59 @@ print("Hello, \(text)!")
 
 :::
 
-A more substantial script (thanks to [Will B Chang](https://forum.popclip.app/t/new-snippet-azure-text-to-speech/1790)):
+A more substantial example:
+
+::: details Example snippet: Download an Iconify icon as SVG
 
 ```zsh
 #!/bin/zsh
-# Text-to-speech in PopClip using Azure Cognitive Services
+# Download an Iconify icon to Downloads folder as SVG
+# Example input: simple-icons:vivaldi
 #
 # #popclip
-# name: Azure TTS
-# icon: symbol:message.and.waveform
+# popclip version: 4050
+# name: GetIcon
+# regex: ([a-z0-9]+(?:-[a-z0-9]+)*):([a-z0-9]+(?:-[a-z0-9]+)*)
+# stdin: text
+# after: copy-result
+#
+set -e # exit on errors
+eval "$(/opt/homebrew/bin/brew shellenv)"
+log() { # print named params to stderr
+  for name in $*; do
+    echo ${(r:8:)name} ${(P)name} >>/dev/stderr
+  done
+}
 
-# Please apply for your own key <https://portal.azure.com/>
-AZURE_REGION=
-AZURE_SUBSCRIPTION_KEY=
+# get input from stdin
+input=$(cat); log input
 
-# Create a temporary audio file
-temp_audio_file=$(mktemp)
+# parse the input
+parts=(${(s(:))input}) # split on :
+prefix=$parts[1]
+icon=$parts[2]
+url="https://api.iconify.design/${prefix}.json?icons=${icon}"; log url
 
-# Use curl to download and save the audio data to the temporary file
-curl -X POST "https://${AZURE_REGION}.tts.speech.microsoft.com/cognitiveservices/v1" \
-     -H "Ocp-Apim-Subscription-Key: ${AZURE_SUBSCRIPTION_KEY}" \
-     -H "Content-Type: application/ssml+xml" \
-     -H "X-Microsoft-OutputFormat: audio-16khz-32kbitrate-mono-mp3" \
-     -d "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xml:lang=\"en-US\">
-    <voice name=\"en-US-JennyMultilingualNeural\">
-        $POPCLIP_TEXT
-    </voice>
-</speak>" -so "$temp_audio_file"
+# get svg string (`brew install httpie`, `brew install jq`)
+svg=$(http get $url | jq -r ".icons.\"$icon\".body")
 
-# Play the temporary audio file using afplay
-afplay "$temp_audio_file"
+# wrap in svg tag
+svg="<svg xmlns=\"http://www.w3.org/2000/svg\">${svg}</svg>"
 
-# Clean up the temporary audio file when you're done with it
-rm "$temp_audio_file"
+# save to file
+svg_name="${prefix}-${icon}.svg"
+out_file="${HOME}/Downloads/${svg_name}"; log out_file
+echo -n $svg > $out_file
+
+# return the file name
+echo -n $svg_name
 ```
+
+:::
 
 ## Script development tips
 
-While developing a script, you can test it from the command line by setting the
+While developing a script, you can test it from the command line by setting any
 required variables in the call. For example:
 
 ```zsh
@@ -209,4 +224,11 @@ Or export them before calling the script:
 export POPCLIP_TEXT="my test text"
 export POPCLIP_OPTION_FOO="foo"
 ./myscript
+```
+
+When testing a script that uses the `stdin` field, you can pipe in a string from
+the command line:
+
+```zsh
+echo "my test text" | ./myscript
 ```
