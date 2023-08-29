@@ -47,15 +47,36 @@ The **modifiers** are specified with the following keywords:
 
 ## Examples
 
-A "highlight" extension supporting a couple of different apps:
-
-A more complex example, using the `before` step to paste then presss return:
+A simple key press to make text bold in most editors:
 
 ```yaml
-# popclip
+#popclip
+name: Bold
+icon: B
+key combo: command b
+```
+
+Pressing a sequence of keys:
+
+```yaml
+#popclip
 name: Paste and Enter
 icon: square monospaced ↵
-requirements: [paste]
-before: paste
-key combo: return
+requirements: [paste] # only show action when there is something to paste
+key combos: 
+- command v
+- return
+```
+
+A "Superscript" extension, supporting a couple of different apps:
+
+```yaml
+#popclip snippet to change to superscript in MS Word and Pages
+name: Superscript
+icon: iconify:tabler:superscript
+actions:
+- required apps: [com.microsoft.Word]
+  key combo: command shift =
+- required apps: [com.apple.iWork.Pages]
+  key combo: command control +
 ```
