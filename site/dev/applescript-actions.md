@@ -24,7 +24,7 @@ script.
 | Key          | Type             | Description                                                                                                                                                                                                                                                                 |
 | ------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `handler`    | String           | Name of a handler within the script to call.                                                                                                                                                                                                                                |
-| `parameters` | Array (optional) | Array of strings specifying names of values to pass as parameters to the handler, as defined in [Script Fields](#script-fields). The number and order of parameters must match exactly what the handler expects to receive. Omit or leave empty if there are no parameters. |
+| `parameters` | Array (optional) | Array of strings specifying names of values to pass as parameters to the handler, as defined in [Script variables](./script-variables.md). The number and order of parameters must match exactly what the handler expects to receive. Omit or leave empty if there are no parameters. |
 
 ## AppleScript format
 
@@ -44,7 +44,7 @@ with an `after` key. For returning errors, see
 Within a plain text script, you may use `{popclip text}` as a placeholder for
 the selected text. PopClip will replace the placeholder with the actual text
 before executing the script. Other placeholders are also available; see
-[Script Fields](#script-fields).
+[Script variables](./script-variables.md).
 
 Here is an example `.applescript` file with placeholder strings:
 
