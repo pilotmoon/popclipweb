@@ -28,8 +28,8 @@ and new names is given in [Key name mapping](#key-name-mapping).
 
 ## Example
 
-Before diving in to the details, let's look at an example of a config dictionary
-for a published extension. This is based on the
+Before diving in to the details, let's look at an example config dictionary for
+a published extension. This is based on the
 [Yoink extension](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Yoink.popclipext):
 
 ::: code-group
