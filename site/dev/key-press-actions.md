@@ -8,7 +8,7 @@ A Key Press action is defined by the presence of a `key combo` or `key combos` f
 
 | Key          | Type    | Description                                                                                                     |
 | ------------ | ------- | --------------------------------------------------------------------------------------------------------------- |
-| `key combo`  | String  | The key combination to press, as defined in [Key Combo String Format](#key-combo-string-format).                |
+| `key combo`  | String  | The key combination to press, as defined in [String format](#key-combo-string-format).                |
 | `key combo`  | Integer | If a number is given, it is interpreted directly as a virtual key code (see below).                             |
 | `key combos` | Array   | Instead of a single key combo, you can supply array of them. PopClip will press all the key combos in sequence, waiting 0.1 seconds in between each key press. |
 
@@ -16,7 +16,7 @@ A Key Press action is defined by the presence of a `key combo` or `key combos` f
 
 Key Press actions do not receive any input or return any output.
 
-## Key Combo String Format
+## String format
 
 The string format is a convenient human-readable format that can specify a key and modifiers. It is a space-separated list of zero or more modifiers (the order does not matter), followed by the key to press. The key combo string is not case sensitive.
 
@@ -61,28 +61,3 @@ requirements: [paste]
 before: paste
 key combo: 0x24
 ```
-
-
-<!-- 
-## Modifier values
-
-This table gives the numeric values for every possiblme modifier combination.
-
-|Keys|Value|
-|----|-----|
-|none|0|
-|⇧|131072|
-|⌃|262144|
-|⌃⇧|393216|
-|⌥|524288|
-|⌥⇧|655360|
-|⌃⌥|786432|
-|⌃⌥⇧|917504|
-|⌘|1048576|
-|⇧⌘|1179648|
-|⌃⌘|1310720|
-|⌃⇧⌘|1441792|
-|⌥⌘|1572864|
-|⌥⇧⌘|1703936|
-|⌃⌥⌘|1835008|
-|⌃⌥⇧⌘|1966080| -->
