@@ -93,7 +93,7 @@ with braces):
 
 ```yaml
 #popclip service example
-{ name: Make Sticky, service name: Make Sticky }
+{ name: Stickies, service name: Make Sticky }
 ```
 
 A [Key Press](./key-press-actions) example:

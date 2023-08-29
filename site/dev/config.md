@@ -11,8 +11,8 @@ underlying structure is the same.
 ::: tip Key names
 
 PopClip is very flexible about how you name keys. In this documentation you'll
-see keys named in lowercase with spaces, for example `required apps`. However,
-PopClip will treat `Required Apps`, `requiredApps`, `RequiredApps`,
+mostly see keys named in lowercase with spaces, for example `required apps`.
+However, PopClip will treat `Required Apps`, `requiredApps`, `RequiredApps`,
 `required_apps`, `required-apps` and `REQUIRED_APPS` as equivalents. It doesn't
 matter which convention you use.
 
@@ -23,6 +23,86 @@ internally. -->
 Additionally, older versions of PopClip used different names for some keys.
 Where there is a new name, the old name is also still accepted. A table of old
 and new names is given in [Key name mapping](#key-name-mapping).
+
+:::
+
+## Example
+
+Before diving in to the details, let's look at an example of a config dictionary
+for a published extension. This is based on the
+[Yoink extension](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Yoink.popclipext):
+
+::: code-group
+
+```json
+{
+  "identifier": "at.EternalStorms.Yoink.PopClipExtension",
+  "popclipVersion": 3785,
+  "name": "Yoink",
+  "icon": "yoink.png",
+  "app": {
+    "name": "Yoink",
+    "link": "https://eternalstorms.at/yoink/mac",
+    "checkInstalled": true,
+    "bundleIdentifiers": [
+      "at.EternalStorms.Yoink",
+      "at.EternalStorms.Yoink-setapp",
+      "at.EternalStorms.Yoink-demo"
+    ]
+  },
+  "serviceName": "Add Selected Text to Yoink",
+  "captureHtml": true,
+  "description": "Add the selected text to Yoink."
+}
+```
+
+```yaml
+identifier: at.EternalStorms.Yoink.PopClipExtension
+popclip version: 3785
+name: Yoink
+icon: yoink.png
+app:
+  name: Yoink
+  link: https://eternalstorms.at/yoink/mac
+  check installed: true
+  bundle identifiers:
+    - at.EternalStorms.Yoink
+    - at.EternalStorms.Yoink-setapp
+    - at.EternalStorms.Yoink-demo
+service name: Add Selected Text to Yoink
+capture html: true
+description: Add the selected text to Yoink.
+```
+
+:::
+
+Not all of those fields are strictly needed. As we have already seen in
+[Snippets](./snippets.md), we can also express a similar extension very
+minimally, at the loss of some of the niceties that the fleshed-out version
+provides:
+
+::: code-group
+
+```json
+{
+  "name": Yoink,
+  "serviceName": Add Selected Text to Yoink
+}
+```
+
+```yaml
+name: Yoink
+service name: Add Selected Text to Yoink
+```
+
+:::
+
+::: tip Minimal or maximal?
+
+In general, if you're writing an extension for your own use, you can freely omit
+any fields that you don't need. But if you're preparing an extension for
+publication, you should flesh out the config as much as possible, to provide the
+best user experience for your extension.
 
 :::
 
@@ -75,7 +155,7 @@ following structure.
 
 | Key             | Type                 | Required?                    | Description                                                                                                                                                                                                                                                         |
 | --------------- | -------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier`    | String               | Required                     | Identifying string for this option. This is passed to your script. The identifier will be downcased or upcased for AppleScript and Shell Script targets, respectively — see [Script variables](./script-variables.md).                                                        |
+| `identifier`    | String               | Required                     | Identifying string for this option. This is passed to your script. The identifier will be downcased or upcased for AppleScript and Shell Script targets, respectively — see [Script variables](./script-variables.md).                                              |
 | `type`          | String               | Required                     | One of the following: `string` (text box for free text entry), `boolean` (a check box), `multiple` (pop-up box with multiple choice options), `heading` (not actually an option, but serves as a heading in the prefs window) or `password` (password entry field). |
 | `label`         | String (Localizable) | Required                     | The label to appear in the UI for this option.                                                                                                                                                                                                                      |
 | `description`   | String (Localizable) | Optional                     | A longer description to appear in the UI to explain this option.                                                                                                                                                                                                    |

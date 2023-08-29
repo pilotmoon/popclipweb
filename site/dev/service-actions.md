@@ -20,6 +20,12 @@ The selected plain text will be sent as input to the service. If `captureHtml` a
 
 Service actions never return any output.
 
-## Example
+## Examples
 
-TODO.
+Simple snippet calling a service:
+
+```yaml
+#popclip
+name: "Deliveries"
+service name: "Add to Deliveries"
+```
