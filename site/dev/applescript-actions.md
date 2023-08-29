@@ -1,9 +1,8 @@
-
 # AppleScript actions
 
-An AppleScript action runs an AppleScript. The script may be supplied either as a
-plain text script (`.applescript` file), or as a compiled script (`.scpt` file,
-created in the Script Editor app).
+An AppleScript action runs an AppleScript. The script may be supplied either as
+a plain text script (`.applescript` file), or as a compiled script (`.scpt`
+file, created in the Script Editor app).
 
 ## Properties
 
@@ -16,17 +15,17 @@ An AppleScript action is defined by the presence of either an `applescript`,
 | `applescript file` | String                | File name of an `.applescript` or `.scpt` file to run.     |
 | `applescript call` | Dictionary (optional) | A named handler to call.                                   |
 
-## The `applescript call` dictionary
+### The `applescript call` dictionary
 
 The `applescript call` dictionary lets you call a named handler within the
 script.
 
-| Key          | Type             | Description                                                                                                                                                                                                                                                                 |
-| ------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `handler`    | String           | Name of a handler within the script to call.                                                                                                                                                                                                                                |
+| Key          | Type             | Description                                                                                                                                                                                                                                                                           |
+| ------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `handler`    | String           | Name of a handler within the script to call.                                                                                                                                                                                                                                          |
 | `parameters` | Array (optional) | Array of strings specifying names of values to pass as parameters to the handler, as defined in [Script variables](./script-variables.md). The number and order of parameters must match exactly what the handler expects to receive. Omit or leave empty if there are no parameters. |
 
-## AppleScript format
+### AppleScript format
 
 PopClip can execute an AppleScript supplied either as a **plain text script**
 (`.applescript` file), or as a **compiled script** (`.scpt` file, created in the
@@ -37,18 +36,57 @@ The script may optionally return a string (e.g. `return "foo"`), and act on it
 with an `after` key. For returning errors, see
 [Indicating Errors](#indicating-errors).
 
-## Examples
-
-### Plain text AppleScript with placeholder strings
+## Input and output
 
 Within a plain text script, you may use `{popclip text}` as a placeholder for
 the selected text. PopClip will replace the placeholder with the actual text
 before executing the script. Other placeholders are also available; see
 [Script variables](./script-variables.md).
 
-Here is an example `.applescript` file with placeholder strings:
+Within a compiled script (`.scpt`), you cannot use placeholder strings. Instead,
+you need to put your code in a handler and pass values to it. See
+[Compiled `.scpt` file](#compiled-scpt-file) example.
+
+Any text returned by the script will be made available to the `after` step.
+
+## Indicating errors
+
+TODO
+
+## Examples
+
+### Snippet examples
+
+Scripting another app:
 
 ```applescript
+-- #popclip
+-- name: LaunchBar
+-- icon: LB
+-- language: applescript
+tell application "LaunchBar"
+  set selection to "{popclip text}"
+end tell
+```
+
+Returning text from the script:
+
+```applescript
+-- #popclip
+-- name: AppleScript HTML
+-- capture html: true
+-- after: show-result
+-- language: applescript
+return "Your HTML: " & "{popclip html}"
+```
+
+### Package examples
+
+#### Plain text `.applescript` file
+
+::: code-group
+
+```applescript [TextEditClip.applescript]
 tell application "TextEdit"
  activate
  set theDocument to make new document
@@ -56,15 +94,23 @@ tell application "TextEdit"
 end tell
 ```
 
-### Calling an AppleScript handler with parameters
+```json [Config.json]
+{
+  "name": "TextEdit Clip",
+  "applescriptFile": "TextEditClip.applescript"
+}
+```
 
-Within a compiled script (`.scpt`), you cannot use placeholder strings. Instead,
-you need to put your code in a handler and pass values to it.
+:::
+
+#### Compiled `.scpt` file
 
 Here is a same example as above, but this time wrapped in a handler named
-'newDocument' that takes two parameters.
+`newDocument` that takes two parameters.
 
-```applescript
+::: code-group
+
+```applescript [TextEditClip.scpt]
 on newDocument(theText, theUrl) --this is a handler
   tell application "TextEdit"
     activate
@@ -74,24 +120,24 @@ on newDocument(theText, theUrl) --this is a handler
 end newDocument
 ```
 
-And a `Config.json` file to call this might be:
-
-```json
+```json [Config.json]
 {
   "name": "TextEdit Clip",
-  "applescript file": "example.scpt",
-  "applescript call": {
+  "applescriptFile": "TextEditClip.scpt",
+  "applescriptCall": {
     "handler": "newDocument",
     "parameters": ["text", "browser url"]
   }
 }
 ```
 
+:::
+
 ## Using JXA Scripts
 
-Note that when using a compiled script, these can be be 'JavaScript for
-Automation' (JXA) scripts instead of AppleScripts. Everything works the same
-except 'handlers' correspond to top level JXA functions. JXA cannot be used in
+Note that when using a compiled script, these can be be JavaScript for
+Automation (JXA) scripts instead of AppleScripts. Everything works the same
+except handlers correspond to top level JXA functions. JXA cannot be used in
 plain text scripts.
 
 An example of an extension using a JXA script is
