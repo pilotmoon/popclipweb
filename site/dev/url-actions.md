@@ -29,11 +29,9 @@ You can substitute `***` as a shorthand for `{popclip text}`.
 
 The selected plain text will be inserted into the URL, replacing the `{popclip text}` placeholder if present. The inserted string will be automatically URL-encoded by PopClip.
 
-URL actions never return any output.
-
-## Options
-
 Option parameters can be inserted in the URL, in the same format as for AppleScript actions. See [example](#use-of-option-parameter).
+
+URL actions never return any output.
 
 ## Examples
 

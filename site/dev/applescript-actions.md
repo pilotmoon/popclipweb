@@ -38,9 +38,9 @@ with an `after` key. For returning errors, see
 
 ## Input and output
 
-Within a plain text script, you may use `{popclip text}` as a placeholder for
-the selected text. PopClip will replace the placeholder with the actual text
-before executing the script. Other placeholders are also available; see
+Within a plain text script, use `{popclip text}` as a placeholder for the
+selected text. PopClip will replace the placeholder with the actual text before
+executing the script. Other placeholders are also available; see
 [Script variables](./script-variables.md).
 
 Within a compiled script (`.scpt`), you cannot use placeholder strings. Instead,
