@@ -30,9 +30,10 @@ extension:
 ```
 Say.popclipext/                -- Package folder
 │
-├── _Signature.plist           -- Signature (signed extensions only)
-├── Config.plist               -- Config file
-├── say.sh                     -- Script file
+├── CHANGELOG.md               -- Changelog file
+├── Config.json                -- Config file
+├── README.md                  -- Readme file
+├── say.zsh                    -- Script file
 └── speechicon.png             -- Icon file
 ```
 

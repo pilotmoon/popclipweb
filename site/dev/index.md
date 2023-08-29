@@ -72,20 +72,12 @@ Please be aware that PopClip extensions can contain arbitrary executable code.
 Be careful about the extensions you create, and be wary about loading extensions
 you get from elsewhere.
 
-PopClip extensions published in the [directory](/extensions/) are digitally
+PopClip extension packages published in the [directory](/extensions/) are digitally
 signed. PopClip will install them directly without showing any warning to the
 user. If you create your own extension, it will not be signed. PopClip will
 display a warning dialog when you try to install it:
 
 ![Example unsigned warning.](../guide/media/shot-unsigned-warning.png#h400)
-
-::: tip Snippets
-
-Snippets cannot be signed, but only snippets containing Shell Script actions,
-AppleScript actions or JavaScript actions with the network entitlement will
-trigger the unsigned warning.
-
-:::
 
 ## Development environment
 

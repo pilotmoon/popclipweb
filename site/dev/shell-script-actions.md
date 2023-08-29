@@ -14,7 +14,7 @@ A Shell Script action is defined by the presence of either a `shell script` or
 | `shell script`      | String            | A string to be run as a shell script. The string will be passed via standard input to the specified `interpreter`, invoked without arguments.                                                                                                                                     |
 | `shell script file` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                        |
 | `interpreter`       | String (optional) | Specify the interpreter to use for `shell script` or `shell script file`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`. |
-| `stdin`             | String (optional) | For script specified as `shell script file` only. Set the name of a [script variable](./script-variables) to pass the contents of via standard input (stdin). If omitted, no standard input is provided to the script.                                                                    |
+| `stdin`             | String (optional) | For script specified as `shell script file` only. Set the name of a [script variable](./script-variables) to pass via standard input (stdin). If omitted, no standard input is provided to the script.                                                            |
 
 ### Shell script file execution
 
@@ -40,6 +40,11 @@ Within the script, access the selected text with the shell variable
 `POPCLIP_TEXT`. Many other variables are also available, as listed in
 [Script variables](./script-variables.md).
 
+Optionally, the script may read from standard input (stdin). If the `stdin`
+field is set, the script will receive the contents of the specified variable via
+stdin. For example, if `stdin` is set to `text`, the script will receive the
+contents of the `POPCLIP_TEXT` variable via stdin.
+
 Any text returned by the script via standard output (stdout) will be available
 to the `after` step.
 
@@ -58,10 +63,17 @@ Any other exit code will be treated as a general error.
 
 ## Examples
 
+### Example package
+
+The
+[Say](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Say.popclipext)
+extension demonstrates a packaged shell script extension.
+
+### Example snippets
+
 ::: info About these examples
 
-The examples are given using the
-[inverted snippet syntax](./snippets#inverted-syntax).
+The examples are given using the [inverted syntax](./snippets#inverted-syntax).
 
 :::
 
