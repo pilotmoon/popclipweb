@@ -63,13 +63,13 @@ Any other exit code will be treated as a general error.
 
 ## Examples
 
-### Example package
+### Package example
 
 The
 [Say](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Say.popclipext)
 extension demonstrates a packaged shell script extension.
 
-### Example snippets
+### Snippet examples
 
 ::: info About these examples
 

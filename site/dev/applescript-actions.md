@@ -51,7 +51,21 @@ Any text returned by the script will be made available to the `after` step.
 
 ## Indicating errors
 
-TODO
+Shell scripts may indicate failure by signalling an error.
+
+| Result                                                                   | Exit code                        |
+| ------------------------------------------------------------------------ | -------------------------------- |
+| Success                                                                  | Complete without throwing error. |
+| General error<br>(PopClip will display 'X')                              | Signal an error with code `501`. |
+| Error with user's settings<br>(PopClip will show the extension settings) | Signal an error with code `502`. |
+
+Any other error code will be treated as a general error.
+
+An example command to signal an error is:
+
+```applescript
+error "Something went wrong" number 501
+```
 
 ## Examples
 
@@ -105,8 +119,7 @@ end tell
 
 #### Compiled `.scpt` file
 
-Here is a same example as above, but this time wrapped in a handler named
-`newDocument` that takes two parameters.
+When using a `.scpt` file, parameters must be passed by calling a handler.
 
 ::: code-group
 
