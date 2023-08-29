@@ -27,7 +27,7 @@ Some examples:
 - `command space` - *Hold command, and press space bar*
 - `f1` - *The F1 key on its own with no modifiers*
 - `option numpad /` - *Hold option, press '/' key on numeric keypad*
-- `option 0x4b` - *0x4b is the hex numeric code for numeric keypad '/'', equivalent to `option numpad /`*
+- `0x74` - *0x74 is the hex numeric code for the Page Up key*
 
 The **key** is specified in one of the following ways:
 
@@ -49,15 +49,13 @@ The **modifiers** are specified with the following keywords:
 
 A "highlight" extension supporting a couple of different apps:
 
-
-
-A more complex example with a raw key code and using some more fields:
+A more complex example, using the `before` step to paste then presss return:
 
 ```yaml
-# popclip extension snippet - more complex example
+# popclip
 name: Paste and Enter
 icon: square monospaced ↵
 requirements: [paste]
 before: paste
-key combo: 0x24
+key combo: return
 ```
