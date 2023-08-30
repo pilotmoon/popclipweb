@@ -3,7 +3,7 @@ outline: deep
 ---
 
 <script setup lang="ts">
-import NewsBox from './src/NewsBox.vue'
+import NewsBox from '/src/NewsBox.vue'
 </script>
 
 # Welcome
