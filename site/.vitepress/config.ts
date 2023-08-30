@@ -151,8 +151,10 @@ export default defineConfig({
                       text: "JS environment",
                       link: "/dev/js-environment",
                     },
+                    { text: "JS module extensions", link: "/dev/js-modules" },
                   ],
                 },
+                
               ],
             },
 

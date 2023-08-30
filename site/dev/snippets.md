@@ -196,9 +196,10 @@ The inverted syntax is supported for JavaScript, AppleScript and shell script
 actions.
 
 When using the inverted syntax, the snippet's whole text becomes the
-`javascript file`, `applescript file` or `shell script file` for the extension,
-accordingly. The config header should be added using the appropriate comment
-style for the source language (see [examples](#inverted-syntax-examples) below).
+`javascript file`, `applescript file`, `shell script file`, or `module` for the
+extension, accordingly. The config header should be added using the appropriate
+comment style for the source language (see [examples](#inverted-syntax-examples)
+below).
 
 ::: info When to use inverted syntax?
 
@@ -213,11 +214,11 @@ approach might still be preferable.
 When using the inverted syntax, the following config fields have special
 meanings, to determine what type of action is created:
 
-| Key           | Type    | Description                                                                                                                                                |
-| ------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `interpreter` | String  | When an interpreter is specified, a [Shell Script action](./shell-script-actions) will be created.                                                         |
-| `language`    | String  | Specify `javascript` to create a [JavaScript action](./js-actions), or `applescript` to create an [AppleScript action](./applescript-actions).             |
-| `module`      | Boolean | For JavaScript actions only. Set `true` if the source file should be loaded as a module, or `false` (default) if it should be loaded as a simple function. |
+| Key           | Type    | Description                                                                                                                                                                           |
+| ------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `interpreter` | String  | When an interpreter is specified, a [Shell Script action](./shell-script-actions) will be created.                                                                                    |
+| `language`    | String  | Specify `javascript` to create a [JavaScript action](./js-actions) or [module](./js-modules), or `applescript` to create an [AppleScript action](./applescript-actions). |
+| `module`      | Boolean | For JavaScript only, set `true` if the source file should be loaded as a module, or `false` (default) if it should be loaded as an action.                                            |
 
 ::: tip Language field shorthand
 
