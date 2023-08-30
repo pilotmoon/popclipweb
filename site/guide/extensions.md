@@ -2,7 +2,7 @@
 import DirectoryCount from '../src/DirectoryCount.vue'
 </script>
 
-# Adding Extensions
+# Extensions
 
 Extensions add new actions to PopClip. You can install ready-made extensions and also create your own. 
 

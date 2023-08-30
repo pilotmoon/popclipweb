@@ -6,12 +6,16 @@ outline: deep
 import NewsBox from './src/NewsBox.vue'
 </script>
 
-# PopClip Documentation Homepage
+# Welcome
+
+Welcome to the official website for PopClip.
 
 <NewsBox />
 
-**Welcome** to the official website for PopClip, the Mac utility tool that pops
-up with a menu of actions when you select text on your screen.
+## What is PopClip?
+
+PopClip is a Mac utility tool that pops up with a menu of actions when you
+select text on your screen.
 
 ![PopClip screenshot](/media/popclip.jpg "Screenshot of PopClip")
 

@@ -24,15 +24,20 @@ export default defineConfig({
     // },
     nav: [
       {
-        text: "Documentation",
+        text: "Guide",
         activeMatch:
-          "^(/home|/guide/|/dev/|/changes|/download|/buy|/kb/|/terms|/privacy|/support|/beta)",
+          "^(/home|/guide/|/changes|/download|/buy|/kb/|/terms|/privacy|/support|/beta)",
         link: "/home",
       },
       {
         text: "Extensions",
         link: "/extensions/",
         activeMatch: "(^/extensions/$)|(^/extensions/x)",
+      },
+      {
+        text: "Reference",
+        activeMatch: "^(/dev/)",
+        link: "/dev/",
       },
       // {
       //   text: "Create",
@@ -49,81 +54,14 @@ export default defineConfig({
       },
     ],
     sidebar: {
-      "/extensions/": [
-        {
-          text: "Extensions",
-          items: [
-            { text: "Directory", link: "/extensions/" },
-            { text: "Create", link: "/extensions/create" },
-          ],
-        },
-      ],
-      "/": [
-        { text: "Introduction", link: "/home" },
-        {
-          text: "User Guide",
-          collapsed: false,
-          items: [
-            { text: "Installation", link: "/guide/install" },
-            { text: "Basic Usage", link: "/guide/basics" },
-            { text: "Actions", link: "/guide/actions" },
-            { text: "Settings", link: "/guide/settings" },
-            { text: "Adding Extensions", link: "/guide/extensions" },
-          ],
-        },
-        {
-          text: "App Info",
-          collapsed: false,
-          items: [
-            {
-              text: "Download",
-              link: "/download",
-              collapsed: true,
-              items: [
-                { text: "Version History", link: "/changes" },
-                { text: "Beta", link: "/beta" },
-              ],
-            },
-            { text: "Buy", link: "/buy" },
-            { text: "Support & Feedback", link: "/support" },
-          ],
-        },
-        {
-          text: "Knowledge Base",
-          collapsed: false,
-          items: [
-            { text: "Troubleshooting", link: "/kb/troubleshooting" },
-            {
-              text: "In-depth topics",
-              collapsed: true,
-              items: [
-                { text: "AppleScript interface", link: "/kb/applescript" },
-                { text: "Browser support", link: "/kb/browsers" },
-                { text: "Paths and identifiers", link: "/kb/paths" },
-              ],
-            },
-          ],
-        },
-        {
-          text: "Policies",
-          collapsed: true,
-          items: [
-            { text: "Terms of License", link: "/terms.md" },
-            { text: "Privacy Policy", link: "/privacy.md" },
-          ],
-        },
+      "/dev/": [
         {
           text: "Developer Reference",
-          collapsed: true,
           items: [
             { text: "Introduction", link: "/dev/" },
-            // {
-            //   items: [
-
-            //   ]
-            // },
             { text: "Snippets", link: "/dev/snippets" },
             { text: "Packages", link: "/dev/packages" },
+
             {
               text: "The config dictionary",
               link: "/dev/config",
@@ -170,6 +108,55 @@ export default defineConfig({
             },
             { text: "Changelog", link: "/dev/changes" },
           ],
+        },
+      ],
+      "/": [
+        { text: "Welcome", link: "/home" },
+        {
+          text: "User Guide",
+          items: [
+            { text: "Installation", link: "/guide/install" },
+            { text: "Basic Usage", link: "/guide/basics" },
+            { text: "Actions", link: "/guide/actions" },
+            { text: "Settings", link: "/guide/settings" },
+            { text: "Extensions", link: "/guide/extensions" },
+          ],
+        },
+        {
+          text: "App Info",
+          items: [
+            {
+              text: "Download",
+              link: "/download",
+              // items: [
+              //   { text: "Beta", link: "/beta" },
+              // ],
+            },
+            { text: "Buy", link: "/buy" },
+            { text: "Version History", link: "/changes" },
+            { text: "Support & Feedback", link: "/support" },            
+          ],
+        },
+
+        {
+          text: "Knowledge Base",
+          items: [
+            { text: "Troubleshooting", link: "/kb/troubleshooting" },
+            { text: "AppleScript interface", link: "/kb/applescript" },
+            { text: "Browser support", link: "/kb/browsers" },
+            { text: "Paths and identifiers", link: "/kb/paths" },
+          ],
+        },
+        {
+          text: "Policies",
+          items: [
+            { text: "Terms of License", link: "/terms.md" },
+            { text: "Privacy Policy", link: "/privacy.md" },
+          ],
+        },
+        {
+          text: "Developer Reference",
+          link: "/dev/",
         },
       ],
     },
