@@ -11,7 +11,7 @@ PopClip's internal state and lets them interact with PopClip itself.
 ::: tip JavaScript module extensions
 
 For more complex functionality, a [JavaScript module extension](./js-modules) is
-a more flexible and powerful alternative to a JavaScript action.
+a flexible and powerful alternative to a JavaScript action.
 
 :::
 

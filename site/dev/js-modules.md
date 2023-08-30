@@ -89,9 +89,9 @@ and cannot be overriden by the module. These are `popclipVersion`,
 
 ## Module actions
 
-::: tip Detailed API Reference
+::: tip Detailed API reference
 
-A fuller definition of the action object, action function and population function
+A more detailed definition of the action object, action function and population function
 may be found in the
 [JavaScript API Reference](https://pilotmoon.github.io/PopClip-Extensions/modules.html).
 
@@ -127,18 +127,16 @@ The action function is called with the following arguments:
 
 ```javascript
 {
-  code:
-  ((input, options, context) => {
+  code: (input, options, context) => {
     // do stuff
-  });
+  }
 }
 ```
 
 The function may return a string, which will be passed to the `after` step.
 Otherwise it should return `undefined` or `null`.
 
-The function may optionally be `async` and return a promise, which will be
-handled automatically by PopClip.
+The function may optionally be `async`, and use `await`.
 
 The function may indicate an error by throwing an exception, as per
 [JavaScript actions](./js-actions.md#indicating-errors).
@@ -160,7 +158,7 @@ return an array of action objects.
 
 ```javascript
 // #popclip
-// { name: DynDemo, entitlements: [dynamic], lang: js, module: true }
+// { name: Dynamic Demo, entitlements: [dynamic], lang: js, module: true }
 exports.actions = (input, options, context) => {
   let myActions = [];
   for (let i = 1; i <= 5; i += 1) {
@@ -177,7 +175,7 @@ exports.actions = (input, options, context) => {
 
 The population function has the following limitations:
 
-- Cannot call the `XMLHttpRequest` function, or any library that calls it.
+- Cannot access the network. (`XMLHttpRequest` is unavailable.)
 - Cannot call methods on the `popclip` global object.
 - Cannot access `popclip.context.browserUrl` or `popclip.context.browserTitle`.
 

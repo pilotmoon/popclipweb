@@ -14,7 +14,7 @@ to avoid issues with older versions of JavaScriptCore, PopClip pre-loads the
 [core-js](https://github.com/zloirock/core-js) library, which provides a
 polyfill for most modern JavaScript features on older macOS versions.
 
-::: tip JavaScript language reference
+::: tip Language reference
 
 The JavaScript language reference I use and recommend is
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
@@ -84,7 +84,8 @@ There is also a global function `print()` for debug output, and a global
 
 ## Bundled libraries
 
-Some libraries from NPM are available to load by scripts. These are:
+Some libraries from [NPM](https://www.npmjs.org/) are bundled within the PopClip
+app itself, and are available to load by scripts. These are:
 
 | Library        | Version | Description                    |
 | -------------- | ------- | ------------------------------ |
@@ -102,6 +103,12 @@ Some libraries from NPM are available to load by scripts. These are:
 | sanitize-html  | 2.7.3   | HTML sanitizer                 |
 | turndown       | 7.1.1   | HTML to Markdown converter     |
 
+Library are loaded by name using `require()`, like this:
+
+```javascript
+const axios = require("axios");
+```
+
 ## Asynchronous operations and async/await
 
 PopClip provides implementations of `XMLHttpRequest` and `setTimeout`, which are
@@ -116,22 +123,23 @@ function to complete. For example:
 // # popclip setTimeout example
 // name: setTimeout Test
 // after: show-result # result shown will be 'bar', not 'foo'
-// lang: javascript
+// language: js
 setTimeout(() => {
   return "bar";
 }, 1000); // 1 second delay
 return "foo";
 ```
 
-You can also use the `await` keyword when calling any function that returns a
-Promise. Internally, PopClip runs all the code you supply wrapped in an `async`
-function call, and resolves any returned promises itself.
+Your functions can be `async`, and you can use the `await` keyword when calling
+any function that returns a Promise. PopClip handles the details of resolving
+promises internally.
 
-As a convenience, PopClip also supplies a global function
-`sleep(delayInMilliseconds)` as a promise-based wrapper around `setTimeout`:
+As a convenience, PopClip supplies a global function `sleep()` as a
+promise-based wrapper around `setTimeout()`:
 
-```yaml
-# popclip await example
+```javascript
+// # popclip await example
+// language: js
 name: Await Test
 javascript: | 
   await sleep(5000) // 5 second delay
@@ -140,48 +148,55 @@ javascript: |
 
 ## Network access from JavaScript
 
-PopClip provides its own implementation of XMLHttpRequest (XHR). To use it, you
-need to include the `network` entitlement in the `entitlements` field of the
-config file.
+::: warning Entitlement needed
+
+To use XHR, the `network` entitlement must be present in the `entitlements`
+array in the extension's config.
+
+:::
+
+PopClip provides its own implementation of
+[`XMLHttpRequest`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+(XHR). This is the only way for JavaScript code to access the network.
 
 PopClip is also bundled with the HTTP library
-[axios](https://axios-http.com/docs/intro) version 0.26.1, which you can load
-using `const axios = require('axios')`. This is a lot easier to use than XHR.
+[axios](https://axios-http.com/docs/intro), which is an easier to use wrapper
+around XHR.
 
-Some limitations to be aware of:
-
-- Due to macOS's App Transport Security, PopClip can only access https URLs.
-  Attempting to access http URLs results in a network error from XHR.
-- PopClip's implementation of XHR currently can only download text MIME types.
-  Binary data will fail.
+Due to macOS's App Transport Security, PopClip can only access `https:` URLs.
+Attempts to access `http:` URLs will throw a network error.
 
 Here's an example extension snippet that downloads a selected URL's contents,
 and copies it to the clipboard:
 
-```yaml
-# popclip JS network example
-name: Download Text
-icon: symbol:square.and.arrow.down.fill
-requirements: [url]
-entitlements: [network]
-javascript: |
-  const axios = require('axios')
-  const response = await axios.get(popclip.input.data.urls[0]) // throws for non-2xx status
-  return response.data
-after: copy-result
+```javascript
+// # popclip JS network example
+// name: Download Text
+// icon: symbol:square.and.arrow.down.fill
+// requirements: [url]
+// entitlements: [network]
+// after: copy-result
+// language: javascript
+const axios = require("axios");
+const response = await axios.get(popclip.input.data.urls[0]);
+/* note: there is no particular need to check the return status here.
+   axios calls will throw an error if the HTTP status is not 200/2xx. */
+return response.data;
 ```
 
 For a more substantial axios example, see for example
-[Instant Translate](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/InstantTranslate).
+[Instant Translate](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/InstantTranslate.popclipext).
 
-## About TypeScript and .ts files
+## About TypeScript and `.ts` files
 
-When looking at the extensions in this repo I have made, you will see `.ts`
-files. These are [TypeScript](https://www.typescriptlang.org/) source code,
-which compiles down to JavaScript. I prefer to use TS than raw JS as it helps me
-to write correct code, aided by the TypeScript definitions file
-[popclip.d.ts](/popclip.d.ts). The TypeScript configuration I use is in
-[tsconfig.json](/tsconfig.json).
+When looking at my extensions in the
+[repository](https://github.com/pilotmoon/PopClip-Extensions), you will see
+`.ts` files. These are [TypeScript](https://www.typescriptlang.org/) source
+code, which compiles down to JavaScript.
+
+I prefer to use TS than raw JS as it helps me to write correct code, aided by
+the TypeScript definitions file [popclip.d.ts](https://github.com/pilotmoon/PopClip-Extensions/blob/master/popclip.d.ts). The TypeScript
+configuration I use is in [tsconfig.json]([/tsconfig.json](https://github.com/pilotmoon/PopClip-Extensions/blob/master/tsconfig.json)).
 
 ## JavaScript testing
 
