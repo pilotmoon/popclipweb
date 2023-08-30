@@ -35,7 +35,7 @@ export default defineConfig({
         activeMatch: "(^/extensions/$)|(^/extensions/x)",
       },
       {
-        text: "Reference",
+        text: "Developer",
         activeMatch: "^(/dev/)",
         link: "/dev/",
       },
