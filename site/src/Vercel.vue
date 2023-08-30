@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted } from 'vue'
-import { loadScript } from './helpers/loadScript'
 
 onMounted(() => {
     const script1 = document.createElement("script");
