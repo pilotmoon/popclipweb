@@ -3,9 +3,6 @@
 An AppleScript action runs AppleScript code. AppleScript's strength is in
 automation, since it can be used to control other apps.
 
-The script may be supplied either as a plain text script (`.applescript` file),
-or as a compiled script (`.scpt` file, created in the Script Editor app).
-
 ## Properties
 
 An AppleScript action is defined by the presence of either an `applescript`,
