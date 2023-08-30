@@ -1,7 +1,7 @@
 ---
 title: PopClip Extensions Directory
 titleTemplate: false
-layout: page
+layout: doc
 sidebar: false
 aside: false
 prev: false

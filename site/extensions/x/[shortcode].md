@@ -2,7 +2,7 @@
 titleTemplate: "PopClip Extensions"
 title: "Extension"
 isExtensionPage: true # needed for transformSiteData title setting
-layout: page
+layout: doc
 sidebar: false
 aside: false
 pref: false

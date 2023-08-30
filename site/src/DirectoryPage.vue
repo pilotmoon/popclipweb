@@ -21,17 +21,16 @@ console.log('dateString', dateString);
        <a href="/extensions/">← PopClip Extensions Directory</a>
     </div>
 
-    <div :class="[$style.Main]">
-      <!-- <div :class="$style.CardHeader">PopClip Extension</div> -->
+    <div :class="$style.Main">      
       <h1>
-        <Icon :class="$style.HeaderIcon" v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcLight="ext.iconUrlBlack"
+        <Icon v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcLight="ext.iconUrlBlack"
           :srcDark="ext.iconUrlWhite" />
         {{ ext.name }}
       </h1>
 
-      <div :class="$style.Container">
+      <div :class="$style.SideBySide">
         <div :class="$style.Description" v-html="ext.description"></div>
-        <div :class="$style.DownloadContainer">
+        <div :class="$style.Download">
           <DownloadButton size="small" :href="ext.downloadUrl" />
         </div>
       </div>
@@ -39,7 +38,7 @@ console.log('dateString', dateString);
 
     <div v-if="ext.demogif" :class="$style.Card">
       <div :class="$style.CardHeader">Demo</div>
-      <img :class="$style.Demo" :src="ext.demogif" alt="Demo GIF" />
+      <img :src="ext.demogif" alt="Demo GIF" />
     </div>
 
     <div v-if="hasReadme" :class="$style.Card">
@@ -54,11 +53,11 @@ console.log('dateString', dateString);
 
     <div :class="$style.Card">
       <div :class="$style.CardHeader">Info</div>
-      <ul :class="$style.Data">        
-        <li><span :class="$style.Label">First published</span><br><span>{{ formatDate(dateString) }}</span></li>
+      <ul :class="$style.CardData">        
+        <li><span :class="$style.CardDataLabel">First published</span><br><span>{{ formatDate(dateString) }}</span></li>
         <!-- <li><span :class="$style.Label">Maintainer</span><br><a href="https://github.com/pilotmoon">Nick Moore</a></li> -->
-        <li><span :class="$style.Label">Identifier</span><br><code>{{ ext.identifier }}</code></li>
-        <li><span :class="$style.Label">Source</span><br><GithubFilled /> <a :href="ext.repoUrl">pilotmoon/PopClip-Extensions/<span>{{ ext.handle }}</span>.popclipext/</a></li>
+        <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>
+        <li><span :class="$style.CardDataLabel">Source</span><br><GithubFilled /> <a :href="ext.repoUrl">pilotmoon/PopClip-Extensions/<span>{{ ext.handle }}</span>.popclipext/</a></li>
       </ul>
     </div>
 
@@ -68,36 +67,58 @@ console.log('dateString', dateString);
 
 <style module>
 
-div.Breadcrumb {
+.Breadcrumb {
   color: var(--vp-c-text-2);
   margin-bottom: 32px;
 }
 
-div.Main {
+.Main {
   margin-bottom: 32px;
 }
 
-div.Card {
-  margin: 16px 0 0;
-
-  background-color: var(--vp-c-bg-soft);
-  border-radius: 8px;
-  padding: 12px;
+.Main h1 img {
+  margin-right: 4px;
+  opacity: 0.7;
 }
 
-
-ul.Data {
+.SideBySide {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: flex-start;
-  gap: 6px 24px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: bottom;
+  gap: 16px;
   
+  margin: 24px 0 0px;
 }
-span.Label {
-  color: var(--vp-c-text-2);
-  font-size: 14px;
+
+.SideBySide .Description {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  margin: 0;
 }
+
+.SideBySide .Download {
+  padding-top: 8px;
+}
+
+@media (max-width: 550px) {
+    .SideBySide {
+        flex-direction: column;
+    }
+    .SideBySide .Download {
+      text-align: right;
+      padding-top: 0;
+    }
+}
+
+.Card {
+  margin: 16px 0 0;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--vp-c-bg-soft);
+}
+
 .CardHeader {
   color: var(--vp-c-text-2);
   font-weight: 600;
@@ -107,72 +128,44 @@ span.Label {
   margin-bottom: 8px;
 }
 
-img.HeaderIcon {
-  margin-right: 4px;
-  opacity: 0.7;
-}
-
-.Container {
+ul.CardData {
   display: flex;
-  justify-content: space-between;
-  align-items: bottom;
-  gap: 16px;
-  margin: 24px 0 0px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 6px 24px;
+  list-style: none;
+  padding-left: 0;
 }
 
-.Description {
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 400;
+ul.CardData li {
   margin: 0;
-
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0;
 }
 
-.DownloadContainer {
-  padding-top: 8px;
-
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: auto;
+ul.CardData code {
+  color: var(--vp-c-text-2);
 }
 
-@media (max-width: 550px) {
-    .Container {
-        flex-direction: column;
-    }
-    .DownloadContainer {
-        display: flex;        
-        justify-content: flex-end;
-        padding: 0;
-    }
+.CardDataLabel {
+  color: var(--vp-c-text-2);
+  font-size: 14px;
 }
 
-img.Demo  {
+.Card > img  {
   border-radius: 8px;
 }
 
+/* ---
+.Readme
+  Geometry is a little tighter then vp-doc
+--- */
 
-
-/* Based on
-https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/src/vp-doc.css */
-
-div.Footer {
-  margin-top: 32px;
-
-  background-color: var(--vp-c-bg-soft);
-  border-radius: 8px;
-  padding: 16px;
-}
-
-
-div.Readme {
+.Readme {
   background-color: var(--vp-c-bg);
   padding: 12px;
   border-radius: 8px;
 }
+
 .Readme h1 {
   margin: 12px 0 24px;
   line-height: 30px;
@@ -180,7 +173,8 @@ div.Readme {
 }
 
 .Readme h2 {
-  margin: 20px 0 16px;
+  margin: 28px 0 16px;
+  padding-top: 16px;
   line-height: 26px;
   font-size: 20px;
 }
@@ -197,94 +191,8 @@ div.Readme {
   font-size: 16px;
 }
 
-.Readme p,
-.Readme summary {
-  margin: 16px 0;
-}
-
 .Readme p {
   line-height: 24px;
-}
-
-.Readme blockquote {
-  margin: 16px 0;
-  border-left: 2px solid var(--vp-c-divider);
-  padding-left: 16px;
-}
-
-.Readme blockquote>p {
-  margin: 0;
-  font-size: 16px;
-  color: var(--vp-c-text-2);
-}
-
-.Readme pre {
-  font-size: 14px;
-}
-
-/**
- * Lists
- * -------------------------------------------------------------------------- */
-
-.Readme ul,
-.Readme ol {
-  padding-left: 1.25rem;
-  margin: 16px 0;
-}
-
-.Readme ul {
-  list-style: disc;
-}
-
-.Readme ol {
-  list-style: decimal;
-}
-
-/* .Readme li + li {
-  margin-top: 8px;
-}
-
-.Readme li > ol,
-.Readme li > ul {
-  margin: 8px 0 0;
-} */
-
-/**
- * Table
- * -------------------------------------------------------------------------- */
-
-.Readme table {
-  display: block;
-  border-collapse: collapse;
-  margin: 20px 0;
-  overflow-x: auto;
-}
-
-.Readme tr {
-  border-top: 1px solid var(--vp-c-divider);
-  transition: background-color 0.5s;
-}
-
-.Readme tr:nth-child(2n) {
-  background-color: var(--vp-c-bg-soft);
-}
-
-.Readme th,
-.Readme td {
-  border: 1px solid var(--vp-c-divider);
-  padding: 8px 16px;
-}
-
-.Readme th {
-  text-align: left;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--vp-c-text-2);
-  background-color: var(--vp-c-bg-soft);
-}
-
-.Readme td {
-  font-size: 14px;
 }
 
 </style>

@@ -51,6 +51,10 @@ const component = computed(() => {
   text-decoration: none;
 }
 
+.Button .ButtonInner {
+  height: 40px;
+}
+
 .Button.medium {
   border-radius: 20px;
   padding: 0 20px;
@@ -78,8 +82,6 @@ const component = computed(() => {
   padding: 0 16px;
   line-height: 30px;
   font-size: 14px;
-
-
 }
 
 .Button.small .ButtonInner {
@@ -92,16 +94,11 @@ const component = computed(() => {
   line-height: 24px;
   font-size: 13px;
   font-weight: 500;
-
-
 }
 
 .Button.smaller .ButtonInner {
   height: 24px;
 }
-
-
-
 
 .Button.brand {
   border-color: var(--vp-button-brand-border);
