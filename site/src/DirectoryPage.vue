@@ -287,18 +287,4 @@ div.Readme {
   font-size: 14px;
 }
 
-
-
-/** Code */
-
-.Card :not(pre, h1, h2, h3, h4, h5, h6)>code {
-  font-size: var(--vp-code-font-size);
-}
-
-.Card :not(pre)>code {
-  border-radius: 4px;
-  padding: 3px 6px;
-  color: var(--vp-c-text-code);
-  background-color: var(--vp-c-mute);
-}
 </style>

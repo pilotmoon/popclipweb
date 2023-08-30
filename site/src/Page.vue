@@ -48,15 +48,20 @@ import Theme from './Theme.vue';
  * Paragraph and inline elements
  * -------------------------------------------------------------------------- */
 
-.Page a {
-    font-weight: 500;
-    color: var(--vp-c-brand);
+ .Page a {
+  font-weight: 500;
+  color: var(--vp-c-brand-1);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition:
+    color 0.25s,
+    opacity 0.25s;
 }
 
 .Page a:hover {
-    text-decoration: underline dotted;
-    text-underline-offset: 2px;
+  color: var(--vp-c-brand-2);
 }
+
 .Page strong {
     font-weight: 600;
 }
@@ -69,6 +74,39 @@ import Theme from './Theme.vue';
   margin: 16px 0;
   border: none;
   border-top: 1px solid var(--vp-c-divider);
+}
+
+/**
+ * Code
+ * ---
+
+/* inline code */
+.Page :not(pre, h1, h2, h3, h4, h5, h6) > code {
+  font-size: var(--vp-code-font-size);
+  color: var(--vp-code-color);
+}
+
+.Page :not(pre) > code {
+  border-radius: 4px;
+  padding: 3px 6px;
+  background-color: var(--vp-code-bg);
+  transition:
+    color 0.25s,
+    background-color 0.5s;
+}
+
+.Page a > code {
+  color: var(--vp-code-link-color);
+}
+
+.Page a:hover > code {
+  color: var(--vp-code-link-hover-color);
+}
+
+.Page h1 > code,
+.Page h2 > code,
+.Page h3 > code {
+  font-size: 0.9em;
 }
 
 </style>
