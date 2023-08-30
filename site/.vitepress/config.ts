@@ -25,7 +25,7 @@ export default defineConfig({
       {
         text: "Guide",
         activeMatch:
-          "^(/guide/|/changes|/download|/buy|/kb/|/terms|/privacy|/support|/beta)",
+          "^(/guide/|/changelog|/download|/buy|/kb/|/terms|/privacy|/support|/beta)",
         link: "/guide/",
       },
       {
@@ -105,7 +105,7 @@ export default defineConfig({
               text: "Module-based extensions",
               link: "/dev/js-modules",
             },
-            { text: "Changelog", link: "/dev/changes" },
+            { text: "Changelog", link: "/dev/changelog" },
           ],
         },
       ],
@@ -132,7 +132,7 @@ export default defineConfig({
               // ],
             },
             { text: "Buy", link: "/buy" },
-            { text: "Version History", link: "/changes" },
+            { text: "Version History", link: "/changelog" },
             { text: "Support & Feedback", link: "/support" },            
           ],
         },

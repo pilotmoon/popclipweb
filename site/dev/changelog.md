@@ -11,7 +11,7 @@ aside: false
 
 Detailed notes on changes to PopClip's extensions programming interface will be kept in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-See also [Version History](/changes) for a list of user-facing changes to the PopClip app itself.
+See also [Version History](/changelog) for a list of user-facing changes to the PopClip app itself.
 
 ## PopClip 2023.7 (4151)
 

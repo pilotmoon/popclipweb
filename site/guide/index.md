@@ -40,7 +40,7 @@ the documentation for PopClip in one place, with the following sections:
   [settings](/guide/settings) and add [extensions](/guide/extensions).
 
 - Vital **App Info** including [download links](/download),
-  [purchase information](/buy), [version history](/changes) and
+  [purchase information](/buy), [version history](/changelog) and
   [support](/support) details.
 
 - The **Knowledge Base** section, with detailed
