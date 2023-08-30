@@ -7,7 +7,7 @@ Action properties can be placed either within the `actions` array, or at the top
 level. Properties set at the top level will apply to all actions unless
 overridden in the individual action.
 
-::: details Example
+::: details Example: Action properties at top level
 
 Consider this extension, which defines two actions:
 
@@ -49,7 +49,7 @@ actions:
 If the extension only needs to define a single action, you can place all the
 action properties at the top level.
 
-::: details Example
+::: details Example: Single action
 
 Consider this extension, which defines a single action:
 

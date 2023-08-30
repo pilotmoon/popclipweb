@@ -2,7 +2,7 @@
 
 A Shell Script action runs a shell script, either directly or from a file. The
 script can be written in any language that can be executed from the command
-line, such as Bash, Python, Ruby, Perl, etc.
+line, such as Zsh, Python, Ruby, Perl, etc.
 
 ## Properties
 
