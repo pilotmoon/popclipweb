@@ -139,11 +139,10 @@ promise-based wrapper around `setTimeout()`:
 
 ```javascript
 // # popclip await example
+// name: Await Test
 // language: js
-name: Await Test
-javascript: | 
-  await sleep(5000) // 5 second delay
-  popclip.showText('Boo!')
+await sleep(5000) // 5 second delay
+popclip.showText('Boo!')
 ```
 
 ## Network access from JavaScript
