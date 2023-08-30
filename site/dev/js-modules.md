@@ -7,9 +7,9 @@ prev:
 
 # Module-based extensions
 
-In contrast to [JavaScript actions](./js-actions), which define a single
-function, module-based extensions let you define the extension itself using
-JavaScript, programatically generating the extension's actions and options.
+In contrast to [JavaScript actions](./js-actions) that define a single function,
+module-based extensions let you define the extension itself using JavaScript,
+programatically generating the extension's actions and options.
 
 A module-based extension is defined by the presence of a `module` field in the
 top level of the static config, as follows:
