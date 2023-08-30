@@ -63,7 +63,7 @@ appearing when they are not useful:
 - Filter by the current values of the extensions's options
 
 Filter rules are defined in the
-[action properties](./config.md#action-properties) under the `regex` key,
+[action properties](./actions) under the `regex` key,
 `requirements` key and `required apps`/`excluded apps` keys.
 
 ## Extension signing

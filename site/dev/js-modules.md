@@ -1,15 +1,18 @@
 ---
 outline: deep
+prev:
+  text: JavaScript environment
+  link: /dev/js-environment
 ---
 
-# JavaScript module extensions
+# Module-based extensions
 
 In contrast to [JavaScript actions](./js-actions), which are defined by a single
-JavaScript function, JavaScript modules let you define the extension itself
+JavaScript function, module-based extensions let you define the extension itself
 using JavaScript, programatically generating the extension's actions and
 options.
 
-A JavaScript module extension is defined by the presence of a `module` field in
+A module-based extension is defined by the presence of a `module` field in
 the top level of the static config, as follows:
 
 | Key      | Type   | Description                                                                                                |
@@ -109,7 +112,7 @@ cannot mix regular actions and module actions in the same extension.
 
 ### Action object
 
-Each action object has the same [properties](./config.md#action-properties) as a
+Each action object has the same [properties](./actions) as a
 regular action, with the addition of the following:
 
 | Key     | Type          | Description                                                                                                                                                                         |

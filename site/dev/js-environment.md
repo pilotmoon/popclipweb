@@ -1,7 +1,13 @@
+---
+outline: deep
+next:
+  text: Module-based extensions
+  link: /dev/js-modules
+---
 # JavaScript environment
 
 This page describes PopClip's JavaScript environment, in which
-[JavaScript actions](./js-actions) and [JavaScript modules](./js-modules) run.
+[JavaScript actions](./js-actions) and [module-based extensions](./js-modules) run.
 
 ## Overview
 

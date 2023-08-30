@@ -124,9 +124,14 @@ export default defineConfig({
             // },
             { text: "Snippets", link: "/dev/snippets" },
             { text: "Packages", link: "/dev/packages" },
-            { text: "Icons", link: "/dev/icons" },
-            { text: "The config dictionary", link: "/dev/config" },
             {
+              text: "The config dictionary",
+              link: "/dev/config",
+            },
+            { text: "Icons", link: "/dev/icons" },
+            {
+              text: "Actions",
+              link: "/dev/actions",
               items: [
                 { text: "Shortcut actions", link: "/dev/shortcut-actions" },
                 { text: "Service actions", link: "/dev/service-actions" },
@@ -160,9 +165,9 @@ export default defineConfig({
               ],
             },
             {
-              text: "JavaScript module extensions",
+              text: "Module-based extensions",
               link: "/dev/js-modules",
-            },            
+            },
             { text: "Changelog", link: "/dev/changes" },
           ],
         },

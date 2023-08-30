@@ -8,10 +8,10 @@ JavaScript actions run JavaScript code. JavaScript actions are run in PopClip's
 own [JavaScript environment](./js-environment), which gives them access to
 PopClip's internal state and lets them interact with PopClip itself.
 
-::: tip JavaScript module extensions
+::: tip Module-based extensions
 
-For more complex functionality, a [JavaScript module extension](./js-modules) is
-a flexible and powerful alternative to a JavaScript action.
+For more complex functionality, JavaScript [module-based extensions](./js-modules) are
+a flexible and powerful alternative to JavaScript actions.
 
 :::
 
