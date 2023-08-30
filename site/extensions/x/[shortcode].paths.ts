@@ -1,11 +1,6 @@
 import { Extension, loadPages } from "../../src/data/extensions-loader.js";
 import MarkdownIt from 'markdown-it';
 import sanitizeHtml from 'sanitize-html';
-import TurndownService from 'turndown';
-var turndownService = new TurndownService({
-  headingStyle: 'atx',
-});
-
 
 declare const paths: Extension[];
 export { paths };

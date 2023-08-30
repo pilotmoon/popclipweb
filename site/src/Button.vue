@@ -44,6 +44,7 @@ const component = computed(() => {
   text-align: center;
   font-weight: 600;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .Button:hover {
@@ -139,20 +140,20 @@ const component = computed(() => {
 }
 
 .Button.outline {
-  border-color: var(--vp-c-brand);
-  color: var(--vp-c-brand);
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
   background-color: transparent;
 }
 
 .Button.outline:hover {
-  border-color: var(--vp-c-brand-light);
-  color: var(--vp-c-brand-light);
+  border-color: var(--vp-c-brand-2);
+  color: var(--vp-c-brand-2);
   background-color: transparent;
 }
 
 .Button.outline:active {
-  border-color: var(--vp-c-brand);
-  color: var(--vp-c-brand);
+  border-color: var(--vp-c-brand-3);
+  color: var(--vp-c-brand-3);
   background-color: transparent;
 }
 </style>

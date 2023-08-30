@@ -4,7 +4,7 @@ import { formatDate } from './helpers/formatters'
 </script>
 
 <template>
-    <div class="box" :class="$style.NewsBox">        
+    <div :class="$style.NewsBox">        
         <div :class="$style.Header">
             <div :class="$style.Title"><b>Latest News</b></div><div :class="$style.Link"><a href="https://forum.popclip.app/c/announce/9/none">More news</a></div>
         </div>
@@ -19,6 +19,10 @@ import { formatDate } from './helpers/formatters'
 
 <style module>
 div.NewsBox {
+    background-color: var(--vp-c-bg-soft);
+    border-radius: 8px;
+    padding: 16px;
+
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: 14px;

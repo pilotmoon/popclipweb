@@ -12,12 +12,12 @@ const antTheme = computed(() => {
     return isDark.value ? {
         algorithm: theme.darkAlgorithm,
         token: {
-            colorPrimary: 'rgb(63, 162, 243)',
+            colorPrimary: 'rgb(63, 162, 243)', // same as var(--vp-c-brand-1) in .dark
         }
     } : {
         algorithm: theme.defaultAlgorithm,
         token: {
-            colorPrimary: 'rgb(50, 117, 231)',
+            colorPrimary: 'rgb(66, 123, 233)', // same as var(--vp-c-brand-1) in :root
         }
     }
 });
