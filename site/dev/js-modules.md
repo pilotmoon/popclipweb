@@ -59,7 +59,7 @@ Observe a few things:
   loaded.
 - The module defines its actions by exporting an `actions` array. See
   [Module actions](#module-actions).
-- The extension's `name` and the action's `after` step, `show-result`, is
+- The extension's `name` and the action's `after` step, `show-result`, are
   specified in the static config (in this case, in the snippet header).
 
 ## Module format
