@@ -1,8 +1,7 @@
 # AppleScript actions
 
 An AppleScript action runs AppleScript code. AppleScript's strength is in
-automation, since it can be used to control other apps. Thus it's a good choice
-for extensions that need to interact with other apps.
+automation, since it can be used to control other apps.
 
 The script may be supplied either as a plain text script (`.applescript` file),
 or as a compiled script (`.scpt` file, created in the Script Editor app).
