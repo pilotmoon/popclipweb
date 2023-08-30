@@ -1,6 +1,7 @@
 ---
 aside: true
 ---
+
 <script setup lang="ts">
 import { data } from './browsers.data';
 const yes = '✅';
@@ -9,32 +10,8 @@ const no = '';
 
 # Browser support
 
-PopClip supports a wide range of browsers. This page lists all the browsers that
-PopClip is aware of, and the level of support.
-
-Apps not on this list will be treated as regular apps. PopClip will pop-up in
-the app but will not apply browser-specific features. To suggest additional
-browsers please [get in touch](/support).
-
-## Supported features
-
-The table contains columns for each of the following features:
-
-- **Basic:** PopClip knows that the app is a browser, and URL-opening actions
-  triggered in the app will stay in the same app.
-
-- **Page Info:** PopClip can read the current page URL and/or page title
-  alongside the selected text.
-
-- **Address Bar:** This column indicates if PopClip will pop-up when you
-  single-click in the browser's address bar.
-
-- **Open In:** This column indicates whether the browser is available as a
-  target in the
-  [Open in Browser](https://pilotmoon.com/popclip/extensions/page/OpenInBrowser)
-  extension.
-
-## Browser table
+This table lists all the browsers that PopClip is aware of, and the level of
+support is provides for each one. (See [Key to table](#key-to-table).)
 
 <table>
 <thead>
@@ -60,3 +37,25 @@ The table contains columns for each of the following features:
 </tr>
 </tbody>
 </table>
+
+## Key to table
+
+The table contains columns for each of the following features:
+
+- **Basic:** PopClip knows that the app is a browser, and URL-opening actions
+  triggered in the app will stay in the same app.
+
+- **Page Info:** PopClip can read the current page URL and/or page title
+  alongside the selected text.
+
+- **Address Bar:** This column indicates if PopClip will pop-up when you
+  single-click in the browser's address bar.
+
+- **Open In:** This column indicates whether the browser is available as a
+  target in the
+  [Open in Browser](https://pilotmoon.com/popclip/extensions/page/OpenInBrowser)
+  extension.
+
+Apps not on this list will be treated as regular apps. PopClip will pop-up in
+the app but will not apply browser-specific features. To suggest additional
+browsers please [get in touch](/support).
