@@ -1,3 +1,6 @@
+---
+titleTemplate: PopClip Developer
+---
 # Service actions
 
 In a Service action, PopClip will invoke a macOS [Service](https://support.apple.com/en-gb/guide/mac-help/mchlp1012/mac) by name.

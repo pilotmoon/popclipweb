@@ -1,3 +1,6 @@
+---
+titleTemplate: PopClip Developer
+---
 # Icons
 
 Icons may be specified in the `icon` fields in a few different ways:

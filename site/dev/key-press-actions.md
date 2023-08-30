@@ -1,3 +1,6 @@
+---
+titleTemplate: PopClip Developer
+---
 # Key Press actions
 
 In a Key Press action, PopClip will simulate a key press, or sequence of presses, as if it was performed by the user.

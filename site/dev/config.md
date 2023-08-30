@@ -1,5 +1,6 @@
 ---
 outline: deep
+titleTemplate: PopClip Developer
 ---
 
 # The config dictionary

@@ -1,3 +1,6 @@
+---
+titleTemplate: PopClip Developer
+---
 # Script variables
 
 These string variables are available in [Shell Script actions](./shell-script-actions) and [AppleScript actions](./applescript-actions). Where no

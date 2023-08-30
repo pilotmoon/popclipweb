@@ -2,6 +2,7 @@
 outline: deep
 titleTemplate: false
 prev: false
+titleTemplate: PopClip Developer
 ---
 
 <script setup lang="ts">

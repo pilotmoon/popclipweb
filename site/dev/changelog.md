@@ -1,5 +1,6 @@
 ---
 aside: false
+titleTemplate: PopClip Developer
 ---
 <!-- markdownlint-configure-file
 {

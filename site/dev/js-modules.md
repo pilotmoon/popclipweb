@@ -3,6 +3,7 @@ outline: deep
 prev:
   text: JavaScript environment
   link: /dev/js-environment
+titleTemplate: PopClip Developer
 ---
 
 # Module-based extensions

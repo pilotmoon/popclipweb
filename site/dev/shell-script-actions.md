@@ -1,3 +1,6 @@
+---
+titleTemplate: PopClip Developer
+---
 # Shell Script actions
 
 A Shell Script action runs a shell script, either directly or from a file. The

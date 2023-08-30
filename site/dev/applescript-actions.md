@@ -1,3 +1,6 @@
+---
+titleTemplate: PopClip Developer
+---
 # AppleScript actions
 
 An AppleScript action runs AppleScript code. AppleScript's strength is in

@@ -1,3 +1,6 @@
+---
+titleTemplate: PopClip Developer
+---
 # Shortcut actions
 
 In a Shortcut action, PopClip will invoke a macOS [Shortcut](https://support.apple.com/en-gb/guide/shortcuts-mac/apdf22b0444c/mac) by name.
