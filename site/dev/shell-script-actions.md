@@ -32,7 +32,7 @@ The `shell script file` will be executed as follows:
 - If none of the above conditions are met, the extension will fail to load
   because no interpreter has been specified.
 
-The the current working directory will be set to the package directory.
+The current working directory will be set to the package directory.
 
 ## Input and output
 
