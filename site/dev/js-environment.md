@@ -55,8 +55,12 @@ Scripts can perform actions via calling methods on the `popclip` global:
 - [`popclip.pressKey()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#pressKey):
   presses a key combo (similar to a key press extension)
 - [`popclip.performCommand()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#performCommand):
-  perform a cut, copy or paste command in the foreground app (simlar to the `before` and `after` steps)
-- [`popclip.showSuccess()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showSuccess), [`popclip.showFailure()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showFailure), [`popclip.showSettings()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showSettings): show a check mark, shaking-X, or Pop up the extension's settings.
+  perform a cut, copy or paste command in the foreground app (simlar to the
+  `before` and `after` steps)
+- [`popclip.showSuccess()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showSuccess),
+  [`popclip.showFailure()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showFailure),
+  [`popclip.showSettings()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showSettings):
+  show a check mark, shaking-X, or Pop up the extension's settings.
 
 ### Global `pasteboard` object
 
@@ -75,7 +79,21 @@ There is also a global function `print()` for debug output, and a global
 
 Some libraries from NPM are available to load by scripts. These are:
 
-TODO.
+| Library        | Version | Description                    |
+| -------------- | ------- | ------------------------------ |
+| axios          | 0.26.1  | HTTP client                    |
+| buffer         | 6.0.3   | Node Buffer implementation     |
+| case-anything  | 2.1.10  | Case conversion library        |
+| content-type   | 1.0.4   | Parse HTTP Content-Type header |
+| dom-serializer | 1.4.1   | HTML serializer                |
+| entities       | 2.2.0   | HTML entity encoder/decoder    |
+| htmlparser2    | 6.1.0   | HTML parser                    |
+| js-yaml        | 4.1.0   | YAML parser                    |
+| linkedom       | 0.12.1  | DOM implementation             |
+| node-blob      | 0.0.2   | Node Blob implementation       |
+| rot13-cipher   | 1.0.0   | ROT13 cipher                   |
+| sanitize-html  | 2.7.3   | HTML sanitizer                 |
+| turndown       | 7.1.1   | HTML to Markdown converter     |
 
 ## Asynchronous operations and async/await
 
