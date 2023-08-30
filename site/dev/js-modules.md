@@ -125,13 +125,29 @@ The action function is called with the following arguments:
 - `options`: same object as `popclip.options`
 - `context`: same object as `popclip.context`
 
-```javascript
+::: code-group
+
+```javascript [synchronous]
 {
   code: (input, options, context) => {
-    // do stuff
+    // ... do stuff ...
+    doSomething();
+    return someResult;
   }
 }
 ```
+
+```javascript [with async/await]
+{
+  code: async (input, options, context) => {
+    // ... do stuff ...
+    await doSomethingAsync();
+    return someResult;
+  }
+}
+```
+
+:::
 
 The function may return a string, which will be passed to the `after` step.
 Otherwise it should return `undefined` or `null`.
