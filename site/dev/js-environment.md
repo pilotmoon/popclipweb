@@ -196,7 +196,7 @@ code, which compiles down to JavaScript.
 
 I prefer to use TS than raw JS as it helps me to write correct code, aided by
 the TypeScript definitions file [popclip.d.ts](https://github.com/pilotmoon/PopClip-Extensions/blob/master/popclip.d.ts). The TypeScript
-configuration I use is in [tsconfig.json]([/tsconfig.json](https://github.com/pilotmoon/PopClip-Extensions/blob/master/tsconfig.json)).
+configuration I use is in [tsconfig.json](https://github.com/pilotmoon/PopClip-Extensions/blob/master/tsconfig.json).
 
 ## JavaScript testing
 

@@ -49,7 +49,7 @@ An extension defines one or more actions. Each action can be one of seven types:
 | [Key Press](./key-press-actions.md)       | Press a key combination.                                     |
 | [Shell Script](./shell-script-actions.md) | Run a shell script.                                          |
 | [AppleScript](./applescript-actions.md)   | Run an AppleScript script.                                   |
-| [JavaScript](./javascript-actions.md)     | Run a JavaScript script.                                     |
+| [JavaScript](./js-actions.md)     | Run a JavaScript script.                                     |
 
 ### Filter rules
 
