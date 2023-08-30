@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted, watch } from 'vue'
 import { useData } from 'vitepress'
 import * as config from './config/config.json'
 
@@ -10,9 +10,25 @@ const props = defineProps<{
     srcDark?: string
 }>()
 
-const src = computed(() => {
-    return isDark.value ? props.srcDark : props.srcLight;
+const src = ref(props.srcLight);
+
+function setSrc() {
+    src.value = isDark.value ? props.srcDark : props.srcLight;
+}
+
+watch(isDark, () => {
+    setSrc()
 })
+
+onMounted(() => {
+    setSrc()
+})
+
+// had to do this because computed() was not having effect at page load somehow
+// computed(() => {
+//     return isDark.value ? props.srcDark : props.srcLight;
+// })
+
 </script>
 
 <template>
