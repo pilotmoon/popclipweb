@@ -163,7 +163,7 @@ following structure.
 | `inset`         | Boolean              | Optional                     | If true, the option field will be shown inset to the right of the label, instead of under it. Default is false.                                                                                                                                                     |
 | `icon`          | String               | Optional                     | For `boolean` options only. Specify an icon to appear next to the check box.                                                                                                                                                                                        |
 
-## Notes
+## Config notes
 
 ### Localized strings
 
