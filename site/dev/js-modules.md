@@ -170,30 +170,26 @@ entitlement is also being used.
 :::
 
 The population function is set as the `actions` property of the module. It
-dynamically generates the actions every time text is selected. The population
-function is called with the same arguments as the action function. It should
-return an array of action objects.
+dynamically supplies actions every time the PopClip bar appears. The population
+function is called with the same arguments as the action function, and it
+returns an array of action objects.
 
 ```javascript
-// #popclip
-// { name: Dynamic Demo, entitlements: [dynamic], lang: js, module: true }
+// #popclip dynamic example
+// { name: Dynamic Title, entitlements: [dynamic], lang: js, module: true }
 exports.actions = (input, options, context) => {
-  let myActions = [];
-  for (let i = 1; i <= 5; i += 1) {
-    myActions.push({
-      title: String(i),
-      code: (input, options, context) => {
-        popclip.showText("Hi from Action " + i);
-      },
-    });
-  }
-  return myActions;
+  return [{
+    title: `<${input.text.slice(0, 10)}>`,
+    code: (input, options, context) => {
+      popclip.showText("Hi from Action");
+    },
+  }];
 };
 ```
 
 The population function has the following limitations:
 
-- Cannot access the network. (`XMLHttpRequest` is unavailable.)
+- Cannot access the network (`XMLHttpRequest` is unavailable).
 - Cannot call methods on the `popclip` global object.
 - Cannot access `popclip.context.browserUrl` or `popclip.context.browserTitle`.
 
