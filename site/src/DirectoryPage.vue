@@ -195,4 +195,8 @@ ul.CardData code {
   line-height: 24px;
 }
 
+.Readme pre {
+  font-size: 14px;
+}
+
 </style>
