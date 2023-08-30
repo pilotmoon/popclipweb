@@ -59,7 +59,7 @@ export default defineConfig({
         },
       ],
       "/": [
-        { text: "Start Here", link: "/home" },
+        { text: "Introduction", link: "/home" },
         {
           text: "User Guide",
           collapsed: false,
