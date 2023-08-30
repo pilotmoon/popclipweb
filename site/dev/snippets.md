@@ -208,15 +208,16 @@ approach might still be preferable.
 
 :::
 
-### Required fields
+### Inverted syntax config
 
-So that PopClip knows what language the source file is in, you must always
-specify either a `language` or `interpreter`, as follows:
+When using the inverted syntax, the following config fields have special
+meanings, to determine what type of action is created:
 
-| Key           | Description                                                                                              |
-| ------------- | -------------------------------------------------------------------------------------------------------- |
-| `language`    | For JavaScript or AppleScript actions, specify the language: either `javascript` or `applescript`.       |
-| `interpreter` | For shell script actions, specify the interpreter as per [Shell Script actions](./shell-script-actions). |
+| Key           | Type    | Description                                                                                                                                                |
+| ------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `interpreter` | String  | When an interpreter is specified, a [Shell Script action](./shell-script-actions) will be created.                                                         |
+| `language`    | String  | Specify `javascript` to create a [JavaScript action](./js-actions), or `applescript` to create an [AppleScript action](./applescript-actions).             |
+| `module`      | Boolean | For JavaScript actions only. Set `true` if the source file should be loaded as a module, or `false` (default) if it should be loaded as a simple function. |
 
 ::: tip Language field shorthand
 

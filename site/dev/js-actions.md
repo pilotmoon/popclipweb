@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # JavaScript actions
 
 JavaScript actions run JavaScript code. JavaScript actions are run in PopClip's
@@ -13,41 +17,73 @@ structure, which is the easiest to explain and to use for simple tasks._ -->
 
 ## Properties
 
-A JavaScript action is defined by the presence of either a `javascript file`
-field or a `javascript` field, as follows:
+A JavaScript action is defined by the presence of either a `javascript file`,
+`javascript` or `module` field, as follows:
 
-| Key               | Type   | Description                                             |
-| ----------------- | ------ | ------------------------------------------------------- |
-| `javascript file` | String | The name of a JavaScript file to load from the package. |
-| `javascript`      | String | A text string to run as JavaScript.                     |
+| Key               | Type   | Description                                                            |
+| ----------------- | ------ | ---------------------------------------------------------------------- |
+| `javascript`      | String | A JavaScript text string to load as a [function](#function-mode).      |
+| `javascript file` | String | The name of a JavaScript file to load as a [function](#function-mode). |
+| `module`          | String | The name of a JavaScript file to load as a [module](#module-mode).     |
 
-PopClip loads the provided script, wraps it in an async function call, and then
-calls the function.
+### Function mode
+
+When you specify `javascript` or `javascript file`, PopClip loads the provided
+script and wraps it as a function. When the action is run, PopClip calls the
+function.
 
 ::: details Function wrapper detail
 
-As an example, take the following JavaScript provided in the `javascript` field:
+As an example, imagine the following JavaScript is provided in the `javascript`
+field:
 
 ```javascript
 return "foo";
 ```
 
-Internally, this will be wrapped as follows:
+Internally, this will be wrapped in an async arrow function definition like
+this:
 
 ```javascript
-(async function () { // [!code focus:2]
-  use strict;
+const main = async () => { // [!code focus:1]
   return "foo";
-})(); // [!code focus:1]
+}; // [!code focus:1]
 ```
+
+When the action is run, PopClip calls this internal `main` function with no
+arguments.
+
+:::
+
+### Module mode
+
+For more complex functionality, a module is a more flexible and powerful way to
+structure your code. When you specify `module`, PopClip loads the provided
+script as a CommonJS module.
+
+Properties exported by the module will be merged into the extension's config.
+With this method, you can use JavaScript to define the extension itself,
+programatically generate the extension's options and actions, even its own icon
+and name.
+
+For more information, see TODO.
+
+<!-- [JavaScript modules](./js-modules). -->
+
+::: info Modules as snippets
+
+Modules can be specified as snippets using the
+[inverted syntax](./snippets#inverted-syntax), by setting `module` to `true` in
+the config header.
 
 :::
 
 ## Input and output
 
-Scripts take their input from the [global `popclip` object](./js-environment.md#global-popclip-object).
+Scripts take their input from the
+[global `popclip` object](./js-environment.md#global-popclip-object).
 
-If the script exits by returning a string, it will be passed to the `after`
+If the function exits by returning a string, it will be passed to the `after`
 step.
 
 ## Indicating errors
