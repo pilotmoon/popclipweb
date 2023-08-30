@@ -146,18 +146,31 @@ export default defineConfig({
                 },
                 { text: "JavaScript actions", link: "/dev/js-actions" },
                 {
-                  items: [
-                    {
-                      text: "JS environment",
-                      link: "/dev/js-environment",
-                    },
-                    { text: "JS module extensions", link: "/dev/js-modules" },
-                  ],
+                  // items: [
+                  //   {
+                  //     text: "JS environment",
+                  //     link: "/dev/js-environment",
+                  //   },
+                  //   { text: "JS modules", link: "/dev/js-modules" },
+                  // ],
                 },
-                
               ],
             },
-
+            {
+              text: "JavaScript environment",
+              link: "/dev/js-environment",
+              items: [
+                {
+                  text: "JavaScript module extensions",
+                  link: "/dev/js-modules",
+                },
+                {
+                  text: "API reference",
+                  link:
+                    "https://pilotmoon.github.io/PopClip-Extensions/modules.html",
+                },
+              ],
+            },
             { text: "Icons", link: "/dev/icons" },
             { text: "Changelog", link: "/dev/changes" },
           ],

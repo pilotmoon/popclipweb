@@ -1,7 +1,7 @@
 # JavaScript environment
 
 This page describes PopClip's JavaScript environment, in which
-[JavaScript actions](./js-actions) run.
+[JavaScript actions](./js-actions) and [JavaScript modules](./js-modules) run.
 
 ## Overview
 
@@ -24,8 +24,8 @@ The JavaScript language reference I use and recommend is
 ## PopClip globals
 
 PopClip provides a global object, `popclip`, and other globals, which are
-documented in detail at
-[PopClip Extensions JavaScript Reference](https://pilotmoon.github.io/PopClip-Extensions/).
+documented in detail in the
+[JavaScript API Reference](https://pilotmoon.github.io/PopClip-Extensions/modules.html).
 The following is a summary of the commonly needed parts.
 
 ### Global `popclip` object

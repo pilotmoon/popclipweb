@@ -89,6 +89,14 @@ and cannot be overriden by the module. These are `popclipVersion`,
 
 ## Module actions
 
+::: tip Detailed API Reference
+
+A fuller definition of the action object, action function and population function
+may be found in the
+[JavaScript API Reference](https://pilotmoon.github.io/PopClip-Extensions/modules.html).
+
+:::
+
 A module defines its actions by exporting an `actions` property, which can be
 either:
 
