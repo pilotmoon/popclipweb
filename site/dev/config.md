@@ -11,20 +11,16 @@ underlying structure is the same.
 ::: tip Key names
 
 PopClip is very flexible about how you name keys. In this documentation you'll
-mostly see keys named in lowercase with spaces, for example `required apps`.
-However, PopClip will treat `Required Apps`, `requiredApps`, `RequiredApps`,
-`required_apps`, `required-apps` and `REQUIRED_APPS` as equivalents.
+mostly see keys named in lowercase with spaces, for example `key name`.
+However, PopClip will treat `Key Name`, `keyName`, `KeyName`,
+`key_name`, `key-name` and `KEY_NAME` as equivalents.
 
 <!-- The full range of formats is as defined by
 [case-anything](https://github.com/mesqueeb/case-anything), which PopClip uses
 internally. -->
 
-I tend to use `this format` in YAML, and `thisFormat` in JSON, but you can use
+I tend to use `key name` in YAML, and `keyName` in JSON, but you can use
 whatever you prefer.
-
-Additionally, older versions of PopClip used different names for some keys.
-Where there is a new name, the old name is also still accepted. A table of old
-and new names is given in [Key name mapping](#key-name-mapping).
 
 :::
 

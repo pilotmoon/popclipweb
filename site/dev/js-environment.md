@@ -14,6 +14,13 @@ to avoid issues with older versions of JavaScriptCore, PopClip pre-loads the
 [core-js](https://github.com/zloirock/core-js) library, which provides a
 polyfill for most modern JavaScript features on older macOS versions.
 
+::: tip JavaScript language reference
+
+The JavaScript language reference I use and recommend is
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
+
+:::
+
 ## PopClip globals
 
 PopClip provides a global object, `popclip`, and other globals, which are
@@ -195,9 +202,3 @@ Some notes:
   `console.log()`).
 - Scripts running in the test harness always have the network access
   entitlement.
-
-## JavaScript language reference
-
-There are loads of JavaScript language references out there, but the one I use
-and recommend is
-[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
