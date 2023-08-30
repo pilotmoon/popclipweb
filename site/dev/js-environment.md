@@ -44,13 +44,19 @@ properties of the `popclip` global:
 
 Scripts can perform actions via calling methods on the `popclip` global:
 
-- `popclip.pasteText('string')` - paste the string (similar to `paste-result`)
-- `popclip.copyText('string')` - copy the string (similar to `copy-result`)
-- `popclip.showText('string')` - show the string (similar to `show-result`)
-- [`popclip.openUrl()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#openUrl) -
-  open a URL, similar to a URL extension
-- [`popclip.pressKey()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#pressKey) -
-  presses a key combo, similar to a key press extension
+- [`popclip.pasteText()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#pasteText):
+  paste a given string (similar to `paste-result`)
+- [`popclip.copyText()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#copyText):
+  copy a string to the clipboard (similar to `copy-result`)
+- [`popclip.showText()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showText):
+  show a string in the PopClip bar (similar to `show-result`)
+- [`popclip.openUrl()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#openUrl):
+  open a URL (similar to a URL action)
+- [`popclip.pressKey()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#pressKey):
+  presses a key combo (similar to a key press extension)
+- [`popclip.performCommand()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#performCommand):
+  perform a cut, copy or paste command in the foreground app (simlar to the `before` and `after` steps)
+- [`popclip.showSuccess()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showSuccess), [`popclip.showFailure()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showFailure), [`popclip.showSettings()`](https://pilotmoon.github.io/PopClip-Extensions/interfaces/PopClip.html#showSettings): show a check mark, shaking-X, or Pop up the extension's settings.
 
 ### Global `pasteboard` object
 
