@@ -33,11 +33,10 @@ PopClip is available for macOS only. It is a [paid](/buy) app with a
 This website aims to be a complete resource for PopClip users. It contains all
 the documentation for PopClip in one place, with the following sections:
 
-- The **User Guide** is a complete introduction to PopClip.
-  [Install](/guide/install) PopClip and learn the
-  [basic concepts](/guide/basics) of the user interface. Take a tour of the
-  [built-in actions](/guide/actions), see how to customize the
-  [settings](/guide/settings) and add [extensions](/guide/extensions).
+- The **User Guide** is an introduction to PopClip. [Install](/guide/install)
+  PopClip and learn the [basic concepts](/guide/basics) of the user interface.
+  Take a tour of the [built-in actions](/guide/actions), see how to customize
+  the [settings](/guide/settings) and add [extensions](/guide/extensions).
 
 - Vital **App Info** including [download links](/download),
   [purchase information](/buy), [version history](/changelog) and
@@ -112,26 +111,35 @@ following people and projects:
   Andy Matuschak and the Sparkle project contributors.
 - [AquaticPrime Core Foundation Implementation](https://github.com/bdrister/AquaticPrime/blob/master/Source/CoreFoundation/AquaticPrime.c)
   (BSD License) by Lucas Newman and other contributors.
-- [nanosvg](https://github.com/memononen/nanosvg) (zlib license) by Mikko
-  Mononen.
 - [EMKeyChain](https://github.com/irons/EMKeychain) (MIT license) by Brian
   Amerige of Extendmac, LLC.
 - [ShortcutRecorder](https://github.com/Kentzo/ShortcutRecorder) (CC Attribution
   4.0) by Ilya Kulakov and other contributors.
+- [nanosvg](https://github.com/memononen/nanosvg) (zlib license) by Mikko
+  Mononen.
 - [case-anything](https://github.com/mesqueeb/case-anything) (MIT license) by
   Luca Ban.
-- [axios](https://github.com/axios/axios) (MIT license) by Matt Zabriskie and
-  other contributors.
 - [core-js](https://github.com/zloirock/core-js) (MIT license) by Denis
   Pushkarev.
-- [Iconify](https://github.com/iconify) by Vjacheslav Trushkin, and the authors
-  of the included
-  [icon sets](https://github.com/iconify/icon-sets/blob/master/collections.json).
+- [axios](https://github.com/axios/axios) (MIT license) by Matt Zabriskie and
+  other contributors.
+- [js-yaml](https://github.com/nodeca/js-yaml) (MIT license) Vitaly Puzrin and
+  other contributors.
+- [linkedom](https://github.com/WebReflection/linkedom) (ISC License) by Andrea
+  Giammarchi.
 - [sanitize-html](https://github.com/apostrophecms/sanitize-html) (MIT license)
   by P'unk Avenue LLC.
 - [turndown](https://github.com/mixmark-io/turndown) (MIT license) by Dom
   Christie.
-- [linkedom](https://github.com/WebReflection/linkedom) (ISC License) by Andrea
-  Giammarchi.
-- [js-yaml](https://github.com/nodeca/js-yaml) (MIT license) Vitaly Puzrin and
-  other contributors.
+- [Iconify](https://github.com/iconify) by Vjacheslav Trushkin, and the authors
+  of the included
+  [icon sets](https://github.com/iconify/icon-sets/blob/master/collections.json).
+
+::: info :turtle:&ensp;It's turtles all the way down
+
+This is actually just a small fraction of the open-source libraries in use,
+since the above projects recursively include other projects. For space, I've
+limited the list to the libraries that I've directly imported and used for core
+functionality.
+
+:::
