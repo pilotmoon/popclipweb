@@ -161,9 +161,9 @@ The number in parentheses after the version number is the build number which is 
 
 When you are running a licensed copy of PopClip, there are three icon buttons at the bottom of the About pane:
 
-- ![]./media/icon-help.png#icon) Help button: Opens this user guide in your browser.
-- ![]./media/icon-envelope.png#icon) Envelope button: Open a new email message to send to the developer.
-- ![]./media/icon-twitter.png#icon) Twitter button: Opens [PopClip's Twitter page](/support).
+- ![](./media/icon-help.png#icon) Help button: Opens this user guide in your browser.
+- ![](./media/icon-envelope.png#icon) Envelope button: Open a new email message to send to the developer.
+- ![](./media/icon-twitter.png#icon) Twitter button: Opens [PopClip's Twitter page](/support).
 
 The text button at the bottom of the About pane differs between editions:
 
