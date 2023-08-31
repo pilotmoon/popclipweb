@@ -11,7 +11,7 @@ const no = '';
 # Browser support
 
 This table lists all the browsers that PopClip is aware of, and the level of
-support is provides for each one. (See [Key to table](#key-to-table).)
+support provided for each one. (See [Key to table](#key-to-table).)
 
 <table>
 <thead>
