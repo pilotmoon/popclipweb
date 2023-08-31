@@ -19,7 +19,7 @@ The service name is usually exactly as shown in the Services menu, for example `
 
 ## Input and output
 
-The selected plain text will be sent as input to the service. If `captureHtml` and/or `captureRtf` are set to `true`, then the HTML and/or RTF versions of the selected text will also be sent as input to the service.
+The selected plain text will be sent as input to the service. If `capture html` is set to `true`, then the HTML version of the selected text will also be sent as input to the service.
 
 Service actions never return any output.
 
