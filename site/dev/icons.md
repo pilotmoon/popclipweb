@@ -147,9 +147,8 @@ the icon for any text string you select. (To see how to install this, see
 // language: javascript
 // module: true
 exports.actions = (selection) => {
-  return {
+  return [{
     icon: selection.text,
-  };
+  }];
 };
 ```
-
