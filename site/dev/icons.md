@@ -1,69 +1,45 @@
 ---
 titleTemplate: PopClip Developer
 ---
+
 # Icons
 
-Icons may be specified in the `icon` fields in a few different ways:
+Icons may be specified in `icon` fields in several different ways:
 
-- **As a filename:** `<filename>.png` or `<filename>.svg` specifies an image
-  file within the extension package, in either PNG or SVG format. PNG icons
-  should be at least 256 pixels high.
+- As a filename: `<filename>.png` or `<filename>.svg`. See
+  [Image files](#image-files).
 
-- **As a text-based icon:** Using a special format, you can instruct PopClip to
-  generate a text-based icon (see below).
+- As text: `text:<text specifier>` or just `<text specifier>`. See
+  [Text icons](#text-icons).
 
-- **As an Iconify icon:** `iconify:<iconify identifier>`. For example
-  `iconify:ion:fish`. Iconify provides over 100,000 open source icons. Search
-  for icons at: <https://icon-sets.iconify.design/>. PopClip needs internet
-  access to retrieve the icon.
+- As an Iconify icon: `iconify:<icon set prefix>:<icon name>`. See
+  [Iconify icons](#iconify-icons).
 
-- **As an SF Symbol:** `symbol:<symbol name>` specifies an Apple
-  [SF Symbols](https://sfsymbols.com) identifier, for example `symbol:flame`.
-  Symbols are only available on macOS 11.0 and above.
+- As an SF Symbol: `symbol:<symbol name>`. See
+  [SF Symbols icons](#sf-symbols-icons).
 
-- **As SVG source code:** `svg:<svg source>`.
+- As SVG source code: `svg:<svg source>`.
 
-## Color handling
+## Image files
 
-Images suitable for use as icons will typically be solid black on a transparent
-background. Opacity can be used for shading.
+If you specify the name of a PNG or SVG image file in the extension's package,
+it will be used.
 
-By default, PopClip renders icons all in the same color, ignoring any color
-information in the image. However, you can set the `preserve color` flag in
-`icon options` to tell PopClip to keep the original color palette. (Color icons
-from Iconify will automatically be rendered in color.)
+Images should feature a monochrome shape on a transparent background. Variable
+opacity can be used for shading.
 
-## Text-based icons
+PNG icons should be at least 256 pixels high.
 
-Text-based icons can up to three characters, on their own or within an enclosing
-shape. They are specified by space-separated keywords followed by the characters
-to draw.
+## Text icons
 
-The following keywords define an enclosing shape (only one of these should be
-included):
+Using a special format, you can instruct PopClip to generate a text-based icon.
+Text icons can have a `text:` prefix but it is optional.
 
-| Keyword  | Effect                                                                                           |
-| -------- | ------------------------------------------------------------------------------------------------ |
-| `text`   | Draw the text on its own, without a shape. This is the default if no shape keyword is specified. |
-| `square` | Encloses text in a round-cornered square.                                                        |
-| `circle` | Encloses text in a circle.                                                                       |
-| `search` | Encloses text in a magnifying glass shape.                                                       |
+### Text icon examples
 
-The following keywords modify the way the text is drawn:
-
-| Keyword      | Effect                                                                                                                                                   |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `filled`     | Specifies a solid filled shape (default is an outline shape).                                                                                            |
-| `monospaced` | Specifies that the text be drawn in a monospaced font (default is variable-width font). Punctuation characters often render better in a monospaced font. |
-
-## Examples of icon specifiers
-
-| Text String                   | Icon Generated                                                                                                                                                 |
+| Specifier string              | Icon generated                                                                                                                                                 |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `symbol:flame`                | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-flame.png" width="20" height="20">                |
-| `symbol:hand.raised`          | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-hand.raised.png" width="20" height="20">          |
-| `symbol:signpost.right`       | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-signpost.right.png" width="20" height="20">       |
-| `A` or `text A`               | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/A.png" width="20" height="20">                           |
+| `text:A` or just `A`          | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/A.png" width="20" height="20">                           |
 | `circle 1`                    | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/circle_1.png" width="20" height="20">                    |
 | `circle filled 本`            | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/circle_filled_本.png" width="20" height="20">            |
 | `square xyz`                  | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/square_xyz.png" width="20" height="20">                  |
@@ -72,8 +48,97 @@ The following keywords modify the way the text is drawn:
 | `search E`                    | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/search_E.png" width="20" height="20">                    |
 | `search filled monospaced £`  | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/search_filled_monospaced_£.png" width="20" height="20">  |
 
+### Text icon format
+
+The specifier format is `<shape> <modifiers> <text>`.
+
+- `<shape>` is optional, and can be one of the following:
+
+| Keyword  | Effect                                     |
+| -------- | ------------------------------------------ |
+| `square` | Encloses text in a round-cornered square.  |
+| `circle` | Encloses text in a circle.                 |
+| `search` | Encloses text in a magnifying glass shape. |
+
+- `<modifiers>` are optional, and can be any number of the following:
+
+| Keyword      | Effect                                                      |
+| ------------ | ----------------------------------------------------------- |
+| `filled`     | Specifies a solid filled shape instead of an outline shape. |
+| `monospaced` | Specifies that the text be drawn with a monospaced font.    |
+
+- `<text>` can up to three characters.
+
+::: info :bulb: Tip: Monospaced font
+
+Punctuation symbols often look better in icons when drawn with the `monospaced`
+modifier.
+
+:::
+
+## Iconify icons
+
+[Iconify](https://iconify.design/) provides over 100,000 icons from a variety of
+open source icon sets.
+
+Browse the catalog at <https://icon-sets.iconify.design/>.
+
+The format is `iconify:<icon set prefix>:<icon name>`.
+
+### Iconify icon examples
+
+| Specifier string               | Icon generated |
+| ------------------------------ | -------------- |
+| `iconify:ion:fish`             | TODO           |
+| `iconify:solar:flag-bold`      | TODO           |
+| `iconify:noto:cowboy-hat-face` | TODO           |
+
+## SF Symbols icons
+
+Apple [SF Symbols](https://developer.apple.com/sf-symbols/) are included on
+macOS 11.0 and above. The icon catalog can be viewed by installig Apple's the SF
+Symbols app on your Mac.
+
+The format is `iconify:<symbol identifier>`.
+
+### SF Symbols icon examples
+
+| Specifier string        | Icon generated                                                                                                                                           |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `symbol:flame`          | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-flame.png" width="20" height="20">          |
+| `symbol:hand.raised`    | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-hand.raised.png" width="20" height="20">    |
+| `symbol:signpost.right` | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-signpost.right.png" width="20" height="20"> |
+
+## Color handling
+
+By default, PopClip renders icons with a uniform fill color, ignoring any color
+information in the image. However, you can set the `preserve color` flag (see
+[Icon options](#icon-options)) to tell PopClip to keep the original color
+palette.
+
+::: info Special case: Color Iconify icons
+
+Color icons from Iconify will automatically be rendered in color.
+
+:::
+
+## Icon options
+
+These icon options can be placed in the config alongside the `icon` field to
+modify the way the icon is drawn.
+
+| Key               | Type    | Description                                                                                                                              |
+| ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `preserve color`  | Boolean | If true, the supplied icon will be displayed with its original color instead of being filled in white/black. Default is `false`.         |
+| `preserve aspect` | Boolean | If true, the supplied icon will be displayed with its original aspect ratio instead of being scaled to fit a square. Default is `false`. |
+| `flip horizontal` | Boolean | If true, the supplied icon will be drawn horizontally flipped. Default is `false`.                                                       |
+| `flip vertical`   | Boolean | If true, the supplied icon will be drawn vertically flipped. Default is `false`.                                                         |
+
+## Icon Preview tool
+
 As a handy tool, the following snippet defines an extension that will display
-the icon for any text string you select.
+the icon for any text string you select. (To see how to install this, see
+[Snippets](./snippets).)
 
 ```javascript
 // #popclip
@@ -89,15 +154,3 @@ exports.actions = (selection) => {
 ```
 
 ![](./media/anim-icon-preview-2.mp4 "The Icon Preview extension.")
-
-## Icon options
-
-These icon options can be placed in the config alongside the `icon` field to
-modify the way the icon is drawn.
-
-| Key               | Type    | Required?                                                                                                                                | Description |
-| ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `preserve color`  | Boolean | If true, the supplied icon will be displayed with its original color instead of being filled in white/black. Default is `false`.         |             |
-| `preserve aspect` | Boolean | If true, the supplied icon will be displayed with its original aspect ratio instead of being scaled to fit a square. Default is `false`. |             |
-| `flip horizontal` | Boolean | If true, the supplied icon will be drawn horizontally flipped. Default is `false`.                                                       |             |
-| `flip vertical`   | Boolean | If true, the supplied icon will be drawn vertically flipped. Default is `false`.                                                         |             |
