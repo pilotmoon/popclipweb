@@ -1,66 +1,75 @@
 ---
 outline: deep
 ---
+
 # Actions
 
-On this page you will learn about actions in PopClip and take a tour of the built-in actions.
+On this page you will learn about actions in PopClip and take a tour of the
+built-in actions.
 
 ## About actions
 
-The buttons that appear in the PopClip bar perform **actions**. PopClip comes with a set of built-in actions, and you can add more by installing [extensions](./extensions).
+The buttons that appear in the PopClip bar perform **actions**. PopClip comes
+with a set of built-in actions, and you can add more by installing
+[extensions](./extensions).
 
-Actions are context-sensitive, meaning that they only appear when they are relevant. So you won't always see all the actions.
+Actions are context-sensitive, meaning that they only appear when they are
+relevant. So you won't always see all the actions.
 
-Some actions respond to modifier keys. Hold down the modifier key while clicking the action's button to perform the action with the modifier.
+Some actions respond to modifier keys. Hold down the modifier key while clicking
+the action's button to perform the action with the modifier.
 
-With actions whose buttons show an icon only, you can hover the pointer over the button to see the action's name.
+With actions whose buttons show an icon only, you can hover the pointer over the
+button to see the action's name.
 
-:::tip Action settings
-Settings for actions can be accessed in the [actions pane](settings#actions-pane) of PopClip settings.
+::: tip Action settings
+
+Settings for actions can be accessed in the
+[actions pane](settings#actions-pane) of PopClip settings.
+
 :::
-
-<!-- :::tip Actions not appearing?
-PopClip is context-sensitive, meaning that the actions that appear are dependent on the the text content, as well as other context.
-
-Examples:
-
-- The Paste and Cut actions only appear when the text is editable.
-- The Open Link action only appears if the selected text contains a link.
-- The Dictionary action only appears if the text is a dictionary word.
-- The Reveal in Finder action only appears if the text is a file path.
-- Spelling correction actions only appear if the text is misspelled and there are suggestions available.
-::: -->
 
 ## Built-in actions
 
 ### ![Cut icon](./media/icon-cut.svg#iconleft) ![Copy icon](./media/icon-copy.svg#iconleft) ![Paste icon](./media/icon-paste.svg#iconleft) Cut, Copy and Paste
 
-The Cut, Copy and Paste actions work just like the usual clipboard functions on your Mac.
+The Cut, Copy and Paste actions work just like the usual clipboard functions on
+your Mac.
 
-:::tip Paste without selecting text
-To make PopClip appear without selecting any text, [long press](/guide/basics#long-press-with-the-mouse-or-trackpad) the mouse or trackpad button.
+::: tip Paste without selecting text
+
+To make PopClip appear without selecting any text,
+[long press](/guide/basics#long-press-with-the-mouse-or-trackpad) the mouse or
+trackpad button.
+
 :::
+
 **Availablilty:**
 
 - Copy requires a text selection.
-- Paste requires an editable text field and content on the clipboard that can be pasted.
+- Paste requires an editable text field and content on the clipboard that can be
+  pasted.
 - Cut requires a text selection and an editable text field.
 
 **Modifiers:**
 
-Hold down **Shift (⌥)** to perform the action with plain text only. This will remove any formatting from the text.
+Hold down **Shift (⌥)** to perform the action with plain text only. This will
+remove any formatting from the text.
 
 **Settings:**
 
 ![](./media/shot-prefs-copy-2.png#pref "Copy settings.")
 
-- **Show as Icon**: When enabled, shows the actions's button as an icon instead of text.
+- **Show as Icon**: When enabled, shows the actions's button as an icon instead
+  of text.
 
 ### ![Search icon](./media/icon-search.svg#iconleft) Search
 
-The Search action opens a web search for the selected text. The default search engine is Google, but you can change this in the actions's settings.
+The Search action opens a web search for the selected text. The default search
+engine is Google, but you can change this in the actions's settings.
 
-The search opens in the default browser, unless the current app is a browser in which case the current browser is used instead.
+The search opens in the default browser, unless the current app is a browser in
+which case the current browser is used instead.
 
 **Availability:**
 
@@ -74,25 +83,36 @@ Hold **Shift (⇧)** to copy the search URL instead of opening it.
 
 ![](./media/shot-prefs-search-1.png#pref "Search settings.")
 
-- **Search URL**: The URL of the search engine. The placeholder `***` will be replaced with the selected text. For example, the default Google search URL is `https://www.google.com/search?q=***`.
+- **Search URL**: The URL of the search engine. The placeholder `***` will be
+  replaced with the selected text. For example, the default Google search URL is
+  `https://www.google.com/search?q=***`.
 
 ### ![Open Link icon](./media/icon-link.svg#iconleft) Open Link
 
-The Open Link action opens any web URLs (`http:` and `https:`) detected in the selected text. If the text contains multiple web URLs, all of them will open in separate tabs. The action will also detect "URL-like" text lacking a scheme prefix and add `https:` when opening it.
+The Open Link action opens any web URLs (`http:` and `https:`) detected in the
+selected text. If the text contains multiple web URLs, all of them will open in
+separate tabs. The action will also detect "URL-like" text lacking a scheme
+prefix and add `https:` when opening it.
 
-The URLs open in the default browser, unless the current app is a browser in which case the current browser is used instead.
+The URLs open in the default browser, unless the current app is a browser in
+which case the current browser is used instead.
 
-In addition to web URLs, PopClip detects single instances of the following URL schemes: `evernote:`, `omnifocus:`, `spotify:`, `ftp:`, `bluesky:`, `hook:`, `craftdocs:`, `x-devonthink-item`.
+In addition to web URLs, PopClip detects single instances of the following URL
+schemes: `evernote:`, `omnifocus:`, `spotify:`, `ftp:`, `bluesky:`, `hook:`,
+`craftdocs:`, `x-devonthink-item`.
 
-**Try it:** `https://apple.com` `xkcd.com` `spotify:track:421Gp1eSmOIcD6alTWowFR`
+**Try it:** `https://apple.com` `xkcd.com`
+`spotify:track:421Gp1eSmOIcD6alTWowFR`
 
 **Availability:**
 
-Only available if the selected text contains URL. The URL must appear in the text itself; links that are behind hyperlinks cannot be detected. 
+Only available if the selected text contains URL. The URL must appear in the
+text itself; links that are behind hyperlinks cannot be detected.
 
 **Modifiers:**
 
-Hold **Shift (⇧)** to copy the URLs to the clipboard as a list, instead of opening them.
+Hold **Shift (⇧)** to copy the URLs to the clipboard as a list, instead of
+opening them.
 
 **Settings:**
 
@@ -100,25 +120,31 @@ None.
 
 ### ![Dictionary icon](./media/icon-dict.svg#iconleft) Dictionary
 
-The Dictionary action looks up the selected text in the macOS Dictionary app. The Dictionary app will open and show the definition of the word.
+The Dictionary action looks up the selected text in the macOS Dictionary app.
+The Dictionary app will open and show the definition of the word.
 
 **Availability:**
 
-Only available if the selected text is a word in one of the dictionaries enabled within the macOS Dictionary app. (PopClip restart may be needed after enabling new dictionaries.)
+Only available if the selected text is a word in one of the dictionaries enabled
+within the macOS Dictionary app. (PopClip restart may be needed after enabling
+new dictionaries.)
 
 **Modifiers:**
 
-Hold **Shift (⇧)** to copy the dictionary definition to the clipboard instead of opening in the Dictionary app.
+Hold **Shift (⇧)** to copy the dictionary definition to the clipboard instead of
+opening in the Dictionary app.
 
 **Settings:**
 
-The action has no settings, but you can change the dictionaries that are enabled in the settings of macOS Dictionary app.
+The action has no settings, but you can change the dictionaries that are enabled
+in the settings of macOS Dictionary app.
 
 ![](./media/shot-macos-dict-1.png "macOS Dictionary app settings.")
 
 ### ![Reveal in Finder icon](./media/icon-finder.svg#iconleft) Reveal in Finder
 
-The Reveal in Finder action opens the folder containing the selected file path, or, if the selected text is a folder path, opens the folder itself.
+The Reveal in Finder action opens the folder containing the selected file path,
+or, if the selected text is a folder path, opens the folder itself.
 
 **Try it:** `~/Documents` `/Applications/`
 
@@ -138,14 +164,18 @@ None.
 
 ![](./media/anim-spelling-3.mp4 "The Spelling action in use.")
 
+The Spelling action shows a list of spelling suggestions for the selected word.
+Click a suggestion to replace the selected text with it.
 
-The Spelling action shows a list of spelling suggestions for the selected word. Click a suggestion to replace the selected text with it.
+Spelling may be checked against up to two different languages, configurable in
+settings.
 
-Spelling may be checked against up to two different languages, configurable in settings.
+This action has a special behaviour, appearing as a submenu in place of the
+regular PopClip bar. You can click the up-arrow button to return to the regular
+PopClip bar.
 
-This action has a special behaviour, appearing as a submenu in place of the regular PopClip bar. You can click the up-arrow button to return to the regular PopClip bar.
-
-The action uses the macOS system spellchecker behind the scenes, so the spelling suggestions will be similar those that appear in other places in macOS.
+The action uses the macOS system spellchecker behind the scenes, so the spelling
+suggestions will be similar those that appear in other places in macOS.
 
 **Availability:**
 
@@ -156,13 +186,19 @@ Available if the the selected text is:
 - the spellchecker has spelling suggestions, and
 - the text is editable.
 
-If the selected text is a valid word in one of the enabled languages, the action will appear in the regular PopClip bar only. Otherwise, the spelling suggestions submenu will appear directly.
+If the selected text is a valid word in one of the enabled languages, the action
+will appear in the regular PopClip bar only. Otherwise, the spelling suggestions
+submenu will appear directly.
 
 **Modifiers:**
 
-Hold **Shift (⇧)** to copy the spelling suggestion to the clipboard instead of replacing the text.
+Hold **Shift (⇧)** to copy the spelling suggestion to the clipboard instead of
+replacing the text.
 
 **Settings:**
 
 ![](./media/shot-prefs-spelling-3.png#pref "Spelling settings.")
-- **Languages**: You can select up to two languages for spellchecking, choosing from any that are available on the operating system. If you only want to check spelling in one language, leave the second language set to "None".
+
+- **Languages**: You can select up to two languages for spellchecking, choosing
+  from any that are available on the operating system. If you only want to check
+  spelling in one language, leave the second language set to "None".
