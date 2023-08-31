@@ -109,7 +109,7 @@ following people and projects:
 - [Sparkle](https://sparkle-project.org/)
   ([license](https://github.com/sparkle-project/Sparkle/blob/2.x/LICENSE)) by
   Andy Matuschak and the Sparkle project contributors.
-- [AquaticPrime Core Foundation Implementation](https://github.com/bdrister/AquaticPrime/blob/master/Source/CoreFoundation/AquaticPrime.c)
+- [AquaticPrime](https://github.com/bdrister/AquaticPrime/blob/master/Source/CoreFoundation/AquaticPrime.c)
   (BSD License) by Lucas Newman and other contributors.
 - [EMKeyChain](https://github.com/irons/EMKeychain) (MIT license) by Brian
   Amerige of Extendmac, LLC.
