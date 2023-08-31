@@ -31,7 +31,6 @@ extension:
 ```
 Say.popclipext/                -- Package folder
 │
-├── CHANGELOG.md               -- Changelog file
 ├── Config.json                -- Config file
 ├── README.md                  -- Readme file
 ├── say.zsh                    -- Script file
