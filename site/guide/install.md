@@ -15,33 +15,32 @@ on your Mac.
 
 There are 3 ways to obtain PopClip:
 
-- **Standalone (free trial, unlockable with license key)**: Download
-  PopClip from the [downloads](/download) page on this website. The download is
-  a zip file containing the PopClip app. Unzip the file and drag the PopClip app
-  to your Applications folder.
+- **Standalone (free trial, unlockable with license key)**: Download PopClip
+  from the [downloads](/download) page on this website. The download is a zip
+  file containing the PopClip app. Unzip the file and drag the PopClip app to
+  your Applications folder.
 
 - **Mac App Store**: PopClip is available to buy on the Mac App Store as a
-  one-time purchase. <Link k="mas.storeUrl">View PopClip on Mac App Store</Link>.
+  one-time purchase. <Link k="mas.storeUrl">View PopClip on Mac App
+  Store</Link>.
 
-- **Setapp**: <Link k="setapp.referralUrl">Setapp</Link> is a subscription service for Mac apps, offering access
-  to hundreds of Mac apps for $9.99 per month. If you're a Setapp customer,
-  PopClip is included in your subscription. Simply search for "PopClip" in the
-  Setapp interface and click Install.
+- **Setapp**: <Link k="setapp.referralUrl">Setapp</Link> is a subscription
+  service for Mac apps, offering access to hundreds of Mac apps for $9.99 per
+  month. If you're a Setapp customer, PopClip is included in your subscription.
+  Simply search for "PopClip" in the Setapp interface and click Install.
 
-I refer to the above three variants of PopClip as *editions*. The editions all share the same features and
-abilities, and the only significant difference is the way you obtain the app and
-how you buy it. There are some minor differences, which I will point
-out where relevant.
+I refer to the above three variants of PopClip as _editions_. The editions all
+share the same features and abilities, and the only significant difference is
+the way you obtain the app and how you buy it. There are some minor differences,
+which I will point out where relevant.
 
 ### Requirements
 
 The latest version of PopClip requires macOS 10.13 (High Sierra) or later. It is
 compatible with both Intel and Apple Silicon Macs.
 
-::: tip Older versions
-Older versions of PopClip are available for older operating systems. See
-the [downloads](/download) page.
-:::
+::: tip Older versions Older versions of PopClip are available for older
+operating systems. See the [downloads](/download) page. :::
 
 ### Free trial
 
@@ -62,9 +61,10 @@ key.
 
 If you bought PopClip on the Mac App Store, then on first launch PopClip will save a separate copy of your Mac App Store receipt to your Mac. This receipt will be detected by the Standalone edition of PopClip if you ever switch to it, for example to test a beta. This means that you can switch between the Mac App Store and Standalone editions without having to buy a license. -->
 
-:::tip Your license is in iCloud
-If you have iCloud enabled on your Mac, PopClip will automatically save your license key to iCloud. If you have multiple Macs signed in to the same iCloud account, the license key will be shared between them. It will also be waiting for you when you install PopClip on a new Mac.
-:::
+:::tip Your license is in iCloud If you have iCloud enabled on your Mac, PopClip
+will automatically save your license key to iCloud. If you have multiple Macs
+signed in to the same iCloud account, the license key will be shared between
+them. It will also be waiting for you when you install PopClip on a new Mac. :::
 
 ## First launch
 
@@ -78,7 +78,7 @@ When you first launch PopClip, its icon (initially greyed out) will appear in
 the menu bar and a message will appear on screen: _To continue, PopClip needs to
 enable Accessibility access._
 
-![Accessibility request message]./media/shot-ax-request.png "PopClip requesting Accessibility permission")
+![Accessibility request message](./media/shot-ax-request.png "PopClip requesting Accessibility permission")
 
 #### Why is Accessibility permission needed?
 
@@ -95,19 +95,19 @@ action such as a web search. See also [Privacy Policy](/privacy).
 
 Click the Enable PopClip button and a macOS dialog appears:
 
-![Accessibility request dialog]./media/shot-ax-dialog.jpg "macOS Accessibility Access dialog")
+![Accessibility request dialog](./media/shot-ax-dialog.jpg "macOS Accessibility Access dialog")
 
 Now click Open System Settings and you will be taken to the Security & Privacy
 pane of System Preferences. On macOS 13.0 and above it looks like this:
 
-![Accessibility settings]./media/shot-ax-settings.png "macOS Accessibility settings in the Privacy & Security pane")
+![Accessibility settings](./media/shot-ax-settings.png "macOS Accessibility settings in the Privacy & Security pane")
 
 Toggle the slider for PopClip to on. You will be prompted to enter your password
 to confirm the change.
 
 Finally, PopClip will show the Welcome to PopClip message:
 
-![Welcome to PopClip]./media/shot-welcome.png "Welcome to PopClip message")
+![Welcome to PopClip](./media/shot-welcome.png "Welcome to PopClip message")
 
 Next, we will put PopClip though its paces!
 
@@ -117,6 +117,9 @@ Before we move on, let's take a moment to learn how to uninstall PopClip.
 
 1. First, quit PopClip if it is running.
 
-2. Drag the PopClip app from your Applications folder (or the Setapp folder inside the Applications folder) to the Trash.
+2. Drag the PopClip app from your Applications folder (or the Setapp folder
+   inside the Applications folder) to the Trash.
 
-3. Optionally, to also remove all PopClip settings, extensions, and supporting files from your Mac, delete the files and folders listed in [Paths and identifiers](/kb/paths).
+3. Optionally, to also remove all PopClip settings, extensions, and supporting
+   files from your Mac, delete the files and folders listed in
+   [Paths and identifiers](/kb/paths).
