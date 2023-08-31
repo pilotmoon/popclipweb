@@ -134,6 +134,8 @@ modify the way the icon is drawn.
 
 ## Icon Preview tool
 
+![](./media/anim-icon-preview-2.mp4 "The Icon Preview extension.")
+
 As a handy tool, the following snippet defines an extension that will display
 the icon for any text string you select. (To see how to install this, see
 [Snippets](./snippets).)
@@ -151,4 +153,3 @@ exports.actions = (selection) => {
 };
 ```
 
-![](./media/anim-icon-preview-2.mp4 "The Icon Preview extension.")
