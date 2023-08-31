@@ -168,11 +168,13 @@ async function processExtensions() {
     }
   }
 
-  // await Promise.all(
-  //   crumbs.map(({ descriptor, key, url }) => postIcon(descriptor, url)),
-  // ).then(() => {
-  //   console.log("done posting icons");
-  // });
+// comment out here ....
+  await Promise.all(
+    crumbs.map(({ descriptor, key, url }) => postIcon(descriptor, url)),
+  ).then(() => {
+    console.log("done posting icons");
+  });
+// ... to here to disable icon posting
 
   return result;
 }
