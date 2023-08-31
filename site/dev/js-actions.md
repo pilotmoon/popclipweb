@@ -11,15 +11,16 @@ PopClip's internal state and lets them interact with PopClip itself.
 
 ::: tip Module-based extensions
 
-For more complex functionality, JavaScript [module-based extensions](./js-modules) are
-a flexible and powerful alternative to JavaScript actions.
+For more complex functionality, JavaScript
+[module-based extensions](./js-modules) are a flexible and powerful alternative
+to JavaScript actions.
 
 :::
 
 ## Properties
 
-A JavaScript action is defined by the presence of either a `javascript file` or
-`javascript` field, as follows:
+A JavaScript action is defined by the presence of either a `javascript` or
+`javascript file` field, as follows:
 
 | Key               | Type   | Description                            |
 | ----------------- | ------ | -------------------------------------- |
