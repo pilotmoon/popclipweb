@@ -78,10 +78,8 @@ modifier.
 
 ## Iconify icons
 
-[Iconify](https://iconify.design/) provides over 100,000 icons from a variety of
-open source icon sets.
-
-Browse the catalog at <https://icon-sets.iconify.design/>.
+[Iconify](https://iconify.design/) provides over 150,000 icons from a variety of
+open source icon sets. Browse the catalog at <https://icon-sets.iconify.design/>.
 
 The format is `iconify:<icon set prefix>:<icon name>`.
 
@@ -95,8 +93,8 @@ The format is `iconify:<icon set prefix>:<icon name>`.
 
 ## SF Symbols icons
 
-Apple [SF Symbols](https://developer.apple.com/sf-symbols/) are included on
-macOS 11.0 and above. The icon catalog can be viewed by installig Apple's the SF
+Apple [SF Symbols](https://developer.apple.com/sf-symbols/) are available on
+macOS 11.0 and above. The icon catalog can be viewed by installing Apple's SF
 Symbols app on your Mac.
 
 The format is `iconify:<symbol identifier>`.
