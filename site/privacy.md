@@ -7,7 +7,7 @@ editLink: false
 
 ## Introduction
 
-I am Nicholas Moore, a sole trader in the United Kingdom doing business using the the trading name [Pilotmoon Software](https://pilotmoon.com/about). I run an independent software business and make my income by selling Mac apps. No part of my business involves gathering your personal data, tracking you, or targeting ads at you. I only collect information as necessary to provide my services to you, as described below.
+I am Nicholas Moore, a sole trader in the United Kingdom doing business using the trading name [Pilotmoon Software](https://pilotmoon.com/about). I run an independent software business and make my income by selling Mac apps. No part of my business involves gathering your personal data, tracking you, or targeting ads at you. I only collect information as necessary to provide my services to you, as described below.
 
 ## Buying from the Mac App Store
 

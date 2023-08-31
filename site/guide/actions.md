@@ -179,7 +179,7 @@ suggestions will be similar those that appear in other places in macOS.
 
 **Availability:**
 
-Available if the the selected text is:
+Available if the selected text is:
 
 - a single word,
 - misspelled in at least one of the enabled languages,

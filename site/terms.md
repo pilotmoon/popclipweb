@@ -8,7 +8,7 @@ editLink: false
 
 ## Definitions
 
-*I*, *me*: Nicholas Moore, a sole trader in the United Kingdom doing business using the the trading name [Pilotmoon Software](https://pilotmoon.com/about).
+*I*, *me*: Nicholas Moore, a sole trader in the United Kingdom doing business using the trading name [Pilotmoon Software](https://pilotmoon.com/about).
 
 *Product*: the PopClip software application. The scope of the product does not include any extensions (see [Extensions](#extensions) below).
 
