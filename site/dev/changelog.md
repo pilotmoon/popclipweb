@@ -14,6 +14,13 @@ Detailed notes on changes to PopClip's extensions programming interface will be 
 
 See also [Version History](/changelog) for a list of user-facing changes to the PopClip app itself.
 
+## Documentation Update, 2023-08-30
+
+- The developer documentation moved from GitHub to <https://www.popclip.app/dev/>.
+- The previous single README was split into multiple pages.
+- All parts revised and updated; more examples added.
+- Added brand new documentation for [Module-based extensions](https://www.popclip.app/dev/js-modules).
+
 ## PopClip 2023.7 (4151)
 
 There were no changes to extension programming interface in this release.
