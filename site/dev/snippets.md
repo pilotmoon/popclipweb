@@ -230,7 +230,7 @@ You can use `lang` as shorthand for `language`, and `js` as shorthand for
 
 ### Inverted syntax examples
 
-Here is Python example:
+Here is a Python example:
 
 ```python
 # #popclip
