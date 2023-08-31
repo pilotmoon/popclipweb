@@ -39,8 +39,12 @@ which I will point out where relevant.
 The latest version of PopClip requires macOS 10.13 (High Sierra) or later. It is
 compatible with both Intel and Apple Silicon Macs.
 
-::: tip Older versions Older versions of PopClip are available for older
-operating systems. See the [downloads](/download) page. :::
+::: tip Older versions
+
+Older versions of PopClip are available for older
+operating systems. See the [downloads](/download) page.
+
+:::
 
 ### Free trial
 
@@ -61,10 +65,14 @@ key.
 
 If you bought PopClip on the Mac App Store, then on first launch PopClip will save a separate copy of your Mac App Store receipt to your Mac. This receipt will be detected by the Standalone edition of PopClip if you ever switch to it, for example to test a beta. This means that you can switch between the Mac App Store and Standalone editions without having to buy a license. -->
 
-:::tip Your license is in iCloud If you have iCloud enabled on your Mac, PopClip
+::: tip Your license is in iCloud
+
+If you have iCloud enabled on your Mac, PopClip
 will automatically save your license key to iCloud. If you have multiple Macs
 signed in to the same iCloud account, the license key will be shared between
-them. It will also be waiting for you when you install PopClip on a new Mac. :::
+them. It will also be waiting for you when you install PopClip on a new Mac.
+
+:::
 
 ## First launch
 
