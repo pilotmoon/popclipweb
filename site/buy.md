@@ -1,5 +1,6 @@
 ---
 titleTemplate: false
+editLink: false
 ---
 <script setup>
 import Buy from '/src/Buy.vue'

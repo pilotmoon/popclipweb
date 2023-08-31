@@ -6,6 +6,7 @@ sidebar: false
 aside: false
 prev: false
 next: false
+editLink: false
 ---
 <script setup>
 import Directory from '/src/Directory.vue'

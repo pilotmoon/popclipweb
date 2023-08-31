@@ -7,6 +7,7 @@ sidebar: false
 aside: false
 pref: false
 next: false
+editLink: false
 ---
 <script setup lang="ts">
 import DirectoryPage from '/src/DirectoryPage.vue';

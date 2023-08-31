@@ -1,5 +1,6 @@
 ---
 outline: deep
+editLink: false
 ---
 
 # Support & Feedback

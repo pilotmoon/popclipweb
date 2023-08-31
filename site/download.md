@@ -1,5 +1,6 @@
 ---
 titleTemplate: false
+editLink: false
 ---
 <script setup>
 import DownloadButton from '/src/DownloadButton.vue';

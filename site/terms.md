@@ -1,6 +1,7 @@
 ---
 prev: false
 next: false
+editLink: false
 ---
 
 # Terms of License

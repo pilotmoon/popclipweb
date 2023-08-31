@@ -18,9 +18,10 @@ export default defineConfig({
       quote: "Sorry about that.",
     },
     logo: "/icon128.png",
-    // editLink: {
-    //   pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path'
-    // },
+    editLink: {
+      pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path',
+      text: 'Edit this page on GitHub'
+    },
     nav: [
       {
         text: "Guide",
