@@ -61,11 +61,7 @@ Your license key will be delivered to you as file whose name ends with
 PopClip will automatically open the file and register itself with the license
 key.
 
-<!-- #### Standalone edition will detect Mac App Store purchase
-
-If you bought PopClip on the Mac App Store, then on first launch PopClip will save a separate copy of your Mac App Store receipt to your Mac. This receipt will be detected by the Standalone edition of PopClip if you ever switch to it, for example to test a beta. This means that you can switch between the Mac App Store and Standalone editions without having to buy a license. -->
-
-::: tip Your license is in iCloud
+::: tip Your license in iCloud
 
 If you have iCloud enabled on your Mac, PopClip
 will automatically save your license key to iCloud. If you have multiple Macs
