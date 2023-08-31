@@ -173,4 +173,4 @@ The text button at the bottom of the About pane differs between editions:
 
 ### Trial mode
 
-In trial mode (Standalone edition only), the About pane will instead show the number of uses remaining before the trial expires. The Buy button (![]./media/icon-buy-tag.svg#icon)) Opens the [buy](/buy) page in your browser.
+In trial mode (Standalone edition only), the About pane will instead show the number of uses remaining before the trial expires. The Buy button (![](./media/icon-buy-tag.svg#icon)) Opens the [buy](/buy) page in your browser.
