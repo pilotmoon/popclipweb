@@ -127,10 +127,10 @@ modify the way the icon is drawn.
 
 | Key               | Type    | Description                                                                                                                              |
 | ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `preserve color`  | Boolean | If true, the supplied icon will be displayed with its original color instead of being filled in white/black. Default is `false`.         |
-| `preserve aspect` | Boolean | If true, the supplied icon will be displayed with its original aspect ratio instead of being scaled to fit a square. Default is `false`. |
-| `flip horizontal` | Boolean | If true, the supplied icon will be drawn horizontally flipped. Default is `false`.                                                       |
-| `flip vertical`   | Boolean | If true, the supplied icon will be drawn vertically flipped. Default is `false`.                                                         |
+| `preserve color`  | Boolean | If `true`, the supplied icon will be displayed with its original color instead of being filled in white/black. Default is `false`.         |
+| `preserve aspect` | Boolean | If `true`, the supplied icon will be displayed with its original aspect ratio instead of being scaled to fit a square. Default is `false`. |
+| `flip horizontal` | Boolean | If `true`, the supplied icon will be drawn horizontally flipped. Default is `false`.                                                       |
+| `flip vertical`   | Boolean | If `true`, the supplied icon will be drawn vertically flipped. Default is `false`.                                                         |
 
 ## Icon Preview tool
 
