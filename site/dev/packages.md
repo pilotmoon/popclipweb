@@ -10,9 +10,9 @@ extension in a folder.
 
 ## The package folder
 
-A PopClip extension package consists of a configuration file plus (optional)
-additional files such as icons and scripts, all contained in a directory whose
-name ends with `.popclipext`.
+A PopClip extension package consists of a config file plus (optional) additional
+files such as icons and scripts, all contained in a directory whose name ends
+with `.popclipext`.
 
 When you double-click a `.popclipext` package, macOS will open it with PopClip,
 which will attempt to load and install it.
