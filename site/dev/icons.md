@@ -97,7 +97,7 @@ Apple [SF Symbols](https://developer.apple.com/sf-symbols/) are available on
 macOS 11.0 and above. The icon catalog can be viewed by installing Apple's SF
 Symbols app on your Mac.
 
-The format is `symbol:<symbol identifier>`.
+The format is `symbol:<symbol name>`.
 
 ### SF Symbols icon examples
 
