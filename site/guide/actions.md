@@ -8,8 +8,13 @@ The buttons that appear in the PopClip bar perform **actions**. PopClip comes
 with a set of built-in actions, and you can add more by installing
 [extensions](./extensions).
 
-Actions are context-sensitive, meaning that they only appear when they are
-relevant. So you won't always see all the actions.
+::: info :thinking:&ensp;Missing actions?
+
+Actions are context-sensitive, and only appear when relevant. So you won't
+always see all the actions in the PopClip bar. See:
+[Why are some actions not appearing?](http://localhost:5173/kb/troubleshooting#why-are-some-actions-not-appearing)
+
+:::
 
 ## Built-in actions
 
@@ -28,10 +33,9 @@ trackpad button.
 
 **Availablilty:**
 
-- Copy requires a text selection.
-- Paste requires an editable text field and content on the clipboard that can be
-  pasted.
-- Cut requires a text selection and an editable text field.
+- Copy: requires a text selection.
+- Paste: requires text on the clipboard and an editable text field.
+- Cut: requires a text selection and an editable text field.
 
 **Modifiers:**
 
