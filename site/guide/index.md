@@ -53,7 +53,7 @@ the documentation for PopClip in one place, with the following sections:
 Finally, there is the [Extensions Directory](/extensions/), a dedicated section
 of the site for browsing ready-made extensions to add to PopClip.
 
-## :thinker: Frequently asked questions
+## :thinking: Frequently asked questions
 
 _See also [Troubleshooting](/kb/troubleshooting) if you have questions about
 technical issues._
