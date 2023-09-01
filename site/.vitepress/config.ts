@@ -12,6 +12,11 @@ export default defineConfig({
     hostname: "https://www.popclip.app",
   },
   themeConfig: {
+    lastUpdated: {    
+      formatOptions: {
+        dateStyle: 'medium',
+      }
+    },
     notFound: {
       quote: "Sorry about that.",
     },
