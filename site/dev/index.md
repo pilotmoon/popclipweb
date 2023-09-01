@@ -10,14 +10,13 @@ import EditionSwitcher from "../src/EditionSwitcher.vue";
 import Ed from "../src/Ed.vue";
 </script>
 
+<!-- markdownlint-disable MD025 -->
+
 # :robot: PopClip Extensions Developer Reference
 
 This section of the documentation provides a detailed specification of PopClip's
 extensions architecture. With this information, you can create your own
 extensions.
-
-<!-- If you are not a programmer, you may find it easier to use the
-[PopClip Extension Creator](https://pilotmoon.com/popclip/extensions/create/). -->
 
 ## Extensions Overview
 
@@ -36,8 +35,6 @@ A PopClip extension can be either a [snippet](./snippets.md) or a
 | Disadvantages   | Limited to what can be done with a single text file.   | More complex to create. Steeper learning curve.                                                    |
 | File extensions | None (direct selection)<br> `.popcliptxt` (text file)  | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
 
-<!-- | Philosophy      | "Empowered user" mentality. Visibility promotes learning. | "Developer" mentality. Opaque format keeps everything hidden from end user.                        | -->
-
 ### Types of actions
 
 An extension defines one or more actions. Each action can be one of seven types:
@@ -50,7 +47,7 @@ An extension defines one or more actions. Each action can be one of seven types:
 | [Key Press](./key-press-actions.md)       | Press a key combination.                                     |
 | [Shell Script](./shell-script-actions.md) | Run a shell script.                                          |
 | [AppleScript](./applescript-actions.md)   | Run an AppleScript script.                                   |
-| [JavaScript](./js-actions.md)     | Run a JavaScript script.                                     |
+| [JavaScript](./js-actions.md)             | Run a JavaScript script.                                     |
 
 ### Filter rules
 
@@ -63,9 +60,8 @@ appearing when they are not useful:
 - Filter by whether the text contains a URL, email address or file path
 - Filter by the current values of the extensions's options
 
-Filter rules are defined in the
-[action properties](./actions) under the `regex` key,
-`requirements` key and `required apps`/`excluded apps` keys.
+Filter rules are defined in the [action properties](./actions) under the `regex`
+key, `requirements` key and `required apps`/`excluded apps` keys.
 
 ## Extension signing
 
@@ -73,10 +69,10 @@ Please be aware that PopClip extensions can contain arbitrary executable code.
 Be careful about the extensions you create, and be wary about loading extensions
 you get from elsewhere.
 
-PopClip extension packages published in the [directory](/extensions/) are digitally
-signed. PopClip will install them directly without showing any warning to the
-user. If you create your own extension, it will not be signed. PopClip will
-display a warning dialog when you try to install it:
+PopClip extension packages published in the [directory](/extensions/) are
+digitally signed. PopClip will install them directly without showing any warning
+to the user. If you create your own extension, it will not be signed. PopClip
+will display a warning dialog when you try to install it:
 
 ![Example unsigned warning.](../guide/media/shot-unsigned-warning.png#h400)
 
