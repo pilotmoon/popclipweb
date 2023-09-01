@@ -54,8 +54,8 @@ remove any formatting from the text.
 The Search action opens a web search for the selected text. The default search
 engine is Google, but you can change this in the actions's settings.
 
-The search opens in the default browser, unless the current app is a browser in
-which case the current browser is used instead.
+Searches open in the current app if it is a [known browser](/kb/browsers), or else 
+in the system default browser.
 
 **Availability:**
 
