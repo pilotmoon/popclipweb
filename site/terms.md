@@ -24,7 +24,7 @@ customers on my behalf (see
 
 ## Free trial
 
-PopClip has a free trial mode. I grant you the right to use the product free of
+Where the product has a free trial mode, I grant you the right to use the product free of
 charge for the period of the trial. The trial mode may include purchase
 reminders and limitations on usage.
 
@@ -163,6 +163,10 @@ such extensions are separate software applications, and are not part of the
 product. Extensions are subject to their own license terms (see the extension
 documentation for details).
 
+## Disclaimer
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 ## Changes to these terms
 
 I may update these terms from time to time, and I will publish the latest
@@ -176,6 +180,8 @@ apply to that purchase.
 - Worldwide (subscriptions): Setapp (<https://setapp.com>)
 
 - In China: Digitalychee (<https://lizhi.io>) - [certificate](/lizhi)
+
+<hr style="margin: 3em 0;">
 
 ::: tip Thank you for reading!
 
