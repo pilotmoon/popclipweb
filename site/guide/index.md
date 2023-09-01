@@ -21,8 +21,8 @@ select text on your screen.
 
 PopClip's [actions](/guide/actions) range from simple copy-paste and web
 searches to complex tasks such as translating text. Using
-[extensions](/guide/extensions), you can add actions to PopClip to adapt it your
-needs. Think of PopClip as a context-aware assistant that provides a set of
+[extensions](/guide/extensions), you can add actions to PopClip to adapt it to
+your needs. Think of PopClip as a context-aware assistant that provides a set of
 tools you can use instantly in any app.
 
 PopClip is available for macOS only. It is a [paid](/buy) app with a
