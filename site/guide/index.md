@@ -95,7 +95,7 @@ person. Nick Moore. I'm also the one writing this user guide. I'm from the UK
 and my native language is English. To get in touch, see
 [Support and Feedback](/support).
 
-[Pilotmoon Software](https://pilotmoon.com/) is the business name under which I
+[Pilotmoon Software](https://pilotmoon.com/about/) is the business name under which I
 have published my apps. You will see some links and references to
 `pilotmoon.com` in various places, and I use the `@pilotmoon` handle on GitHub
 and elsewhere.
@@ -143,3 +143,11 @@ limited the list to the libraries that I've directly imported and used for core
 functionality.
 
 :::
+
+## Copyright statement
+
+>  **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**
+> 
+> Copyright © 2023 Nicholas Moore.
+>
+> This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
