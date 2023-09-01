@@ -84,8 +84,8 @@ provides:
 
 ```json
 {
-  "name": Yoink,
-  "serviceName": Add Selected Text to Yoink
+  "name": "Yoink",
+  "serviceName": "Add Selected Text to Yoink"
 }
 ```
 
