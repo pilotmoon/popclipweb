@@ -4,23 +4,12 @@ outline: deep
 
 # Actions
 
-On this page you will learn about actions in PopClip and take a tour of the
-built-in actions.
-
-## About actions
-
 The buttons that appear in the PopClip bar perform **actions**. PopClip comes
 with a set of built-in actions, and you can add more by installing
 [extensions](./extensions).
 
 Actions are context-sensitive, meaning that they only appear when they are
 relevant. So you won't always see all the actions.
-
-Some actions respond to modifier keys. Hold down the modifier key while clicking
-the action's button to perform the action with the modifier.
-
-With actions whose buttons show an icon only, you can hover the pointer over the
-button to see the action's name.
 
 ::: tip Action settings
 
