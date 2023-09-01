@@ -146,8 +146,8 @@ functionality.
 
 ## Copyright statement
 
->  **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**
-> 
+> **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**
+>
 > Copyright © 2023 Nicholas Moore.
 >
 > This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
