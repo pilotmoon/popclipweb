@@ -64,9 +64,9 @@ technical issues._
 
 - **Is there / will you make a version of PopClip for Windows?** I don't make a
   Windows version of PopClip and I have no plans to do so. There is a similar
-  app for Windows called [SnipDo](https://snipdo-app.com/) (formerly
-  Pantherbar), which the developer says was was inspired by PopClip. However, I
-  have no involvement with that app at all.
+  app for Windows called [SnipDo](https://snipdo-app.com/) (formerly Pantherbar)
+  that was inspired by PopClip. However, I have no involvement with that app at
+  all.
 
 - **Can you make the Dictionary action use the macOS pop-up dictionary instead
   of the Dictionary app?** I'd love it to do this, but it is technically not
