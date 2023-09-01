@@ -80,8 +80,8 @@ selected text. If the text contains multiple web URLs, all of them will open in
 separate tabs. The action will also detect "URL-like" text lacking a scheme
 prefix and add `https:` when opening it.
 
-The URLs open in the default browser, unless the current app is a browser in
-which case the current browser is used instead.
+URLs open in the current app if it is a [known browser](/kb/browsers), or else 
+in the system default browser.
 
 In addition to web URLs, PopClip detects single instances of the following URL
 schemes: `evernote:`, `omnifocus:`, `spotify:`, `ftp:`, `bluesky:`, `hook:`,
