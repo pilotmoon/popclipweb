@@ -28,7 +28,7 @@ tools you can use instantly in any app.
 PopClip is available for macOS only. It is a [paid](/buy) app with a
 [free trial](/download). It has been in continuous development since 2011.
 
-## **Site contents**
+## :open_book: **Site contents**
 
 This website aims to be a complete resource for PopClip users. It contains all
 the documentation for PopClip in one place, with the following sections:
@@ -53,7 +53,7 @@ the documentation for PopClip in one place, with the following sections:
 Finally, there is the [Extensions Directory](/extensions/), a dedicated section
 of the site for browsing ready-made extensions to add to PopClip.
 
-## Frequently asked questions
+## :thinker: Frequently asked questions
 
 _See also [Troubleshooting](/kb/troubleshooting) if you have questions about
 technical issues._
@@ -72,7 +72,7 @@ technical issues._
   of the Dictionary app?** I'd love it to do this, but it is technically not
   possible (as far as I know).
 
-## Languages and translation
+## :earth_africa: Languages and translation
 
 PopClip's user interface is developed in English and is translated into Chinese
 (Traditional and Simplified), French, German, Italian, Japanese, Korean,
@@ -88,7 +88,7 @@ it.
 
 The documentation only available in English.
 
-## About the developer
+## :man_juggling: About the developer
 
 PopClip is not made by a large company or even a small team; it's made by one
 person. Nick Moore. I'm also the one writing this user guide. I'm from the UK
@@ -100,7 +100,7 @@ have published my apps. You will see some links and references to
 `pilotmoon.com` in various places, and I use the `@pilotmoon` handle on GitHub
 and elsewhere.
 
-## Acknowledgements
+## :handshake: Acknowledgements
 
 PopClip would not be possible without the work of many other people who have
 created open source software and freely shared their work. My thanks to the
