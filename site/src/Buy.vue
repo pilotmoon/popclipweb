@@ -61,8 +61,8 @@ onMounted(() => {
         </div>
     </div>
     <div :class="isLoaded ? $style.infoLine : $style.infoLineLoading">
-        {{ isLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode)} ${store.countryName}` :
-            `Loading prices...` }}
+        <!-- {{ isLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode)} ${store.countryName}` :
+            `Loading prices...` }} -->
     </div>
 </template>
 
