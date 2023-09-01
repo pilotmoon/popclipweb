@@ -8,8 +8,8 @@ editLink: false
 
 ## Definitions
 
-_I_, _me_: [Nicholas Moore](https://pilotmoon.com/about), a sole trader in the United Kingdom doing business
-using the trading name Pilotmoon Software.
+_I_, _me_: [Nicholas Moore](https://pilotmoon.com/about), a sole trader in the
+United Kingdom doing business using the trading name Pilotmoon Software.
 
 _Product_: the PopClip software application. The scope of the product does not
 include any extensions (see [Extensions](#extensions) below).
@@ -19,7 +19,8 @@ _You_: a free trial user or a licensed user of the product.
 _App Store_: Apple's Mac App Store.
 
 _Reseller_: a business with whom I have an arrangement to sell licenses to end
-customers on my behalf (see [Appendix A](#appendix-a-authorized-resellers-and-subscription-services)).
+customers on my behalf (see
+[Appendix A](#appendix-a-authorized-resellers-and-subscription-services)).
 
 ## Free trial
 
@@ -165,8 +166,8 @@ documentation for details).
 ## Changes to these terms
 
 I may update these terms from time to time, and I will publish the latest
-version here on my website. The terms published at the time of
-purchase will apply to that purchase.
+version here on my website. The terms published at the time of purchase will
+apply to that purchase.
 
 ## Appendix A: Authorized resellers and subscription services
 
@@ -175,3 +176,9 @@ purchase will apply to that purchase.
 - Worldwide (subscriptions): Setapp (<https://setapp.com>)
 
 - In China: Digitalychee (<https://lizhi.io>) - [certificate](/lizhi)
+
+::: tip Thank you for reading!
+
+Thank you for taking the time to read all this. As a reward, let me point you [here](/coupon-code).
+
+:::
