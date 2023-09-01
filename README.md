@@ -1,6 +1,6 @@
 # PopClip Website
 
-This repository contains the source code for the [PopClip website].
+This repository contains the source files for the [PopClip website].
 
 The site is built with [VitePress] and hosted on [Vercel].
 
