@@ -74,7 +74,7 @@ digitally signed. PopClip will install them directly without showing any warning
 to the user. If you create your own extension, it will not be signed. PopClip
 will display a warning dialog when you try to install it:
 
-![Example unsigned warning.](../guide/media/shot-unsigned-warning.png#h400)
+![Example unsigned warning.](../guide/media/shot-unsigned-warning.png#pref "Unsigned extension warning.")
 
 ## Development environment
 

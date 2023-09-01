@@ -11,13 +11,6 @@ with a set of built-in actions, and you can add more by installing
 Actions are context-sensitive, meaning that they only appear when they are
 relevant. So you won't always see all the actions.
 
-::: tip Action settings
-
-Settings for actions can be accessed in the
-[actions pane](settings#actions-pane) of PopClip settings.
-
-:::
-
 ## Built-in actions
 
 ### ![Cut icon](./media/icon-cut.svg#iconleft) ![Copy icon](./media/icon-copy.svg#iconleft) ![Paste icon](./media/icon-paste.svg#iconleft) Cut, Copy and Paste
