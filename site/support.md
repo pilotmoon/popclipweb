@@ -5,18 +5,18 @@ editLink: false
 
 # Support & Feedback
 
-## Self-help
+## :eyes: Self-help
 
 If you're having a problem, please read the [Troubleshooting](/kb/troubleshooting) page first.
 
-## Email
+## :wave: Email
 
 To contact the developer directly, email Nick Moore at [support@pilotmoon.com](mailto:support@pilotmoon.com?subject=PopClip%20Feedback&body=Here's%20how%20I%20feel%20about%20PopClip:%0A%0A).
 
-## Forum
+## :earth_africa: Forum
 
 On the [PopClip Forum](https://forum.popclip.app/) you can ask questions, share creations, and discuss PopClip with the developer and other users. News and announcements by Nick are posted there too.
 
-## X / Twitter
+## :fire: X / Twitter
 
 PopClip's account is [@PopClipApp](https://twitter.com/popclipapp). Follow for occasional news and updates.
