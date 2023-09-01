@@ -47,6 +47,13 @@ defineProps<{
     min-width: 0; /* Somehow this makes the truncation on the child element work */
 }
 
+.EntryHeader a {
+    text-decoration: none;
+}
+.EntryHeader a:hover {
+    text-decoration: underline;
+}
+
 .EntryLeft,
 .EntryRight {
     display: flex;
