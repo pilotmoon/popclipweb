@@ -1,5 +1,6 @@
 ---
 outline: deep
+title: PopClip Extensions Developer Reference
 titleTemplate: false
 prev: false
 ---
@@ -9,7 +10,7 @@ import EditionSwitcher from "../src/EditionSwitcher.vue";
 import Ed from "../src/Ed.vue";
 </script>
 
-# PopClip Extensions Developer Reference
+# :robot: PopClip Extensions Developer Reference
 
 This section of the documentation provides a detailed specification of PopClip's
 extensions architecture. With this information, you can create your own

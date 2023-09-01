@@ -1,10 +1,11 @@
 ---
 editLink: false
+titleTemplate: false
 ---
 <script setup>
 import Changelog from '/src/Changelog.vue'
 </script>
 
-# Version History
+# PopClip Version History
 
 <Changelog />

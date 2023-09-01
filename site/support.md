@@ -1,9 +1,10 @@
 ---
 outline: deep
 editLink: false
+titleTemplate: false
 ---
 
-# Support & Feedback
+# PopClip Support & Feedback
 
 ## :eyes: Self-help
 
