@@ -12,7 +12,7 @@ with a set of built-in actions, and you can add more by installing
 
 Actions are context-sensitive, and only appear when relevant. So you won't
 always see all the actions in the PopClip bar. See:
-[Why are some actions not appearing?](http://localhost:5173/kb/troubleshooting#why-are-some-actions-not-appearing)
+[Why are some actions not appearing?](/kb/troubleshooting#why-are-some-actions-not-appearing)
 
 :::
 
