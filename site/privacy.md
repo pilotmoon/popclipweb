@@ -119,7 +119,7 @@ I also use the following third-party vendors to provide my services to you:
 - I use [Groove](https://groovehq.com/) to manage my email help desk.
 - I use [GitHub](https://www.github.com/pilotmoon/) to host public code
   repositories and track issues.
-- I use [Paddle](https://www.paddle.com/) to accept payments and donations.
+- I use [PayPal](https://www.paypal.com/) to accept payments and donations.
 - I use [X](https://twitter.com/) to communicate with you.
 
 ## Changes to this policy
