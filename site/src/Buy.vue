@@ -55,7 +55,7 @@ onMounted(() => {
             <span :class="$style.price">{{ roundPrice(store.lizhiPrice) }}</span>
         </div>
         <div :class="$style.box">
-            <span>Buy License Key from Paddle</span><br>
+            <span>Buy License Key<span v-if="isLizhi"> from Paddle</span></span><br>
             <Button :class="$style.buybutton" @click="openPaddleCheckout" theme="brand" size="medium"><ShoppingOutlined /> Buy</Button><br>
             <span :class="$style.price">{{ roundPrice(store.paddlePrice) }}</span>
         </div>
