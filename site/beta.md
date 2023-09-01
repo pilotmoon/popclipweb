@@ -1,5 +1,7 @@
 ---
 titleTemplate: false
+editLink: false
+lastUpdated: false
 ---
 <script setup>
 import Changelog from '/src/Changelog.vue'

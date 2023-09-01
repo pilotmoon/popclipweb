@@ -1,5 +1,7 @@
 ---
 search: false
+editLink: false
+lastUpdated: false
 ---
 
 # DIGITALYCHEE

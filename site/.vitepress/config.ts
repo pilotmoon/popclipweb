@@ -7,13 +7,11 @@ export default defineConfig({
   title: "PopClip",
   description: "Instant text actions for macOS",
   cleanUrls: true,
+  lastUpdated: true,
   sitemap: {
     hostname: "https://www.popclip.app",
   },
   themeConfig: {
-    // search: {
-    //   provider: 'local'
-    // },
     notFound: {
       quote: "Sorry about that.",
     },
@@ -39,12 +37,6 @@ export default defineConfig({
         activeMatch: "^(/dev/)",
         link: "/dev/",
       },
-      // {
-      //   text: "Create",
-      //   link: "/extensions/create",
-      //   activeMatch:
-      //     "^(/extensions/create)",
-      // },
       {
         text: "Support",
         items: [
@@ -128,9 +120,6 @@ export default defineConfig({
             {
               text: "Download",
               link: "/download",
-              // items: [
-              //   { text: "Beta", link: "/beta" },
-              // ],
             },
             { text: "Buy", link: "/buy" },
             { text: "Version History", link: "/changelog" },

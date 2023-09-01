@@ -2,6 +2,7 @@
 outline: deep
 editLink: false
 titleTemplate: false
+lastUpdated: false
 ---
 
 # PopClip Support & Feedback
