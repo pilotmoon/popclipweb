@@ -1,28 +1,28 @@
 <script setup type="ts">
 import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
-import { getFlagEmoji } from './helpers/getFlagEmoji'
+// import { getFlagEmoji } from './helpers/getFlagEmoji'
 import { store, loadStore, isLoaded } from './helpers/store/store'
 import Button from './Button.vue'
 import { ShoppingOutlined } from '@ant-design/icons-vue'
 import * as config from './config/config.json'
 
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode));
+const sandbox = window.location.hostname === "localhost";
+
+async function initPaddle() {
+    await loadScript(config.paddle.script);
+    if (sandbox) {
+        Paddle.Environment.set('sandbox');
+    }
+    Paddle.Setup({
+        vendor: config.paddle.vendorId, eventCallback: function (args) {
+            console.log("Paddle event", args);
+        }
+    });
+}
 
 async function openPaddleCheckout(event) {
-    // only call paddle setup when script is first loaded, not on subsequent calls
-    const sandbox = window.location.hostname === "localhost";
-    if (await loadScript(config.paddle.script)) {
-        if (sandbox) {
-            Paddle.Environment.set('sandbox');
-        }
-        Paddle.Setup({
-            vendor: config.paddle.vendorId, eventCallback: function (args) {
-                console.log("Paddle event", args);
-            }
-        });
-        await new Promise(resolve => setTimeout(resolve, 150));
-    }
     const product = sandbox ? config.paddle.sandboxProductId : config.paddle.productId;
     console.log("Opening Paddle checkout");
     Paddle.Checkout.open({ product });
@@ -32,8 +32,8 @@ function roundPrice(price) {
     return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
 };
 
-onMounted(() => {
-    loadStore();
+onMounted(async () => {
+    await Promise.all([loadStore(), initPaddle()]);
 });
 
 </script>
