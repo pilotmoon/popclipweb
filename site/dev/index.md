@@ -105,7 +105,7 @@ in Terminal, then Quit and restart PopClip:
 
 You can then view the debug output in the Console app.
 
-![Console app screenshot](./media/shot-console-window-1.png "Viewing PopClip debug output in Console app.")
+![Console app screenshot](./media/shot-console-window-2.png "Viewing PopClip debug output in Console app.")
 
 To filter the Console to show just PopClip extensions, enter Process "PopClip"
 and Category "Extension" in the Search field.
