@@ -6,8 +6,8 @@ prev: false
 ---
 
 <script setup lang="ts">
-import EditionSwitcher from "../src/EditionSwitcher.vue";
-import Ed from "../src/Ed.vue";
+import EditionSwitcher from "/src/EditionSwitcher.vue";
+import Ed from "/src/Ed.vue";
 </script>
 
 <!-- markdownlint-disable MD025 -->
