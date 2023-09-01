@@ -24,7 +24,7 @@ features:
     link: /guide/
     linkText: Learn More
   - title: Rich extension library
-    details:  From productivity boosters to language translation, the library of extensions has tools for a huge range of tasks..
+    details:  From productivity boosters to language translation, the library of extensions has tools for a huge range of tasks.
     link: /extensions/
     linkText: Browse Extensions
   # - title: Customize for you
