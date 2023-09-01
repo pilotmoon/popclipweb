@@ -39,7 +39,7 @@ trackpad button.
 
 **Modifiers:**
 
-Hold down **Shift (⌥)** to perform the action with plain text only. This will
+Hold **Shift (⌥)** to perform the action with plain text only. This will
 remove any formatting from the text.
 
 **Settings:**
