@@ -3,24 +3,79 @@ import { data } from './data/extensions.data';
 import Page from './Page.vue';
 import DirectoryEntry from './DirectoryEntry.vue';
 import { Input, RadioButton, RadioGroup, Space } from 'ant-design-vue';
-import { computed, ref } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { Extension } from './data/extensions-loader.js';
+import { useData } from 'vitepress'
 
-const filter = ref("");
+// page title
+const title = useData().title;
 
+// the main filter and arrange variables
+const defaultFilter = ""; const filter = ref(defaultFilter);
+const defaultArrange = "categories"; const arrange = ref(defaultArrange);
+
+// total number of extensons
 const total = computed(() => {
     return Object.keys(data.extensions).length;
 });
 
+// get params from url
+function readParams() {
+    return new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+}
+
+// weite params to url, and update the filter
+function writeParams(params: URLSearchParams) {
+    // update the url hash
+    const url = new URL(window.location.toString());
+    url.hash = params.toString();
+    window.history.replaceState({}, "", url.toString());
+
+    // set title too
+    window.document.title = filter.value ? `${title.value}: "${filter.value}"` : title.value;
+
+    // update the filter 
+    filter.value = params.get("filter") || defaultFilter;
+    arrange.value = params.get("arrange") || defaultArrange;
+}
+
+// on filter change
+watch([filter, arrange], ([newFilter, newArrange]) => {
+    const params = readParams();
+    if (newFilter == defaultFilter) {
+        params.delete("filter");
+    } else {
+        params.set("filter", newFilter);
+    }
+    if (newArrange == defaultArrange) {
+        params.delete("arrange");
+    } else {
+        params.set("arrange", newArrange);
+    }
+    writeParams(params);
+});
+
+// on hash change
+function onHashChange() {
+    writeParams(readParams());
+}
+
+onMounted(() => {
+    window.addEventListener("onhashchange", onHashChange);
+    onHashChange();
+});
+onBeforeUnmount(() => {
+    window.removeEventListener("onhashchange", onHashChange);
+});
+
 const alphaIndex = computed(() => [{ title: "All Extensions (Alphabetical)", members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier) }]);
 const newestIndex = computed(() => [{ title: "All Extensions (Newest first)", members: Object.values(data.extensions).sort((a, b) => b.timestamp - a.timestamp).map(e => e.identifier) }]);
-const selectedIndexName = ref("categories");
 const selectedIndex = computed(() => {
-    if (selectedIndexName.value === "categories") {
+    if (arrange.value === "categories") {
         return data.index;
-    } else if (selectedIndexName.value === "alpha") {
+    } else if (arrange.value === "alpha") {
         return alphaIndex.value;
-    } else if (selectedIndexName.value === "newest") {
+    } else if (arrange.value === "newest") {
         return newestIndex.value;
     } else {
         return [];
@@ -58,7 +113,7 @@ const filteredIndex = computed(() => {
                 <div :class="$style.Header">
                     <Space>
                         Arrange:
-                        <RadioGroup v-model:value="selectedIndexName">
+                        <RadioGroup v-model:value="arrange">
                             <RadioButton value="categories">Categories</RadioButton>
                             <RadioButton value="alpha">A–Z</RadioButton>
                             <RadioButton value="newest">Newest</RadioButton>
@@ -83,7 +138,6 @@ const filteredIndex = computed(() => {
 </template>
 
 <style module>
-
 .Directory h2 {
     border: none;
     font-size: 1.2rem;
