@@ -14,12 +14,18 @@ const defaultArrange = "categories";
 const arrange = ref(defaultArrange);
 
 // define the categories
-const alphaIndex: Section = { title: "All Extensions (Alphabetical)", members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier) };
-const newestIndex: Section = { title: "All Extensions (Newest first)", members: Object.values(data.extensions).sort((a, b) => b.timestamp - a.timestamp).map(e => e.identifier) };
+const alphaSection: Section = {
+    title: "All Extensions (Alphabetical)",
+    members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier)
+};
+const newestSection: Section = {
+    title: "All Extensions (Newest first)",
+    members: Object.values(data.extensions).sort((a, b) => b.timestamp - a.timestamp).map(e => e.identifier)
+};
 const arrangements = new Map([
     ["categories", { label: "Categories", index: data.index }],
-    ["alpha", { label: "A–Z", index: [alphaIndex] }],
-    ["newest", { label: "Newest", index: [newestIndex] }],
+    ["alpha", { label: "A–Z", index: [alphaSection] }],
+    ["newest", { label: "Newest", index: [newestSection] }],
 ]);
 
 // total number of extensons
@@ -57,15 +63,15 @@ function writeParams(params: URLSearchParams) {
     window.history.replaceState({}, "", url.toString());
 
     // update the title
-    window.document.title=title();
+    window.document.title = title();
 
     // update the filter 
     arrange.value = params.get("arrange") || defaultArrange;
     filter.value = params.get("filter") || defaultFilter;
 }
 
-// set state of filter/arrange
-function set([newFilter, newArrange]) {
+// watch filter/arrange change
+watch([filter, arrange], ([newFilter, newArrange]) => {
     const params = new URLSearchParams();
     if (newArrange !== defaultArrange) {
         params.set("arrange", newArrange);
@@ -74,10 +80,7 @@ function set([newFilter, newArrange]) {
         params.set("filter", newFilter);
     }
     writeParams(params);
-}
-
-// watch filter/arrange change
-watch([filter, arrange], set);
+});
 
 // on hash change
 function onHashChange() {
@@ -86,8 +89,8 @@ function onHashChange() {
 
 // mount/unmount
 onMounted(() => {
-    window.addEventListener("onhashchange", onHashChange);
     onHashChange();
+    window.addEventListener("onhashchange", onHashChange);
 });
 onBeforeUnmount(() => {
     window.removeEventListener("onhashchange", onHashChange);
