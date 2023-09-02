@@ -9,8 +9,7 @@ Icons may be specified in `icon` fields in several different ways:
 - As a filename: `<filename>.png` or `<filename>.svg`. See
   [Image files](#image-files).
 
-- As text: `text:<text specifier>` or just `<text specifier>`. See
-  [Text icons](#text-icons).
+- As text: `<text specifier>`. See [Text icons](#text-icons).
 
 - As an Iconify icon: `iconify:<icon set prefix>:<icon name>`. See
   [Iconify icons](#iconify-icons).
