@@ -52,14 +52,14 @@ function title() {
 
 // get params from url
 function readParams() {
-    return new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+    return new URLSearchParams((window.location.search || '').replace(/^\?/, ''));
 }
 
 // weite params to url, and update the filter
 function writeParams(params: URLSearchParams) {
     // update the url hash
     const url = new URL(window.location.toString());
-    url.hash = params.toString();
+    url.search = params.toString();
     window.history.replaceState({}, "", url.toString());
 
     // update the title
