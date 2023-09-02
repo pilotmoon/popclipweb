@@ -11,11 +11,23 @@ import { useUrlSearchParams } from '@vueuse/core';
 const params = useUrlSearchParams('hash-params', { write: true });
 const filter = computed({
     get: () => typeof params.filter === "string" ? params.filter : "",
-    set: (value) => params.filter = value
+    set: (value) => {
+        if (value === "") {
+            delete params.filter;
+        } else {
+            params.filter = value;
+        }
+    }
 });
 const arrange = computed({
     get: () => typeof params.arrange === "string" ? params.arrange : "categories",
-    set: (value) => params.arrange = value
+    set: (value) => {
+        if (value === "categories") {
+            delete params.arrange;
+        } else {
+            params.arrange = value;
+        }
+    }
 });
 
 // total number of extensons
