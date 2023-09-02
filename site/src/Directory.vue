@@ -3,15 +3,18 @@ import { data } from './data/extensions.data';
 import Page from './Page.vue';
 import DirectoryEntry from './DirectoryEntry.vue';
 import { Input, RadioButton, RadioGroup, Space } from 'ant-design-vue';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { Extension } from './data/extensions-loader.js';
 import { useUrlSearchParams } from '@vueuse/core';
+import { useState } from './helpers/state';
+const { filter: filterState, arrange: arrangeState } = useState();
 
 // map filter/arrange to hash params
 const params = useUrlSearchParams('hash-params', { write: true });
 const filter = computed({
-    get: () => typeof params.filter === "string" ? params.filter : "",
+    get: () => typeof params.filter === "string" ? params.filter : filterState.value,
     set: (value) => {
+        filterState.value = value;
         if (value === "") {
             delete params.filter;
         } else {
@@ -20,14 +23,19 @@ const filter = computed({
     }
 });
 const arrange = computed({
-    get: () => typeof params.arrange === "string" ? params.arrange : "categories",
+    get: () => typeof params.arrange === "string" ? params.arrange : arrangeState.value,
     set: (value) => {
+        arrangeState.value = value;
         if (value === "categories") {
             delete params.arrange;
         } else {
             params.arrange = value;
         }
     }
+});
+onMounted(() => {
+    filter.value = filter.value;
+    arrange.value = arrange.value;
 });
 
 // total number of extensons
