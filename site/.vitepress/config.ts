@@ -162,6 +162,10 @@ export default defineConfig({
     ],
   ],
   markdown: {
+    theme: {
+      light: "github-light",
+      dark: "github-dark",
+    },
     config: (md) => {
       md.use(html5Media, {
         videoAttrs: "autoplay loop muted playsinline",
