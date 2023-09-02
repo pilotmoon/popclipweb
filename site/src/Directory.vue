@@ -6,11 +6,12 @@ import { Input, RadioButton, RadioGroup, Space } from 'ant-design-vue';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { Extension, Section } from './data/extensions-loader.js';
 import { useData } from 'vitepress'
-import { useTitle } from '@vueuse/core';
-import { useDirectoryState } from './state/useDirectoryState';
 
 // filter/arrange state
-const { filter, arrange, defaultFilter, defaultArrange } = useDirectoryState();
+const defaultFilter = "";
+const filter = ref(defaultFilter);
+const defaultArrange = "categories";
+const arrange = ref(defaultArrange);
 
 // define the categories
 const alphaIndex: Section = { title: "All Extensions (Alphabetical)", members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier) };
@@ -30,11 +31,11 @@ const total = computed(() => {
 const { title: { value: initialTitle } } = useData();
 function title() {
     const parts: string[] = [];
-    if (filter.value !== defaultFilter) {
-        parts.push(`"${filter.value}"`);
-    }
     if (arrange.value !== defaultArrange) {
         parts.push(arrangements.get(arrange.value)?.label || arrange.value);
+    }
+    if (filter.value !== defaultFilter) {
+        parts.push(`"${filter.value}"`);
     }
     if (parts.length > 0) {
         return `${initialTitle}: ${parts.join(", ")}`;
@@ -42,7 +43,6 @@ function title() {
         return initialTitle;
     }
 };
-
 
 // get params from url
 function readParams() {
@@ -57,7 +57,7 @@ function writeParams(params: URLSearchParams) {
     window.history.replaceState({}, "", url.toString());
 
     // update the title
-    useTitle(title());
+    window.document.title=title();
 
     // update the filter 
     arrange.value = params.get("arrange") || defaultArrange;
@@ -66,9 +66,13 @@ function writeParams(params: URLSearchParams) {
 
 // set state of filter/arrange
 function set([newFilter, newArrange]) {
-    const params = readParams();    
-    params.set("arrange", newArrange);
-    params.set("filter", newFilter);
+    const params = new URLSearchParams();
+    if (newArrange !== defaultArrange) {
+        params.set("arrange", newArrange);
+    }
+    if (newFilter !== defaultFilter) {
+        params.set("filter", newFilter);
+    }
     writeParams(params);
 }
 
@@ -82,12 +86,8 @@ function onHashChange() {
 
 // mount/unmount
 onMounted(() => {
-    const params = readParams();    
-    set([
-        params.get("filter") !== null ? params.get("filter") : filter.value,
-        params.get("arrange") !== null ? params.get("arrange") : arrange.value,
-    ]);
     window.addEventListener("onhashchange", onHashChange);
+    onHashChange();
 });
 onBeforeUnmount(() => {
     window.removeEventListener("onhashchange", onHashChange);
