@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useGlobalState } from './helpers/state'
-const { edition } = useGlobalState();
+import { useEditionSwitcherState } from './state/useEditionSwitcherState'
+const { edition } = useEditionSwitcherState();
 const props = defineProps({
     code: {
         type: Boolean,

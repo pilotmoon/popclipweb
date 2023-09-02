@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Theme from './Theme.vue';
 import { RadioButton, RadioGroup, Space } from 'ant-design-vue';
-import { useGlobalState } from './helpers/state'
-const { edition } = useGlobalState();
+import { useEditionSwitcherState } from './state/useEditionSwitcherState'
+const { edition } = useEditionSwitcherState();
 </script>
 
 <template>

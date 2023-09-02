@@ -3,44 +3,72 @@ import { data } from './data/extensions.data';
 import Page from './Page.vue';
 import DirectoryEntry from './DirectoryEntry.vue';
 import { Input, RadioButton, RadioGroup, Space } from 'ant-design-vue';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { Extension } from './data/extensions-loader.js';
-import { useUrlSearchParams } from '@vueuse/core';
-import { useState } from './helpers/state';
-const { filter: filterState, arrange: arrangeState } = useState();
+import { useData } from 'vitepress'
+import { useDirectoryState } from './state/useDirectoryState';
 
-// map filter/arrange to hash params
-const params = useUrlSearchParams('hash-params', { write: true });
-const filter = computed({
-    get: () => typeof params.filter === "string" ? params.filter : filterState.value,
-    set: (value) => {
-        filterState.value = value;
-        if (value === "") {
-            delete params.filter;
-        } else {
-            params.filter = value;
-        }
-    }
-});
-const arrange = computed({
-    get: () => typeof params.arrange === "string" ? params.arrange : arrangeState.value,
-    set: (value) => {
-        arrangeState.value = value;
-        if (value === "categories") {
-            delete params.arrange;
-        } else {
-            params.arrange = value;
-        }
-    }
-});
-onMounted(() => {
-    filter.value = filter.value;
-    arrange.value = arrange.value;
-});
+const { filter, arrange, defaultFilter, defaultArrange } = useDirectoryState();
+
+// page title
+const title = useData().title;
 
 // total number of extensons
 const total = computed(() => {
     return Object.keys(data.extensions).length;
+});
+
+// get params from url
+function readParams() {
+    return new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+}
+
+// weite params to url, and update the filter
+function writeParams(params: URLSearchParams) {
+    // update the url hash
+    const url = new URL(window.location.toString());
+    url.hash = params.toString();
+    window.history.replaceState({}, "", url.toString());
+
+    // set title too
+    window.document.title = filter.value ? `${title.value}: "${filter.value}"` : title.value;
+
+    // update the filter 
+    filter.value = params.get("filter") || defaultFilter;
+    arrange.value = params.get("arrange") || defaultArrange;
+}
+
+// set state of filter/arrange
+function set([newFilter, newArrange]) {
+    const params = readParams();
+    if (newFilter == defaultFilter) {
+        params.delete("filter");
+    } else {
+        params.set("filter", newFilter);
+    }
+    if (newArrange == defaultArrange) {
+        params.delete("arrange");
+    } else {
+        params.set("arrange", newArrange);
+    }
+    writeParams(params);
+}
+
+// watch filter/arrange change
+watch([filter, arrange], set);
+
+// on hash change
+function onHashChange() {
+    writeParams(readParams());
+}
+
+// mount/unmount
+onMounted(() => {
+    set([filter.value, arrange.value]);
+    window.addEventListener("onhashchange", onHashChange);    
+});
+onBeforeUnmount(() => {
+    window.removeEventListener("onhashchange", onHashChange);
 });
 
 const alphaIndex = computed(() => [{ title: "All Extensions (Alphabetical)", members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier) }]);
