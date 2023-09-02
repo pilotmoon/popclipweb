@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, watch } from 'vue'
 import { useData } from 'vitepress'
-import * as config from './config/config.json'
+import config from './config/config.json'
 
 const { isDark } = useData()
 

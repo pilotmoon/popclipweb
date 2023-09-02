@@ -8,7 +8,7 @@ import {
   IconKey,
 } from "../helpers/iconKeyBrowser.js";
 
-import * as config from "../config/config.json";
+import config from "../config/config.json";
 
 // simple sha256 wrapper that generates a hex string
 export function sha256Base(message: string) {

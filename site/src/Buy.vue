@@ -1,13 +1,14 @@
 <script setup type="ts">
 import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
-// import { getFlagEmoji } from './helpers/getFlagEmoji'
-import { store, loadStore, isLoaded } from './helpers/store/store'
+import { getFlagEmoji } from './helpers/getFlagEmoji'
+import { useStoreState, loadStore } from './state/useStoreState'
 import Button from './Button.vue'
 import { ShoppingOutlined } from '@ant-design/icons-vue'
-import * as config from './config/config.json'
+import config from './config/config.json'
 
-const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode));
+const store = useStoreState();
+const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode.value));
 const sandbox = window.location.hostname === "localhost";
 
 async function initPaddle() {
@@ -45,25 +46,25 @@ onMounted(async () => {
             <a :href="store.masUrl" target="_blank">
                 <img :class="$style.buybadge" src="/badge-mas.svg" alt="Download on the Mac App Store">
             </a><br>
-            <span :class="$style.price">{{ roundPrice(store.masPrice) }}</span>
+            <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
         </div>
-        <div :class="$style.box" :hidden="!isLizhi || !isLoaded">
+        <div :class="$style.box" :hidden="!isLizhi || !store.isLoaded">
             <span>Buy License Key from DIGITALYCHEE</span><br>
             <a :href="store.lizhiUrl" target="_blank">
                 <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store">
             </a><br>
-            <span :class="$style.price">{{ roundPrice(store.lizhiPrice) }}</span>
+            <span :class="$style.price">{{ roundPrice(store.lizhiPrice.value) }}</span>
         </div>
         <div :class="$style.box">
             <span>Buy License Key<span v-if="isLizhi"> from Paddle</span></span><br>
             <Button :class="$style.buybutton" @click="openPaddleCheckout" theme="brand" size="medium"><ShoppingOutlined /> Buy</Button><br>
-            <span :class="$style.price">{{ roundPrice(store.paddlePrice) }}</span>
+            <span :class="$style.price">{{ roundPrice(store.paddlePrice.value) }}</span>
         </div>
     </div>
-    <div :class="isLoaded ? $style.infoLine : $style.infoLineLoading">
-        <!-- {{ isLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode)} ${store.countryName}` :
-            `Loading prices...` }} -->
-    </div>
+    <!-- <div :class="store.isLoaded ? $style.infoLine : $style.infoLineLoading">
+        {{ store.isLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` :
+            `Loading prices...` }}
+    </div> -->
 </template>
 
 <style module>

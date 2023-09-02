@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { loadScript } from './helpers/loadScript'
-import * as config from './config/config.json'
+import config from './config/config.json'
 
 onMounted(() => {
     loadScript(config.setapp.script);

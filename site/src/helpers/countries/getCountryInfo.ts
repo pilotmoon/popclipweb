@@ -23,7 +23,7 @@ export function getCountryInfo(countryCode: any) {
   const itunesInfo = itunesCountries.find((x) => x[1] === countryCode);
   return {
     appStoreCode: String(itunesInfo?.[1] ?? ""),
-    countryName: paddleCountries[countryCode] ?? ""
+    countryName: String(paddleCountries[countryCode] ?? "")
   };
 }
 

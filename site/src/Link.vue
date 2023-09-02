@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import * as config from './config/config.json';
+import config from './config/config.json';
 import { computed, onMounted } from 'vue';
-import { store, loadStore } from './helpers/store/store';
+import { useStoreState, loadStore } from './state/useStoreState';
 
+const store = useStoreState();
 const props = defineProps<{
     k: string
 }>()
@@ -10,7 +11,7 @@ const props = defineProps<{
 const href = computed(() => {
     // special case for mas.storeUrl, so it points to correct country
     if (props.k === 'mas.storeUrl') {
-        return store.masUrl;
+        return store.masUrl.value;
     }
 
     const keyPath = props.k.split('.');
