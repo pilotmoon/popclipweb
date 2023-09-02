@@ -2,6 +2,10 @@
 import { onMounted } from 'vue'
 
 onMounted(() => {
+    if (window.location.hostname === "localhost") {
+        return;
+    }
+    
     const script1 = document.createElement("script");
     script1.textContent="window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };"
     document.head.appendChild(script1);
