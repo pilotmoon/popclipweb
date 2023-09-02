@@ -4,19 +4,45 @@ import Page from './Page.vue';
 import DirectoryEntry from './DirectoryEntry.vue';
 import { Input, RadioButton, RadioGroup, Space } from 'ant-design-vue';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
-import { Extension } from './data/extensions-loader.js';
+import { Extension, Section } from './data/extensions-loader.js';
 import { useData } from 'vitepress'
+import { useTitle } from '@vueuse/core';
 import { useDirectoryState } from './state/useDirectoryState';
 
+// filter/arrange state
 const { filter, arrange, defaultFilter, defaultArrange } = useDirectoryState();
 
-// page title
-const title = useData().title;
+// define the categories
+const alphaIndex: Section = { title: "All Extensions (Alphabetical)", members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier) };
+const newestIndex: Section = { title: "All Extensions (Newest first)", members: Object.values(data.extensions).sort((a, b) => b.timestamp - a.timestamp).map(e => e.identifier) };
+const arrangements = new Map([
+    ["categories", { label: "Categories", index: data.index }],
+    ["alpha", { label: "A–Z", index: [alphaIndex] }],
+    ["newest", { label: "Newest", index: [newestIndex] }],
+]);
 
 // total number of extensons
 const total = computed(() => {
     return Object.keys(data.extensions).length;
 });
+
+// page title
+const { title: { value: initialTitle } } = useData();
+function title() {
+    const parts: string[] = [];
+    if (filter.value !== defaultFilter) {
+        parts.push(`"${filter.value}"`);
+    }
+    if (arrange.value !== defaultArrange) {
+        parts.push(arrangements.get(arrange.value)?.label || arrange.value);
+    }
+    if (parts.length > 0) {
+        return `${initialTitle}: ${parts.join(", ")}`;
+    } else {
+        return initialTitle;
+    }
+};
+
 
 // get params from url
 function readParams() {
@@ -30,27 +56,19 @@ function writeParams(params: URLSearchParams) {
     url.hash = params.toString();
     window.history.replaceState({}, "", url.toString());
 
-    // set title too
-    window.document.title = filter.value ? `${title.value}: "${filter.value}"` : title.value;
+    // update the title
+    useTitle(title());
 
     // update the filter 
-    filter.value = params.get("filter") || defaultFilter;
     arrange.value = params.get("arrange") || defaultArrange;
+    filter.value = params.get("filter") || defaultFilter;
 }
 
 // set state of filter/arrange
 function set([newFilter, newArrange]) {
-    const params = readParams();
-    if (newFilter == defaultFilter) {
-        params.delete("filter");
-    } else {
-        params.set("filter", newFilter);
-    }
-    if (newArrange == defaultArrange) {
-        params.delete("arrange");
-    } else {
-        params.set("arrange", newArrange);
-    }
+    const params = readParams();    
+    params.set("arrange", newArrange);
+    params.set("filter", newFilter);
     writeParams(params);
 }
 
@@ -64,25 +82,19 @@ function onHashChange() {
 
 // mount/unmount
 onMounted(() => {
-    set([filter.value, arrange.value]);
-    window.addEventListener("onhashchange", onHashChange);    
+    const params = readParams();    
+    set([
+        params.get("filter") !== null ? params.get("filter") : filter.value,
+        params.get("arrange") !== null ? params.get("arrange") : arrange.value,
+    ]);
+    window.addEventListener("onhashchange", onHashChange);
 });
 onBeforeUnmount(() => {
     window.removeEventListener("onhashchange", onHashChange);
 });
 
-const alphaIndex = computed(() => [{ title: "All Extensions (Alphabetical)", members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier) }]);
-const newestIndex = computed(() => [{ title: "All Extensions (Newest first)", members: Object.values(data.extensions).sort((a, b) => b.timestamp - a.timestamp).map(e => e.identifier) }]);
 const selectedIndex = computed(() => {
-    if (arrange.value === "categories") {
-        return data.index;
-    } else if (arrange.value === "alpha") {
-        return alphaIndex.value;
-    } else if (arrange.value === "newest") {
-        return newestIndex.value;
-    } else {
-        return [];
-    }
+    return arrangements.get(arrange.value)?.index ?? [];
 });
 
 const filteredIndex = computed(() => {
