@@ -67,7 +67,7 @@ function writeParams(params: URLSearchParams) {
 
     // update the filter 
     arrange.value = params.get("arrange") || defaultArrange;
-    filter.value = params.get("filter") || defaultFilter;
+    filter.value = params.get("q") || defaultFilter;
 }
 
 // watch filter/arrange change
@@ -77,7 +77,7 @@ watch([filter, arrange], ([newFilter, newArrange]) => {
         params.set("arrange", newArrange);
     }
     if (newFilter !== defaultFilter) {
-        params.set("filter", newFilter);
+        params.set("q", newFilter);
     }
     writeParams(params);
 });
