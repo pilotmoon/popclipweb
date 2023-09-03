@@ -66,7 +66,7 @@ function writeParams(params: URLSearchParams) {
     window.document.title = title();
 
     // update the filter 
-    arrange.value = params.get("arrange") || defaultArrange;
+    arrange.value = params.get("a") || defaultArrange;
     filter.value = params.get("q") || defaultFilter;
 }
 
@@ -74,7 +74,7 @@ function writeParams(params: URLSearchParams) {
 watch([filter, arrange], ([newFilter, newArrange]) => {
     const params = new URLSearchParams();
     if (newArrange !== defaultArrange) {
-        params.set("arrange", newArrange);
+        params.set("a", newArrange);
     }
     if (newFilter !== defaultFilter) {
         params.set("q", newFilter);

@@ -11,7 +11,6 @@ const ext: Extension = params.value as Extension;
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === 'string';
 const dateString = new Date(ext.timestamp * 1000).toISOString();
-console.log('dateString', dateString);
 </script>
 
 <template>

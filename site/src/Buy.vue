@@ -9,7 +9,7 @@ import config from './config/config.json'
 
 const store = useStoreState();
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode.value));
-const sandbox = window.location.hostname === "localhost";
+const sandbox = typeof window !== "undefined" && window.location.hostname === "localhost";
 
 async function initPaddle() {
     await loadScript(config.paddle.script);
