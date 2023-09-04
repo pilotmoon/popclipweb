@@ -72,5 +72,5 @@ export async function loadStore() {
       countryInfo.appStoreCode,
     );
   }
-  console.log(`Prices loaded for ${store.countryCode}`);
+  console.log(`Prices loaded for ${store.countryCode.value}`);
 }
