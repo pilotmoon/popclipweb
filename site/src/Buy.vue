@@ -39,7 +39,7 @@ onMounted(async () => {
 });
 
 function trackBuy(button) {
-    const info = { button, country: store.countryName.value ?? "Unknown" };
+    const info = { button };
     console.log("Buy", JSON.stringify(info));
     va.track("Buy", info);
 }
