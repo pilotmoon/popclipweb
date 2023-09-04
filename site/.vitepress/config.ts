@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import imageFigures from "markdown-it-image-figures";
 import { html5Media } from "markdown-it-html5-media";
+import ElementPlus from "unplugin-element-plus/vite";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -12,18 +13,18 @@ export default defineConfig({
     hostname: "https://www.popclip.app",
   },
   themeConfig: {
-    lastUpdated: {    
+    lastUpdated: {
       formatOptions: {
-        dateStyle: 'medium',
-      }
+        dateStyle: "medium",
+      },
     },
     notFound: {
       quote: "Sorry about that.",
     },
     logo: "/icon128.png",
     editLink: {
-      pattern: 'https://github.com/pilotmoon/popclipweb/edit/main/site/:path',
-      text: 'Edit this page on GitHub'
+      pattern: "https://github.com/pilotmoon/popclipweb/edit/main/site/:path",
+      text: "Edit this page on GitHub",
     },
     nav: [
       {
@@ -128,7 +129,7 @@ export default defineConfig({
             },
             { text: "Buy", link: "/buy" },
             { text: "Version History", link: "/changelog" },
-            { text: "Support & Feedback", link: "/support" },            
+            { text: "Support & Feedback", link: "/support" },
           ],
         },
 
@@ -175,6 +176,14 @@ export default defineConfig({
         copyAttrs: "^class$",
       });
     },
+  },
+  vite: {
+    ssr: {
+      noExternal: ["element-plus"],
+    },
+    plugins: [
+      ElementPlus({}),
+    ],
   },
   vue: {
     template: {

@@ -4,7 +4,6 @@ editLink: false
 lastUpdated: false
 ---
 <script setup>
-import DownloadButton from '/src/DownloadButton.vue';
 import Download from '/src/Download.vue';
 import Link from "/src/Link.vue";
 import { data } from "/src/data/releases.data";
