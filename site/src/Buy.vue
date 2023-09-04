@@ -38,8 +38,9 @@ onMounted(async () => {
 });
 
 function trackBuy(button) {
-    console.log("Buy", button);
-    va.track("Buy", { button, country: store.countryName.value ?? "Unknown" });
+    const info = { button, country: store.countryName.value ?? "Unknown" };
+    console.log("Buy", JSON.stringify(info));
+    va.track("Buy", info);
 }
 </script>
 
