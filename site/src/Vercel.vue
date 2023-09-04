@@ -14,7 +14,7 @@ onMounted(() => {
         script2.setAttribute("src", "/_vercel/insights/script.js");
         script2.defer = true;
         document.head.appendChild(script2);
-    }, 0);
+    }, 500);
 
 });
 </script>
