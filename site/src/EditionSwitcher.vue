@@ -7,17 +7,18 @@ const { edition } = useEditionSwitcherState();
 
 <template>
     <Theme>
-    <div :class="$style.EditionSwitcher">
-        Use the selector below to choose the <a href="/guide/install#obtaining-popclip">PopClip edition</a> you would like to see documentation for.
-        <Space>
-            Edition:
-            <RadioGroup v-model:value="edition" name="editionSwitcher">
-                <RadioButton value="base">Standalone and Mac App Store editions</RadioButton>
-                <RadioButton value="setapp">Setapp edition</RadioButton>
-            </RadioGroup>
-        </Space>
-    </div>
-</Theme>
+        <div :class="$style.EditionSwitcher">
+            Use the selector below to choose the <a href="/guide/install#obtaining-popclip">PopClip edition</a> you would
+            like to see documentation for.
+            <Space>
+                Edition:
+                <RadioGroup v-model:value="edition" name="editionSwitcher">
+                    <RadioButton value="base">Standalone and Mac App Store editions</RadioButton>
+                    <RadioButton value="setapp">Setapp edition</RadioButton>
+                </RadioGroup>
+            </Space>
+        </div>
+    </Theme>
 </template>
 
 <style module>
