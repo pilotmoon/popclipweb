@@ -24,9 +24,9 @@ customers on my behalf (see
 
 ## Free trial
 
-Where the product has a free trial mode, I grant you the right to use the product free of
-charge for the period of the trial. The trial mode may include purchase
-reminders and limitations on usage.
+Where the product has a free trial mode, I grant you the right to use the
+product free of charge for the period of the trial. The trial mode may include
+purchase reminders and limitations on usage.
 
 I encourage you to make use of the free trial before buying, to see if the
 product is suitable for your needs.
@@ -49,15 +49,14 @@ the same Apple ID you used to purchase the product.
 
 ## License key purchases
 
-When you buy a license key, your payment is made to a reseller. License key
-purchases are subject to the following license agreement and terms.
+When you buy a license key, your payment is made to a reseller.
 
-### License agreement
+### License grant
 
 In consideration of the purchase fee paid by you to the reseller, I grant you a
 non-exclusive, non-transferable, non-sublicensable, perpetual, irrevocable,
-royalty-free right and license to use the product, subject to these terms and
-the reseller's terms.
+royalty-free right and license to use the product, subject to the terms of this
+document and the reseller's terms.
 
 ### License keys
 
@@ -165,7 +164,12 @@ documentation for details).
 
 ## Disclaimer
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Changes to these terms
 
@@ -185,6 +189,7 @@ apply to that purchase.
 
 ::: tip Thank you for reading!
 
-Thank you for taking the time to read all this. As a reward, let me point you [here](/coupon-code).
+Thank you for taking the time to read all this. As a reward, let me point you
+[here](/coupon-code).
 
 :::
