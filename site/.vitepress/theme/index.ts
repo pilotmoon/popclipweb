@@ -18,6 +18,7 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'element-plus/es/components/switch/style/css'
 import 'element-plus/es/components/radio/style/css'
 import 'element-plus/es/components/radio-button/style/css'
+import 'element-plus/es/components/tag/style/css'
 import '../../src/style/overrides.css'
 
 export default {

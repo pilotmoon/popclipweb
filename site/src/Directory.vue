@@ -2,7 +2,7 @@
 import { data } from './data/extensions.data';
 import { SearchOutlined } from '@ant-design/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
-import { ElInput, ElRadioButton, ElRadioGroup } from 'element-plus';
+import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from 'element-plus';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { Extension, Section } from './data/extensions-loader.js';
 import { useData } from 'vitepress'
@@ -142,6 +142,7 @@ const filteredIndex = computed(() => {
         </div>
         <div :class="$style.Info">
             Showing {{ filteredIndex.count }} of {{ total }} extensions
+            <ElTag v-if="filter" closable @close="filter = ''">Filter: {{ filter }}</ElTag>
         </div>
         <div v-for="{ title, extensions } in filteredIndex.index">
             <h2>{{ title }}</h2>
@@ -173,6 +174,12 @@ const filteredIndex = computed(() => {
 }
 
 .Info {    
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+
     font-size: 14px;
     text-align: left;
     color: var(--vp-c-text-2);
