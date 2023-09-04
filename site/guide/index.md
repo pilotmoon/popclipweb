@@ -144,10 +144,12 @@ functionality.
 
 :::
 
-## Copyright statement
+---
 
-> **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**
->
-> Copyright © 2023 Nicholas Moore.
->
-> This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+## Legal notices
+
+**PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**<br>
+Copyright © 2023 Nicholas Moore.<br>
+This work is licensed under a [Creative Commons BY-SA 4.0 License](http://creativecommons.org/licenses/by-sa/4.0/).
+
+**PopClip &trade;** is a trademark of Nicholas Moore.
