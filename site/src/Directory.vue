@@ -2,7 +2,7 @@
 import { data } from './data/extensions.data';
 import { SearchOutlined } from '@ant-design/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
-import { ElInput, ElRadioButton, ElRadioGroup, ElSpace } from 'element-plus';
+import { ElInput, ElRadioButton, ElRadioGroup } from 'element-plus';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { Extension, Section } from './data/extensions-loader.js';
 import { useData } from 'vitepress'
@@ -127,18 +127,18 @@ const filteredIndex = computed(() => {
     <h1>PopClip Extensions Directory</h1>
     <div :class="$style.Directory">
         <div :class="$style.Header">
-            <ElSpace>
+            <div :class="$style.Control">
                 Arrange:
                 <ElRadioGroup v-model="arrange">
                     <ElRadioButton label="categories">Categories</ElRadioButton>
                     <ElRadioButton label="alpha">A–Z</ElRadioButton>
                     <ElRadioButton label="newest">Newest</ElRadioButton>
                 </ElRadioGroup>
-            </ElSpace>
-            <ElSpace>
+            </div>
+            <div :class="$style.Control">
                 Filter:
                 <ElInput v-model="filter" placeholder="Type to filter" :prefix-icon="SearchOutlined" />
-            </ElSpace>
+            </div>
         </div>
         <div v-for="{ title, extensions } in filteredIndex.index">
             <h2>{{ title }}</h2>
@@ -163,6 +163,12 @@ const filteredIndex = computed(() => {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 12px;
+}
+
+.Control {
+    display: flex;
+    align-items: center;
     gap: 8px;
 }
 

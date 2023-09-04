@@ -15,7 +15,6 @@ import Edition from '../../src/Edition.vue';
 
 // element-plus css
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import 'element-plus/es/components/space/style/css'
 import 'element-plus/es/components/switch/style/css'
 import 'element-plus/es/components/radio/style/css'
 import 'element-plus/es/components/radio-button/style/css'
