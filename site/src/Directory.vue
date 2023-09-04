@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { data } from './data/extensions.data';
+import { SearchOutlined } from '@ant-design/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
 import { ElInput, ElRadioButton, ElRadioGroup, ElSpace } from 'element-plus';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
@@ -136,7 +137,7 @@ const filteredIndex = computed(() => {
             </ElSpace>
             <ElSpace>
                 Filter:
-                <ElInput v-model="filter" placeholder="Type to filter" />
+                <ElInput v-model="filter" placeholder="Type to filter" :prefix-icon="SearchOutlined" />
             </ElSpace>
         </div>
         <div v-for="{ title, extensions } in filteredIndex.index">
