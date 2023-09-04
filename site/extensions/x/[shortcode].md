@@ -5,7 +5,7 @@ isExtensionPage: true # needed for transformPageData
 layout: doc
 sidebar: false
 aside: false
-pref: false
+prev: false
 next: false
 editLink: false
 lastUpdated: false
