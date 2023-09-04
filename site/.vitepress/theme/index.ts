@@ -11,7 +11,15 @@ import Vercel from '../../src/Vercel.vue';
 import MyButton from '../../src/MyButton.vue';
 import DownloadButton from '../../src/DownloadButton.vue';
 import EditionSwitcher from '../../src/EditionSwitcher.vue';
-import Ed from '../../src/Ed.vue';
+import Edition from '../../src/Edition.vue';
+
+// element-plus css
+import 'element-plus/theme-chalk/dark/css-vars.css'
+import 'element-plus/es/components/space/style/css'
+import 'element-plus/es/components/switch/style/css'
+import 'element-plus/es/components/radio/style/css'
+import 'element-plus/es/components/radio-button/style/css'
+import '../../src/style/overrides.css'
 
 export default {
   extends: Theme,
@@ -25,13 +33,10 @@ export default {
     // TODO - make github link component
     app.component("GithubFilled", GithubFilled);
     
-    // vercel
-    app.component("Vercel", Vercel);
-
     // local
     app.component("MyButton", MyButton);
     app.component("DownloadButton", DownloadButton);
     app.component("EditionSwitcher", EditionSwitcher);
-    app.component("Ed", Ed);
+    app.component("Edition", Edition);
   },
 };

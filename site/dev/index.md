@@ -5,11 +5,6 @@ titleTemplate: false
 prev: false
 ---
 
-<script setup lang="ts">
-import EditionSwitcher from "/src/EditionSwitcher.vue";
-import Ed from "/src/Ed.vue";
-</script>
-
 <!-- markdownlint-disable MD025 -->
 
 # :robot: PopClip Extensions Developer Reference
@@ -93,7 +88,7 @@ If the unsigned extension warning gets annoying while you are testing your work,
 you can turn it off. Run the following command at the Terminal, then Quit and
 restart PopClip:
 
-<Ed code base="defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp LoadUnsignedExtensions -bool YES"/>
+<Edition code base="defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp LoadUnsignedExtensions -bool YES"/>
 
 ### Debug output
 
@@ -101,7 +96,7 @@ To help you when creating extensions, PopClip can be configured to send script
 outputs and other debug info to the Console app. To enable it, run this command
 in Terminal, then Quit and restart PopClip:
 
-<Ed code base="defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp EnableExtensionDebug -bool YES"/>
+<Edition code base="defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp EnableExtensionDebug -bool YES"/>
 
 You can then view the debug output in the Console app.
 

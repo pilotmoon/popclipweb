@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useEditionSwitcherState } from './state/useEditionSwitcherState'
+import { useEditionSwitcherState } from './composables/useEditionSwitcherState'
 const { edition } = useEditionSwitcherState();
 const props = defineProps({
     code: {

@@ -3,13 +3,14 @@ import va from '@vercel/analytics';
 import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
-import { useStoreState, loadStore } from './state/useStoreState'
+import { useStoreState, loadStore } from './composables/useStoreState'
+import { useLocalhost } from './composables/useLocalhost'
 import { ShoppingOutlined } from '@ant-design/icons-vue'
 import config from './config/config.json'
 
 const store = useStoreState();
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode.value));
-const sandbox = typeof window !== "undefined" && window.location.hostname === "localhost";
+const sandbox = useLocalhost();
 
 async function initPaddle() {
     await loadScript(config.paddle.script);

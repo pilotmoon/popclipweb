@@ -1,10 +1,9 @@
 <script setup>
 import { onMounted } from 'vue'
+import { useLocalhost } from './composables/useLocalhost'
 
 onMounted(() => {
-    if (typeof window !== "undefined" && window.location.hostname === "localhost") {
-        return;
-    }
+    if (useLocalhost()) return;
     
     const script1 = document.createElement("script");
     script1.textContent = "window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };"

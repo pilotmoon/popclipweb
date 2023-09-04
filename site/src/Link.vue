@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import config from './config/config.json';
 import { computed, onMounted } from 'vue';
-import { useStoreState, loadStore } from './state/useStoreState';
+import { useStoreState, loadStore } from './composables/useStoreState';
 
 const store = useStoreState();
 const props = defineProps<{

@@ -1,6 +1,7 @@
 import { createGlobalState, useSessionStorage } from "@vueuse/core";
 import { getMacAppStoreUrl } from "../helpers/getMacAppStoreUrl";
 import { getCountryInfo } from "../helpers/countries/getCountryInfo";
+import { useLocalhost } from '../composables/useLocalhost'
 import config from "../config/config.json";
 import { z } from "zod";
 
@@ -54,9 +55,7 @@ export async function loadStore() {
     console.log(`Store already loaded for ${store.countryCode}`);
     return;
   }
-  const apiRoot = window.location.hostname === "localhost"
-    ? config.pilotmoon.apiRoot
-    : "/api";
+  const apiRoot = useLocalhost() ? config.pilotmoon.apiRoot : "/api";
   const fetchResponse = await fetch(
     apiRoot + "/frontend/store/getPrices?product=" + config.pilotmoon.product,
   );

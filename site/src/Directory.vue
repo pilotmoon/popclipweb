@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { data } from './data/extensions.data';
-import Page from './Page.vue';
 import DirectoryEntry from './DirectoryEntry.vue';
-import { Input, RadioButton, RadioGroup, Space } from 'ant-design-vue';
+import { ElInput, ElRadioButton, ElRadioGroup, ElSpace } from 'element-plus';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { Extension, Section } from './data/extensions-loader.js';
 import { useData } from 'vitepress'
@@ -124,35 +123,33 @@ const filteredIndex = computed(() => {
 </script>
 
 <template>
-    <Page>
-        <h1>PopClip Extensions Directory</h1>
-        <div :class="$style.Directory">
-            <ClientOnly>
-                <div :class="$style.Header">
-                    <Space>
-                        Arrange:
-                        <RadioGroup v-model:value="arrange">
-                            <RadioButton value="categories">Categories</RadioButton>
-                            <RadioButton value="alpha">A–Z</RadioButton>
-                            <RadioButton value="newest">Newest</RadioButton>
-                        </RadioGroup>
-                    </Space>
+    <h1>PopClip Extensions Directory</h1>
+    <div :class="$style.Directory">
+        <ClientOnly>
+            <div :class="$style.Header">
+                <ElSpace>
+                    Arrange:
+                    <ElRadioGroup v-model="arrange">
+                        <ElRadioButton label="categories">Categories</ElRadioButton>
+                        <ElRadioButton label="alpha">A–Z</ElRadioButton>
+                        <ElRadioButton label="newest">Newest</ElRadioButton>
+                    </ElRadioGroup>
+                </ElSpace>
 
-                    <Space>
-                        Filter:
-                        <Input type="text" v-model:value="filter" placeholder="Type to filter" />
-                    </Space>
-                </div>
-            </ClientOnly>
-            <div v-for="{ title, extensions } in filteredIndex.index">
-                <h2>{{ title }}</h2>
-                <DirectoryEntry v-for="ext in extensions" :key="ext.identifier" :ext="ext" />
+                <ElSpace>
+                    Filter:
+                    <ElInput v-model="filter" placeholder="Type to filter" />
+                </ElSpace>
             </div>
+        </ClientOnly>
+        <div v-for="{ title, extensions } in filteredIndex.index">
+            <h2>{{ title }}</h2>
+            <DirectoryEntry v-for="ext in extensions" :key="ext.identifier" :ext="ext" />
         </div>
-        <div :class="$style.Footer">
-            Showing {{ filteredIndex.count }} of {{ total }}.
-        </div>
-    </Page>
+    </div>
+    <div :class="$style.Footer">
+        Showing {{ filteredIndex.count }} of {{ total }}.
+    </div>
 </template>
 
 <style module>

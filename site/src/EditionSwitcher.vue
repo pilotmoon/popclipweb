@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import Theme from './Theme.vue';
-import 'element-plus/theme-chalk/dark/css-vars.css'
-import 'element-plus/es/components/switch/style/css'
-import './style/overrides.css'
 import { ElSwitch } from 'element-plus'
-import { useEditionSwitcherState } from './state/useEditionSwitcherState'
+import { useEditionSwitcherState } from './composables/useEditionSwitcherState'
 import { onMounted } from 'vue';
 const { edition, defaultEdition } = useEditionSwitcherState();
 onMounted(() => {

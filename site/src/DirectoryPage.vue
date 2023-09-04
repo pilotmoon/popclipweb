@@ -2,7 +2,6 @@
 import { useData } from 'vitepress';
 import { useSlots } from 'vue';
 import Icon from './Icon.vue';
-import Page from './Page.vue';
 import { Extension } from './data/extensions-loader.js';
 import { formatDate } from './helpers/formatters.js';
 const { params } = useData();
@@ -13,58 +12,53 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
 </script>
 
 <template>
-  <Page v-once>
-    <div :class="$style.Breadcrumb">
-      <!-- ← <a href="/extensions/">Back to Directory</a> -->
-       <a href="/extensions/">← PopClip Extensions Directory</a>
-    </div>
+  <div :class="$style.Breadcrumb">
+    <!-- ← <a href="/extensions/">Back to Directory</a> -->
+    <a href="/extensions/">← PopClip Extensions Directory</a>
+  </div>
 
-    <div :class="$style.Main">      
-      <h1>
-        <Icon v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcLight="ext.iconUrlBlack"
-          :srcDark="ext.iconUrlWhite" />
-        {{ ext.name }}
-      </h1>
+  <div :class="$style.Main">
+    <h1>
+      <Icon v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcLight="ext.iconUrlBlack" :srcDark="ext.iconUrlWhite" />
+      {{ ext.name }}
+    </h1>
 
-      <div :class="$style.SideBySide">
-        <div :class="$style.Description" v-html="ext.description"></div>
-        <div :class="$style.Download">
-          <DownloadButton size="small" :href="ext.downloadUrl" />
-        </div>
+    <div :class="$style.SideBySide">
+      <div :class="$style.Description" v-html="ext.description"></div>
+      <div :class="$style.Download">
+        <DownloadButton size="small" :href="ext.downloadUrl" />
       </div>
     </div>
+  </div>
 
-    <div v-if="ext.demogif" :class="$style.Card">
-      <div :class="$style.CardHeader">Demo</div>
-      <img :src="ext.demogif" alt="Demo GIF" />
+  <div v-if="ext.demogif" :class="$style.Card">
+    <div :class="$style.CardHeader">Demo</div>
+    <img :src="ext.demogif" alt="Demo GIF" />
+  </div>
+
+  <div v-if="hasReadme" :class="$style.Card">
+    <div :class="$style.CardHeader">Readme</div>
+    <div v-if="hasReadme" :class="$style.Readme">
+      <slot />
     </div>
-
-    <div v-if="hasReadme" :class="$style.Card">
-      <div :class="$style.CardHeader">Readme</div>
-      <div v-if="hasReadme" :class="$style.Readme">
-        <slot />
-      </div>
-      <div v-else>
-        The extension author did not provide a Readme file.
-      </div>
+    <div v-else>
+      The extension author did not provide a Readme file.
     </div>
+  </div>
 
-    <div :class="$style.Card">
-      <div :class="$style.CardHeader">Info</div>
-      <ul :class="$style.CardData">        
-        <li><span :class="$style.CardDataLabel">First published</span><br><span>{{ formatDate(dateString) }}</span></li>
-        <!-- <li><span :class="$style.Label">Maintainer</span><br><a href="https://github.com/pilotmoon">Nick Moore</a></li> -->
-        <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>
-        <li><span :class="$style.CardDataLabel">Source</span><br><GithubFilled /> <a :href="ext.repoUrl">pilotmoon/PopClip-Extensions/<span>{{ ext.handle }}</span>.popclipext/</a></li>
-      </ul>
-    </div>
-
-    
-  </Page>
+  <div :class="$style.Card">
+    <div :class="$style.CardHeader">Info</div>
+    <ul :class="$style.CardData">
+      <li><span :class="$style.CardDataLabel">First published</span><br><span>{{ formatDate(dateString) }}</span></li>
+      <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>
+      <li><span :class="$style.CardDataLabel">Source</span><br>
+        <GithubFilled /> <a :href="ext.repoUrl">pilotmoon/PopClip-Extensions/<span>{{ ext.handle }}</span>.popclipext/</a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style module>
-
 .Breadcrumb {
   color: var(--vp-c-text-2);
   margin-bottom: 32px;
@@ -85,7 +79,7 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
   justify-content: space-between;
   align-items: bottom;
   gap: 16px;
-  
+
   margin: 24px 0 0px;
 }
 
@@ -101,13 +95,14 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
 }
 
 @media (max-width: 550px) {
-    .SideBySide {
-        flex-direction: column;
-    }
-    .SideBySide .Download {
-      text-align: right;
-      padding-top: 0;
-    }
+  .SideBySide {
+    flex-direction: column;
+  }
+
+  .SideBySide .Download {
+    text-align: right;
+    padding-top: 0;
+  }
 }
 
 .Card {
@@ -149,7 +144,7 @@ ul.CardData code {
   font-size: 14px;
 }
 
-.Card > img  {
+.Card>img {
   border-radius: 8px;
 }
 
@@ -196,5 +191,4 @@ ul.CardData code {
 .Readme pre {
   font-size: 14px;
 }
-
 </style>
