@@ -9,6 +9,8 @@
   --vp-c-blue-2: rgb(66, 142, 237);
   --vp-c-blue-3: rgb(100, 178, 244);
   --vp-c-blue-soft: rgba(50, 117, 231, 0.16);
+
+  --mid-grey: #999;
 }
 
 .dark {
@@ -16,6 +18,8 @@
   --vp-c-blue-2: rgb(41, 132, 199);
   --vp-c-blue-3: rgb(20, 103, 157);
   --vp-c-blue-soft: rgba(63, 162, 243, 0.16);
+
+  --mid-grey: #555;
 }
 
 /**

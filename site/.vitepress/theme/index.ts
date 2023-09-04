@@ -14,6 +14,7 @@ import EditionSwitcher from '../../src/EditionSwitcher.vue';
 import Edition from '../../src/Edition.vue';
 
 // element-plus css
+// https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/src/common/var.scss
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'element-plus/es/components/switch/style/css'
 import 'element-plus/es/components/radio/style/css'

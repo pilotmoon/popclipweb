@@ -2,6 +2,7 @@
 import { ElSwitch } from 'element-plus'
 import { useEditionSwitcherState } from './composables/useEditionSwitcherState'
 import { onMounted } from 'vue';
+import { SetappIcon } from 'vue3-simple-icons'
 const { edition, defaultEdition } = useEditionSwitcherState();
 onMounted(() => {
     // force switch to update on page load
@@ -17,8 +18,8 @@ onMounted(() => {
     <div :class="$style.EditionSwitcher">
         View docs for PopClip edition:
         <ElSwitch v-model="edition" inactive-value="base" active-value="setapp"
-            inactive-text="Standalone or Mac App Store" active-text="Setapp" inactive-color="var(--el-color-primary)"
-            active-color="var(--el-color-primary)" />
+            inactive-text="Standalone or Mac App Store" active-text="Setapp" inactive-color="var(--mid-grey)"
+            active-color="var(--mid-grey)" :active-action-icon="SetappIcon" />
     </div>
 </template>
 
