@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import va from '@vercel/analytics';
 import { data } from './data/extensions.data';
 import { SearchOutlined } from '@ant-design/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
@@ -6,6 +7,7 @@ import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from 'element-plus';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { Extension, Section } from './data/extensions-loader.js';
 import { useData } from 'vitepress'
+import { useDebounceFn } from '@vueuse/core';
 
 // filter/arrange state
 const defaultFilter = "";
@@ -33,6 +35,14 @@ const total = computed(() => {
     return Object.keys(data.extensions).length;
 });
 
+// track filter term
+const trackFilterTerm = useDebounceFn(() => {
+    if (filter.value === defaultFilter) return;
+    const info = { query: filter.value };
+    console.log("Filter", JSON.stringify(info));
+    va.track("Filter", info);
+}, 1000);
+
 // page title
 const { title: { value: initialTitle } } = useData();
 function title() {
@@ -57,6 +67,8 @@ function readParams() {
 
 // weite params to url, and update the filter
 function writeParams(params: URLSearchParams) {
+    trackFilterTerm();
+
     // update the url hash
     const url = new URL(window.location.toString());
     url.hash = params.toString();
@@ -67,7 +79,7 @@ function writeParams(params: URLSearchParams) {
 
     // update the filter 
     arrange.value = params.get("a") || defaultArrange;
-    filter.value = params.get("q") || defaultFilter;
+    filter.value = params.get("q") || defaultFilter;    
 }
 
 // watch filter/arrange change
@@ -173,7 +185,7 @@ const filteredIndex = computed(() => {
     gap: 8px;
 }
 
-.Info {    
+.Info {
     display: flex;
     justify-content: flex-start;
     align-items: baseline;
