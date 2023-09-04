@@ -5,35 +5,18 @@ import 'element-plus/es/components/switch/style/css'
 import './style/overrides.css'
 import { ElSwitch } from 'element-plus'
 import { useEditionSwitcherState } from './state/useEditionSwitcherState'
-import { WatchStopHandle, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-
 const { edition } = useEditionSwitcherState();
-const state = ref(false);
-const updateSwitch = (newEditionString) => {
-    state.value = newEditionString === 'setapp';
-}
-const stoppers: WatchStopHandle[] = [];
-onMounted(() => {
-    console.log('mounted edition', edition.value);
-    stoppers.push(watch(edition, updateSwitch));
-    stoppers.push( watch(state, (newVal) => {
-        edition.value = newVal ? 'setapp' : 'base';
-    }));
-    updateSwitch(edition.value);
-});
-onBeforeUnmount(() => {
-    console.log('stopping watchers');
-    stoppers.forEach((stop) => stop());
-});
 </script>
 
 <template>
-    <div :class="$style.EditionSwitcher">
-        View docs for PopClip edition:
-        <ElSwitch v-model="state" inactive-text="Standalone or Mac App Store" active-text="Setapp"
-            inactive-color="var(--el-color-primary)" active-color="var(--el-color-primary)" />
-
-    </div>
+    <ClientOnly>
+        <div :class="$style.EditionSwitcher">
+            View docs for PopClip edition:
+            <ElSwitch v-model="edition" inactive-value="base" active-value="setapp"
+                inactive-text="Standalone or Mac App Store" active-text="Setapp" inactive-color="var(--el-color-primary)"
+                active-color="var(--el-color-primary)" />
+        </div>
+    </ClientOnly>
 </template>
 
 <style module>
