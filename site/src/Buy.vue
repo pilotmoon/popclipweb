@@ -63,7 +63,7 @@ function trackBuy(button) {
         </div>
         <div :class="$style.box">
             <span>Buy License Key<span v-if="isLizhi"> from Paddle</span></span><br>
-            <MyButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand" size="medium"><ShoppingOutlined /> Buy</MyButton><br>
+            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand" size="medium"><ShoppingOutlined /> Buy</AaButton><br>
             <span :class="$style.price">{{ roundPrice(store.paddlePrice.value) }}</span>
         </div>
     </div>

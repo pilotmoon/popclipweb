@@ -72,11 +72,9 @@ However, it is recommended to use the correct file extension for clarity.
 ::: info Historical note
 
 Plist was the original format for PopClip extensions, and many of the older
-extensions in
-<span style="white-space: nowrap"><GithubFilled />&nbsp;<a href="https://github.com/pilotmoon/PopClip-Extensions">pilotmoon/PopClip-Extensions</a></span>
-are in Plist format. Support for JSON and YAML was added later. I recommend
-using JSON or YAML for new extensions as they are easier for a human to read and
-write.
+extensions in <AaLink gh="pilotmoon/PopClip-Extensions" /> are in Plist format.
+Support for JSON and YAML was added later. I recommend using JSON or YAML for
+new extensions as they are easier for a human to read and write.
 
 :::
 
@@ -89,5 +87,4 @@ organise your files.
 
 ## Examples
 
-For a whole bunch of example extension packages, see
-<span style="white-space: nowrap"><GithubFilled />&nbsp;<a href="https://github.com/pilotmoon/PopClip-Extensions/tree/master/source">pilotmoon/PopClip-Extensions/source</a></span>.
+For a whole bunch of example extension packages, see&#32;<AaLink gh="pilotmoon/PopClip-Extensions/tree/master/source" />.

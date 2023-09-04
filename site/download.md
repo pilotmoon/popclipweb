@@ -3,9 +3,10 @@ titleTemplate: false
 editLink: false
 lastUpdated: false
 ---
+
 <script setup>
 import Download from '/src/Download.vue';
-import Link from "/src/Link.vue";
+import AaLink from "/src/AaLink.vue";
 import { data } from "/src/data/releases.data";
 import { formatDate, formatSize, formatArchs } from "/src/helpers/formatters";
 
@@ -31,21 +32,29 @@ notes="/changelog"
 channel="production"
 />
 
-**Installation:** Unzip and move the PopClip app to your Applications folder. See [First Launch](/guide/install#first-launch) for next steps.
+**Installation:** Unzip and move the PopClip app to your Applications folder.
+See [First Launch](/guide/install#first-launch) for next steps.
 
-**Free Trial:** PopClip operates in free trial mode until you register a license key. The trial is fully functional and includes all features for 150 uses.
+**Free Trial:** PopClip operates in free trial mode until you register a license
+key. The trial is fully functional and includes all features for 150 uses.
 
 ::: tip Other ways to get PopClip
-If you already bought PopClip from the <Link k="mas.storeUrl">Mac App Store</Link>, you can sign in to the store and install PopClip again for free.
 
-If you're a <Link k="setapp.referralUrl">Setapp</Link> subscriber, PopClip is included in your subscription. You can install PopClip from the Setapp app.
+If you already bought PopClip from the <AaLink cfg="mas.storeUrl">Mac App
+Store</AaLink>, you can sign in to the store and install PopClip again for free.
 
-If you use [Homebrew](https://brew.sh/), you can install PopClip with the command `brew install popclip`.
+If you're a <AaLink cfg="setapp.referralUrl">Setapp</AaLink> subscriber, PopClip
+is included in your subscription. You can install PopClip from the Setapp app.
+
+If you use [Homebrew](https://brew.sh/), you can install PopClip with the
+command `brew install popclip`.
+
 :::
 
 ## Older Releases
 
-This list gives the last supported release for each macOS version or processor type.
+This list gives the last supported release for each macOS version or processor
+type.
 
 <ul>
   <li v-for="r in pinned">
@@ -55,7 +64,8 @@ This list gives the last supported release for each macOS version or processor t
   </li>
 </ul>
 
-Download links for some further old versions are available on the [Version History](/changelog) page.
+Download links for some further old versions are available on the
+[Version History](/changelog) page.
 
 ## Beta Release
 

@@ -2,13 +2,13 @@
 import { h } from "vue";
 import Theme from "vitepress/theme";
 import "./style.css";
-import { GithubFilled } from '@ant-design/icons-vue';
 
 // vercel
 import Vercel from '../../src/Vercel.vue';
 
 // local
-import MyButton from '../../src/MyButton.vue';
+import AaButton from '../../src/AaButton.vue';
+import AaLink from '../../src/AaLink.vue';
 import DownloadButton from '../../src/DownloadButton.vue';
 import EditionSwitcher from '../../src/EditionSwitcher.vue';
 import Edition from '../../src/Edition.vue';
@@ -29,12 +29,10 @@ export default {
       'layout-bottom': () => h(Vercel)
     });
   },
-  enhanceApp({ app, router, siteData }) {
-    // TODO - make github link component
-    app.component("GithubFilled", GithubFilled);
-    
+  enhanceApp({ app, router, siteData }) {        
     // local
-    app.component("MyButton", MyButton);
+    app.component("AaButton", AaButton);
+    app.component("AaLink", AaLink);
     app.component("DownloadButton", DownloadButton);
     app.component("EditionSwitcher", EditionSwitcher);
     app.component("Edition", Edition);

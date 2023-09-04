@@ -52,7 +52,7 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
       <li><span :class="$style.CardDataLabel">First published</span><br><span>{{ formatDate(dateString) }}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>
       <li><span :class="$style.CardDataLabel">Source</span><br>
-        <GithubFilled /> <a :href="ext.repoUrl">pilotmoon/PopClip-Extensions/<span>{{ ext.handle }}</span>.popclipext/</a>
+        <AaLink :gh="ext.repoUrl" />
       </li>
     </ul>
   </div>

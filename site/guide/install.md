@@ -3,7 +3,7 @@ outline: deep
 ---
 
 <script setup>
-  import Link from "/src/Link.vue";
+import AaLink from "/src/AaLink.vue";
 </script>
 
 # Installation
@@ -21,10 +21,10 @@ There are 3 ways to obtain PopClip:
   your Applications folder.
 
 - **Mac App Store**: PopClip is available to buy on the Mac App Store as a
-  one-time purchase. <Link k="mas.storeUrl">View PopClip on Mac App
-  Store</Link>.
+  one-time purchase. <AaLink cfg="mas.storeUrl">View PopClip on Mac App
+  Store</AaLink>.
 
-- **Setapp**: <Link k="setapp.referralUrl">Setapp</Link> is a subscription
+- **Setapp**: <AaLink cfg="setapp.referralUrl">Setapp</AaLink> is a subscription
   service for Mac apps, offering access to hundreds of Mac apps for $9.99 per
   month. If you're a Setapp customer, PopClip is included in your subscription.
   Simply search for "PopClip" in the Setapp interface and click Install.
@@ -41,8 +41,8 @@ compatible with both Intel and Apple Silicon Macs.
 
 <div class="info custom-block" style="padding-top: 8px">
 
-Older versions of PopClip are available for older
-operating systems. See the [downloads](/download) page.
+Older versions of PopClip are available for older operating systems. See the
+[downloads](/download) page.
 
 </div>
 
@@ -63,10 +63,10 @@ key.
 
 ::: tip Your license in iCloud
 
-If you have iCloud enabled on your Mac, PopClip
-will automatically save your license key to iCloud. If you have multiple Macs
-signed in to the same iCloud account, the license key will be shared between
-them. It will also be waiting for you when you install PopClip on a new Mac.
+If you have iCloud enabled on your Mac, PopClip will automatically save your
+license key to iCloud. If you have multiple Macs signed in to the same iCloud
+account, the license key will be shared between them. It will also be waiting
+for you when you install PopClip on a new Mac.
 
 :::
 

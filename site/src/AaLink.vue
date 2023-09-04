@@ -2,24 +2,53 @@
 import config from './config/config.json';
 import { computed, onMounted } from 'vue';
 import { useStoreState, loadStore } from './composables/useStoreState';
+import { GithubFilled } from '@ant-design/icons-vue';
 
 const store = useStoreState();
 const props = defineProps<{
-    k: string
+    href?: string
+    gh?: string
+    cfg?: string
 }>()
 
+const ghTrimmed = computed(() => {
+    if(props.gh) {
+        return props.gh.replace(/^https?:\/\/github.com\//, '');
+    }
+    return '';
+});
+
+const ghDisplay = computed(() => {
+    if(props.gh) {
+        return ghTrimmed.value.replace(/tree\/master\//, '');
+    }
+    return '';
+});
+
 const href = computed(() => {
+    if(props.href) {
+        return props.href;
+    }
+
+    if(props.gh) {
+        return `https://github.com/${ghTrimmed.value}`;
+    }
+
     // special case for mas.storeUrl, so it points to correct country
-    if (props.k === 'mas.storeUrl') {
+    if (props.cfg === 'mas.storeUrl') {
         return store.masUrl.value;
     }
 
-    const keyPath = props.k.split('.');
-    let value = config;
-    for (const key of keyPath) {
-        value = value[key];
+    if (props.cfg) {
+        const keyPath = props.cfg.split('.');
+        let value = config;
+        for (const key of keyPath) {
+            value = value[key];
+        }
+        return typeof value === 'string' ? value : '';
     }
-    return typeof value === 'string' ? value : '';
+    
+    return '';
 });
 
 onMounted(() => {
@@ -29,9 +58,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <a :href="href">
-        <slot></slot>
-    </a>
+    <span v-if="props.gh"><GithubFilled /> <a :href="href"><span v-html="ghDisplay" /></a></span>
+    <a v-else :href="href"><slot /></a>
 </template>
 
 <style scoped>
