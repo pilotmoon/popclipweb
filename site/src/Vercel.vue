@@ -19,4 +19,6 @@ onMounted(() => {
 });
 </script>
 
-<template></template>
+<template>
+    <div id="vercel-insights"></div>
+</template>
