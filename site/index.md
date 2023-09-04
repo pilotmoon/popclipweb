@@ -27,9 +27,5 @@ features:
     details:  From productivity boosters to language translation, the library of extensions has tools for a huge range of tasks.
     link: /extensions/
     linkText: Browse Extensions
-  # - title: Customize for you
-  #   details: Create your own extensions to make PopClip work just the way you want.
-  #   link: /extensions/create
-  #   linkText: Try Extension Creator
 ---
 

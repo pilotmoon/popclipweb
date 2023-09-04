@@ -140,6 +140,7 @@ export default defineConfig({
             { text: "AppleScript interface", link: "/kb/applescript" },
             { text: "Browser support", link: "/kb/browsers" },
             { text: "Paths and identifiers", link: "/kb/paths" },
+            { text: "Technical notes", link: "/kb/notes" },
           ],
         },
         {
