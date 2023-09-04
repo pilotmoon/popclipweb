@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Button from './Button.vue';
+import MyButton from './MyButton.vue';
 import { DownloadOutlined } from '@ant-design/icons-vue';
 const props = defineProps<{
   iconOnly?: boolean
@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <Button>
+    <MyButton>
         <DownloadOutlined /><span v-if="!iconOnly"> Download</span>
-    </Button>
+    </MyButton>
 </template>

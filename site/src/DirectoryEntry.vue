@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Icon from './Icon.vue';
-import DownloadButton from './DownloadButton.vue';
 import { Extension } from './data/extensions-loader.js';
 defineProps<{
     ext: Extension

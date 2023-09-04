@@ -3,7 +3,6 @@ import { useData } from 'vitepress';
 import { useSlots } from 'vue';
 import Icon from './Icon.vue';
 import Page from './Page.vue';
-import DownloadButton from './DownloadButton.vue';
 import { Extension } from './data/extensions-loader.js';
 import { formatDate } from './helpers/formatters.js';
 const { params } = useData();

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DownloadButton from './DownloadButton.vue'
 import { formatDate, formatSize, formatArchs } from './helpers/formatters';
 import { DownloadOutlined } from '@ant-design/icons-vue';
 const props = defineProps<{

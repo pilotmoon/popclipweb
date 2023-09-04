@@ -8,7 +8,7 @@ import { GithubFilled } from '@ant-design/icons-vue';
 import Vercel from '../../src/Vercel.vue';
 
 // local
-import Button from '../../src/Button.vue';
+import MyButton from '../../src/MyButton.vue';
 import DownloadButton from '../../src/DownloadButton.vue';
 import EditionSwitcher from '../../src/EditionSwitcher.vue';
 import Ed from '../../src/Ed.vue';
@@ -29,7 +29,7 @@ export default {
     app.component("Vercel", Vercel);
 
     // local
-    app.component("Button", Button);
+    app.component("MyButton", MyButton);
     app.component("DownloadButton", DownloadButton);
     app.component("EditionSwitcher", EditionSwitcher);
     app.component("Ed", Ed);

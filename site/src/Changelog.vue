@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MarkdownIt from 'markdown-it';
-import DownloadButton from './DownloadButton.vue'
 import { computed } from 'vue';
 import { data } from './data/releases.data';
 import { formatDate, formatSize } from './helpers/formatters';

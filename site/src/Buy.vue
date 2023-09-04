@@ -3,7 +3,6 @@ import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
 import { useStoreState, loadStore } from './state/useStoreState'
-import Button from './Button.vue'
 import { ShoppingOutlined } from '@ant-design/icons-vue'
 import config from './config/config.json'
 
@@ -57,7 +56,7 @@ onMounted(async () => {
         </div>
         <div :class="$style.box">
             <span>Buy License Key<span v-if="isLizhi"> from Paddle</span></span><br>
-            <Button :class="$style.buybutton" @click="openPaddleCheckout" theme="brand" size="medium"><ShoppingOutlined /> Buy</Button><br>
+            <MyButton :class="$style.buybutton" @click="openPaddleCheckout" theme="brand" size="medium"><ShoppingOutlined /> Buy</MyButton><br>
             <span :class="$style.price">{{ roundPrice(store.paddlePrice.value) }}</span>
         </div>
     </div>
