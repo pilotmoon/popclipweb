@@ -20,11 +20,10 @@ const state = computed({
 
 <template>
     <div :class="$style.EditionSwitcher">
-        <div :class="$style.SwitchRow">
-            View docs for PopClip edition:
-            <ElSwitch v-model="state" inactive-text="Standalone & Mac App Store" active-text="Setapp"
-                inactive-color="var(--el-color-primary)" active-color="var(--el-color-primary)" />
-        </div>
+        View docs for PopClip edition:
+        <ElSwitch v-model="state" inactive-text="Standalone or Mac App Store" active-text="Setapp"
+            inactive-color="var(--el-color-primary)" active-color="var(--el-color-primary)" />
+
     </div>
 </template>
 
@@ -34,12 +33,6 @@ const state = computed({
     border-radius: 8px;
     padding: 16px;
     font-size: 14px;
-}
-.Info {
-    color: var(--vp-c-text-2);
-    text-align: center;
-}
-.SwitchRow {
     display: flex;
     justify-content: center;
     align-items: baseline;
