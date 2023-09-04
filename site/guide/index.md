@@ -144,8 +144,6 @@ functionality.
 
 :::
 
----
-
 ## Legal notices
 
 **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**<br>
