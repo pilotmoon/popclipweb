@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue';
 import { formatDate, formatSize, formatArchs } from './helpers/formatters';
-import { DownloadOutlined } from '@ant-design/icons-vue';
+import { useSessionStorage } from '@vueuse/core';
+const downloaded = useSessionStorage("popclip-downloaded", {});
 const props = defineProps<{
     name: string,
     ver: string,
@@ -12,6 +14,20 @@ const props = defineProps<{
     size: number,
     archs: string[]
 }>();
+const auto = ref(false);
+onMounted(() => {
+    if (window.location.hash === "#go" && props.url) {
+        console.log("hasDownloaded", downloaded.value[props.url]);
+        if (downloaded.value[props.url]) {
+            console.log("already downloaded", props.url);
+        } else {
+            downloaded.value[props.url] = true;
+            console.log("auto download", props.url);
+            window.location.href = props.url;
+            auto.value = true;
+        }            
+    }
+});
 
 </script>
 
@@ -27,6 +43,7 @@ const props = defineProps<{
             <DownloadButton :href="props.url" size="small"/>&ensp;
             Zip file, {{ formatSize(props.size) }}
         </div>
+        <div style="margin: 8px 0 0 0" v-if="auto" :class="$style.status">Your download has started automatically.</div>
     </div>
 </template>
 
@@ -51,5 +68,8 @@ span.splash {
     text-transform: uppercase;
     font-size: 0.9em;
     font-weight: 500;
+}
+div.status {
+    color: var(--vp-c-text-2);
 }
 </style>

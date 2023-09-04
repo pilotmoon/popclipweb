@@ -13,7 +13,7 @@ hero:
   actions:
     - theme: brand
       text: Download Free Trial
-      link: /download
+      link: /download#go
     - theme: alt
       text: Buy
       link: /buy
