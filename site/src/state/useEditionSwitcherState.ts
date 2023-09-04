@@ -2,7 +2,8 @@ import { createGlobalState, useStorage } from '@vueuse/core'
 
 export const useEditionSwitcherState = createGlobalState(
   () => {
-    const edition = useStorage('popclip-edition', 'base');
-    return { edition };
+    const defaultEdition = "base";
+    const edition = useStorage("popclip-edition", defaultEdition);
+    return { edition, defaultEdition };
   }
 )

@@ -6,11 +6,11 @@ import './style/overrides.css'
 import { ElSwitch } from 'element-plus'
 import { useEditionSwitcherState } from './state/useEditionSwitcherState'
 import { onMounted } from 'vue';
-const { edition } = useEditionSwitcherState();
+const { edition, defaultEdition } = useEditionSwitcherState();
 onMounted(() => {
     // force switch to update on page load
     const value = edition.value;
-    edition.value = "base";
+    edition.value = defaultEdition;
     setTimeout(() => {
         edition.value = value;
     }, 0);
