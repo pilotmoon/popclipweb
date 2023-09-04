@@ -125,23 +125,20 @@ const filteredIndex = computed(() => {
 <template>
     <h1>PopClip Extensions Directory</h1>
     <div :class="$style.Directory">
-        <ClientOnly>
-            <div :class="$style.Header">
-                <ElSpace>
-                    Arrange:
-                    <ElRadioGroup v-model="arrange">
-                        <ElRadioButton label="categories">Categories</ElRadioButton>
-                        <ElRadioButton label="alpha">A–Z</ElRadioButton>
-                        <ElRadioButton label="newest">Newest</ElRadioButton>
-                    </ElRadioGroup>
-                </ElSpace>
-
-                <ElSpace>
-                    Filter:
-                    <ElInput v-model="filter" placeholder="Type to filter" />
-                </ElSpace>
-            </div>
-        </ClientOnly>
+        <div :class="$style.Header">
+            <ElSpace>
+                Arrange:
+                <ElRadioGroup v-model="arrange">
+                    <ElRadioButton label="categories">Categories</ElRadioButton>
+                    <ElRadioButton label="alpha">A–Z</ElRadioButton>
+                    <ElRadioButton label="newest">Newest</ElRadioButton>
+                </ElRadioGroup>
+            </ElSpace>
+            <ElSpace>
+                Filter:
+                <ElInput v-model="filter" placeholder="Type to filter" />
+            </ElSpace>
+        </div>
         <div v-for="{ title, extensions } in filteredIndex.index">
             <h2>{{ title }}</h2>
             <DirectoryEntry v-for="ext in extensions" :key="ext.identifier" :ext="ext" />
