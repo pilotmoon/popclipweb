@@ -1,5 +1,7 @@
 <script setup>
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'element-plus/es/components/button/style/css'
+import './src/style/overrides.css'
 import { ElButton } from 'element-plus'
 </script>
 
@@ -7,4 +9,6 @@ import { ElButton } from 'element-plus'
 
 ## Section
 
-<ElButton>Hello</ElButton>
+<ElButton>Default</ElButton>
+<ElButton type="primary">Primary</ElButton>
+<ElButton type="success">Success</ElButton>

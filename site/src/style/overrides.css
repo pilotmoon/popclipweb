@@ -1,0 +1,7 @@
+/* Element plus theme overrides */
+:root {
+    --el-color-primary: var(--vp-c-brand-1);
+}
+html.dark {
+    --el-color-primary: var(--vp-c-brand-2);
+}
