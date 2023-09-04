@@ -7,6 +7,7 @@ aside: false
 prev: false
 next: false
 editLink: false
+lastUpdated: false
 ---
 <script setup>
 import Directory from '/src/Directory.vue'
