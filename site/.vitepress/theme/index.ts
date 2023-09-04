@@ -18,7 +18,7 @@ export default {
   Layout: () => {
     return h(Theme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      // 'layout-bottom': () => h(Vercel)
+      'layout-bottom': () => h(Vercel)
     });
   },
   enhanceApp({ app, router, siteData }) {
