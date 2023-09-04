@@ -1,14 +1,16 @@
 <script setup>
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import 'element-plus/es/components/button/style/css'
+import 'element-plus/es/components/radio-button/style/css'
+import 'element-plus/es/components/radio-group/style/css'
 import './src/style/overrides.css'
-import { ElButton } from 'element-plus'
+import { ElRadioGroup, ElRadioButton } from 'element-plus'
 </script>
 
 # Test
 
 ## Section
 
-<ElButton>Default</ElButton>
-<ElButton type="primary">Primary</ElButton>
-<ElButton type="success">Success</ElButton>
+<ElRadioGroup v-model="radio">
+  <ElRadioButton label="1">Option 1</ElRadioButton>
+  <ElRadioButton label="2">Option 2</ElRadioButton>
+</ElRadioGroup>

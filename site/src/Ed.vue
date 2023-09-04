@@ -15,10 +15,16 @@ const props = defineProps({
         default: "Setapp edition",
     },
 });
-const element=computed(() => props.code ? "code" : "span");
 </script>
 
 <template>
-    <component :is="element" v-if="edition === 'setapp'" v-html="setapp" />    
-    <component :is="element" v-else v-html="base" />
+    <!---- Didn't use <component> here because it wasn't rendeting v-html in SSR -->
+    <span v-if="code">
+        <code v-if="edition === 'setapp'" v-html="props.setapp" />    
+        <code v-else v-html="props.base" />
+    </span>
+    <span v-else>
+        <span v-if="edition === 'setapp'" v-html="props.setapp" />    
+        <span v-else v-html="props.base" />
+    </span>
 </template>
