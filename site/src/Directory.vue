@@ -37,7 +37,7 @@ const total = computed(() => {
 
 // track filter term
 const trackFilterTerm = useDebounceFn(() => {
-    if (filter.value === defaultFilter) return;
+    if (filter.value.length < 3) return;
     const info = { query: filter.value };
     console.log("Filter", JSON.stringify(info));
     va.track("Filter", info);
