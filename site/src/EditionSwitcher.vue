@@ -9,14 +9,12 @@ const { edition } = useEditionSwitcherState();
 </script>
 
 <template>
-    <ClientOnly>
-        <div :class="$style.EditionSwitcher">
-            View docs for PopClip edition:
-            <ElSwitch v-model="edition" inactive-value="base" active-value="setapp"
-                inactive-text="Standalone or Mac App Store" active-text="Setapp" inactive-color="var(--el-color-primary)"
-                active-color="var(--el-color-primary)" />
-        </div>
-    </ClientOnly>
+    <div :class="$style.EditionSwitcher">
+        View docs for PopClip edition:
+        <ElSwitch v-model="edition" inactive-value="base" active-value="setapp"
+            inactive-text="Standalone or Mac App Store" active-text="Setapp" inactive-color="var(--el-color-primary)"
+            active-color="var(--el-color-primary)" />
+    </div>
 </template>
 
 <style module>
