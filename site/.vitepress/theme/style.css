@@ -171,7 +171,7 @@
 /* Custom CSS */
 
 /* disable transitions */
-*,
+/* *,
 ::before,
 ::after {
   animation-delay: -1ms !important;
@@ -181,7 +181,7 @@
   scroll-behavior: auto !important;
   transition-duration: 0s !important;
   transition-delay: 0s !important;
-}
+} */
 
 .main img[src*="#icon"] {
   height: 1.5em;

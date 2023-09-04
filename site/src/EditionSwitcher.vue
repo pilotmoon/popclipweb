@@ -1,40 +1,49 @@
 <script setup lang="ts">
 import Theme from './Theme.vue';
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import 'element-plus/es/components/radio-button/style/css'
-import 'element-plus/es/components/radio-group/style/css'
-import 'element-plus/es/components/space/style/css'
+import 'element-plus/es/components/switch/style/css'
 import './style/overrides.css'
-import { ElSpace, ElRadioGroup, ElRadioButton } from 'element-plus'
-
+import { ElSwitch, ElSpace } from 'element-plus'
 import { useEditionSwitcherState } from './state/useEditionSwitcherState'
+import { computed } from 'vue';
+
 const { edition } = useEditionSwitcherState();
+const state = computed({
+    get() {
+        return edition.value === 'setapp';
+    },
+    set(newValue) {
+        edition.value = newValue ? 'setapp' : 'base';
+    }
+});
 </script>
 
 <template>
     <div :class="$style.EditionSwitcher">
-        Use the selector below to choose the <a href="/guide/install#obtaining-popclip">PopClip edition</a> you would
-        like to see documentation for.
-        <ElSpace size="default">
-            Edition:
-            <ElRadioGroup v-model="edition" name="editionSwitcher">
-                <ElRadioButton label="base">Standalone and Mac App Store editions</ElRadioButton>
-                <ElRadioButton label="setapp">Setapp edition</ElRadioButton>
-            </ElRadioGroup>
-        </ElSpace>
+        <div :class="$style.SwitchRow">
+            View docs for PopClip edition:
+            <ElSwitch v-model="state" inactive-text="Standalone & Mac App Store" active-text="Setapp"
+                inactive-color="var(--el-color-primary)" active-color="var(--el-color-primary)" />
+        </div>
     </div>
 </template>
 
 <style module>
 .EditionSwitcher {
-    font-size: 14px;
-    display: flex;
-    justify-content: start;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 8px;
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
     padding: 16px;
+    font-size: 14px;
+}
+.Info {
+    color: var(--vp-c-text-2);
+    text-align: center;
+}
+.SwitchRow {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0 12px;
+    flex-wrap: wrap;
 }
 </style>
