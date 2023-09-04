@@ -1,4 +1,5 @@
 <script setup type="ts">
+import va from '@vercel/analytics';
 import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
@@ -36,27 +37,31 @@ onMounted(async () => {
     await Promise.all([loadStore(), initPaddle()]);
 });
 
+function trackBuy(button) {
+    console.log("Buy", button);
+    va.track("Buy", { button });
+}
 </script>
 
 <template>
     <div :class="$style.container">
         <div :class="$style.box">
             <span>Buy from the Mac App Store</span><br>
-            <a :href="store.masUrl.value" target="_blank">
+            <a :href="store.masUrl.value" target="_blank" @click="trackBuy('MAS')">
                 <img :class="$style.buybadge" src="/badge-mas.svg" alt="Download on the Mac App Store">
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
         </div>
         <div :class="$style.box" :hidden="!isLizhi || !store.isLoaded">
             <span>Buy License Key from DIGITALYCHEE</span><br>
-            <a :href="store.lizhiUrl.value" target="_blank">
+            <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('Lizhi')">
                 <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store">
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.lizhiPrice.value) }}</span>
         </div>
         <div :class="$style.box">
             <span>Buy License Key<span v-if="isLizhi"> from Paddle</span></span><br>
-            <MyButton :class="$style.buybutton" @click="openPaddleCheckout" theme="brand" size="medium"><ShoppingOutlined /> Buy</MyButton><br>
+            <MyButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand" size="medium"><ShoppingOutlined /> Buy</MyButton><br>
             <span :class="$style.price">{{ roundPrice(store.paddlePrice.value) }}</span>
         </div>
     </div>
