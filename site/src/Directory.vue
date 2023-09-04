@@ -140,13 +140,13 @@ const filteredIndex = computed(() => {
                 <ElInput v-model="filter" placeholder="Type to filter" :prefix-icon="SearchOutlined" />
             </div>
         </div>
+        <div :class="$style.Info">
+            Showing {{ filteredIndex.count }} of {{ total }} extensions
+        </div>
         <div v-for="{ title, extensions } in filteredIndex.index">
             <h2>{{ title }}</h2>
             <DirectoryEntry v-for="ext in extensions" :key="ext.identifier" :ext="ext" />
         </div>
-    </div>
-    <div :class="$style.Footer">
-        Showing {{ filteredIndex.count }} of {{ total }}.
     </div>
 </template>
 
@@ -172,8 +172,9 @@ const filteredIndex = computed(() => {
     gap: 8px;
 }
 
-.Footer {
-    margin-top: 16px;
-    font-size: 0.8em;
+.Info {    
+    font-size: 14px;
+    text-align: left;
+    color: var(--vp-c-text-2);
 }
 </style>
