@@ -4,6 +4,7 @@ outline: deep
 
 <script setup lang="ts">
 import NewsBox from '/src/NewsBox.vue'
+import StoreLoader from '/src/StoreLoader.vue'
 </script>
 
 # Welcome
@@ -11,6 +12,7 @@ import NewsBox from '/src/NewsBox.vue'
 Welcome to the official website for PopClip.
 
 <NewsBox />
+<StoreLoader />
 
 ## What is PopClip?
 
