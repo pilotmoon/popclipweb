@@ -1,10 +1,13 @@
 import { createGlobalState, useStorage } from "@vueuse/core";
+import { ref } from "vue";
+import { z } from "zod";
 import { getMacAppStoreUrl } from "../helpers/getMacAppStoreUrl";
 import { getCountryInfo } from "../helpers/countries/getCountryInfo";
 import { useLocalhost } from "../composables/useLocalhost";
+import { useLogger } from "../composables/useLogger";
 import config from "../config/config.json";
-import { z } from "zod";
-import { ref } from "vue";
+
+const log = useLogger();
 
 export const useStoreState = createGlobalState(
   () => {
@@ -53,10 +56,10 @@ const ZPricesResponse = z.object({
 export async function loadStore() {
   const store = useStoreState();
   if (store.isLoaded.value) {
-    console.log(`Store already loaded for ${store.countryCode.value}`);
+    log(`Store already loaded for ${store.countryCode.value}`);
     return;
   }
-  console.log(`Loading prices...`);
+  log(`Loading prices...`);
   const apiRoot = useLocalhost() ? config.pilotmoon.apiRoot : "/api";
   const fetchResponse = await fetch(
     apiRoot + "/frontend/store/getPrices?product=" + config.pilotmoon.product,
@@ -74,5 +77,5 @@ export async function loadStore() {
     );
     store.isLoaded.value = true;
   }
-  console.log(`Prices loaded for ${store.countryCode.value}`);
+  log(`Prices loaded for ${store.countryCode.value}`);
 }

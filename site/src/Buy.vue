@@ -5,9 +5,11 @@ import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
 import { useStoreState } from './composables/useStoreState'
 import { useLocalhost } from './composables/useLocalhost'
+import { useLogger } from "./composables/useLogger";
 import { IconShoppingBag } from '@tabler/icons-vue';
 import config from './config/config.json'
 
+const log = useLogger();
 const store = useStoreState();
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode.value));
 const sandbox = useLocalhost();
@@ -19,7 +21,7 @@ async function initPaddle() {
     }
     Paddle.Setup({
         vendor: config.paddle.vendorId, eventCallback: function (args) {
-            console.log("Paddle event", args);
+            log("Paddle event", args);
         }
     });
 }
@@ -27,7 +29,7 @@ async function initPaddle() {
 async function openPaddleCheckout(event) {
     await initPaddle();
     const product = sandbox ? config.paddle.sandboxProductId : config.paddle.productId;
-    console.log("Opening Paddle checkout");
+    log("Opening Paddle checkout");
     setTimeout(() => {
         Paddle.Checkout.open({ product });
     }, 200);
@@ -129,9 +131,9 @@ function trackBuy(button) {
     color: var(--vp-c-text-2);
 }
 
-
 @media (max-width: 768px) {
     .box {
         width: 100%;
     }
-}</style>
+}
+</style>
