@@ -4,7 +4,8 @@ import { loadScript } from './helpers/loadScript'
 import config from './config/config.json'
 
 onMounted(() => {
-    loadScript(config.setapp.script);
+    // loadScript(config.setapp.script);
+    loadScript('/setapp-banner.js');
 });
 </script>
 
