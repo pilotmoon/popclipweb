@@ -13,6 +13,7 @@ import DownloadButton from "../../src/DownloadButton.vue";
 import EditionSwitcher from "../../src/EditionSwitcher.vue";
 import Edition from "../../src/Edition.vue";
 import HomeFooter from "../../src/HomeFooter.vue";
+import StoreLoader from "../../src/StoreLoader.vue";
 
 // element-plus css
 // https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/src/common/var.scss
@@ -28,8 +29,8 @@ export default {
   Layout: () => {
     return h(Theme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      "layout-bottom": () => h(Vercel),
-      "home-features-after": () => h(HomeFooter),
+      "layout-bottom": () => h('div', [h(Vercel)]),
+      "home-features-after": () => h('div', [h(HomeFooter), h(StoreLoader)]),
     });
   },
   enhanceApp({ app, router, siteData }) {

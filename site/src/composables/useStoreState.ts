@@ -56,6 +56,7 @@ export async function loadStore() {
     console.log(`Store already loaded for ${store.countryCode.value}`);
     return;
   }
+  console.log(`Loading prices...`);
   const apiRoot = useLocalhost() ? config.pilotmoon.apiRoot : "/api";
   const fetchResponse = await fetch(
     apiRoot + "/frontend/store/getPrices?product=" + config.pilotmoon.product,

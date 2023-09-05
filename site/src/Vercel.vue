@@ -17,6 +17,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <!-- Must have some content, or we get hydration errors -->
-    <div id="vercel-insights"></div>
+    <div id="vercel-insights" />
 </template>
