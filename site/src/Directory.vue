@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import va from '@vercel/analytics';
 import { data } from './data/extensions.data';
-import { SearchOutlined } from '@ant-design/icons-vue';
+import { IconFilter } from '@tabler/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
 import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from 'element-plus';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
@@ -147,7 +147,7 @@ const filteredIndex = computed(() => {
             </div>
             <div :class="$style.Control">
                 Filter:
-                <ElInput v-model="filter" placeholder="Type to filter" :prefix-icon="SearchOutlined" />
+                <ElInput v-model="filter" placeholder="Type to filter" :prefix-icon="IconFilter" />
             </div>
         </div>
         <div :class="$style.Info">

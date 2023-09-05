@@ -252,3 +252,7 @@ Only needed for "doc" layout. */
 ul.ant-pagination li + li {
   margin-top: 0;
 } */
+
+span.DocSearch-Button-Keys {
+  display: none !important;
+}

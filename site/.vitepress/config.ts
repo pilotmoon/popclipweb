@@ -13,6 +13,14 @@ export default defineConfig({
     hostname: "https://www.popclip.app",
   },
   themeConfig: {
+    search: {
+      provider: 'algolia',
+      options: {
+        appId: '2OKYDNY04O',
+        apiKey: 'e035954eb950fa45d7dc871068a53648',
+        indexName: 'popclip',
+      }
+    },
     lastUpdated: {
       formatOptions: {
         dateStyle: "medium",
