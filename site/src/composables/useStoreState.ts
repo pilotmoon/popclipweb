@@ -1,4 +1,4 @@
-import { createGlobalState, useSessionStorage } from "@vueuse/core";
+import { createGlobalState, useStorage } from "@vueuse/core";
 import { getMacAppStoreUrl } from "../helpers/getMacAppStoreUrl";
 import { getCountryInfo } from "../helpers/countries/getCountryInfo";
 import { useLocalhost } from '../composables/useLocalhost'
@@ -7,20 +7,20 @@ import { z } from "zod";
 
 export const useStoreState = createGlobalState(
   () => {
-    const isLoaded = useSessionStorage("popclip-store-isLoaded", false);
-    const countryCode = useSessionStorage("popclip-store-countryCode", "");
-    const countryName = useSessionStorage("popclip-store-countryName", "");
-    const paddlePrice = useSessionStorage("popclip-store-paddlePrice", "");
-    const masPrice = useSessionStorage("popclip-store-masPrice", "");
-    const masUrl = useSessionStorage(
+    const isLoaded = useStorage("popclip-store-isLoaded", false);
+    const countryCode = useStorage("popclip-store-countryCode", "");
+    const countryName = useStorage("popclip-store-countryName", "");
+    const paddlePrice = useStorage("popclip-store-paddlePrice", "");
+    const masPrice = useStorage("popclip-store-masPrice", "");
+    const masUrl = useStorage(
       "popclip-store-masUrl",
       getMacAppStoreUrl(config.mas.appId, config.mas.slug),
     );
-    const lizhiPrice = useSessionStorage(
+    const lizhiPrice = useStorage(
       "popclip-store-lizhiPrice",
       config.lizhi.price,
     );
-    const lizhiUrl = useSessionStorage(
+    const lizhiUrl = useStorage(
       "popclip-store-lizhiUrl",
       config.lizhi.storeUrl,
     );
