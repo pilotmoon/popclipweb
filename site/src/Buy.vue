@@ -25,17 +25,20 @@ async function initPaddle() {
 }
 
 async function openPaddleCheckout(event) {
+    await initPaddle();
     const product = sandbox ? config.paddle.sandboxProductId : config.paddle.productId;
     console.log("Opening Paddle checkout");
-    Paddle.Checkout.open({ product });
+    setTimeout(() => {
+        Paddle.Checkout.open({ product });
+    }, 200);
 }
 
 function roundPrice(price) {
     return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
 };
 
-onMounted(async () => {
-    await Promise.all([loadStore(), initPaddle()]);
+onMounted(() => {
+    loadStore();
 });
 
 function trackBuy(button) {
