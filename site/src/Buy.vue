@@ -5,7 +5,7 @@ import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
 import { useStoreState, loadStore } from './composables/useStoreState'
 import { useLocalhost } from './composables/useLocalhost'
-import { ShoppingOutlined } from '@ant-design/icons-vue'
+import { IconShoppingBag } from '@tabler/icons-vue';
 import config from './config/config.json'
 
 const store = useStoreState();
@@ -63,7 +63,10 @@ function trackBuy(button) {
         </div>
         <div :class="$style.box">
             <span>Buy License Key<span v-if="isLizhi"> from Paddle</span></span><br>
-            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand" size="medium"><ShoppingOutlined /> Buy</AaButton><br>
+            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand"
+                size="medium">
+                <IconShoppingBag style="margin-left: -0.2em;" /> Buy
+            </AaButton><br>
             <span :class="$style.price">{{ roundPrice(store.paddlePrice.value) }}</span>
         </div>
     </div>
@@ -134,5 +137,4 @@ function trackBuy(button) {
     .box {
         width: 100%;
     }
-}
-</style>
+}</style>
