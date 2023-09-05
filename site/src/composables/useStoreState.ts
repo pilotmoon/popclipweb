@@ -1,13 +1,14 @@
 import { createGlobalState, useStorage } from "@vueuse/core";
 import { getMacAppStoreUrl } from "../helpers/getMacAppStoreUrl";
 import { getCountryInfo } from "../helpers/countries/getCountryInfo";
-import { useLocalhost } from '../composables/useLocalhost'
+import { useLocalhost } from "../composables/useLocalhost";
 import config from "../config/config.json";
 import { z } from "zod";
+import { ref } from "vue";
 
 export const useStoreState = createGlobalState(
   () => {
-    const isLoaded = useStorage("popclip-store-isLoaded", false);
+    const isLoaded = ref(false); // don't use storage for this because we want to reload on page refresh
     const countryCode = useStorage("popclip-store-countryCode", "");
     const countryName = useStorage("popclip-store-countryName", "");
     const paddlePrice = useStorage("popclip-store-paddlePrice", "");
@@ -52,7 +53,7 @@ const ZPricesResponse = z.object({
 export async function loadStore() {
   const store = useStoreState();
   if (store.isLoaded.value) {
-    console.log(`Store already loaded for ${store.countryCode}`);
+    console.log(`Store already loaded for ${store.countryCode.value}`);
     return;
   }
   const apiRoot = useLocalhost() ? config.pilotmoon.apiRoot : "/api";
@@ -70,6 +71,7 @@ export async function loadStore() {
       config.mas.slug,
       countryInfo.appStoreCode,
     );
+    store.isLoaded.value = true;
   }
   console.log(`Prices loaded for ${store.countryCode.value}`);
 }
