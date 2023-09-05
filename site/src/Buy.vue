@@ -3,7 +3,7 @@ import va from '@vercel/analytics';
 import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
-import { useStoreState, loadStore } from './composables/useStoreState'
+import { useStoreState } from './composables/useStoreState'
 import { useLocalhost } from './composables/useLocalhost'
 import { IconShoppingBag } from '@tabler/icons-vue';
 import config from './config/config.json'
@@ -37,14 +37,8 @@ function roundPrice(price) {
     return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
 };
 
-onMounted(() => {
-    loadStore();
-});
-
 function trackBuy(button) {
-    const info = { button };
-    console.log("Buy", JSON.stringify(info));
-    va.track("Buy", info);
+    va.track("Buy", { button });
 }
 </script>
 

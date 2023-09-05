@@ -7,9 +7,7 @@ const props = defineProps<{
   href: string
 }>();
 const track = () => {
-  const info = { url: props.href }; 
-  console.log("Download", JSON.stringify(info));
-  va.track("Download", info);
+  va.track("Download", { url: props.href });
 };
 </script>
 
