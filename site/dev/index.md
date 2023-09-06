@@ -2,7 +2,9 @@
 outline: deep
 title: PopClip Extensions Developer Reference
 titleTemplate: false
-prev: /privacy
+prev:
+  text: Privacy Policy
+  link: /privacy
 ---
 
 <!-- markdownlint-disable MD025 -->
