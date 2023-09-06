@@ -2,7 +2,7 @@
 outline: deep
 title: PopClip Extensions Developer Reference
 titleTemplate: false
-prev: false
+prev: /privacy
 ---
 
 <!-- markdownlint-disable MD025 -->
