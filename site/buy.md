@@ -36,5 +36,5 @@ Students can get a discount on a PopClip license key via
 
 ## Free
 
-If you cannot afford PopClip, [email](/support) me](/support), and I will send
+If you cannot afford PopClip, [email me](/support), and I will send
 you a 1-year license for free.
