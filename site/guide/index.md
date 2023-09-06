@@ -21,7 +21,7 @@ select text on your screen.
 
 PopClip's [actions](/guide/actions) range from simple copy-paste and web
 searches to complex tasks such as translating text. Using
-[extensions](/guide/extensions), you can add actions to PopClip to adapt it to
+[extensions](/extensions/), you can add more actions to PopClip to adapt it to
 your needs. Think of PopClip as a context-aware assistant that provides a set of
 tools you can use instantly in any app.
 
@@ -95,8 +95,8 @@ person. Nick Moore. I'm also the one writing this user guide. I'm from the UK
 and my native language is English. To get in touch, see
 [Support and Feedback](/support).
 
-[Pilotmoon Software](https://pilotmoon.com/about/) is the business name under which I
-have published my apps. You will see some links and references to
+[Pilotmoon Software](https://pilotmoon.com/about/) is the business name under
+which I have published my apps. You will see some links and references to
 `pilotmoon.com` in various places, and I use the `@pilotmoon` handle on GitHub
 and elsewhere.
 
@@ -147,7 +147,7 @@ functionality.
 ## Legal notices
 
 **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**<br>
-Copyright © 2023 Nicholas Moore.<br>
-This work is licensed under a [Creative Commons BY-SA 4.0 License](http://creativecommons.org/licenses/by-sa/4.0/).
+Copyright © 2023 Nicholas Moore.<br> This work is licensed under a
+[Creative Commons BY-SA 4.0 License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 **PopClip &trade;** is a trademark of Nicholas Moore.
