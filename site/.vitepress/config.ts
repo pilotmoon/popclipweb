@@ -115,6 +115,10 @@ export default defineConfig({
             { text: "Changelog", link: "/dev/changelog" },
           ],
         },
+        {
+          text: "User Guide",
+          link: "/guide/",
+        },
       ],
       "/": [
         { text: "Welcome", link: "/guide/" },
