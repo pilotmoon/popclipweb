@@ -12,7 +12,7 @@ const beta = data.beta[0];
 
 # PopClip Beta
 
-Anyone is welcome to use the beta release, which is a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find.
+Anyone is welcome to use the beta release, a preview of the next version of PopClip. The beta release is more likely to contain bugs. Please report any issues you find.
 
 :::tip Beta access for Mac App Store and Setapp customers
 
@@ -35,7 +35,7 @@ notes="#beta-version-history"
 channel="beta"
 />
 
-**Beta installation:** Install in the Applications folder, replacing any existing copy of the PopClip app. (Settings and extensions will be preserved.)
+**Beta installation:** Install in the Applications folder, replacing any existing copy of the PopClip app. PopClip beta will preserve your current settings and extensions.
 
 ## Beta Version History
 

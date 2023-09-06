@@ -16,14 +16,14 @@ you, as described below.
 ## Buying from the Mac App Store
 
 When you buy my product from the Mac App Store, your order will be processed by
-Apple. Apple does not pass any of your personal information on to me. I am
-therefore unable to assist with individual Mac App Store orders; order inquiries
-should be directed to [Apple Support](https://getsupport.apple.com/).
+Apple. Apple does not pass any of your personal information on to me. Therefore,
+I cannot assist with individual Mac App Store orders; order inquiries should be
+directed to [Apple Support](https://getsupport.apple.com/).
 
 ## Buying a license key
 
 When you buy a license key for my product, your order will be processed by a
-reseller. I use [Paddle](https://paddle.com/) as my reseller worldwide, and
+reseller. I use [Paddle](https://paddle.com/) as my reseller worldwide and
 [Digitalychee](https://lizhi.io/) in China. The reseller will pass me your name
 and email address, which will be encoded as part of your license key. I retain
 this information so I can help you if you contact me about an order.
@@ -33,7 +33,7 @@ this information so I can help you if you contact me about an order.
 Some features of my apps require an internet connection. I do not want to be
 responsible for storing sensitive data, and so my apps are designed to avoid
 sending data to my own servers wherever possible. None of my apps send any data
-away from your device, except as described below or where otherwise explicitly
+away from your device except as described below or where otherwise explicitly
 indicated within the app.
 
 ### Extensions
@@ -41,26 +41,26 @@ indicated within the app.
 Some of my apps offer the ability to install extensions that interact with
 third-party services on the internet. (For example, "send to Instapaper" or
 "translate with Google Translate".) All such communication occurs directly
-between your device and the third-party using secure HTTPS APIs; my servers do
+between your device and the third party using secure HTTPS APIs; my servers do
 not act as an intermediary. Your use of these extensions is subject to the
 policies of the relevant third-party services.
 
 Where extensions require login details such as a username and password, these
-are stored locally on your device, in the operating system's secure keychain.
+are stored locally on your device in the operating system's secure keychain.
 Your login details are never sent to my servers.
 
 ### Update checking
 
-My apps include update checking functionality. When auto-update is turned on,
-the app will periodically contact my web server to see if an update is
-available. Update checking may send me anonymous system information such as app
-version and operating system version. You can disable update checking within the
-app's preferences.
+My apps include update-checking functionality. When auto-update is on, the app
+will periodically contact my web server to see if an update is available. Update
+checking may send me anonymous system information, such as the app version and
+operating system version. You can disable update checking within the app's
+preferences.
 
 ### Crash reporting
 
-My apps have crash reporting functionality. If a crash occurs, the app will send
-the technical details of the crash to me, to help me fix it. My crash reporting
+My apps have crash-reporting functionality. If a crash occurs, the app will send
+the technical details of the crash to me to help me fix it. My crash reporting
 functionality is provided by [Microsoft App Center](https://appcenter.ms/).
 
 ### Analytics
@@ -88,16 +88,16 @@ My websites are:
 
 When you access my websites, your visit will be recorded in my server logs. The
 logs record the page URL, date and time, referrer URL (if any), IP address,
-device type, operating system and browser.
+device type, operating system, and browser.
 
 My websites use no advertising or tracking cookies. Cookies and local storage
-are used for functionality such as purchase flow, user preferences and login
+are used for functionality such as purchase flow, user preferences, and login
 sessions.
 
 ### Forum
 
 The PopClip forum (<https://forum.popclip.app>) is self-hosted using
-[Discourse](https://www.discourse.org/) forum software. The forum contains its
+[Discourse](https://www.discourse.org/) software. The forum contains its
 own [privacy notice](https://forum.popclip.app/privacy).
 
 ## Mailing list

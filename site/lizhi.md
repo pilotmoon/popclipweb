@@ -20,4 +20,4 @@ lastUpdated: false
 
 ## AUTHORIZATION CERTIFICATE
 
-We, Pilotmoon Software, the developer of PopClip, authorize DIGITALYCHEE TECHNOLOGY CO, LTD as our official partner in China, and it owns the right to sell our copyrighted software on their store: <https://lizhi.shop>. Please don't purchase our product(s) from any other websites. Purchases from unauthorised websites will not receive official customer support such as license retrieval, software updates, and technical assistance.
+We, Pilotmoon Software, the developer of PopClip, authorize DIGITALYCHEE TECHNOLOGY CO, LTD as our official partner in China, and it owns the right to sell our copyrighted software on their store: <https://lizhi.shop>. Please don't purchase our product(s) from any other websites. Purchases from unauthorized websites will not receive official customer support, such as license retrieval, software updates, and technical assistance.
