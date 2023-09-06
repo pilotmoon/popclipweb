@@ -14,6 +14,7 @@ import EditionSwitcher from "../../src/EditionSwitcher.vue";
 import Edition from "../../src/Edition.vue";
 import HomeFooter from "../../src/HomeFooter.vue";
 import StoreLoader from "../../src/StoreLoader.vue";
+import GrooveWidget from "../../src/GrooveWidget.vue";
 
 // element-plus css
 // https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/src/common/var.scss
@@ -29,7 +30,7 @@ export default {
   Layout: () => {
     return h(Theme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      "layout-bottom": () => h('div', [h(Vercel), h(StoreLoader)]),
+      "layout-bottom": () => h('div', [h(Vercel), h(StoreLoader), h(GrooveWidget)]),
       "home-features-after": () => h('div', [h(HomeFooter)]),
     });
   },
