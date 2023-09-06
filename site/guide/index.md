@@ -38,17 +38,17 @@ the documentation for PopClip in one place, with the following sections:
   Take a tour of the [built-in actions](/guide/actions), see how to customize
   the [settings](/guide/settings) and add [extensions](/guide/extensions).
 
-- Vital **App Info** including [download links](/download),
-  [purchase information](/buy), [version history](/changelog) and
+- Vital **App Info**, including [download links](/download),
+  [purchase information](/buy), [version history](/changelog), and
   [support](/support) details.
 
-- The **Knowledge Base** section, with detailed
-  [troubleshooting guide](/kb/troubleshooting) and in-depth articles.
+- The **Knowledge Base** section, with a detailed
+  [troubleshooting guide](/kb/troubleshooting) and technical articles.
 
 - **Policies** including [license terms](/terms) and [privacy](/privacy) policy.
 
-- A **Developer Reference** section with
-  [detailed technical documentation](/dev/) on how to create PopClip extensions.
+- A **Developer Reference** section with [detailed documentation](/dev/) on how
+  to create PopClip extensions.
 
 Finally, there is the [Extensions Directory](/extensions/), a dedicated section
 of the site for browsing ready-made extensions to add to PopClip.
@@ -59,7 +59,7 @@ _See also [Troubleshooting](/kb/troubleshooting) if you have questions about
 technical issues._
 
 - **Is there / will you make a version of PopClip for iPhone or iPad?**
-  Unfortunately PopClip would not be possible on iOS, due to the way iOS apps
+  Unfortunately PopClip would not be possible on iOS due to the way iOS apps
   work.
 
 - **Is there / will you make a version of PopClip for Windows?** I don't make a
@@ -69,7 +69,7 @@ technical issues._
   all.
 
 - **Can you make the Dictionary action use the macOS pop-up dictionary instead
-  of the Dictionary app?** I'd love it to do this, but it is technically not
+  of the Dictionary app?** I'd love to do this, but it is technically not
   possible (as far as I know).
 
 ## :earth_africa: Languages and translation
@@ -80,20 +80,19 @@ Brazilian Portuguese, Russian, Slovak, Spanish, and Turkish. These translations
 have been produced by a mix of paid translation services and volunteer users.
 
 Users can contribute translations in their own language using the CrowdIn
-platform. If you would like to add or suggest changes to translations please go
-to:
+platform. If you would like to add or suggest changes to translations, please go
+to the
 [Pilotmoon Apps project on CrowdIn](https://crowdin.com/project/pilotmoon-apps).
 If your language does not exist in the project, send me an email so I can add
 it.
 
-The documentation only available in English.
+The documentation is only available in English.
 
 ## :man_juggling: About the developer
 
-PopClip is not made by a large company or even a small team; it's made by one
-person. Nick Moore. I'm also the one writing this user guide. I'm from the UK
-and my native language is English. To get in touch, see
-[Support and Feedback](/support).
+PopClip is not made by a large company or even a small team; one person makes it
+— me, Nick Moore. I'm from the UK and my native language is English. To get in
+touch, see [Support and Feedback](/support).
 
 [Pilotmoon Software](https://pilotmoon.com/about/) is the business name under
 which I have published my apps. You will see some links and references to
@@ -103,7 +102,7 @@ and elsewhere.
 ## :handshake: Acknowledgements
 
 PopClip would not be possible without the work of many other people who have
-created open source software and freely shared their work. My thanks to the
+created open-source software and freely shared their work. My thanks to the
 following people and projects:
 
 - [Sparkle](https://sparkle-project.org/)
@@ -137,10 +136,9 @@ following people and projects:
 
 ::: info :turtle:&ensp;It's turtles all the way down
 
-This is actually just a small fraction of the open-source libraries in use,
-since the above projects recursively include other projects. For space, I've
-limited the list to the libraries that I've directly imported and used for core
-functionality.
+This is just a fraction of the open-source libraries PopClip uses since the
+above projects include other projects. For space, I've limited the list to those
+I've directly imported.
 
 :::
 
