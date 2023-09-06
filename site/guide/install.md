@@ -91,7 +91,7 @@ select in other apps. Since this is an essential part of PopClip's operation,
 you cannot use PopClip without enabling Accessibility access.
 
 PopClip only uses the Accessibility API to read the text you select. All
-processing is done locally on your Mac and no information is stored or
+processing is done locally on your Mac and no selected text is stored or
 transmitted anywhere, except when you explicitly invoke an internet-connected
 action such as a web search. See also [Privacy Policy](/privacy).
 
