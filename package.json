@@ -3,8 +3,7 @@
   "scripts": {
     "docs:dev": "vitepress dev site",
     "docs:build": "npx patch-package; vitepress build site",
-    "docs:preview": "vitepress preview site",
-    "deploy": "git push origin main:deploy"
+    "docs:preview": "vitepress preview site"    
   },
   "dependencies": {
     "@ant-design/icons-vue": "6.1.0",
