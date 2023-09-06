@@ -31,8 +31,8 @@ PNG icons should be at least 256 pixels high.
 
 ## Text icons
 
-Using a special format, you can instruct PopClip to generate a text-based icon.
-Text icons can have a `text:` prefix but it is optional.
+Using a particular format, you can instruct PopClip to generate a text-based icon.
+Text icons can have a `text:` prefix, but it is optional.
 
 ### Text icon examples
 
@@ -51,7 +51,7 @@ Text icons can have a `text:` prefix but it is optional.
 
 The specifier format is `<shape> <modifiers> <text>`.
 
-- `<shape>` is optional, and can be one of the following:
+- `<shape>` is optional and can be one of:
 
 | Keyword  | Effect                                     |
 | -------- | ------------------------------------------ |
@@ -59,14 +59,14 @@ The specifier format is `<shape> <modifiers> <text>`.
 | `circle` | Encloses text in a circle.                 |
 | `search` | Encloses text in a magnifying glass shape. |
 
-- `<modifiers>` are optional, and can be any number of the following:
+- `<modifiers>` are optional and can be any combination of:
 
 | Keyword      | Effect                                                      |
 | ------------ | ----------------------------------------------------------- |
 | `filled`     | Specifies a solid filled shape instead of an outline shape. |
 | `monospaced` | Specifies that the text be drawn with a monospaced font.    |
 
-- `<text>` can up to three characters.
+- `<text>` can be up to three characters.
 
 ::: info :bulb: Tip: Monospaced font
 
@@ -78,7 +78,7 @@ modifier.
 ## Iconify icons
 
 [Iconify](https://iconify.design/) provides over 150,000 icons from a variety of
-open source icon sets. Browse the catalog at <https://icon-sets.iconify.design/>.
+open-source icon sets. Browse the catalog at <https://icon-sets.iconify.design/>.
 
 The format is `iconify:<icon set prefix>:<icon name>`.
 
@@ -115,14 +115,13 @@ palette.
 
 ::: info Special case: Color Iconify icons
 
-Color icons from Iconify will automatically be rendered in color.
+PopClip will automatically render color icons from Iconify in color.
 
 :::
 
 ## Icon options
 
-These icon options can be placed in the config alongside the `icon` field to
-modify the way the icon is drawn.
+These optional fields can be placed in the config alongside the `icon` field to modify how PopClip draws it.
 
 | Key               | Type    | Description                                                                                                                              |
 | ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |

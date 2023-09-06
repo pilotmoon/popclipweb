@@ -48,17 +48,17 @@ An extension defines one or more actions. Each action can be one of seven types:
 
 ### Filter rules
 
-Extensions have access to the following filtering mechanisms, to prevent actions
-appearing when they are not useful:
+Extensions have access to the following filtering mechanisms to prevent actions
+from appearing when they are not helpful:
 
-- Filter by current application
+- Filter by the current application
 - Filter by matching a regular expression against the selected text
-- Filter by whether cut, paste or formatting is available
-- Filter by whether the text contains a URL, email address or file path
+- Filter by whether cut, paste, or formatting is available
+- Filter by whether the text contains a URL, email address, or file path
 - Filter by the current values of the extensions's options
 
 Filter rules are defined in the [action properties](./actions) under the `regex`
-key, `requirements` key and `required apps`/`excluded apps` keys.
+key, `requirements` key, and `required apps`/`excluded apps` keys.
 
 ## Extension signing
 
@@ -75,34 +75,34 @@ will display a warning dialog when you try to install it:
 
 ## Development environment
 
-You can create extensions using any text editor. The macOS included app TextEdit
-will suffice for simple snippets, but otherwise I recommend using a dedicated
+You can create extensions using any text editor. The macOS-included app TextEdit
+will suffice for simple snippets, but otherwise, I recommend using a dedicated
 code editor such as [VS Code](https://code.visualstudio.com/),
 [Sublime Text](https://www.sublimetext.com/),
-[BBEdit](https://www.barebones.com/products/bbedit/) or
+[BBEdit](https://www.barebones.com/products/bbedit/), or
 [Nova](https://nova.app/).
 
 <EditionSwitcher />
 
 ### Turn off unsigned warning
 
-If the unsigned extension warning gets annoying while you are testing your work,
-you can turn it off. Run the following command at the Terminal, then Quit and
+If the unsigned extension warning gets annoying while you test your work, you
+can turn it off. Run the following command at the Terminal, then Quit and
 restart PopClip:
 
 <Edition code base="defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp LoadUnsignedExtensions -bool YES"/>
 
 ### Debug output
 
-To help you when creating extensions, PopClip can be configured to send script
-outputs and other debug info to the Console app. To enable it, run this command
-in Terminal, then Quit and restart PopClip:
+To help you when creating extensions, PopClip can send script outputs and other
+debug info to the Console app. To enable it, run this command in Terminal, then
+Quit and restart PopClip:
 
 <Edition code base="defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp EnableExtensionDebug -bool YES"/>
 
 You can then view the debug output in the Console app.
 
-![Console app screenshot](./media/shot-console-window-2.png "Viewing PopClip debug output in Console app.")
+![Console app screenshot](./media/shot-console-window-2.png "Viewing PopClip debug output in the Console app.")
 
 To filter the Console to show just PopClip extensions, enter Process "PopClip"
 and Category "Extension" in the Search field.
