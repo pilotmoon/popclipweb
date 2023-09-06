@@ -1,0 +1,12 @@
+{
+  "grammarly.files.include": [
+    "**/*.md"
+  ],
+  "markdownlint.config": {
+    "default": true,
+    "MD033": false,
+    "MD041": false,
+    "MD045": false,
+    "MD013": false
+  }
+}
