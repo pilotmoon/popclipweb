@@ -3,27 +3,30 @@
   * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
   */
 
-/* PopClip Blue Theme */
+/**
+  * Site Colors
+  * -------------------------------------------------------------------------- */
+
 :root {
-  --vp-c-blue-1: rgb(50, 117, 231);
-  --vp-c-blue-2: rgb(66, 142, 237);
-  --vp-c-blue-3: rgb(100, 178, 244);
-  --vp-c-blue-soft: rgba(50, 117, 231, 0.16);
+  --blue-1: rgb(50, 117, 231);
+  --blue-2: rgb(66, 142, 237);
+  --blue-3: rgb(100, 178, 244);
+  --blue-soft: rgba(50, 117, 231, 0.16);
 
   --mid-grey: #999;
 }
 
 .dark {
-  --vp-c-blue-1: rgb(63, 162, 243);
-  --vp-c-blue-2: rgb(41, 132, 199);
-  --vp-c-blue-3: rgb(20, 103, 157);
-  --vp-c-blue-soft: rgba(63, 162, 243, 0.16);
+  --blue-1: rgb(63, 162, 243);
+  --blue-2: rgb(41, 132, 199);
+  --blue-3: rgb(20, 103, 157);
+  --blue-soft: rgba(63, 162, 243, 0.16);
 
   --mid-grey: #555;
 }
 
 /**
-  * Colors
+  * VitePress Colors
   *
   * Each colors have exact same color scale system with 3 levels of solid
   * colors with different brightness, and 1 soft color.
@@ -68,10 +71,10 @@
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
 
-  --vp-c-brand-1: var(--vp-c-blue-1);
-  --vp-c-brand-2: var(--vp-c-blue-2);
-  --vp-c-brand-3: var(--vp-c-blue-3);
-  --vp-c-brand-soft: var(--vp-c-blue-soft);
+  --vp-c-brand-1: var(--blue-1);
+  --vp-c-brand-2: var(--blue-2);
+  --vp-c-brand-3: var(--blue-3);
+  --vp-c-brand-soft: var(--blue-soft);
 
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
@@ -165,27 +168,8 @@
 }
 
 /**
- * Component: Algolia
+ * Custom CSS
  * -------------------------------------------------------------------------- */
-
-/* .DocSearch {
-  --docsearch-primary-color: var(--vp-c-brand) !important;
-} */
-
-/* Custom CSS */
-
-/* disable transitions */
-/* *,
-::before,
-::after {
-  animation-delay: -1ms !important;
-  animation-duration: 1ms !important;
-  animation-iteration-count: 1 !important;
-  background-attachment: initial !important;
-  scroll-behavior: auto !important;
-  transition-duration: 0s !important;
-  transition-delay: 0s !important;
-} */
 
 .main img[src*="#icon"] {
   height: 1.5em;
@@ -240,19 +224,11 @@
   margin-bottom: 0.5rem;
 }
 
-/* 
-Here we are fixing glitches caused when the ant design components
-inherit styles from vitepress styling. 
-Only needed for "doc" layout. */
+/**
+ * Fixes
+ * -------------------------------------------------------------------------- */
 
-/* a.ant-btn:hover {
-  text-decoration: none;
-}
-
-ul.ant-pagination li + li {
-  margin-top: 0;
-} */
-
+/* remove the shortcut key indicator because it is badly glitched on safari */
 span.DocSearch-Button-Keys {
   display: none !important;
 }
