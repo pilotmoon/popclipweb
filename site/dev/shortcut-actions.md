@@ -1,5 +1,5 @@
 ---
-titleTemplate: PopClip Developer
+titleTemplate: :title — PopClip Developer
 ---
 # Shortcut actions
 

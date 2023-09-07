@@ -6,6 +6,7 @@ import ElementPlus from "unplugin-element-plus/vite";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "PopClip",
+  titleTemplate: ":title — PopClip",
   description: "Instant text actions for macOS",
   cleanUrls: true,
   lastUpdated: true,

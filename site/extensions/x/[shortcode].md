@@ -1,5 +1,5 @@
 ---
-titleTemplate: "PopClip Extensions"
+titleTemplate: ":title — PopClip Extensions"
 title: "Extension" # this is replaced in transformPageData
 isExtensionPage: true # needed for transformPageData
 layout: doc
