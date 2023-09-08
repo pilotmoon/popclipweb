@@ -247,7 +247,7 @@
     "supportsAware": false,
     "supportsPageInfo": false,
     "supportsAddressBar": false,
-    "supportsOpenIn": false,
+    "supportsOpenIn": true,
     "bundleId": "net.waterfox.waterfox",
     "homepageUrl": "https://www.waterfox.net/"
   }
