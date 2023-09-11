@@ -96,21 +96,19 @@ app itself, and are available to load by scripts. These are:
 
 | Library        | Version | Description                    |
 | -------------- | ------- | ------------------------------ |
-| axios          | 0.26.1  | HTTP client                    |
-| buffer         | 6.0.3   | Node Buffer implementation     |
-| case-anything  | 2.1.10  | Case conversion library        |
-| content-type   | 1.0.4   | Parse HTTP Content-Type header |
-| dom-serializer | 1.4.1   | HTML serializer                |
-| entities       | 2.2.0   | HTML entity encoder/decoder    |
-| htmlparser2    | 6.1.0   | HTML parser                    |
+| axios          | 1.5.0   | HTTP client                    |
+| case-anything  | 2.1.13  | Case conversion library        |
+| content-type   | 1.0.5   | Parse HTTP Content-Type header |
+| dom-serializer | 2.0.0   | HTML serializer                |
+| entities       | 4.5.0   | HTML entity encoder/decoder    |
+| htmlparser2    | 8.0.2   | HTML parser                    |
 | js-yaml        | 4.1.0   | YAML parser                    |
-| linkedom       | 0.12.1  | DOM implementation             |
-| node-blob      | 0.0.2   | Node Blob implementation       |
+| linkedom       | 0.15.0  | DOM implementation             |
 | rot13-cipher   | 1.0.0   | ROT13 cipher                   |
-| sanitize-html  | 2.7.3   | HTML sanitizer                 |
-| turndown       | 7.1.1   | HTML to Markdown converter     |
+| sanitize-html  | 2.11.0  | HTML sanitizer                 |
+| turndown       | 7.1.2   | HTML to Markdown converter     |
 
-Library are loaded by name using `require()`, like this:
+Library modules may be loaded by name using `require()`, like this:
 
 ```javascript
 const axios = require("axios");
