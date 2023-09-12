@@ -265,12 +265,16 @@ For a more substantial axios example, see for example
 
 ## TypeScript support
 
+::: info TypeScript version
+
+The current version of PopClip uses TypeScript 4.9.5.
+
+:::
+
 PopClip has built-in support for [TypeScript](https://www.typescriptlang.org/).
 You can supply TypeScript source in any place where a JavaScript file can be
 specified. PopClip loads files with a `.js` extension as raw JavaScript, and
 loads files with a `.ts` extension as TypeScript.
-
-The current version of PopClip uses TypeScript 4.9.5.
 
 At load time, PopClip transpiles TypeScript files into JavaScript source.
 PopClip does not do any type validation on the TypeScript source.
