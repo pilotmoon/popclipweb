@@ -19,7 +19,7 @@ automatically.
 
 ![](./media/anim-basic-5.mp4 "PopClip appears when text is selected using the pointer.")
 
-::: tip Didn't work?
+::: info Didn't work?
 
 If PopClip doesn't appear, check the [Troubleshooting](/kb/troubleshooting) page
 for help.
@@ -34,9 +34,13 @@ PopClip will respond when selecting text by the following methods:
 - Click once, then **hold Shift (⇧) and click** elsewhere to select between the
   two points.
 
-When you select text using the keyboard only, such as by holding Shift and using
-the arrow keys, PopClip will not appear automatically. Use the
-[keyboard shortcut](#activate-with-a-keyboard-shortcut) to make PopClip appear.
+::: tip Force PopClip to appear
+
+In case PopClip does not respond, **hold the Fn key or the Globe 🌐 key** (depending on your Mac model or keyboard)
+while selecting the text. This provides an extra hint to PopClip that you are
+selecting text, and in many cases this will make PopClip appear.
+
+:::
 
 ### Long press with the mouse or trackpad
 
@@ -96,5 +100,5 @@ are a few ways to do this:
 - **Disable auto-appear in a particular application**, by adding it to the
   [Excluded Apps](./settings.md#excluded-apps-pane) list in PopClip settings.
 
-- To suppress PopClip temporarily, **Hold down the Command (⌘) key** or the **Fn
-  key** while selecting text with the mouse or trackpad.
+- To suppress PopClip temporarily, **Hold down the Command (⌘) key** while
+  selecting text with the mouse or trackpad.
