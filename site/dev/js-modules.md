@@ -91,16 +91,6 @@ Observe a few things:
 - The extension's `name` and the action's `after` step, `show-result`, are
   specified in the static config (in this case, in the snippet header).
 
-## Module format
-
-JavaScript modules should use CommonJS module format. You can use
-`module.exports = ...` to export the whole object at once, or
-`exports.foo = ...` to export the properties piecemeal.
-
-TypeScript modules may use
-[ES modules](https://www.typescriptlang.org/docs/handbook/2/modules.html)
-format.
-
 ## Static properties
 
 Certain properties of the extension can only be defined in the static config,

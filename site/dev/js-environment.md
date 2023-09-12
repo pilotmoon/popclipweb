@@ -89,7 +89,7 @@ global:
 ### Other globals
 
 There is also a global function `print()` for debug output, and a global
-`require()` function for loading other package files or libraries.
+[`require()`](#using-require) function.
 
 ## Bundled libraries
 
@@ -116,6 +116,47 @@ Library modules may be loaded by name using `require()`, like this:
 const axios = require("axios");
 ```
 
+## Using `require()`
+
+PopClip has a `require()` function for loading modules and JSON data from other
+files. It takes string argument interpreted as follows:
+
+- If the string starts with `./` or `../`, it is interpreted as a path to a file
+  in the package directory, relative the current file.
+- Otherwise, the string is interpreted as a path to a file in the package
+  directory, relative to the package root.
+- If no file is found in the package directory, the string is then checked
+  against the names of the [bundled libraries](#bundled-libraries). If found,
+  the library module is loaded and returned.
+- If no file is found in the package directory or the bundled libraries,
+  `undefined` is returned.
+
+Results are cached, and subsequent calls to `require()` with the same argument
+will return the same object instance that was returned the first time.
+
+File paths beginning with `/` or using `..` to go up a directory level outside
+the package directory are not supported and will always return `undefined`.
+
+### File name extensions
+
+The `require()` function supports the following file name extensions.
+
+- File names ending `.js` are interpreted as JavaScript modules.
+- File names ending `.ts` are interpreted as TypeScript modules.
+- File names ending `.json` extension are interpreted as JSON and parsed into a
+  JavaScript object.
+
+If no file name extension is specified, PopClip will try `.js`, `.ts`, `.json`
+in order.
+
+## Module format
+
+- JavaScript modules should use
+  [CommonJS](https://www.typescriptlang.org/docs/handbook/2/modules.html#commonjs-syntax) syntax.
+- TypeScript modules may use
+  [ES Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html#es-module-syntax)
+  syntax.
+
 ## Asynchronous operations and async/await
 
 PopClip provides implementations of `XMLHttpRequest` and `setTimeout`, which are
@@ -129,12 +170,13 @@ function to complete. For example:
 ```javascript
 // # popclip setTimeout example
 // name: setTimeout Test
-// after: show-result # result shown will be 'bar', not 'foo'
-// language: js
+// after: show-result
+// language: javascript
 setTimeout(() => {
   return "bar";
 }, 1000); // 1 second delay
 return "foo";
+// result shown will be 'bar', not 'foo'
 ```
 
 Your functions can be `async`, and you can use the `await` keyword when calling
@@ -175,6 +217,8 @@ Attempts to access `http:` URLs will throw a network error.
 Here's an example extension snippet that downloads a selected URL's contents,
 and copies it to the clipboard:
 
+::: code-group
+
 ```javascript
 // # popclip JS network example
 // name: Download Text
@@ -189,6 +233,23 @@ const response = await axios.get(popclip.input.data.urls[0]);
    axios calls will throw an error if the HTTP status is not 200/2xx. */
 return response.data;
 ```
+
+```typescript
+// # popclip TS network example
+// name: Download Text
+// icon: symbol:square.and.arrow.down.fill
+// requirements: [url]
+// entitlements: [network]
+// after: copy-result
+// language: typescript
+import axios from "axios";
+const response = await axios.get(popclip.input.data.urls[0]);
+/* note: there is no particular need to check the return status here.
+   axios calls will throw an error if the HTTP status is not 200/2xx. */
+return response.data;
+```
+
+:::
 
 For a more substantial axios example, see for example
 [Instant Translate](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/InstantTranslate.popclipext).

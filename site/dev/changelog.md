@@ -54,8 +54,9 @@ The format is based on
 
 ### Documentation
 
-- Amended documentation to reflect the new TypeScript support where relevant.
-- Added a new section to describe [Abbreviated forms](./js-modules.md#abbreviated-forms) for module-based extensions.
+- Amended documentation in various places to reflect the new TypeScript support.
+- Added [Using `require()`](./js-environment.md#using-require) to the JavaScript environment documentation.
+- Added [Abbreviated forms](./js-modules.md#abbreviated-forms) to the module-based extensions documentation.
 
 ## Documentation Update, 2023-08-30
 
