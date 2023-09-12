@@ -140,7 +140,7 @@ app itself, and are available to load by scripts. These are:
 
 | Library        | Version | Description                    |
 | -------------- | ------- | ------------------------------ |
-| axios          | 1.5.0   | HTTP client                    |
+| axios          | 0.26.1  | HTTP client                    |
 | case-anything  | 2.1.13  | Case conversion library        |
 | content-type   | 1.0.5   | Parse HTTP Content-Type header |
 | dom-serializer | 2.0.0   | HTML serializer                |
@@ -269,7 +269,6 @@ For a more substantial axios example, see for example
 
 The current version of PopClip uses TypeScript 4.9.5.
 
-:::
 
 PopClip has built-in support for [TypeScript](https://www.typescriptlang.org/).
 You can supply TypeScript source in any place where a JavaScript file can be
