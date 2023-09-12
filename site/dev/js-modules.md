@@ -15,9 +15,9 @@ programatically generating the extension's actions and options.
 A module-based extension is defined by the presence of a `module` field in the
 top level of the static config, as follows:
 
-| Key      | Type   | Description                                                                                                |
-| -------- | ------ | ---------------------------------------------------------------------------------------------------------- |
-| `module` | String | The name of a JavaScript file to load from the package. The file must export a CommonJS JavaScript module. |
+| Key      | Type   | Description                                                                             |
+| -------- | ------ | --------------------------------------------------------------------------------------- |
+| `module` | String | The name of a JavaScript (`.js`) or TypeScript (`.ts`) module to load from the package. |
 
 The module is always loaded last, after the extension's static config. All
 properties exported by the module will be merged into the extension's config.
@@ -32,7 +32,9 @@ the config header.
 
 ### Example
 
-The following snippet defines a complete JavaScript module extension:
+The following snippet defines a complete module-based extension:
+
+::: code-group
 
 ```javascript
 // #popclip
@@ -53,6 +55,32 @@ module.exports = {
 };
 ```
 
+```typescript
+/// <reference path="/Applications/PopClip.app/Contents/Resources/popclip.d.ts" />
+/* Note: The above line is optional. It will enable autocomplete
+   and type-checking in code editors that support TypeScript.
+   (Adjust to Setapp path if needed.) */
+// #popclip
+// name: Module Demo
+// after: show-result
+// language: typescript
+// module: true
+const extension: Extension = {
+  icon: "square " + String(Math.floor(Math.random() * 100)),
+  actions: [
+    {
+      title: "Action 1",
+      code: (input) => {
+        return "Hi from the action. Your text is: " + input.text;
+      },
+    },
+  ],
+};
+export default extension;
+```
+
+:::
+
 Observe a few things:
 
 - The module has generated its own icon, by exporting an `icon` property. It
@@ -65,24 +93,13 @@ Observe a few things:
 
 ## Module format
 
-PopClip expects the module to export a JavaScript object using
-[CommonJS](https://en.wikipedia.org/wiki/CommonJS) module format. ES modules are
-not supported.
+JavaScript modules should use CommonJS module format. You can use
+`module.exports = ...` to export the whole object at once, or
+`exports.foo = ...` to export the properties piecemeal.
 
-<!-- PopClip expects the module to export a JavaScript object using either
-[CommonJS](https://en.wikipedia.org/wiki/CommonJS) or
-[AMD](https://requirejs.org/docs/whyamd.html) module format.
-
-::: info CommonJS vs AMD
-
-CommonJS is the module format originally used by Node.js, characterized by its
-use of `module.exports = ...` and so on. AMD is a different module format used
-by some JavaScript libraries. If you're not sure which to use, CommonJS is
-probably the right choice. All the examples in this documentation use CommonJS.
-
-PopClip does not support ES modules (ESM) at this time.
-
-::: -->
+TypeScript modules may use
+[ES modules](https://www.typescriptlang.org/docs/handbook/2/modules.html)
+format.
 
 ## Static properties
 
@@ -175,6 +192,8 @@ dynamically supplies actions every time the PopClip bar appears. The population
 function is called with the same arguments as the action function, and it
 returns an array of action objects.
 
+::: code-group
+
 ```javascript
 // #popclip dynamic example
 // { name: Dynamic Title, entitlements: [dynamic], lang: js, module: true }
@@ -187,6 +206,22 @@ exports.actions = (input, options, context) => {
   }];
 };
 ```
+
+```typescript
+// #popclip dynamic example
+// { name: Dynamic Title, entitlements: [dynamic], lang: ts, module: true }
+export const actions: Action[] = (input, options, context) => {
+  return [{
+    title: `<${input.text.slice(0, 10)}>`,
+    code: (input, options, context) => {
+      popclip.showText("Hi from Action");
+    },
+  }];
+};
+```
+
+:::
+
 
 The population function has the following limitations:
 

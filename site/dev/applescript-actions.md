@@ -1,6 +1,7 @@
 ---
 titleTemplate: :title — PopClip Developer
 ---
+
 # AppleScript actions
 
 An AppleScript action runs AppleScript code. AppleScript's strength is in
@@ -11,11 +12,11 @@ automation, since it can be used to control other apps.
 An AppleScript action is defined by the presence of either an `applescript`,
 `applescript file` field, with optional `applescript call` field, as follows:
 
-| Key                | Type                  | Description                                                |
-| ------------------ | --------------------- | ---------------------------------------------------------- |
-| `applescript`      | String                | A text string to interpret directly as AppleScript source. |
-| `applescript file` | String                | File name of an `.applescript` or `.scpt` file to run.     |
-| `applescript call` | Dictionary (optional) | A named handler to call.                                   |
+| Key                | Type                  | Description                                                         |
+| ------------------ | --------------------- | ------------------------------------------------------------------- |
+| `applescript`      | String                | A text string to interpret directly as AppleScript source.          |
+| `applescript file` | String                | Path to an `.applescript` or `.scpt` file in the package directory. |
+| `applescript call` | Dictionary (optional) | A named handler to call.                                            |
 
 ### The `applescript call` dictionary
 

@@ -5,10 +5,12 @@ next:
   link: /dev/js-modules
 titleTemplate: :title — PopClip Developer
 ---
+
 # JavaScript environment
 
 This page describes PopClip's JavaScript environment, in which
-[JavaScript actions](./js-actions) and [module-based extensions](./js-modules) run.
+[JavaScript actions](./js-actions) and [module-based extensions](./js-modules)
+run.
 
 ## Overview
 
@@ -146,8 +148,8 @@ promise-based wrapper around `setTimeout()`:
 // # popclip await example
 // name: Await Test
 // language: js
-await sleep(5000) // 5 second delay
-popclip.showText('Boo!')
+await sleep(5000); // 5 second delay
+popclip.showText("Boo!");
 ```
 
 ## Network access from JavaScript
@@ -191,16 +193,34 @@ return response.data;
 For a more substantial axios example, see for example
 [Instant Translate](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/InstantTranslate.popclipext).
 
-## About TypeScript and `.ts` files
+## TypeScript support
 
-When looking at my extensions in the
-[repository](https://github.com/pilotmoon/PopClip-Extensions), you will see
-`.ts` files. These are [TypeScript](https://www.typescriptlang.org/) source
-code, which compiles down to JavaScript.
+PopClip has built-in support for [TypeScript](https://www.typescriptlang.org/).
+You can supply TypeScript source in any place where a JavaScript file can be
+specified. PopClip loads files with a `.js` extension as raw JavaScript, and
+loads files with a `.ts` extension as TypeScript.
 
-I prefer to use TS than raw JS as it helps me to write correct code, aided by
-the TypeScript definitions file [popclip.d.ts](https://github.com/pilotmoon/PopClip-Extensions/blob/master/popclip.d.ts). The TypeScript
-configuration I use is in [tsconfig.json](https://github.com/pilotmoon/PopClip-Extensions/blob/master/tsconfig.json).
+At load time, PopClip transpiles TypeScript files into JavaScript source.
+PopClip does not do any type validation on the TypeScript source.
+
+PopClip ships with a TypeScript type definitions file to assist in developing
+extensions. This will enable autocomplete and type-checking in TypeScript-aware
+editors such as VS Code. So that your editor can find the type definitions, you
+can reference the definitions file in your TypeScript code using a
+[triple-slash directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)
+at the top of the file, like this:
+
+::: code-group
+
+```typescript [Standalone and Mac App Store editions]
+/// <reference path="/Applications/PopClip.app/Contents/Resources/popclip.d.ts" />
+```
+
+```typescript [Setapp edition]
+/// <reference path="/Applications/Setapp/PopClip.app/Contents/Resources/popclip.d.ts" />
+```
+
+:::
 
 ## JavaScript testing
 

@@ -215,16 +215,16 @@ approach might still be preferable.
 When using the inverted syntax, the following config fields have special
 meanings, to determine what type of action is created:
 
-| Key           | Type    | Description                                                                                                                                                                           |
-| ------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `interpreter` | String  | When an interpreter is specified, a [Shell Script action](./shell-script-actions) will be created.                                                                                    |
-| `language`    | String  | Specify `javascript` to create a [JavaScript action](./js-actions) or [module](./js-modules), or `applescript` to create an [AppleScript action](./applescript-actions). |
-| `module`      | Boolean | For JavaScript only, set `true` if the source file should be loaded as a module, or `false` (default) if it should be loaded as an action.                                            |
+| Key           | Type    | Description                                                                                                                                                                                    |
+| ------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `interpreter` | String  | When an interpreter is specified, a [Shell Script action](./shell-script-actions) will be created.                                                                                             |
+| `language`    | String  | Specify `javascript` or `typescript` to create a [JavaScript action](./js-actions) or [module](./js-modules). Specifiy `applescript` to create an [AppleScript action](./applescript-actions). |
+| `module`      | Boolean | For JavaScript and TypeScript language only, set `true` if the source file should be loaded as a module, or `false` (default) if it should be loaded as an action.                             |
 
 ::: tip Language field shorthand
 
-You can use `lang` as shorthand for `language`, and `js` as shorthand for
-`javascript`.
+You can use `lang` as shorthand for `language`, `js` as shorthand for
+`javascript`, and `ts` as shorthand for `typescript`.
 
 :::
 
