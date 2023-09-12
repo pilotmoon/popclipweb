@@ -140,7 +140,7 @@ app itself, and are available to load by scripts. These are:
 
 | Library        | Version | Description                    |
 | -------------- | ------- | ------------------------------ |
-| axios          | 0.26.1  | HTTP client                    |
+| axios          | 1.5.0   | HTTP client                    |
 | case-anything  | 2.1.13  | Case conversion library        |
 | content-type   | 1.0.5   | Parse HTTP Content-Type header |
 | dom-serializer | 2.0.0   | HTML serializer                |
@@ -152,7 +152,7 @@ app itself, and are available to load by scripts. These are:
 | sanitize-html  | 2.11.0  | HTML sanitizer                 |
 | turndown       | 7.1.2   | HTML to Markdown converter     |
 
-Library modules may be loaded by name, like this:
+Library modules may be loaded by name, for example:
 
 ::: code-group
 
