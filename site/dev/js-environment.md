@@ -18,10 +18,14 @@ PopClip's JavaScript engine is Apple's
 [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),
 which is part of macOS.
 
-The version of JavaScriptCore used by PopClip depends on the macOS version, but
-to avoid issues with older versions of JavaScriptCore, PopClip pre-loads the
-[core-js](https://github.com/zloirock/core-js) library, which provides a
-polyfill for most modern JavaScript features on older macOS versions.
+JavaScriptCore's language and standard library support varies depending on macOS
+version. However, PopClip uses [core-js](https://github.com/zloirock/core-js) to
+provide polyfills for the JavaScript standard library up to ES2023. You can also
+assume availability of language features up to ES2017 on all macOS versions that
+PopClip supports.
+
+PopClip also has built-in support for TypeScript. See
+[TypeScript support](#typescript-support).
 
 ::: tip Language reference
 
@@ -91,6 +95,44 @@ global:
 There is also a global function `print()` for debug output, and a global
 [`require()`](#using-require) function.
 
+## Using `require()`
+
+PopClip has a `require()` function for loading modules and JSON data from other
+files. It takes a single string argument, interpreted as follows:
+
+- If the string starts with `./` or `../`, it is interpreted as a path to a file
+  in the package directory, relative the current file.
+- Otherwise, the string is interpreted as a path relative to the root of the
+  package directory.
+- If no file is found in the package directory, the string is then checked
+  against the names of the [bundled libraries](#bundled-libraries). If found,
+  the library module is loaded and returned.
+
+Results are cached, and subsequent calls to `require()` with the same argument
+will return the same object instance that was returned the first time.
+
+File paths beginning with `/` or using `..` to go up a directory level outside
+the package directory are not valid.
+
+### Supported file types
+
+The `require()` function can load the following file types:
+
+| File extension | Description                                                                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.js`          | A JavaScript module in [CommonJS](https://www.typescriptlang.org/docs/handbook/2/modules.html#commonjs-syntax) format.                             |
+| `.ts`          | A TypeScript module. TypeScript modules may use [ES Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html#es-module-syntax) syntax. |
+| `.json`        | A JSON file parsed into a JavaScript object.                                                                                                       |
+
+If no file name extension is specified, PopClip will try `.js`, `.ts`, `.json`
+in order.
+
+### Return value
+
+The return value of `require()` is the exported value of the module, or the
+parsed JSON object. If the specified file or library module is not found, or an
+invalid path is supplied, `undefined` is returned.
+
 ## Bundled libraries
 
 Some libraries from [NPM](https://www.npmjs.org/) are bundled within the PopClip
@@ -110,52 +152,19 @@ app itself, and are available to load by scripts. These are:
 | sanitize-html  | 2.11.0  | HTML sanitizer                 |
 | turndown       | 7.1.2   | HTML to Markdown converter     |
 
-Library modules may be loaded by name using `require()`, like this:
+Library modules may be loaded by name, like this:
+
+::: code-group
 
 ```javascript
 const axios = require("axios");
 ```
 
-## Using `require()`
+```typescript
+import axios from "axios";
+```
 
-PopClip has a `require()` function for loading modules and JSON data from other
-files. It takes string argument interpreted as follows:
-
-- If the string starts with `./` or `../`, it is interpreted as a path to a file
-  in the package directory, relative the current file.
-- Otherwise, the string is interpreted as a path to a file in the package
-  directory, relative to the package root.
-- If no file is found in the package directory, the string is then checked
-  against the names of the [bundled libraries](#bundled-libraries). If found,
-  the library module is loaded and returned.
-- If no file is found in the package directory or the bundled libraries,
-  `undefined` is returned.
-
-Results are cached, and subsequent calls to `require()` with the same argument
-will return the same object instance that was returned the first time.
-
-File paths beginning with `/` or using `..` to go up a directory level outside
-the package directory are not supported and will always return `undefined`.
-
-### File name extensions
-
-The `require()` function supports the following file name extensions.
-
-- File names ending `.js` are interpreted as JavaScript modules.
-- File names ending `.ts` are interpreted as TypeScript modules.
-- File names ending `.json` extension are interpreted as JSON and parsed into a
-  JavaScript object.
-
-If no file name extension is specified, PopClip will try `.js`, `.ts`, `.json`
-in order.
-
-## Module format
-
-- JavaScript modules should use
-  [CommonJS](https://www.typescriptlang.org/docs/handbook/2/modules.html#commonjs-syntax) syntax.
-- TypeScript modules may use
-  [ES Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html#es-module-syntax)
-  syntax.
+:::
 
 ## Asynchronous operations and async/await
 
@@ -260,6 +269,8 @@ PopClip has built-in support for [TypeScript](https://www.typescriptlang.org/).
 You can supply TypeScript source in any place where a JavaScript file can be
 specified. PopClip loads files with a `.js` extension as raw JavaScript, and
 loads files with a `.ts` extension as TypeScript.
+
+The current version of PopClip uses TypeScript 4.9.5.
 
 At load time, PopClip transpiles TypeScript files into JavaScript source.
 PopClip does not do any type validation on the TypeScript source.

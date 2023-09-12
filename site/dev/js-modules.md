@@ -17,10 +17,12 @@ top level of the static config, as follows:
 
 | Key      | Type   | Description                                                                             |
 | -------- | ------ | --------------------------------------------------------------------------------------- |
-| `module` | String | The name of a JavaScript (`.js`) or TypeScript (`.ts`) module to load from the package. |
+| `module` | String | The path to a JavaScript (`.js`) or TypeScript (`.ts`) module to load from the package. |
 
 The module is always loaded last, after the extension's static config. All
 properties exported by the module will be merged into the extension's config.
+The module is loaded by the same mechanism as `require()` — see
+[module file format](./js-environment.md#supported-file-types).
 
 ::: info Modules as snippets
 
