@@ -52,6 +52,11 @@ The format is based on
 
 - Updated the versions of several of the built in NPM modules.
 
+### Documentation
+
+- Amended documentation to reflect the new TypeScript support where relevant.
+- Added a new section to describe [Abbreviated forms](./js-modules.md#abbreviated-forms) for module-based extensions.
+
 ## Documentation Update, 2023-08-30
 
 - The developer documentation moved from GitHub to

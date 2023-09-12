@@ -222,13 +222,62 @@ export const actions: Action[] = (input, options, context) => {
 
 :::
 
-
 The population function has the following limitations:
 
 - Cannot access the network (`XMLHttpRequest` is unavailable).
 - Cannot call methods on the `popclip` global object.
 - Cannot access `popclip.context.browserUrl` or `popclip.context.browserTitle`.
 
-<!-- ## Further Example
+## Abbreviated forms
 
-TODO. -->
+### The `action` property
+
+If the module defines only a single action, it may be exported as the `action`
+property instead of in an `actions` array. For example:
+
+::: code-group
+
+```javascript
+// #popclip
+// { name: Single Action, lang: js, module: true}
+exports.action = {
+  code: () => {
+    popclip.showText("hi mom!");
+  },
+};
+```
+
+```typescript
+// #popclip
+// { name: Single Action, lang: ts, module: true}
+export const action: Action = {
+  code: () => {
+    popclip.showText("hi mom!");
+  },
+};
+```
+
+:::
+
+### Action function shorthand
+
+If the action object has only a `code` property, it may be exported as a
+function instead of an object. For example:
+
+::: code-group
+
+```javascript
+// #popclip
+// { name: Action Function, lang: js, module: true}
+exports.action = () => {
+  popclip.showText("hi mom!");
+};
+```
+
+```typescript
+// #popclip
+// { name: Action Function, lang: ts, module: true}
+export const action: ActionFunction = () => {
+  popclip.showText("hi mom!");
+};
+```
