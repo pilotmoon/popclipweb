@@ -2,7 +2,7 @@
   {
     "name": "Arc",
     "supportsAware": true,
-    "supportsPageInfo": false,
+    "supportsPageInfo": true,
     "supportsAddressBar": false,
     "supportsOpenIn": true,
     "bundleId": "company.thebrowser.Browser",
