@@ -136,9 +136,9 @@ following people and projects:
 
 ::: info :turtle:&ensp;It's turtles all the way down
 
-This is just a fraction of the open-source libraries PopClip uses since the
-above projects include other projects. For space, I've limited the list to those
-I've directly imported.
+For space, I've limited the list to include only a selection of the libraries
+I've directly imported. And of course, most of the above projects also include
+other projects. So the full list would be much longer.
 
 :::
 
