@@ -148,9 +148,11 @@ app itself, and are available to load by scripts. These are:
 | htmlparser2    | 8.0.2   | HTML parser                    |
 | js-yaml        | 4.1.0   | YAML parser                    |
 | linkedom       | 0.15.0  | DOM implementation             |
+| linkifyjs      | 4.1.1   | Detect web links in text       |
 | rot13-cipher   | 1.0.0   | ROT13 cipher                   |
 | sanitize-html  | 2.11.0  | HTML sanitizer                 |
 | turndown       | 7.1.2   | HTML to Markdown converter     |
+| zod            | 3.22.2  | Object schema validator        |
 
 Library modules may be loaded by name, for example:
 
@@ -268,7 +270,6 @@ For a more substantial axios example, see for example
 ::: info TypeScript version
 
 The current version of PopClip uses TypeScript 4.9.5.
-
 
 PopClip has built-in support for [TypeScript](https://www.typescriptlang.org/).
 You can supply TypeScript source in any place where a JavaScript file can be
