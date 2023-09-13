@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { z } from "zod";
 import { getMacAppStoreUrl } from "../helpers/getMacAppStoreUrl";
 import { getCountryInfo } from "../helpers/countries/getCountryInfo";
-import { useLocalhost } from "../composables/useLocalhost";
+import { useDeploymentInfo } from '../composables/useDeploymentInfo'
 import { useLogger } from "../composables/useLogger";
 import config from "../config/config.json";
 
@@ -60,7 +60,7 @@ export async function loadStore() {
     return;
   }
   log(`Loading prices...`);
-  const apiRoot = useLocalhost() ? config.pilotmoon.apiRoot : "/api";
+  const apiRoot = useDeploymentInfo().isLocalhost ? config.pilotmoon.apiRoot : "/api";
   const fetchResponse = await fetch(
     apiRoot + "/frontend/store/getPrices?product=" + config.pilotmoon.product,
   );

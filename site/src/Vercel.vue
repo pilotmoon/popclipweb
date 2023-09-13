@@ -1,9 +1,9 @@
 <script setup>
 import { onMounted } from 'vue'
-import { useLocalhost } from './composables/useLocalhost'
+import { useDeploymentInfo } from './composables/useDeploymentInfo'
 
 onMounted(() => {
-    if (useLocalhost()) return;
+    if (useDeploymentInfo().isLocalhost) return;
     
     const script1 = document.createElement("script");
     script1.textContent = "window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };"

@@ -4,7 +4,7 @@ import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
 import { useStoreState } from './composables/useStoreState'
-import { useLocalhost } from './composables/useLocalhost'
+import { useDeploymentInfo } from './composables/useDeploymentInfo'
 import { useLogger } from "./composables/useLogger";
 import { IconShoppingBag } from '@tabler/icons-vue';
 import config from './config/config.json'
@@ -12,7 +12,7 @@ import config from './config/config.json'
 const log = useLogger();
 const store = useStoreState();
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode.value));
-const sandbox = useLocalhost();
+const sandbox = useDeploymentInfo().isLocalhost;
 
 async function initPaddle() {
     await loadScript(config.paddle.script);
