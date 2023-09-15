@@ -17,8 +17,7 @@ kept in this file.
 
 <div class="info custom-block" style="padding-top: 8px">
 
-The format is based on
-[Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
@@ -51,12 +50,17 @@ The format is based on
 ### Changed
 
 - Updated the versions of several of the built in NPM modules.
+- Key Press actions no longer automatically wait 100ms between keypresses.
+  Instead, use `wait <milliseconds>` to add a delay if needed. See
+  [Wait between keypresses](/dev/key-press-actions#wait-between-key-presses).
 
 ### Documentation
 
 - Amended documentation in various places to reflect the new TypeScript support.
-- Added [Using `require()`](./js-environment.md#using-require) to the JavaScript environment documentation.
-- Added [Abbreviated forms](./js-modules.md#abbreviated-forms) to the module-based extensions documentation.
+- Added [Using `require()`](./js-environment.md#using-require) to the JavaScript
+  environment documentation.
+- Added [Abbreviated forms](./js-modules.md#abbreviated-forms) to the
+  module-based extensions documentation.
 
 ## Documentation Update, 2023-08-30
 
