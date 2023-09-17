@@ -156,7 +156,7 @@ find the modified text as `popclip.input.matchedText` and the full text as
 
 ### The `before` and `after` strings
 
-The `cut`, `copy` and `paste` keys can be used as the `before` string. All the
+The `cut`, `copy`, `paste` and `paste-plain` values can be used as the `before` string. All the
 values can be used as the `after` string.
 
 | Value            | Description                                                                                                                                                                           |
