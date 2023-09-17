@@ -66,10 +66,6 @@ in the PopClip bar itself.
 
 ![](./media/shot-snippet-error-3.png "PopClip bar showing error message.")
 
-If the extension is of type Shortcut, Service, URL, Key Combo or JavaScript
-(without network entitlement), the snippet will install without the usual
-"unsigned extension" warning.
-
 In the absence of an `identifier` field, the `name` acts as the identifier for
 the extension. Installing a snippet with the same name as an existing snippet
 will replace it.

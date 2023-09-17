@@ -67,9 +67,12 @@ Be careful about the extensions you create, and be wary about loading extensions
 you get from elsewhere.
 
 PopClip extension packages published in the [directory](/extensions/) are
-digitally signed. PopClip will install them directly without showing any warning
-to the user. If you create your own extension, it will not be signed. PopClip
-will display a warning dialog when you try to install it:
+digitally signed. PopClip will install signed extensions without showing any
+warning to the user.
+
+If you create your own extension, it will be unsigned. If an unsigned extension
+contains Shell Script actions or AppleScript actions, or has the `network`
+entitlement, PopClip will display a warning dialog when you try to install it:
 
 ![Example unsigned warning.](../guide/media/shot-unsigned-warning.png#pref "Unsigned extension warning.")
 

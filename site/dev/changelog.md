@@ -53,6 +53,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Key Press actions no longer automatically wait 100ms between keypresses.
   Instead, use `wait <milliseconds>` to add a delay if needed. See
   [Wait between keypresses](/dev/key-press-actions#wait-between-key-presses).
+- The Unsigned Extension warning is now only shown for extensions with Shell
+  Script or AppleScript actions, or JavaScript actions that access the network.
+  Other unsigned extensions no longer trigger the warning.
 
 ### Documentation
 
