@@ -152,6 +152,7 @@ app itself, and are available to load by scripts. These are:
 | rot13-cipher   | 1.0.0   | ROT13 cipher                   |
 | sanitize-html  | 2.11.0  | HTML sanitizer                 |
 | turndown       | 7.1.2   | HTML to Markdown converter     |
+| typescript     | 5.2.2   | TypeScript transpiler & tools  |
 | zod            | 3.22.2  | Object schema validator        |
 
 Library modules may be loaded by name, for example:
@@ -267,10 +268,6 @@ For a more substantial axios example, see for example
 
 ## TypeScript support
 
-::: info TypeScript version
-
-The current version of PopClip uses TypeScript 5.2.2.
-
 PopClip has built-in support for [TypeScript](https://www.typescriptlang.org/).
 You can supply TypeScript source in any place where a JavaScript file can be
 specified. PopClip loads files with a `.js` extension as raw JavaScript, and
@@ -279,7 +276,7 @@ loads files with a `.ts` extension as TypeScript.
 At load time, PopClip transpiles TypeScript files into JavaScript source.
 PopClip does not do any type validation on the TypeScript source.
 
-PopClip ships with a TypeScript type definitions file to assist in developing
+PopClip ships with a TypeScript type definitions file, `popclip.d.ts`, to assist in developing
 extensions. This will enable autocomplete and type-checking in TypeScript-aware
 editors such as VS Code. So that your editor can find the type definitions, you
 can reference the definitions file in your TypeScript code using a
