@@ -269,7 +269,7 @@ For a more substantial axios example, see for example
 
 ::: info TypeScript version
 
-The current version of PopClip uses TypeScript 4.9.5.
+The current version of PopClip uses TypeScript 5.2.2.
 
 PopClip has built-in support for [TypeScript](https://www.typescriptlang.org/).
 You can supply TypeScript source in any place where a JavaScript file can be
