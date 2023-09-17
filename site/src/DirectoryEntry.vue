@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Icon from './Icon.vue';
 import { Extension } from './data/extensions-loader.js';
-defineProps<{
+const props = defineProps<{
     ext: Extension
 }>();
 </script>
@@ -9,21 +9,21 @@ defineProps<{
 <template>
     <div :class="$style.DirectoryEntry" v-once>
         <div :class="$style.EntryLeft">
-            <a :href="'x/' + ext.shortcode">
-                <Icon v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcDark="ext.iconUrlWhite"
-                    :srcLight="ext.iconUrlBlack" />
+            <a :href="'x/' + props.ext.shortcode">
+                <Icon v-if="props.ext.iconUrlWhite && props.ext.iconUrlBlack" :srcDark="props.ext.iconUrlWhite"
+                    :srcLight="props.ext.iconUrlBlack" />
             </a>
         </div>
         <div :class="$style.EntryMain">
             <div :class="$style.EntryHeader">
-                <a :href="'x/' + ext.shortcode">
-                    <span :class="$style.EntryName">{{ ext.name }}</span>
+                <a :href="'x/' + props.ext.shortcode">
+                    <div :class="$style.EntryName">{{ props.ext.name }}</div>
                 </a>
-            </div>
-            <div v-html="ext.description" :class="$style.EntryDescription"></div>
+                <div v-html="props.ext.description" :class="$style.EntryDescription" />
+            </div>        
         </div>
         <div :class="$style.EntryRight">
-            <DownloadButton theme="outline" size="smaller" :href="ext.downloadUrl" icon-only />
+            <DownloadButton theme="outline" size="smaller" :href="props.ext.downloadUrl" icon-only />
         </div>
     </div>
 </template>
@@ -34,7 +34,7 @@ defineProps<{
     gap: 12px;
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 6px 12px;
     margin-bottom: 8px;
     position: relative;
 }
@@ -44,6 +44,14 @@ defineProps<{
     flex-shrink: 1;
     flex-basis: 0;
     min-width: 0; /* Somehow this makes the truncation on the child element work */
+}
+
+.EntryHeader {
+    display: flex;
+    gap: 12px;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: start;
 }
 
 .EntryHeader a {
@@ -66,6 +74,11 @@ defineProps<{
     width: 30px;
     font-size: 24px;
     opacity: 0.6;
+}
+
+.EntryHeader > a {
+    flex-shrink: 0;
+    flex-basis: auto;
 }
 
 .EntryName {
