@@ -34,6 +34,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   using a
   [triple-slash directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)
   at the top of the file, like this:
+- URL actions can now specify an optional `alternate url`, invoked by holding
+  Option (⌥).
+- URL actions now have an optional `clean query` flag to clean up newlines and
+  whitespace in the text before inserting into the URL.
 
 ::: code-group
 
@@ -56,6 +60,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The Unsigned Extension warning is now only shown for extensions with Shell
   Script or AppleScript actions, or JavaScript actions that access the network.
   Other unsigned extensions no longer trigger the warning.
+- In URL actions, leading and trailing whitespace and newlines are now always
+  trimmed before URL-encoding.
 
 ### Documentation
 
