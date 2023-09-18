@@ -8,6 +8,7 @@ prev: false
 next: false
 editLink: false
 lastUpdated: false
+pageClass: popclip-directory
 ---
 <script setup>
 import Directory from '/src/Directory.vue'

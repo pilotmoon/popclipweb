@@ -32,9 +32,6 @@ const props = defineProps<{
 .DirectoryEntry {
     display: flex;
     gap: 12px;
-    background-color: var(--vp-c-bg-soft);
-    border-radius: 8px;
-    padding: 6px 12px;
     margin-bottom: 8px;
     position: relative;
 }
@@ -71,8 +68,8 @@ const props = defineProps<{
 }
 
 .EntryLeft {
-    width: 30px;
-    font-size: 24px;
+    width: 24px;
+    font-size: 20px;
     opacity: 0.6;
 }
 
