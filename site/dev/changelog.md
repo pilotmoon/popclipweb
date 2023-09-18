@@ -29,27 +29,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   module-based extensions. This is done by specifying a file with the `.ts`
   extension in the `javascript file` or `module` field. For snippets, specify
   `typescript` in the `language` field.
-- PopClip ships with a TypeScript type definitions file to assist in developing
-  extensions. You can reference the definitions file in your TypeScript code
-  using a
-  [triple-slash directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)
-  at the top of the file, like this:
+- PopClip ships with a TypeScript type definitions file, `popclip.d.ts`, inside
+  the app bundle. You can configure your code editor to reference this to aid in
+  developing your own extensions.
 - URL actions can now specify an optional `alternate url`, invoked by holding
   Option (⌥).
 - URL actions now have an optional `clean query` flag to clean up newlines and
   whitespace in the text before inserting into the URL.
-
-::: code-group
-
-```typescript [Standalone and Mac App Store editions]
-/// <reference path="/Applications/PopClip.app/Contents/Resources/popclip.d.ts" />
-```
-
-```typescript [Setapp edition]
-/// <reference path="/Applications/Setapp/PopClip.app/Contents/Resources/popclip.d.ts" />
-```
-
-:::
 
 ### Changed
 
@@ -58,8 +44,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   Instead, use `wait <milliseconds>` to add a delay if needed. See
   [Wait between keypresses](/dev/key-press-actions#wait-between-key-presses).
 - The Unsigned Extension warning is now only shown for extensions with Shell
-  Script or AppleScript actions, or JavaScript actions that access the network.
-  Other unsigned extensions no longer trigger the warning.
+  Script actions, AppleScript actions, or JavaScript actions with entitlements.
 - In URL actions, leading and trailing whitespace and newlines are now always
   trimmed before URL-encoding.
 

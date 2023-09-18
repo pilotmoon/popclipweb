@@ -263,7 +263,7 @@ you double-click such a file in Finder, PopClip will load the snippet from the
 file and install it. When using this method:
 
 - There is no size limit on the snippet.
-- The unsigned extension warning will always be shown.
+- The unsigned extension warning may be shown.
 
 ## Further examples
 

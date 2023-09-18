@@ -12,7 +12,8 @@ Configure, re-order and remove extensions in the
 
 ::: tip Get stuck in!
 
-Browse the [PopClip Extensions Directory](/extensions/) which currently contains&#x0020;<DirectoryCount /> extensions.
+Browse the [PopClip Extensions Directory](/extensions/) which currently
+contains&#x0020;<DirectoryCount /> extensions.
 
 :::
 
@@ -26,9 +27,10 @@ PopClip.
 
 ### Unsigned Extensions
 
-If you see an "Unsigned Extension" warning it means the extension is not from
-PopClip's developer. You will need to confirm whether you want to install the
-extension.
+If you see an "Unsigned Extension" warning it means the extension runs code that
+has the potential to access files on your machine or access the internet, and is
+not from PopClip's developer. You will need to confirm whether you want to
+install the extension.
 
 ![](./media/shot-unsigned-warning.png#pref "Unsigned extension warning")
 
