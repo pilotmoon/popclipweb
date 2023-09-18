@@ -3,7 +3,7 @@
   "scripts": {
     "docs:dev": "vitepress dev site",
     "docs:build": "npx patch-package; vitepress build site",
-    "docs:preview": "vitepress preview site"    
+    "docs:preview": "vitepress preview site"
   },
   "dependencies": {
     "@ant-design/icons-vue": "6.1.0",
@@ -20,7 +20,7 @@
     "patch-package": "8.0.0",
     "sanitize-html": "2.11.0",
     "unplugin-element-plus": "0.8.0",
-    "vitepress": "1.0.0-rc.13",
+    "vitepress": "1.0.0-rc.14",
     "vue": "3.3.4",
     "vue3-simple-icons": "9.10.0",
     "zod": "3.21.4"
