@@ -232,3 +232,10 @@
 span.DocSearch-Button-Keys {
   display: none !important;
 }
+
+/**
+  * Directory page class
+  * -------------------------------------------------------------------------- */
+.popclip-directory .VPDoc .content {
+  max-width: 960px !important;
+}
