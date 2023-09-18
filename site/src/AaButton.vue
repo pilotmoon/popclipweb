@@ -4,7 +4,7 @@ import { computed } from 'vue'
 const props = defineProps<{
   tag?: string
   size?: 'smaller' | 'small' | 'medium' | 'big'
-  theme?: 'brand' | 'alt' | 'outline'
+  theme?: 'brand' | 'alt' | 'outline' | 'bare'
   href?: string
 }>()
 
@@ -45,6 +45,7 @@ const component = computed(() => {
   font-weight: 600;
   white-space: nowrap;
   text-decoration: none;
+  transition: none !important;
 }
 
 .Button:hover {
@@ -150,6 +151,25 @@ const component = computed(() => {
 
 .Button.outline:active {
   border-color: var(--vp-c-brand-3);
+  color: var(--vp-c-brand-3);
+  background-color: transparent;
+}
+
+.Button.bare {  
+  border-color: transparent;
+  color: var(--vp-c-text-2);
+  background-color: transparent;
+  padding: 0;
+}
+
+.Button.bare:hover {
+  border-color: transparent;
+  color: var(--vp-c-brand-1);
+  background-color: transparent;
+}
+
+.Button.bare:active {
+  border-color: transparent;
   color: var(--vp-c-brand-3);
   background-color: transparent;
 }

@@ -8,22 +8,20 @@ const props = defineProps<{
 
 <template>
     <div :class="$style.DirectoryEntry" v-once>
-        <div :class="$style.EntryLeft">
+        <div :class="$style.EntryDownload">
+            <DownloadButton theme="bare" size="smaller" :href="props.ext.downloadUrl" icon-only />
+        </div>
+        <div :class="$style.EntryIcon">
             <a :href="'x/' + props.ext.shortcode">
                 <Icon v-if="props.ext.iconUrlWhite && props.ext.iconUrlBlack" :srcDark="props.ext.iconUrlWhite"
                     :srcLight="props.ext.iconUrlBlack" />
             </a>
         </div>
         <div :class="$style.EntryMain">
-            <div :class="$style.EntryHeader">
-                <a :href="'x/' + props.ext.shortcode">
-                    <div :class="$style.EntryName">{{ props.ext.name }}</div>
-                </a>
-                <div v-html="props.ext.description" :class="$style.EntryDescription" />
-            </div>        
-        </div>
-        <div :class="$style.EntryRight">
-            <DownloadButton theme="outline" size="smaller" :href="props.ext.downloadUrl" icon-only />
+            <a :class="$style.EntryName" :href="'x/' + props.ext.shortcode">
+                <div :class="$style.EntryName">{{ props.ext.name }}</div>
+            </a>
+            <div :class="$style.EntryDescription" v-html="props.ext.description" />
         </div>
     </div>
 </template>
@@ -33,67 +31,65 @@ const props = defineProps<{
     display: flex;
     gap: 12px;
     margin-bottom: 8px;
-    position: relative;
+    align-items: center;
+}
+
+.EntryDownload {
+    display: flex;
+    align-items: center;
+}
+
+.EntryIcon {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    width: 24px;    
+    opacity: 0.7;
 }
 
 .EntryMain {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
-    min-width: 0; /* Somehow this makes the truncation on the child element work */
-}
+    min-width: 0;
+    /* Somehow this makes the truncation on the child element work */
 
-.EntryHeader {
     display: flex;
     gap: 12px;
-    flex-direction: row;
     align-items: baseline;
     justify-content: start;
 }
 
-.EntryHeader a {
+.EntryMain a {
     text-decoration: none;
 }
-.EntryHeader a:hover {
+
+.EntryMain a:hover {
     text-decoration: underline;
-}
-
-.EntryLeft,
-.EntryRight {
-    display: flex;
-    align-items: center;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: auto;
-}
-
-.EntryLeft {
-    width: 24px;
-    font-size: 20px;
-    opacity: 0.6;
-}
-
-.EntryHeader > a {
-    flex-shrink: 0;
-    flex-basis: auto;
 }
 
 .EntryName {
     font-weight: 600;
     font-size: 16px;
+
+    flex-shrink: 0;
+    flex-basis: auto;
 }
 
 .EntryDescription {
     font-size: 14px;
-    
+
     /* Truncate text with ellipsis */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    flex-shrink: 1;
+    flex-basis: auto;
 }
 
 @media (max-width: 550px) {
-    .EntryRight {
+    .EntryDownload {
         display: none;
     }
 }
