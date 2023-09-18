@@ -22,15 +22,15 @@ extensions.
 A PopClip extension can be either a [snippet](./snippets.md) or a
 [package](./packages.md). The following table summarizes the differences:
 
-|                 | Snippet                                                | Package                                                                                            |
-| --------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| What is it?     | Plain text in YAML format.                             | A folder containing a config file plus other files such as icons, source files, and a readme file. |
-| Install method  | PopClip can load it directly from a text selection.    | Double-clicking it will open it in PopClip.                                                        |
-| Distribution    | Can be shared as text, e.g. on forums, pastebins, etc. | Can be downloaded as a file.                                                                       |
-| Signing         | Not signed.                                            | Can be signed.                                                                                     |
-| Advantages      | Easy to create and share. No need for separate files.  | Easy for end user to install. Allows modular source code with complex functionality.               |
-| Disadvantages   | Limited to what can be done with a single text file.   | More complex to create. Steeper learning curve.                                                    |
-| File extensions | None (direct selection)<br> `.popcliptxt` (text file)  | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
+|                 | Snippet                                                           | Package                                                                                            |
+| --------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| What is it?     | Plain text in YAML format.                                        | A folder containing a config file plus other files such as icons, source files, and a readme file. |
+| Install method  | PopClip can load it directly from a text selection.               | Double-clicking it will open it in PopClip.                                                        |
+| Distribution    | Can be copied and pasted as text, e.g. on forums, pastebins, etc. | Can be downloaded as a file.                                                                       |
+| Signing         | Not signed.                                                       | Can be signed.                                                                                     |
+| Advantages      | Easy to create and informally share. No need for separate files.  | Easy for end user to install. Allows modular source code with complex functionality.               |
+| Disadvantages   | Limited to what can be done with a single text file.              | More complex to create. Steeper learning curve.                                                    |
+| File extensions | None (direct selection)<br> `.popcliptxt` (text file)             | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
 
 ### Types of actions
 
