@@ -142,7 +142,7 @@ Even when PopClip is excluded from an app, you can still use the [keyboard short
 ## ![About icon](./media/icon-about.png#iconleft) About pane
 
 <figure>  
-  <img src="./media/shot-settings-about-mas-1.png#pref" />
+  <img src="./media/shot-settings-about-mas-2.png#pref" />
   <img src="./media/shot-settings-about-sa-trial-1.png#pref" />
   <figcaption>About pane: Mac App Store  edition (left), Standalone edition in trial mode (right).</figcaption>
 </figure>
