@@ -76,8 +76,9 @@ technical issues._
 
 PopClip's user interface is developed in English and is translated into Chinese
 (Traditional and Simplified), French, German, Italian, Japanese, Korean,
-Brazilian Portuguese, Russian, Slovak, Spanish, and Turkish. These translations
-have been produced by a mix of paid translation services and volunteer users.
+Brazilian Portuguese, Russian, Slovak, Spanish, Vietnamese and Turkish. These
+translations have been produced by a mix of paid translation services and
+volunteer users.
 
 Users can contribute translations in their own language using the CrowdIn
 platform. If you would like to add or suggest changes to translations, please go
