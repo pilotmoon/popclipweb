@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
-## Unreleased/Beta
+## PopClip 2023.9 (4225)
 
 ### Added
 
