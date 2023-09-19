@@ -213,7 +213,7 @@ activated by calling PopClip's executable (inside the PopCLip.app package) with
 the parameter `runjs` followed by the file name to run.
 
 ```bash
-/Application/PopClip.app/Contents/MacOS/PopClip runjs test.js
+/Applications/PopClip.app/Contents/MacOS/PopClip runjs test.js
 ```
 
 Some notes:
