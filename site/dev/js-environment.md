@@ -300,11 +300,11 @@ at the top of the file, like this:
 PopClip has a 'test harness' mode, which runs JavaScript files in the PopClip
 environment from the command line. It is useful for running unit tests of your
 code in PopClip's environment, with the same libraries, globals etc. It is
-activated by calling PopClip's executable (inside the PopCLip.app package) with
+activated by calling PopClip's executable (inside the PopClip.app package) with
 the parameter `runjs` followed by the file name to run.
 
 ```bash
-/Application/PopClip.app/Contents/MacOS/PopClip runjs test.js
+/Applications/PopClip.app/Contents/MacOS/PopClip runjs test.js
 ```
 
 Some notes:
