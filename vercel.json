@@ -15,6 +15,13 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/go/apps",
+      "destination": "/kb/troubleshooting#app-compatibility",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/:match*",
