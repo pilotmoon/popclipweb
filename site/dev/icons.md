@@ -31,8 +31,8 @@ PNG icons should be at least 256 pixels high.
 
 ## Text icons
 
-Using a particular format, you can instruct PopClip to generate a text-based icon.
-Text icons can have a `text:` prefix, but it is optional.
+Using a particular format, you can instruct PopClip to generate a text-based
+icon. Text icons can have a `text:` prefix, but it is optional.
 
 ### Text icon examples
 
@@ -78,7 +78,8 @@ modifier.
 ## Iconify icons
 
 [Iconify](https://iconify.design/) provides over 150,000 icons from a variety of
-open-source icon sets. Browse the catalog at <https://icon-sets.iconify.design/>.
+open-source icon sets. Browse the catalog at
+<https://icon-sets.iconify.design/>.
 
 The format is `iconify:<icon set prefix>:<icon name>`.
 
@@ -119,16 +120,19 @@ PopClip will automatically render color icons from Iconify in color.
 
 :::
 
-## Icon options
+## Icon properties
 
-These optional fields can be placed in the config alongside the `icon` field to modify how PopClip draws it.
+These optional properties can be placed in the config alongside the `icon` field
+to modify how PopClip draws it. Unlike action properties, icon properties set at
+the top level are not inherited by actions.
 
-| Key               | Type    | Description                                                                                                                              |
-| ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Key               | Type    | Description                                                                                                                                |
+| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `preserve color`  | Boolean | If `true`, the supplied icon will be displayed with its original color instead of being filled in white/black. Default is `false`.         |
 | `preserve aspect` | Boolean | If `true`, the supplied icon will be displayed with its original aspect ratio instead of being scaled to fit a square. Default is `false`. |
 | `flip horizontal` | Boolean | If `true`, the supplied icon will be drawn horizontally flipped. Default is `false`.                                                       |
 | `flip vertical`   | Boolean | If `true`, the supplied icon will be drawn vertically flipped. Default is `false`.                                                         |
+| `scale`           | Number  | Adjust the scale at which the icon is drawn. For example `1.2` to enlarge, or `0.9` to shrink. The default is `1.0`, no scaling.           |
 
 ## Icon Preview tool
 

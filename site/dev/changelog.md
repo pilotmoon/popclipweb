@@ -21,6 +21,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
+## Unreleased / beta
+
+### Added
+
+- Added `scale` property for icons, to scale the icon up or down.
+
+### Changed
+
+- Icon properties set at the top level are not longer inherited by actions.
+
 ## PopClip 2023.9 (4225)
 
 ### Added
