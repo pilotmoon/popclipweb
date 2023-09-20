@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Added `scale` property for icons, to scale the icon up or down.
+- Somehow, color emoji icons are a thing now. For example `icon: 🐶`.
 
 ### Changed
 

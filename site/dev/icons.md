@@ -11,6 +11,8 @@ Icons may be specified in `icon` fields in several different ways:
 
 - As text: `<text specifier>`. See [Text icons](#text-icons).
 
+- As an emoji: `🐶`.
+
 - As an Iconify icon: `iconify:<icon set prefix>:<icon name>`. See
   [Iconify icons](#iconify-icons).
 
