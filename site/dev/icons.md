@@ -1,6 +1,9 @@
 ---
 titleTemplate: :title — PopClip Developer
 ---
+<script setup>
+import IconExplorer from '/src/IconExplorer.vue';
+</script>
 
 # Icons
 
@@ -20,6 +23,8 @@ Icons may be specified in `icon` fields in several different ways:
   [SF Symbols icons](#sf-symbols-icons).
 
 - As SVG source code: `svg:<svg source>`.
+
+<IconExplorer />
 
 ## Image files
 
