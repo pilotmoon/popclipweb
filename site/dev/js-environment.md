@@ -49,6 +49,8 @@ properties of the `popclip` global:
 - `popclip.input.text`: the full plain text selection
 - `popclip.input.matchedText`: the part of the text matching the requirement or
   regex
+- `popclip.input.regexResult`: if regex was specified, this is an array
+  containing the full result of the match, including any capture groups
 - `popclip.input.html`: the html backing the selection (if `capture html` is
   set)
 - `popclip.input.markdown`: the markdownified html (if `capture html` is set)
@@ -276,10 +278,11 @@ loads files with a `.ts` extension as TypeScript.
 At load time, PopClip transpiles TypeScript files into JavaScript source.
 PopClip does not do any type validation on the TypeScript source.
 
-PopClip ships with a TypeScript type definitions file, `popclip.d.ts`, to assist in developing
-extensions. This will enable autocomplete and type-checking in TypeScript-aware
-editors such as VS Code. So that your editor can find the type definitions, you
-can reference the definitions file in your TypeScript code using a
+PopClip ships with a TypeScript type definitions file, `popclip.d.ts`, to assist
+in developing extensions. This will enable autocomplete and type-checking in
+TypeScript-aware editors such as VS Code. So that your editor can find the type
+definitions, you can reference the definitions file in your TypeScript code
+using a
 [triple-slash directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)
 at the top of the file, like this:
 

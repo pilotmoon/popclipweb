@@ -26,7 +26,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Added `scale` property for icons, to scale the icon up or down.
-- Somehow, color emoji icons are a thing now. For example `icon: 🐶`.
+- Added `data:` icon type for specifying icons as raw data.
+- Emoji icons.
+- In the JavaScript environment, `popclip.input.regexResult` is an array
+  containing the full result of the regex match, including any capture groups.
+  Unlike previous PopClip versions, this array is now always available
+  regardless of whether the regex was specified in the static config (as an ICU
+  regex string) or in a module (as a JavaScript RegExp object).
 
 ### Changed
 
