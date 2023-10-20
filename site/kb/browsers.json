@@ -250,5 +250,23 @@
     "supportsOpenIn": true,
     "bundleId": "net.waterfox.waterfox",
     "homepageUrl": "https://www.waterfox.net/"
+  },
+  {
+    "name": "LibreWolf",
+    "supportsAware": true,
+    "supportsPageInfo": false,
+    "supportsAddressBar": false,
+    "supportsOpenIn": false,
+    "bundleId": "org.mozilla.librewolf",
+    "homepageUrl": "https://librewolf.net/"
+  },
+  {
+    "name": "Thorium",
+    "supportsAware": true,
+    "supportsPageInfo": true,
+    "supportsAddressBar": true,
+    "supportsOpenIn": false,
+    "bundleId": "org.chromium.Thorium",
+    "homepageUrl": "https://thorium.rocks/"
   }
 ]
