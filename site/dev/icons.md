@@ -5,7 +5,13 @@ titleTemplate: :title — PopClip Developer
 import IconExplorer from '/src/IconExplorer.vue';
 </script>
 
+<script setup>
+import IconExplorer from '/src/IconExplorer.vue';
+</script>
+
 # Icons
+
+<IconExplorer />
 
 Icons may be specified in `icon` fields in several different ways:
 
@@ -116,14 +122,16 @@ The format is `symbol:<symbol name>`.
 
 ## Color handling
 
-By default, PopClip renders icons with a uniform fill color, ignoring any color
-information in the image. However, you can set the `preserve color` flag (see
-[Icon options](#icon-options)) to tell PopClip to keep the original color
-palette.
+By default, PopClip treats icons as a mask images and renders them with a
+uniform fill color, ignoring any color information in the image. However, you
+can set the `preserve color` flag (see [Icon options](#icon-options)) to tell
+PopClip to keep the original color palette.
 
-::: info Special case: Color Iconify icons
+::: info Special case: Emoji and Iconify icons
 
-PopClip will automatically render color icons from Iconify in color.
+PopClip gives special treatment to emoji icons and color icons from Iconify.
+These icons are inherently colored, and PopClip will preserve their color even
+if `preserve color` is not set.
 
 :::
 
