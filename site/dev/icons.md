@@ -25,7 +25,7 @@ Icons may be specified in `icon` fields in several different ways:
 - As an SF Symbol: `symbol:<symbol name>`. See
   [SF Symbols icons](#sf-symbols-icons).
 
-- As SVG source code: `svg:<svg source>`.
+- As [raw data](#raw-data-icons).
 
 ## Image files
 
@@ -114,6 +114,14 @@ The format is `symbol:<symbol name>`.
 | `symbol:flame`          | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-flame.png" width="20" height="20">          |
 | `symbol:hand.raised`    | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-hand.raised.png" width="20" height="20">    |
 | `symbol:signpost.right` | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-signpost.right.png" width="20" height="20"> |
+
+## Raw data icons
+
+You can supply the raw data for the icon in the icon field itself:
+
+- As SVG source: `svg:<svg source>`
+
+- As a data URL: `data:<mediatype>[;base64],<data>`, where `<mediatype>` may be either `image/png` or `image/svg+xml`.
 
 ## Color handling
 
