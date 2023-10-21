@@ -2,6 +2,7 @@
 import { computed, ref, onMounted, watch, reactive } from 'vue'
 import config from './config/config.json'
 import { calculateIconKey, querifyDescriptor } from './helpers/icon.js'
+import { useDeploymentInfo } from './composables/useDeploymentInfo.js'
 import axios from 'axios';
 import { LRUCache } from 'lru-cache';
 import { useData } from 'vitepress'
@@ -12,9 +13,7 @@ const cache = new LRUCache<string, string>({
     max: 100,
 });
 
-// const apiRoot = "http://localhost:1235";
-const apiRoot = config.pilotmoon.apiRoot;
-
+const apiRoot = "/api";
 const props = defineProps<{
     spec: string
 }>()
@@ -33,8 +32,7 @@ const descriptor = computed(() => {
 })
 
 const iconUrl = computed(() => {
-    const url = new URL("frontend/icon", apiRoot);
-    url.search = querifyDescriptor(descriptor.value).toString();
+    const url = apiRoot + "/example?" + querifyDescriptor(descriptor.value).toString();
     return url.toString();
 });
 
