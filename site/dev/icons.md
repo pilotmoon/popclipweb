@@ -27,8 +27,6 @@ Icons may be specified in `icon` fields in several different ways:
 
 - As SVG source code: `svg:<svg source>`.
 
-<IconExplorer />
-
 ## Image files
 
 If you specify the name of a PNG or SVG image file in the extension's package,
