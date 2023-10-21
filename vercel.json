@@ -2,7 +2,7 @@
   "buildCommand": "npm run docs:build",
   "outputDirectory": "site/.vitepress/dist",
   "installCommand": "npm install",
-  "devCommand": "npm run docs:dev",
+  "devCommand": "vitepress dev site --port $PORT",
   "cleanUrls": true,
   "headers": [
     {

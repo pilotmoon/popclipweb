@@ -12,18 +12,23 @@ export default async function handler(request: Request) {
   } catch (e) {
     body = null;
   }
+
+  const iconUrl = new URL("http://api.pilotmoon.com/frontend/icon");
+  iconUrl.search = urlParams.toString();
+
+  const res = await fetch(iconUrl.toString());
  
   return new Response(
-    JSON.stringify({
-      body,
-      query,
-      cookies,
-    }),
+    res.body,
+    // JSON.stringify({
+    //   body,
+    //   query,
+    //   cookies,
+    //   it: iconUrl.toString(),
+    // }),
     {
-      status: 200,
-      headers: {
-        'content-type': 'application/json',
-      },
+      status: res.status,
+      headers: res.headers
     },
   );
 }
