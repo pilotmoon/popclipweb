@@ -12,7 +12,6 @@
     "@tabler/icons-vue": "2.32.0",
     "@vercel/analytics": "1.0.2",
     "@vueuse/core": "10.3.0",
-    "ant-design-vue": "4.0.0",
     "axios": "1.4.0",
     "element-plus": "2.3.12",
     "js-sha256": "0.10.1",
