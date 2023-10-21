@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Icon from './Icon.vue';
+import Icon from './IconS.vue';
 import { Extension } from './data/extensions-loader.js';
 const props = defineProps<{
     ext: Extension
@@ -13,8 +13,7 @@ const props = defineProps<{
         </div>
         <div :class="$style.EntryIcon">
             <a :href="'x/' + props.ext.shortcode">
-                <Icon v-if="props.ext.iconUrlWhite && props.ext.iconUrlBlack" :srcDark="props.ext.iconUrlWhite"
-                    :srcLight="props.ext.iconUrlBlack" />
+                <Icon :class="$style.IconImg" v-if="props.ext.iconSpecifier" :spec="props.ext.iconSpecifier" />
             </a>
         </div>
         <div :class="$style.EntryMain">
@@ -41,10 +40,14 @@ const props = defineProps<{
 
 .EntryIcon {
     display: flex;
-    align-items: center;
+    align-items: center;    
     font-size: 20px;
     width: 24px;    
     opacity: 0.7;
+}
+
+.IconImg {
+    height: 24px !important;
 }
 
 .EntryMain {

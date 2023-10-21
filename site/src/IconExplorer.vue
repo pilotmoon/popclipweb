@@ -3,7 +3,7 @@ import { ElInput } from 'element-plus'
 import IconS from './IconS.vue'
 import { ref } from 'vue';
 
-const spec = ref("==")
+const spec = ref("A")
 </script>
 
 <template>
@@ -21,6 +21,7 @@ const spec = ref("==")
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
     padding: 16px;
+    margin: 16px 0;
 
     display: flex;
     flex-direction: column;

@@ -21,11 +21,5 @@
       "destination": "/kb/troubleshooting#app-compatibility",
       "permanent": true
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/:match*",
-      "destination": "https://api.pilotmoon.com/:match*"
-    }
   ]
 }
