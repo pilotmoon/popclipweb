@@ -1,9 +1,6 @@
 ---
 titleTemplate: :title — PopClip Developer
 ---
-<script setup>
-import IconExplorer from '/src/IconExplorer.vue';
-</script>
 
 <script setup>
 import IconExplorer from '/src/IconExplorer.vue';
