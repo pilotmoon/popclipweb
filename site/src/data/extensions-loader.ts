@@ -1,17 +1,8 @@
 import { z } from "zod";
 import { alphabets, baseEncode } from "@pilotmoon/chewit";
 import { createHash } from "node:crypto";
-import {
-  canonicalize,
-  generateKey,
-  IconDescriptor,
-  IconKey,
-} from "../helpers/iconKeyBrowser.js";
 
-import config from "../config/config.json";
-
-// simple sha256 wrapper that generates a hex string
-export function sha256Base(message: string) {
+export function sha256Base58(message: string) {
   return baseEncode(
     Array.from(createHash("sha256").update(message).digest()),
     alphabets.base58Flickr,
@@ -117,48 +108,23 @@ async function processExtensions() {
   const shortcodes = new Set<string>();
   const result: Extension[] = [];
 
-  const crumbs: {
-    descriptor: IconDescriptor;
-    key: IconKey;
-    url: string;
-  }[] = [];
-  async function generateIconUrls(imageUrl: string) {
-    const result = { black: undefined, white: undefined };
-    if (imageUrl) {
-      for (const color of ["black", "white"]) {
-        const descriptor = canonicalize({ specifier: imageUrl, color });
-        const key = await generateKey(descriptor);
-        const cdnUrl = config.pilotmoon.cdnRoot + "/icons/" + key.opaque;
-        const spacesUrl = config.pilotmoon.spacesRoot + "/icons/" +
-          key.opaque;
-        result[color] = cdnUrl;
-        crumbs.push({ descriptor, key, url: spacesUrl });
-      }
-    }
-    return result;
-  }
-
   for (const extension of extensionsArray) {
     if (!extension.identifier) {
       // console.log(`Missing identifier for ${extension.handle}`);
       continue;
     }
-    let shortcode: any = "1" + sha256Base(extension.identifier).substring(0, 4);
+    let shortcode: any = "1" + sha256Base58(extension.identifier).substring(0, 4);
     if (shortcodes.has(shortcode)) {
       console.log(`Duplicate shortcode: ${shortcode} for ${extension.handle}`);
       continue;
     }
-    const { black: imageLight, white: imageDark } = await generateIconUrls(
-      extension.image,
-    );
+
     shortcodes.add(shortcode);
     const parsed = ZExtension.safeParse({
       ...extension,
       name: extension.title,
       shortcode,
-      iconSpecifier: extension.image,
-      iconUrlWhite: imageDark,
-      iconUrlBlack: imageLight,      
+      iconSpecifier: extension.image, 
       downloadUrl: extension.download,
       timestamp: extension.date,
       repoUrl: `https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/${extension.handle}.popclipext`,
@@ -167,53 +133,5 @@ async function processExtensions() {
       result.push(parsed.data);
     }
   }
-
-// comment out here ....
-  // await Promise.all(
-  //   crumbs.map(({ descriptor, key, url }) => postIcon(descriptor, url)),
-  // ).then(() => {
-  //   console.log("done posting icons");
-  // });
-// ... to here to disable icon posting
-
   return result;
-}
-
-async function postIcon(
-  descriptor: IconDescriptor,
-  url: string,
-) {
-  // check if icon exists in cdn
-  try {
-    const cdnResponse = await fetch(url);
-    if (cdnResponse.ok) {
-      console.log("icon exists in space", url);
-      return;
-    }
-  } catch (e) {
-    console.log("fetch exception", e);
-  }
-  console.log("icon does not exist in space", url);
-  // post icon to cdn
-
-  try {
-    let apiRoot = config.pilotmoon.apiRoot;
-    const apiResponse = await fetch(
-      apiRoot + "/frontend/icon",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(descriptor),
-      },
-    );
-    if (!apiResponse.ok) {
-      console.log("icon post failed", url);
-      return;
-    }
-    console.log("icon post succeeded", url);
-  } catch (e) {
-    console.log("fetch exception", e);
-  }
 }

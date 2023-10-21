@@ -260,10 +260,8 @@ end tell
 
 You can save a snippet to a plain text file with a `.popcliptxt` extension. When
 you double-click such a file in Finder, PopClip will load the snippet from the
-file and install it. When using this method:
-
-- There is no size limit on the snippet.
-- The unsigned extension warning may be shown.
+file and install it. There is no size limit on the snippet when installed by
+this method.
 
 ## Further examples
 
