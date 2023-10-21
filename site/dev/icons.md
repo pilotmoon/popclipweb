@@ -37,8 +37,8 @@ PNG icons should be at least 256 pixels high.
 
 ## Text icons
 
-Using a particular format, you can instruct PopClip to generate a text-based icon.
-Text icons can have a `text:` prefix, but it is optional.
+Using a particular format, you can instruct PopClip to generate a text-based
+icon. Text icons can have a `text:` prefix, but it is optional.
 
 ### Text icon examples
 
@@ -84,7 +84,8 @@ modifier.
 ## Iconify icons
 
 [Iconify](https://iconify.design/) provides over 150,000 icons from a variety of
-open-source icon sets. Browse the catalog at <https://icon-sets.iconify.design/>.
+open-source icon sets. Browse the catalog at
+<https://icon-sets.iconify.design/>.
 
 The format is `iconify:<icon set prefix>:<icon name>`.
 
@@ -129,10 +130,11 @@ if `preserve color` is not set.
 
 ## Icon options
 
-These optional fields can be placed in the config alongside the `icon` field to modify how PopClip draws it.
+These optional fields can be placed in the config alongside the `icon` field to
+modify how PopClip draws it.
 
-| Key               | Type    | Description                                                                                                                              |
-| ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Key               | Type    | Description                                                                                                                                |
+| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `preserve color`  | Boolean | If `true`, the supplied icon will be displayed with its original color instead of being filled in white/black. Default is `false`.         |
 | `preserve aspect` | Boolean | If `true`, the supplied icon will be displayed with its original aspect ratio instead of being scaled to fit a square. Default is `false`. |
 | `flip horizontal` | Boolean | If `true`, the supplied icon will be drawn horizontally flipped. Default is `false`.                                                       |
