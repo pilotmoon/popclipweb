@@ -73,7 +73,7 @@ export function querifyDescriptor(descriptor: IconDescriptor) {
     } else if (typeof value === "number") {
       query.push(`${key}=${value.toFixed(2)}`);
     } else if (typeof value === "string") {
-      query.push(`${key}=${value}`);
+      query.push(`${key}=${encodeURIComponent(value)}`);
     }
   }
   return query.join("&");
