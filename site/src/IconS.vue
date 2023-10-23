@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, watch, reactive } from 'vue'
 import config from './config/config.json'
-import { calculateIconKey, querifyDescriptor } from './helpers/icon.js'
+import { querifyDescriptor } from './helpers/iconDescriptor.js'
 import { useDeploymentInfo } from './composables/useDeploymentInfo.js'
 import axios from 'axios';
 import { LRUCache } from 'lru-cache';
@@ -13,14 +13,15 @@ const cache = new LRUCache<string, string>({
     max: 100,
 });
 
-const apiRoot = "/api";
+// const apiRoot = "http://localhost:1235/frontend";
+const apiRoot = useDeploymentInfo().origin + "/api";
 const props = defineProps<{
     spec: string
 }>()
 
 const specifier = ref(props.spec);
 watch(() => props.spec, (spec, prevSpec) => {
-    console.log("spec changed", spec, prevSpec);
+    console.log("spec changed to", spec);
     specifier.value = spec;
 })
 
@@ -32,14 +33,13 @@ const descriptor = computed(() => {
 })
 
 const iconUrl = computed(() => {
-    const url = apiRoot + "/example?" + querifyDescriptor(descriptor.value).toString();
-    return url.toString();
+    return apiRoot + "/icon?" + querifyDescriptor(descriptor.value) + "&cache=001";
 });
 
 const src = ref(iconUrl.value);
 
 watch(iconUrl, async (url, prevUrl) => {
-    console.log("iconUrl changed", url, prevUrl);
+    console.log("iconUrl changed to", url);
     src.value = url;
     // try {
     //     src.value = await imgLoad();
