@@ -8,6 +8,7 @@ export default async function handler(request: Request) {
   const iconUrl = `https://icons.popclip.app/icon?${query}`;
   console.log(iconUrl.toString());
   const res = await fetch(iconUrl.toString()); 
+  const cacheControl = res.headers.get("Cache-Control") || "public,max-age=1";
   return new Response(
     res.body,
     {
@@ -15,7 +16,7 @@ export default async function handler(request: Request) {
       headers: {        
         "Content-Type": res.headers.get("Content-Type") || "text/plain",
         "X-Icon-Color-Mode": res.headers.get("X-Icon-Color-Mode") || "unknown",
-        "Cache-Control": "public,max-age=604800,s-maxage=604800,stale-while-revalidate=604800",
+        "Cache-Control": cacheControl + ",s-maxage=604800,stale-while-revalidate=604800",
         "Access-Control-Allow-Origin": "*",
       }
     },
