@@ -4,17 +4,12 @@ import config from './config/config.json'
 import { querifyDescriptor } from './helpers/iconDescriptor.js'
 import { useDeploymentInfo } from './composables/useDeploymentInfo.js'
 import axios from 'axios';
-import { LRUCache } from 'lru-cache';
 import { useData } from 'vitepress'
 
 const { isDark } = useData()
 
-const cache = new LRUCache<string, string>({
-    max: 100,
-});
+const apiRoot = useDeploymentInfo().isLocalhost ? config.pilotmoon.iconsRoot : useDeploymentInfo().origin + "/api";
 
-// const apiRoot = "http://localhost:1235/frontend";
-const apiRoot = useDeploymentInfo().origin + "/api";
 const props = defineProps<{
     spec: string
 }>()
@@ -33,7 +28,7 @@ const descriptor = computed(() => {
 })
 
 const iconUrl = computed(() => {
-    return apiRoot + "/icon?" + querifyDescriptor(descriptor.value) + "&cache=001";
+    return apiRoot + "/icon?" + querifyDescriptor(descriptor.value, "2021-10-26-B");
 });
 
 const src = ref(iconUrl.value);
