@@ -19,13 +19,9 @@ export default async function handler(request: Request) {
     cacheControl += ",s-maxage=604800,stale-while-revalidate=604800";
   }
 
-  return new Response(res.body, {
-    status: res.status,
-    headers: {
-      "X-Icon-Color-Mode": res.headers.get("X-Icon-Color-Mode") || "unknown",
-      "Content-Type": res.headers.get("Content-Type") || "text/plain",
-      "Cache-Control": cacheControl,
-      "Access-Control-Allow-Origin": "*",
-    },
-  });
+  // pass on the response, with CORS and cache headers
+  const headers = new Headers(res.headers);
+  headers.set("Access-Control-Allow-Origin", "*");
+  headers.set("Cache-Control", cacheControl);
+  return new Response(res.body, { status: res.status, headers });
 }
