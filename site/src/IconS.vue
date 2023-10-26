@@ -28,7 +28,7 @@ const descriptor = computed(() => {
 })
 
 const iconUrl = computed(() => {
-    return apiRoot + "/icon?" + querifyDescriptor(descriptor.value, "2021-10-26-L");
+    return apiRoot + "/icon?" + querifyDescriptor(descriptor.value, "2021-10-26-R");
 });
 
 const src = ref(iconUrl.value);
