@@ -21,9 +21,8 @@ export default async function handler(request: Request) {
     cacheControl += ",s-maxage=604800,stale-while-revalidate=604800";
   }
 
-  // pass on the response, with CORS and cache headers
+  // pass on the response
   const headers = new Headers(res.headers);
-  headers.set("Access-Control-Allow-Origin", "*");
   headers.set("Cache-Control", cacheControl);
   return new Response(res.body, { status: res.status, headers });
 }
