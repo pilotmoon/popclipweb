@@ -8,5 +8,5 @@ const props = defineProps<{
 </script>
 
 <template>
-    <Icon :spec="props.spec" :height="64" class="InlineIcon"/>
+    <Icon :spec=props.spec :height=64 class=InlineIcon />
 </template>

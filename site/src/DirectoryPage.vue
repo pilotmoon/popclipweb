@@ -19,7 +19,7 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
 
   <div :class="$style.Main">
     <h1>
-      <Icon v-if="ext.iconSpecifier" :spec="ext.iconSpecifier" :height=40 />
+      <Icon v-if="ext.iconSpecifier" :spec="ext.iconSpecifier" :height=64 />
       {{ ext.name }}
     </h1>
 
