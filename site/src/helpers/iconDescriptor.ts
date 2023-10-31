@@ -19,7 +19,6 @@ export function querifyDescriptor(descriptor: IconDescriptor, cacheKey = "") {
   if (cacheKey) {
     params.set("cache", cacheKey);
   }
-  console.log(params);
   for (const key of [...params.keys()].sort()) {
     const value = params.get(key);
     if (typeof value === "boolean") {
