@@ -7,6 +7,7 @@ import "./style.css";
 import Vercel from "../../src/Vercel.vue";
 
 // local
+import InlineIcon from "../../src/InlineIcon.vue";
 import AaButton from "../../src/AaButton.vue";
 import AaLink from "../../src/AaLink.vue";
 import DownloadButton from "../../src/DownloadButton.vue";
@@ -34,7 +35,8 @@ export default {
     });
   },
   enhanceApp({ app, router, siteData }) {
-    // local
+    // local    
+    app.component("InlineIcon", InlineIcon);
     app.component("AaButton", AaButton);
     app.component("AaLink", AaLink);
     app.component("DownloadButton", DownloadButton);

@@ -18,7 +18,7 @@ always see all the actions in the PopClip bar. See:
 
 ## Built-in actions
 
-### ![Cut icon](./media/icon-cut.svg#iconleft) ![Copy icon](./media/icon-copy.svg#iconleft) ![Paste icon](./media/icon-paste.svg#iconleft) Cut, Copy and Paste
+### <InlineIcon spec="bundle:cut" /> <InlineIcon spec="bundle:copy" /> <InlineIcon spec="bundle:paste" /> Cut, Copy and Paste
 
 The Cut, Copy and Paste actions work just like the usual clipboard functions on
 your Mac.
@@ -49,7 +49,7 @@ remove any formatting from the text.
 - **Show as Icon**: When enabled, shows the actions's button as an icon instead
   of text.
 
-### ![Search icon](./media/icon-search.svg#iconleft) Search
+### <InlineIcon spec="bundle:search" /> Search
 
 The Search action opens a web search for the selected text. The default search
 engine is Google, but you can change this in the actions's settings.
@@ -73,7 +73,7 @@ Hold **Shift (⇧)** to copy the search URL instead of opening it.
   replaced with the selected text. For example, the default Google search URL is
   `https://www.google.com/search?q=***`.
 
-### ![Open Link icon](./media/icon-link.svg#iconleft) Open Link
+### <InlineIcon spec="bundle:link" /> Open Link
 
 The Open Link action opens any web URLs (`http:` and `https:`) detected in the
 selected text. If the text contains multiple web URLs, all of them will open in
@@ -104,7 +104,7 @@ opening them.
 
 None.
 
-### ![Dictionary icon](./media/icon-dict.svg#iconleft) Dictionary
+### <InlineIcon spec="bundle:book" /> Dictionary
 
 The Dictionary action looks up the selected text in the macOS Dictionary app.
 The Dictionary app will open and show the definition of the word.
@@ -127,7 +127,7 @@ in the settings of macOS Dictionary app.
 
 ![](./media/shot-macos-dict-1.png "macOS Dictionary app settings.")
 
-### ![Reveal in Finder icon](./media/icon-finder.svg#iconleft) Reveal in Finder
+### <InlineIcon spec="bundle:folder" /> Reveal in Finder
 
 The Reveal in Finder action opens the folder containing the selected file path,
 or, if the selected text is a folder path, opens the folder itself.
@@ -146,7 +146,7 @@ None.
 
 None.
 
-### ![Spelling icon](./media/icon-spelling.svg#iconleft) Spelling
+### <InlineIcon spec="bundle:spelling" /> Spelling
 
 ![](./media/anim-spelling-3.mp4 "The Spelling action in use.")
 
