@@ -8,8 +8,6 @@ import IconExplorer from '/src/IconExplorer.vue';
 
 # Icons
 
-<IconExplorer />
-
 Icons may be specified in `icon` fields in several different ways:
 
 - As a filename: `<filename>.png` or `<filename>.svg`. See

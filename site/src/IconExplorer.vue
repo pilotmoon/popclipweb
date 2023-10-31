@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ElInput } from 'element-plus'
-import IconS from './IconS.vue'
+import Icon from './Icon.vue'
 import { ref } from 'vue';
 
-const spec = ref("==")
+const spec = ref("A")
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const spec = ref("==")
         <span>Try it out! Type an icon specifier in the box to see the icon it produces.</span>
         <ElInput v-model="spec" placeholder="Type icon specifier" />
         <div class="icon-preview">
-            <IconS :spec="spec" />
+            <Icon :spec="spec" />
         </div>
     </div>
 </template>
@@ -21,6 +21,7 @@ const spec = ref("==")
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
     padding: 16px;
+    margin: 16px 0;
 
     display: flex;
     flex-direction: column;

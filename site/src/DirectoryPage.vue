@@ -19,7 +19,7 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
 
   <div :class="$style.Main">
     <h1>
-      <Icon v-if="ext.iconUrlWhite && ext.iconUrlBlack" :srcLight="ext.iconUrlBlack" :srcDark="ext.iconUrlWhite" />
+      <Icon v-if="ext.iconSpecifier" :spec="ext.iconSpecifier" :height=40 />
       {{ ext.name }}
     </h1>
 
@@ -68,9 +68,16 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
   margin-bottom: 32px;
 }
 
+.Main h1 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
 .Main h1 img {
-  margin-right: 4px;
   opacity: 0.7;
+  width: 40px;
 }
 
 .SideBySide {

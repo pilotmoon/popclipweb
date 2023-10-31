@@ -171,6 +171,12 @@
  * Custom CSS
  * -------------------------------------------------------------------------- */
 
+.main img.InlineIcon {
+  height: 1.2em;
+  display: inline-block;
+  margin: 0 0.2em -0.25em 0.2em;
+}
+
 .main img[src*="#icon"] {
   height: 1.5em;
   display: inline-block;

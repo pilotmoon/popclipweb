@@ -1,44 +1,37 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, watch } from 'vue'
-import { useData } from 'vitepress'
+import { ref, onMounted, watch } from 'vue'
 import config from './config/config.json'
+import { querifyDescriptor } from './helpers/iconDescriptor.js'
+import { useData } from 'vitepress'
 
-const { isDark } = useData()
-
+const cacheKey = "2021-10-31-XD";
+const { isDark } = useData();
 const props = defineProps<{
-    srcLight?: string
-    srcDark?: string
+    spec: string
+    height?: number
 }>()
 
-const src = ref(props.srcLight);
+const src = ref(iconUrl(false));
 
 function setSrc() {
-    src.value = isDark.value ? props.srcDark : props.srcLight;
+    src.value = iconUrl(isDark.value);
 }
 
-watch(isDark, () => {
-    setSrc()
-})
+onMounted(setSrc);
+watch(isDark, setSrc);
+watch(props, setSrc)
 
-onMounted(() => {
-    setSrc()
-})
-
-// had to do this because computed() was not having effect at page load somehow
-// computed(() => {
-//     return isDark.value ? props.srcDark : props.srcLight;
-// })
+function iconUrl(dark: boolean) {
+    const query = querifyDescriptor({
+        specifier: props.spec,
+        color: dark ? "#ffffff" : "#000000",
+        height: typeof props.height === 'number' && props.height > 0 ? props.height * 2 : 256
+    }, cacheKey);
+    return config.pilotmoon.iconsRoot + "/icon?" + query;
+};
 
 </script>
 
 <template>
-    <img :src="src" class="Icon" />
+    <img :src="src">
 </template>
-
-<style scoped>
-.Icon {
-    width: 1.2em;
-    display: inline-block;
-    margin-bottom: -0.2em
-}
-</style>

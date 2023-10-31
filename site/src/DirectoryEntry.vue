@@ -7,21 +7,20 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div :class="$style.DirectoryEntry" v-once>
-        <div :class="$style.EntryDownload">
-            <DownloadButton theme="bare" size="smaller" :href="props.ext.downloadUrl" icon-only />
+    <div :class=$style.DirectoryEntry v-once>
+        <div :class=$style.EntryDownload>
+            <DownloadButton theme="bare" size="smaller" :href=props.ext.downloadUrl icon-only />
         </div>
-        <div :class="$style.EntryIcon">
+        <div :class=$style.EntryIcon>
             <a :href="'x/' + props.ext.shortcode">
-                <Icon v-if="props.ext.iconUrlWhite && props.ext.iconUrlBlack" :srcDark="props.ext.iconUrlWhite"
-                    :srcLight="props.ext.iconUrlBlack" />
+                <Icon v-if=props.ext.iconSpecifier :spec=props.ext.iconSpecifier :height=24 />
             </a>
         </div>
-        <div :class="$style.EntryMain">
-            <a :class="$style.EntryName" :href="'x/' + props.ext.shortcode">
-                <div :class="$style.EntryName">{{ props.ext.name }}</div>
+        <div :class=$style.EntryMain>
+            <a :class=$style.EntryName :href="'x/' + props.ext.shortcode">
+                <div :class=$style.EntryName>{{ props.ext.name }}</div>
             </a>
-            <div :class="$style.EntryDescription" v-html="props.ext.description" />
+            <div :class=$style.EntryDescription v-html=props.ext.description />
         </div>
     </div>
 </template>
@@ -29,9 +28,10 @@ const props = defineProps<{
 <style module>
 .DirectoryEntry {
     display: flex;
-    gap: 12px;
-    margin-bottom: 8px;
     align-items: center;
+
+    gap: 12px;
+    margin-bottom: 8px;    
 }
 
 .EntryDownload {
@@ -41,10 +41,15 @@ const props = defineProps<{
 
 .EntryIcon {
     display: flex;
-    align-items: center;
+    align-items: center;    
+
     font-size: 20px;
     width: 24px;    
     opacity: 0.7;
+}
+
+.EntryIcon img {
+    width: 24px;
 }
 
 .EntryMain {
