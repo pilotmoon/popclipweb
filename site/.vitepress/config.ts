@@ -177,7 +177,11 @@ export default defineConfig({
     ],
     [
       "link",
-      { rel: "preconnect", href: "https://icons.popclip.app" },
+      { rel: "preconnect", href: "https://icons.popclip.app/" },
+    ],
+    [
+      "link",
+      { rel: "preconnect", href: "https://api.pilotmoon.com/v2" },
     ]
   ],
   markdown: {
