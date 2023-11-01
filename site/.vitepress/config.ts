@@ -175,6 +175,10 @@ export default defineConfig({
       "link",
       { rel: "shortcut icon", href: "/icon32.png", type: "image/png" },
     ],
+    [
+      "link",
+      { rel: "preconnect", href: "https://icons.popclip.app" },
+    ]
   ],
   markdown: {
     theme: {
