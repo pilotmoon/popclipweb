@@ -192,6 +192,11 @@ export default defineConfig({
     },
   },
   vite: {
+    server: {
+      headers: {
+        'Link': '<https://icons.popclip.app>; rel="preconnect"'
+      },
+    },
     ssr: {
       noExternal: ["element-plus"],
     },
