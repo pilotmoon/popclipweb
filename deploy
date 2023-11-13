@@ -1,0 +1,13 @@
+#!/bin/zsh
+set -e
+if [ -z "$SSH_USER" ] || [ -z "$SSH_HOST" ]; then
+    echo "Error: SSH_USER or SSH_HOST not set"
+    exit 1
+fi
+
+id="g$(git rev-parse HEAD | cut -c 1-11)"
+dest=/var/www/www.popclip.app
+print "Sending files to ${SSH_USER}@${SSH_HOST}:$dest/${id}/"
+rsync -avz ./site/.vitepress/dist/ ${SSH_USER}@${SSH_HOST}:$dest/${id}/
+print "Setting symlink to ${id}"
+ssh ${SSH_USER}@${SSH_HOST} "cd $dest && ln -s -f ${id} static"
