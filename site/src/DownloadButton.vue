@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import va from '@vercel/analytics';
 import AaButton from './AaButton.vue';
 import { IconDownload } from '@tabler/icons-vue';
 const props = defineProps<{
@@ -7,7 +6,7 @@ const props = defineProps<{
   href: string
 }>();
 const track = () => {
-  va.track("Download", { url: props.href });
+  // va.track("Download", { url: props.href });
 };
 </script>
 

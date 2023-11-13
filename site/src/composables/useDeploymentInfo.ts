@@ -11,7 +11,6 @@ export function useDeploymentInfo() {
   return {
     origin,
     isLocalhost: hostname === "localhost",
-    isPreview: hostname.endsWith(".vercel.app"),
     isProduction: hostname === "www.popclip.app",
   };
 }

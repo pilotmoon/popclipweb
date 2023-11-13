@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import va from '@vercel/analytics';
 import { data } from './data/extensions.data';
 import { IconFilter } from '@tabler/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
@@ -38,7 +37,7 @@ const total = computed(() => {
 // track filter term
 const trackFilterTerm = useDebounceFn(() => {
     if (filter.value.length < 3) return;
-    va.track("Filter", { query: filter.value });
+    // va.track("Filter", { query: filter.value });
 }, 1000);
 
 // page title

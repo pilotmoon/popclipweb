@@ -1,5 +1,4 @@
 <script setup type="ts">
-import va from '@vercel/analytics';
 import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
@@ -40,7 +39,7 @@ function roundPrice(price) {
 };
 
 function trackBuy(button) {
-    va.track("Buy", { button });
+    // va.track("Buy", { button });
 }
 </script>
 

@@ -111,8 +111,8 @@ yourself from the mailing list at any time. My mailing list provider is
 
 I also use the following third-party vendors to provide my services to you:
 
-- My web hosts are [Gandi](https://www.gandi.net/),
-  [DigitalOcean](htts://digitalocean.com) and [Vercel](https://vercel.com/).
+- My web hosts are [Gandi](https://www.gandi.net/) and
+  [DigitalOcean](htts://digitalocean.com).
 - My email host is [Fastmail](https://www.fastmail.com/).
 - I use [Groove](https://groovehq.com/) to manage my email help desk.
 - I use [GitHub](https://www.github.com/pilotmoon/) to host public code
