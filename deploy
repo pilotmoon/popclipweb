@@ -15,7 +15,7 @@ fi
 # the site's base directory on the server
 site_dir="/var/www/www.popclip.app"
 
-check that the git repo is clean
+# check that the git repo is clean
 if [ -n "$(git status --porcelain)" ]; then
     echo "Error: git repo is not clean"
     exit 1
