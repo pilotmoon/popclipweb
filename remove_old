@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Remove all but the newest 10 deployment directories
+# List directories sorted by modification time and skip the first 10
+for dir in $(ls -dt /var/www/www.popclip.app/g*/ | tail -n +11); do
+  echo "removing $dir"
+  rm -rf "$dir"
+done

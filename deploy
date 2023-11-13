@@ -29,8 +29,11 @@ dest="${SSH_USER}@${SSH_HOST}:$site_dir/${id}"
 echo "Sending files to ${dest}"
 rsync -avzc "${src}/" "${dest}"
 
+# send the remove_old script
+rsync -avzc ./remove_old "${site_dir}"
+
 # symlink the new folder so it gets served
 echo "Updating symlink"
-ssh ${SSH_USER}@${SSH_HOST} "cd ${site_dir} && ln -sfn ${id} static && ./remove_old"
+ssh ${SSH_USER}@${SSH_HOST} "cd ${site_dir} && ln -sfn ${id} static && bash remove_old"
 
 echo "Done"
