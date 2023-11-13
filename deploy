@@ -25,12 +25,12 @@ fi
 id="g$(git rev-parse HEAD | cut -c 1-11)"
 
 # the full destination path
-dest="${SSH_USER}@${SSH_HOST}:$site_dir/${id}/"
+dest="${SSH_USER}@${SSH_HOST}:$site_dir/${id}"
 echo "Sending files to ${dest}"
 rsync -avz "${src}/" "${dest}"
 
 # symlink the new folder so it gets served
 echo "Updating symlink"
-ssh ${SSH_USER}@${SSH_HOST} "cd ${site_dir} && ln -s -f ${id} static"
+ssh ${SSH_USER}@${SSH_HOST} "cd ${site_dir} && ln -s -f ${dest} static"
 
 echo "Done"
