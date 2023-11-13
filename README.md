@@ -2,7 +2,7 @@
 
 This repository contains the source files for the [PopClip website].
 
-The site is built with [VitePress] and hosted on a static Nginx web server.
+The site is built with [VitePress] and hosted on a static web server.
 
 [PopClip website]: https://www.popclip.app/
 [VitePress]: https://vitepress.dev/
