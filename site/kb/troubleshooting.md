@@ -125,6 +125,6 @@ most likely to be required after upgrading macOS from one version to another.
 3. In the list, highlight PopClip and then remove it using the "–" (minus)
    button. (Fully remove it, don't just uncheck it.)
 
-4. Use the "+" (plus) button add PopClip again to the list.
+![](./media/shot-ax-remove-1.png#h400 "Remove from the list with minus button")
 
-![](./media/shot-ax-remove-1.png#h400 "Remove and re-add to the list with minus button")
+4. Use the "+" (plus) button add PopClip again to the list.
