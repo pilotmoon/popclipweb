@@ -16,10 +16,10 @@ fi
 site_dir="/var/www/www.popclip.app"
 
 # check that the git repo is clean
-# if [ -n "$(git status --porcelain)" ]; then
-#     echo "Error: git repo is not clean"
-#     exit 1
-# fi
+if [ -n "$(git status --porcelain)" ]; then
+    echo "Error: git repo is not clean"
+    exit 1
+fi
 
 # we use the git commit hash to generate a unique folder name
 id="g$(git rev-parse HEAD | cut -c 1-11)"
@@ -27,7 +27,7 @@ id="g$(git rev-parse HEAD | cut -c 1-11)"
 # the full destination path
 dest="${SSH_USER}@${SSH_HOST}:$site_dir/${id}"
 echo "Sending files to ${dest}"
-#rsync -avzc "${src}/" "${dest}"
+rsync -avzc "${src}/" "${dest}"
 
 # complete the deployment on the server
 ssh ${SSH_USER}@${SSH_HOST} 'bash -s' <<END_SCRIPT
@@ -35,19 +35,24 @@ set -e
 echo "In remote script"
 
 cd ${site_dir}
-echo p \$(pwd)"
+echo "In \$(pwd)"
+
+echo "Update modification date of new folder"
+touch ${id}
 
 echo "Updating symlink"
 ln -sfn ${id} static
 
-#echo "Removing old deployments"
+echo "Removing old deployments"
 # Remove all but the newest n deployment directories
-# List directories sorted by modification time and skip the first n
-#ls -dt g*/
-#for dir in \$(ls -dt g*/ | tail -n +4); do
-#  echo "removing \$dir"
-#  #rm -rf "\$dir"
-#done
+# (List directories sorted by modification time and skip to the (n+1)th)
+for dir in \$(ls -dt g*/ | tail -n +11); do
+  echo "removing \$dir"
+  rm -rf "\$dir"
+done
+
+echo "Listing files:"
+ls -lt
 
 echo "Done remote script"
 END_SCRIPT
