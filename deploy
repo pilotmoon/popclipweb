@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+if [ -z "$SSH_USER" ] || [ -z "$SSH_HOST" ]; then
+    echo "Error: SSH_USER or SSH_HOST not set"
+    exit 1
+fi
+
+# the local directory where the site is built
+src="./site/.vitepress/dist"
+if [ ! -d "$src" ]; then
+    echo "Error: $src does not exist"
+    exit 1
+fi
+
+# the site's base directory on the server
+site_dir="/var/www/www.popclip.app"
+
+# check that the git repo is clean
+if [ -n "$(git status --porcelain)" ]; then
+    echo "Error: git repo is not clean"
+    exit 1
+fi
+
+# we use the git commit hash to generate a unique folder name
+id="g$(git rev-parse HEAD | cut -c 1-11)"
+
+# the full destination path
+dest="${SSH_USER}@${SSH_HOST}:$site_dir/${id}"
+echo "Sending files to ${dest}"
+rsync -avzc "${src}/" "${dest}"
+
+# symlink the new folder so it gets served
+echo "Updating symlink"
+ssh ${SSH_USER}@${SSH_HOST} "cd ${site_dir} && ln -sfn ${id} static && ls -l static"
+
+echo "Done"

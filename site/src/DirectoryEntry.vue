@@ -13,7 +13,7 @@ const props = defineProps<{
         </div>
         <div :class=$style.EntryIcon>
             <a :href="'x/' + props.ext.shortcode">
-                <Icon v-if=props.ext.iconSpecifier :spec=props.ext.iconSpecifier :height=24 />
+                <Icon v-if=props.ext.iconSpecifier :spec=props.ext.iconSpecifier :height=64 />
             </a>
         </div>
         <div :class=$style.EntryMain>

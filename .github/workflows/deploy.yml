@@ -1,0 +1,38 @@
+name: Deploy Site
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  SSH_USER: "${{ secrets.DEPLOY_SSH_USER }}"
+  SSH_HOST: "${{ secrets.DEPLOY_SSH_HOST }}"
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4.1.1
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4.0.0
+      with:
+        node-version: '18'
+        cache: npm
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run docs:build
+
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2.6.1
+      with:
+        key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+
+    - name: Deploy
+      run: ./deploy
+
