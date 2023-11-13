@@ -31,6 +31,6 @@ rsync -avzc "${src}/" "${dest}"
 
 # symlink the new folder so it gets served
 echo "Updating symlink"
-ssh ${SSH_USER}@${SSH_HOST} "cd ${site_dir} && ln -sfn ${id} static && ls -l static"
+ssh ${SSH_USER}@${SSH_HOST} "cd ${site_dir} && ln -sfn ${id} static && ./remove_old"
 
 echo "Done"
