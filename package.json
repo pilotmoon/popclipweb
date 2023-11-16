@@ -10,7 +10,8 @@
     "@mdit/plugin-img-size": "0.4.8",
     "@pilotmoon/chewit": "0.3.0",
     "@tabler/icons-vue": "2.32.0",
-    "@vercel/analytics": "1.0.2",
+    "@vicons/fa": "0.12.0",
+    "@vicons/utils": "0.1.4",
     "@vueuse/core": "10.3.0",
     "axios": "1.4.0",
     "element-plus": "2.3.12",
@@ -21,7 +22,7 @@
     "patch-package": "8.0.0",
     "sanitize-html": "2.11.0",
     "unplugin-element-plus": "0.8.0",
-    "vitepress": "1.0.0-rc.14",
+    "vitepress": "1.0.0-rc.25",
     "vue": "3.3.4",
     "vue3-simple-icons": "9.10.0",
     "zod": "3.21.4"

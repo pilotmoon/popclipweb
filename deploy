@@ -29,8 +29,32 @@ dest="${SSH_USER}@${SSH_HOST}:$site_dir/${id}"
 echo "Sending files to ${dest}"
 rsync -avzc "${src}/" "${dest}"
 
-# symlink the new folder so it gets served
+# complete the deployment on the server
+ssh ${SSH_USER}@${SSH_HOST} 'bash -s' <<END_SCRIPT
+set -e
+echo "In remote script"
+
+cd ${site_dir}
+echo "In \$(pwd)"
+
+echo "Update modification date of new folder"
+touch ${id}
+
 echo "Updating symlink"
-ssh ${SSH_USER}@${SSH_HOST} "cd ${site_dir} && ln -sfn ${id} static && ls -l static"
+ln -sfn ${id} static
+
+echo "Removing old deployments"
+# Remove all but the newest n deployment directories
+# (List directories sorted by modification time and skip to the (n+1)th)
+for dir in \$(ls -dt g*/ | tail -n +11); do
+  echo "removing \$dir"
+  rm -rf "\$dir"
+done
+
+echo "Listing files:"
+ls -lt
+
+echo "Done remote script"
+END_SCRIPT
 
 echo "Done"

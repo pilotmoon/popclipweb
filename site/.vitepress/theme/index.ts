@@ -3,9 +3,6 @@ import { h } from "vue";
 import Theme from "vitepress/theme";
 import "./style.css";
 
-// vercel
-import Vercel from "../../src/Vercel.vue";
-
 // local
 import InlineIcon from "../../src/InlineIcon.vue";
 import AaButton from "../../src/AaButton.vue";
@@ -30,7 +27,7 @@ export default {
   Layout: () => {
     return h(Theme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      "layout-bottom": () => h('div', [/*h(Vercel),*/ h(StoreLoader)]),
+      "layout-bottom": () => h('div', [h(StoreLoader)]),
       "home-features-after": () => h('div', [h(HomeFooter)]),
     });
   },

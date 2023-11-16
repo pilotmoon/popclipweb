@@ -2,11 +2,10 @@
 
 This repository contains the source files for the [PopClip website].
 
-The site is built with [VitePress] and hosted on [Vercel].
+The site is built with [VitePress] and hosted on a static web server.
 
 [PopClip website]: https://www.popclip.app/
 [VitePress]: https://vitepress.dev/
-[Vercel]: https://vercel.com/
 
 ## License
 

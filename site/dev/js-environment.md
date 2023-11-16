@@ -317,3 +317,5 @@ Some notes:
   `console.log()`).
 - Scripts running in the test harness always have the network access
   entitlement.
+- The test harness is a somewhat experimental feature at present. Please reach
+  out to me if something does not seem to work as expected.

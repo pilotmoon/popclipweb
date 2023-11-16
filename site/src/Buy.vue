@@ -1,12 +1,12 @@
 <script setup type="ts">
-import va from '@vercel/analytics';
 import { onMounted, computed } from 'vue'
 import { loadScript } from './helpers/loadScript'
 import { getFlagEmoji } from './helpers/getFlagEmoji'
 import { useStoreState } from './composables/useStoreState'
 import { useDeploymentInfo } from './composables/useDeploymentInfo'
 import { useLogger } from "./composables/useLogger";
-import { IconShoppingBag } from '@tabler/icons-vue';
+import { Paypal, ApplePay, CreditCard } from '@vicons/fa';
+import { Icon } from '@vicons/utils'
 import config from './config/config.json'
 
 const log = useLogger();
@@ -40,7 +40,7 @@ function roundPrice(price) {
 };
 
 function trackBuy(button) {
-    va.track("Buy", { button });
+    // va.track("Buy", { button });
 }
 </script>
 
@@ -61,10 +61,13 @@ function trackBuy(button) {
             <span :class="$style.price">{{ roundPrice(store.lizhiPrice.value) }}</span>
         </div>
         <div :class="$style.box">
-            <span>Buy License Key<span v-if="isLizhi"> from Paddle</span></span><br>
+            <span>Buy License Key<span v-if="isLizhi"> from Paddle</span> </span><br>
             <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand"
                 size="medium">
-                <IconShoppingBag style="margin-left: -0.2em;" /> Buy
+                Buy with
+                <Icon size=18><CreditCard /></Icon>
+                <Icon size=18><Paypal /></Icon>
+                <Icon size=32><ApplePay /></Icon>
             </AaButton><br>
             <span :class="$style.price">{{ roundPrice(store.paddlePrice.value) }}</span>
         </div>

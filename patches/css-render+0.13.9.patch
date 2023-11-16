@@ -1,0 +1,13 @@
+diff --git a/node_modules/css-render/lib/mount.js b/node_modules/css-render/lib/mount.js
+index e1523a0..a78142d 100644
+--- a/node_modules/css-render/lib/mount.js
++++ b/node_modules/css-render/lib/mount.js
+@@ -5,7 +5,7 @@ exports.mount = exports.unmount = exports.setCount = exports.getCount = void 0;
+ const hash_1 = require("./hash");
+ const render_1 = require("./render");
+ const utils_1 = require("./utils");
+-if (window) {
++if (typeof window !== "undefined" && window) {
+     window.__cssrContext = {};
+ }
+ function getCount(el) {
