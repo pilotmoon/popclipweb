@@ -10,6 +10,8 @@
     "@mdit/plugin-img-size": "0.4.8",
     "@pilotmoon/chewit": "0.3.0",
     "@tabler/icons-vue": "2.32.0",
+    "@vicons/fa": "0.12.0",
+    "@vicons/utils": "0.1.4",
     "@vueuse/core": "10.3.0",
     "axios": "1.4.0",
     "element-plus": "2.3.12",
