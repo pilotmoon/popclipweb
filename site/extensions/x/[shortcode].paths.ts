@@ -13,8 +13,12 @@ function renderMarkdown(markdown: string) {
   //return markdown;
   let html = sanitizeHtml(md.render(markdown));
 
-  // insert newline before any <pre> -- due to https://github.com/markdown-it/markdown-it/issues/951
+  // insert newline before these tags -- due to https://github.com/markdown-it/markdown-it/issues/951
+  // (specifically these four as per https://spec.commonmark.org/0.30/#html-blocks)
   html = html.replace(/<pre/g, "\n<pre");  
+  html = html.replace(/<script/g, "\n<script");  
+  html = html.replace(/<style/g, "\n<style");  
+  html = html.replace(/<textarea/g, "\n<textarea");  
   return html
 }
 

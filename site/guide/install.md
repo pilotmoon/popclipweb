@@ -36,7 +36,7 @@ which I will point out where relevant.
 
 ### Requirements
 
-The latest version of PopClip requires macOS 10.13 (High Sierra) or later. It is
+The latest version of PopClip requires macOS 10.15 (Catalina) or later. It is
 compatible with both Intel and Apple Silicon Macs.
 
 <div class="info custom-block" style="padding-top: 8px">

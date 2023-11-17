@@ -183,10 +183,6 @@ export default defineConfig({
       "link",
       { rel: "preconnect", href: "https://api.pilotmoon.com/v2" },
     ],
-    [
-      "link",
-      { rel: "preconnect", href: "https://cdn.pilotmoon.com/preconnect" },
-    ]
   ],
   markdown: {
     theme: {
