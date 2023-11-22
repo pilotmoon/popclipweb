@@ -121,7 +121,7 @@ of the extension itself. All properties are optional except `name`.
 | `options`         | Array                | Array of dictionaries defining the options for this extension, if any. See [The `options` array](#the-options-array).                                                                                                                                            |
 | `options title`   | String (Localizable) | Title to appear at the top of the options window. Default is `Options for <extension name>`.                                                                                                                                                                     |
 | `entitlements`    | Array                | Only applies to JavaScript extensions. The possible values are `network` (allows use of XMLHttpRequest) and `dynamic` (allows dynamically generated actions).                                                                                                    |
-| `actions`         | Array                | Array of dictionaries defining the actions for this extension. See [Actions](./actions).                                                                                                                                                      |
+| `action` or `actions`         | Dictionary or Array            |   The action(s) for this extension. See [Actions](./actions).                                                                                                                                                      |
 
 ### The `identifier` field
 
