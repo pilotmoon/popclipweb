@@ -141,7 +141,7 @@ will be modified.
 - For `email` requirement, the only the matching email address will be passed to
   the action.
 - For `path` requirement, only the matching path will be passed to the action,
-  and it will be standardized form with `~` and `..` expanded. For example
+  and it will be standardized, with `~` and `..` expanded. For example
   `~/Documents` will be passed as `/Users/username/Documents`.
 
 In all three cases, actions can assume that their input is a valid web URL,
