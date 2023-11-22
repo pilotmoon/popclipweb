@@ -127,7 +127,7 @@ can prefix any requirement with `!` to negate it.
 | `emails`     | The text must contain one or more email addresses.                                                                                                                                                                               |
 | `path`       | The text must be a local file path, and it must exist on the local file system. _(see side effects below)_                                                                                                                       |
 | `formatting` | The selected text control must support formatting. (PopClip makes its best guess about this, erring on the side of a false positive.)                                                                                            |
-| `option-*=#` | The option named `*` must be equal to the string `#`. For example `option-fish=shark` would require an option named `fish` to be set to the value `shark`. This mechanism allows actions to be enabled and disabled via options. |
+| `option-foo=bar` | The option with identifier `foo` must be equal to the string `bar`. This mechanism allows actions to be enabled and disabled via options. Boolean option values map to the strings `1` and `0`.|
 
 ::: info Note on side effect of `requirements` field
 
