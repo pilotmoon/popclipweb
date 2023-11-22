@@ -4,8 +4,7 @@ titleTemplate: :title — PopClip Developer
 ---
 # Actions
 
-Action properties can be placed either within the `actions` array or at the top
-level. Properties set at the top level will apply to all actions unless
+Action properties can be placed either in an `action` dictionary, in an `actions` array, or at the top level. Properties set at the top level will apply to all actions unless
 overridden in the individual action.
 
 ::: details Example: Action properties at top level
@@ -57,8 +56,8 @@ Consider this extension, which defines a single action:
 ```yaml
 #popclip
 name: Stickies
-actions: 
-- service name: Make Sticky
+action: 
+  service name: Make Sticky
   capture html: true
 ```
 
