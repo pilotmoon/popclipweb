@@ -4,8 +4,7 @@ titleTemplate: :title — PopClip Developer
 ---
 # Actions
 
-Action properties can be placed either within the `actions` array, or at the top
-level. Properties set at the top level will apply to all actions unless
+Action properties can be placed either in an `action` dictionary, in an `actions` array, or at the top level. Properties set at the top level will apply to all actions unless
 overridden in the individual action.
 
 ::: details Example: Action properties at top level
@@ -57,12 +56,12 @@ Consider this extension, which defines a single action:
 ```yaml
 #popclip
 name: Stickies
-actions: 
-- service name: Make Sticky
+action: 
+  service name: Make Sticky
   capture html: true
 ```
 
-Since there is only one action, the actions array can be eliminated, and all the
+Since there is only one action, the nesting can be eliminated, and all the
 action properties can be placed at the top level:
 
 ```yaml
@@ -127,7 +126,7 @@ can prefix any requirement with `!` to negate it.
 | `emails`     | The text must contain one or more email addresses.                                                                                                                                                                               |
 | `path`       | The text must be a local file path, and it must exist on the local file system. _(see side effects below)_                                                                                                                       |
 | `formatting` | The selected text control must support formatting. (PopClip makes its best guess about this, erring on the side of a false positive.)                                                                                            |
-| `option-*=#` | The option named `*` must be equal to the string `#`. For example `option-fish=shark` would require an option named `fish` to be set to the value `shark`. This mechanism allows actions to be enabled and disabled via options. |
+| `option-foo=bar` | The option with identifier `foo` must be equal to the string `bar`. This mechanism allows actions to be enabled and disabled via options. Boolean option values map to the strings `1` and `0`.|
 
 ::: info Note on side effect of `requirements` field
 
@@ -141,7 +140,7 @@ will be modified.
 - For `email` requirement, the only the matching email address will be passed to
   the action.
 - For `path` requirement, only the matching path will be passed to the action,
-  and it will be standardized form with `~` and `..` expanded. For example
+  and it will be standardized, with `~` and `..` expanded. For example
   `~/Documents` will be passed as `/Users/username/Documents`.
 
 In all three cases, actions can assume that their input is a valid web URL,

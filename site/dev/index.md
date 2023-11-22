@@ -15,6 +15,12 @@ This section of the documentation provides a detailed specification of PopClip's
 extensions architecture. With this information, you can create your own
 extensions.
 
+::: tip Getting help
+
+If you have any questions about the specification or need help with developing an extension, I encourage you to post to the [PopClip Forum](https://forum.popclip.app).
+
+:::
+
 ## Extensions Overview
 
 ### Snippets and Packages
@@ -27,7 +33,7 @@ A PopClip extension can be either a [snippet](./snippets.md) or a
 | What is it?     | Plain text in YAML format.                                        | A folder containing a config file plus other files such as icons, source files, and a readme file. |
 | Install method  | PopClip can load it directly from a text selection.               | Double-clicking it will open it in PopClip.                                                        |
 | Distribution    | Can be copied and pasted as text, e.g. on forums, pastebins, etc. | Can be downloaded as a file.                                                                       |
-| Signing         | Not signed.                                                       | Can be signed.                                                                                     |
+| Signing         | Not signed.                                                       | Can be signed.                                                                                |
 | Advantages      | Easy to create and informally share. No need for separate files.  | Easy for end user to install. Allows modular source code with complex functionality.               |
 | Disadvantages   | Limited to what can be done with a single text file.              | More complex to create. Steeper learning curve.                                                    |
 | File extensions | None (direct selection)<br> `.popcliptxt` (text file)             | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
@@ -44,7 +50,7 @@ An extension defines one or more actions. Each action can be one of seven types:
 | [Key Press](./key-press-actions.md)       | Press a key combination.                                     |
 | [Shell Script](./shell-script-actions.md) | Run a shell script.                                          |
 | [AppleScript](./applescript-actions.md)   | Run an AppleScript script.                                   |
-| [JavaScript](./js-actions.md)             | Run a JavaScript script.                                     |
+| [JavaScript](./js-actions.md)             | Run a JavaScript or TypeScript script.                                     |
 
 ### Filter rules
 
