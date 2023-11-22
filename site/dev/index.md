@@ -15,6 +15,12 @@ This section of the documentation provides a detailed specification of PopClip's
 extensions architecture. With this information, you can create your own
 extensions.
 
+::: tip Getting help
+
+If you have any questions about the specification or need help with developing an extension, I encourage you to post to the [PopClip Forum](https://forum.popclip.app).
+
+:::
+
 ## Extensions Overview
 
 ### Snippets and Packages
