@@ -61,7 +61,7 @@ action:
   capture html: true
 ```
 
-Since there is only one action, the actions array can be eliminated, and all the
+Since there is only one action, the nesting can be eliminated, and all the
 action properties can be placed at the top level:
 
 ```yaml
