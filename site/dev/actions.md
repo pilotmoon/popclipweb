@@ -4,7 +4,7 @@ titleTemplate: :title — PopClip Developer
 ---
 # Actions
 
-Action properties can be placed either within the `actions` array, or at the top
+Action properties can be placed either within the `actions` array or at the top
 level. Properties set at the top level will apply to all actions unless
 overridden in the individual action.
 
