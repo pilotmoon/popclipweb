@@ -47,6 +47,8 @@ const ZPricesResponse = z.object({
       currency: z.string(),
       amount: z.number(),
       formatted: z.string(),
+      netAmount: z.number(),
+      netFormatted: z.string(),
     }),
   }),
 });
@@ -58,17 +60,17 @@ export async function loadStore() {
     log(`Store already loaded for ${store.countryCode.value}`);
     return;
   }
-  log(`Loading prices...`);
-  const apiRoot = config.pilotmoon.apiRoot;
+  log("Loading prices...");
+  const apiRoot = config.pilotmoon.apiRoot;  
   const fetchResponse = await fetch(
-    apiRoot + "/frontend/store/getPrices?product=" + config.pilotmoon.product,
+    `${apiRoot}/frontend/store/getPrices?product=${config.pilotmoon.product}`,
   );
   const { country, prices } = ZPricesResponse.parse(await fetchResponse.json());
   if (country) {
     const countryInfo = getCountryInfo(country);
     store.countryCode.value = country;
     store.countryName.value = countryInfo.countryName;
-    store.paddlePrice.value = prices.paddle.formatted;
+    store.paddlePrice.value = prices.paddle.netFormatted;
     store.masUrl.value = getMacAppStoreUrl(
       config.mas.appId,
       config.mas.slug,
