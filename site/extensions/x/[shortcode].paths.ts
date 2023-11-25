@@ -1,6 +1,6 @@
+import MarkdownIt from "markdown-it";
+import sanitizeHtml from "sanitize-html";
 import { Extension, loadPages } from "../../src/data/extensions-loader.js";
-import MarkdownIt from 'markdown-it';
-import sanitizeHtml from 'sanitize-html';
 
 declare const paths: Extension[];
 export { paths };
@@ -15,11 +15,11 @@ function renderMarkdown(markdown: string) {
 
   // insert newline before these tags -- due to https://github.com/markdown-it/markdown-it/issues/951
   // (specifically these four as per https://spec.commonmark.org/0.30/#html-blocks)
-  html = html.replace(/<pre/g, "\n<pre");  
-  html = html.replace(/<script/g, "\n<script");  
-  html = html.replace(/<style/g, "\n<style");  
-  html = html.replace(/<textarea/g, "\n<textarea");  
-  return html
+  html = html.replace(/<pre/g, "\n<pre");
+  html = html.replace(/<script/g, "\n<script");
+  html = html.replace(/<style/g, "\n<style");
+  html = html.replace(/<textarea/g, "\n<textarea");
+  return html;
 }
 
 export default {
@@ -28,12 +28,12 @@ export default {
     const extensions = await loadPages();
     return extensions.map((ext) => {
       const extCopy = { ...ext };
-      delete extCopy.readme;      
+      extCopy.readme = undefined;
       console.log("Rendering readme for extension", ext.name);
       return {
         params: extCopy,
         content: ext.readme ? renderMarkdown(ext.readme) : "",
       };
-    })
-  }
-}
+    });
+  },
+};

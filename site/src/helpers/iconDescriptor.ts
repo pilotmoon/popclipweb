@@ -1,7 +1,7 @@
 interface IconDescriptor {
   specifier: string;
   color?: string;
-  height?: number;  
+  height?: number;
 }
 
 // Turn descriptor into a query string.
@@ -9,12 +9,14 @@ interface IconDescriptor {
 // This can be used both as a cache key and as a URL query string.
 export function querifyDescriptor(descriptor: IconDescriptor, cacheKey = "") {
   const query: string[] = [];
-  const params = new Map<string, string | number | boolean>(Object.entries(descriptor));
-  if (params.get('color') === "#000000") {
-    params.delete('color');
+  const params = new Map<string, string | number | boolean>(
+    Object.entries(descriptor),
+  );
+  if (params.get("color") === "#000000") {
+    params.delete("color");
   }
-  if (params.get('height') === 256) {
-    params.delete('height');
+  if (params.get("height") === 256) {
+    params.delete("height");
   }
   if (cacheKey) {
     params.set("cache", cacheKey);

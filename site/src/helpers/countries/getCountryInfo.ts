@@ -19,11 +19,10 @@ import paddleCountries from "./paddleCountries.json";
 export function getCountryInfo(countryCode: any) {
   if (!/^[A-Z]{2}$/.test(countryCode)) {
     throw new Error(`Invalid country code: ${countryCode}`);
-  }  
+  }
   const itunesInfo = itunesCountries.find((x) => x[1] === countryCode);
   return {
     appStoreCode: String(itunesInfo?.[1] ?? ""),
-    countryName: String(paddleCountries[countryCode] ?? "")
+    countryName: String(paddleCountries[countryCode] ?? ""),
   };
 }
-

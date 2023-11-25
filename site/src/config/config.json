@@ -1,27 +1,27 @@
 {
-    "pilotmoon": {
-        "product": "popclip",
-        "apiRoot": "https://api.pilotmoon.com",
-        "iconsRoot": "https://icons.popclip.app",
-        "spacesRoot": "https://pilotmoon1.ams3.digitaloceanspaces.com"
-    },
-    "paddle": {
-        "vendorId": 161988,
-        "productId": 818494,
-        "sandboxProductId": 41687,
-        "script": "https://cdn.paddle.com/paddle/paddle.js"
-    },
-    "mas": {
-        "appId": "445189367",
-        "slug": "popclip"
-    },
-    "lizhi": {
-        "storeUrl": "https://lizhi.shop/site/products/id/612?cid=pchuiuf8",
-        "price": "CN¥89",
-        "countries": ["CN", "TW", "MO", "HK"]
-    },
-    "setapp": {
-        "script": "https://developer.setapp.com/setapp-banner/index.js",
-        "referralUrl": "https://go.setapp.com/stp304?refAppId=159&refVendorId=92"
-    }
+  "pilotmoon": {
+    "product": "popclip",
+    "apiRoot": "https://api.pilotmoon.com",
+    "iconsRoot": "https://icons.popclip.app",
+    "spacesRoot": "https://pilotmoon1.ams3.digitaloceanspaces.com"
+  },
+  "paddle": {
+    "vendorId": 161988,
+    "productId": 818494,
+    "sandboxProductId": 41687,
+    "script": "https://cdn.paddle.com/paddle/paddle.js"
+  },
+  "mas": {
+    "appId": "445189367",
+    "slug": "popclip"
+  },
+  "lizhi": {
+    "storeUrl": "https://lizhi.shop/site/products/id/612?cid=pchuiuf8",
+    "price": "CN¥89",
+    "countries": ["CN", "TW", "MO", "HK"]
+  },
+  "setapp": {
+    "script": "https://developer.setapp.com/setapp-banner/index.js",
+    "referralUrl": "https://go.setapp.com/stp304?refAppId=159&refVendorId=92"
+  }
 }

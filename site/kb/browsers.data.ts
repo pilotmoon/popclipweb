@@ -1,6 +1,6 @@
+import fs from "node:fs";
 import { defineLoader } from "vitepress";
 import { z } from "zod";
-import fs from "node:fs";
 
 export const ZBrowser = z.object({
   name: z.string(),
