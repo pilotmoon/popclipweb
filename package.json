@@ -23,7 +23,7 @@
     "patch-package": "8.0.0",
     "sanitize-html": "2.11.0",
     "unplugin-element-plus": "0.8.0",
-    "vitepress": "1.0.0-rc.25",
+    "vitepress": "1.0.0-rc.31",
     "vue": "3.3.4",
     "vue3-simple-icons": "9.10.0",
     "zod": "3.21.4"
