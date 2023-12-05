@@ -5,6 +5,7 @@ import { useLogger } from "../composables/useLogger";
 import config from "../config/config.json";
 import { getCountryInfo } from "../helpers/countries/getCountryInfo";
 import { getMacAppStoreUrl } from "../helpers/getMacAppStoreUrl";
+import { useDeploymentInfo } from "./useDeploymentInfo";
 
 const log = useLogger();
 
@@ -53,7 +54,9 @@ export async function loadStore() {
     return;
   }
   log("Loading prices...");
-  const apiRoot = config.pilotmoon.apiRoot;
+  const apiRoot = useDeploymentInfo().isLocalhost
+    ? config.pilotmoon.localApiRoot
+    : config.pilotmoon.apiRoot;
   const fetchResponse = await fetch(
     `${apiRoot}/frontend/store/getPrices?product=${config.pilotmoon.product}`,
   );
