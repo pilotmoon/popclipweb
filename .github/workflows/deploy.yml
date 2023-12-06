@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  SSH_USER: "${{ secrets.DEPLOY_SSH_USER }}"
+  SSH_USER: "${{ vars.DEPLOY_SSH_USER }}"
   SSH_HOST: "${{ secrets.DEPLOY_SSH_HOST }}"
 
 jobs:

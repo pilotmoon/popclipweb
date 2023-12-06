@@ -1,12 +1,12 @@
-import { defineLoader } from 'vitepress'
 import axios from "axios";
-import { z } from 'zod'
+import { defineLoader } from "vitepress";
+import { z } from "zod";
 
-export const ZRelease = z.object({  
+export const ZRelease = z.object({
   versionString: z.string(),
   date: z.string(),
   description: z.string(),
-  
+
   version: z.number().int().nullish(),
   url: z.string().url().nullish(),
   size: z.number().int().nullish(),
@@ -15,20 +15,19 @@ export const ZRelease = z.object({
   minimumSystemVersion: z.string().nullish(),
   archs: z.array(z.string()).nullish(),
   eddsaSignature: z.string().nullish(),
-
 });
-export type Release = z.infer<typeof ZRelease>
+export type Release = z.infer<typeof ZRelease>;
 
 export const ZReleases = z.array(ZRelease);
-export type Releases = z.infer<typeof ZReleases>
+export type Releases = z.infer<typeof ZReleases>;
 
 export interface Data {
-  production: Releases
-  beta: Releases
+  production: Releases;
+  beta: Releases;
 }
 
-declare const data: Data
-export { data }
+declare const data: Data;
+export { data };
 
 export default defineLoader({
   async load(): Promise<Data> {
@@ -40,9 +39,9 @@ export default defineLoader({
       "https://pilotmoon.com/popclip/releases-beta.json",
     );
     const result = {
-        production: ZReleases.parse(dataProd),
-        beta: ZReleases.parse(dataBeta),
+      production: ZReleases.parse(dataProd),
+      beta: ZReleases.parse(dataBeta),
     };
     return result;
-  }
+  },
 });

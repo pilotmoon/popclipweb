@@ -1,7 +1,6 @@
 export function useLogger() {
-    if (import.meta.env.DEV) {
-        return console.log;
-    } else {
-        return () => { };
-    }  
+  if (import.meta.env.DEV) {
+    return console.log;
+  }
+  return () => {};
 }

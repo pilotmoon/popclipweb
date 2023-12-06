@@ -1,6 +1,6 @@
-import { z } from "zod";
-import { alphabets, baseEncode } from "@pilotmoon/chewit";
 import { createHash } from "node:crypto";
+import { alphabets, baseEncode } from "@pilotmoon/chewit";
+import { z } from "zod";
 
 export function sha256Base58(message: string) {
   return baseEncode(
@@ -16,8 +16,8 @@ export const ZExtension = z.object({
   name: z.string(), // extension name
   description: z.string(),
   size: z.number(),
-  downloadUrl: z.string().url(),  
-  repoUrl: z.string().url(),  
+  downloadUrl: z.string().url(),
+  repoUrl: z.string().url(),
   iconSpecifier: z.string().nullish(),
   iconUrlWhite: z.string().url().nullish(),
   iconUrlBlack: z.string().url().nullish(),
@@ -43,8 +43,8 @@ export async function loadIndex(): Promise<ExtensionsData> {
   const extensions: Record<string, Extension> = {};
   for (const ext of extensionsArray) {
     const extCopy = { ...ext };
-    delete extCopy.readme;
-    delete extCopy.demogif;
+    extCopy.readme = undefined;
+    extCopy.demogif = undefined;
     extensions[ext.identifier] = extCopy;
   }
   return { extensions, index };
@@ -58,9 +58,10 @@ export async function loadPages(): Promise<Extension[]> {
 let savedResult: { extensionsArray: Extension[]; index: Section[] };
 
 let count = 0;
-export async function load(): Promise<
-  { extensionsArray: Extension[]; index: Section[] }
-> {
+export async function load(): Promise<{
+  extensionsArray: Extension[];
+  index: Section[];
+}> {
   console.log("!!load called!!", ++count);
   if (savedResult) {
     console.log("returning saved result");
@@ -73,9 +74,9 @@ export async function load(): Promise<
 }
 
 async function processIndex(extensions: Extension[]): Promise<Section[]> {
-  const rawIndex = await (await fetch(
-    "https://pilotmoon.com/popclip/extensions/index.json",
-  )).json();
+  const rawIndex = await (
+    await fetch("https://pilotmoon.com/popclip/extensions/index.json")
+  ).json();
 
   // make a lookup table mapping handle to identifier
   const handleToIdentifier: Record<string, string> = {};
@@ -113,7 +114,10 @@ async function processExtensions() {
       // console.log(`Missing identifier for ${extension.handle}`);
       continue;
     }
-    let shortcode: any = "1" + sha256Base58(extension.identifier).substring(0, 4);
+    const shortcode: any = `1${sha256Base58(extension.identifier).substring(
+      0,
+      4,
+    )}`;
     if (shortcodes.has(shortcode)) {
       console.log(`Duplicate shortcode: ${shortcode} for ${extension.handle}`);
       continue;
@@ -124,7 +128,7 @@ async function processExtensions() {
       ...extension,
       name: extension.title,
       shortcode,
-      iconSpecifier: extension.image, 
+      iconSpecifier: extension.image,
       downloadUrl: extension.download,
       timestamp: extension.date,
       repoUrl: `https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/${extension.handle}.popclipext`,
