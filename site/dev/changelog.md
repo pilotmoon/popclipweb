@@ -28,8 +28,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The text string format can now be used for all kinds of icons, e.g. "square
   filled symbol:flame".
 - Add "strike" modifier for icon strings, which overlays a strike-out effect.
-- Add "flipX", "flipY", "moveX <percent of viewport>", "moveY <percent of
-  viewport>", "scale <percent>" and "rotate <degrees>" modifiers for icon
+- Add "flipX", "flipY", "moveX (percent of viewport)", "moveY (percent of
+  viewport)", "scale (percent)" and "rotate (degrees)" modifiers for icon
   strings.
 - Emoji text icons now render in color.
 - Added `data:` icon type for specifying icons as raw data.
