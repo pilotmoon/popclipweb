@@ -155,7 +155,6 @@ app itself, and are available to load by scripts. These are:
 | sanitize-html  | 2.11.0  | HTML sanitizer                 |
 | turndown       | 7.1.2   | HTML to Markdown converter     |
 | typescript     | 5.2.2   | TypeScript transpiler & tools  |
-| zod            | 3.22.2  | Object schema validator        |
 
 Library modules may be loaded by name, for example:
 
