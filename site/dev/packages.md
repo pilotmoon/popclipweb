@@ -46,7 +46,7 @@ package.
 
 ## The config file
 
-Every extension must define a [config dictionary](./config.md). PopClip will try
+Every package must include a [config dictionary](./config.md). PopClip will try
 looking in the root of the package directory for the following named files:
 
 | File Name      | Format | Description                                                                     |
