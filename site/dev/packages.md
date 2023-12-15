@@ -60,15 +60,6 @@ looking in the root of the package directory for the following named files:
 If multiple config files are present, PopClip will load them all, in the order
 listed above, and merge them into a single config dictionary.
 
-::: info Technical note
-
-In recent versions of PopClip, `.json` files are actually parsed with a YAML
-parser. This is because valid JSON is valid YAML too. Therefore, technically you
-can use YAML syntax in a `.json` file, and it will be parsed without errors.
-However, it is recommended to use the correct file extension for clarity.
-
-:::
-
 ::: info Historical note
 
 Plist was the original format for PopClip extensions, and many of the older
