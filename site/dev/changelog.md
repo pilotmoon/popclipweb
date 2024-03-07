@@ -38,11 +38,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   Unlike previous PopClip versions, this array is now always available
   regardless of whether the regex was specified in the static config (as an ICU
   regex string) or in a module (as a JavaScript RegExp object).
+- Added option type `secret` for storing a string in the macOS
+  Keychain instead of in the PopClip preferences file. This is useful for extensions that save sensitive data such as a password or API key.
 
 ### Changed
 
 - Icon properties set at the top level are no longer inherited by actions.
 - Config.json files are now parsed with a JSON parser instead of a YAML parser.
+- All extensions must now have a static config defining at least `name`. An override name may also be specified in the dynamic (JS module) config.
+- If an extension defines an `identifier`, it must be in the static config. Defining an identifier in dynamic config is now a load error.
+- Identifier prefix `app.popclip.` is now reserved for signed extensions only.
+- Unsigned extensions no longer purge all existing options upon installation. Instead, only options of type `secret` are purged, and only if an unsigned extension replaces a signed extension with the same identifier.
+- `id` may be used as an alias for `identifier` fields in extension configs.
 
 ## PopClip 2023.9 (4225)
 
