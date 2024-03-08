@@ -21,7 +21,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
-## Unreleased / beta
+## Unreleased / Beta
+
+Updated as of Build 4481.
 
 ### Added
 
@@ -38,18 +40,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   Unlike previous PopClip versions, this array is now always available
   regardless of whether the regex was specified in the static config (as an ICU
   regex string) or in a module (as a JavaScript RegExp object).
-- Added option type `secret` for storing a string in the macOS
-  Keychain instead of in the PopClip preferences file. This is useful for extensions that save sensitive data such as a password or API key.
+- Added option type `secret` for storing a string in the macOS Keychain instead
+  of in the PopClip preferences file. This is useful for extensions that save
+  sensitive data such as a password or API key.
 
 ### Changed
 
 - Icon properties set at the top level are no longer inherited by actions.
 - Config.json files are now parsed with a JSON parser instead of a YAML parser.
-- All extensions must now have a static config defining at least `name`. An override name may also be specified in the dynamic (JS module) config.
-- If an extension defines an `identifier`, it must be in the static config. Defining an identifier in dynamic config is now a load error.
+- All extensions must now have a static config defining at least `name`. An
+  override name may also be specified in the dynamic (JS module) config.
+- If an extension defines an `identifier`, it must be in the static config.
+  Defining an identifier in dynamic config is now a load error.
+- Extension identifiers now must begin and end with a letter or number.
+  Separators (period, hypen or underscore) are allowed in the middle but not
+  multiple in a row.
 - Identifier prefix `app.popclip.` is now reserved for signed extensions only.
-- Unsigned extensions no longer purge all existing options upon installation. Instead, only options of type `secret` are purged, and only if an unsigned extension replaces a signed extension with the same identifier.
+- Unsigned extensions no longer purge all existing options upon installation.
+  Instead, only options of type `secret` are purged, and only if an unsigned
+  extension replaces a signed extension with the same identifier.
+- Option labels are now optional. If omitted, the option `identifier` is used as
+  the label.
 - `id` may be used as an alias for `identifier` fields in extension configs.
+- _For Setapp edition only:_ the storage location for Extensions has changed
+  from `~/Library/Application Support/com.pilotmoon.popclip-setapp/Extensions`
+  to `~/Library/Application Support/PopClip/Extensions`.
+- Updated all embedded NPM modules to latest versions.
+
+### Removed
+
+- Removed `zod` from the embedded NPM modules.
 
 ## PopClip 2023.9 (4225)
 
