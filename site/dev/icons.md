@@ -19,7 +19,6 @@ table img {
 Icons may be specified either by suppling an image file (PNG or SVG), or by
 using a text string to describe an icon.
 
-
 ## Using image files
 
 [Packaged extensions](/dev/packages) can contain image files for use as icons.
@@ -99,8 +98,8 @@ available icons.
 
 The format is `iconify:<icon set prefix>:<icon name>`.
 
-Some Iconfy icons are available as color icons. These are automatically
-recognized by PopClip and will be rendered in color.
+Some Iconify icons contain color information. These are automatically recognized by
+PopClip and will be rendered in color.
 
 Examples:
 
@@ -216,7 +215,7 @@ string itself. For example:
   "icon": "iconify:mdi:home",
   "square": true,
   "filled": true,
-  "rotate": 45,
+  "rotate": 45
 }
 ```
 
