@@ -98,8 +98,8 @@ available icons.
 
 The format is `iconify:<icon set prefix>:<icon name>`.
 
-Some Iconify icons contain color information. These are automatically recognized by
-PopClip and will be rendered in color.
+Some Iconify icons contain color information. These are automatically recognized
+by PopClip and will be rendered in color.
 
 Examples:
 
@@ -175,7 +175,7 @@ icon is drawn.
 | `filled`     | Draw the enclosing shape as a solid shape.                  |
 | `monospaced` | For text icons only. Draw the text using a monospaced font. |
 
-### Gerometric transformations
+### Geometric transformations
 
 | Keyword            | Description                                                                                                                                                                  |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -199,10 +199,18 @@ Examples:
 
 ### Color and aspect
 
-| Keyword           | Description                                                                                            |
-| ----------------- | ------------------------------------------------------------------------------------------------------ |
-| `preserve_color`  | The supplied icon will be displayed in its original colors instead of used as a monochrome mask.       |
-| `preserve_aspect` | The supplied icon will be displayed in its original aspect ratio instead of being scaled to be square. |
+| Keyword           | Description                                                                                                                                                 |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `preserve_color`  | The base icon will be displayed in its original colors instead of used as a monochrome mask. (This is applied implicitly to emoji and color Iconify icons.) |
+| `preserve_aspect` | If the base icon is not square, it by default rendered into a square canvas. With this modifier, the icon will be rendered with its original aspect ratio.  |
+
+::: tip Negative modifiers
+
+In some cases it may be useful to explicitly negate a modifier. This is done by
+appending `=0`. For example, to remove the implicit color rendering from an
+Iconify icon, use `preserve_color=0`.
+
+:::
 
 ## Icon modifiers in config
 
