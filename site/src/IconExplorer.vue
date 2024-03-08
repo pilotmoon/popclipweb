@@ -16,7 +16,7 @@ const spec = ref("A")
     </div>
 </template>
 
-<style scoprd>
+<style scoped>
 .icon-explorer {
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;

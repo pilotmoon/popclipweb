@@ -241,6 +241,8 @@ follows:
 | apple script call         | applescript call |
 | apple script file         | applescript file |
 | blocked apps              | excluded apps    |
+| flip horizontal           | flip x           |
+| flip vertical             | flip y           |
 | image file                | icon             |
 | java script               | javascript       |
 | java script file          | javascript file  |

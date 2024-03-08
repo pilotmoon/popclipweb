@@ -3,76 +3,84 @@ titleTemplate: :title — PopClip Developer
 ---
 
 <script setup>
+import Icon from '/src/Icon.vue';
+import InlineIcon from '/src/InlineIcon.vue';
 import IconExplorer from '/src/IconExplorer.vue';
 </script>
 
+<style module>
+table img {
+  height: 48px;
+}
+</style>
+
 # Icons
 
-Icons may be specified in `icon` fields in several different ways:
+Icons may be specified either by suppling an image file (PNG or SVG), or by
+using a text string to describe an icon.
 
-- As a filename: `<filename>.png` or `<filename>.svg`. See
-  [Image files](#image-files).
 
-- As text: `<text specifier>`. See [Text icons](#text-icons).
+## Using image files
 
-- As an emoji: `🐶`.
+[Packaged extensions](/dev/packages) can contain image files for use as icons.
+The the `icon` field should specify the path to the image file, relative to the
+extension's root directory.
 
-- As an Iconify icon: `iconify:<icon set prefix>:<icon name>`. See
-  [Iconify icons](#iconify-icons).
+```json
+{
+  "icon": "icon.png"
+}
+```
 
-- As an SF Symbol: `symbol:<symbol name>`. See
-  [SF Symbols icons](#sf-symbols-icons).
+Images must be in either PNG or SVG format. A good icon will feature a
+monochrome shape on a transparent background. Variable opacity can be used for
+shading. PNG icons should be at least 256 pixels high.
 
-- As [raw data](#raw-data-icons).
+## Using an icon specifier string
 
-## Image files
+An icon specifier string describes an icon using a simple text-based format. The
+string consists of a series of space-separated keywords, with the final keyword
+specifying the **base icon** (see [Base icon formats](#base-icon-formats)), and
+the preceding keywords (if any) specifying **modifiers** (see
+[Icon modifiers](#icon-modifiers)).
 
-If you specify the name of a PNG or SVG image file in the extension's package,
-it will be used.
+Here are some examples:
 
-Images should feature a monochrome shape on a transparent background. Variable
-opacity can be used for shading.
+| Specifier string                 | Icon generated                                 | Notes                                                                                                         |
+| -------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `T`                              | <Icon spec="T" />                              | Here, `T` specifies the base icon as a [text icon](#text-icons).                                              |
+| `square T`                       | <Icon spec="square T" />                       | Here, `square` is a modifier that encloses the base icon in a square.                                         |
+| `square filled T`                | <Icon spec="square filled T" />                | Combining two modifiers; `filled` specifies that the square is a solid shape.                                 |
+| `circle filled T`                | <Icon spec="circle filled T" />                | Here we use a non-Ascii character as the base icon. The `circle` modifier encloses the base icon in a circle. |
+| `search filled T`                | <Icon spec="search filled T" />                | The `search` modifier encloses the base icon in a magnifying glass shape.                                     |
+| `iconify:mdi:home`               | <Icon spec="iconify:mdi:home" />               | Here, the base icon is an [Iconify icon](#iconify-icons).                                                     |
+| `square filled iconify:mdi:home` | <Icon spec="square filled iconify:mdi:home" /> | We put the home icon in a filled square.                                                                      |
+| `strike iconify:mdi:home`        | <Icon spec="strike iconify:mdi:home" />        | The `strike` modifier draws a strike-through line over the base icon.                                         |
+| `symbol:hand.raised`             | <Icon spec="symbol:hand.raised" />             | Here, the base icon as an [SF Symbols icon](#sf-symbols-icons).                                               |
+| `flip_x symbol:hand.raised`      | <Icon spec="flip_x symbol:hand.raised" />      | The `flip_x` modifier flips the base icon horizontally.                                                       |
 
-PNG icons should be at least 256 pixels high.
+## Base icon formats
 
-## Text icons
+### Text icons
 
-Using a particular format, you can instruct PopClip to generate a text-based
-icon. Text icons can have a `text:` prefix, but it is optional.
+Text icons can include up to 3 characters and are specified simply as the text
+itself.
 
-### Text icon examples
+Text icons are drawn using the system font. Adding the `monospaced` modifier
+will draw the icon in a monospaced variant.
 
-| Specifier string              | Icon generated                                                                                                                                                 |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `text:A` or just `A`          | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/A.png" width="20" height="20">                           |
-| `circle 1`                    | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/circle_1.png" width="20" height="20">                    |
-| `circle filled 本`            | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/circle_filled_本.png" width="20" height="20">            |
-| `square xyz`                  | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/square_xyz.png" width="20" height="20">                  |
-| `square filled !`             | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/square_filled_!.png" width="20" height="20">             |
-| `square filled monospaced ()` | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/square_filled_monospaced_().png" width="20" height="20"> |
-| `search E`                    | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/search_E.png" width="20" height="20">                    |
-| `search filled monospaced £`  | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/search_filled_monospaced_£.png" width="20" height="20">  |
+If the text icon is a single emoji without modifiers, it rendered in color.
 
-### Text icon format
+Examples:
 
-The specifier format is `<shape> <modifiers> <text>`.
-
-- `<shape>` is optional and can be one of:
-
-| Keyword  | Effect                                     |
-| -------- | ------------------------------------------ |
-| `square` | Encloses text in a round-cornered square.  |
-| `circle` | Encloses text in a circle.                 |
-| `search` | Encloses text in a magnifying glass shape. |
-
-- `<modifiers>` are optional and can be any combination of:
-
-| Keyword      | Effect                                                      |
-| ------------ | ----------------------------------------------------------- |
-| `filled`     | Specifies a solid filled shape instead of an outline shape. |
-| `monospaced` | Specifies that the text be drawn with a monospaced font.    |
-
-- `<text>` can be up to three characters.
+| Specifier string | Icon generated                |
+| ---------------- | ----------------------------- |
+| `ABC`            | <Icon spec="ABC" />           |
+| `@`              | <Icon spec="@" />             |
+| `本`             | <Icon spec="本" />            |
+| `()`             | <Icon spec="()" />            |
+| `monospaced ()`  | <Icon spec="monospaced ()" /> |
+| `😵‍💫`           | <Icon spec="😵‍💫" />          |
 
 ::: info :bulb: Tip: Monospaced font
 
@@ -81,74 +89,136 @@ modifier.
 
 :::
 
-## Iconify icons
+### Iconify icons
 
-[Iconify](https://iconify.design/) provides over 150,000 icons from a variety of
-open-source icon sets. Browse the catalog at
-<https://icon-sets.iconify.design/>.
+[Iconify](https://iconify.design/) provides access to over 200,000 icons from a
+variety of open-source icon sets, using a unified naming system.
+
+The Iconify website provides a [catalog](https://icon-sets.iconify.design/) of
+available icons.
 
 The format is `iconify:<icon set prefix>:<icon name>`.
 
-### Iconify icon examples
+Some Iconfy icons are available as color icons. These are automatically
+recognized by PopClip and will be rendered in color.
 
-| Specifier string               | Icon generated |
-| ------------------------------ | -------------- |
-| `iconify:ion:fish`             | TODO           |
-| `iconify:solar:flag-bold`      | TODO           |
-| `iconify:noto:cowboy-hat-face` | TODO           |
+Examples:
 
-## SF Symbols icons
+| Specifier string             | Icon generated                             |
+| ---------------------------- | ------------------------------------------ |
+| `iconify:ion:fish`           | <Icon spec="iconify:ion:fish" />           |
+| `iconify:solar:flag-bold`    | <Icon spec="iconify:solar:flag-bold" />    |
+| `iconify:logos:spotify-icon` | <Icon spec="iconify:logos:spotify-icon" /> |
+
+### SF Symbols icons
 
 Apple [SF Symbols](https://developer.apple.com/sf-symbols/) are available on
-macOS 11.0 and above. The icon catalog can be viewed by installing Apple's SF
-Symbols app on your Mac.
+macOS 11.0 and above. (Symbol availability may vary by macOS version). The icon
+catalog can be viewed by installing Apple's SF Symbols app on your Mac.
 
 The format is `symbol:<symbol name>`.
 
-### SF Symbols icon examples
+Symbols are always drawn in the monochrome variant.
 
-| Specifier string        | Icon generated                                                                                                                                           |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `symbol:flame`          | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-flame.png" width="20" height="20">          |
-| `symbol:hand.raised`    | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-hand.raised.png" width="20" height="20">    |
-| `symbol:signpost.right` | <img src="https://raw.githubusercontent.com/pilotmoon/PopClip-Extensions/master/docs-assets/texticons/symbol-signpost.right.png" width="20" height="20"> |
+Examples:
 
-## Raw data icons
+| Specifier string        | Icon generated                               |
+| ----------------------- | -------------------------------------------- |
+| `symbol:flame`          | <Icon spec="symbol:flame" />                 |
+| `symbol:hand.raised`    | <Icon spec="symbol:hand.raised" />           |
+| `symbol:signpost.right` | <Icon spec="rotate symbol:signpost.right" /> |
 
-You can supply the raw data for the icon in the icon field itself:
+### Data icons
 
-- As SVG source: `svg:<svg source>`
+You can supply the raw data for the icon in the icon field itself as a
+[data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs).
 
-- As a data URL: `data:<mediatype>[;base64],<data>`, where `<mediatype>` may be either `image/png` or `image/svg+xml`.
+The format is: `data:<mediatype>[;base64],<data>`, where `<mediatype>` may be
+either `image/svg+xml` or `image/png`.
 
-## Color handling
+::: details SVG Example
 
-By default, PopClip treats icons as a mask images and renders them with a
-uniform fill color, ignoring any color information in the image. However, you
-can set the `preserve color` flag (see [Icon options](#icon-options)) to tell
-PopClip to keep the original color palette.
+Specifier string:
 
-::: info Special case: Emoji and Iconify icons
+`data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M5.5%2015v-4.5H4V9h3v6H5.5ZM9%2015v-2.5q0-.425.288-.713T10%2011.5h2v-1H9V9h3.5q.425%200%20.713.288T13.5%2010v1.5q0%20.425-.288.713t-.712.287h-2v1h3V15H9Zm6%200v-1.5h3v-1h-2v-1h2v-1h-3V9h3.5q.425%200%20.713.288T19.5%2010v4q0%20.425-.288.713T18.5%2015H15Z%22%2F%3E%3C%2Fsvg%3E"/></svg>`
 
-PopClip gives special treatment to emoji icons and color icons from Iconify.
-These icons are inherently colored, and PopClip will preserve their color even
-if `preserve color` is not set.
+generates:
+
+<Icon style="height: 48px" spec="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M5.5%2015v-4.5H4V9h3v6H5.5ZM9%2015v-2.5q0-.425.288-.713T10%2011.5h2v-1H9V9h3.5q.425%200%20.713.288T13.5%2010v1.5q0%20.425-.288.713t-.712.287h-2v1h3V15H9Zm6%200v-1.5h3v-1h-2v-1h2v-1h-3V9h3.5q.425%200%20.713.288T19.5%2010v4q0%20.425-.288.713T18.5%2015H15Z%22%2F%3E%3C%2Fsvg%3E" />
 
 :::
 
-## Icon properties
+::: details PNG Example
 
-These optional properties can be placed in the config alongside the `icon` field
-to modify how PopClip draws it. Unlike action properties, icon properties set at
-the top level are not inherited by actions.
+Specifier string:
 
-| Key               | Type    | Description                                                                                                                                |
-| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `preserve color`  | Boolean | If `true`, the supplied icon will be displayed with its original color instead of being filled in white/black. Default is `false`.         |
-| `preserve aspect` | Boolean | If `true`, the supplied icon will be displayed with its original aspect ratio instead of being scaled to fit a square. Default is `false`. |
-| `flip horizontal` | Boolean | If `true`, the supplied icon will be drawn horizontally flipped. Default is `false`.                                                       |
-| `flip vertical`   | Boolean | If `true`, the supplied icon will be drawn vertically flipped. Default is `false`.                                                         |
-| `scale`           | Number  | Adjust the scale at which the icon is drawn. For example `1.2` to enlarge, or `0.9` to shrink. The default is `1.0`, no scaling.           |
+`data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAwUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACVM9DkAAAAPdFJOUwDcIDTLUFYGEqLpZfaDQdxVBh4AAAIbSURBVHja7doxS0JRGMZxuVI6BUG4GBhtDoHQkmPQViSBtAsVjS66CNIuLrWF0CcIaalojsAhXEMaGoJwvOCiCbfR9w5dXI6P4v/3Be4D5/C87xFjMQAAAAAAAAAAAAAAAAAAAADAIknsTmvPTYD4/vqUUmUnASrBtH6vCEAAAhCAAARY9gBv6nF87WYhqR9E2DTfH/y4CeCdRrg1AdJurkD0utaafH/8IVhYd9qTAMOt2X8/+WBO4Lg8+wCVwuT7/rPgBPrdSYB3wRX0eu5LIFIz474EIt9sZ+ISWLsTl0C2Ky6BnrgEquoS+A60JWDnkKYE2uISsHMoJTiBekFcAnlxCXjqEmiYOeRfCq5gcdlLwC6jr4ISCC2jKcEVrMxTCQwUJWCv4KHgBOwyOhKcQGgZ7eQEy2jB1rB4GR08iZfRe0EN12wJ3IiX0cGXeA4pSsDOIUUJhOZQR1DDdXUJ5MUl4KlLwC6jY8EullBfwZWC+Dlgr6C/jFewJr6CsWKg/U0gNIfSijnUFc+hF3EJrKpLoK8ugZa4BOzvcpISKIlLwDsSl0BTXAKJkrgE4uoSyIpLIPkpLoGquAQS9kWq+GHQYxOYoxfpWPIcCMSbgLoEGuoSOBGXQGgODR8v/nXu6HTsHArGEX/t3si5L4FIIzcBKhlxgGYgDpAlAAEIQAACEGBxAviOFpLtqQleDAAAAAAAAAAAAMCi+gOiz1VAs+KXUwAAAABJRU5ErkJggg==`
+
+generates:
+
+<Icon style="height: 48px" spec="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAwUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACVM9DkAAAAPdFJOUwDcIDTLUFYGEqLpZfaDQdxVBh4AAAIbSURBVHja7doxS0JRGMZxuVI6BUG4GBhtDoHQkmPQViSBtAsVjS66CNIuLrWF0CcIaalojsAhXEMaGoJwvOCiCbfR9w5dXI6P4v/3Be4D5/C87xFjMQAAAAAAAAAAAAAAAAAAAADAIknsTmvPTYD4/vqUUmUnASrBtH6vCEAAAhCAAARY9gBv6nF87WYhqR9E2DTfH/y4CeCdRrg1AdJurkD0utaafH/8IVhYd9qTAMOt2X8/+WBO4Lg8+wCVwuT7/rPgBPrdSYB3wRX0eu5LIFIz474EIt9sZ+ISWLsTl0C2Ky6BnrgEquoS+A60JWDnkKYE2uISsHMoJTiBekFcAnlxCXjqEmiYOeRfCq5gcdlLwC6jr4ISCC2jKcEVrMxTCQwUJWCv4KHgBOwyOhKcQGgZ7eQEy2jB1rB4GR08iZfRe0EN12wJ3IiX0cGXeA4pSsDOIUUJhOZQR1DDdXUJ5MUl4KlLwC6jY8EullBfwZWC+Dlgr6C/jFewJr6CsWKg/U0gNIfSijnUFc+hF3EJrKpLoK8ugZa4BOzvcpISKIlLwDsSl0BTXAKJkrgE4uoSyIpLIPkpLoGquAQS9kWq+GHQYxOYoxfpWPIcCMSbgLoEGuoSOBGXQGgODR8v/nXu6HTsHArGEX/t3si5L4FIIzcBKhlxgGYgDpAlAAEIQAACEGBxAviOFpLtqQleDAAAAAAAAAAAAMCi+gOiz1VAs+KXUwAAAABJRU5ErkJggg==" />
+
+:::
+
+## Icon modifiers
+
+The following modifiers can be prefixed to the specifier string to alter how the
+icon is drawn.
+
+### Style modifiers
+
+| Keyword      | Description                                                 |
+| ------------ | ----------------------------------------------------------- |
+| `square`     | Enclose the icon in a square.                               |
+| `circle`     | Enclose the icon in a circle.                               |
+| `search`     | Enclose the icon in a magnifying glass shape.               |
+| `strike`     | Draw a strike-through line over the icon.                   |
+| `filled`     | Draw the enclosing shape as a solid shape.                  |
+| `monospaced` | For text icons only. Draw the text using a monospaced font. |
+
+### Gerometric transformations
+
+| Keyword            | Description                                                                                                                                                                  |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `flip_x`           | Flip the icon horizontally.                                                                                                                                                  |
+| `flip_y`           | Flip the icon vertically.                                                                                                                                                    |
+| `move_x=<percent>` | Move the icon horizontally by the specified distance, expressed as percentage of the icon's width. For example `move_x=10` to move 10% right or `move_x=-5` to move 5% left. |
+| `move_y=<percent>` | Move the icon vertically by the specified distance, expressed as percentage of the icon's height.                                                                            |
+| `scale=<percent>`  | Adjust the scale at which the icon is drawn. For example `scale=120` to enlarge to 100%, or `scale=90` to shrink to 90%.                                                     |
+| `rotate=<degrees>` | Rotate the icon by the specified number of degrees. For example `rotate=90` to rotate 90 degrees anticlockwise.                                                              |
+
+Examples:
+
+| Specifier string                                         | Icon generated                                                         |
+| -------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `symbol:signpost.right`                                  | <Icon spec="rotate symbol:signpost.right" />                           |
+| `flip_x symbol:signpost.right`                           | <Icon spec="flip_x symbol:signpost.right" />                           |
+| `move_y=-50 symbol:signpost.right`                       | <Icon spec="move_y=-50 symbol:signpost.right" />                       |
+| `scale=50 symbol:signpost.right`                         | <Icon spec="scale=50 symbol:signpost.right" />                         |
+| `rotate=90 symbol:signpost.right`                        | <Icon spec="rotate=90 symbol:signpost.right" />                        |
+| `square filled move_x=4 move_y=-4 scale=115 rotate=45 T` | <Icon spec="square filled move_x=4 move_y=-4 scale=115 rotate=45 T" /> |
+
+### Color and aspect
+
+| Keyword           | Description                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------ |
+| `preserve_color`  | The supplied icon will be displayed in its original colors instead of used as a monochrome mask.       |
+| `preserve_aspect` | The supplied icon will be displayed in its original aspect ratio instead of being scaled to be square. |
+
+## Icon modifiers in config
+
+All [icon modifiers](#icon-modifiers) may alternatively be specified as
+properties in the config alongside the icon string, instead of in the icon
+string itself. For example:
+
+```json
+{
+  "icon": "iconify:mdi:home",
+  "square": true,
+  "filled": true,
+  "rotate": 45,
+}
+```
 
 ## Icon Preview tool
 

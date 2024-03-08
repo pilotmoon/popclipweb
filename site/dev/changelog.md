@@ -29,10 +29,10 @@ Updated as of Build 4481.
 
 - The text string format can now be used for all kinds of icons, e.g. "square
   filled symbol:flame".
-- Add "strike" modifier for icon strings, which overlays a strike-out effect.
-- Add "flipX", "flipY", "moveX (percent of viewport)", "moveY (percent of
-  viewport)", "scale (percent)" and "rotate (degrees)" modifiers for icon
-  strings.
+- Add `strike` modifier for icon strings, which overlays a strike-out effect.
+- Add `flip_x`, `flip_y`, `move_x (percent of viewport)`,
+  `move_y (percent of viewport)`, `scale (percent)` and `rotate (degrees)`
+  modifiers for icon strings.
 - Emoji text icons now render in color.
 - Added `data:` icon type for specifying icons as raw data.
 - In the JavaScript environment, `popclip.input.regexResult` is an array
@@ -55,6 +55,8 @@ Updated as of Build 4481.
 - Extension identifiers now must begin and end with a letter or number.
   Separators (period, hypen or underscore) are allowed in the middle but not
   multiple in a row.
+- Renamed `flip horizontal` and `flip vertical` to `flip x` and `flip y`
+  respectively.
 - Identifier prefix `app.popclip.` is now reserved for signed extensions only.
 - Unsigned extensions no longer purge all existing options upon installation.
   Instead, only options of type `secret` are purged, and only if an unsigned
