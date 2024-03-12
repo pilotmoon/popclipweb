@@ -91,15 +91,13 @@ code editor such as [VS Code](https://code.visualstudio.com/),
 [BBEdit](https://www.barebones.com/products/bbedit/), or
 [Nova](https://nova.app/).
 
-<EditionSwitcher />
-
 ### Turn off unsigned warning
 
 If the unsigned extension warning gets annoying while you test your work, you
 can turn it off. Run the following command at the Terminal, then Quit and
 restart PopClip:
 
-<Edition code base="defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp LoadUnsignedExtensions -bool YES"/>
+`defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES"`
 
 ### Debug output
 
@@ -107,7 +105,7 @@ To help you when creating extensions, PopClip can send script outputs and other
 debug info to the Console app. To enable it, run this command in Terminal, then
 Quit and restart PopClip:
 
-<Edition code base="defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES" setapp="defaults write com.pilotmoon.popclip-setapp EnableExtensionDebug -bool YES"/>
+`defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES`
 
 You can then view the debug output in the Console app.
 

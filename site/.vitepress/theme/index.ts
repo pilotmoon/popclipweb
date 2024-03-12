@@ -8,8 +8,6 @@ import InlineIcon from "../../src/InlineIcon.vue";
 import AaButton from "../../src/AaButton.vue";
 import AaLink from "../../src/AaLink.vue";
 import DownloadButton from "../../src/DownloadButton.vue";
-import EditionSwitcher from "../../src/EditionSwitcher.vue";
-import Edition from "../../src/Edition.vue";
 import HomeFooter from "../../src/HomeFooter.vue";
 import StoreLoader from "../../src/StoreLoader.vue";
 
@@ -37,7 +35,5 @@ export default {
     app.component("AaButton", AaButton);
     app.component("AaLink", AaLink);
     app.component("DownloadButton", DownloadButton);
-    app.component("EditionSwitcher", EditionSwitcher);
-    app.component("Edition", Edition);
   },
 };
