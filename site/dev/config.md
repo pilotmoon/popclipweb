@@ -12,9 +12,9 @@ underlying structure is the same.
 ::: tip Key names
 
 PopClip is very flexible about how you name keys. In this documentation you'll
-mostly see keys named in lowercase with spaces, for example `key name`.
-However, PopClip will treat `Key Name`, `keyName`, `KeyName`,
-`key_name`, `key-name` and `KEY_NAME` as equivalents.
+mostly see keys named in lowercase with spaces, for example `key name`. However,
+PopClip will treat `Key Name`, `keyName`, `KeyName`, `key_name`, `key-name` and
+`KEY_NAME` as equivalents.
 
 <!-- The full range of formats is as defined by
 [case-anything](https://github.com/mesqueeb/case-anything), which PopClip uses
@@ -110,18 +110,18 @@ best user experience for your extension.
 The following keys are used at the top level of the config to define properties
 of the extension itself. All properties are optional except `name`.
 
-| Key               | Type                 | Description                                                                                                                                                                                                                                                      |
-| ----------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name` (Required) | String (Localizable) | A short, human-readable display name for this extension.                                                                                                                                                                                                         |
-| `icon`            | String               | See [Icons](./icons). If you omit this field, the icon for the first action will be used (if any), or else no icon will be displayed.                                                                                                                             |
-| `identifier`      | String               | You may provide a string to uniquely identify this extension. See [The `identifier` field](#the-identifier-field).                                                                                                                                              |
-| `description`     | String (Localizable) | A short, human readable description of this extension. Appears in the [directory](/extensions/) but not in the app.                                                                                                                                              |
-| `macos version`   | String               | Minimum version number of Mac OS X needed by this extension. For example `10.8.2` or `11.0`.                                                                                                                                                                     |
-| `popclip version` | Integer              | Minimum PopClip version required. This is the integer build number e.g. `4151`. Specifying the current PopClip version here can help preserve your extension's functionality in future, because PopClip applies backward-compatibility rules for old extensions. |
-| `options`         | Array                | Array of dictionaries defining the options for this extension, if any. See [The `options` array](#the-options-array).                                                                                                                                            |
-| `options title`   | String (Localizable) | Title to appear at the top of the options window. Default is `Options for <extension name>`.                                                                                                                                                                     |
-| `entitlements`    | Array                | Only applies to JavaScript extensions. The possible values are `network` (allows use of XMLHttpRequest) and `dynamic` (allows dynamically generated actions).                                                                                                    |
-| `action` or `actions`         | Dictionary or Array            |   A dictionary or array of dictionaries defining the action(s) for this extension. See [Actions](./actions).                                                                                                                                                      |
+| Key                   | Type                 | Description                                                                                                                                                                                                                                                      |
+| --------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name` (Required)     | String (Localizable) | A short, human-readable display name for this extension.                                                                                                                                                                                                         |
+| `icon`                | String               | See [Icons](./icons). If you omit this field, the icon for the first action will be used (if any), or else no icon will be displayed.                                                                                                                            |
+| `identifier`          | String               | You may provide a string to uniquely identify this extension. See [The `identifier` field](#the-identifier-field).                                                                                                                                               |
+| `description`         | String (Localizable) | A short, human readable description of this extension. Appears in the [directory](/extensions/) but not in the app.                                                                                                                                              |
+| `macos version`       | String               | Minimum version number of Mac OS X needed by this extension. For example `10.8.2` or `11.0`.                                                                                                                                                                     |
+| `popclip version`     | Integer              | Minimum PopClip version required. This is the integer build number e.g. `4151`. Specifying the current PopClip version here can help preserve your extension's functionality in future, because PopClip applies backward-compatibility rules for old extensions. |
+| `options`             | Array                | Array of dictionaries defining the options for this extension, if any. See [The `options` array](#the-options-array).                                                                                                                                            |
+| `options title`       | String (Localizable) | Title to appear at the top of the options window. Default is `Options for <extension name>`.                                                                                                                                                                     |
+| `entitlements`        | Array                | Only applies to JavaScript extensions. The possible values are `network` (allows use of XMLHttpRequest) and `dynamic` (allows dynamically generated actions).                                                                                                    |
+| `action` or `actions` | Dictionary or Array  | A dictionary or array of dictionaries defining the action(s) for this extension. See [Actions](./actions).                                                                                                                                                       |
 
 ### The `identifier` field
 
@@ -235,7 +235,7 @@ follows:
 
 ::: details Key name mapping table
 
-| Old/Alternative name      | Canonical name   |
+| Alternative name          | Canonical name   |
 | ------------------------- | ---------------- |
 | apple script              | applescript      |
 | apple script call         | applescript call |
