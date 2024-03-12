@@ -127,7 +127,23 @@ Examples:
 | `symbol:hand.raised`    | <Icon spec="symbol:hand.raised" />           |
 | `symbol:signpost.right` | <Icon spec="rotate symbol:signpost.right" /> |
 
-### Data icons
+### SVG Icons
+
+You can supply the raw SVG for the icon in the icon field itself.
+
+The format is `svg:<svg string>`.
+
+::: details Example
+
+`svg:<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m6 10.95l-1.875 1.025l-2.975-5.2L7.75 3H10v1q0 .825.588 1.413T12 6q.825 0 1.413-.587T14 4V3h2.25l6.6 3.775l-2.95 5.15l-1.9-.95V21H6z"/></svg>`
+
+generates:
+
+<Icon style="height: 48px" spec="svg:<svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'><path fill='currentColor' d='m6 10.95l-1.875 1.025l-2.975-5.2L7.75 3H10v1q0 .825.588 1.413T12 6q.825 0 1.413-.587T14 4V3h2.25l6.6 3.775l-2.95 5.15l-1.9-.95V21H6z'/></svg>" />
+
+:::
+
+<!-- ### Data icons
 
 You can supply the raw data for the icon in the icon field itself as a
 [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs).
@@ -157,7 +173,7 @@ generates:
 
 <Icon style="height: 48px" spec="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAwUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACVM9DkAAAAPdFJOUwDcIDTLUFYGEqLpZfaDQdxVBh4AAAIbSURBVHja7doxS0JRGMZxuVI6BUG4GBhtDoHQkmPQViSBtAsVjS66CNIuLrWF0CcIaalojsAhXEMaGoJwvOCiCbfR9w5dXI6P4v/3Be4D5/C87xFjMQAAAAAAAAAAAAAAAAAAAADAIknsTmvPTYD4/vqUUmUnASrBtH6vCEAAAhCAAARY9gBv6nF87WYhqR9E2DTfH/y4CeCdRrg1AdJurkD0utaafH/8IVhYd9qTAMOt2X8/+WBO4Lg8+wCVwuT7/rPgBPrdSYB3wRX0eu5LIFIz474EIt9sZ+ISWLsTl0C2Ky6BnrgEquoS+A60JWDnkKYE2uISsHMoJTiBekFcAnlxCXjqEmiYOeRfCq5gcdlLwC6jr4ISCC2jKcEVrMxTCQwUJWCv4KHgBOwyOhKcQGgZ7eQEy2jB1rB4GR08iZfRe0EN12wJ3IiX0cGXeA4pSsDOIUUJhOZQR1DDdXUJ5MUl4KlLwC6jY8EullBfwZWC+Dlgr6C/jFewJr6CsWKg/U0gNIfSijnUFc+hF3EJrKpLoK8ugZa4BOzvcpISKIlLwDsSl0BTXAKJkrgE4uoSyIpLIPkpLoGquAQS9kWq+GHQYxOYoxfpWPIcCMSbgLoEGuoSOBGXQGgODR8v/nXu6HTsHArGEX/t3si5L4FIIzcBKhlxgGYgDpAlAAEIQAACEGBxAviOFpLtqQleDAAAAAAAAAAAAMCi+gOiz1VAs+KXUwAAAABJRU5ErkJggg==" />
 
-:::
+::: -->
 
 ## Icon modifiers
 

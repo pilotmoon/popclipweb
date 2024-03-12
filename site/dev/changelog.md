@@ -34,7 +34,7 @@ Updated as of Build 4481.
   `move_y (percent of viewport)`, `scale (percent)` and `rotate (degrees)`
   modifiers for icon strings.
 - Emoji text icons now render in color.
-- Added `data:` icon type for specifying icons as raw data.
+<!-- - Added `data:` icon type for specifying icons as raw data. -->
 - In the JavaScript environment, `popclip.input.regexResult` is an array
   containing the full result of the regex match, including any capture groups.
   Unlike previous PopClip versions, this array is now always available

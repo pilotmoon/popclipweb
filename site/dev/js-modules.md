@@ -96,7 +96,7 @@ Observe a few things:
 ## Static properties
 
 Certain properties of the extension can only be defined in the static config,
-and cannot be overriden by the module. These are `popclipVersion`,
+and cannot be overriden by the module. These are `identifier`, `popclipVersion`,
 `macosVersion` and `entitlements`.
 
 ## Module actions
