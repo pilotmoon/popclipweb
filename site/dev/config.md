@@ -168,13 +168,13 @@ following structure.
 
 The `type` field of an option dictionary can be one of the following:
 
-| Type       | Description                                                                                                                          |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `string`   | A text field.                                                                                                                        |
-| `boolean`  | A checkbox.                                                                                                                          |
-| `multiple` | A multiple choice list. The `values` field must be provided.                                                                         |
-| `secret`   | A secret text field. The value is obscured and is stored in the keychain. This is useful for sensitive information such as API keys. |
-| `heading`  | Acts as a heading to group options together.                                                                                         |
+| Type       | Description                                                                          |
+| ---------- | ------------------------------------------------------------------------------------ |
+| `string`   | A text field.                                                                        |
+| `boolean`  | A checkbox.                                                                          |
+| `multiple` | A multiple choice list. The `values` field must be provided.                         |
+| `secret`   | Concealed text entry. The value persisted in the keychain.                           |
+| `heading`  | Acts as a heading to group options together.                                         |
 
 ## Config notes
 
