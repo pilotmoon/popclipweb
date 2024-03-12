@@ -69,10 +69,6 @@ Updated as of Build 4481.
   to `~/Library/Application Support/PopClip/Extensions`.
 - Updated all embedded NPM modules to latest versions.
 
-### Removed
-
-- Removed `zod` from the embedded NPM modules.
-
 ## PopClip 2023.9 (4225)
 
 ### Added

@@ -140,21 +140,23 @@ invalid path is supplied, `undefined` is returned.
 Some libraries from [NPM](https://www.npmjs.org/) are bundled within the PopClip
 app itself, and are available to load by scripts. These are:
 
-| Library        | Version | Description                    |
-| -------------- | ------- | ------------------------------ |
-| axios          | 1.5.0   | HTTP client                    |
-| case-anything  | 2.1.13  | Case conversion library        |
-| content-type   | 1.0.5   | Parse HTTP Content-Type header |
-| dom-serializer | 2.0.0   | HTML serializer                |
-| entities       | 4.5.0   | HTML entity encoder/decoder    |
-| htmlparser2    | 8.0.2   | HTML parser                    |
-| js-yaml        | 4.1.0   | YAML parser                    |
-| linkedom       | 0.15.0  | DOM implementation             |
-| linkifyjs      | 4.1.1   | Detect web links in text       |
-| rot13-cipher   | 1.0.0   | ROT13 cipher                   |
-| sanitize-html  | 2.11.0  | HTML sanitizer                 |
-| turndown       | 7.1.2   | HTML to Markdown converter     |
-| typescript     | 5.2.2   | TypeScript transpiler & tools  |
+| Library                    | Version | Description                    |
+| -------------------------- | ------- | ------------------------------ |
+| axios                      | 1.6.7   | HTTP client                    |
+| case-anything              | 2.1.13  | Case conversion library        |
+| content-type               | 1.0.5   | Parse HTTP Content-Type header |
+| dom-serializer             | 2.0.0   | HTML serializer                |
+| emoji-regex                | 10.3.0  | Emoji regular expression       |
+| entities                   | 4.5.0   | HTML entity encoder/decoder    |
+| fast-json-stable-stringify | 2.1.0   | Stable JSON stringify          |
+| htmlparser2                | 9.1.0   | HTML parser                    |
+| js-yaml                    | 4.1.0   | YAML parser                    |
+| linkedom                   | 0.16.8  | DOM implementation             |
+| linkifyjs                  | 4.1.3   | Detect web links in text       |
+| rot13-cipher               | 1.0.0   | ROT13 cipher                   |
+| sanitize-html              | 2.12.1  | HTML sanitizer                 |
+| turndown                   | 7.1.2   | HTML to Markdown converter     |
+| typescript                 | 5.4.2   | TypeScript transpiler & tools  |
 
 Library modules may be loaded by name, for example:
 
