@@ -243,6 +243,7 @@ follows:
 | blocked apps              | excluded apps    |
 | flip horizontal           | flip x           |
 | flip vertical             | flip y           |
+| id                        | identifier       |
 | image file                | icon             |
 | java script               | javascript       |
 | java script file          | javascript file  |
