@@ -268,5 +268,14 @@
     "supportsOpenIn": false,
     "bundleId": "org.chromium.Thorium",
     "homepageUrl": "https://thorium.rocks/"
+  },
+  {
+    "name": "Sigma OS",
+    "supportsAware": true,
+    "supportsPageInfo": true,
+    "supportsAddressBar": false,
+    "supportsOpenIn": false,
+    "bundleId": "com.sigmaos.sigmaos.macos",
+    "homepageUrl": "https://sigmaos.com/"
   }
 ]
