@@ -4,7 +4,7 @@ import config from './config/config.json'
 import { querifyDescriptor } from './helpers/iconDescriptor.js'
 import { useData } from 'vitepress'
 
-const cacheKey = "a";
+const cacheKey = "a1";
 const { isDark } = useData();
 const props = defineProps<{
     spec: string
