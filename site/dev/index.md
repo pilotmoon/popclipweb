@@ -97,7 +97,7 @@ If the unsigned extension warning gets annoying while you test your work, you
 can turn it off. Run the following command at the Terminal, then Quit and
 restart PopClip:
 
-`defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES"`
+`defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES`
 
 ### Debug output
 
