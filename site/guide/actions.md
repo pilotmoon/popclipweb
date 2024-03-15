@@ -39,8 +39,8 @@ trackpad button.
 
 **Modifiers:**
 
-Hold **Shift (⌥)** to perform the action with plain text only. This will
-remove any formatting from the text.
+Hold **Shift (⌥)** to perform the action with plain text only. This will remove
+any formatting from the text.
 
 **Settings:**
 
@@ -54,8 +54,8 @@ remove any formatting from the text.
 The Search action opens a web search for the selected text. The default search
 engine is Google, but you can change this in the actions's settings.
 
-Searches open in the current app if it is a [known browser](/kb/browsers), or else 
-in the system default browser.
+Searches open in the current app if it is a [known browser](/kb/browsers), or
+else in the system default browser.
 
 **Availability:**
 
@@ -63,7 +63,7 @@ Always available, subject to a maximum length limit.
 
 **Modifiers:**
 
-Hold **Shift (⇧)** to copy the search URL instead of opening it.
+Hold **Shift (⇧)** to open the search in a background tab, in [supported browsers](/kb/browsers).
 
 **Settings:**
 
@@ -80,7 +80,7 @@ selected text. If the text contains multiple web URLs, all of them will open in
 separate tabs. The action will also detect "URL-like" text lacking a scheme
 prefix and add `https:` when opening it.
 
-URLs open in the current app if it is a [known browser](/kb/browsers), or else 
+URLs open in the current app if it is a [known browser](/kb/browsers), or else
 in the system default browser.
 
 In addition to web URLs, PopClip detects single instances of the following URL
@@ -97,7 +97,9 @@ text itself; links that are behind hyperlinks cannot be detected.
 
 **Modifiers:**
 
-Hold **Shift (⇧)** to copy the URLs to the clipboard as a list, instead of
+Hold **Shift (⇧)** to open the URLs in a background tab, in [supported browsers](/kb/browsers).
+
+Hold **Option (⌥)** to copy the URLs to the clipboard as a list, instead of
 opening them.
 
 **Settings:**

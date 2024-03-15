@@ -9,6 +9,7 @@ export const ZBrowser = z.object({
   supportsAware: z.boolean(),
   supportsPageInfo: z.boolean(),
   supportsAddressbar: z.boolean(),
+  supportsBackgroundTab: z.boolean(),
   supportsOpenIn: z.boolean(),
 });
 type Browser = z.infer<typeof ZBrowser>;

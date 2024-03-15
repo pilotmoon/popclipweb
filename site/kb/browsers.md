@@ -1,5 +1,5 @@
 ---
-aside: true
+aside: false
 ---
 
 <script setup lang="ts">
@@ -20,6 +20,7 @@ support provided for each one. (See [Key to table](#key-to-table).)
 <th style="text-align: center">Basic</th>
 <th style="text-align: center">Page Info</th>
 <th style="text-align: center">Address Bar</th>
+<th style="text-align: center">Background Tab</th>
 <th style="text-align: center">Open In</th>
 </tr>
 </thead>
@@ -33,6 +34,7 @@ support provided for each one. (See [Key to table](#key-to-table).)
 <td style="text-align: center">{{ browser.supportsAware ? yes : no }}</td>
 <td style="text-align: center">{{ browser.supportsPageInfo ? yes : no }}</td>
 <td style="text-align: center">{{ browser.supportsAddressBar ? yes : no }}</td>
+<td style="text-align: center">{{ browser.supportsBackgroundTab ? yes : no }}</td>
 <td style="text-align: center">{{ browser.supportsOpenIn ? yes : no }}</td>
 </tr>
 </tbody>
@@ -50,6 +52,9 @@ The table contains columns for each of the following features:
 
 - **Address Bar:** This column indicates if PopClip will pop-up when you
   single-click in the browser's address bar.
+
+- **Background Tab:** This column indicates whether the browser supports
+  openening searches and URLs in a background tab by holding down the Shift key.
 
 - **Open In:** This column indicates whether the browser is available as a
   target in the
