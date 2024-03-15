@@ -7,11 +7,11 @@ This page will give you a comprehensive overview of PopClip's settings.
 
 ## The settings menu
 
-PopClip's settings menu is accessed by clicking the ![PopClip menu bar icon](./media/icon-status.png#icon) icon in the menu bar.
+PopClip's settings menu is accessed by clicking the <InlineIcon spec="bundle:status-icon" /> icon in the menu bar.
 
-![](./media/shot-settings-general-2.png "PopClip menu bar icon and s  ettings menu.")
+![](./media/shot-settings-general-2.png "PopClip menu bar icon and settings menu.")
 
-The settings menu has five panes:<br>[![Home icon](./media/icon-home.png#icon) Home](#home-pane), [![Options icon](./media/icon-options.png#icon) Options](#options-pane), [![Actions icon](./media/icon-exts.png#icon) Actions](#actions-pane), [![Excluded Apps icon](./media/icon-apps.png#icon) Excluded Apps](#excluded-apps-pane) and [![About icon](./media/icon-about.png#icon) About](#about-pane).
+The settings menu has five panes:<br>[<InlineIcon spec="bundle:HomeIcon" />  Home](#home-pane), [<InlineIcon spec="bundle:gear" /> Options](#options-pane), [<InlineIcon spec="bundle:jigsaw2" /> Actions](#actions-pane), [<InlineIcon spec="bundle:NoEntry" /> Excluded Apps](#excluded-apps-pane) and [<InlineIcon spec="bundle:Info" /> About](#about-pane).
 
 ### Turn PopClip On and Off
 
@@ -25,7 +25,7 @@ On/off state can also be set with [AppleScript](/kb/applescript).
 Even when PopClip is turned off, you can use the [keyboard shortcut](./basics#activate-with-a-keyboard-shortcut) to make PopClip appear.
 :::
 
-## ![Home icon](./media/icon-home.png#iconleft) Home pane
+## <InlineIcon spec="bundle:HomeIcon" /> Home pane
 
 <figure>
   <img src="./media/shot-settings-home-sa.png#pref" />
@@ -47,7 +47,7 @@ If you have the Mac App Store or Setapp edition, you will not see the *Check for
 
 At the bottom of the Home pane is the **Quit** button. Click this button to quit PopClip.
 
-## ![Options icon](./media/icon-options.png#iconleft) Options pane
+## <InlineIcon spec="bundle:gear" /> Options pane
 
 ![](./media/shot-settings-options-3.png#pref "Options pane.")
 
@@ -89,7 +89,7 @@ Set a keyboard shortcut for making PopClip appear. See [Activate with a keyboard
 You can use any key combination you like, but it's good to pick somehting that's easy to remember and doesn't conflict with other common shortcuts. Personally, I use ⌃⌘P.
 :::
 
-## ![Actions icon](./media/icon-exts.png#iconleft) Actions pane
+## <InlineIcon spec="bundle:gear" /> Actions pane
 
 ![](./media/shot-settings-actions-1.png#pref "Actions pane, showing the built-in actions in their default order.")
 
@@ -101,15 +101,15 @@ For details about the built-in actions and their settings, see [Actions](/guide/
 
 ### Action settings
 
-You can enable or disable actions by checking or un-checking the box next to the action name. Click the cog icon (![Cog icon](./media/icon-options.png#icon)) next to the action name to access that action's settings.
+You can enable or disable actions by checking or un-checking the box next to the action name. Click the cog icon (<InlineIcon spec="bundle:gear" />) next to the action name to access that action's settings.
 
-Clicking the Plus (![Plus icon](./media/icon-plus.png#icon)) button will take you to the [extensions directory](/extensions/).
+Clicking the Plus (<InlineIcon spec="bundle:Plus" />) button will take you to the [extensions directory](/extensions/).
 
 #### Re-ordering actions
 
 To re-order the actions, drag an action's icon up or down in the list.
 
-![](./media/anim-actions-reorder-1.mp4 "Re-ordering the actions.")
+![](./media/anim-actions-reorder-2.mp4 "Re-ordering the actions.")
 
 ::: info Spelling action
 The Spelling action is always at the top of the list and can't be moved.
@@ -117,7 +117,7 @@ The Spelling action is always at the top of the list and can't be moved.
 
 #### Deleting actions
 
-To delete an action, first click the Pencil icon (![Pencil icon](./media/icon-pencil.png#icon)) to enter edit mode. Then click the Delete button (![Delete icon](./media/icon-deletex.png#icon)) next to the action you want to delete. Click the Done button to exit edit mode.
+To delete an action, first click the Pencil icon (<InlineIcon spec="bundle:pencilicon" />) to enter edit mode. Then click the Delete button (<InlineIcon spec="preserve_color bundle:DeleteX" />) next to the action you want to delete. Click the Done button to exit edit mode.
 
 ![](./media/anim-actions-delete-1.mp4 "Deleting an action.")
 
@@ -125,7 +125,7 @@ To delete an action, first click the Pencil icon (![Pencil icon](./media/icon-pe
 The Delete button is shown for extensions only. You cannot delete the built-in actions.
 :::
 
-## ![Excluded Apps icon](./media/icon-apps.png#iconleft) Excluded Apps pane
+## <InlineIcon spec="bundle:NoEntry" /> Excluded Apps pane
 
 ![](./media/shot-settings-apps-2.png#pref "Excluded Apps pane.")
 
@@ -135,11 +135,11 @@ The Excluded Apps pane lets you choose certain apps that PopClip will not appear
 Even when PopClip is excluded from an app, you can still use the [keyboard shortcut](./basics#activate-with-a-keyboard-shortcut) to make PopClip appear in that app.
 :::
 
-- Click the Plus button (![Plus icon](./media/icon-plus.png#icon)) to open the file browser and choose an app to exclude.
+- Click the Plus button (<InlineIcon spec="bundle:Plus" />) to open the file browser and choose an app to exclude.
 - Or, Option(⌥)-click the Plus button to add the frontmost app to the list.
-- To remove an app from the list, select it in the list and click the Minus button (![Minus icon](./media/icon-minus.png#icon)).
+- To remove an app from the list, select it in the list and click the Minus button (<InlineIcon spec="bundle:Minus" />).
 
-## ![About icon](./media/icon-about.png#iconleft) About pane
+## <InlineIcon spec="bundle:Info" /> About pane
 
 <figure>  
   <img src="./media/shot-settings-about-mas-2.png#pref" />
@@ -153,9 +153,9 @@ The About pane shows information about the version and edition of PopClip you ar
 
 When you are running a licensed copy of PopClip, there are three icon buttons at the bottom of the About pane:
 
-- ![](./media/icon-help.png#icon) Help button: Opens this user guide in your browser.
-- ![](./media/icon-envelope.png#icon) Envelope button: Open a new email message to send to the developer.
-- ![](./media/icon-twitter.png#icon) Twitter button: Opens [PopClip's Twitter page](/support).
+- <InlineIcon spec="bundle:help" /> Help button: Opens this user guide.
+- <InlineIcon spec="bundle:mail" /> Mail button: Open a new email message to send to the developer.
+- <InlineIcon spec="bundle:forum" /> Forum button: Opens the [PopClip Forum](https://forum.popclip.app/).
 
 The text button at the bottom of the About pane differs between editions:
 
@@ -165,4 +165,4 @@ The text button at the bottom of the About pane differs between editions:
 
 ### Trial mode
 
-In trial mode (Standalone edition only), the About pane will instead show the number of uses remaining before the trial expires. The Buy button (![](./media/icon-buy-tag.svg#icon)) Opens the [buy](/buy) page in your browser.
+In trial mode (Standalone edition only), the About pane will instead show the number of uses remaining before the trial expires. The Buy button (<InlineIcon spec="preserve_aspect bundle:buy-tag" />) Opens the [buy](/buy) page in your browser.

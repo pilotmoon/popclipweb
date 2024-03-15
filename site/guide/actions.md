@@ -52,7 +52,8 @@ any formatting from the text.
 ### <InlineIcon spec="bundle:search" /> Search
 
 The Search action opens a web search for the selected text. The default search
-engine is Google, but you can change this in the actions's settings.
+engine is Google (except if your Mac's region is China, in
+which case it's Baidu). You can change the search engine in the actions's settings.
 
 Searches open in the current app if it is a [known browser](/kb/browsers), or
 else in the system default browser.
@@ -65,13 +66,18 @@ Always available, subject to a maximum length limit.
 
 Hold **Shift (⇧)** to open the search in a background tab, in [supported browsers](/kb/browsers).
 
+Hold **Option (⌥)** to use the alternate search engine, if set.
+
 **Settings:**
 
-![](./media/shot-prefs-search-1.png#pref "Search settings.")
+![](./media/shot-prefs-search-2.png#pref "Search settings.")
 
 - **Search URL**: The URL of the search engine. The placeholder `***` will be
   replaced with the selected text. For example, the default Google search URL is
   `https://www.google.com/search?q=***`.
+
+- **Alternate Search URL**: An optional second search engine, which can be
+  triggered by holding the **Option (⌥)** key.
 
 ### <InlineIcon spec="bundle:link" /> Open Link
 
@@ -84,8 +90,7 @@ URLs open in the current app if it is a [known browser](/kb/browsers), or else
 in the system default browser.
 
 In addition to web URLs, PopClip detects single instances of the following URL
-schemes: `evernote:`, `omnifocus:`, `spotify:`, `ftp:`, `bluesky:`, `hook:`,
-`craftdocs:`, `x-devonthink-item`.
+schemes: `bluesky:`, `craftdocs:`, `evernote:`, `ftp:`, `hook:`, `message:`, `omnifocus:`, `spotify:`, `x-devonthink-item`.
 
 **Try it:** `https://apple.com` `xkcd.com`
 `spotify:track:421Gp1eSmOIcD6alTWowFR`
