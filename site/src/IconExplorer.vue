@@ -11,7 +11,7 @@ const spec = ref("A")
         <span>Try it out! Type in the box to see the icon it makes.</span>
         <ElInput v-model="spec" placeholder="Type icon specifier" />
         <div class="icon-preview">
-            <Icon :spec="spec" :height="128" />
+            <Icon :spec="spec" />
         </div>          
         
     </div>
