@@ -14,19 +14,19 @@
     "@vicons/fa": "0.12.0",
     "@vicons/utils": "0.1.4",
     "@vueuse/core": "10.3.0",
-    "axios": "1.4.0",
+    "axios": "1.6.7",
     "element-plus": "2.3.12",
     "js-sha256": "0.10.1",
     "lru-cache": "10.0.1",
     "markdown-it-html5-media": "0.7.1",
     "markdown-it-image-figures": "2.1.1",
     "patch-package": "8.0.0",
-    "sanitize-html": "2.11.0",
+    "sanitize-html": "2.12.1",
     "unplugin-element-plus": "0.8.0",
-    "vitepress": "1.0.0-rc.31",
-    "vue": "3.3.4",
+    "vitepress": "1.0.0-rc.45",
+    "vue": "3.4.21",
     "vue3-simple-icons": "9.10.0",
-    "zod": "3.21.4"
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@types/node": "20.4.7"
