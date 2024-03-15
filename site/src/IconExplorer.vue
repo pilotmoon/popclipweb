@@ -8,11 +8,12 @@ const spec = ref("A")
 
 <template>
     <div class="icon-explorer">
-        <span>Try it out! Type an icon specifier in the box to see the icon it produces.</span>
+        <span>Try it out! Type in the box to see the icon it makes.</span>
         <ElInput v-model="spec" placeholder="Type icon specifier" />
         <div class="icon-preview">
-            <Icon :spec="spec" />
-        </div>
+            <Icon :spec="spec" :height="128" />
+        </div>          
+        
     </div>
 </template>
 
@@ -25,13 +26,15 @@ const spec = ref("A")
 
     display: flex;
     flex-direction: column;
+    
     gap: 16px;
 }
 .icon-preview {
-    display: flex;
-    justify-content: center;
+    text-align: center
 }
-.icon {
+.icon-preview img {
+    display: inline-block;
     height: 64px;
+    background-color: var(--vp-c-bg);
 }
 </style>

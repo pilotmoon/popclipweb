@@ -37,6 +37,8 @@ shading. PNG icons should be at least 256 pixels high.
 
 ## Using an icon specifier string
 
+<IconExplorer />
+
 An icon specifier string describes an icon using a simple text-based format. The
 string consists of a series of space-separated keywords, with the final keyword
 specifying the **base icon** (see [Base icon formats](#base-icon-formats)), and
