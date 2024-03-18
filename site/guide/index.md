@@ -111,8 +111,6 @@ following people and projects:
   Andy Matuschak and the Sparkle project contributors.
 - [AquaticPrime](https://github.com/bdrister/AquaticPrime/blob/master/Source/CoreFoundation/AquaticPrime.c)
   (BSD License) by Lucas Newman and other contributors.
-- [EMKeyChain](https://github.com/irons/EMKeychain) (MIT license) by Brian
-  Amerige of Extendmac, LLC.
 - [ShortcutRecorder](https://github.com/Kentzo/ShortcutRecorder) (CC Attribution
   4.0) by Ilya Kulakov and other contributors.
 - [nanosvg](https://github.com/memononen/nanosvg) (zlib license) by Mikko
