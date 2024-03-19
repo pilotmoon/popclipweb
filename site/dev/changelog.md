@@ -21,22 +21,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
-## Unreleased / Beta
-
-Updated as of Build 4481.
+## PopClip 2024.3 (4508)
 
 ### Added
 
-- The text string format can now be used for all kinds of icons, e.g. "square
-  filled symbol:flame".
-- Add `strike` modifier for icon strings, which overlays a strike-out effect.
-- Add `flip_x`, `flip_y`, `move_x (percent of viewport)`,
-  `move_y (percent of viewport)`, `scale (percent)` and `rotate (degrees)`
-  modifiers for icon strings.
+- The text string format can now be used for all kinds of icons, e.g.
+  `square filled symbol:flame`.
+- Added `strike` modifier for icon strings, which overlays a strike-out effect.
+- Added `flip_x`, `flip_y`, `move_x`, `move_y`, `scale (percent)` and
+  `rotate (degrees)` modifiers for icon strings.
 - Emoji text icons now render in color.
-
-<!-- - Added `data:` icon type for specifying icons as raw data. -->
-
 - In the JavaScript environment, `popclip.input.regexResult` is an array
   containing the full result of the regex match, including any capture groups.
   Unlike previous PopClip versions, this array is now always available
@@ -70,6 +64,12 @@ Updated as of Build 4481.
   from `~/Library/Application Support/com.pilotmoon.popclip-setapp/Extensions`
   to `~/Library/Application Support/PopClip/Extensions`.
 - Updated all embedded NPM modules to latest versions.
+
+### Documentation
+
+- Updated all documentation to reflect the changes in this release. In
+  particular, the [Icons](/dev/icons) page has been fully rewritten to reflect
+  the new icon string features.
 
 ## PopClip 2023.9 (4225)
 
