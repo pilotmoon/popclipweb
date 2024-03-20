@@ -63,7 +63,7 @@ export async function loadStore() {
     const countryInfo = getCountryInfo(country);
     store.countryCode.value = country;
     store.countryName.value = countryInfo.countryName;
-    store.paddlePrice.value = prices.paddle.netFormatted;
+    store.paddlePrice.value = prices.paddle.formatted;
     store.masUrl.value = getMacAppStoreUrl(
       config.mas.appId,
       config.mas.slug,

@@ -72,17 +72,19 @@ function trackBuy(button) {
             <span :class="$style.price">{{ roundPrice(store.paddlePrice.value) }}</span>
         </div>
     </div>
-    <!-- <div :class="store.isLoaded ? $style.infoLine : $style.infoLineLoading">
+    <div :class="store.isLoaded ? $style.infoLine : $style.infoLineLoading">
         {{ store.isLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` :
             `Loading prices...` }}
-    </div> -->
+    </div>
 </template>
 
 <style module>
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 8px;
+    /* center the boxes */    
     width: 100%;
 }
 
