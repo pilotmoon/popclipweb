@@ -17,7 +17,7 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 
 ## How to migrate
 
-1. Install PopClip from the MAS, if it is not installed
+1. Install PopClip 2023.9 from the MAS, if it is not installed
    already. _If you need to install it, you can find it in the Purchased section
    your account page in the MAS._
 2. Run PopClip (MAS edition) once, then quit it.
