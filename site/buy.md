@@ -13,15 +13,16 @@ import Setapp from '/src/Setapp.vue'
 
 ## One-time Purchase
 
+PopClip is available as a one-time purchase by buying a license key.
+
+<Buy />
+
 ::: info PopClip has left the Mac App Store
 
 As of 20th March 2024, PopClip is no longer available to buy on the Mac App Store. More information in the [forum post](https://forum.popclip.app/t/popclip-is-leaving-the-mac-app-store/2188).
 
 :::
 
-PopClip is available as a one-time purchase by buying a license key.
-
-<Buy />
 
 ## Subscribe
 
