@@ -46,13 +46,13 @@ function trackBuy(button) {
 
 <template>
     <div :class="$style.container">
-        <div :class="$style.box">
+        <!-- <div :class="$style.box">
             <span>Buy from the Mac App Store</span><br>
             <a :href="store.masUrl.value" target="_blank" @click="trackBuy('Mac App Store')">
                 <img :class="$style.buybadge" src="/badge-mas.svg" alt="Download on the Mac App Store">
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
-        </div>
+        </div> -->
         <div :class="$style.box" :hidden="!isLizhi || !store.isLoaded">
             <span>Buy License Key from DIGITALYCHEE</span><br>
             <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
