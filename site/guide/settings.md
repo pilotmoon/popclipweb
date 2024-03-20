@@ -30,7 +30,7 @@ Even when PopClip is turned off, you can use the [keyboard shortcut](./basics#ac
 <figure>
   <img src="./media/shot-settings-home-sa.png#pref" />
   <img src="./media/shot-settings-home-se.png#pref" />
-  <figcaption>Home pane: Standalone edition (left), Mac App Store and Setapp editions (right).</figcaption>
+  <figcaption>Home pane: Standalone edition (left), Setapp edition (right).</figcaption>
 </figure>
 
 ### App settings
@@ -39,8 +39,8 @@ Even when PopClip is turned off, you can use the [keyboard shortcut](./basics#ac
 - **Show in menu bar:** When disabled, the icon will be hidden from the menu bar. To show PopClip's settings when the icon is hidden, double-click the PopClip app in your Applications folder. *(Default: On)*
 - **Check for updates** (Standalone edition only): When enabled, PopClip will check for updates automatically in the background. You can trigger an immediate update check by un-checking and re-checking this option. *(Default: On)*
 
-:::tip Mac App Store and Setapp editions
-If you have the Mac App Store or Setapp edition, you will not see the *Check for updates* option. Updates are managed by the Mac App Store or Setapp.
+:::tip Setapp edition
+If you have the Setapp edition, you will not see the *Check for updates* option. Updates are managed by Setapp.
 :::
 
 ### Quit PopClip
@@ -144,7 +144,7 @@ Even when PopClip is excluded from an app, you can still use the [keyboard short
 <figure>  
   <img src="./media/shot-settings-about-mas-2.png#pref" />
   <img src="./media/shot-settings-about-sa-trial-1.png#pref" />
-  <figcaption>About pane: Mac App Store  edition (left), Standalone edition in trial mode (right).</figcaption>
+  <figcaption>About pane: Mac App Store edition (left), Standalone edition in trial mode (right).</figcaption>
 </figure>
 
 The About pane shows information about the version and edition of PopClip you are using.
@@ -160,7 +160,7 @@ When you are running a licensed copy of PopClip, there are three icon buttons at
 The text button at the bottom of the About pane differs between editions:
 
 - **View License** (Standalone edition): Opens a window showing your license details.
-- **Rate on App Store** (Mac App Store edition): Opens the Mac App Store page for PopClip.
+<!-- - **Rate on App Store** (Mac App Store edition): Opens the Mac App Store page for PopClip. -->
 - **Release Notes** (Setapp edition): Opens the Setapp release notes window.
 
 ### Trial mode
