@@ -7,6 +7,7 @@ lastUpdated: false
 <script setup>
 import Buy from '/src/Buy.vue'
 import Setapp from '/src/Setapp.vue'
+import { AppstoreIcon } from 'vue3-simple-icons' 
 </script>
 
 # Buy PopClip
@@ -17,7 +18,7 @@ PopClip is available as a one-time purchase by buying a license key.
 
 <Buy />
 
-::: info PopClip has left the Mac App Store
+::: info <AppstoreIcon style="fill: var(--vp-c-text-1); display: inline-block; height:16px; vertical-align: middle; margin:  0 -4px 0 -3px;" />&nbsp;PopClip has left the Mac App Store
 
 As of 20th March 2024, PopClip is no longer distributed on the Mac App Store. I explained the reasons in a [forum post](https://forum.popclip.app/t/popclip-is-leaving-the-mac-app-store/2188).
 
@@ -25,7 +26,7 @@ Existing Mac App Store customers may [migrate for free to the Standalone edition
 
 :::
 
-## Subscribe
+## Setapp
 
 Alternatively, PopClip is also available as part of a
 [Setapp subscription](https://go.setapp.com/stp304?refAppId=159&refVendorId=92).
