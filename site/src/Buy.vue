@@ -127,12 +127,12 @@ function trackBuy(button) {
 
 .infoLine {
     text-align: center;
-    margin-bottom: -24px;
+    
 }
 
 .infoLineLoading {
     text-align: center;
-    margin-bottom: -24px;
+    
     color: var(--vp-c-text-2);
 }
 

@@ -17,17 +17,21 @@ PopClip is available as a one-time purchase by buying a license key.
 
 <Buy />
 
-<!-- ::: info PopClip has left the Mac App Store
+::: info PopClip has left the Mac App Store
 
-As of 20th March 2024, PopClip is no longer available to buy on the Mac App Store. More information in the [forum post](https://forum.popclip.app/t/popclip-is-leaving-the-mac-app-store/2188).
+As of 20th March 2024, PopClip is no longer distributed on the Mac App Store. I explained the reasons in a [forum post](https://forum.popclip.app/t/popclip-is-leaving-the-mac-app-store/2188).
 
-::: -->
+Mac App Store customers should follow these [migration instructions](https://www.popclip.app/kb/mas) to continue receiving updates.
 
+:::
 
 ## Subscribe
 
-PopClip is also available as part of a
+Alternatively, PopClip is also available as part of a
 [Setapp subscription](https://go.setapp.com/stp304?refAppId=159&refVendorId=92).
+
+This is a great option if you are interested in using the other apps available from
+Setapp as well.
 
 <Setapp />
 
