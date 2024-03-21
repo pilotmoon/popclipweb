@@ -18,7 +18,7 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 ## Proof of your MAS purchase is already in iCloud
 
 If you use iCloud and ever ran PopClip 2023.7 or later from the MAS, then
-PopClip has already saved proof of your MAS purchase to your iCloud account.
+PopClip has already recorded proof of your MAS purchase in your iCloud account.
 
 On any Mac where you use the same iCloud account (including on new Macs in the
 future), you can simply download the Standalone edition of PopClip from the
@@ -26,6 +26,12 @@ future), you can simply download the Standalone edition of PopClip from the
 detect your MAS purchase and unlock itself.
 
 ![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
+
+## Homebrew
+
+[Homebrew](https://brew.sh/) users can install the Standalone edition of PopClip
+with the command `brew install popclip`. It will automatically unlock itself via
+iCloud, as above.
 
 ## Full steps for migration
 
