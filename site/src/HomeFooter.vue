@@ -1,11 +1,13 @@
 <script setup>
 import Setapp from './Setapp.vue'
+import InfoBox from './InfoBox.vue'
 </script>
 <template>
     <div class="container">
         <div class="HomeFooter">
+            <div style="padding-bottom: 16px;" ><InfoBox /></div>
             <Setapp />
-        </div>
+        </div>        
     </div>
 </template>
 

@@ -7,6 +7,7 @@ lastUpdated: false
 <script setup>
 import Download from '/src/Download.vue';
 import AaLink from "/src/AaLink.vue";
+import InfoBox from '/src/InfoBox.vue';
 import { data } from "/src/data/releases.data";
 import { SetappIcon, AppstoreIcon } from 'vue3-simple-icons'
 import { formatDate, formatSize, formatArchs } from "/src/helpers/formatters";
@@ -18,6 +19,8 @@ const pinned = data.production.filter((r) => r.pin);
 </script>
 
 # Download PopClip
+
+<InfoBox />
 
 ## Latest Release
 

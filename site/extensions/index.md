@@ -12,6 +12,9 @@ pageClass: popclip-directory
 ---
 <script setup>
 import Directory from '/src/Directory.vue'
+import InfoBox from '/src/InfoBox.vue'
 </script>
+
+<InfoBox />
 
 <Directory />

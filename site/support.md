@@ -4,8 +4,13 @@ editLink: false
 titleTemplate: false
 lastUpdated: false
 ---
+<script setup>
+import InfoBox from '/src/InfoBox.vue'
+</script>
 
 # PopClip Support & Feedback
+
+<InfoBox />
 
 ## :eyes: Self-help
 

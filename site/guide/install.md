@@ -4,9 +4,12 @@ outline: deep
 
 <script setup>
 import AaLink from "/src/AaLink.vue";
+import InfoBox from "/src/InfoBox.vue";
 </script>
 
 # Installation
+
+<InfoBox />
 
 This page will guide you through the process of obtaining and installing PopClip
 on your Mac.
