@@ -20,7 +20,7 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 If you use iCloud and ever ran PopClip 2023.7 or later from the MAS, then PopClip has already
 saved proof of your MAS purchase to your iCloud account.
 
-On any Mac where you use the same iCloud account (including on mew Macs in the
+On any Mac where you use the same iCloud account (including on new Macs in the
 future), you can simply download the Standalone edition of PopClip from the
 [downloads](/download) page and put it in the /Applications folder. It will
 detect your MAS purchase and unlock itself.
