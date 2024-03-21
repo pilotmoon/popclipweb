@@ -21,7 +21,7 @@ PopClip is available as a one-time purchase by buying a license key.
 
 As of 20th March 2024, PopClip is no longer distributed on the Mac App Store. I explained the reasons in a [forum post](https://forum.popclip.app/t/popclip-is-leaving-the-mac-app-store/2188).
 
-Existing Mac App Store customers should follow these [migration instructions](https://www.popclip.app/kb/mas) to continue receiving updates.
+Existing Mac App Store customers may [migrate for free to the Standalone edition](https://www.popclip.app/kb/mas) to continue receiving updates.
 
 :::
 
