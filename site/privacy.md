@@ -60,18 +60,18 @@ preferences.
 ### Crash reporting
 
 My apps have crash-reporting functionality. If a crash occurs, the app will send
-the technical details of the crash to me to help me fix it. My crash reporting
+the technical details of the crash to me to help me fix it. Crash reporting
 functionality is provided by [Microsoft App Center](https://appcenter.ms/).
 
 ### Analytics
 
-My apps have analytics functionality. The app will report anonymous usage data
-to me, including the type of computer, the version of macOS, the number of times
-the app is used, the number of times each feature within the app is used, and
-the identifiers of other applications you interact with using the app. This
-helps me improve the app and improve compatibility with other apps. No personal
-information or user data is recorded. My analytics functionality is provided by
-[Microsoft App Center](https://appcenter.ms/).
+My apps have analytics functionality. When enabled, the app will report
+anonymous usage data to me, including the type of computer, the version of
+macOS, the number of times the app is used, the number of times each feature
+within the app is used, and the identifiers of other applications you interact
+with using the app. This helps me improve the app and improve compatibility with
+other apps. No personal information or user data is recorded. Analytics
+functionality is provided by [Microsoft App Center](https://appcenter.ms/).
 
 ### Log files
 
@@ -90,15 +90,15 @@ When you access my websites, your visit will be recorded in my server logs. The
 logs record the page URL, date and time, referrer URL (if any), IP address,
 device type, operating system, and browser.
 
-My websites use no advertising or tracking cookies. Cookies and local storage
-are used for functionality such as purchase flow, user preferences, and login
-sessions.
+My websites carry no advertising and perform no tracking. Cookies and local
+storage are used for functionality such as purchase flow, user preferences, and
+login sessions.
 
 ### Forum
 
 The PopClip forum (<https://forum.popclip.app>) is self-hosted using
-[Discourse](https://www.discourse.org/) software. The forum contains its
-own [privacy notice](https://forum.popclip.app/privacy).
+[Discourse](https://www.discourse.org/) software. The forum contains its own
+[privacy notice](https://forum.popclip.app/privacy).
 
 ## Mailing list
 
