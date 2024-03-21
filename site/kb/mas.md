@@ -17,12 +17,13 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 
 ## Proof of your MAS purchase is already in iCloud
 
-If you use iCloud and ever ran PopClip 2023.7 or later, then PopClip has already
+If you use iCloud and ever ran PopClip 2023.7 or later from the MAS, then PopClip has already
 saved proof of your MAS purchase to your iCloud account.
 
-You can simply download the Standalone edition of PopClip from the
+On any Mac where you use the same iCloud account (including on mew Macs in the
+future), you can simply download the Standalone edition of PopClip from the
 [downloads](/download) page and put it in the /Applications folder. It will
-detect your MAS purchase from iCloud unlock itself.
+detect your MAS purchase and unlock itself.
 
 ![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
 
@@ -57,3 +58,5 @@ you can do the migration like this:
 
 - **How can I tell which edition of PopClip I have?**<br>In the PopClip
   preferences window, the About pane shows the edition of PopClip you are using.
+
+![](./media/shot-2024-3-about.png "About pane for PopClip 2024.3, Standalone edition")
