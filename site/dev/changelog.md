@@ -42,7 +42,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Icon properties set at the top level are no longer inherited by actions.
 - Config.json files are now parsed with a JSON parser instead of a YAML parser.
 - All extensions must now have a static config defining at least `name`. An
   override name may also be specified in the dynamic (JS module) config.
