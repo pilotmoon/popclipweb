@@ -28,11 +28,14 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 5. Unzip the downloaded file and drag the new PopClip app to your /Applications
    folder.
 6. Run the new PopClip app. It will detect your Mac App Store purchase and
-   unlock itself.
+   unlock itself. You can confirm this by checking the About pane in the
+   preferences window.
 
 **Note: PopClip saves proof of your MAS purchase in iCloud, so that you do not
 have to repeat this process on other Macs in future, as long as each Mac is
 signed in to the same iCloud account.**
+
+![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
 
 ### FAQs
 
