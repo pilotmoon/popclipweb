@@ -1,7 +1,7 @@
 # Migrate from the Mac App Store (MAS) edition to the Standalone edition
 
-The last released version of PopClip on the Mac App Store is v2023.9. This is the
-final update that will be available through the store.
+The last released version of PopClip on the Mac App Store is v2023.9. This is
+the final update that will be available through the store.
 
 If you have the MAS edition of PopClip, you can migrate for free to the
 Standalone edition to continue receiving updates.
@@ -17,8 +17,8 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 
 ## Proof of your MAS purchase is already in iCloud
 
-If you use iCloud and ever ran PopClip 2023.7 or later from the MAS, then PopClip has already
-saved proof of your MAS purchase to your iCloud account.
+If you use iCloud and ever ran PopClip 2023.7 or later from the MAS, then
+PopClip has already saved proof of your MAS purchase to your iCloud account.
 
 On any Mac where you use the same iCloud account (including on new Macs in the
 future), you can simply download the Standalone edition of PopClip from the
@@ -27,7 +27,7 @@ detect your MAS purchase and unlock itself.
 
 ![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
 
-## Full migration
+## Full steps for migration
 
 In case you do not use iCloud, or use a different iCloud account on a new Mac,
 you can do the migration like this:
@@ -55,6 +55,11 @@ you can do the migration like this:
   edition, you will receive updates automatically through the in-app update
   mechanism. Make sure that "Check for Updates" is enabled in the PopClip
   preferences.
+
+- **Are there any differences between the MAS and Standalone editions?**
+  <br>There are no functional differences between the MAS and Standalone
+  editions. They are both built from the exact same codebase. Only the method of
+  distribution is different.
 
 - **How can I tell which edition of PopClip I have?**<br>In the PopClip
   preferences window, the About pane shows the edition of PopClip you are using.
