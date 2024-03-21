@@ -17,7 +17,7 @@ extensions.
 
 ::: tip Getting help
 
-If you have any questions about the specification or need help with developing an extension, I encourage you to post to the [PopClip Forum](https://forum.popclip.app).
+If you have any questions about the specification or need help with developing an extension, I encourage you to post to the [PopClip Forum](https://forum.popclip.app). I frequently check the forum and will be happy to help you there.
 
 :::
 
