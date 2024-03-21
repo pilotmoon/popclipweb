@@ -149,7 +149,7 @@ export default defineConfig({
         {
           text: "Knowledge Base",
           items: [
-            { text: "⚠️ Mac App Store migration", link: "/kb/mas" },
+            { text: "Mac App Store migration", link: "/kb/mas" },
             { text: "Troubleshooting", link: "/kb/troubleshooting" },
             { text: "AppleScript interface", link: "/kb/applescript" },
             { text: "Browser support", link: "/kb/browsers" },
