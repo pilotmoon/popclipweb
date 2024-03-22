@@ -17,10 +17,11 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 
 ## How to migrate
 
-1. Download PopClip from the [download](/download) page, and unzip it.
-2. Put it in the `/Applications` folder, replacing the MAS edition. (MacOS will
+1. Quit your existing PopClip, if it is running.
+2. Download PopClip from the [download](/download) page, and unzip it.
+3. Put it in the `/Applications` folder, replacing the MAS edition. (MacOS will
    ask for your password to confirm deletion of the MAS edition.)
-3. Run the new PopClip app. It will detect your Mac App Store purchase and
+4. Run the new PopClip app. It will detect your Mac App Store purchase and
    unlock itself.
 
 ::: details Alternative: migrate using Homebrew
