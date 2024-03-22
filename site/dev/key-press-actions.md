@@ -16,7 +16,6 @@ field, as follows:
 | Key          | Type    | Description                                                                                                     |
 | ------------ | ------- | --------------------------------------------------------------------------------------------------------------- |
 | `key combo`  | String  | The key combination to press, as defined in [String format](#string-format).                                    |
-| `key combo`  | Integer | If a number is given, it is interpreted directly as a virtual key code (see below).                             |
 | `key combos` | Array   | Instead of a single key combo, you can supply array of them. PopClip will press all the key combos in sequence. |
 
 ## Input and output
