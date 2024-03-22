@@ -16,8 +16,7 @@ Anyone is welcome to use the beta release, a preview of the next version of PopC
 
 :::tip Beta access for Setapp customers
 
-<!-- - Mac App Store customers can download and use the beta from this page. It will pick up your existing settings and detect your purchase. -->
-- Setapp users should *not* download this beta. Instead, enable the beta updates option in Setapp settings, then click "Check for Updates..." in the Setapp menu.
+- Setapp users may download these betas, but they will run in trial mode. For long-term testing, selected betas are also published to Setapp. To receive them, enable beta updates option in Setapp settings.
 
 :::
 
