@@ -15,47 +15,55 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 
 :::
 
-## Proof of your MAS purchase is already in iCloud
+## How to migrate
 
-If you use iCloud and ever ran PopClip 2023.7 or later from the MAS, then
-PopClip has already recorded proof of your MAS purchase in your iCloud account.
+1. Download PopClip from the [download](/download) page, and unzip it.
+2. Put it in the `/Applications` folder, replacing the MAS edition. (MacOS will
+   ask for your password to confirm deletion of the MAS edition.)
+3. Run the new PopClip app. It will detect your Mac App Store purchase and
+   unlock itself.
 
-On any Mac where you use the same iCloud account (including on new Macs in the
-future), you can simply download the Standalone edition of PopClip from the
-[downloads](/download) page and put it in the /Applications folder. It will
-detect your MAS purchase and unlock itself.
+::: details Alternative: migrate using Homebrew
+
+[Homebrew](https://brew.sh/) users can perform the migration with one command:
+
+```
+brew reinstall popclip
+```
+
+:::
+
+## Installing in future on a new Mac
+
+You may be thinking that you have to mess about installing the MAS edition
+first, then the Standalone edition, whenever you install PopClip on a new Mac.
+Not so!
+
+In future, the Standalone edition will detect a proof your MAS purchase in
+iCloud and unlock itself.
+
+This assumes you have iCloud enabled on your Mac now, and you use the same
+iCloud account on the new Mac.
 
 ![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
 
-## Homebrew
+## Fallback method
 
-[Homebrew](https://brew.sh/) users can install the Standalone edition of PopClip
-with the command `brew install popclip`. It will automatically unlock itself via
-iCloud, as above.
+If you installed the Standalone edition and it did not unlock itself
+automatically, do the following:
 
-## Full steps for migration
-
-In case you do not use iCloud, or use a different iCloud account on a new Mac,
-you can do the migration like this:
-
-1. Install PopClip 2023.9 from the MAS, if it is not installed already. _If you
-   need to install it, you can find it in the Purchased section your account
-   page in the MAS._
+1. Install the Mac App Store edition of PopClip 2023.9. You can find it in the
+   Purchased section your account page in the MAS.
 2. Run PopClip (MAS edition) once, then quit it.
-3. Go to the /Applications folder in Finder and drag the PopClip app to the
-   Trash.
-4. Download the latest version of PopClip (Standalone edition) from the
-   [downloads](/download) page on this website.
-5. Unzip the downloaded file and drag the new PopClip app to your /Applications
-   folder.
-6. Run the new PopClip app. It will detect your Mac App Store purchase and
-   unlock itself. You can confirm this by checking the About pane in the
-   preferences window.
+
+Then follow the steps in the "How to migrate" section above.
 
 ## FAQs
 
 - **What happens to my settings and extensions?**<br>Your settings and
-  extensions will be preserved when you migrate to the Standalone edition.
+  extensions will be preserved when you migrate to the Standalone edition.<br>
+  _Important: do not use an app cleaner or uninstaller tool to remove the MAS
+  edition! That will likely delete your settings and extensions._
 
 - **How will I get future updates?**<br>After migrating to the Standalone
   edition, you will receive updates automatically through the in-app update
