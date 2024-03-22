@@ -34,6 +34,8 @@ brew reinstall popclip
 
 :::
 
+![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
+
 ## Installing in future on a new Mac
 
 You may be thinking that you have to mess about installing the MAS edition
@@ -46,18 +48,16 @@ iCloud and unlock itself.
 This assumes you have iCloud enabled on your Mac now, and you use the same
 iCloud account on the new Mac.
 
-![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
-
 ## Fallback method
 
-If you installed the Standalone edition and it did not unlock itself
-automatically, do the following:
+If the Standalone edition did not unlock itself automatically, refresh the MAS
+receipt by following these steps:
 
 1. Install the Mac App Store edition of PopClip 2023.9. You can find it in the
    Purchased section your account page in the MAS.
 2. Run PopClip (MAS edition) once, then quit it.
 
-Then follow the steps in the "How to migrate" section above.
+Then follow the steps in [How to migrate](#how-to-migrate) above.
 
 ## FAQs
 
