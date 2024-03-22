@@ -28,8 +28,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The text string format can now be used for all kinds of icons, e.g.
   `square filled symbol:flame`.
 - Added `strike` modifier for icon strings, which overlays a strike-out effect.
-- Added `flip_x`, `flip_y`, `move_x`, `move_y`, `scale (percent)` and
-  `rotate (degrees)` modifiers for icon strings.
+- Added `flip_x`, `flip_y`, `move_x`, `move_y`, `scale` and `rotate` modifiers
+  for icon strings.
 - Emoji text icons now render in color.
 - In the JavaScript environment, `popclip.input.regexResult` is an array
   containing the full result of the regex match, including any capture groups.
