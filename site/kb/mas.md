@@ -62,7 +62,7 @@ receipt by following these steps:
 
 Then follow the steps in [How to migrate](#how-to-migrate) above.
 
-## FAQs
+## Migration FAQs
 
 - **What happens to my settings and extensions?**<br>Your settings and
   extensions will be preserved when you migrate to the Standalone edition.<br>
