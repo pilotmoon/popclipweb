@@ -29,7 +29,7 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 [Homebrew](https://brew.sh/) users can perform the migration with one command:
 
 ```
-killall PopClip && brew reinstall popclip --force
+killall PopClip; brew reinstall popclip --force
 ```
 
 :::
