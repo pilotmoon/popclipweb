@@ -150,4 +150,4 @@ other projects. So the full list would be much longer.
 Copyright © 2023 Nicholas Moore.<br> This work is licensed under a
 [Creative Commons BY-SA 4.0 License](http://creativecommons.org/licenses/by-sa/4.0/).
 
-**PopClip &trade;** is a trademark of Nicholas Moore.
+**PopClip &reg;** is a registered trademark of Nicholas Moore.
