@@ -9,7 +9,7 @@ export default defineConfig({
   titleTemplate: ":title — PopClip",
   description: "Instant text actions for macOS",
   cleanUrls: true,
-  lastUpdated: true,
+  lastUpdated: false,
   sitemap: {
     hostname: "https://www.popclip.app",
   },
