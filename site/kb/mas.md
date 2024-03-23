@@ -34,6 +34,9 @@ brew reinstall popclip
 
 :::
 
+You can confirm the unlocked status by clicking View License in the About pane
+of PopClip's settings menu.
+
 ![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
 
 ## Installing in future on a new Mac
