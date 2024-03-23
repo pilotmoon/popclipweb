@@ -71,7 +71,7 @@ Then follow the steps in [How to migrate](#how-to-migrate) above.
 
 - **How will I get future updates?**<br>After migrating to the Standalone
   edition, you will receive updates automatically through the in-app update
-  mechanism. Make sure that "Check for Updates" is enabled in the PopClip
+  mechanism. Make sure that "Check for updates" is enabled in the PopClip
   preferences.
 
 - **Are there any differences between the MAS and Standalone editions?**
