@@ -82,4 +82,8 @@ Then follow the steps in [How to migrate](#how-to-migrate) above.
 - **How can I tell which edition of PopClip I have?**<br>In the PopClip
   preferences window, the About pane shows the edition of PopClip you are using.
 
+- **Can I get a license key for the Standalone edition?**<br>I am currently offering all MAS customers
+  a 50% discount on a license key for the Standalone edition. Please email proof
+  of your MAS purchase to my [support email](/support).
+
 ![](./media/shot-2024-3-about.png "About pane for PopClip 2024.3, Standalone edition")
