@@ -1,6 +1,6 @@
 # Migrate from the Mac App Store (MAS) edition to the Standalone edition
 
-The last released version of PopClip on the Mac App Store is v2023.9. This is
+The last released version of PopClip on the Mac App Store is 2023.9. This is
 the final update that will be available through the store.
 
 If you have the MAS edition of PopClip, you can migrate for free to the
