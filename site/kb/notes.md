@@ -38,3 +38,19 @@ other editions. For example, version `2023.7 (4151)` of the Standalone Edition
 is the same version as `2023.7 (1004151)` of the Mac App Store Edition.
 
 :::
+
+## How to take screenshots of PopClip
+
+> When I try to take a screenshot, the PopClip bar disappears. Is there a secret
+> to taking such a screenshot?
+
+In Terminal, enter:
+
+`defaults write com.pilotmoon.popclip ScreenshotMode -bool YES`
+
+then Quit and restart PopClip. Now you can use ⌘⇧4 to take a shot, and PopClip
+won't disappear when you press the keys.
+
+When you've done with screenshots and want to go back to normal:
+
+`defaults write com.pilotmoon.popclip ScreenshotMode -bool NO`
