@@ -217,13 +217,6 @@ meanings, to determine what type of action is created:
 | `language`    | String  | Specify `javascript` or `typescript` to create a [JavaScript action](./js-actions) or [module](./js-modules). Specifiy `applescript` to create an [AppleScript action](./applescript-actions). |
 | `module`      | Boolean | For JavaScript and TypeScript language only, set `true` if the source file should be loaded as a module, or `false` (default) if it should be loaded as an action.                             |
 
-::: tip Language field shorthand
-
-You can use `lang` as shorthand for `language`, `js` as shorthand for
-`javascript`, and `ts` as shorthand for `typescript`.
-
-:::
-
 ### Inverted syntax examples
 
 Here is a Python example:

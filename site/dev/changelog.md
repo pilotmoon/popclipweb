@@ -58,7 +58,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   extension replaces a signed extension with the same identifier.
 - Option labels are now optional. If omitted, the option `identifier` is used as
   the label.
-- `id` may be used as an alias for `identifier` fields in extension configs.
 - _For Setapp edition only:_ the storage location for Extensions has changed
   from `~/Library/Application Support/com.pilotmoon.popclip-setapp/Extensions`
   to `~/Library/Application Support/PopClip/Extensions`.
