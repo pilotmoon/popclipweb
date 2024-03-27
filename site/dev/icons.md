@@ -17,26 +17,7 @@ table img {
 
 # Icons
 
-Icons may be specified either by suppling an image file (PNG or SVG), or by
-using a text string to describe an icon.
-
-## Using image files
-
-[Packaged extensions](/dev/packages) can contain image files for use as icons.
-The the `icon` field should specify the path to the image file, relative to the
-extension's root directory.
-
-```json
-{
-  "icon": "icon.png"
-}
-```
-
-Images must be in either PNG or SVG format. A good icon will feature a
-monochrome shape on a transparent background. Variable opacity can be used for
-shading. PNG icons should be at least 256 pixels high.
-
-## Using an icon specifier string
+Icons are specified by using a text string to describe an icon.
 
 <IconExplorer />
 
@@ -62,6 +43,30 @@ Here are some examples:
 | `flip_x symbol:hand.raised`      | <Icon spec="flip_x symbol:hand.raised" />      | The `flip_x` modifier flips the base icon horizontally.                                                       |
 
 ## Base icon formats
+
+### File icons
+
+[Packaged extensions](/dev/packages) can contain image files for use as icons.
+File icons are specified with a path to the image file relative to the package
+root directory.
+
+```json
+{
+  "icon": "icon.png"
+}
+```
+
+Images must be in either PNG or SVG format. A good icon will feature a
+monochrome shape on a transparent background. Variable opacity can be used for
+shading. PNG icons should be at least 256 pixels high.
+
+When used with modifiers, the file path must be prefixed with `file:`.
+
+```json
+{
+  "icon": "square filled file:icon.png"
+}
+```
 
 ### Text icons
 
@@ -177,10 +182,6 @@ generates:
 <Icon style="height: 48px" spec="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAwUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACVM9DkAAAAPdFJOUwDcIDTLUFYGEqLpZfaDQdxVBh4AAAIbSURBVHja7doxS0JRGMZxuVI6BUG4GBhtDoHQkmPQViSBtAsVjS66CNIuLrWF0CcIaalojsAhXEMaGoJwvOCiCbfR9w5dXI6P4v/3Be4D5/C87xFjMQAAAAAAAAAAAAAAAAAAAADAIknsTmvPTYD4/vqUUmUnASrBtH6vCEAAAhCAAARY9gBv6nF87WYhqR9E2DTfH/y4CeCdRrg1AdJurkD0utaafH/8IVhYd9qTAMOt2X8/+WBO4Lg8+wCVwuT7/rPgBPrdSYB3wRX0eu5LIFIz474EIt9sZ+ISWLsTl0C2Ky6BnrgEquoS+A60JWDnkKYE2uISsHMoJTiBekFcAnlxCXjqEmiYOeRfCq5gcdlLwC6jr4ISCC2jKcEVrMxTCQwUJWCv4KHgBOwyOhKcQGgZ7eQEy2jB1rB4GR08iZfRe0EN12wJ3IiX0cGXeA4pSsDOIUUJhOZQR1DDdXUJ5MUl4KlLwC6jY8EullBfwZWC+Dlgr6C/jFewJr6CsWKg/U0gNIfSijnUFc+hF3EJrKpLoK8ugZa4BOzvcpISKIlLwDsSl0BTXAKJkrgE4uoSyIpLIPkpLoGquAQS9kWq+GHQYxOYoxfpWPIcCMSbgLoEGuoSOBGXQGgODR8v/nXu6HTsHArGEX/t3si5L4FIIzcBKhlxgGYgDpAlAAEIQAACEGBxAviOFpLtqQleDAAAAAAAAAAAAMCi+gOiz1VAs+KXUwAAAABJRU5ErkJggg==" />
 
 ::: -->
-
-### File icons
-
-In packaged extensions, you can specify a file as the base icon using the prefix `file:`. For example `square filled file:icon.png`, where `icon.png` is a file in the extension's root directory.
 
 ## Icon modifiers
 
