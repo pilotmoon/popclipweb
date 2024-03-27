@@ -245,8 +245,8 @@ string itself. For example:
 ```json
 {
   "icon": "iconify:mdi:home",
-  "square": true,
-  "filled": true,
+  "square": true,  
+  "flip-y": true,
   "rotate": 45
 }
 ```
