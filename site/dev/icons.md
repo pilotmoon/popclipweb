@@ -40,7 +40,7 @@ Here are some examples:
 | `square filled iconify:mdi:home` | <Icon spec="square filled iconify:mdi:home" /> | We put the home icon in a filled square.                                                                      |
 | `strike iconify:mdi:home`        | <Icon spec="strike iconify:mdi:home" />        | The `strike` modifier draws a strike-through line over the base icon.                                         |
 | `symbol:hand.raised`             | <Icon spec="symbol:hand.raised" />             | Here, the base icon as an [SF Symbols icon](#sf-symbols-icons).                                               |
-| `flip_x symbol:hand.raised`      | <Icon spec="flip_x symbol:hand.raised" />      | The `flip_x` modifier flips the base icon horizontally.                                                       |
+| `flip-x symbol:hand.raised`      | <Icon spec="flip_x symbol:hand.raised" />      | The `flip-x` modifier flips the base icon horizontally.                                                       |
 
 ## Base icon formats
 
@@ -203,10 +203,10 @@ icon is drawn.
 
 | Keyword            | Description                                                                                                                                                                  |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `flip_x`           | Flip the icon horizontally.                                                                                                                                                  |
-| `flip_y`           | Flip the icon vertically.                                                                                                                                                    |
-| `move_x=<percent>` | Move the icon horizontally by the specified distance, expressed as percentage of the icon's width. For example `move_x=10` to move 10% right or `move_x=-5` to move 5% left. |
-| `move_y=<percent>` | Move the icon vertically by the specified distance, expressed as percentage of the icon's height.                                                                            |
+| `flip-x`           | Flip the icon horizontally.                                                                                                                                                  |
+| `flip-y`           | Flip the icon vertically.                                                                                                                                                    |
+| `move-x=<percent>` | Move the icon horizontally by the specified distance, expressed as percentage of the icon's width. For example `move-x=10` to move 10% right or `move-x=-5` to move 5% left. |
+| `move-y=<percent>` | Move the icon vertically by the specified distance, expressed as percentage of the icon's height.                                                                            |
 | `scale=<percent>`  | Adjust the scale at which the icon is drawn. For example `scale=120` to enlarge to 100%, or `scale=90` to shrink to 90%.                                                     |
 | `rotate=<degrees>` | Rotate the icon by the specified number of degrees. For example `rotate=90` to rotate 90 degrees anticlockwise.                                                              |
 
@@ -215,24 +215,24 @@ Examples:
 | Specifier string                                         | Icon generated                                                         |
 | -------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `symbol:signpost.right`                                  | <Icon spec="rotate symbol:signpost.right" />                           |
-| `flip_x symbol:signpost.right`                           | <Icon spec="flip_x symbol:signpost.right" />                           |
-| `move_y=-50 symbol:signpost.right`                       | <Icon spec="move_y=-50 symbol:signpost.right" />                       |
+| `flip-x symbol:signpost.right`                           | <Icon spec="flip_x symbol:signpost.right" />                           |
+| `move-y=-50 symbol:signpost.right`                       | <Icon spec="move_y=-50 symbol:signpost.right" />                       |
 | `scale=50 symbol:signpost.right`                         | <Icon spec="scale=50 symbol:signpost.right" />                         |
 | `rotate=90 symbol:signpost.right`                        | <Icon spec="rotate=90 symbol:signpost.right" />                        |
-| `square filled move_x=4 move_y=-4 scale=115 rotate=45 T` | <Icon spec="square filled move_x=4 move_y=-4 scale=115 rotate=45 T" /> |
+| `square filled move-x=4 move-y=-4 scale=115 rotate=45 T` | <Icon spec="square filled move_x=4 move_y=-4 scale=115 rotate=45 T" /> |
 
 ### Color and aspect
 
 | Keyword           | Description                                                                                                                                                 |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `preserve_color`  | The base icon will be displayed in its original colors instead of used as a monochrome mask. (This is applied implicitly to emoji and color Iconify icons.) |
-| `preserve_aspect` | If the base icon is not square, it by default rendered into a square canvas. With this modifier, the icon will be rendered with its original aspect ratio.  |
+| `preserve-color`  | The base icon will be displayed in its original colors instead of used as a monochrome mask. (This is applied implicitly to emoji and color Iconify icons.) |
+| `preserve-aspect` | If the base icon is not square, it by default rendered into a square canvas. With this modifier, the icon will be rendered with its original aspect ratio.  |
 
 ::: tip Negative modifiers
 
 In some cases it may be useful to explicitly negate a modifier. This is done by
 appending `=0`. For example, to remove the implicit color rendering from an
-Iconify icon, use `preserve_color=0`.
+Iconify icon, use `preserve-color=0`.
 
 :::
 

@@ -4,14 +4,14 @@ import config from './config/config.json'
 import { querifyDescriptor } from './helpers/iconDescriptor.js'
 import { useData } from 'vitepress'
 
-const cacheKey = "a1";
+const cacheKey = "a2";
 const { isDark } = useData();
 const props = defineProps<{
     spec: string
     height?: number
 }>()
 
-const src = ref(iconUrl(props.spec, false));
+const src = ref(iconUrl(props.spec, "#000000"));
 
 function setSrc() {
     src.value = iconUrl(props.spec, isDark.value ? "#ffffff" : "#000000");
