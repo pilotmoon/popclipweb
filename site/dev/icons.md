@@ -1,5 +1,6 @@
 ---
 titleTemplate: :title — PopClip Developer
+outline: deep
 ---
 
 <script setup>
@@ -176,6 +177,10 @@ generates:
 <Icon style="height: 48px" spec="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAwUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACVM9DkAAAAPdFJOUwDcIDTLUFYGEqLpZfaDQdxVBh4AAAIbSURBVHja7doxS0JRGMZxuVI6BUG4GBhtDoHQkmPQViSBtAsVjS66CNIuLrWF0CcIaalojsAhXEMaGoJwvOCiCbfR9w5dXI6P4v/3Be4D5/C87xFjMQAAAAAAAAAAAAAAAAAAAADAIknsTmvPTYD4/vqUUmUnASrBtH6vCEAAAhCAAARY9gBv6nF87WYhqR9E2DTfH/y4CeCdRrg1AdJurkD0utaafH/8IVhYd9qTAMOt2X8/+WBO4Lg8+wCVwuT7/rPgBPrdSYB3wRX0eu5LIFIz474EIt9sZ+ISWLsTl0C2Ky6BnrgEquoS+A60JWDnkKYE2uISsHMoJTiBekFcAnlxCXjqEmiYOeRfCq5gcdlLwC6jr4ISCC2jKcEVrMxTCQwUJWCv4KHgBOwyOhKcQGgZ7eQEy2jB1rB4GR08iZfRe0EN12wJ3IiX0cGXeA4pSsDOIUUJhOZQR1DDdXUJ5MUl4KlLwC6jY8EullBfwZWC+Dlgr6C/jFewJr6CsWKg/U0gNIfSijnUFc+hF3EJrKpLoK8ugZa4BOzvcpISKIlLwDsSl0BTXAKJkrgE4uoSyIpLIPkpLoGquAQS9kWq+GHQYxOYoxfpWPIcCMSbgLoEGuoSOBGXQGgODR8v/nXu6HTsHArGEX/t3si5L4FIIzcBKhlxgGYgDpAlAAEIQAACEGBxAviOFpLtqQleDAAAAAAAAAAAAMCi+gOiz1VAs+KXUwAAAABJRU5ErkJggg==" />
 
 ::: -->
+
+### File icons
+
+In packaged extensions, you can specify a file as the base icon using the prefix `file:`. For example `square filled file:icon.png`, where `icon.png` is a file in the extension's root directory.
 
 ## Icon modifiers
 
