@@ -11,8 +11,8 @@ value is available, it will be set to an empty string.
 - Within a shell script, the variables are named like this: `POPCLIP_TEXT`,
   `POPCLIP_BROWSER_TITLE`, `POPCLIP_OPTION_FOO` etc.
 
-- Within an AppleScript, use placeholders like this: `{ popclip text }`,
-  `{ popclip browser title }`, `{ popclip option foo }` etc.
+- Within an AppleScript, use placeholders like this: `{popclip text}`,
+  `{popclip browser title}`, `{popclip option foo}` etc.
 
 :::
 
