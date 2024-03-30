@@ -9,7 +9,7 @@ automation, since it can be used to control other apps.
 
 ## Properties
 
-An AppleScript action is defined by the presence of either an `applescript`,
+An AppleScript action is defined by the presence of either an `applescript` or
 `applescript file` field, with optional `applescript call` field, as follows:
 
 | Key                | Type                  | Description                                                         |
