@@ -51,7 +51,7 @@ PopClip has a free trial mode which is fully functional. So if you just want to
 try out PopClip, you can [download it](/download) and use every feature for
 free.
 
-After you have used 150 actions inside that app (and that usually takes a few
+After you have used 150 actions inside the app (and that usually takes a few
 weeks of use), the app will start to nag you periodically to buy a license key.
 
 If you have already used the free trial and you cannot afford PopClip,
