@@ -236,7 +236,7 @@ Iconify icon, use `preserve-color=0`.
 
 :::
 
-## Icon modifiers in config
+<!-- ## Icon modifiers in config
 
 All [icon modifiers](#icon-modifiers) may alternatively be specified as
 properties in the config alongside the icon string, instead of in the icon
@@ -249,7 +249,7 @@ string itself. For example:
   "flip-y": true,
   "rotate": 45
 }
-```
+``` -->
 
 ## Icon Preview tool
 
