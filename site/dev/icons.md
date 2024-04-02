@@ -228,11 +228,11 @@ Examples:
 | `preserve-color`  | The base icon will be displayed in its original colors instead of used as a monochrome mask. (This is applied implicitly to emoji and color Iconify icons.) |
 | `preserve-aspect` | If the base icon is not square, it by default rendered into a square canvas. With this modifier, the icon will be rendered with its original aspect ratio.  |
 
-Example: 
+Example:
 
 ```json
 {
-  icon: "preserve-color file:rainbow.png"
+  "icon": "preserve-color file:rainbow.png"
 }
 ```
 
@@ -253,7 +253,7 @@ string itself. For example:
 ```json
 {
   "icon": "iconify:mdi:home",
-  "square": true,  
+  "square": true,
   "flip-y": true,
   "rotate": 45
 }
