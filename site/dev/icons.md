@@ -228,6 +228,14 @@ Examples:
 | `preserve-color`  | The base icon will be displayed in its original colors instead of used as a monochrome mask. (This is applied implicitly to emoji and color Iconify icons.) |
 | `preserve-aspect` | If the base icon is not square, it by default rendered into a square canvas. With this modifier, the icon will be rendered with its original aspect ratio.  |
 
+Example: 
+
+```json
+{
+  icon: "preserve-color file:rainbow.png"
+}
+```
+
 ::: tip Negative modifiers
 
 In some cases it may be useful to explicitly negate a modifier. This is done by
