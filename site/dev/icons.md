@@ -46,9 +46,8 @@ Here are some examples:
 
 ### File icons
 
-[Packaged extensions](/dev/packages) can contain image files for use as icons.
-File icons are specified with a path to the image file relative to the package
-root directory.
+File icons can only be used in [packages](/dev/packages). The icon is specified
+as a path to a `.png` or `.svg` image file in the package.
 
 ```json
 {
@@ -56,22 +55,32 @@ root directory.
 }
 ```
 
-Images must be in either PNG or SVG format. A good icon will feature a
-monochrome shape on a transparent background. Variable opacity can be used for
-shading. PNG icons should be at least 256 pixels high.
+A good icon will feature a monochrome shape on a transparent background.
+Variable opacity can be used for shading. PNG icons should be at least 256
+pixels high.
 
-When used with modifiers, the file path must be prefixed with `file:`.
+::: info File icons with modifiers
 
-```json
+File icons can be used with modifiers by adding the prefix `file:`, for example:
+
+```
 {
-  "icon": "square filled file:icon.png"
+  "icon": "strike file:icon.png"
 }
 ```
 
+:::
+
 ### Text icons
 
-Text icons can include up to 3 characters and are specified simply as the text
-itself.
+Text icons can include up to 3 characters and are specified as the text itself.
+The prefix `text:` can optionally be used.
+
+```json
+{
+  "icon": "T"
+}
+```
 
 Text icons are drawn using the system font. Adding the `monospaced` modifier
 will draw the icon in a monospaced variant.
@@ -80,14 +89,14 @@ If the text icon is a single emoji without modifiers, it rendered in color.
 
 Examples:
 
-| Specifier string | Icon generated                |
-| ---------------- | ----------------------------- |
-| `ABC`            | <Icon spec="ABC" />           |
-| `@`              | <Icon spec="@" />             |
-| `本`             | <Icon spec="本" />            |
-| `()`             | <Icon spec="()" />            |
-| `monospaced ()`  | <Icon spec="monospaced ()" /> |
-| `😵‍💫`           | <Icon spec="😵‍💫" />          |
+| Specifier string      | Icon generated                |
+| --------------------- | ----------------------------- |
+| `ABC` (or `text:ABC`) | <Icon spec="ABC" />           |
+| `@`                   | <Icon spec="@" />             |
+| `本`                  | <Icon spec="本" />            |
+| `()`                  | <Icon spec="()" />            |
+| `monospaced ()`       | <Icon spec="monospaced ()" /> |
+| `😵‍💫`                | <Icon spec="😵‍💫" />          |
 
 ::: info :bulb: Tip: Monospaced font
 
