@@ -14,6 +14,21 @@ const store = useStoreState();
 const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode.value));
 const sandbox = useDeploymentInfo().isLocalhost;
 
+// get params from url
+function readParams() {
+    return new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+}
+
+function queryBool(val) {
+    return val === '' || val === '1';
+}
+
+onMounted(() => {
+    if (queryBool(readParams().get("go"))) {
+        openPaddleCheckout();
+    }
+});
+
 async function initPaddle() {
     await loadScript(config.paddle.script);
     if (sandbox) {
@@ -26,12 +41,15 @@ async function initPaddle() {
     });
 }
 
-async function openPaddleCheckout(event) {
+async function openPaddleCheckout() {
     await initPaddle();
+    const coupon = readParams().get("coupon") ?? null;
+    const email = readParams().get("email") ?? null;
+    log("Coupon", coupon);
     const product = sandbox ? config.paddle.sandboxProductId : config.paddle.productId;
     log("Opening Paddle checkout");
     setTimeout(() => {
-        Paddle.Checkout.open({ product });
+        Paddle.Checkout.open({ product, coupon, email });
     }, 200);
 }
 
