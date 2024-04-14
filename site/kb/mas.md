@@ -26,7 +26,7 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 
 ::: details Alternative: migrate using Homebrew
 
-[Homebrew](https://brew.sh/) users can perform the migration with one command:
+[Homebrew](https://brew.sh/) users can perform the migration with this command:
 
 ```
 killall PopClip; brew reinstall popclip --force
