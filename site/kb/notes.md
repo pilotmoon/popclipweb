@@ -54,3 +54,19 @@ won't disappear when you press the keys.
 When you've done with screenshots and want to go back to normal:
 
 `defaults write com.pilotmoon.popclip ScreenshotMode -bool NO`
+
+## How to find all instances of PopClip.app on your Mac
+
+Terminal command:
+
+```
+mdfind \"kMDItemCFBundleIdentifier == 'com.pilotmoon.popclip*'\"
+```
+
+Example output:
+
+```
+/Applications/PopClip.app
+/Users/nick/Downloads/PopClip.app
+/Applications/Setapp/PopClip.app
+```
