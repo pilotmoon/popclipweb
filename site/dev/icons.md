@@ -279,10 +279,10 @@ the icon for any text string you select. (To see how to install this, see
 // entitlements: [dynamic]
 // language: javascript
 // module: true
-exports.actions = (selection) => {
+exports.actions = () => {
   return [
     {
-      icon: selection.text,
+      icon: popclip.input.text,
     },
   ];
 };
