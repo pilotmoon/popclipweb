@@ -96,7 +96,7 @@ Examples:
 | `本`                  | <Icon spec="本" />            |
 | `()`                  | <Icon spec="()" />            |
 | `monospaced ()`       | <Icon spec="monospaced ()" /> |
-| `😵‍💫`                | <Icon spec="😵‍💫" />          |
+| `😵‍💫`                  | <Icon spec="😵‍💫" />            |
 
 ::: info :bulb: Tip: Monospaced font
 
@@ -146,9 +146,7 @@ Examples:
 
 ### SVG Icons
 
-You can supply the raw SVG for the icon in the icon field itself.
-
-The format is `svg:<svg string>`.
+The icon string can supply SVG source code for an icon. The format is `svg:<svg string>`.
 
 ::: details Example
 
@@ -160,10 +158,9 @@ generates:
 
 :::
 
-<!-- ### Data icons
+### Data icons
 
-You can supply the raw data for the icon in the icon field itself as a
-[data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs).
+The icon string can include raw image data as a [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs).
 
 The format is: `data:<mediatype>[;base64],<data>`, where `<mediatype>` may be
 either `image/svg+xml` or `image/png`.
@@ -190,7 +187,7 @@ generates:
 
 <Icon style="height: 48px" spec="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAwUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACVM9DkAAAAPdFJOUwDcIDTLUFYGEqLpZfaDQdxVBh4AAAIbSURBVHja7doxS0JRGMZxuVI6BUG4GBhtDoHQkmPQViSBtAsVjS66CNIuLrWF0CcIaalojsAhXEMaGoJwvOCiCbfR9w5dXI6P4v/3Be4D5/C87xFjMQAAAAAAAAAAAAAAAAAAAADAIknsTmvPTYD4/vqUUmUnASrBtH6vCEAAAhCAAARY9gBv6nF87WYhqR9E2DTfH/y4CeCdRrg1AdJurkD0utaafH/8IVhYd9qTAMOt2X8/+WBO4Lg8+wCVwuT7/rPgBPrdSYB3wRX0eu5LIFIz474EIt9sZ+ISWLsTl0C2Ky6BnrgEquoS+A60JWDnkKYE2uISsHMoJTiBekFcAnlxCXjqEmiYOeRfCq5gcdlLwC6jr4ISCC2jKcEVrMxTCQwUJWCv4KHgBOwyOhKcQGgZ7eQEy2jB1rB4GR08iZfRe0EN12wJ3IiX0cGXeA4pSsDOIUUJhOZQR1DDdXUJ5MUl4KlLwC6jY8EullBfwZWC+Dlgr6C/jFewJr6CsWKg/U0gNIfSijnUFc+hF3EJrKpLoK8ugZa4BOzvcpISKIlLwDsSl0BTXAKJkrgE4uoSyIpLIPkpLoGquAQS9kWq+GHQYxOYoxfpWPIcCMSbgLoEGuoSOBGXQGgODR8v/nXu6HTsHArGEX/t3si5L4FIIzcBKhlxgGYgDpAlAAEIQAACEGBxAviOFpLtqQleDAAAAAAAAAAAAMCi+gOiz1VAs+KXUwAAAABJRU5ErkJggg==" />
 
-::: -->
+:::
 
 ## Icon modifiers
 
@@ -283,8 +280,10 @@ the icon for any text string you select. (To see how to install this, see
 // language: javascript
 // module: true
 exports.actions = (selection) => {
-  return [{
-    icon: selection.text,
-  }];
+  return [
+    {
+      icon: selection.text,
+    },
+  ];
 };
 ```
