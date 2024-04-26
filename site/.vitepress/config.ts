@@ -15,12 +15,12 @@ export default defineConfig({
   },
   themeConfig: {
     search: {
-      provider: 'algolia',
+      provider: "algolia",
       options: {
-        appId: '2OKYDNY04O',
-        apiKey: 'e035954eb950fa45d7dc871068a53648',
-        indexName: 'popclip',
-      }
+        appId: "2OKYDNY04O",
+        apiKey: "e035954eb950fa45d7dc871068a53648",
+        indexName: "popclip",
+      },
     },
     lastUpdated: {
       formatOptions: {
@@ -48,7 +48,7 @@ export default defineConfig({
         activeMatch: "(^/extensions/$)|(^/extensions/x)",
       },
       {
-        text: "Dev Docs",
+        text: "Reference",
         activeMatch: "^(/dev/)",
         link: "/dev/",
       },
@@ -104,8 +104,7 @@ export default defineConfig({
               items: [
                 {
                   text: "API reference",
-                  link:
-                    "https://pilotmoon.github.io/PopClip-Extensions/modules.html",
+                  link: "https://pilotmoon.github.io/PopClip-Extensions/modules.html",
                 },
               ],
             },
@@ -172,18 +171,9 @@ export default defineConfig({
     },
   },
   head: [
-    [
-      "link",
-      { rel: "shortcut icon", href: "/icon32.png", type: "image/png" },
-    ],
-    [
-      "link",
-      { rel: "preconnect", href: "https://icons.popclip.app/" },
-    ],
-    [
-      "link",
-      { rel: "preconnect", href: "https://api.pilotmoon.com/v2" },
-    ],
+    ["link", { rel: "shortcut icon", href: "/icon32.png", type: "image/png" }],
+    ["link", { rel: "preconnect", href: "https://icons.popclip.app/" }],
+    ["link", { rel: "preconnect", href: "https://api.pilotmoon.com/v2" }],
   ],
   markdown: {
     theme: {
@@ -204,9 +194,7 @@ export default defineConfig({
     ssr: {
       noExternal: ["element-plus"],
     },
-    plugins: [
-      ElementPlus({}),
-    ],
+    plugins: [ElementPlus({})],
   },
   vue: {
     template: {
