@@ -173,6 +173,7 @@ export default defineConfig({
   head: [
     ["link", { rel: "shortcut icon", href: "/icon32.png", type: "image/png" }],
     ["link", { rel: "preconnect", href: "https://icons.popclip.app/" }],
+    ["link", { rel: "preconnect", href: "https://public.popclip.app/" }],
     ["link", { rel: "preconnect", href: "https://api.pilotmoon.com/v2" }],
   ],
   markdown: {
