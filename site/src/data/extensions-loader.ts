@@ -9,6 +9,13 @@ export function sha256Base58(message: string) {
   );
 }
 
+export function sha256Base32(message: string) {
+  return baseEncode(
+    Array.from(createHash("sha256").update(message).digest()),
+    alphabets.base32Crockford,
+  ).toLowerCase();
+}
+
 export const ZExtension = z.object({
   identifier: z.string(), // e.g. com.pilotmoon.select-all
   handle: z.string(), // e.g. SelectAll
@@ -114,14 +121,16 @@ async function processExtensions() {
       // console.log(`Missing identifier for ${extension.handle}`);
       continue;
     }
-    const shortcode: any = `1${sha256Base58(extension.identifier).substring(
+    const oldShortcode: any = `1${sha256Base58(extension.identifier).substring(
       0,
       4,
     )}`;
+    const shortcode = sha256Base32(extension.identifier).slice(-6);
     if (shortcodes.has(shortcode)) {
       console.log(`Duplicate shortcode: ${shortcode} for ${extension.handle}`);
       continue;
     }
+    //console.log(`    /extensions/x/${oldShortcode} /extensions/x/${shortcode};`);
 
     shortcodes.add(shortcode);
     const parsed = ZExtension.safeParse({
@@ -137,5 +146,6 @@ async function processExtensions() {
       result.push(parsed.data);
     }
   }
+  
   return result;
 }
