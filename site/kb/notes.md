@@ -60,7 +60,7 @@ When you've done with screenshots and want to go back to normal:
 Terminal command:
 
 ```
-mdfind \"kMDItemCFBundleIdentifier == 'com.pilotmoon.popclip*'\"
+mdfind "kMDItemCFBundleIdentifier == 'com.pilotmoon.popclip*'"
 ```
 
 Example output:
