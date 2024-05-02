@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -e
+# if .env file doesn't exist, create it file using 1password CLI
+[[ -f .env ]] || op inject -i .env-template -o .env
+

@@ -2,6 +2,11 @@ import { createHash } from "node:crypto";
 import { alphabets, baseEncode } from "@pilotmoon/chewit";
 import { z } from "zod";
 
+const API_KEY=process.env.PILOTMOON_API_KEY;
+if (!API_KEY) {
+  throw new Error("Missing PILOTMOON_API_KEY");
+}
+
 export function sha256Base58(message: string) {
   return baseEncode(
     Array.from(createHash("sha256").update(message).digest()),

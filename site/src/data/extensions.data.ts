@@ -1,5 +1,5 @@
 import { defineLoader } from "vitepress";
-import { ExtensionsData, loadIndex } from "./extensions-loader.js";
+import { type ExtensionsData, loadIndex } from "./extensions-loader.js";
 
 declare const data: ExtensionsData;
 export { data };
