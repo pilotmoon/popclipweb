@@ -35,6 +35,7 @@ const ZExtInfo = z.object({
   source: z.string().nullable(),
   // owner: z.string().nullable(),
   files: z.array(ZFileInfo),
+  download: z.string().nullable(),
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
 
@@ -73,8 +74,9 @@ export async function load() {
       ...ext, 
       firstCreated: adjustFirstCreated(ext.firstCreated, ext.identifier),
       description: linkifyDescription(ext.description, ext.apps),
-      demo: adjustBlobPath(ext.demo),
-      readme: adjustBlobPath(ext.readme),
+      demo: adjustPublicPath(ext.demo),
+      readme: adjustPublicPath(ext.readme),
+      download: adjustPublicPath(ext.download),
     })));
     cursor = parseResult.data.at(-1)?.id;
   } while (cursor);
@@ -102,7 +104,7 @@ function adjustFirstCreated(date: Date, identifier: string) {
 }
 
 // adjust blob paths to full URLs
-function adjustBlobPath(path: string | null) {
+function adjustPublicPath(path: string | null) {
   if (path?.startsWith("/")) {
     return config.pilotmoon.publicRoot + path;
   }

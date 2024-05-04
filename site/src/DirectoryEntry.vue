@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Icon from "./Icon.vue";
 import type { ExtInfo } from "./data/extensions.data";
-import { downloadUrl } from "./helpers/directoryHelpers.js";
 const props = defineProps<{
   ext: ExtInfo;
 }>();
@@ -10,7 +9,7 @@ const props = defineProps<{
 <template>
     <div :class=$style.DirectoryEntry v-once>
         <div :class=$style.EntryDownload>
-            <DownloadButton theme="bare" size="smaller" :href=downloadUrl(props.ext) icon-only />
+            <DownloadButton theme="bare" size="smaller" :href=props.ext.download icon-only />
         </div>
         <div :class=$style.EntryIcon>
             <a :href="'x/' + props.ext.shortcode">

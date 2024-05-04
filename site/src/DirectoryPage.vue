@@ -5,7 +5,6 @@ import Icon from "./Icon.vue";
 import type {
   ExtInfo
 } from "./data/extensions.data.js";
-import { downloadUrl } from "./helpers/directoryHelpers.js";
 import { formatDate } from "./helpers/formatters.js";
 
 const { params } = useData();
@@ -33,7 +32,7 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
     <div :class="$style.SideBySide">
       <div :class="$style.Description" v-html="ext.description"></div>
       <div :class="$style.Download">
-        <DownloadButton size="small" :href="downloadUrl(ext)" />
+        <DownloadButton size="small" :href="ext.download" />
       </div>
     </div>
   </div>
