@@ -58,8 +58,8 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
     <div :class="$style.CardHeader">Info</div>
     <ul :class="$style.CardData">
       <li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li>
-      <!-- <li><span :class="$style.CardDataLabel">Updated</span><br><span>{{ formatDate(ext.created.toISOString()) }}</span></li>
-      <li><span :class="$style.CardDataLabel">Version</span><br><span>{{ ext.version}}</span></li> -->
+      <li><span :class="$style.CardDataLabel">Updated</span><br><span>{{ formatDate(ext.created.toISOString()) }}</span></li>
+      <li><span :class="$style.CardDataLabel">Version</span><br><span>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
       <li><span :class="$style.CardDataLabel">Source</span><br>
         <AaLink :gh="ext.source" />
