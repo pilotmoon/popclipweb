@@ -5,14 +5,20 @@ import { classicExtensions } from "./classic.ts";
 import * as config from "../config/config.json";
 
 // the vitepress whizzery
-declare const data: PopClipDirectoryView[];
+declare const data: ExtInfo[];
 export { data };
 export default defineLoader({ load });
 
 // what we get back from the extensions endpoint of the API
 const ZAppInfo = z.object({ name: z.string(), link: z.string() });
-type AppInfo = z.infer<typeof ZAppInfo>;
-const ZPopClipDirectoryView = z.object({
+export type AppInfo = z.infer<typeof ZAppInfo>;
+const ZFileInfo =     z.object({
+  path: z.string(),
+  url: z.string(),
+  executable: z.boolean().optional(),
+});
+export type FileInfo = z.infer<typeof ZFileInfo>;
+const ZExtInfo = z.object({
   id: z.string(),
   created: z.coerce.date(),
   firstCreated: z.coerce.date(),
@@ -28,8 +34,9 @@ const ZPopClipDirectoryView = z.object({
   readme: z.string().nullable(),
   source: z.string().nullable(),
   // owner: z.string().nullable(),
+  files: z.array(ZFileInfo),
 });
-export type PopClipDirectoryView = z.infer<typeof ZPopClipDirectoryView>;
+export type ExtInfo = z.infer<typeof ZExtInfo>;
 
 // prepare api access
 const PILOTMOON_API_KEY = process.env.PILOTMOON_API_KEY;
@@ -47,7 +54,7 @@ export async function load() {
   console.log("In extensions loader");
   console.time("load extensions");
   let cursor: string | undefined;
-  const exts: PopClipDirectoryView[] = [];
+  const exts: ExtInfo[] = [];
   do {
     const response = await api.get("extensions", {
       params: {
@@ -58,7 +65,7 @@ export async function load() {
         cursor,
       },
     });
-    const parseResult = z.array(ZPopClipDirectoryView).safeParse(response.data);
+    const parseResult = z.array(ZExtInfo).safeParse(response.data);
     if (!parseResult.success) {
       throw new Error("Failed to parse extensions info");
     }

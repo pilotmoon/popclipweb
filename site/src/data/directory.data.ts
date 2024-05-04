@@ -27,15 +27,12 @@ const gh = axios.create({
 declare const data: Section[];
 export { data };
 export default defineLoader({
-  watch: ["./directory-index.yaml"],
-  async load(watchedFiles: string[]) {
-    const indexYaml = (
+  async load() {
+    const indexYaml = Buffer.from((
       await gh.get(
-        "https://api.github.com/gists/59df578800096b9a4611b47d2d9a154a",
+        "https://api.github.com/repos/pilotmoon/pcx-directory/contents/categories.yaml",
       )
-    ).data.files["directory-index.yaml"].content;
-    // const indexYaml = fs.readFileSync(watchedFiles[0], "utf-8");
-    // const { data: indexYaml } = await axios.get("https://public.popclip.app/config/directory-index.yaml");
+    ).data.content, "base64").toString("utf-8");    
     const parseResult = z
       .record(z.array(z.string()))
       .safeParse(jsYaml.load(indexYaml));
@@ -46,7 +43,6 @@ export default defineLoader({
     for (const [title, members] of Object.entries(parseResult.data)) {
       arr.push({ title, members });
     }
-
     return arr;
   },
 });

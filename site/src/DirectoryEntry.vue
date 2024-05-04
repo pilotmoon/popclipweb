@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Icon from "./Icon.vue";
-import type { PopClipDirectoryView } from "./data/extensions.data";
+import type { ExtInfo } from "./data/extensions.data";
 import { downloadUrl } from "./helpers/directoryHelpers.js";
 const props = defineProps<{
-  ext: PopClipDirectoryView;
+  ext: ExtInfo;
 }>();
 </script>
 

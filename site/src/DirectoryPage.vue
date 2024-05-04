@@ -3,17 +3,17 @@ import { useData } from "vitepress";
 import { useSlots } from "vue";
 import Icon from "./Icon.vue";
 import type {
-  PopClipDirectoryView
+  ExtInfo
 } from "./data/extensions.data.js";
 import { downloadUrl } from "./helpers/directoryHelpers.js";
 import { formatDate } from "./helpers/formatters.js";
 
 const { params } = useData();
-const ext: PopClipDirectoryView = {
+const ext: ExtInfo = {
   ...params.value,
   firstCreated: new Date(params.value?.firstCreated),
   created: new Date(params.value?.created),
-} as PopClipDirectoryView;
+} as ExtInfo;
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 </script>

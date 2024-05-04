@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { data as extsa, type PopClipDirectoryView } from './data/extensions.data';
+import { data as extsa, type ExtInfo } from './data/extensions.data';
 import { data as index, type Section } from './data/directory.data';
 import { IconFilter } from '@tabler/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
@@ -112,9 +112,9 @@ const selectedIndex = computed(() => {
 
 const filteredIndex = computed(() => {
     let count = 0;
-    const index: { title: string, extensions: PopClipDirectoryView[] }[] = [];
+    const index: { title: string, extensions: ExtInfo[] }[] = [];
     for (const section of selectedIndex.value) {
-        const extensions: PopClipDirectoryView[] = [];
+        const extensions: ExtInfo[] = [];
         for (const identifier of section.members) {
             const ext = extsMap.get(identifier);
             if (ext?.name.toLowerCase().includes(filter.value.toLowerCase())) {
