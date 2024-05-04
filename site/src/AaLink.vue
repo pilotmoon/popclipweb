@@ -20,7 +20,7 @@ const ghTrimmed = computed(() => {
 
 const ghDisplay = computed(() => {
     if (props.gh) {
-        return ghTrimmed.value.replace(/tree\/master\//, '');
+        return ghTrimmed.value.replace(/tree\/[a-z0-9]+\//, '');
     }
     return '';
 });

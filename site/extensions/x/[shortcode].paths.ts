@@ -1,16 +1,22 @@
 import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
-import { Extension, loadPages } from "../../src/data/extensions-loader.js";
+import {
+  type PopClipDirectoryView,
+  load,
+} from "../../src/data/extensions.data";
+import * as config from "../../src/config/config.json";
+import axios from "axios";
 
-declare const paths: Extension[];
+declare const paths: PopClipDirectoryView[];
 export { paths };
 
 // markdown rendering (with html passed through)
 const md = new MarkdownIt({
   html: true,
 });
-function renderMarkdown(markdown: string) {
-  //return markdown;
+
+async function getMarkdown(markdownUrl: string) {
+  const { data: markdown } = await axios.get(markdownUrl);
   let html = sanitizeHtml(md.render(markdown));
 
   // insert newline before these tags -- due to https://github.com/markdown-it/markdown-it/issues/951
@@ -25,14 +31,24 @@ function renderMarkdown(markdown: string) {
 export default {
   async paths() {
     console.log("calling load from paths");
-    const extensions = await loadPages();
+    const extensions = await load();
+    await Promise.all(
+      extensions.map(async (ext) => {
+        if (ext.readme) {
+          ext.readme = await getMarkdown(ext.readme);
+          console.log(
+            "\nRendered readme for extension",
+            ext.name,
+            ext.shortcode,
+            ext.readme?.slice(0, 100),
+          );
+        }
+      }),
+    );
     return extensions.map((ext) => {
-      const extCopy = { ...ext };
-      extCopy.readme = undefined;
-      console.log("Rendering readme for extension", ext.name);
       return {
-        params: extCopy,
-        content: ext.readme ? renderMarkdown(ext.readme) : "",
+        params: ext,
+        content: ext.readme,
       };
     });
   },

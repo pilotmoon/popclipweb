@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import Icon from './Icon.vue';
-import { Extension } from './data/extensions-loader.js';
+import Icon from "./Icon.vue";
+import type { PopClipDirectoryView } from "./data/extensions.data";
+import { downloadUrl } from "./helpers/directoryHelpers.js";
 const props = defineProps<{
-    ext: Extension
+  ext: PopClipDirectoryView;
 }>();
 </script>
 
 <template>
     <div :class=$style.DirectoryEntry v-once>
         <div :class=$style.EntryDownload>
-            <DownloadButton theme="bare" size="smaller" :href=props.ext.downloadUrl icon-only />
+            <DownloadButton theme="bare" size="smaller" :href=downloadUrl(props.ext) icon-only />
         </div>
         <div :class=$style.EntryIcon>
             <a :href="'x/' + props.ext.shortcode">
-                <Icon v-if=props.ext.iconSpecifier :spec=props.ext.iconSpecifier :height=64 />
+                <Icon v-if=props.ext.icon :spec=props.ext.icon :height=64 />
             </a>
         </div>
         <div :class=$style.EntryMain>
@@ -98,4 +99,4 @@ const props = defineProps<{
         display: none;
     }
 }
-</style>
+</style>./data/extensions.data

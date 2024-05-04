@@ -2,7 +2,8 @@
   "pilotmoon": {
     "product": "popclip",
     "iconsRoot": "https://icons.popclip.app",
-    "apiRoot": "https://api.pilotmoon.com"
+    "apiRoot": "https://api.pilotmoon.com",
+    "publicRoot": "https://public.popclip.app/test"
   },
   "paddle": {
     "vendorId": 161988,

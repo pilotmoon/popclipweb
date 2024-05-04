@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { useData } from 'vitepress';
-import { useSlots } from 'vue';
-import Icon from './Icon.vue';
-import { Extension } from './data/extensions-loader.js';
-import { formatDate } from './helpers/formatters.js';
+import { useData } from "vitepress";
+import { useSlots } from "vue";
+import Icon from "./Icon.vue";
+import type {
+  PopClipDirectoryView
+} from "./data/extensions.data.js";
+import { downloadUrl } from "./helpers/directoryHelpers.js";
+import { formatDate } from "./helpers/formatters.js";
+
 const { params } = useData();
-const ext: Extension = params.value as Extension;
+const ext: PopClipDirectoryView = {
+  ...params.value,
+  firstCreated: new Date(params.value?.firstCreated),
+  created: new Date(params.value?.created),
+} as PopClipDirectoryView;
 const slots = useSlots();
-const hasReadme = typeof slots.default?.()?.[0]?.type === 'string';
-const dateString = new Date(ext.timestamp * 1000).toISOString();
+const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 </script>
 
 <template>
@@ -19,21 +26,22 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
 
   <div :class="$style.Main">
     <h1>
-      <Icon v-if="ext.iconSpecifier" :spec="ext.iconSpecifier" :height=64 />
+      <Icon v-if="ext.icon" :spec="ext.icon" :height=64 />
       {{ ext.name }}
     </h1>
 
     <div :class="$style.SideBySide">
       <div :class="$style.Description" v-html="ext.description"></div>
       <div :class="$style.Download">
-        <DownloadButton size="small" :href="ext.downloadUrl" />
+        <DownloadButton size="small" :href="downloadUrl(ext)" />
       </div>
     </div>
   </div>
 
-  <div v-if="ext.demogif" :class="$style.Card">
+  <div v-if="ext.demo" :class="$style.Card">
     <div :class="$style.CardHeader">Demo</div>
-    <img :src="ext.demogif" alt="Demo GIF" />
+    <img v-if="ext.demo.endsWith('.gif')" :src="ext.demo" alt="Demo Animated GIF" />
+    <video v-if="ext.demo.endsWith('.mp4')" :src="ext.demo" alt="Demo Video" autoplay loop playsinline>Browser can't show this video.</video>
   </div>
 
   <div v-if="hasReadme" :class="$style.Card">
@@ -49,10 +57,12 @@ const dateString = new Date(ext.timestamp * 1000).toISOString();
   <div :class="$style.Card">
     <div :class="$style.CardHeader">Info</div>
     <ul :class="$style.CardData">
-      <li><span :class="$style.CardDataLabel">First published</span><br><span>{{ formatDate(dateString) }}</span></li>
-      <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>
+      <li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li>
+      <!-- <li><span :class="$style.CardDataLabel">Updated</span><br><span>{{ formatDate(ext.created.toISOString()) }}</span></li>
+      <li><span :class="$style.CardDataLabel">Version</span><br><span>{{ ext.version}}</span></li> -->
+      <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
       <li><span :class="$style.CardDataLabel">Source</span><br>
-        <AaLink :gh="ext.repoUrl" />
+        <AaLink :gh="ext.source" />
       </li>
     </ul>
   </div>

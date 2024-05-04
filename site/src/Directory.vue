@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { data } from './data/extensions.data';
+import { data as extsa, type PopClipDirectoryView } from './data/extensions.data';
+import { data as index, type Section } from './data/directory.data';
 import { IconFilter } from '@tabler/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
 import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from 'element-plus';
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue';
-import { Extension, Section } from './data/extensions-loader.js';
 import { useData } from 'vitepress'
 import { useDebounceFn } from '@vueuse/core';
 
@@ -14,24 +14,26 @@ const filter = ref(defaultFilter);
 const defaultArrange = "categories";
 const arrange = ref(defaultArrange);
 
+const extsMap = new Map(extsa.map(e => [e.identifier, { ...e, firstCreated: new Date(e.firstCreated), created: new Date(e.created) }]));
+
 // define the categories
 const alphaSection: Section = {
     title: "All Extensions (Alphabetical)",
-    members: Object.values(data.extensions).sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier)
+    members: [... extsMap.values()].sort((a, b) => a.name.localeCompare(b.name)).map(e => e.identifier)
 };
 const newestSection: Section = {
     title: "All Extensions (Newest first)",
-    members: Object.values(data.extensions).sort((a, b) => b.timestamp - a.timestamp).map(e => e.identifier)
+    members: [... extsMap.values()].sort((a, b) => b.firstCreated.getTime() - a.firstCreated.getTime()).map(e => e.identifier)
 };
 const arrangements = new Map([
-    ["categories", { label: "Categories", index: data.index }],
+    ["categories", { label: "Categories", index }],
     ["alpha", { label: "A–Z", index: [alphaSection] }],
     ["newest", { label: "Newest", index: [newestSection] }],
 ]);
 
 // total number of extensons
 const total = computed(() => {
-    return Object.keys(data.extensions).length;
+    return extsMap.size
 });
 
 // track filter term
@@ -52,9 +54,8 @@ function title() {
     }
     if (parts.length > 0) {
         return `${initialTitle}: ${parts.join(", ")}`;
-    } else {
-        return initialTitle;
     }
+    return initialTitle;
 };
 
 // get params from url
@@ -111,12 +112,12 @@ const selectedIndex = computed(() => {
 
 const filteredIndex = computed(() => {
     let count = 0;
-    const index: { title: string, extensions: Extension[] }[] = [];
+    const index: { title: string, extensions: PopClipDirectoryView[] }[] = [];
     for (const section of selectedIndex.value) {
-        const extensions: Extension[] = [];
+        const extensions: PopClipDirectoryView[] = [];
         for (const identifier of section.members) {
-            const ext = data.extensions[identifier];
-            if (ext.name.toLowerCase().includes(filter.value.toLowerCase())) {
+            const ext = extsMap.get(identifier);
+            if (ext?.name.toLowerCase().includes(filter.value.toLowerCase())) {
                 extensions.push(ext);
             }
         }

@@ -1,0 +1,1316 @@
+[
+  {
+    "name": "Kagi",
+    "handle": "Kagi",
+    "identifier": "com.pilotmoon.popclip.extension.kagi",
+    "date": 1693491848
+  },
+  {
+    "name": "ChatGPT",
+    "handle": "ChatGPT",
+    "identifier": "com.pilotmoon.popclip.extension.chatgpt",
+    "date": 1677834436
+  },
+  {
+    "name": "Notion",
+    "handle": "Notion",
+    "identifier": "com.pilotmoon.popclip.extension.notion",
+    "date": 1674236229
+  },
+  {
+    "name": "Markdown to RTF",
+    "handle": "MarkdownToRTF",
+    "identifier": "com.pilotmoon.popclip.extension.markdown-to-rtf",
+    "date": 1674236229
+  },
+  {
+    "name": "Open in Browser",
+    "handle": "OpenInBrowser",
+    "identifier": "com.pilotmoon.popclip.extension.open-in-browser",
+    "date": 1669926624
+  },
+  {
+    "name": null,
+    "handle": "OpenInBrowsers",
+    "identifier": null,
+    "date": 1669926368
+  },
+  {
+    "name": "Coding Cases",
+    "handle": "CodeCase",
+    "identifier": "com.pilotmoon.popclip.extension.code-case",
+    "date": 1653497863
+  },
+  {
+    "name": "ROT13",
+    "handle": "ROT13",
+    "identifier": "com.pilotmoon.popclip.extension.rot13",
+    "date": 1653488320
+  },
+  {
+    "name": "Bundle ID",
+    "handle": "BundleID",
+    "identifier": "com.pilotmoon.popclip.extension.bundleid",
+    "date": 1653487451
+  },
+  {
+    "name": "Join Lines",
+    "handle": "JoinLines",
+    "identifier": "com.pilotmoon.popclip.extension.join-lines",
+    "date": 1652462867
+  },
+  {
+    "name": "Comma List",
+    "handle": "CommaList",
+    "identifier": "com.pilotmoon.popclip.extension.comma-list",
+    "date": 1651298383
+  },
+  {
+    "name": "Pinyin",
+    "handle": "Pinyin",
+    "identifier": "com.pilotmoon.popclip.extension.pinyin",
+    "date": 1650479741
+  },
+  {
+    "name": "Line Count",
+    "handle": "LineCount",
+    "identifier": "com.pilotmoon.popclip.extension.linecount",
+    "date": 1640190788
+  },
+  {
+    "name": "SideNotes",
+    "handle": "SideNotes",
+    "identifier": "com.pilotmoon.popclip.extension.sidenotes",
+    "date": 1639491503
+  },
+  {
+    "name": "Base64",
+    "handle": "Base64",
+    "identifier": "com.pilotmoon.popclip.extension.base64",
+    "date": 1636198626
+  },
+  {
+    "name": "Alternating Case",
+    "handle": "AlternatingCase",
+    "identifier": "com.pilotmoon.popclip.extension.alternating-case",
+    "date": 1634850660
+  },
+  {
+    "name": null,
+    "handle": "AlternatingText",
+    "identifier": null,
+    "date": 1634841922
+  },
+  {
+    "name": "Glosbe",
+    "handle": "Glosbe",
+    "identifier": "com.pilotmoon.popclip.extension.glosbe",
+    "date": 1634551739
+  },
+  {
+    "name": "Raindrop.io",
+    "handle": "RaindropIO",
+    "identifier": "com.miller.popclip.extension.raindrop",
+    "date": 1633157826
+  },
+  {
+    "name": "Tot",
+    "handle": "Tot",
+    "identifier": "com.pilotmoon.popclip.extension.tot",
+    "date": 1633093783
+  },
+  {
+    "name": "Reverso",
+    "handle": "Reverso",
+    "identifier": "com.pilotmoon.popclip.extension.reverso",
+    "date": 1632905444
+  },
+  {
+    "name": "Online Thesaurus",
+    "handle": "OnlineThesaurus",
+    "identifier": "com.pilotmoon.popclip.extension.online-thesaurus",
+    "date": 1632414524
+  },
+  {
+    "name": null,
+    "handle": "OpenInVivaldi",
+    "identifier": null,
+    "date": 1627466090
+  },
+  {
+    "name": "Sentence Case",
+    "handle": "SentenceCase",
+    "identifier": "com.pilotmoon.popclip.extension.sentence-case",
+    "date": 1623915992
+  },
+  {
+    "name": "FindAnyFile",
+    "handle": "FindAnyFile",
+    "identifier": "org.tempel.pilotmoon.popclip.extension.FindAnyFile",
+    "date": 1623870452
+  },
+  {
+    "name": "Audible",
+    "handle": "Audible",
+    "identifier": "com.pilotmoon.popclip.extension.audible-search",
+    "date": 1623305413
+  },
+  {
+    "name": "Ecosia",
+    "handle": "Ecosia",
+    "identifier": "com.pilotmoon.popclip.extension.ecosia",
+    "date": 1623236540
+  },
+  {
+    "name": "Print",
+    "handle": "Print",
+    "identifier": "com.pilotmoon.popclip.extension.print",
+    "date": 1622454247
+  },
+  {
+    "name": "Translatium",
+    "handle": "Translatium",
+    "identifier": "com.pilotmoon.popclip.extension.translatium",
+    "date": 1621003269
+  },
+  {
+    "name": "Timestamp",
+    "handle": "Timestamp",
+    "identifier": "com.pilotmoon.popclip.extension.timestamp",
+    "date": 1617435559
+  },
+  {
+    "name": "Slugify",
+    "handle": "Slugify",
+    "identifier": "com.pilotmoon.popclip.extension.slugify",
+    "date": 1615308255
+  },
+  {
+    "name": "Readwise",
+    "handle": "Readwise",
+    "identifier": "com.pilotmoon.popclip.extension.readwise",
+    "date": 1613713108
+  },
+  {
+    "name": "Music",
+    "handle": "Music",
+    "identifier": "com.pilotmoon.popclip.extension.music",
+    "date": 1606771637
+  },
+  {
+    "name": null,
+    "handle": "OpenInEdge",
+    "identifier": null,
+    "date": 1604935249
+  },
+  {
+    "name": "Fantastical 3",
+    "handle": "Fantastical3",
+    "identifier": "com.pilotmoon.popclip.extension.fantastical",
+    "date": 1582322945
+  },
+  {
+    "name": "DEVONthink 3",
+    "handle": "DEVONthink3",
+    "identifier": "com.pilotmoon.popclip.extension.devonthink3",
+    "date": 1573660874
+  },
+  {
+    "name": "EagleFiler",
+    "handle": "EagleFiler",
+    "identifier": "com.pilotmoon.popclip.extension.eaglefiler",
+    "date": 1573647267
+  },
+  {
+    "name": "Fantastical 2",
+    "handle": "Fantastical2",
+    "identifier": "com.pilotmoon.popclip.extension.fantastical",
+    "date": 1570525247
+  },
+  {
+    "name": null,
+    "handle": "Fantastical 2",
+    "identifier": null,
+    "date": 1570525085
+  },
+  {
+    "name": null,
+    "handle": "OpenInBrave",
+    "identifier": null,
+    "date": 1568805984
+  },
+  {
+    "name": "Unix Time",
+    "handle": "UnixTime",
+    "identifier": "com.pilotmoon.popclip.extension.unix-time",
+    "date": 1568128860
+  },
+  {
+    "name": "SnippetsLab",
+    "handle": "SnippetsLab",
+    "identifier": "com.pilotmoon.popclip.extension.SnippetsLab",
+    "date": 1568128860
+  },
+  {
+    "name": "Quiver",
+    "handle": "Quiver",
+    "identifier": "com.pilotmoon.popclip.extension.quiver",
+    "date": 1568128860
+  },
+  {
+    "name": "Downie",
+    "handle": "Downie",
+    "identifier": "com.pilotmoon.popclip.extension.open-in-downie",
+    "date": 1568128860
+  },
+  {
+    "name": "Goodreads",
+    "handle": "Goodreads",
+    "identifier": "com.pilotmoon.popclip.extension.goodreads",
+    "date": 1568128860
+  },
+  {
+    "name": "CamelCamelCamel",
+    "handle": "CamelCamelCamel",
+    "identifier": "com.pilotmoon.popclip.extension.camelcamelcamel",
+    "date": 1568128860
+  },
+  {
+    "name": "Yahoo! Japan",
+    "handle": "YahooJapanSearch",
+    "identifier": "com.pilotmoon.popclip.extension.yahoo-japan-search",
+    "date": 1568128860
+  },
+  {
+    "name": "Yahoo!",
+    "handle": "YahooSearch",
+    "identifier": "com.pilotmoon.popclip.extension.yahoo-search",
+    "date": 1568128860
+  },
+  {
+    "name": "Slack",
+    "handle": "Slack",
+    "identifier": "com.pilotmoon.popclip.extension.slack",
+    "date": 1568128860
+  },
+  {
+    "name": "Quicksilver",
+    "handle": "Quicksilver",
+    "identifier": "com.pilotmoon.popclip.extension.quicksilver",
+    "date": 1568128860
+  },
+  {
+    "name": "Yoink",
+    "handle": "Yoink",
+    "identifier": "at.EternalStorms.Yoink.PopClipExtension",
+    "date": 1568128860
+  },
+  {
+    "name": "BusyContacts",
+    "handle": "BusyContacts",
+    "identifier": "com.pilotmoon.popclip.extension.busycontacts",
+    "date": 1568128860
+  },
+  {
+    "name": "Cardhop",
+    "handle": "Cardhop",
+    "identifier": "com.pilotmoon.popclip.extension.cardhop",
+    "date": 1568128860
+  },
+  {
+    "name": "TickTick",
+    "handle": "TickTick",
+    "identifier": "com.pilotmoon.popclip.extension.ticktick",
+    "date": 1568128860
+  },
+  {
+    "name": "Things 3",
+    "handle": "Things3",
+    "identifier": "com.pilotmoon.popclip.extension.things3",
+    "date": 1568128860
+  },
+  {
+    "name": "Ulysses",
+    "handle": "Ulysses",
+    "identifier": "com.pilotmoon.popclip.extension.ulysses",
+    "date": 1568128860
+  },
+  {
+    "name": "Scrivener",
+    "handle": "Scrivener",
+    "identifier": "com.pilotmoon.popclip.extension.scrivener",
+    "date": 1568128860
+  },
+  {
+    "name": "Drafts",
+    "handle": "Drafts",
+    "identifier": "com.pilotmoon.popclip.extension.drafts",
+    "date": 1568128860
+  },
+  {
+    "name": "Curiota",
+    "handle": "Curiota",
+    "identifier": "com.zengobi.curiota.popclip",
+    "date": 1568128860
+  },
+  {
+    "name": "Paper",
+    "handle": "Paper",
+    "identifier": "com.pilotmoon.popclip.extension.paper",
+    "date": 1568128860
+  },
+  {
+    "name": "Bear",
+    "handle": "Bear",
+    "identifier": "com.pilotmoon.popclip.extension.bear",
+    "date": 1568128860
+  },
+  {
+    "name": "Bubble Translate",
+    "handle": "BubbleTranslate3",
+    "identifier": "ru.bubble-translate.pop-clip.translate",
+    "date": 1568128860
+  },
+  {
+    "name": "Mate Translate",
+    "handle": "MateTranslate",
+    "identifier": "com.pilotmoon.popclip.extension.matetranslate",
+    "date": 1568128860
+  },
+  {
+    "name": "DeepL Translator",
+    "handle": "DeepLTranslator",
+    "identifier": "com.pilotmoon.popclip.extension.deepl-translator",
+    "date": 1568128860
+  },
+  {
+    "name": "Copy as Markdown",
+    "handle": "CopyAsMarkdown",
+    "identifier": "com.pilotmoon.popclip.extension.copy-as-markdown",
+    "date": 1568128860
+  },
+  {
+    "name": null,
+    "handle": "MarkdownToHTML",
+    "identifier": null,
+    "date": 1568128860
+  },
+  {
+    "name": "Remove Spaces",
+    "handle": "RemoveSpaces",
+    "identifier": "com.pilotmoon.popclip.extension.remove-spaces",
+    "date": 1568128860
+  },
+  {
+    "name": "Highlight",
+    "handle": "Highlight",
+    "identifier": "com.pilotmoon.popclip.extension.highlight",
+    "date": 1568128860
+  },
+  {
+    "name": "BusyCal",
+    "handle": "BusyCal",
+    "identifier": "com.pilotmoon.popclip.extension.busycal",
+    "date": 1478863573
+  },
+  {
+    "name": "iTunes Music",
+    "handle": "iTunesMusic",
+    "identifier": "com.pilotmoon.popclip.extension.itunes-music",
+    "date": 1478274648
+  },
+  {
+    "name": "Rotten Tomatoes",
+    "handle": "RottenTomatoes",
+    "identifier": "com.pilotmoon.popclip.extension.rotten-tomatoes",
+    "date": 1477641946
+  },
+  {
+    "name": null,
+    "handle": "Slicereader",
+    "identifier": null,
+    "date": 1463758861
+  },
+  {
+    "name": "Twitter Search",
+    "handle": "TwitterSearch",
+    "identifier": "com.pilotmoon.popclip.extension.twitter-search",
+    "date": 1463651200
+  },
+  {
+    "name": null,
+    "handle": "OpenInOpera",
+    "identifier": null,
+    "date": 1455879663
+  },
+  {
+    "name": "Title Case",
+    "handle": "TitleCase",
+    "identifier": "com.pilotmoon.popclip.extension.title-case",
+    "date": 1452106465
+  },
+  {
+    "name": "Reverse",
+    "handle": "Reverse",
+    "identifier": "com.pilotmoon.popclip.extension.reverse",
+    "date": 1450339526
+  },
+  {
+    "name": "Unclutter",
+    "handle": "Unclutter",
+    "identifier": "com.pilotmoon.popclip.extension.unclutter",
+    "date": 1441887792
+  },
+  {
+    "name": "JD",
+    "handle": "JD",
+    "identifier": "com.pilotmoon.popclip.extension.jd",
+    "date": 1435308726
+  },
+  {
+    "name": "Bing Translator",
+    "handle": "BingTranslator",
+    "identifier": "com.pilotmoon.popclip.extension.bing-translator",
+    "date": 1434119614
+  },
+  {
+    "name": null,
+    "handle": "Base64Encode",
+    "identifier": null,
+    "date": 1433420581
+  },
+  {
+    "name": "OneNote",
+    "handle": "OneNote",
+    "identifier": "com.pilotmoon.popclip.extension.onenote",
+    "date": 1433341619
+  },
+  {
+    "name": null,
+    "handle": "Trello",
+    "identifier": null,
+    "date": 1433316983
+  },
+  {
+    "name": "Douban",
+    "handle": "Douban",
+    "identifier": "com.pilotmoon.popclip.extension.douban",
+    "date": 1433243498
+  },
+  {
+    "name": "Brackets",
+    "handle": "Brackets",
+    "identifier": "com.pilotmoon.popclip.extension.brackets",
+    "date": 1425993635
+  },
+  {
+    "name": "HoudahSpot",
+    "handle": "HoudahSpot",
+    "identifier": "com.pilotmoon.popclip.extension.HoudahSpot",
+    "date": 1424078438
+  },
+  {
+    "name": "Large Type",
+    "handle": "LargeType",
+    "identifier": "com.pilotmoon.popclip.extension.large-type",
+    "date": 1417517990
+  },
+  {
+    "name": "Deliveries",
+    "handle": "Deliveries",
+    "identifier": "com.pilotmoon.popclip.extension.deliveries",
+    "date": 1417085246
+  },
+  {
+    "name": "DOI",
+    "handle": "DOI",
+    "identifier": "com.pilotmoon.popclip.extension.doi",
+    "date": 1417082211
+  },
+  {
+    "name": "Call",
+    "handle": "Call",
+    "identifier": "com.pilotmoon.popclip.extension.call",
+    "date": 1414431501
+  },
+  {
+    "name": "Urban Dictionary",
+    "handle": "UrbanDictionary",
+    "identifier": "com.pilotmoon.popclip.extension.urban-dictionary",
+    "date": 1413298721
+  },
+  {
+    "name": null,
+    "handle": "Simplenote",
+    "identifier": null,
+    "date": 1413285042
+  },
+  {
+    "name": "Etsy",
+    "handle": "Etsy",
+    "identifier": "com.pilotmoon.popclip.extension.etsy",
+    "date": 1412670693
+  },
+  {
+    "name": "Underscore",
+    "handle": "Underscore",
+    "identifier": "com.pilotmoon.popclip.extension.underscore",
+    "date": 1411645709
+  },
+  {
+    "name": "LaunchBar",
+    "handle": "LaunchBar",
+    "identifier": "com.pilotmoon.popclip.extension.launchbar",
+    "date": 1408701130
+  },
+  {
+    "name": "Shuffle",
+    "handle": "Shuffle",
+    "identifier": "com.pilotmoon.popclip.extension.shuffle",
+    "date": 1408045358
+  },
+  {
+    "name": "Antidote",
+    "handle": "Antidote",
+    "identifier": "com.pilotmoon.popclip.extension.antidote",
+    "date": 1408006666
+  },
+  {
+    "name": null,
+    "handle": "Lingvo",
+    "identifier": null,
+    "date": 1408005286
+  },
+  {
+    "name": null,
+    "handle": "Pronounce",
+    "identifier": null,
+    "date": 1405620879
+  },
+  {
+    "name": "WorldCat",
+    "handle": "WorldCat",
+    "identifier": "com.pilotmoon.popclip.extension.worldcat",
+    "date": 1405496444
+  },
+  {
+    "name": "PubMed",
+    "handle": "PubMed",
+    "identifier": "com.pilotmoon.popclip.extension.pubmed",
+    "date": 1405495854
+  },
+  {
+    "name": "Yandex",
+    "handle": "Yandex",
+    "identifier": "com.pilotmoon.popclip.extension.yandex",
+    "date": 1405418215
+  },
+  {
+    "name": "Hyphenate",
+    "handle": "Hyphenate",
+    "identifier": "com.pilotmoon.popclip.extension.hyphenate",
+    "date": 1405415673
+  },
+  {
+    "name": "Eudic",
+    "handle": "Eudic",
+    "identifier": "com.pilotmoon.popclip.extension.eudic",
+    "date": 1405356257
+  },
+  {
+    "name": "Todoist",
+    "handle": "Todoist",
+    "identifier": "com.pilotmoon.popclip.extension.todoist",
+    "date": 1401456861
+  },
+  {
+    "name": "Dropshelf",
+    "handle": "Dropshelf",
+    "identifier": "com.pilotmoon.popclip.extension.dropshelf",
+    "date": 1400842988
+  },
+  {
+    "name": null,
+    "handle": "UnshortenLink",
+    "identifier": null,
+    "date": 1400184565
+  },
+  {
+    "name": "StartPage",
+    "handle": "StartPage",
+    "identifier": "com.pilotmoon.popclip.extension.startpage",
+    "date": 1400143178
+  },
+  {
+    "name": "Google",
+    "handle": "GoogleSearch",
+    "identifier": "com.pilotmoon.popclip.extension.google-search",
+    "date": 1400141242
+  },
+  {
+    "name": "Naver",
+    "handle": "Naver",
+    "identifier": "com.pilotmoon.popclip.extension.SearchNaver",
+    "date": 1400138246
+  },
+  {
+    "name": "Parcel",
+    "handle": "Parcel",
+    "identifier": "com.pilotmoon.popclip.extension.parcel",
+    "date": 1399489101
+  },
+  {
+    "name": null,
+    "handle": "DeskConnect",
+    "identifier": null,
+    "date": 1394792897
+  },
+  {
+    "name": "Typinator",
+    "handle": "Typinator",
+    "identifier": "com.pilotmoon.popclip.extension.typinator",
+    "date": 1394792897
+  },
+  {
+    "name": "NoteAway",
+    "handle": "NoteAway",
+    "identifier": "com.pilotmoon.popclip.extension.noteaway",
+    "date": 1394183394
+  },
+  {
+    "name": "BBEdit",
+    "handle": "BBEdit",
+    "identifier": "com.pilotmoon.popclip.extension.bbedit",
+    "date": 1393606912
+  },
+  {
+    "name": "Online Dictionary",
+    "handle": "OnlineDictionary",
+    "identifier": "com.pilotmoon.popclip.extension.online-dictionary",
+    "date": 1393585165
+  },
+  {
+    "name": "Google Images",
+    "handle": "GoogleImages",
+    "identifier": "com.pilotmoon.popclip.extension.google-images",
+    "date": 1393580910
+  },
+  {
+    "name": "The Hit List",
+    "handle": "TheHitList",
+    "identifier": "com.potionfactory.popclip-extension.TheHitList",
+    "date": 1392984115
+  },
+  {
+    "name": "Notefile",
+    "handle": "Notefile",
+    "identifier": "com.pilotmoon.popclip.extension.junecloud-notefile",
+    "date": 1392981473
+  },
+  {
+    "name": null,
+    "handle": "Wunderlist",
+    "identifier": null,
+    "date": 1392402616
+  },
+  {
+    "name": "TextEdit",
+    "handle": "TextEdit",
+    "identifier": "com.pilotmoon.popclip.extension.textedit",
+    "date": 1392396995
+  },
+  {
+    "name": "Instant Translate",
+    "handle": "InstantTranslate",
+    "identifier": "com.popclip.extension.instant-translate",
+    "date": 1392152417
+  },
+  {
+    "name": "Maps",
+    "handle": "Maps",
+    "identifier": "com.pilotmoon.popclip.extension.maps",
+    "date": 1382467182
+  },
+  {
+    "name": "Google Scholar",
+    "handle": "GoogleScholar",
+    "identifier": "com.pilotmoon.popclip.extension.google-scholar",
+    "date": 1379495810
+  },
+  {
+    "name": "HTML Encode",
+    "handle": "HTMLEncode",
+    "identifier": "com.pilotmoon.popclip.extension.htmlencode",
+    "date": 1377799966
+  },
+  {
+    "name": "URL Encode",
+    "handle": "URLEncode",
+    "identifier": "com.pilotmoon.popclip.extension.urlencode",
+    "date": 1377796276
+  },
+  {
+    "name": "DuckDuckGo",
+    "handle": "DuckDuckGo",
+    "identifier": "com.pilotmoon.popclip.extension.duckduckgo",
+    "date": 1371812564
+  },
+  {
+    "name": "Alfred",
+    "handle": "Alfred",
+    "identifier": "com.pilotmoon.popclip.extension.alfred",
+    "date": 1371808931
+  },
+  {
+    "name": "Reading List",
+    "handle": "ReadingList",
+    "identifier": "com.pilotmoon.popclip.extension.safari-reading-list",
+    "date": 1369383649
+  },
+  {
+    "name": null,
+    "handle": "Facebook",
+    "identifier": null,
+    "date": 1369327138
+  },
+  {
+    "name": null,
+    "handle": "SinaWeibo",
+    "identifier": null,
+    "date": 1369300364
+  },
+  {
+    "name": null,
+    "handle": "Tweet",
+    "identifier": null,
+    "date": 1369300364
+  },
+  {
+    "name": "LinkedIn",
+    "handle": "LinkedIn",
+    "identifier": "com.pilotmoon.popclip.extension.linkedin",
+    "date": 1369243533
+  },
+  {
+    "name": null,
+    "handle": "DEVONthinkPro",
+    "identifier": null,
+    "date": 1368819737
+  },
+  {
+    "name": "Messages",
+    "handle": "Messages",
+    "identifier": "com.pilotmoon.popclip.extension.messages",
+    "date": 1367605193
+  },
+  {
+    "name": "Day One",
+    "handle": "DayOne",
+    "identifier": "com.pilotmoon.popclip.extension.dayone",
+    "date": 1367568074
+  },
+  {
+    "name": "Short Menu",
+    "handle": "ShortMenu",
+    "identifier": "com.pilotmoon.popclip.extension.short-menu",
+    "date": 1367231431
+  },
+  {
+    "name": "Convert",
+    "handle": "Convert",
+    "identifier": "com.pilotmoon.popclip.extension.convert",
+    "date": 1366035634
+  },
+  {
+    "name": "Ebay",
+    "handle": "Ebay",
+    "identifier": "com.pilotmoon.popclip.extension.ebay",
+    "date": 1365763257
+  },
+  {
+    "name": "Quotes",
+    "handle": "Quotes",
+    "identifier": "com.pilotmoon.popclip.extension.quotes",
+    "date": 1363951613
+  },
+  {
+    "name": "Due",
+    "handle": "Due",
+    "identifier": "com.pilotmoon.popclip.extension.due",
+    "date": 1363876749
+  },
+  {
+    "name": "Bing",
+    "handle": "Bing",
+    "identifier": "com.pilotmoon.popclip.extension.bing",
+    "date": 1361897463
+  },
+  {
+    "name": "Droplr",
+    "handle": "Droplr",
+    "identifier": "com.pilotmoon.popclip.extension.droplr",
+    "date": 1361885901
+  },
+  {
+    "name": "Buffer",
+    "handle": "Buffer",
+    "identifier": "com.pilotmoon.popclip.extension.buffer",
+    "date": 1361541418
+  },
+  {
+    "name": "Bitly",
+    "handle": "Bitly",
+    "identifier": "com.pilotmoon.popclip.extension.bitly",
+    "date": 1361307189
+  },
+  {
+    "name": "Shorten Link",
+    "handle": "ShortenLink",
+    "identifier": "com.pilotmoon.popclip.extension.urlshortener",
+    "date": 1360607774
+  },
+  {
+    "name": "Discogs",
+    "handle": "Discogs",
+    "identifier": "com.pilotmoon.popclip.extension.discogs",
+    "date": 1360601770
+  },
+  {
+    "name": "Todo",
+    "handle": "Todo",
+    "identifier": "com.pilotmoon.popclip.extension.appigo-todo",
+    "date": 1360582949
+  },
+  {
+    "name": "MiniNote Pro",
+    "handle": "NotesTab",
+    "identifier": "com.pilotmoon.popclip.extension.notestab",
+    "date": 1360577288
+  },
+  {
+    "name": "Get IP",
+    "handle": "GetIP",
+    "identifier": "com.pilotmoon.popclip.extension.getip",
+    "date": 1360361983
+  },
+  {
+    "name": "Sort",
+    "handle": "Sort",
+    "identifier": "com.pilotmoon.popclip.extension.sort",
+    "date": 1360348310
+  },
+  {
+    "name": null,
+    "handle": "YoruFukurou",
+    "identifier": null,
+    "date": 1360003763
+  },
+  {
+    "name": "TextSoap",
+    "handle": "TextSoap",
+    "identifier": "com.pilotmoon.popclip.extension.textsoap",
+    "date": 1360002769
+  },
+  {
+    "name": "Pinboard",
+    "handle": "Pinboard",
+    "identifier": "com.pilotmoon.popclip.extension.pinboard",
+    "date": 1358941985
+  },
+  {
+    "name": null,
+    "handle": "Together",
+    "identifier": null,
+    "date": 1358874975
+  },
+  {
+    "name": "Swap with Clipboard",
+    "handle": "Swap",
+    "identifier": "com.pilotmoon.popclip.extension.swap",
+    "date": 1358711938
+  },
+  {
+    "name": null,
+    "handle": "Rdio",
+    "identifier": null,
+    "date": 1358694638
+  },
+  {
+    "name": "Calculate",
+    "handle": "Calculate",
+    "identifier": "com.pilotmoon.popclip.extension.calculate",
+    "date": 1358694638
+  },
+  {
+    "name": null,
+    "handle": "TextExpander",
+    "identifier": null,
+    "date": 1358538925
+  },
+  {
+    "name": "Wolfram Alpha",
+    "handle": "WolframAlpha",
+    "identifier": "com.pilotmoon.popclip.extension.wolframalpha",
+    "date": 1358529365
+  },
+  {
+    "name": "IMDb",
+    "handle": "IMDb",
+    "identifier": "com.pilotmoon.popclip.extension.imdb",
+    "date": 1358529365
+  },
+  {
+    "name": "Tembo",
+    "handle": "Tembo",
+    "identifier": "com.pilotmoon.popclip.extension.tembo",
+    "date": 1358337711
+  },
+  {
+    "name": null,
+    "handle": "Readability",
+    "identifier": null,
+    "date": 1357670075
+  },
+  {
+    "name": null,
+    "handle": "Instapaper",
+    "identifier": null,
+    "date": 1357670075
+  },
+  {
+    "name": "Select All",
+    "handle": "SelectAll",
+    "identifier": "com.pilotmoon.popclip.extension.select-all",
+    "date": 1357664447
+  },
+  {
+    "name": "Google Maps",
+    "handle": "GoogleMaps",
+    "identifier": "com.pilotmoon.popclip.extension.google-maps",
+    "date": 1357662666
+  },
+  {
+    "name": "Wikipedia",
+    "handle": "Wikipedia",
+    "identifier": "com.pilotmoon.popclip.extension.wikipedia",
+    "date": 1357658636
+  },
+  {
+    "name": "Taobao",
+    "handle": "Taobao",
+    "identifier": "com.pilotmoon.popclip.extension.taobao-search",
+    "date": 1357312078
+  },
+  {
+    "name": "Amazon",
+    "handle": "Amazon",
+    "identifier": "com.pilotmoon.popclip.extension.amazon-search",
+    "date": 1357312078
+  },
+  {
+    "name": "Phone Amego",
+    "handle": "PhoneAmego",
+    "identifier": "com.pilotmoon.popclip.extension.PhoneAmego",
+    "date": 1356121135
+  },
+  {
+    "name": "Full/Half Width",
+    "handle": "FullHalfWidth",
+    "identifier": "com.pilotmoon.popclip.extension.fullhalfwidth",
+    "date": 1355997813
+  },
+  {
+    "name": "Yojimbo",
+    "handle": "Yojimbo",
+    "identifier": "com.pilotmoon.popclip.extension.yojimbo",
+    "date": 1355488051
+  },
+  {
+    "name": null,
+    "handle": "LuckyLink",
+    "identifier": null,
+    "date": 1355485109
+  },
+  {
+    "name": "Append to Clipboard",
+    "handle": "Append",
+    "identifier": "com.pilotmoon.popclip.extension.append",
+    "date": 1355402121
+  },
+  {
+    "name": null,
+    "handle": "Dialectic",
+    "identifier": null,
+    "date": 1355397930
+  },
+  {
+    "name": "Skype",
+    "handle": "Skype",
+    "identifier": "com.pilotmoon.popclip.extension.skype",
+    "date": 1355397930
+  },
+  {
+    "name": "Leap",
+    "handle": "Leap",
+    "identifier": "com.pilotmoon.popclip.extension.leap",
+    "date": 1355393246
+  },
+  {
+    "name": null,
+    "handle": "Spotlight",
+    "identifier": null,
+    "date": 1355342224
+  },
+  {
+    "name": null,
+    "handle": "OpenInFirefox",
+    "identifier": null,
+    "date": 1355332574
+  },
+  {
+    "name": null,
+    "handle": "OpenInSafari",
+    "identifier": null,
+    "date": 1355332574
+  },
+  {
+    "name": "Pocket",
+    "handle": "Pocket",
+    "identifier": "com.pilotmoon.popclip.extension.pocket",
+    "date": 1354055196
+  },
+  {
+    "name": "Baidu",
+    "handle": "Baidu",
+    "identifier": "com.snowzjx.popclip.extension.baidu-search",
+    "date": 1353925677
+  },
+  {
+    "name": "Email",
+    "handle": "Email",
+    "identifier": "com.pilotmoon.popclip.extension.generic-mail",
+    "date": 1353917674
+  },
+  {
+    "name": null,
+    "handle": "Fantastical",
+    "identifier": null,
+    "date": 1353104263
+  },
+  {
+    "name": "TaskPaper",
+    "handle": "TaskPaper",
+    "identifier": "com.pilotmoon.popclip.extension.taskpaper",
+    "date": 1352922248
+  },
+  {
+    "name": "Doit.im",
+    "handle": "Doit",
+    "identifier": "com.snoworange.Doitim-Mac",
+    "date": 1352905138
+  },
+  {
+    "name": null,
+    "handle": "PreviewHighlight",
+    "identifier": null,
+    "date": 1352824012
+  },
+  {
+    "name": "Leech",
+    "handle": "Leech",
+    "identifier": "com.pilotmoon.popclip.extension.leech",
+    "date": 1352824012
+  },
+  {
+    "name": "2Do",
+    "handle": "2Do",
+    "identifier": "com.pilotmoon.popclip.extension.2do",
+    "date": 1352824012
+  },
+  {
+    "name": "Markdown",
+    "handle": "Markdown",
+    "identifier": "com.pilotmoon.popclip.extension.markdown-to-html",
+    "date": 1352824012
+  },
+  {
+    "name": "Dash",
+    "handle": "Dash",
+    "identifier": "com.pilotmoon.popclip.extension.dash",
+    "date": 1348182000
+  },
+  {
+    "name": null,
+    "handle": "OpenInChrome",
+    "identifier": null,
+    "date": 1348182000
+  },
+  {
+    "name": "Character Count",
+    "handle": "CharCount",
+    "identifier": "com.pilotmoon.popclip.extension.charcount",
+    "date": 1338246000
+  },
+  {
+    "name": "Word Count",
+    "handle": "WordCount",
+    "identifier": "com.pilotmoon.popclip.extension.wordcount",
+    "date": 1338246000
+  },
+  {
+    "name": null,
+    "handle": "ImFeelingLucky",
+    "identifier": null,
+    "date": 1349996400
+  },
+  {
+    "name": "Spotify",
+    "handle": "Spotify",
+    "identifier": "com.pilotmoon.popclip.extension.spotify-search",
+    "date": 1350601200
+  },
+  {
+    "name": "YouTube",
+    "handle": "YouTube",
+    "identifier": "com.pilotmoon.popclip.extension.youtube",
+    "date": 1350601200
+  },
+  {
+    "name": "Terminal",
+    "handle": "RunCommand",
+    "identifier": "com.pilotmoon.popclip.extension.rtc",
+    "date": 1349996400
+  },
+  {
+    "name": "Say",
+    "handle": "Say",
+    "identifier": "com.pilotmoon.popclip.extension.say",
+    "date": 1338246000
+  },
+  {
+    "name": null,
+    "handle": "Tweetbot",
+    "identifier": null,
+    "date": 1350514800
+  },
+  {
+    "name": null,
+    "handle": "Twitterrific",
+    "identifier": null,
+    "date": 1350514800
+  },
+  {
+    "name": null,
+    "handle": "Twitter",
+    "identifier": null,
+    "date": 1340319600
+  },
+  {
+    "name": null,
+    "handle": "StickyNotifications",
+    "identifier": null,
+    "date": 1349996400
+  },
+  {
+    "name": null,
+    "handle": "Things",
+    "identifier": null,
+    "date": 1348182000
+  },
+  {
+    "name": "OmniFocus",
+    "handle": "OmniFocus",
+    "identifier": "com.pilotmoon.popclip.extension.omnifocus",
+    "date": 1348182000
+  },
+  {
+    "name": "nvALT",
+    "handle": "nvALT",
+    "identifier": "com.pilotmoon.popclip.extension.nvalt",
+    "date": 1348182000
+  },
+  {
+    "name": null,
+    "handle": "NotationalVelocity",
+    "identifier": null,
+    "date": 1348182000
+  },
+  {
+    "name": "Evernote",
+    "handle": "Evernote",
+    "identifier": "com.pilotmoon.popclip.extension.evernote",
+    "date": 1338246000
+  },
+  {
+    "name": "Stickies",
+    "handle": "MakeSticky",
+    "identifier": "com.pilotmoon.popclip.extension.make-sticky",
+    "date": 1338246000
+  },
+  {
+    "name": "Reminders",
+    "handle": "Reminders",
+    "identifier": "com.pilotmoon.popclip.extension.reminders",
+    "date": 1349996400
+  },
+  {
+    "name": "Notes",
+    "handle": "Notes",
+    "identifier": "com.pilotmoon.popclip.extension.notes",
+    "date": 1348182000
+  },
+  {
+    "name": "Delete",
+    "handle": "Delete",
+    "identifier": "com.pilotmoon.popclip.extension.delete",
+    "date": 1338246000
+  },
+  {
+    "name": "Formatting",
+    "handle": "Formatting",
+    "identifier": "com.pilotmoon.popclip.extension.formatting",
+    "date": 1349996400
+  },
+  {
+    "name": "Lowercase",
+    "handle": "Lowercase",
+    "identifier": "com.pilotmoon.popclip.extension.lowercase",
+    "date": 1349996400
+  },
+  {
+    "name": "Uppercase",
+    "handle": "Uppercase",
+    "identifier": "com.pilotmoon.popclip.extension.uppercase",
+    "date": 1349996400
+  },
+  {
+    "name": "Capitalize Words",
+    "handle": "Capitalize",
+    "identifier": "com.pilotmoon.popclip.extension.capitalize",
+    "date": 1349996400
+  },
+  {
+    "name": "Paste and Enter",
+    "handle": "PasteAndEnter",
+    "identifier": "com.pilotmoon.popclip.extension.pasteandenter",
+    "date": 1338246000
+  },
+  {
+    "name": "Paste and Match Style",
+    "handle": "PasteAndMatch",
+    "identifier": "com.pilotmoon.popclip.extension.pasteplain",
+    "date": 1340319600
+  },
+  {
+    "name": "Translate Tab",
+    "handle": "TranslateTab",
+    "identifier": "com.pilotmoon.popclip.extension.translate-tab",
+    "date": 1338246000
+  },
+  {
+    "name": "Google Translate",
+    "handle": "GoogleTranslate",
+    "identifier": "com.pilotmoon.popclip.extension.google-translate",
+    "date": 1338246000
+  }
+]
