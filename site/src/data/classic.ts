@@ -1,5 +1,5 @@
 import { z } from "zod";
-import classics from "./classic-extensions.json";
+import classics from "./classic.json";
 
 const ZClassicExtension = z.object({
   handle: z.string(),
