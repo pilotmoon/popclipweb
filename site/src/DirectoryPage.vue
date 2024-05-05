@@ -62,7 +62,7 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
       <li><span :class="$style.CardDataLabel">Version</span><br><span>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
       <li><span :class="$style.CardDataLabel">Source</span><br>
-        <AaLink :gh="ext.source" />
+        <AaLink :href="ext.source" />
       </li>
     </ul>
   </div>
@@ -71,7 +71,7 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
     <div :class="$style.CardHeader">Previous Versons</div>
     <ul :class="$style.CardData">
       <li v-for="ver in ext.previousVersions" :key="ver.version">
-        Version {{ ver.version }} ({{ formatDate(ver.sourceDate) }}): <a v-id=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>      
+        Version {{ ver.version }} <span :class="$style.small">({{ formatDate(ver.sourceDate) }}<span v-if="ver.name!==ext.name">, as "{{ ver.name }}"</span>)</span>: <a v-id=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>      
       </li>
     </ul>
   </div>
@@ -174,6 +174,10 @@ ul.CardData code {
   border-radius: 8px;
 }
 
+.Card .small {
+  font-size: 14px;
+}
+
 /* ---
 .Readme
   Geometry is a little tighter then vp-doc
@@ -217,4 +221,4 @@ ul.CardData code {
 .Readme pre {
   font-size: 14px;
 }
-</style>./data/loadExtensionInfo.js
+</style>
