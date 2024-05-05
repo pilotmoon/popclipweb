@@ -1,8 +1,8 @@
 import { defineLoader } from "vitepress";
 import { z } from "zod";
-import axios from "axios";
 import { classicExtensions } from "./classic.ts";
 import * as config from "../config/config.json";
+import { api } from "./pilotmoonApi.ts";
 
 // the vitepress whizzery
 declare const data: ExtInfo[];
@@ -41,18 +41,6 @@ const ZExtInfo = z.object({
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
 
-// prepare api access
-const PILOTMOON_API_KEY = process.env.PILOTMOON_API_KEY;
-if (!PILOTMOON_API_KEY) {
-  throw new Error("Missing PILOTMOON_API_KEY");
-}
-const api = axios.create({
-  baseURL: "https://pltmn-rolo.eu.ngrok.io",
-  headers: {
-    Authorization: `Bearer ${PILOTMOON_API_KEY}`,
-  },
-});
-
 export async function load() {
   console.log("In extensions loader");
   console.time("load extensions");
@@ -80,7 +68,6 @@ export async function load() {
       readme: adjustPublicPath(findSpecialFile("readme.md", ext.files)),
       download: adjustPublicPath(ext.download),
     })));
-    console.log("ext", exts.at(-1), "cursor", cursor)
     cursor = parseResult.data.at(-1)?.id;
   } while (cursor);
   console.log(`Loaded ${exts.length} extensions from the API`);
