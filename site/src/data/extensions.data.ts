@@ -31,6 +31,7 @@ const ZExtInfo = z.object({
   keywords: z.string(),
   apps: z.array(ZAppInfo),
   source: z.string().nullable(),
+  sourceDate: z.coerce.date().nullable(),
   files: z.array(ZFileInfo),
   download: z.string().nullable(),
   owner: z.string().nullable(),
@@ -79,6 +80,7 @@ export async function load() {
       readme: adjustPublicPath(findSpecialFile("readme.md", ext.files)),
       download: adjustPublicPath(ext.download),
     })));
+    console.log("ext", exts.at(-1), "cursor", cursor)
     cursor = parseResult.data.at(-1)?.id;
   } while (cursor);
   console.log(`Loaded ${exts.length} extensions from the API`);
@@ -115,7 +117,7 @@ function adjustPublicPath(path: string | null) {
 // either bare e.g. readme.md or suffixed e.g. blah-demo.mp4
 // and only in root folder
 function findSpecialFile(suffix: string, files: FileInfo[]) {
-  const regex = new RegExp(`(?:[^/]+-${suffix}$|^${suffix}$)`, "i");
+  const regex = new RegExp(`(^([^/]+-)?${suffix}$)`, "i");
   const file = files.find((f) => regex.test(f.path));
   return file?.url ?? null;
 }

@@ -8,11 +8,14 @@ import type {
 import { formatDate } from "./helpers/formatters.js";
 
 const { params } = useData();
+console.log(params.value);
 const ext: ExtInfo = {
   ...params.value,
   firstCreated: new Date(params.value?.firstCreated),
   created: new Date(params.value?.created),
+  sourceDate: params.value?.sourceDate ? new Date(params.value?.sourceDate) : null,
 } as ExtInfo;
+console.log(ext);
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 </script>
@@ -56,8 +59,8 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
   <div :class="$style.Card">
     <div :class="$style.CardHeader">Info</div>
     <ul :class="$style.CardData">
-      <!-- <li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li> -->
-      <li><span :class="$style.CardDataLabel">Updated</span><br><span>{{ formatDate(ext.created.toISOString()) }}</span></li>
+      <!--<li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li> -->
+      <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">Updated</span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
       <li><span :class="$style.CardDataLabel">Version</span><br><span>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
       <li><span :class="$style.CardDataLabel">Source</span><br>

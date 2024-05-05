@@ -22,7 +22,7 @@ async function getMarkdown(markdownUrl: string, files: FileInfo[]) {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),    
     transformTags: {
       img: (tagName, attribs) => {
-        console.log("attribs", attribs);
+        // console.log("attribs", attribs);
         const blobUrl = files.find((f) => f.path === attribs.src)?.url
         if (!blobUrl) {
           return {
@@ -57,12 +57,12 @@ export default {
       extensions.map(async (ext) => {
         if (ext.readme) {
           ext.readme = await getMarkdown(ext.readme, ext.files);
-          console.log(
-            "\nRendered readme for extension",
-            ext.name,
-            ext.shortcode,
-            ext.readme?.slice(0, 100),
-          );
+          // console.log(
+          //   "\nRendered readme for extension",
+          //   ext.name,
+          //   ext.shortcode,
+          //   ext.readme?.slice(0, 100),
+          // );
         }
       }),
     );
