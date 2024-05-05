@@ -30,12 +30,13 @@ const ZExtInfo = z.object({
   description: z.string(),
   keywords: z.string(),
   apps: z.array(ZAppInfo),
-  demo: z.string().nullable(),
-  readme: z.string().nullable(),
   source: z.string().nullable(),
-  // owner: z.string().nullable(),
   files: z.array(ZFileInfo),
   download: z.string().nullable(),
+  owner: z.string().nullable(),
+  // extras that we add:
+  demo: z.string().nullish(),
+  readme: z.string().nullish(),
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
 
@@ -74,8 +75,8 @@ export async function load() {
       ...ext, 
       firstCreated: adjustFirstCreated(ext.firstCreated, ext.identifier),
       description: linkifyDescription(ext.description, ext.apps),
-      demo: adjustPublicPath(ext.demo),
-      readme: adjustPublicPath(ext.readme),
+      demo: adjustPublicPath(findSpecialFile("demo.mp4", ext.files) ?? findSpecialFile("demo.gif", ext.files)),
+      readme: adjustPublicPath(findSpecialFile("readme.md", ext.files)),
       download: adjustPublicPath(ext.download),
     })));
     cursor = parseResult.data.at(-1)?.id;
@@ -109,4 +110,12 @@ function adjustPublicPath(path: string | null) {
     return config.pilotmoon.publicRoot + path;
   }
   return path;
+}
+
+// either bare e.g. readme.md or suffixed e.g. blah-demo.mp4
+// and only in root folder
+function findSpecialFile(suffix: string, files: FileInfo[]) {
+  const regex = new RegExp(`(?:[^/]+-${suffix}$|^${suffix}$)`, "i");
+  const file = files.find((f) => regex.test(f.path));
+  return file?.url ?? null;
 }
