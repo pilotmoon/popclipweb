@@ -2,9 +2,7 @@
 import { useData } from "vitepress";
 import { useSlots } from "vue";
 import Icon from "./Icon.vue";
-import type {
-  ExtInfo
-} from "./data/extensions.data.js";
+import type { ExtInfo } from "./data/extensionInfo.js";
 import { formatDate } from "./helpers/formatters.js";
 
 const { params } = useData();
@@ -210,4 +208,4 @@ ul.CardData code {
 .Readme pre {
   font-size: 14px;
 }
-</style>
+</style>./data/loadExtensionInfo.js
