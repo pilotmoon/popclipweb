@@ -18,7 +18,7 @@ const ZFileInfo =     z.object({
   executable: z.boolean().optional(),
 });
 export type FileInfo = z.infer<typeof ZFileInfo>;
-const ZExtInfo = z.object({
+export const ZExtInfo = z.object({
   id: z.string(),
   created: z.coerce.date(),
   firstCreated: z.coerce.date(),
@@ -41,7 +41,11 @@ const ZExtInfo = z.object({
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
 
+let savedResult: ExtInfo[] | undefined;
 export async function load() {
+  if (savedResult) {
+    return savedResult;
+  }
   console.log("In extensions loader");
   console.time("load extensions");
   let cursor: string | undefined;
@@ -72,6 +76,7 @@ export async function load() {
   } while (cursor);
   console.log(`Loaded ${exts.length} extensions from the API`);
   console.timeEnd("load extensions");
+  savedResult = exts;
   return exts;
 }
 

@@ -8,14 +8,14 @@ import type {
 import { formatDate } from "./helpers/formatters.js";
 
 const { params } = useData();
-console.log(params.value);
+
 const ext: ExtInfo = {
   ...params.value,
   firstCreated: new Date(params.value?.firstCreated),
   created: new Date(params.value?.created),
   sourceDate: params.value?.sourceDate ? new Date(params.value?.sourceDate) : null,
 } as ExtInfo;
-console.log(ext);
+
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 </script>

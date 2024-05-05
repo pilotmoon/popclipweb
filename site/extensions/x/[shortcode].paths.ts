@@ -4,6 +4,7 @@ import {
   type ExtInfo,
   load,
   type FileInfo,
+  ZExtInfo,
 } from "../../src/data/extensions.data";
 import * as config from "../../src/config/config.json";
 import axios from "axios";
@@ -22,15 +23,14 @@ const md = new MarkdownIt({
 async function getMarkdown(markdownUrl: string, files: FileInfo[]) {
   const { data: markdown } = await axios.get(markdownUrl);
   let html = sanitizeHtml(md.render(markdown), {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),    
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
     transformTags: {
       img: (tagName, attribs) => {
-        // console.log("attribs", attribs);
-        const blobUrl = files.find((f) => f.path === attribs.src)?.url
+        const blobUrl = files.find((f) => f.path === attribs.src)?.url;
         if (!blobUrl) {
           return {
             tagName: "i",
-            text: "[Remote image removed]"
+            text: "[Remote image removed]",
           };
         }
         return {
@@ -40,7 +40,7 @@ async function getMarkdown(markdownUrl: string, files: FileInfo[]) {
             src: config.pilotmoon.publicRoot + blobUrl,
           },
         };
-      }
+      },
     },
   });
   // insert newline before these tags -- due to https://github.com/markdown-it/markdown-it/issues/951
@@ -52,66 +52,65 @@ async function getMarkdown(markdownUrl: string, files: FileInfo[]) {
   return html;
 }
 
-const ZVersionInfo = z.object({
-  id: z.string(),
-  created: z.coerce.date(),
-  version: z.string(),
-  name: z.string(),
-  icon: z.string().nullable(),
-  description: z.string(), 
-  source: z.string().nullable(),
-  sourceDate: z.coerce.date().nullable(),
-  download: z.string().nullable(),
-  owner: z.string().nullable(),
+const ZPartialExtInfo = ZExtInfo.pick({
+  id: true,
+  created: true,
+  version: true,
+  name: true,
+  icon: true,
+  description: true,
+  source: true,
+  sourceDate: true,
+  download: true,
+  owner: true,
 });
-export type VersionInfo = z.infer<typeof ZVersionInfo>;
+export type PartialExtInfo = z.infer<typeof ZPartialExtInfo>;
 
-async function getVersions(shortcode: string) {
+const ZExtInfoWithVersions = ZExtInfo.extend({
+  versions: z.array(ZPartialExtInfo),
+});
+export type ExtInfoWithVersions = z.infer<typeof ZExtInfoWithVersions>;
+
+async function processVersions(ext: ExtInfo) {
   const response = await api.get("extensions", {
     params: {
-      shortcode,
+      "info.identifier": ext.identifier,
       view: "popclip",
       format: "json",
       limit: 30,
     },
   });
-  const parseResult = z.array(ZVersionInfo).safeParse(response.data);
+  const parseResult = z.array(ZPartialExtInfo).safeParse(response.data);
   if (!parseResult.success) {
     throw new Error("Failed to parse previous version info");
   }
-  return parseResult.data;
+  console.log(`Loaded ${parseResult.data.length} versions`, ext.shortcode, ext.identifier);
+  (ext as ExtInfoWithVersions).versions = parseResult.data;
 }
 
-async function processExtension(ext: ExtInfo) {
-    if (ext.readme) {
-      ext.readme = await getMarkdown(ext.readme, ext.files);
-      console.log(
-        "\nRendered readme for extension",
-        ext.name,
-        ext.shortcode,
-        ext.readme?.slice(0, 100),
-      );
-    }
+async function processReadme(ext: ExtInfo) {
+  if (ext.readme) {
+    ext.readme = await getMarkdown(ext.readme, ext.files);
+    console.log(`Rendered ${ext.readme?.length} bytes readme`, ext.shortcode, ext.identifier);
+  }
 }
 
 export default {
   async paths() {
-    console.log("calling load from paths");
+    console.log("In paths loader");
+    console.time("load paths");
     const extensions = await load();
-    const limit = pLimit(20);
+    const limit = pLimit(30);
     await Promise.all(
-      extensions.map(async (ext) => limit(
-
-
-      })),
-
-
+      extensions.flatMap((ext) => [
+        limit(() => processVersions(ext)),
+        limit(() => processReadme(ext)),
+      ])
     );
-    return extensions.map((ext) => {
-      return {
-        params: ext,
-        content: ext.readme,
-      };
-    });
+    console.timeEnd("load paths");
+    return extensions.map((ext) => ({
+      params: ext as ExtInfoWithVersions,
+      content: ext.readme,
+    }));
   },
 };
