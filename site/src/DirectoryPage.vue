@@ -66,6 +66,15 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
       </li>
     </ul>
   </div>
+
+  <div v-if=ext.previousVersions.length :class="$style.Card">
+    <div :class="$style.CardHeader">Previous Versons</div>
+    <ul :class="$style.CardData">
+      <li v-for="ver in ext.previousVersions" :key="ver.version">
+        Version {{ ver.version }} ({{ formatDate(ver.sourceDate) }}): <a v-id=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>      
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style module>
