@@ -14,6 +14,12 @@ const ZFileInfo = z.object({
 });
 export type FileInfo = z.infer<typeof ZFileInfo>;
 
+const ZAltString = z.object({
+  lang: z.string(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+});
+
 const ZPartialExtInfo = z.object({
   version: z.string(),
   name: z.string(),
@@ -34,6 +40,7 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   files: z.array(ZFileInfo),
   owner: z.string().nullable(),
   previousVersions: z.array(ZPartialExtInfo),
+  altStrings: z.array(ZAltString).nullable(),
   // extras that we add:
   demo: z.string().nullish(),
   readme: z.string().nullish(),

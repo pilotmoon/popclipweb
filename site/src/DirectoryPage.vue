@@ -13,9 +13,10 @@ const ext: ExtInfo = {
   created: new Date(params.value?.created),
   sourceDate: params.value?.sourceDate ? new Date(params.value?.sourceDate) : null,
 } as ExtInfo;
-
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
+
+console.log("ext", ext);
 </script>
 
 <template>
@@ -36,6 +37,15 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
         <DownloadButton size="small" :href="ext.download" />
       </div>
     </div>
+
+    <div v-if=ext.altStrings :class="$style.AltStrings" style="color: var(--vp-c-text-2)">
+      <span v-for="alt in ext.altStrings" :key="alt.lang">
+        <span :class="$style.Subdued">{{ alt.lang }}</span>
+        <b v-if="alt.name">{{ alt.name }}</b>
+        <span v-if="alt.description">{{ alt.description }}</span>
+      </span>
+    </div>
+    
   </div>
 
   <div v-if="ext.demo" :class="$style.Card">
@@ -78,6 +88,15 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 </template>
 
 <style module>
+
+.Small {
+  font-size: 14px;
+}
+.Subdued {
+  font-size: 12px;
+  color: var(--vp-c-text-2);
+}
+
 .Breadcrumb {
   color: var(--vp-c-text-2);
   margin-bottom: 32px;
@@ -118,6 +137,25 @@ const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 
 .SideBySide .Download {
   padding-top: 8px;
+}
+
+.AltStrings {
+  margin: 16px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0 16px;
+}
+
+.AltStrings > span {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 8px;
 }
 
 @media (max-width: 550px) {
@@ -172,10 +210,6 @@ ul.CardData code {
 
 .Card>img {
   border-radius: 8px;
-}
-
-.Card .small {
-  font-size: 14px;
 }
 
 /* ---
