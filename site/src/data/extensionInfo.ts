@@ -51,13 +51,14 @@ export async function load() {
   console.log("In extensions loader");
   console.time("load extensions");
   let cursor: string | undefined;
+  const limit = 200;
   const exts: ExtInfo[] = [];
   do {
     const response = await api.get("extensions", {
       params: {
         view: "popclipDirectory",
         format: "json",
-        limit: 300,
+        limit,
         cursor,
       },
     });
@@ -76,7 +77,7 @@ export async function load() {
       }
       exts.push(ext);
     }
-    cursor = parseResult.data.at(-1)?.id;
+    cursor = parseResult.data.length === limit ? parseResult.data[limit - 1].id : undefined;
   } while (cursor);
   console.log(`Loaded ${exts.length} extensions from the API`);
   console.timeEnd("load extensions");
