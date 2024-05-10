@@ -21,6 +21,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
+## PopClip 2024.5 (4578)
+
+### Added
+
+- JavaScript extensions can now be debugged using the Safari Web Inspector. This
+  lets you inspect and debug your code while it is running inside PopClip. The
+  inspector can be accessed from Safari's Develop menu, which must be enabled
+  with the "Show features for web developers" in Safari's Advanced settings.
+- Added new `popclip.input.isUrl` property that indicates whether the input text
+  is a single a web URL (as opposed to text _containing_ one or more URLs). This
+  is useful for extensions that have different actions depending on whether the
+  input is a URL or not.
+- Added `popclip.share()` function to send text to other apps using macOS
+  Sharing Extensions. I will soon update the official Notes, Messages and
+  Reading List extension to use this feature.
+
+### Fixed
+
+- Extension requirements keys `path`, `url`, `email` now properly propagate
+  their matched text as the input to Service actions.
+
 ## PopClip 2024.3 (4508)
 
 ### Added
@@ -52,12 +73,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   multiple in a row.
 - Renamed `flip horizontal` and `flip vertical` to `flip x` and `flip y`
   respectively.
+- Option labels are now optional. If omitted, the option `identifier` is used as
+  the label.
 - Identifier prefix `app.popclip.` is now reserved for signed extensions only.
+- When an action specifies both a `regex` and a `url`, `path` or `email`
+  requirement, the requirement is now applied first, and then the regex is
+  applied to the output of the requirement.
 - Unsigned extensions no longer purge all existing options upon installation.
   Instead, only options of type `secret` are purged, and only if an unsigned
   extension replaces a signed extension with the same identifier.
-- Option labels are now optional. If omitted, the option `identifier` is used as
-  the label.
+- Signed and unsigned extensions now store keychain items in separate keyspaces,
+  so an unsigned extension cannot access the secrets stored by a signed one, and
+  vice versa.
 - _For Setapp edition only:_ the storage location for Extensions has changed
   from `~/Library/Application Support/com.pilotmoon.popclip-setapp/Extensions`
   to `~/Library/Application Support/PopClip/Extensions`.
