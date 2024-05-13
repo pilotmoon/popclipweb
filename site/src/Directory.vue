@@ -117,7 +117,7 @@ const filteredIndex = computed(() => {
         const extensions: ExtInfo[] = [];
         for (const identifier of section.members) {
             const ext = extsMap.get(identifier);
-            if (ext?.name.toLowerCase().includes(filter.value.toLowerCase())) {
+            if (ext?.filterTerms?.includes(filter.value.toLowerCase())) {
                 extensions.push(ext);
             }
         }

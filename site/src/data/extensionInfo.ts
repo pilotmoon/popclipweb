@@ -45,6 +45,7 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   // extras that we add:
   demo: z.string().nullish(),
   readme: z.string().nullish(),
+  filterTerms: z.string().nullish(),
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
 
@@ -73,6 +74,7 @@ export async function load() {
       ext.demo = adjustPublicPath(findSpecialFile("demo.mp4", ext.files) ?? findSpecialFile("demo.gif", ext.files));
       ext.readme = adjustPublicPath(findSpecialFile("readme.md", ext.files));
       ext.download = adjustPublicPath(ext.download);
+      ext.filterTerms = compileFilterTerms(ext);
       for (const prev of ext.previousVersions) {
         prev.download = adjustPublicPath(prev.download);
       }
@@ -83,6 +85,15 @@ export async function load() {
   console.log(`Loaded ${exts.length} extensions from the API`);
   console.timeEnd("load extensions");
   return exts;
+}
+
+function compileFilterTerms(ext: ExtInfo) {
+  return [
+    ext.name,
+    ext.keywords,
+    ext.apps.map((app) => app.name).join(" "),
+    ext.altStrings?.map((alt) => alt.name).join(" "),
+  ].join(" ").toLowerCase();
 }
 
 // replace app names with html link to apps
