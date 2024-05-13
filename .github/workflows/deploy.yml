@@ -7,6 +7,8 @@ on:
 env:
   SSH_USER: "${{ vars.DEPLOY_SSH_USER }}"
   SSH_HOST: "${{ secrets.DEPLOY_SSH_HOST }}"
+  PILOTMOON_API_KEY: "${{ secrets.PILOTMOON_API_KEY }}"
+  GH_API_KEY: "${{ secrets.GH_API_KEY }}"
 
 jobs:
   build:
