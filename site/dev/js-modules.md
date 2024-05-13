@@ -28,7 +28,7 @@ properties exported by the module will be merged into the extension's config.
 The module is loaded by the same mechanism as `require()` — see
 [module file format](./js-environment.md#supported-file-types).
 
-### Example
+### Examples
 
 The following snippet defines a complete module-based extension:
 
@@ -88,6 +88,13 @@ Observe a few things:
   [Module actions](#module-actions).
 - The extension's `name` and the action's `after` step, `show-result`, are
   specified in the static config (in this case, in the snippet header).
+
+### More examples
+
+For examples from the PopClip extensions directory, see:
+
+- *Alternating Case*, [Config.js](https://github.com/pilotmoon/PopClip-Extensions/blob/master/source/AlternatingCase.popclipext/Config.js)
+- *Copy as Markdown*, [Config.js](https://github.com/pilotmoon/PopClip-Extensions/blob/master/source/CopyAsMarkdown.popclipext/Config.js),
 
 ## Static properties
 
