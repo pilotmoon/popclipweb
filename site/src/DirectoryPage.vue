@@ -85,7 +85,7 @@ console.log("ext", ext);
     <div :class="$style.CardHeader">Previous Versons</div>
     <ul :class="$style.CardData">
       <li v-for="ver in ext.previousVersions" :key="ver.version">
-        Version {{ ver.version }} <span :class="$style.small">({{ formatDate(ver.sourceDate) }} <span v-if="ver.name!==ext.name">, as "{{ ver.name }}"</span>)</span>: <a v-if=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>
+        Version {{ ver.version }} <span :class="$style.small">({{ formatDate(ver.sourceDate) }}<span v-if="ver.name!==ext.name">, as "{{ ver.name }}"</span>)</span>: <a v-if=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>
       </li>
     </ul>
   </div>
