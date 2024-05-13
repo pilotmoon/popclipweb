@@ -27,6 +27,7 @@ const ZPartialExtInfo = z.object({
   sourceDate: z.coerce.date().nullable(),
   download: z.string().nullable(),
 });
+export type PartialExtInfo = z.infer<typeof ZExtInfo>;
 export const ZExtInfo = ZPartialExtInfo.extend({
   id: z.string(),
   created: z.coerce.date(),

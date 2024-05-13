@@ -2,7 +2,7 @@
 import { useData } from "vitepress";
 import { useSlots } from "vue";
 import Icon from "./Icon.vue";
-import type { ExtInfo } from "./data/extensionInfo.js";
+import type { ExtInfo, PartialExtInfo } from "./data/extensionInfo.js";
 import { formatDate } from "./helpers/formatters.js";
 
 const { params } = useData();
@@ -12,6 +12,10 @@ const ext: ExtInfo = {
   firstCreated: new Date(params.value?.firstCreated),
   created: new Date(params.value?.created),
   sourceDate: params.value?.sourceDate ? new Date(params.value?.sourceDate) : null,
+  previousVersions: params.value?.previousVersions.map((pv: PartialExtInfo) => ({
+    ...pv,
+    sourceDate: pv.sourceDate ? new Date(pv.sourceDate) : null,
+  })),
 } as ExtInfo;
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
@@ -81,7 +85,7 @@ console.log("ext", ext);
     <div :class="$style.CardHeader">Previous Versons</div>
     <ul :class="$style.CardData">
       <li v-for="ver in ext.previousVersions" :key="ver.version">
-        Version {{ ver.version }} <span :class="$style.small">({{ formatDate(ver.sourceDate) }}<span v-if="ver.name!==ext.name">, as "{{ ver.name }}"</span>)</span>: <a v-id=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>      
+        Version {{ ver.version }} <span :class="$style.small">({{ formatDate(ver.sourceDate) }} <span v-if="ver.name!==ext.name">, as "{{ ver.name }}"</span>)</span>: <a v-if=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>
       </li>
     </ul>
   </div>

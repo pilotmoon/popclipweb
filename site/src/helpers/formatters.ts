@@ -1,6 +1,7 @@
 // date formetter for headings
-export function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString("en-US", {
+export function formatDate(dateStringOrDate: string | Date | null) {
+  if (!dateStringOrDate) return "<no date>";
+  return new Date(dateStringOrDate).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
