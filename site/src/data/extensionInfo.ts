@@ -25,6 +25,7 @@ const ZPartialExtInfo = z.object({
   name: z.string(),
   source: z.string().nullable(),
   sourceDate: z.coerce.date().nullable(),
+  sourceMessage: z.string().nullish(),
   download: z.string().nullable(),
 });
 export type PartialExtInfo = z.infer<typeof ZExtInfo>;

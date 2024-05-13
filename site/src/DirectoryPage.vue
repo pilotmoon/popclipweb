@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { useData } from "vitepress";
 import { useSlots } from "vue";
 import Icon from "./Icon.vue";
@@ -19,8 +20,10 @@ const ext: ExtInfo = {
 } as ExtInfo;
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
-
-console.log("ext", ext);
+function extractSourceMessage(info: PartialExtInfo) {
+  if (info.sourceMessage) return `Commit message: ${info.sourceMessage}`
+  return "";
+}
 </script>
 
 <template>
@@ -73,7 +76,7 @@ console.log("ext", ext);
     <ul :class="$style.CardData">
       <!--<li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li> -->
       <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">Updated</span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
-      <li><span :class="$style.CardDataLabel">Version</span><br><span>{{ ext.version}}</span></li>
+      <li><span :class="$style.CardDataLabel">Version</span><br><span :title=extractSourceMessage(ext)>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
       <li><span :class="$style.CardDataLabel">Source</span><br>
         <AaLink :href="ext.source" />
@@ -85,7 +88,7 @@ console.log("ext", ext);
     <div :class="$style.CardHeader">Previous Versons</div>
     <ul :class="$style.CardData">
       <li v-for="ver in ext.previousVersions" :key="ver.version">
-        Version {{ ver.version }} <span :class="$style.small">({{ formatDate(ver.sourceDate) }}<span v-if="ver.name!==ext.name">, as "{{ ver.name }}"</span>)</span>: <a v-if=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>
+        <span :title=extractSourceMessage(ver)>Version {{ ver.version }} <span :class="$style.small">({{ formatDate(ver.sourceDate) }}<span v-if="ver.name!==ext.name">, as "{{ ver.name }}"</span>)</span>:</span> <a v-if=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>
       </li>
     </ul>
   </div>

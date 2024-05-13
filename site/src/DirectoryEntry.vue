@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Icon from "./Icon.vue";
-import type { ExtInfo } from "./data/extensions.data";
+import type { ExtInfo } from "./data/extensionInfo";
 const props = defineProps<{
   ext: ExtInfo;
 }>();
