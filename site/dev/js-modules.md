@@ -12,25 +12,21 @@ In contrast to [JavaScript actions](./js-actions) that define a single function,
 module-based extensions let you define the extension itself using JavaScript,
 programatically generating the extension's actions and options.
 
-A module-based extension is defined by the presence of a `module` field in the
-top level of the static config, as follows:
+If the extension package contains a Config file called `Config.js` or
+`Config.ts`, the module is loaded from that file.
 
-| Key      | Type   | Description                                                                             |
-| -------- | ------ | --------------------------------------------------------------------------------------- |
-| `module` | String | The path to a JavaScript (`.js`) or TypeScript (`.ts`) module to load from the package. |
+Otherwise, you can specify a module in the static config using the `module` key,
+as follows:
+
+| Key      | Type                   | Description                                                                                         |
+| -------- | ---------------------- | --------------------------------------------------------------------------------------------------- |
+| `module` | String (packages only) | The path to a JavaScript (`.js`) or TypeScript (`.ts`) file to load.                                |
+| `module` | `true`                 | Specifies that the current file defines the module. Use this when defining a module with a snippet. |
 
 The module is always loaded last, after the extension's static config. All
 properties exported by the module will be merged into the extension's config.
 The module is loaded by the same mechanism as `require()` — see
 [module file format](./js-environment.md#supported-file-types).
-
-::: info Modules as snippets
-
-Modules can be specified as snippets using the
-[inverted syntax](./snippets#inverted-syntax), by setting `module` to `true` in
-the config header.
-
-:::
 
 ### Example
 
@@ -141,21 +137,21 @@ The action function is called with the following arguments:
 
 ```javascript [synchronous]
 {
-  code: (input, options, context) => {
+  code: ((input, options, context) => {
     // ... do stuff ...
     doSomething();
     return someResult;
-  }
+  });
 }
 ```
 
 ```javascript [with async/await]
 {
-  code: async (input, options, context) => {
+  code: (async (input, options, context) => {
     // ... do stuff ...
     await doSomethingAsync();
     return someResult;
-  }
+  });
 }
 ```
 

@@ -49,23 +49,25 @@ package.
 Every package must include a [config dictionary](./config.md). PopClip will try
 looking in the root of the package directory for the following named files:
 
-| File Name      | Format | Description                                                                     |
-| -------------- | ------ | ------------------------------------------------------------------------------- |
-| `Config.plist` | Plist  | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file. |
-| `Config.json`  | JSON   | A [JSON](https://www.json.org/json-en.html) file.                               |
-| `Config.yaml`  | YAML   | A [YAML 1.2](https://yaml.org) file.                                            |
+| File Name      | Format                 | Description                                                                     |
+| -------------- | ---------------------- | ------------------------------------------------------------------------------- |
+| `Config.plist` | Plist                  | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file. |
+| `Config.json`  | JSON                   | A [JSON](https://www.json.org/json-en.html) file.                               |
+| `Config.yaml`  | YAML                   | A [YAML 1.2](https://yaml.org) file.                                            |
+| `Config.js`    | JavaScript | A JavaScript [module](./js-modules.md).                           |
 
-<!-- | Source code | `Config.*` (any other file extension) or `Config` | Shell script, AppleScript or JavaScript file with config header using [inverted snippet syntax](./snippets.md#inverted-syntax). See [Example](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source-contrib/IconPreview.popclipext). | -->
+<!-- | `Config.*`, or just `Config` | Other                  | Any file with config header using [inverted snippet syntax](./snippets.md#inverted-syntax). See [Example](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source-contrib/IconPreview.popclipext). | -->
 
-If multiple config files are present, PopClip will load them all, in the order
-listed above, and merge them into a single config dictionary.
+<!-- If multiple config files are present, PopClip will load them all, in the order
+listed above, and merge them into a single config dictionary. -->
 
 ::: info Historical note
 
 Plist was the original format for PopClip extensions, and many of the older
-extensions in <AaLink href="https://github.com/pilotmoon/PopClip-Extensions" /> are in Plist format.
-Support for JSON and YAML was added later. I recommend using JSON or YAML for
-new extensions as they are easier for a human to read and write.
+extensions in <AaLink href="https://github.com/pilotmoon/PopClip-Extensions" />
+are in Plist format. Support for JSON and YAML was added later. I recommend
+using JSON or YAML for new extensions as they are easier for a human to read and
+write.
 
 :::
 
@@ -78,4 +80,5 @@ organise your files.
 
 ## Examples
 
-For a whole bunch of example extension packages, see&#32;<AaLink href="https://github.com/pilotmoon/PopClip-Extensions/tree/master/source" />.
+For a whole bunch of example extension packages,
+see&#32;<AaLink href="https://github.com/pilotmoon/PopClip-Extensions/tree/master/source" />.
