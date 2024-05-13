@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { data as extsa, type ExtInfo } from './data/extensions.data';
+import type { ExtInfo } from './data/extensionInfo';
+import { data as extsa } from './data/extensions.data';
 import { data as index, type Section } from './data/directory.data';
 import { IconFilter } from '@tabler/icons-vue';
 import DirectoryEntry from './DirectoryEntry.vue';
@@ -14,7 +15,8 @@ const filter = ref(defaultFilter);
 const defaultArrange = "categories";
 const arrange = ref(defaultArrange);
 
-const extsMap = new Map(extsa.map(e => [e.identifier, { ...e, firstCreated: new Date(e.firstCreated), created: new Date(e.created) }]));
+const extsMap = new Map(extsa.map(e => [e.identifier, { ...e, firstCreated: new Date(e.firstCreated), created: new Date(e.created), updatedDate: new Date((e.previousVersions.length > 0 ? e.sourceDate : 0) ?? 0) }]));
+const epochDate = new Date(0);
 
 // define the categories
 const alphaSection: Section = {
@@ -25,10 +27,15 @@ const newestSection: Section = {
     title: "All Extensions (Newest first)",
     members: [... extsMap.values()].sort((a, b) => b.firstCreated.getTime() - a.firstCreated.getTime()).map(e => e.identifier)
 };
+const updatedSection: Section = {
+    title: "All Extensions (Recently updated first)",
+    members: [... extsMap.values()].sort((a, b) => b.updatedDate.getTime() - a.updatedDate.getTime()).map(e => e.identifier)
+};
 const arrangements = new Map([
     ["categories", { label: "Categories", index }],
     ["alpha", { label: "A–Z", index: [alphaSection] }],
     ["newest", { label: "Newest", index: [newestSection] }],
+    ["updated", { label: "Updated", index: [updatedSection] }],
 ]);
 
 // total number of extensons
@@ -143,6 +150,7 @@ const filteredIndex = computed(() => {
                     <ElRadioButton label="categories">Categories</ElRadioButton>
                     <ElRadioButton label="alpha">A–Z</ElRadioButton>
                     <ElRadioButton label="newest">Newest</ElRadioButton>
+                    <ElRadioButton label="updated">Updated</ElRadioButton>
                 </ElRadioGroup>
             </div>
             <div :class="$style.Control">
