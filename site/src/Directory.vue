@@ -120,13 +120,16 @@ const selectedIndex = computed(() => {
 const filteredIndex = computed(() => {
     let count = 0;
     const index: { title: string, extensions: ExtInfo[] }[] = [];
+    const all = new Set<string>(arrangements.get("alpha")?.index[0].members);
+    const filterValue = filter.value.toLowerCase();
     for (const section of selectedIndex.value) {
         const extensions: ExtInfo[] = [];
         for (const identifier of section.members) {
             const ext = extsMap.get(identifier);
-            if (ext?.filterTerms?.includes(filter.value.toLowerCase())) {
+            if (ext?.filterTerms?.includes(filterValue)) {
                 extensions.push(ext);
             }
+            all.delete(identifier);
         }
         if (extensions.length > 0) {
             count += extensions.length;
@@ -135,6 +138,15 @@ const filteredIndex = computed(() => {
                 extensions
             });
         }
+    }
+    // if user has typed a search filter, add any remaining extensions in extras section
+    if (filterValue && all.size > 0) {
+        const extensions = [...all].map(identifier => extsMap.get(identifier)).filter(e => e !== undefined) as ExtInfo[];
+        count += extensions.length;
+        index.push({
+            title: "Uncategorized",
+            extensions
+        });
     }
     return { index, count }
 });
