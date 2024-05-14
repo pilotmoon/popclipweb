@@ -104,7 +104,7 @@ export default defineConfig({
               items: [
                 {
                   text: "API reference",
-                  link: "https://pilotmoon.github.io/PopClip-Extensions/modules.html",
+                  link: "https://pilotmoon.github.io/popclip-types/modules.html",
                 },
               ],
             },

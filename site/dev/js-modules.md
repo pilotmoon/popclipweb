@@ -108,7 +108,7 @@ and cannot be overriden by the module. These are `identifier`, `popclipVersion`,
 
 A more detailed definition of the action object, action function and population
 function may be found in the
-[JavaScript API Reference](https://pilotmoon.github.io/PopClip-Extensions/modules.html).
+[JavaScript API Reference](https://pilotmoon.github.io/popclip-types/modules.html).
 
 :::
 
