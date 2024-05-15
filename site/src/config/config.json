@@ -4,7 +4,8 @@
     "iconsRoot": "https://icons.popclip.app",
     "apiRoot": "https://api.pilotmoon.com/v2",
     "frontendRoot": "https://api.pilotmoon.com/frontend",
-    "publicRoot": "https://public.popclip.app/"
+    "publicRoot": "https://public.popclip.app",
+    "localAppRoot": "http://localhost:58906"
   },
   "paddle": {
     "vendorId": 161988,
