@@ -75,7 +75,7 @@ function extractSourceMessage(info: PartialExtInfo) {
     <div :class="$style.CardHeader">Info</div>
     <ul :class="$style.CardData">
       <!--<li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li> -->
-      <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">Updated</span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
+      <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">{{ (ext.previousVersions.length ? "Updated" : "Created") }} </span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
       <li><span :class="$style.CardDataLabel">Version</span><br><span :title=extractSourceMessage(ext)>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
       <li><span :class="$style.CardDataLabel">Source</span><br>
