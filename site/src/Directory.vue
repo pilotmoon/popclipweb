@@ -15,7 +15,7 @@ const filter = ref(defaultFilter);
 const defaultArrange = "categories";
 const arrange = ref(defaultArrange);
 
-const extsMap = new Map(extsa.map(e => [e.identifier, { ...e, firstCreated: new Date(e.firstCreated), created: new Date(e.created), updatedDate: new Date((e.previousVersions.length > 0 ? e.sourceDate : 0) ?? 0) }]));
+const extsMap = new Map(extsa.map(e => [e.identifier, { ...e, firstCreated: new Date(e.firstCreated), created: new Date(e.created), updatedDate: new Date(e.sourceDate ?? 0) }]));
 const epochDate = new Date(0);
 
 // define the categories
