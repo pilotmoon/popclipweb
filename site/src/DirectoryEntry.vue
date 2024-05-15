@@ -4,6 +4,10 @@ import type { ExtInfo } from "./data/extensionInfo";
 const props = defineProps<{
   ext: ExtInfo;
 }>();
+const newDate = Date.now() - 14 * 24 * 60 * 60 * 1000;
+function isNew(ext: ExtInfo) {
+  return ext.firstCreated.getTime() > newDate;
+}
 </script>
 
 <template>
@@ -20,6 +24,7 @@ const props = defineProps<{
             <a :class=$style.EntryName :href="'x/' + props.ext.shortcode">
                 <div :class=$style.EntryName>{{ props.ext.name }}</div>
             </a>
+            <span :class=$style.EntryFlash v-if=isNew(props.ext)>New!</span>
             <div :class=$style.EntryDescription v-html=props.ext.description />
         </div>
     </div>
@@ -79,6 +84,15 @@ const props = defineProps<{
 
     flex-shrink: 0;
     flex-basis: auto;
+}
+
+.EntryFlash {
+    font-size: 10px;         
+    color: var(--vp-c-red-2);
+    font-weight: 600; 
+    align-self: flex-start;
+    margin-top: -3px;
+    margin-left: -6px;
 }
 
 .EntryDescription {
