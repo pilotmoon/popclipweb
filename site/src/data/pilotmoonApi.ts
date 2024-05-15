@@ -7,7 +7,7 @@ if (!PILOTMOON_API_KEY) {
   throw new Error("Missing PILOTMOON_API_KEY");
 }
 export const api = axios.create({
-  baseURL: `${config.pilotmoon.apiRoot}/v2`,
+  baseURL: `${config.pilotmoon.apiRoot}`,
   headers: {
     Authorization: `Bearer ${PILOTMOON_API_KEY}`,
   },

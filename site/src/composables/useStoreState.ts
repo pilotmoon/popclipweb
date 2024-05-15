@@ -54,9 +54,8 @@ export async function loadStore() {
     return;
   }
   log("Loading prices...");
-  const apiRoot = config.pilotmoon.apiRoot;
   const fetchResponse = await fetch(
-    `${apiRoot}/frontend/store/getPrices?product=${config.pilotmoon.product}`,
+    `${config.pilotmoon.frontendRoot}/store/getPrices?product=${config.pilotmoon.product}`,
   );
   const { country, prices } = ZPricesResponse.parse(await fetchResponse.json());
   if (country) {
