@@ -31,10 +31,16 @@ const updatedSection: Section = {
     title: "All Extensions (Recently updated first)",
     members: [... extsMap.values()].sort((a, b) => b.updatedDate.getTime() - a.updatedDate.getTime()).map(e => e.identifier)
 };
+function categories(): Section[] {
+    // 5 newset extensions
+    const newTitle = "Newly Added";
+    const newest = { title: newTitle, members: newestSection.members.slice(0, 5), link: "#a=newest", special: true };
+    return [newest, ...index];
+}
 const arrangements = new Map([
-    ["categories", { label: "Categories", index }],
+    ["categories", { label: "Categories", index: categories() }],
     ["alpha", { label: "A–Z", index: [alphaSection] }],
-    ["newest", { label: "Newest", index: [newestSection] }],
+    ["newest", { label: "New", index: [newestSection] }],
     ["updated", { label: "Updated", index: [updatedSection] }],
 ]);
 
@@ -101,16 +107,17 @@ watch([filter, arrange], ([newFilter, newArrange]) => {
 
 // on hash change
 function onHashChange() {
+    console.log("onHashChange");
     writeParams(readParams());
 }
 
 // mount/unmount
 onMounted(() => {
     onHashChange();
-    window.addEventListener("onhashchange", onHashChange);
+    window.addEventListener("hashchange", onHashChange);
 });
 onBeforeUnmount(() => {
-    window.removeEventListener("onhashchange", onHashChange);
+    window.removeEventListener("hashchange", onHashChange);
 });
 
 const selectedIndex = computed(() => {
@@ -119,10 +126,13 @@ const selectedIndex = computed(() => {
 
 const filteredIndex = computed(() => {
     let count = 0;
-    const index: { title: string, extensions: ExtInfo[] }[] = [];
+    const index: { title: string, link?: string, linkText?: string, extensions: ExtInfo[] }[] = [];
     const all = new Set<string>(arrangements.get("alpha")?.index[0].members);
     const filterValue = filter.value.toLowerCase();
     for (const section of selectedIndex.value) {
+        if (filterValue && section.special) {         
+            continue;
+        }
         const extensions: ExtInfo[] = [];
         for (const identifier of section.members) {
             const ext = extsMap.get(identifier);
@@ -132,9 +142,13 @@ const filteredIndex = computed(() => {
             all.delete(identifier);
         }
         if (extensions.length > 0) {
-            count += extensions.length;
+            if (!section.special) {
+                count += extensions.length;
+            }
             index.push({
                 title: section.title,
+                link: section.link,
+                linkText: `View all in "${section.title}"`,
                 extensions
             });
         }
@@ -161,7 +175,7 @@ const filteredIndex = computed(() => {
                 <ElRadioGroup v-model="arrange">
                     <ElRadioButton label="categories">Categories</ElRadioButton>
                     <ElRadioButton label="alpha">A–Z</ElRadioButton>
-                    <ElRadioButton label="newest">Newest</ElRadioButton>
+                    <ElRadioButton label="newest">New</ElRadioButton>
                     <ElRadioButton label="updated">Updated</ElRadioButton>
                 </ElRadioGroup>
             </div>
@@ -174,9 +188,10 @@ const filteredIndex = computed(() => {
             Showing {{ filteredIndex.count }} of {{ total }} extensions
             <ElTag v-if="filter" closable @close="filter = ''">Filter: {{ filter }}</ElTag>
         </div>
-        <div v-for="{ title, extensions } in filteredIndex.index">
+        <div v-for="{ title, extensions, link, linkText } in filteredIndex.index">
             <h2>{{ title }}</h2>
             <DirectoryEntry v-for="ext in extensions" :key="ext.identifier" :ext="ext" />
+            <span :class="$style.Link" v-if="link"><a :href="link">{{ linkText }}</a></span>
         </div>
     </div>
 </template>
@@ -213,5 +228,9 @@ const filteredIndex = computed(() => {
     font-size: 14px;
     text-align: left;
     color: var(--vp-c-text-2);
+}
+
+.Link {
+    font-size: 14px;
 }
 </style>

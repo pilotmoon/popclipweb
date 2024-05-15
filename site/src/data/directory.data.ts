@@ -7,6 +7,8 @@ import axios from "axios";
 const ZSection = z.object({
   title: z.string(),
   members: z.array(z.string()),
+  link: z.string().optional(),
+  special: z.boolean().optional(),
 });
 export type Section = z.infer<typeof ZSection>;
 
