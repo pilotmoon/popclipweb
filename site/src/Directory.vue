@@ -148,7 +148,7 @@ const filteredIndex = computed(() => {
             index.push({
                 title: section.title,
                 link: section.link,
-                linkText: `View all in "${section.title}"`,
+                linkText: `View all in "${section.title}" →`,
                 extensions
             });
         }
@@ -175,8 +175,9 @@ const filteredIndex = computed(() => {
 </script>
 
 <template>
+    <div :class="$style.Links"><a href="https://public.popclip.app/extensions/popclip.rss">RSS</a></div>
     <h1>PopClip Extensions Directory</h1>
-    <div :class="$style.Directory">
+    <div :class="$style.Directory">        
         <div :class="$style.Header">
             <div :class="$style.Control">
                 Arrange:
@@ -205,6 +206,15 @@ const filteredIndex = computed(() => {
 </template>
 
 <style module>
+.Links {
+    margin-top: -24px;
+    text-align: right;
+}
+
+.Links a {
+    text-decoration: none;
+}
+
 .Directory h2 {
     border: none;
     font-size: 1.2rem;
@@ -240,5 +250,8 @@ const filteredIndex = computed(() => {
 
 .Link {
     font-size: 14px;
+}
+.Link a {
+    text-decoration: none;
 }
 </style>

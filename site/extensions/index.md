@@ -9,6 +9,9 @@ next: false
 editLink: false
 lastUpdated: false
 pageClass: popclip-directory
+head: [
+    ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS Feed', href: 'https://public.popclip.app/extensions/popclip.rss' } ],
+]
 ---
 <script setup>
 import Directory from '/src/Directory.vue'
