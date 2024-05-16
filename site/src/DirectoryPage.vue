@@ -24,6 +24,17 @@ function extractSourceMessage(info: PartialExtInfo) {
   if (info.sourceMessage) return `Commit message: ${info.sourceMessage}`
   return "";
 }
+
+const filteredPreviousVersions: PartialExtInfo[] = [];
+let cursor: PartialExtInfo = ext;
+for (const ver of ext.previousVersions) {
+  // if less than 24 hours before the cursor version, skip
+  if (!ver.sourceDate || !cursor.sourceDate) continue;
+  if (ver.sourceDate.getTime() > cursor.sourceDate.getTime() - 24 * 60 * 60 * 1000) continue;
+  cursor = ver;
+  filteredPreviousVersions.push(ver);  
+}
+
 </script>
 
 <template>
@@ -84,10 +95,10 @@ function extractSourceMessage(info: PartialExtInfo) {
     </ul>
   </div>
 
-  <div v-if=ext.previousVersions.length :class="$style.Card">
+  <div v-if=filteredPreviousVersions.length :class="$style.Card">
     <div :class="$style.CardHeader">Previous Versons</div>
     <ul :class="$style.CardData">
-      <li v-for="ver in ext.previousVersions" :key="ver.version">
+      <li v-for="ver in filteredPreviousVersions" :key="ver.version">
         <span :title=extractSourceMessage(ver)>Version {{ ver.version }} <span :class="$style.small">({{ formatDate(ver.sourceDate) }}<span v-if="ver.name!==ext.name">, as "{{ ver.name }}"</span>)</span>:</span> <a v-if=ver.source :href=ver.source>Source</a>, <a v-if=ver.download :href=ver.download>Download</a>
       </li>
     </ul>
