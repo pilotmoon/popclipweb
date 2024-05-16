@@ -211,6 +211,12 @@ const filteredIndex = computed(() => {
     text-align: right;
 }
 
+@media (max-width: 768px) {
+    .Links  {
+        margin-top: -16px;
+    }
+}
+
 .Links a {
     text-decoration: none;
 }
