@@ -155,12 +155,20 @@ const filteredIndex = computed(() => {
     }
     // if user has typed a search filter, add any remaining extensions in extras section
     if (filterValue && all.size > 0) {
-        const extensions = [...all].map(identifier => extsMap.get(identifier)).filter(e => e !== undefined) as ExtInfo[];
-        count += extensions.length;
-        index.push({
-            title: "Uncategorized",
-            extensions
-        });
+        const extensions: ExtInfo[] = [];
+        for (const identifier of all) {
+            const ext = extsMap.get(identifier);
+            if (ext?.filterTerms?.includes(filterValue)) {
+                extensions.push(ext);
+            }
+        }
+        if (extensions.length > 0) {
+            count += extensions.length;
+            index.push({
+                title: "Uncategorized",
+                extensions
+            });
+        }
     }
     return { index, count }
 });
