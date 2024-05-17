@@ -82,9 +82,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Unsigned extensions no longer purge all existing options upon installation.
   Instead, only options of type `secret` are purged, and only if an unsigned
   extension replaces a signed extension with the same identifier.
-- Signed and unsigned extensions now store keychain items in separate keyspaces,
-  so an unsigned extension cannot access the secrets stored by a signed one, and
-  vice versa.
 - _For Setapp edition only:_ the storage location for Extensions has changed
   from `~/Library/Application Support/com.pilotmoon.popclip-setapp/Extensions`
   to `~/Library/Application Support/PopClip/Extensions`.
