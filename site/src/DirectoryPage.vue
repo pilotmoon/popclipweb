@@ -119,9 +119,15 @@ for (const ver of ext.previousVersions) {
   color: var(--vp-c-text-2);
   margin-bottom: 32px;
 }
+.Breadcrumb a {
+  text-decoration: none;
+}
 
 .Main {
   margin-bottom: 32px;
+}
+.Main a {
+    text-decoration: none;
 }
 
 .Main h1 {
@@ -193,6 +199,9 @@ for (const ver of ext.previousVersions) {
   border-radius: 8px;
   background-color: var(--vp-c-bg-soft);
 }
+.Card a {
+  text-decoration: none;
+}
 
 .CardHeader {
   color: var(--vp-c-text-2);
@@ -239,6 +248,9 @@ ul.CardData code {
   background-color: var(--vp-c-bg);
   padding: 12px;
   border-radius: 8px;
+}
+.Readme a {
+  text-decoration: underline;
 }
 
 .Readme h1 {
