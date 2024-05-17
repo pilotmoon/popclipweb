@@ -2,7 +2,7 @@ import { defineLoader } from "vitepress";
 import { z } from "zod";
 import fs from "node:fs";
 import jsYaml from "js-yaml";
-import axios from "axios";
+import { gh } from "./gh";
 
 const ZSection = z.object({
   title: z.string(),
@@ -11,20 +11,6 @@ const ZSection = z.object({
   special: z.boolean().optional(),
 });
 export type Section = z.infer<typeof ZSection>;
-
-const GH_API_KEY = process.env.GH_API_KEY;
-if (!GH_API_KEY) {
-  throw new Error("Missing GH_API_KEY");
-}
-
-const gh = axios.create({
-  baseURL: "https://api.github.com",
-  headers: {
-    Authorization: `Bearer ${GH_API_KEY}`,
-    "X-GitHub-Api-Version": "2022-11-28",
-    Accept: "application/vnd.github+json",
-  },
-});
 
 declare const data: Section[];
 export { data };
