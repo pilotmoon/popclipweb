@@ -71,10 +71,10 @@ export async function load() {
       throw new Error("Failed to parse extensions info");
     }
     for (const ext of parseResult.data) {
-      ext.name = sanitizeHtml(ext.name);
+      ext.name = sanitizeHtml(ext.name.trim());
       ext.firstCreated = adjustFirstCreated(ext.firstCreated, ext.identifier);
       // enforce period at end od description
-      ext.description = `${sanitizeHtml(linkifyDescription(ext.description, ext.apps)).replace(/\.$/, "")}.`;
+      ext.description = `${sanitizeHtml(linkifyDescription(ext.description, ext.apps)).trim().replace(/\.$/, "")}.`;
       ext.demo = adjustPublicPath(findSpecialFile("demo.mp4", ext.files) ?? findSpecialFile("demo.gif", ext.files));
       ext.readme = adjustPublicPath(findSpecialFile("readme.md", ext.files));
       ext.download = adjustPublicPath(ext.download);
