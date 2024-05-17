@@ -85,7 +85,9 @@ for (const ver of ext.previousVersions) {
   <div :class="$style.Card">
     <div :class="$style.CardHeader">Info</div>
     <span :class="$style.Small">
-      Third-party product names and logos are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities. Extensions are published under the <a :class="$style.Subdued" href="http://localhost:5173/extensions/license">MIT License</a> except where otherwise stated.
+      This is an extension for <a :class="$style.Subdued" href="/">PopClip</a>, a macOS app that lets users perform actions with text.
+      Third-party product names and logos are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities.
+      Extensions are published under the <a :class="$style.Subdued" href="http://localhost:5173/extensions/license">MIT License</a> except where otherwise stated.
     </span>
     <ul :class="$style.CardData">
       <!--<li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li> -->
@@ -117,7 +119,7 @@ for (const ver of ext.previousVersions) {
   color: var(--vp-c-text-2);
 }
 a.Subdued {
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-1);
 }
 
 .Breadcrumb {
