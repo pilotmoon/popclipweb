@@ -84,6 +84,9 @@ for (const ver of ext.previousVersions) {
 
   <div :class="$style.Card">
     <div :class="$style.CardHeader">Info</div>
+    <span :class="$style.Small">
+      Third-party product names are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities. Extensions are published under the <a :class="$style.Subdued" href="http://localhost:5173/extensions/license">MIT License</a> except where otherwise stated.
+    </span>
     <ul :class="$style.CardData">
       <!--<li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li> -->
       <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">{{ (ext.previousVersions.length ? "Updated" : "Created") }} </span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
@@ -111,7 +114,9 @@ for (const ver of ext.previousVersions) {
   font-size: 14px;
 }
 .Subdued {
-  font-size: 12px;
+  color: var(--vp-c-text-2);
+}
+a.Subdued {
   color: var(--vp-c-text-2);
 }
 
