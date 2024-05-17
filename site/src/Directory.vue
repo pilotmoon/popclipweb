@@ -125,7 +125,7 @@ const selectedIndex = computed(() => {
 });
 
 const filteredIndex = computed(() => {
-    let count = 0;
+    const uniques = new Set<string>();
     const index: { title: string, link?: string, linkText?: string, extensions: ExtInfo[] }[] = [];
     const all = new Set<string>(arrangements.get("alpha")?.index[0].members);
     const filterValue = filter.value.toLowerCase();
@@ -138,13 +138,11 @@ const filteredIndex = computed(() => {
             const ext = extsMap.get(identifier);
             if (ext?.filterTerms?.includes(filterValue)) {
                 extensions.push(ext);
+                uniques.add(identifier);
             }
             all.delete(identifier);
         }
         if (extensions.length > 0) {
-            if (!section.special) {
-                count += extensions.length;
-            }
             index.push({
                 title: section.title,
                 link: section.link,
@@ -160,17 +158,17 @@ const filteredIndex = computed(() => {
             const ext = extsMap.get(identifier);
             if (ext?.filterTerms?.includes(filterValue)) {
                 extensions.push(ext);
+                uniques.add(identifier);
             }
         }
-        if (extensions.length > 0) {
-            count += extensions.length;
+        if (extensions.length > 0) {            
             index.push({
                 title: "Uncategorized",
                 extensions
             });
         }
     }
-    return { index, count }
+    return { index, count: uniques.size };
 });
 </script>
 
