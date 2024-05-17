@@ -2,6 +2,7 @@ import { z } from "zod";
 import { classicExtensions } from "./classic.ts";
 import * as config from "../config/config.json";
 import { api } from "./pilotmoonApi.ts";
+import sanitizeHtml from "sanitize-html";
 
 // what we get back from the extensions endpoint of the API
 const ZAppInfo = z.object({ name: z.string(), link: z.string() });
@@ -70,8 +71,10 @@ export async function load() {
       throw new Error("Failed to parse extensions info");
     }
     for (const ext of parseResult.data) {
+      ext.name = sanitizeHtml(ext.name);
       ext.firstCreated = adjustFirstCreated(ext.firstCreated, ext.identifier);
-      ext.description = linkifyDescription(ext.description, ext.apps);
+      // enforce period at end od description
+      ext.description = `${sanitizeHtml(linkifyDescription(ext.description, ext.apps)).replace(/\.$/, "")}.`;
       ext.demo = adjustPublicPath(findSpecialFile("demo.mp4", ext.files) ?? findSpecialFile("demo.gif", ext.files));
       ext.readme = adjustPublicPath(findSpecialFile("readme.md", ext.files));
       ext.download = adjustPublicPath(ext.download);
@@ -98,10 +101,11 @@ function compileFilterTerms(ext: ExtInfo) {
 }
 
 // replace app names with html link to apps
+// also sanitize the html
 function linkifyDescription(description: string, apps: AppInfo[]) {
   let html = description;
   for (const app of apps) {
-    html = description.replace(
+    html = html.replace(
       new RegExp(`\\b${app.name}\\b`),
       `<a href="${app.link}">${app.name}</a>`
     );
