@@ -40,7 +40,7 @@ channel="production"
 See [First Launch](/guide/install#first-launch) for the next steps.
 
 **Free Trial:** PopClip operates in trial mode until you register a license key.
-The trial is fully functional and includes all features for 150 uses.
+The trial is fully functional and includes all features for 250 uses.
 
 ::: tip Other ways to get PopClip
 
