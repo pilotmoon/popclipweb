@@ -99,7 +99,7 @@ for (const ver of ext.previousVersions) {
       <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">{{ (ext.previousVersions.length ? "Updated" : "Created") }} </span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
       <li><span :class="$style.CardDataLabel">Version</span><br><span :title=extractSourceMessage(ext)>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
-      <li><span :class="$style.CardDataLabel">License</span><br><a href="/extensions/license">MIT License</a></li>      
+      <li v-if="ext.license"><span :class="$style.CardDataLabel">License</span><br><a :href="ext.license.url">{{ ext.license.name }}</a></li>      
       <li><span :class="$style.CardDataLabel">Source</span><br>
         <AaLink :href="ext.source" />
       </li>

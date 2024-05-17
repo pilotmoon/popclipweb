@@ -3,6 +3,7 @@ import { classicExtensions } from "./classic.ts";
 import * as config from "../config/config.json";
 import { api } from "./pilotmoonApi.ts";
 import sanitizeHtml from "sanitize-html";
+import { gh } from "./gh.ts";
 
 // what we get back from the extensions endpoint of the API
 const ZAppInfo = z.object({ name: z.string(), link: z.string() });
@@ -15,12 +16,14 @@ const ZFileInfo = z.object({
 });
 export type FileInfo = z.infer<typeof ZFileInfo>;
 
+const ZLicenseInfo = z.object({ name: z.string(), url: z.string() });
+type LicenseInfo = z.infer<typeof ZLicenseInfo>;
+
 const ZAltString = z.object({
   lang: z.string(),
   name: z.string().optional(),
   description: z.string().optional(),
 });
-
 const ZPartialExtInfo = z.object({
   version: z.string(),
   name: z.string(),
@@ -48,8 +51,39 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   demo: z.string().nullish(),
   readme: z.string().nullish(),
   filterTerms: z.string().nullish(),
+  license: ZLicenseInfo.nullish(),
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
+
+const ZGithubLicenseInfo = z.object({
+  html_url: z.string(),
+  license: z.object({
+    name: z.string(),
+  }),
+});
+
+const licenseCache = new Map<string, LicenseInfo>();
+async function getLicenseInfo(ext: ExtInfo) {
+  let info = { name: "MIT License", url: "/extensions/license" }; // default
+  const repoId = ext.source?.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)/)
+    ?.[1];
+  if (repoId) {
+    if (licenseCache.has(repoId)) {
+      return licenseCache.get(repoId);
+    }
+    console.log(`Getting license info for ${repoId}`);
+    const response = await gh.get(`repos/${repoId}/license`);
+    const parseResult = ZGithubLicenseInfo.safeParse(response.data);
+    if (parseResult.success) {
+      info = {
+        name: parseResult.data.license.name,
+        url: parseResult.data.html_url,
+      };
+    }
+    licenseCache.set(repoId, info);
+  }
+  return info;
+}
 
 export async function load() {
   console.log("In extensions loader");
@@ -74,18 +108,27 @@ export async function load() {
       ext.name = sanitizeHtml(ext.name.trim());
       ext.firstCreated = adjustFirstCreated(ext.firstCreated, ext.identifier);
       // enforce period at end od description
-      ext.description = `${sanitizeHtml(linkifyDescription(ext.description, ext.apps)).trim().replace(/\.$/, "")}.`;
-      ext.demo = adjustPublicPath(findSpecialFile("demo.mp4", ext.files) ?? findSpecialFile("demo.gif", ext.files));
+      ext.description = `${
+        sanitizeHtml(linkifyDescription(ext.description, ext.apps)).trim()
+          .replace(/\.$/, "")
+      }.`;
+      ext.demo = adjustPublicPath(
+        findSpecialFile("demo.mp4", ext.files) ??
+          findSpecialFile("demo.gif", ext.files),
+      );
       ext.readme = adjustPublicPath(findSpecialFile("readme.md", ext.files));
       ext.download = adjustPublicPath(ext.download);
       ext.filterTerms = compileFilterTerms(ext);
+      ext.license = await getLicenseInfo(ext);
       for (const prev of ext.previousVersions) {
         prev.download = adjustPublicPath(prev.download);
         prev.name = sanitizeHtml(prev.name.trim());
       }
       exts.push(ext);
     }
-    cursor = parseResult.data.length === limit ? parseResult.data[limit - 1].id : undefined;
+    cursor = parseResult.data.length === limit
+      ? parseResult.data[limit - 1].id
+      : undefined;
   } while (cursor);
   console.log(`Loaded ${exts.length} extensions from the API`);
   console.timeEnd("load extensions");
@@ -108,7 +151,7 @@ function linkifyDescription(description: string, apps: AppInfo[]) {
   for (const app of apps) {
     html = html.replace(
       new RegExp(`\\b${app.name}\\b`),
-      `<a href="${app.link}">${app.name}</a>`
+      `<a href="${app.link}">${app.name}</a>`,
     );
   }
   return html;
