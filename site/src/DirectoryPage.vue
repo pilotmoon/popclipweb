@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { useData } from "vitepress";
 import { useSlots } from "vue";
 import Icon from "./Icon.vue";
@@ -12,16 +11,20 @@ const ext: ExtInfo = {
   ...params.value,
   firstCreated: new Date(params.value?.firstCreated),
   created: new Date(params.value?.created),
-  sourceDate: params.value?.sourceDate ? new Date(params.value?.sourceDate) : null,
-  previousVersions: params.value?.previousVersions.map((pv: PartialExtInfo) => ({
-    ...pv,
-    sourceDate: pv.sourceDate ? new Date(pv.sourceDate) : null,
-  })),
+  sourceDate: params.value?.sourceDate
+    ? new Date(params.value?.sourceDate)
+    : null,
+  previousVersions: params.value?.previousVersions.map(
+    (pv: PartialExtInfo) => ({
+      ...pv,
+      sourceDate: pv.sourceDate ? new Date(pv.sourceDate) : null,
+    }),
+  ),
 } as ExtInfo;
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 function extractSourceMessage(info: PartialExtInfo) {
-  if (info.sourceMessage) return `Commit message: ${info.sourceMessage}`
+  if (info.sourceMessage) return `Commit message: ${info.sourceMessage}`;
   return "";
 }
 
@@ -30,11 +33,14 @@ let cursor: PartialExtInfo = ext;
 for (const ver of ext.previousVersions) {
   // if less than 24 hours before the cursor version, skip
   if (!ver.sourceDate || !cursor.sourceDate) continue;
-  if (ver.sourceDate.getTime() > cursor.sourceDate.getTime() - 24 * 60 * 60 * 1000) continue;
+  if (
+    ver.sourceDate.getTime() >
+    cursor.sourceDate.getTime() - 24 * 60 * 60 * 1000
+  )
+    continue;
   cursor = ver;
-  filteredPreviousVersions.push(ver);  
+  filteredPreviousVersions.push(ver);
 }
-
 </script>
 
 <template>
@@ -83,17 +89,17 @@ for (const ver of ext.previousVersions) {
   </div>
 
   <div :class="$style.Card">
-    <div :class="$style.CardHeader">Info</div>
-    <span :class="$style.Small">
-      This is an extension for <a :class="$style.Subdued" href="/">PopClip</a>, a macOS app that lets users perform actions with text.
-      Third-party product names and logos are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities.
-      Extensions are published under the <a :class="$style.Subdued" href="http://localhost:5173/extensions/license">MIT License</a> except where otherwise stated.
+    <div :class="$style.CardHeader">Info</div>    
+    <span :class="$style.Small">Third-party product names and logos are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities.      
     </span>
+  
+    
     <ul :class="$style.CardData">
       <!--<li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li> -->
       <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">{{ (ext.previousVersions.length ? "Updated" : "Created") }} </span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
       <li><span :class="$style.CardDataLabel">Version</span><br><span :title=extractSourceMessage(ext)>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
+      <li><span :class="$style.CardDataLabel">License</span><br><a href="/extensions/license">MIT License</a></li>      
       <li><span :class="$style.CardDataLabel">Source</span><br>
         <AaLink :href="ext.source" />
       </li>
