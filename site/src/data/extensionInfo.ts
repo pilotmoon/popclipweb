@@ -81,7 +81,7 @@ export async function load() {
       ext.filterTerms = compileFilterTerms(ext);
       for (const prev of ext.previousVersions) {
         prev.download = adjustPublicPath(prev.download);
-        prev.name = sanitizeHtml(ext.name.trim());
+        prev.name = sanitizeHtml(prev.name.trim());
       }
       exts.push(ext);
     }
