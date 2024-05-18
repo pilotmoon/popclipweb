@@ -74,8 +74,10 @@ for (const ver of ext.previousVersions) {
 
   <div v-if="ext.demo" :class="$style.Card">
     <div :class="$style.CardHeader">Demo</div>
-    <img v-if="ext.demo.endsWith('.gif')" :src="ext.demo" alt="Demo Animated GIF" />
-    <video v-if="ext.demo.endsWith('.mp4')" :src="ext.demo" alt="Demo Video" autoplay loop playsinline>Browser can't show this video.</video>
+    <div :class="$style.Media">
+      <img v-if="ext.demo.endsWith('.gif')" :src="ext.demo" alt="Demo Animated GIF" />
+      <video v-if="ext.demo.endsWith('.mp4')" :src="ext.demo" alt="Demo Video" autoplay loop playsinline>Browser can't show this video.</video>
+    </div>
   </div>
 
   <div v-if="hasReadme" :class="$style.Card">
@@ -250,6 +252,14 @@ ul.CardData code {
 
 .Card>img {
   border-radius: 8px;
+}
+
+
+/* center items */
+.Media {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /* ---
