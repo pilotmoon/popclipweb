@@ -75,21 +75,19 @@ global:
 There is also a global function `print()` for debug output, and a global
 [`require()`](#using-require) function.
 
-## Standard Library
+## Language version and Standard Library
 
 PopClip's JavaScript engine is Apple's
 [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),
-which is part of macOS.
+which is part of macOS. Thus, language features available will vary depending
+on the macOS version PopClip is running on. However, you can assume availability
+of language features up to at least ES2018 on all macOS versions that PopClip
+supports (10.15+).
 
-JavaScriptCore's language and standard library support varies depending on macOS
-version. However, PopClip uses [core-js](https://github.com/zloirock/core-js) to
-provide polyfills for the JavaScript standard library up to ES2023. You can also
-assume availability of language features up to ES2017 on all macOS versions that
-PopClip supports.
+For the Standard Library, PopClip uses [core-js](https://github.com/zloirock/core-js)
+to provide ES2023 support on all platforms.
 
-::: tip Language reference
-
-The JavaScript language reference I use and recommend is
+The JavaScript reference I use and recommend is
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
 
 :::
