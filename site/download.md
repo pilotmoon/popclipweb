@@ -53,6 +53,8 @@ If you use [Homebrew](https://brew.sh/), you can install PopClip with the comman
 
 :::
 
+<InfoBox />
+
 ## Older Releases
 
 This list gives the last supported release for each macOS version or processor
