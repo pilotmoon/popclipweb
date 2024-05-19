@@ -3,9 +3,9 @@ outline: deep
 titleTemplate: :title — PopClip Developer
 ---
 
-# URL actions
+# Open URL actions
 
-In a URL action, PopClip will ask macOS to open a given URL, optionally
+In an Open URL action, PopClip will ask macOS to open a given URL, optionally
 inserting the selected text and option parameters into the URL.
 
 If the URL scheme is `http:` or `https:` then:
@@ -20,7 +20,7 @@ app for that scheme.
 
 ## Properties
 
-A URL action is defined by the presence of a `url` field, plus additional
+An Open URL action is defined by the presence of a `url` field, plus additional
 optional fields, as follows:
 
 | Key             | Type               | Description                                                                                                                                                        |
