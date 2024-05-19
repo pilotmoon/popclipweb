@@ -78,10 +78,10 @@ export default defineConfig({
               text: "Actions",
               link: "/dev/actions",
               items: [
-                { text: "Shortcut actions", link: "/dev/shortcut-actions" },
-                { text: "Service actions", link: "/dev/service-actions" },
                 { text: "URL actions", link: "/dev/url-actions" },
                 { text: "Key Press actions", link: "/dev/key-press-actions" },
+                { text: "Service actions", link: "/dev/service-actions" },
+                { text: "Shortcut actions", link: "/dev/shortcut-actions" },
                 { text: "JavaScript actions", link: "/dev/js-actions" },
                 {
                   text: "AppleScript actions",
