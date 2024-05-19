@@ -41,6 +41,12 @@ AppleScript actions. See [example](#use-of-option-parameter).
 
 URL actions never return any output.
 
+::: tip Advanced behaviours
+
+If you need to customize the generation of the URL string or specify a particular app to open the URL, don't use an Open URL action. Instead, use an AppleScript action and the `popclip.openUrl()` function.
+
+:::
+
 ## Examples
 
 ### Simple web search
