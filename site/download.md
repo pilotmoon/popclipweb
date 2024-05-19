@@ -20,8 +20,6 @@ const pinned = data.production.filter((r) => r.pin);
 
 # Download PopClip
 
-<InfoBox />
-
 ## Latest Release
 
 <Download
