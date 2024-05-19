@@ -38,7 +38,7 @@ Note that `#` begins a YAML comment. Thus the entire snippet including the
 
 :::
 
-::: tip Writing snippets in JSON
+<!-- ::: tip Writing snippets in JSON
 
 If you prefer, you can write your snippets in JSON syntax. (From PopClip's point
 of view it's still YAML, since JSON is a subset of YAML.)
@@ -57,7 +57,7 @@ The following snippet is equivalent to the example above:
 Most of the examples in this guide are written in block-style YAML, but I've
 included JSON syntax here and there too.
 
-:::
+::: -->
 
 ## Creating snippets
 
