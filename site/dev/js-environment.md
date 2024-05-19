@@ -8,9 +8,10 @@ titleTemplate: :title — PopClip Developer
 
 # JavaScript environment
 
-This page describes PopClip's JavaScript environment, in which
-[JavaScript actions](./js-actions) and [module-based extensions](./js-modules)
-run.
+JavaScript actions and module-based extensions run inside PopClip's JavaScript
+environment. This environment provides provides properties and functions that
+let your scripts interact with PopClip. Scripts run in a secure JavaScript
+sandbox that cannot access the filesystem.
 
 ## PopClip globals
 
@@ -79,13 +80,14 @@ There is also a global function `print()` for debug output, and a global
 
 PopClip's JavaScript engine is Apple's
 [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),
-which is part of macOS. Thus, language features available will vary depending
-on the macOS version PopClip is running on. However, you can assume availability
-of language features up to at least ES2018 on all macOS versions that PopClip
+which is part of macOS. Thus, language features available will vary depending on
+the macOS version PopClip is running on. However, you can assume availability of
+language features up to at least ES2018 on all macOS versions that PopClip
 supports (10.15+).
 
-For the Standard Library, PopClip uses [core-js](https://github.com/zloirock/core-js)
-to provide ES2023 support on all platforms.
+For the Standard Library, PopClip uses
+[core-js](https://github.com/zloirock/core-js) to provide ES2023 support on all
+platforms.
 
 The JavaScript reference I use and recommend is
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
