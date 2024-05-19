@@ -5,18 +5,12 @@ titleTemplate: :title — PopClip Developer
 
 # Open URL actions
 
-In an Open URL action, PopClip will ask macOS to open a given URL, optionally
-inserting the selected text and option parameters into the URL.
+In an Open URL action, PopClip will ask macOS to open a URL generated from a template that you provide.
 
-If the URL scheme is `http:` or `https:` then:
+If the URL scheme is `http:` or `https:` and the current app is a [known browser](/kb/browsers), PopClip will ask
+the current app to open the URL.
 
-- if the current app is not [known browser](/kb/browsers), PopClip will ask
-  macOS to open the URL in the default web browser;
-- if the current app is a known browser, PopClip will ask the current app to
-  open the URL.
-
-For all other URL schemes, PopClip will ask macOS to open the URL in the default
-app for that scheme.
+In all other cases, PopClip will ask macOPS to open the URL in the default app app for its URL scheme.
 
 ## Properties
 
