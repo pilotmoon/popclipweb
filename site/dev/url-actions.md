@@ -10,7 +10,7 @@ In an Open URL action, PopClip will ask macOS to open a URL generated from a tem
 If the URL scheme is `http:` or `https:` and the current app is a [known browser](/kb/browsers), PopClip will ask
 the current app to open the URL.
 
-In all other cases, PopClip will ask macOPS to open the URL in the default app app for its URL scheme.
+In all other cases, PopClip will ask macOS to open the URL in the default app app for its URL scheme.
 
 ## Properties
 
