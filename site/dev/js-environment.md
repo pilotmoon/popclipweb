@@ -12,28 +12,6 @@ This page describes PopClip's JavaScript environment, in which
 [JavaScript actions](./js-actions) and [module-based extensions](./js-modules)
 run.
 
-## Overview
-
-PopClip's JavaScript engine is Apple's
-[JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),
-which is part of macOS.
-
-JavaScriptCore's language and standard library support varies depending on macOS
-version. However, PopClip uses [core-js](https://github.com/zloirock/core-js) to
-provide polyfills for the JavaScript standard library up to ES2023. You can also
-assume availability of language features up to ES2017 on all macOS versions that
-PopClip supports.
-
-PopClip also has built-in support for TypeScript. See
-[TypeScript support](#typescript-support).
-
-::: tip Language reference
-
-The JavaScript language reference I use and recommend is
-[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
-
-:::
-
 ## PopClip globals
 
 PopClip provides a global object, `popclip`, and other globals, which are
@@ -96,6 +74,25 @@ global:
 
 There is also a global function `print()` for debug output, and a global
 [`require()`](#using-require) function.
+
+## Standard Library
+
+PopClip's JavaScript engine is Apple's
+[JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),
+which is part of macOS.
+
+JavaScriptCore's language and standard library support varies depending on macOS
+version. However, PopClip uses [core-js](https://github.com/zloirock/core-js) to
+provide polyfills for the JavaScript standard library up to ES2023. You can also
+assume availability of language features up to ES2017 on all macOS versions that
+PopClip supports.
+
+::: tip Language reference
+
+The JavaScript language reference I use and recommend is
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
+
+:::
 
 ## Using `require()`
 
