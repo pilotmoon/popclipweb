@@ -3,18 +3,23 @@ titleTemplate: :title — PopClip Developer
 ---
 # Script variables
 
-These string variables are available in [Shell Script actions](./shell-script-actions) and [AppleScript actions](./applescript-actions). Where no
-value is available, it will be set to an empty string.
+When calling a script from a PopClip extension, the script receives a set of variables that describe the context in which the action was triggered. These variables are available in JavaScript, Shell Script, and AppleScript actions.
 
-::: tip Referring to variables in scripts
+## JavaScript variables
 
-- Within a shell script, the variables are named like this: `POPCLIP_TEXT`,
-  `POPCLIP_BROWSER_TITLE`, `POPCLIP_OPTION_FOO` etc.
+In JavaScript, you access variables in the `popclip` global object. See [JavaScript environment](https://www.popclip.app/dev/js-environment).
 
-- Within an AppleScript, use placeholders like this: `{popclip text}`,
-  `{popclip browser title}`, `{popclip option foo}` etc.
+## Shell Script and AppleScript variables
 
-:::
+All values are provided as strings. Where no value is available, it will be set to an empty string.
+
+Within a shell script, PopClip sets script variables named like this: `POPCLIP_TEXT`,
+`POPCLIP_BROWSER_TITLE`, `POPCLIP_OPTION_FOO`, etc.
+
+Within an AppleScript, PopClip pre-processes the script to replace placeholders with strings. Placeholders look like this: `{popclip text}`,
+`{popclip browser title}`, `{popclip option foo}`, etc.
+
+### Available variables
 
 | Name                   | Description                                                                                                                                                                                                                   |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

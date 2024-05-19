@@ -44,7 +44,7 @@ extension `.popclipextz`. You can examine an existing PopClip extension by
 renaming it with a `.zip` extension and unzipping it, to reveal a `.popclipext`
 package.
 
-## The config file
+## The Config file
 
 Every package must include a [config dictionary](./config.md). PopClip will try
 looking in the root of the package directory for the following named files:

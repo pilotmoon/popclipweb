@@ -11,9 +11,9 @@ internal state and lets them interact with PopClip itself.
 
 ::: tip Module-based extensions
 
-For more complex functionality, JavaScript
-[module-based extensions](./js-modules) are a flexible and powerful alternative
-to JavaScript actions.
+JavaScript actions provided a simplified way to run call in PopClip, for example
+form a quick snippet. To access the full power of JavaScript, use a
+[module-based extension](./js-modules).
 
 :::
 

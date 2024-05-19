@@ -3,9 +3,9 @@ outline: deep
 titleTemplate: :title — PopClip Developer
 ---
 
-# The config dictionary
+# Config
 
-Every extension is defined by a config dictionary. This can be provided either
+Every extension is defined by a configuration dictionary. This can be provided either
 by a [snippet](./snippets) or a [package](./packages), but in each case the
 underlying structure is the same.
 

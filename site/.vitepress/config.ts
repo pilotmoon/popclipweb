@@ -70,7 +70,7 @@ export default defineConfig({
             { text: "Packages", link: "/dev/packages" },
 
             {
-              text: "The config dictionary",
+              text: "Config",
               link: "/dev/config",
             },
             { text: "Icons", link: "/dev/icons" },
@@ -82,29 +82,28 @@ export default defineConfig({
                 { text: "Service actions", link: "/dev/service-actions" },
                 { text: "URL actions", link: "/dev/url-actions" },
                 { text: "Key Press actions", link: "/dev/key-press-actions" },
-                {
-                  text: "Shell Script actions",
-                  link: "/dev/shell-script-actions",
-                },
+                { text: "JavaScript actions", link: "/dev/js-actions" },
                 {
                   text: "AppleScript actions",
                   link: "/dev/applescript-actions",
                 },
                 {
-                  items: [
-                    { text: "Script variables", link: "/dev/script-variables" },
-                  ],
+                  text: "Shell Script actions",
+                  link: "/dev/shell-script-actions",
                 },
-                { text: "JavaScript actions", link: "/dev/js-actions" },
               ],
             },
+
+            { text: "Script variables", link: "/dev/script-variables" },
+
             {
               text: "JavaScript environment",
               link: "/dev/js-environment",
               items: [
                 {
                   text: "API reference",
-                  link: "https://pilotmoon.github.io/popclip-types/modules.html",
+                  link:
+                    "https://pilotmoon.github.io/popclip-types/modules.html",
                 },
               ],
             },

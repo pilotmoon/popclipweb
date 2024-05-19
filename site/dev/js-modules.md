@@ -8,31 +8,32 @@ titleTemplate: :title — PopClip Developer
 
 # Module-based extensions
 
-In contrast to [JavaScript actions](./js-actions) that define a single function,
-module-based extensions let you define the extension itself using JavaScript,
-programatically generating the extension's actions and options.
+Module-based extensions let you use the full power of JavaScript or TypeScript
+to define your PopClip extension. This allows you use code to construct
+properties like `options` at load time, and to define `actions` dynamically, for example to
+generate titles or icons in response to the input text.
 
-If the extension package contains a Config file called `Config.js` or
-`Config.ts`, the module is loaded from that file.
+When you provide a config file called `Config.js` ot `Config.ts`, PopClip treats
+this as a JavaScript or TypeScript module and looks for the extension's
+properties in the exported object, after first loading static properties from
+YAML in a comment header.
 
-Otherwise, you can specify a module in the static config using the `module` key,
-as follows:
+All properties exported by the module will be merged into the extension's
+config, overriding any static properties with the same name (except for the
+[static-only properties](#static-only-properties) which cannot be overriden).
 
-| Key      | Type                   | Description                                                                                         |
-| -------- | ---------------------- | --------------------------------------------------------------------------------------------------- |
-| `module` | String (packages only) | The path to a JavaScript (`.js`) or TypeScript (`.ts`) file to load.                                |
-| `module` | `true`                 | Specifies that the current file defines the module. Use this when defining a module with a snippet. |
+The module can also define a population function to dynamically populate the
+actions.
 
-The module is always loaded last, after the extension's static config. All
-properties exported by the module will be merged into the extension's config.
-The module is loaded by the same mechanism as `require()` — see
-[module file format](./js-environment.md#supported-file-types).
+::: info Snippets as modules
 
-### Examples
+You can also define a module in a snippet by setting `module: true`.
 
-The following snippet defines a complete module-based extension:
+:::
 
-::: code-group
+## Example
+
+The following JavaScript snippet defines a complete module-based extension:
 
 ```javascript
 // #popclip
@@ -40,63 +41,81 @@ The following snippet defines a complete module-based extension:
 // after: show-result
 // language: javascript
 // module: true
+
+// this is only run once, at load time
+const theNumber = String(Math.floor(Math.random() * 100));
+
 module.exports = {
-  icon: "square " + String(Math.floor(Math.random() * 100)),
+  icon: `square ${theNumber}`,
   actions: [
     {
-      title: "Action 1",
+      title: "The Title",
       code: (input) => {
-        return "Hi from the action. Your text is: " + input.text;
+        return `The number is ${theNumber}. Your text is: ${input.text}`;
       },
     },
   ],
 };
 ```
-
-```typescript
-/// <reference path="/Applications/PopClip.app/Contents/Resources/popclip.d.ts" />
-/* Note: The above line is optional. It will enable autocomplete
-   and type-checking in code editors that support TypeScript.
-   (Adjust to Setapp path if needed.) */
-// #popclip
-// name: Module Demo
-// after: show-result
-// language: typescript
-// module: true
-const extension: Extension = {
-  icon: "square " + String(Math.floor(Math.random() * 100)),
-  actions: [
-    {
-      title: "Action 1",
-      code: (input) => {
-        return "Hi from the action. Your text is: " + input.text;
-      },
-    },
-  ],
-};
-export default extension;
-```
-
-:::
 
 Observe a few things:
 
-- The module has generated its own icon, by exporting an `icon` property. It
-  uses a random number to generate a different icon each time the extension is
-  loaded.
+- The extension's `name` and the action's `after` step, `show-result`, are
+  specified in the static config in the header.
+- At load time, the module generates a random number and saves it in a variable.
+- The module exports an `icon` property, displaying the random number in a
+  square.
 - The module defines its actions by exporting an `actions` array. See
   [Module actions](#module-actions).
-- The extension's `name` and the action's `after` step, `show-result`, are
-  specified in the static config (in this case, in the snippet header).
 
 ### More examples
 
-For examples from the PopClip extensions directory, see:
+See the following examples from the PopClip Extensions Directory:
 
-- *Alternating Case*, [Config.js](https://github.com/pilotmoon/PopClip-Extensions/blob/master/source/AlternatingCase.popclipext/Config.js)
-- *Copy as Markdown*, [Config.js](https://github.com/pilotmoon/PopClip-Extensions/blob/master/source/CopyAsMarkdown.popclipext/Config.js),
+- _Alternating Case_,
+  [Config.js](https://github.com/pilotmoon/PopClip-Extensions/blob/master/source/AlternatingCase.popclipext/Config.js)
+- _Copy as Markdown_,
+  [Config.js](https://github.com/pilotmoon/PopClip-Extensions/blob/master/source/CopyAsMarkdown.popclipext/Config.js),
+- _OpenAI Chat_ (TypeScript example),
+  [Config.ts](https://github.com/pilotmoon/PopClip-Extensions/blob/master/source/OpenAIChat.popclipext/Config.ts),
 
-## Static properties
+## File format
+
+### Comment header
+
+In `Config.js` and `Config.ts` a YAML comment header must be provided defining
+`name` as the bare minumum. The header is in the same format as for a snippet.
+See [Snippets - Inverted syntax](./snippets#inverted-syntax).
+
+### Module format
+
+The module file may be written in JavaScript (`.js`) or TypeScript (`.ts`).
+
+The module format is
+[CommonJS](https://www.typescriptlang.org/docs/handbook/2/modules.html#commonjs-syntax).
+You can either export a single object with `module.exports = ...` or export
+individual properties like `exports.foo = ...`.
+
+TypeScript files can use
+[ES Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html#es-module-syntax)
+syntax, which will be transpiled to CommonJS under the hood. JavaScript files
+may not use ES Modules syntax.
+
+The exported property names and types are the same as defined in
+[Config](./config), with the execption of `actions` which has special handling -
+see [Module actions](#module-actions).
+
+## Specifying the module file
+
+The module does not have to be loaded from `Config.js`/`Config.ts`.
+Alternatively, you can provide static config in another format (e.g.
+`Config.json`) and specify a module file name as follows:
+
+| Key      | Type   | Description                                                          |
+| -------- | ------ | -------------------------------------------------------------------- |
+| `module` | String | The path to a JavaScript (`.js`) or TypeScript (`.ts`) file to load. |
+
+## Static-only properties
 
 Certain properties of the extension can only be defined in the static config,
 and cannot be overriden by the module. These are `identifier`, `popclipVersion`,
