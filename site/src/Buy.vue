@@ -89,11 +89,11 @@ function trackBuy(button) {
                 <Icon size=32><ApplePay /></Icon>
             </AaButton><br>
             <div :class="$style.prices">
-                <span v-if="store.paddleProducts.value.popclip.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip.displayListPrice) }}</span>
-                <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip.displayPrice) }}</span>
+                <span v-if="store.paddleProducts.value.popclip?.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip.displayListPrice ?? "") }}</span>
+                <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip?.displayPrice ?? "") }}</span>
             </div>
-            <div v-if="store.paddleProducts.value.popclip.coupon" :class="$style.couponInfo">
-                <span>{{ `Coupon "${store.paddleProducts.value.popclip.coupon}" applied`  }}</span>                
+            <div v-if="store.paddleProducts.value.popclip?.coupon" :class="$style.couponInfo">
+                <span>{{ `Coupon "${store.paddleProducts.value.popclip?.coupon ?? ""}" applied`  }}</span>                
             </div>
         </div>
     </div>
