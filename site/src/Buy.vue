@@ -1,64 +1,65 @@
 <script setup type="ts">
-import { onMounted, computed } from 'vue'
-import { loadScript } from './helpers/loadScript'
-import { getFlagEmoji } from './helpers/getFlagEmoji'
-import { useStoreState } from './composables/useStoreState'
-import { useDeploymentInfo } from './composables/useDeploymentInfo'
+import { onMounted, computed } from "vue";
+import { loadScript } from "./helpers/loadScript";
+import { getFlagEmoji } from "./helpers/getFlagEmoji";
+import { useStoreState } from "./composables/useStoreState";
+import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
-import { Paypal, ApplePay, CreditCard } from '@vicons/fa';
-import { Icon } from '@vicons/utils'
-import config from './config/config.json'
+import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
+import { Icon } from "@vicons/utils";
+import config from "./config/config.json";
+import { readParams } from "./helpers/readParams";
 
 const log = useLogger();
 const store = useStoreState();
-const isLizhi = computed(() => config.lizhi.countries.includes(store.countryCode.value));
+const isLizhi = computed(() =>
+  config.lizhi.countries.includes(store.countryCode.value),
+);
 const sandbox = useDeploymentInfo().isLocalhost;
 
-// get params from url
-function readParams() {
-    return new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
-}
-
 function queryBool(val) {
-    return val === '' || val === '1';
+  return val === "" || val === "1";
 }
 
 onMounted(() => {
-    if (queryBool(readParams().get("go"))) {
-        openPaddleCheckout();
-    }
+  if (queryBool(readParams().get("go"))) {
+    openPaddleCheckout();
+  }
 });
 
 async function initPaddle() {
-    await loadScript(config.paddle.script);
-    if (sandbox) {
-        Paddle.Environment.set('sandbox');
-    }
-    Paddle.Setup({
-        vendor: config.paddle.vendorId, eventCallback: function (args) {
-            log("Paddle event", args);
-        }
-    });
+  await loadScript(config.paddle.script);
+  if (sandbox) {
+    Paddle.Environment.set("sandbox");
+  }
+  Paddle.Setup({
+    vendor: config.paddle.vendorId,
+    eventCallback: (args) => {
+      log("Paddle event", args);
+    },
+  });
 }
 
 async function openPaddleCheckout() {
-    await initPaddle();
-    const coupon = readParams().get("coupon") ?? null;
-    const email = readParams().get("email") ?? null;
-    log("Coupon", coupon);
-    const product = sandbox ? config.paddle.sandboxProductId : config.paddle.productId;
-    log("Opening Paddle checkout");
-    setTimeout(() => {
-        Paddle.Checkout.open({ product, coupon, email });
-    }, 200);
+  await initPaddle();
+  const coupon = readParams().get("coupon") ?? null;
+  const email = readParams().get("email") ?? null;
+  log("Coupon", coupon);
+  const product = sandbox
+    ? config.paddle.sandboxProductId
+    : config.paddle.productId;
+  log("Opening Paddle checkout");
+  setTimeout(() => {
+    Paddle.Checkout.open({ product, coupon, email });
+  }, 200);
 }
 
 function roundPrice(price) {
-    return price.endsWith('.00') ? price.substring(0, price.length - 3) : price;
-};
+  return price.endsWith(".00") ? price.substring(0, price.length - 3) : price;
+}
 
 function trackBuy(button) {
-    // va.track("Buy", { button });
+  // va.track("Buy", { button });
 }
 </script>
 
@@ -87,7 +88,13 @@ function trackBuy(button) {
                 <Icon size=18><Paypal /></Icon>
                 <Icon size=32><ApplePay /></Icon>
             </AaButton><br>
-            <span :class="$style.price">{{ roundPrice(store.paddlePrice.value) }}</span>
+            <div :class="$style.prices">
+                <span v-if="store.paddleProducts.value.popclip.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip.displayListPrice) }}</span>
+                <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip.displayPrice) }}</span>
+            </div>
+            <div v-if="store.paddleProducts.value.popclip.coupon" :class="$style.couponInfo">
+                <span>{{ `Coupon "${store.paddleProducts.value.popclip.coupon}" applied`  }}</span>                
+            </div>
         </div>
     </div>
     <div :class="store.isLoaded ? $style.infoLine : $style.infoLineLoading">
@@ -121,10 +128,26 @@ function trackBuy(button) {
     text-decoration: none;
 }
 
+.box div.prices{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
 .box span.price {
     font-size: 14px;
     font-weight: 600;
-    display: inline-block;
+}
+
+.box span.listPrice {
+    font-size: 14px;
+    text-decoration: line-through;
+}
+
+.box div.couponInfo {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vp-c-green-1);
 }
 
 .box span.priceLoading {

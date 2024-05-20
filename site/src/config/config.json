@@ -1,6 +1,6 @@
 {
   "pilotmoon": {
-    "product": "popclip",
+    "paddleProducts": "popclip",
     "iconsRoot": "https://icons.popclip.app",
     "apiRoot": "https://api.pilotmoon.com/v2",
     "frontendRoot": "https://api.pilotmoon.com/frontend",
