@@ -14,11 +14,11 @@ include any extensions (see [Extensions](#extensions) below).
 
 _You_: a free trial user or a licensed user of the product.
 
-_App Store_: Apple's Mac App Store.
-
-_Reseller_: a business with whom I have an arrangement to sell licenses to end
-customers on my behalf (see
+_Authorized Reseller_: a business authorized by me to to sell license keys for
+the product to end customers (see
 [Appendix A](#appendix-a-authorized-resellers-and-subscription-services)).
+
+_App Store_: Apple's Mac App Store.
 
 ## Free trial
 
@@ -26,76 +26,82 @@ Where the product has a free trial mode, I grant you the right to use the
 product free of charge for the period of the trial. The trial mode may include
 purchase reminders and limitations on usage.
 
-I encourage you to make use of the free trial before buying, to see if the
+I encourage you to make use of the free trial before buying to see if the
 product is suitable for your needs.
-
-## App Store purchases
-
-Products you buy through the App Store are delivered to you by Apple using the
-App Store's installation mechanism.
-
-App Store purchases are subject to Apple's
-[standard End User License Agreement (EULA)](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/).
-
-::: info App store purchases and multiple Macs
-
-The App Store EULA lets you install and use the product on any Mac that you own
-or control. You can install PopClip on a new Mac by signing in to the store with
-the same Apple ID you used to purchase the product.
-
-:::
 
 ## License key purchases
 
-When you buy a license key, your payment is made to a reseller.
+License keys may only be purchased through an authorized reseller.
 
 ### License grant
 
 In consideration of the purchase fee paid by you to the reseller, I grant you a
 non-exclusive, non-transferable, non-sublicensable, perpetual, irrevocable,
-royalty-free right and license to use the product, subject to the terms of this
-document and the reseller's terms.
+royalty-free right and license to use the product, subject to these terms and
+the reseller's terms.
 
 ### License keys
 
-You will receive a license key as part of the order process, along with
-instructions on how to use it to activate the product. Activating the product
-removes all trial restrictions and purchase reminders.
+During the purchase process, you will receive a license key and instructions on
+how to use it to activate the product. Activating the product removes all trial
+restrictions and purchase reminders.
 
-The license key is unique to you and may only be used by you and, for a multi
-user license, any legitimate additional users. License keys have the following
-restrictions:
+The license key will be registered to a named user and email address at the time
+of purchase.
 
-- Single user license: A single user license is purchased when you specify a
-  quantity of 1 at the checkout. You may use it activate the product on any
-  number of machines, for your own personal use only.
+::: info Change of registered details
 
-- Multi user license: A multi user license is purchased when you specify a
-  quantity of 2 or more at the checkout. You may use it to activate the product
-  on any number of machines, for use by no more than the specified number of
-  people simulaneously.
-
-::: info About Multi-user Licenses
-
-A multi user license is appropriate for a business who wants to buy a product
-for use by several employees. Please specify the number of users in the quantity
-field at checkout. You will receive a single license key to be shared between
-the licensed users.
+To change the registered name and/or email address after purchase,
+[contact support](/support).
 
 :::
 
-If you share, publish or otherwise allow use of your license key beyond that
-granted by the license, your license will be revoked and you may no longer use
-the product. In such a case, I may use technical means to disable the use the
-license key.
+License keys have the following restrictions:
+
+- Personal license: A personal license key may be used to activate the product
+  any number of computers that the registered user owns or controls (including
+  work computers), for use only by the registered user.
+
+- Multi-user license: A multi-user license is for a specified number of users in
+  a named organization, team, or business. It may be used to activate the
+  product on any number of computers, for use by no more than the specified
+  number of users simultaneously.
+
+If you share, publish, or otherwise allow the use of your license key beyond
+that granted by the license, your license will be revoked, and you may no longer
+use the product. In such a case, I may use technical means to disable the use of
+the license key.
 
 ## Update policy
 
-Your App Store or license key purchase entitles you to lifetime use of the
-version of the product that was available at the time of purchase. I may, at my
-sole discretion, provide updated versions of products in future, either as free
-updates (downloadable from the App Store and/or activatable using your existing
-license key), or as paid updates requiring a further purchase or subscription.
+In the first instance, your license entitles you to use the version of the
+product that existed at the time of purchase. Following your purchase, I may, at
+my sole discretion, provide updated versions of the product in the future.
+
+Your entitlement to future updates depends on the type of license you have:
+
+- Time-limited license: entitles you to all product updates I release within the
+  stated time period from the date of purchase. Upon expiry, you may continue to
+  use the last version of the product released during the license period, but
+  you will need to purchase a new license to receive further updates.
+
+- Lifetime license: entitles you to all product updates I release for as long as
+  the product exists.
+
+You may be required to make further payments within the license period to use
+features that have a recurring cost component such as syncing, API access, or
+other online features.
+
+### Previous update policy
+
+Prior to 20th May 2024, the update policy was as follows:
+
+> Your App Store or license key purchase entitles you to lifetime use of the
+> version of the product that was available at the time of purchase. I may, at
+> my sole discretion, provide updated versions of products in future, either as
+> free updates (downloadable from the App Store and/or activatable using your
+> existing license key), or as paid updates requiring a further purchase or
+> subscription.
 
 ## Transfer policy
 
@@ -115,12 +121,6 @@ you a coupon code.
 :::
 
 ## Refund policy
-
-### Refunds of App Store purchases
-
-App Store purchases are subject to Apple's refund policies. If you want a refund
-for your purchase from the App Store, please contact
-[Apple support](https://getsupport.apple.com/).
 
 ### Refunds of license key purchases
 
@@ -142,9 +142,18 @@ exceptional circumstances.
 
 :::
 
-## Subscriptions
+### Refunds of App Store purchases
 
-### Setapp
+App Store purchases are subject to Apple's refund policies. If you want a refund
+for your purchase from the App Store, please contact
+[Apple support](https://getsupport.apple.com/).
+
+## Setapp subscriptions
+
+If you are a subscriber to Setapp, you may use the product as part of your
+subscription.
+
+### Setapp license grant
 
 In consideration of the subscription fees paid by you to Setapp, I grant you a
 non-exclusive, non-transferable, non-sublicensable, perpetual, irrevocable
@@ -152,13 +161,25 @@ non-exclusive, non-transferable, non-sublicensable, perpetual, irrevocable
 payable), royalty-free right and licence to use the product subject to these
 terms and Setapp’s Terms and Conditions.
 
+## App Store purchases
+
+App Store purchases are subject to Apple's
+[standard End User License Agreement (EULA)](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/).
+
+::: info App store purchases and multiple Macs
+
+The App Store EULA lets you install and use the product on any Mac that you own
+or control. You can install PopClip on a new Mac by signing in to the store with
+the same Apple ID you used to purchase the product.
+
+:::
+
 ## Extensions
 
 I and others may publish downloadable add-on extensions that add functionality
-to the product and may contain executable code. For the purposes of these terms,
-such extensions are separate software applications, and are not part of the
-product. Extensions are subject to their own license terms (see the extension
-documentation for details).
+to the product. These extensions are not part of the licensed product and your
+use of these extensions is not included in these license terms. Extensions are
+subject to their own license terms as indicated.
 
 ## Disclaimer
 

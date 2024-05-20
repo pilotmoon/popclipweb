@@ -2,7 +2,7 @@
 import { onMounted, computed } from "vue";
 import { loadScript } from "./helpers/loadScript";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
-import { useStoreState } from "./composables/useStoreState";
+import { loadStore, useStoreState } from "./composables/useStoreState";
 import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
 import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
@@ -22,6 +22,7 @@ function queryBool(val) {
 }
 
 onMounted(() => {
+  loadStore();
   if (queryBool(readParams().get("go"))) {
     openPaddleCheckout();
   }
@@ -50,7 +51,7 @@ async function openPaddleCheckout() {
     : config.paddle.productId;
   log("Opening Paddle checkout");
   setTimeout(() => {
-    Paddle.Checkout.open({ product, coupon, email });
+    Paddle.Checkout.open({ product, coupon, email, allowQuantity: false});
   }, 200);
 }
 
@@ -72,15 +73,26 @@ function trackBuy(button) {
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
         </div> -->
-        <div :class="$style.box" :hidden="!isLizhi || !store.isLoaded">
-            <span>Buy License Key from DIGITALYCHEE</span><br>
+        <div :class="$style.box" :hidden="!isLizhi || store.isLoadedForCoupon === null">
+            <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
+            <span :class="$style.title">Lifetime Personal License</span><br>            
+            <span :class="$style.subtitle">✅ Lifetime updates<br></span>
+            <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
+            <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
+            <span v-if="isLizhi" :class="$style.subtitle">Buy from DIGITALYCHEE<br></span>
             <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
                 <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store">
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.lizhiPrice.value) }}</span>
+            <span :class="$style.subtitle">One-time purchase<br></span>
         </div>
         <div :class="$style.box">
-            <span>Buy License Key<span v-if="isLizhi"> from Paddle</span> </span><br>
+            <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
+            <span :class="$style.title">Lifetime Personal License</span><br>            
+            <span :class="$style.subtitle">✅ Lifetime updates<br></span>
+            <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
+            <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
+            <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br></span>
             <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand"
                 size="medium">
                 Buy with
@@ -95,10 +107,11 @@ function trackBuy(button) {
             <div v-if="store.paddleProducts.value.popclip?.coupon" :class="$style.couponInfo">
                 <span>{{ `Coupon "${store.paddleProducts.value.popclip?.coupon ?? ""}" applied`  }}</span>                
             </div>
+            <span :class="$style.subtitle">One-time purchase<br></span>
         </div>
     </div>
-    <div :class="store.isLoaded ? $style.infoLine : $style.infoLineLoading">
-        {{ store.isLoaded ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` :
+    <div :class="store.isLoadedForCoupon !== null ? $style.infoLine : $style.infoLineLoading">
+        {{ store.isLoadedForCoupon !== null ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` :
             `Loading prices...` }}
     </div>
 </template>
@@ -123,6 +136,34 @@ function trackBuy(button) {
     box-sizing: border-box;
 }
 
+.box div.product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    gap: 4px;
+}
+
+.box span.title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.box img {
+    display: inline-block;
+    height: 24px;    
+}
+
+.box span.subtitle {
+    font-size: 14px;    
+}
+
+.box span.small {
+    font-size: 12px;    
+}
+
 .box .buybutton {
     margin: 8px 0 6px 0;
     text-decoration: none;
@@ -135,7 +176,7 @@ function trackBuy(button) {
 }
 
 .box span.price {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -167,8 +208,7 @@ function trackBuy(button) {
 }
 
 .infoLine {
-    text-align: center;
-    
+    text-align: center;   
 }
 
 .infoLineLoading {

@@ -11,7 +11,7 @@ import { readParams } from "../helpers/readParams";
 const log = useLogger();
 
 export const useStoreState = createGlobalState(() => {
-  const isLoaded = ref(false); // don't use storage for this because we want to reload on page refresh
+  const isLoadedForCoupon = ref<null | string>(null); // don't use storage for this because we want to reload on page refresh
   const countryCode = useStorage("popclip-store-countryCode", "");
   const countryName = useStorage("popclip-store-countryName", "");
   const paddleProducts = useStorage("popclip-store-paddleProducts", {});
@@ -30,7 +30,7 @@ export const useStoreState = createGlobalState(() => {
     // masUrl,
     lizhiPrice,
     lizhiUrl,
-    isLoaded,
+    isLoadedForCoupon,
   };
 });
 
@@ -74,12 +74,13 @@ type ProductsResult = z.infer<typeof ZProductsResult>;
 // don't call this during SSR!
 export async function loadStore() {
   const store = useStoreState();
-  if (store.isLoaded.value) {
-    log(`Store already loaded for ${store.countryCode.value}`);
+
+  const coupon = readParams().get("coupon") ?? ""
+  if (store.isLoadedForCoupon.value === coupon) {
+    log(`Store already loaded for ${store.countryCode.value} and coupon '${coupon}'`);
     return;
   }
 
-  const coupon = readParams().get("coupon") ?? ""
   log("Loading prices", { coupon });
   const fetchResponse = await fetch(
     `${config.pilotmoon.frontendRoot}/store/getProducts?products=${config.pilotmoon.paddleProducts}&coupons=${coupon}`,
@@ -93,7 +94,7 @@ export async function loadStore() {
   store.countryCode.value = productData.countryCode;
   store.countryName.value = countryInfo.countryName;
   store.paddleProducts.value = preprocessProducts(productData);
-  store.isLoaded.value = true;
+  store.isLoadedForCoupon.value = coupon;
   log(`Prices loaded for ${store.countryCode.value}`);
 }
 
