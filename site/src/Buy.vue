@@ -9,7 +9,9 @@ import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
+import { useData } from "vitepress";
 
+const { isDark } = useData();
 const log = useLogger();
 const store = useStoreState();
 const isLizhi = computed(() =>
@@ -51,7 +53,13 @@ async function openPaddleCheckout() {
     : config.paddle.productId;
   log("Opening Paddle checkout");
   setTimeout(() => {
-    Paddle.Checkout.open({ product, coupon, email, allowQuantity: false});
+    Paddle.Checkout.open({
+      product,
+      coupon,
+      email,
+      allowQuantity: false,
+      displayModeTheme: isDark.value ? "dark" : "light",
+    });
   }, 200);
 }
 
