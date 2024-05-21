@@ -92,8 +92,6 @@ platforms.
 The JavaScript reference I use and recommend is
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
 
-:::
-
 ## Using `require()`
 
 PopClip has a `require()` function for loading modules and JSON data from other
