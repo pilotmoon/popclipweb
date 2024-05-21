@@ -20,15 +20,15 @@ PopClip is available as a one-time purchase by buying a license key.
 
 ::: tip About this offer
 
-**Lifetime updates** means you will receive free updates to all future
-versions of PopClip. Payment may be required for online features.
+**Lifetime updates** means you will receive free updates to all future versions
+of PopClip. Payment may be required for online features.
 
 **Personal license** means means the license is for your personal use only. You
 can use PopClip on all your personal Macs at home and work. You may not share
 the license key with others.
 
-**Delivery** is by email. You will receive a license key registered to the
-billing name and email address you provide during checkout.
+**Delivery** is by email. Your license key will be sent to the email address you
+provide during checkout.
 
 :::
 
