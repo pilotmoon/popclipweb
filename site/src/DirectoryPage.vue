@@ -61,6 +61,7 @@ for (const ver of ext.previousVersions) {
       <div :class="$style.Description" v-html="ext.description"></div>
       <div :class="$style.Download">
         <DownloadButton size="small" :href="ext.download" />
+        <ClientOnly>
         <ElPopover
     placement="bottom"
     title="Verified Extension"
@@ -74,6 +75,7 @@ for (const ver of ext.previousVersions) {
         </div>
     </template>
     </ElPopover>  
+  </ClientOnly>
         
       </div>
     </div>
