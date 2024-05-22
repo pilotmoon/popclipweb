@@ -139,17 +139,6 @@ function formatActionTypes(ext: ExtInfo) {
     </div>
   </div>
 
-  <div v-if="ext.apps.length" :class="$style.Card">
-    <div :class="$style.CardHeader">Works With</div>       
-    <ul :class="$style.CardList">
-      <li v-for="app in ext.apps" :key="app.name">
-        <span>{{ app.name }}:</span> <a :href="app.link">{{ app.link }}</a>
-      </li>
-    </ul>
-    <span :class="$style.Small" style="margin-top: 4px">Third-party product names and logos are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities.      
-    </span>          
-  </div>
-
   <div :class="$style.Card">
     <div :class="$style.CardHeader">Info</div>    
     
@@ -167,6 +156,18 @@ function formatActionTypes(ext: ExtInfo) {
     </ul>
   </div>
 
+
+  <div v-if="ext.apps.length" :class="$style.Card">
+    <div :class="$style.CardHeader">Works With</div>       
+    <ul :class="$style.CardList">
+      <li v-for="app in ext.apps" :key="app.name">
+        <span>{{ app.name }}:</span> <a :href="app.link">{{ app.link }}</a>
+      </li>
+    </ul>
+    <span :class="$style.Small" style="margin-top: 4px">Third-party product names and logos are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities.      
+    </span>          
+  </div>
+  
   <div v-if=filteredPreviousVersions.length :class="$style.Card">
     <div :class="$style.CardHeader">Previous Versons</div>
     <ul :class="$style.CardData">
