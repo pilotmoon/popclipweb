@@ -43,6 +43,37 @@ for (const ver of ext.previousVersions) {
   cursor = ver;
   filteredPreviousVersions.push(ver);
 }
+
+function formatActionTypes(ext: ExtInfo) {
+  if (!ext.actionTypes) return "";
+  const lookup = {
+    service: "Service",
+    url: "Open URL",
+    keypress: "Key Press",
+    applescript: "AppleScript",
+    shellscript: "Shell Script",
+    javascript: "JavaScript",
+    shortcut: "Shortcut",
+    none: "None",
+  };
+  const strings: string[] = [];
+  for (const type of ext.actionTypes) {
+    let typeString = lookup[type];
+    if (type === "javascript") {
+      let entitlementsString = "";
+      for (const entitlement of ext.entitlements) {        
+        if (entitlement === "network") {
+          entitlementsString += "with internet access";        
+        }
+      }
+      if (entitlementsString) {
+        typeString += ` (${entitlementsString})`;
+      }
+    }
+    strings.push(typeString);
+  }
+  return strings.join(", ");
+}
 </script>
 
 <template>
@@ -108,18 +139,28 @@ for (const ver of ext.previousVersions) {
     </div>
   </div>
 
+  <div v-if="ext.apps.length" :class="$style.Card">
+    <div :class="$style.CardHeader">Works With</div>       
+    <ul :class="$style.CardList">
+      <li v-for="app in ext.apps" :key="app.name">
+        <span>{{ app.name }}:</span> <a :href="app.link">{{ app.link }}</a>
+      </li>
+    </ul>
+    <span :class="$style.Small" style="margin-top: 4px">Third-party product names and logos are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities.      
+    </span>          
+  </div>
+
   <div :class="$style.Card">
     <div :class="$style.CardHeader">Info</div>    
-    <span :class="$style.Small">Third-party product names and logos are used solely to identify compatible apps, websites, or services, and do not imply endorsement by the respective entities.      
-    </span>
-  
     
-    <ul :class="$style.CardData">
-      <!--<li><span :class="$style.CardDataLabel">First Published</span><br><span>{{ formatDate(ext.firstCreated.toISOString()) }}</span></li> -->
+    <ul :class="$style.CardData">      
       <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">{{ (ext.previousVersions.length ? "Updated" : "Created") }} </span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
       <li><span :class="$style.CardDataLabel">Version</span><br><span :title=extractSourceMessage(ext)>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
-      <li v-if="ext.license"><span :class="$style.CardDataLabel">License</span><br><a :href="ext.license.url">{{ ext.license.name }}</a></li>      
+      <li v-if="ext.actionTypes.length"><span :class="$style.CardDataLabel">Action Type</span><br>
+        {{ formatActionTypes(ext) }}
+      </li>              
+      <li v-if="ext.license"><span :class="$style.CardDataLabel">License</span><br><a :href="ext.license.url">{{ ext.license.name }}</a></li>            
       <li><span :class="$style.CardDataLabel">Source</span><br>
         <AaLink :href="ext.source" />
       </li>
@@ -266,6 +307,11 @@ a.Subdued {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 8px;
+}
+
+ul.CardList {
+  list-style: none;
+  padding-left: 0;
 }
 
 ul.CardData {

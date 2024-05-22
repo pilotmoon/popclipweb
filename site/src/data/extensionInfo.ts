@@ -47,6 +47,10 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   owner: z.string().nullable(),
   previousVersions: z.array(ZPartialExtInfo),
   altStrings: z.array(ZAltString).nullable(),
+  actionTypes: z.array(z.string()),
+  entitlements: z.array(z.string()),
+  macosVersion: z.string().nullable(),
+  popclipVersion: z.number().nullable(),
   // extras that we add:
   demo: z.string().nullish(),
   readme: z.string().nullish(),
@@ -120,6 +124,7 @@ export async function load() {
       ext.download = adjustPublicPath(ext.download);
       ext.filterTerms = compileFilterTerms(ext);
       ext.license = await getLicenseInfo(ext);
+      ext.actionTypes = adjustActionTypes(ext);
       for (const prev of ext.previousVersions) {
         prev.download = adjustPublicPath(prev.download);
         prev.name = sanitizeHtml(prev.name.trim());
@@ -133,6 +138,13 @@ export async function load() {
   console.log(`Loaded ${exts.length} extensions from the API`);
   console.timeEnd("load extensions");
   return exts;
+}
+
+function adjustActionTypes(ext: ExtInfo) {
+  if (!ext.actionTypes.length) {
+    return ["javascript"]; // fix for missing action type in some Config.js / Config.ts extensions
+  }
+  return ext.actionTypes;
 }
 
 function compileFilterTerms(ext: ExtInfo) {
