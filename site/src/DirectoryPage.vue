@@ -4,6 +4,8 @@ import { useSlots } from "vue";
 import Icon from "./Icon.vue";
 import type { ExtInfo, PartialExtInfo } from "./data/extensionInfo.js";
 import { formatDate } from "./helpers/formatters.js";
+import { ElPopover } from "element-plus";
+import { ShieldTask16Filled } from "@vicons/fluent";
 
 const { params } = useData();
 
@@ -59,6 +61,20 @@ for (const ver of ext.previousVersions) {
       <div :class="$style.Description" v-html="ext.description"></div>
       <div :class="$style.Download">
         <DownloadButton size="small" :href="ext.download" />
+        <ElPopover
+    placement="bottom"
+    title="Verified Extension"
+    :width="200"
+    trigger="hover"
+    content="This extension has been vetted and approved by the developer of PopClip."
+  >
+    <template #reference>
+      <div :class="$style.DownloadInfo">
+          <ShieldTask16Filled /> Verified
+        </div>
+    </template>
+    </ElPopover>  
+        
       </div>
     </div>
 
@@ -176,6 +192,29 @@ a.Subdued {
 
 .SideBySide .Download {
   padding-top: 8px;
+}
+
+.Download {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.DownloadInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  line-height: 14px;
+  gap: 2px;
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+}
+
+.DownloadInfo svg {
+  margin-left: -3px;
+  height: 18px;
+  color: var(--vp-c-green-1);
 }
 
 .AltStrings {
