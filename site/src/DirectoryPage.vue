@@ -146,6 +146,8 @@ function formatActionTypes(ext: ExtInfo) {
       <li v-if=ext.sourceDate><span :class="$style.CardDataLabel">{{ (ext.previousVersions.length ? "Updated" : "Created") }} </span><br><span>{{ formatDate(ext.sourceDate.toISOString()) }}</span></li>
       <li><span :class="$style.CardDataLabel">Version</span><br><span :title=extractSourceMessage(ext)>{{ ext.version}}</span></li>
       <li><span :class="$style.CardDataLabel">Identifier</span><br><code>{{ ext.identifier }}</code></li>      
+      <li v-if="ext.popclipDisplayVersion"><span :class="$style.CardDataLabel">PopClip Version</span><br>≥{{ ext.popclipDisplayVersion }}</li>      
+      <li v-if="ext.macosVersion"><span :class="$style.CardDataLabel">macOS Version</span><br>≥{{ ext.macosVersion }}</li>      
       <li v-if="ext.actionTypes.length"><span :class="$style.CardDataLabel">Action Type</span><br>
         {{ formatActionTypes(ext) }}
       </li>              

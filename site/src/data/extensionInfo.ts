@@ -4,6 +4,7 @@ import * as config from "../config/config.json";
 import { api } from "./pilotmoonApi.ts";
 import sanitizeHtml from "sanitize-html";
 import { gh } from "./gh.ts";
+import { type Data as ReleasesData, load as loadReleases, Release } from './releases.data';
 
 // what we get back from the extensions endpoint of the API
 const ZAppInfo = z.object({ name: z.string(), link: z.string() });
@@ -56,6 +57,7 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   readme: z.string().nullish(),
   filterTerms: z.string().nullish(),
   license: ZLicenseInfo.nullish(),
+  popclipDisplayVersion: z.string().nullish(),
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
 
@@ -87,6 +89,35 @@ async function getLicenseInfo(ext: ExtInfo) {
     licenseCache.set(repoId, info);
   }
   return info;
+}
+
+let releasesCache: ReleasesData;
+let noVersionCount = 0;
+async function getDisplayVersion(ext: ExtInfo) {
+  if (!releasesCache) {
+    releasesCache = await loadReleases();
+  }
+  // find release that matches the extension version if any
+  // if no exact match return lowest version that is higher than the extension version
+  // if there is no next release return the build number
+  if (ext.popclipVersion) {
+    let nextRelease: Release | undefined;
+    for (const release of releasesCache.production) {
+      if (release.version === ext.popclipVersion) {
+        return release.versionString;        
+      }
+      if ((release.version ?? 0) > ext.popclipVersion) {
+        if (!nextRelease || (release.version ?? 0) < (nextRelease.version ?? 0)) {
+          nextRelease = release;
+        }        
+      }      
+    }
+    if (nextRelease) {
+      return nextRelease.versionString;
+    }
+    return `Build ${ext.popclipVersion}`;
+  }
+  return "";
 }
 
 export async function load() {
@@ -125,6 +156,7 @@ export async function load() {
       ext.filterTerms = compileFilterTerms(ext);
       ext.license = await getLicenseInfo(ext);
       ext.actionTypes = adjustActionTypes(ext);
+      ext.popclipDisplayVersion = await getDisplayVersion(ext);
       for (const prev of ext.previousVersions) {
         prev.download = adjustPublicPath(prev.download);
         prev.name = sanitizeHtml(prev.name.trim());
