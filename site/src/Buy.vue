@@ -85,8 +85,8 @@ function trackBuy(button) {
             <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
             <span :class="$style.title">Standard Personal License</span><br>            
             <span :class="$style.subtitle">✅ 2 years of updates<br></span>
-            <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.subtitle">✅ Keep the last version you receive<br></span>
+            <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
             <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br></span>
             <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout(store.paddleProducts.value.popclip_2year?.productId)" theme="brand"
