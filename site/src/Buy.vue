@@ -83,8 +83,8 @@ function trackBuy(button) {
         </div> -->
         <div :class="$style.box">
             <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
-            <span :class="$style.title">Standard Personal License</span><br>            
-            <span :class="$style.subtitle">✅ 2 years of updates<br></span>
+            <span :class="$style.title">Standard License</span><br>            
+            <span :class="$style.subtitle">✅ 2 years of free updates<br></span>
             <span :class="$style.subtitle">✅ Keep the last version you receive<br></span>
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
@@ -111,8 +111,8 @@ function trackBuy(button) {
         </div>
         <div :class="$style.box">
             <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
-            <span :class="$style.title">Lifetime Personal License</span><br>            
-            <span :class="$style.subtitle">✅ Lifetime updates<br></span>
+            <span :class="$style.title">Lifetime License</span><br>            
+            <span :class="$style.subtitle">✅ Free lifetime updates<br></span>
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
             <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br></span>
@@ -138,8 +138,8 @@ function trackBuy(button) {
         </div>
         <div :class="$style.box" :hidden="!isLizhi || store.isLoadedForCoupon === null">
             <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
-            <span :class="$style.title">Lifetime Personal License</span><br>            
-            <span :class="$style.subtitle">✅ Lifetime updates<br></span>
+            <span :class="$style.title">Lifetime License</span><br>            
+            <span :class="$style.subtitle">✅ Free lifetime updates<br></span>
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
             <span v-if="isLizhi" :class="$style.subtitle">Buy from DIGITALYCHEE<br></span>
