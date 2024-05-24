@@ -43,14 +43,14 @@ async function initPaddle() {
   });
 }
 
-async function openPaddleCheckout() {
+async function openPaddleCheckout(product) {
   await initPaddle();
   const coupon = readParams().get("coupon") ?? null;
   const email = readParams().get("email") ?? null;
   log("Coupon", coupon);
-  const product = sandbox
-    ? config.paddle.sandboxProductId
-    : config.paddle.productId;
+  if (sandbox) {
+    product = config.paddle.sandboxProductId
+  }   
   log("Opening Paddle checkout");
   setTimeout(() => {
     Paddle.Checkout.open({
@@ -89,12 +89,12 @@ function trackBuy(button) {
             <span :class="$style.subtitle">✅ Keep the last version you receive<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
             <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br></span>
-            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand"
+            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout(store.paddleProducts.value.popclip_2year?.productId)" theme="brand"
                 size="medium">
                 Buy with
                 <Icon size=18><CreditCard /></Icon>
                 <Icon size=18><Paypal /></Icon>
-                <Icon size=32><ApplePay /></Icon>
+                <Icon size=32><ApplePay /></Icon>                
             </AaButton><br>
             <div :class="$style.prices">
                 <span v-if="store.paddleProducts.value.popclip_2year?.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip_2year.displayListPrice ?? "") }}</span>
@@ -116,7 +116,7 @@ function trackBuy(button) {
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
             <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br></span>
-            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand"
+            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout(store.paddleProducts.value.popclip?.productId)" theme="brand"
                 size="medium">
                 Buy with
                 <Icon size=18><CreditCard /></Icon>

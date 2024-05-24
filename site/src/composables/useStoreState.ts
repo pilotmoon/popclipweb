@@ -106,6 +106,7 @@ const ZProcessedProduct = z.object({
   displayDiscount: z.string().nullable(),
   coupon: z.string().nullable(),
   message: z.string().nullable(),
+  productId: z.number(),
 });
 type ProcessedProduct = z.infer<typeof ZProcessedProduct>;
 
@@ -161,6 +162,7 @@ function preprocessProducts(productData: ProductsResult) {
       displayDiscount,
       coupon,
       message,
+      productId: product.paddleData.product_id,
     };
     result[key] = processed;
   }
