@@ -58,6 +58,7 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   filterTerms: z.string().nullish(),
   license: ZLicenseInfo.nullish(),
   popclipDisplayVersion: z.string().nullish(),
+  popclipVersionIsBeta: z.boolean().nullish(),
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
 
@@ -103,7 +104,7 @@ async function getDisplayVersion(ext: ExtInfo) {
     let nextRelease: Release | undefined;
     for (const release of releasesCache.production) {
       if (release.version === ext.popclipVersion) {
-        return release.versionString;        
+        return { versionString: release.versionString, isBeta: false };
       }
       if ((release.version ?? 0) > ext.popclipVersion) {
         if (!nextRelease || (release.version ?? 0) < (nextRelease.version ?? 0)) {
@@ -112,11 +113,11 @@ async function getDisplayVersion(ext: ExtInfo) {
       }      
     }
     if (nextRelease) {
-      return nextRelease.versionString;
+      return { versionString: nextRelease.versionString, isBeta: false };
     }
-    return `Build ${ext.popclipVersion}`;
+    return { versionString: `Build ${ext.popclipVersion}`, isBeta: true };
   }
-  return "";
+  return { versionString: "", isBeta: false };
 }
 
 export async function load() {
@@ -150,12 +151,14 @@ export async function load() {
         findSpecialFile("demo.mp4", ext.files) ??
           findSpecialFile("demo.gif", ext.files),
       );
+      const { versionString, isBeta } = await getDisplayVersion(ext);
       ext.readme = adjustPublicPath(findSpecialFile("readme.md", ext.files));
       ext.download = adjustPublicPath(ext.download);
       ext.filterTerms = compileFilterTerms(ext);
       ext.license = await getLicenseInfo(ext);
       ext.actionTypes = adjustActionTypes(ext);
-      ext.popclipDisplayVersion = await getDisplayVersion(ext);
+      ext.popclipDisplayVersion = versionString;
+      ext.popclipVersionIsBeta = isBeta;
       for (const prev of ext.previousVersions) {
         prev.download = adjustPublicPath(prev.download);
         prev.name = sanitizeHtml(prev.name.trim());

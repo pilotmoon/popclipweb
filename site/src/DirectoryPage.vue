@@ -121,6 +121,11 @@ function formatActionTypes(ext: ExtInfo) {
     
   </div>
 
+  <div v-if="ext.popclipVersionIsBeta" class="warning custom-block">
+        <p class="custom-block-title">Needs PopClip Beta</p>        
+        <p>This extension requires {{ ext.popclipDisplayVersion }} of PopClip, available from <a href="/beta">PopClip Beta</a>.</p>
+    </div>    
+
   <div v-if="ext.demo" :class="$style.Card">
     <div :class="$style.CardHeader">Demo</div>
     <div :class="$style.Media">
