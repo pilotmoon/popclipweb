@@ -4,7 +4,7 @@ import * as config from "../config/config.json";
 import { api } from "./pilotmoonApi.ts";
 import sanitizeHtml from "sanitize-html";
 import { gh } from "./gh.ts";
-import { type Data as ReleasesData, load as loadReleases, Release } from './releases.data';
+import { type Data as ReleasesData, load as loadReleases, type Release } from './releases.data';
 
 // what we get back from the extensions endpoint of the API
 const ZAppInfo = z.object({ name: z.string(), link: z.string() });
@@ -92,7 +92,6 @@ async function getLicenseInfo(ext: ExtInfo) {
 }
 
 let releasesCache: ReleasesData;
-let noVersionCount = 0;
 async function getDisplayVersion(ext: ExtInfo) {
   if (!releasesCache) {
     releasesCache = await loadReleases();
