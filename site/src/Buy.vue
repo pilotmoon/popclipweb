@@ -112,7 +112,7 @@ function trackBuy(button) {
         <div :class="$style.box">
             <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
             <span :class="$style.title">Lifetime License</span><br>            
-            <span :class="$style.subtitle">✅ Free lifetime updates<br></span>
+            <span :class="$style.subtitle">✅ Lifetime free updates<br></span>
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
             <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br></span>
@@ -139,7 +139,7 @@ function trackBuy(button) {
         <div :class="$style.box" :hidden="!isLizhi || store.isLoadedForCoupon === null">
             <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
             <span :class="$style.title">Lifetime License</span><br>            
-            <span :class="$style.subtitle">✅ Free lifetime updates<br></span>
+            <span :class="$style.subtitle">✅ Lifetime free updates<br></span>
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
             <span v-if="isLizhi" :class="$style.subtitle">Buy from DIGITALYCHEE<br></span>
