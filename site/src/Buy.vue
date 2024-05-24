@@ -116,7 +116,7 @@ function trackBuy(button) {
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
             <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br></span>
-            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout(store.paddleProducts.value.popclip?.productId)" theme="brand"
+            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout(store.paddleProducts.value.popclip_lifetime?.productId)" theme="brand"
                 size="medium">
                 Buy with
                 <Icon size=18><CreditCard /></Icon>
@@ -124,15 +124,15 @@ function trackBuy(button) {
                 <Icon size=32><ApplePay /></Icon>
             </AaButton><br>
             <div :class="$style.prices">
-                <span v-if="store.paddleProducts.value.popclip?.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip.displayListPrice ?? "") }}</span>
-                <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip?.displayPrice ?? "") }}</span>
-                <span v-if="store.paddleProducts.value.popclip?.isTaxed" :class="$style.tax">+ tax</span>
+                <span v-if="store.paddleProducts.value.popclip?.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip_lifetime.displayListPrice ?? "") }}</span>
+                <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_lifetime?.displayPrice ?? "") }}</span>
+                <span v-if="store.paddleProducts.value.popclip_lifetime?.isTaxed" :class="$style.tax">+ tax</span>
             </div>
-            <div v-if="store.paddleProducts.value.popclip?.isDiscounted && store.paddleProducts.value.popclip?.message" :class="$style.priceMessage">
-                <span>{{ store.paddleProducts.value.popclip?.message  }}</span>                
+            <div v-if="store.paddleProducts.value.popclip_lifetime?.isDiscounted && store.paddleProducts.value.popclip_lifetime?.message" :class="$style.priceMessage">
+                <span>{{ store.paddleProducts.value.popclip_lifetime?.message  }}</span>                
             </div>
-            <div v-if="store.paddleProducts.value.popclip?.coupon" :class="$style.couponInfo">
-                <span>{{ `Coupon "${store.paddleProducts.value.popclip?.coupon ?? ""}" applied`  }}</span>                
+            <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon" :class="$style.couponInfo">
+                <span>{{ `Coupon "${store.paddleProducts.value.popclip_lifetime?.coupon ?? ""}" applied`  }}</span>                
             </div>
             <span :class="$style.subtitle">One-time purchase<br></span>
         </div>
