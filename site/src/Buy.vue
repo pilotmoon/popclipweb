@@ -124,7 +124,7 @@ function trackBuy(button) {
                 <Icon size=32><ApplePay /></Icon>
             </AaButton><br>
             <div :class="$style.prices">
-                <span v-if="store.paddleProducts.value.popclip?.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip_lifetime.displayListPrice ?? "") }}</span>
+                <span v-if="store.paddleProducts.value.popclip_lifetime?.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip_lifetime.displayListPrice ?? "") }}</span>
                 <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_lifetime?.displayPrice ?? "") }}</span>
                 <span v-if="store.paddleProducts.value.popclip_lifetime?.isTaxed" :class="$style.tax">+ tax</span>
             </div>
