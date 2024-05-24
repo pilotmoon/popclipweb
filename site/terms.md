@@ -103,6 +103,13 @@ Prior to 20th May 2024, the update policy was as follows:
 > existing license key), or as paid updates requiring a further purchase or
 > subscription.
 
+For past purchases I will apply the following policy:
+
+- Purchased on or after 1st January 2023: Will be treated as a lifetime license.
+
+- Purchased before 1st January 2023: Updates will continue to be at my
+  discretion. I may release an update in future which is a paid update for you.
+
 ## Transfer policy
 
 App Store and license key purchases are separate license agreements and are not
