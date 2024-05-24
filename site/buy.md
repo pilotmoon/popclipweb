@@ -20,12 +20,12 @@ PopClip is available as a one-time purchase by buying a license key.
 
 ::: tip Summary of terms
 
-**2 years of updates** means you will receive free updates to all versions of
+**2 years of free updates** means you will receive free updates to all versions of
 PopClip released within 2 years of the purchase date. After that, you can
 continue to use the last version you received but you will need to buy a
 new license to receive further updates.
 
-**Lifetime updates** means you will receive free updates to all future versions
+**Lifetime free updates** means you will receive free updates to all future versions
 of PopClip.
 
 **Personal license** means means the license is for your personal use only. You
