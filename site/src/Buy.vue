@@ -83,7 +83,7 @@ function trackBuy(button) {
         </div> -->
         <div :class="$style.box">
             <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
-            <span :class="$style.title">2-Year Personal License</span><br>            
+            <span :class="$style.title">Standard Personal License</span><br>            
             <span :class="$style.subtitle">✅ 2 years of updates<br></span>
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
             <span :class="$style.subtitle">✅ Keep the last version you receive<br></span>
