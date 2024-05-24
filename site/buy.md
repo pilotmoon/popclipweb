@@ -14,21 +14,24 @@ import { AppstoreIcon } from 'vue3-simple-icons'
 
 ## Personal License
 
-PopClip is available as a one-time purchase by buying a license key.
+PopClip is available as a one-time purchase by buying a license key. You will
+receive your license key by email.
 
 <Buy />
 
-::: tip About this offer
+::: tip Summary of terms
+
+**2 years of updates** means you will receive free updates to all versions of
+PopClip released within 2 years of the purchase date. After that, you can
+continue to use the last version you received but you will need to buy a
+new license to receive further updates.
 
 **Lifetime updates** means you will receive free updates to all future versions
-of PopClip. Payment may be required for online features.
+of PopClip.
 
 **Personal license** means means the license is for your personal use only. You
 can use PopClip on all your personal Macs at home and work. You may not share
 the license key with others.
-
-**Delivery** is by email. Your license key will be sent to the email address you
-provide during checkout.
 
 :::
 
