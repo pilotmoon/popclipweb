@@ -83,7 +83,7 @@ export async function loadStore() {
 
   log("Loading prices", { coupon });
   const fetchResponse = await fetch(
-    `${config.pilotmoon.frontendRoot}/store/getProducts?products=${config.pilotmoon.paddleProducts}&coupons=${coupon}`,
+    `${config.pilotmoon.frontendRoot}/store/getProducts?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupons=${coupon}`,
   );
   if (!fetchResponse.ok) {
     log("Failed to load prices");
@@ -100,10 +100,12 @@ export async function loadStore() {
 
 const ZProcessedProduct = z.object({
   isDiscounted: z.boolean(),
+  isTaxed: z.boolean(),
   displayPrice: z.string(),
   displayListPrice: z.string(),
   displayDiscount: z.string().nullable(),
   coupon: z.string().nullable(),
+  message: z.string().nullable(),
 });
 type ProcessedProduct = z.infer<typeof ZProcessedProduct>;
 
@@ -127,21 +129,38 @@ function preprocessProducts(productData: ProductsResult) {
       );
     }
     const displayPrice = formatCurrency(
-      product.paddleData.price.gross,
+      product.paddleData.price.net,
       product.paddleData.currency,
     );
-    const displayListPrice = formatCurrency(
-      product.paddleData.list_price.gross,
-      product.paddleData.currency,
-    );
-    const isDiscounted =
-      product.paddleData.price.gross < product.paddleData.list_price.gross;
+    let displayListPrice: string;
+    let isDiscounted = false;
+    let message: string | null = null;
+    const productConfig = config.pilotmoon.paddleProducts[productData.products[key].product];
+    if (productConfig.fullPrice) {
+      displayListPrice = formatCurrency(
+        productConfig.fullPrice,
+        productConfig.fullPriceCurrency,
+      );
+      message = productConfig.message;
+      isDiscounted = product.paddleData.price.net < productConfig.fullPrice;      
+    }
+    else {
+      displayListPrice = formatCurrency(
+        product.paddleData.list_price.net,
+        product.paddleData.currency,
+      );
+      isDiscounted =
+        product.paddleData.price.net < product.paddleData.list_price.net;
+    }
+    const isTaxed = product.paddleData.price.net < product.paddleData.price.gross;
     const processed: ProcessedProduct = {
+      isTaxed,
       isDiscounted,
       displayPrice,
       displayListPrice,
       displayDiscount,
       coupon,
+      message,
     };
     result[key] = processed;
   }

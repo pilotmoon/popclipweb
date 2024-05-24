@@ -1,6 +1,15 @@
 {
   "pilotmoon": {
-    "paddleProducts": "popclip",
+    "paddleProducts": {
+      "popclip_2year": {
+        
+      },
+      "popclip": {
+        "fullPrice": 30,
+        "fullPriceCurrency": "USD",
+        "message": "New pricing - transitonal offer"
+      }
+    },
     "iconsRoot": "https://icons.popclip.app",
     "apiRoot": "https://api.pilotmoon.com/v2",
     "frontendRoot": "https://api.pilotmoon.com/frontend",

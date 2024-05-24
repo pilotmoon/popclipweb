@@ -81,17 +81,32 @@ function trackBuy(button) {
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
         </div> -->
-        <div :class="$style.box" :hidden="!isLizhi || store.isLoadedForCoupon === null">
+        <div :class="$style.box">
             <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
-            <span :class="$style.title">Lifetime Personal License</span><br>            
-            <span :class="$style.subtitle">✅ Lifetime updates<br></span>
+            <span :class="$style.title">2-Year Personal License</span><br>            
+            <span :class="$style.subtitle">✅ 2 years of updates<br></span>
             <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
+            <span :class="$style.subtitle">✅ Keep the last version you receive<br></span>
             <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
-            <span v-if="isLizhi" :class="$style.subtitle">Buy from DIGITALYCHEE<br></span>
-            <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
-                <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store">
-            </a><br>
-            <span :class="$style.price">{{ roundPrice(store.lizhiPrice.value) }}</span>
+            <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br></span>
+            <AaButton :class="$style.buybutton" @click="trackBuy('Paddle'); openPaddleCheckout()" theme="brand"
+                size="medium">
+                Buy with
+                <Icon size=18><CreditCard /></Icon>
+                <Icon size=18><Paypal /></Icon>
+                <Icon size=32><ApplePay /></Icon>
+            </AaButton><br>
+            <div :class="$style.prices">
+                <span v-if="store.paddleProducts.value.popclip_2year?.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip_2year.displayListPrice ?? "") }}</span>
+                <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_2year?.displayPrice ?? "") }}</span>
+                <span v-if="store.paddleProducts.value.popclip_2year?.isTaxed" :class="$style.tax">+ tax</span>
+            </div>
+            <div v-if="store.paddleProducts.value.popclip_2year?.isDiscounted && store.paddleProducts.value.popclip_2year?.message" :class="$style.priceMessage">
+                <span>{{ store.paddleProducts.value.popclip_2year?.message  }}</span>                
+            </div>
+            <div v-if="store.paddleProducts.value.popclip_2year?.coupon" :class="$style.couponInfo">
+                <span>{{ `Coupon "${store.paddleProducts.value.popclip_2year?.coupon ?? ""}" applied`  }}</span>                
+            </div>
             <span :class="$style.subtitle">One-time purchase<br></span>
         </div>
         <div :class="$style.box">
@@ -111,10 +126,27 @@ function trackBuy(button) {
             <div :class="$style.prices">
                 <span v-if="store.paddleProducts.value.popclip?.isDiscounted" :class="$style.listPrice">{{ roundPrice(store.paddleProducts.value.popclip.displayListPrice ?? "") }}</span>
                 <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip?.displayPrice ?? "") }}</span>
+                <span v-if="store.paddleProducts.value.popclip?.isTaxed" :class="$style.tax">+ tax</span>
+            </div>
+            <div v-if="store.paddleProducts.value.popclip?.isDiscounted && store.paddleProducts.value.popclip?.message" :class="$style.priceMessage">
+                <span>{{ store.paddleProducts.value.popclip?.message  }}</span>                
             </div>
             <div v-if="store.paddleProducts.value.popclip?.coupon" :class="$style.couponInfo">
                 <span>{{ `Coupon "${store.paddleProducts.value.popclip?.coupon ?? ""}" applied`  }}</span>                
             </div>
+            <span :class="$style.subtitle">One-time purchase<br></span>
+        </div>
+        <div :class="$style.box" :hidden="!isLizhi || store.isLoadedForCoupon === null">
+            <div :class="$style.product"><img src="/icon128.png"> PopClip for macOS</div>
+            <span :class="$style.title">Lifetime Personal License</span><br>            
+            <span :class="$style.subtitle">✅ Lifetime updates<br></span>
+            <span :class="$style.subtitle">✅ Use on all your Macs<br></span>
+            <span :class="$style.small"><a href="/terms">Full license terms</a><br></span>
+            <span v-if="isLizhi" :class="$style.subtitle">Buy from DIGITALYCHEE<br></span>
+            <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
+                <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store">
+            </a><br>
+            <span :class="$style.price">{{ roundPrice(store.lizhiPrice.value) }}</span><br>
             <span :class="$style.subtitle">One-time purchase<br></span>
         </div>
     </div>
@@ -191,6 +223,16 @@ function trackBuy(button) {
 .box span.listPrice {
     font-size: 14px;
     text-decoration: line-through;
+}
+
+.box span.tax {
+    font-size: 14px;
+}
+
+
+.box div.priceMessage {
+    font-size: 14px;    
+    color: var(--vp-c-purple-2);
 }
 
 .box div.couponInfo {
