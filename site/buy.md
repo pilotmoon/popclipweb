@@ -14,8 +14,7 @@ import { AppstoreIcon } from 'vue3-simple-icons'
 
 ## Personal License
 
-PopClip is available as a one-time purchase by buying a license key. You will
-receive your license key by email.
+PopClip is available as a one-time purchase by buying a license key.
 
 <Buy />
 
