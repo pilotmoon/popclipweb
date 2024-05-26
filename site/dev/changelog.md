@@ -29,7 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Now loads a module from a file, and optionally invokes a named function in that module.
   - Now supports TypeScript files.
   - Improved the tool output format.
-  - CHanged the command from `runjs` to `run`.
+  - Changed the command name from `runjs` to `run`.
 
 ## PopClip 2024.5 (4578)
 
