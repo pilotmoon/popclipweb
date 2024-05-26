@@ -311,7 +311,7 @@ and an optional function name to call. For example:
 /Applications/PopClip.app/Contents/MacOS/PopClip run mymodule.js test
 ```
 
-If a function namer is supplied, it will be called with no parameters. If the
+If a function name is supplied, it will be called with no parameters. If the
 function is an `async` function or returns a `Promise`, the test harness will
 wait for the function to complete before exiting. The return value of the
 function is printed to the console.
