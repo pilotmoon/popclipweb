@@ -294,17 +294,27 @@ at the top of the file, like this:
 
 :::
 
-## JavaScript testing
+## Test Harness
 
-PopClip has a 'test harness' mode, which runs JavaScript files in the PopClip
-environment from the command line. It is useful for running unit tests of your
-code in PopClip's environment, with the same libraries, globals etc. It is
-activated by calling PopClip's executable (inside the PopClip.app package) with
-the parameter `runjs` followed by the file name to run.
+PopClip has a command-line mode that loads a JavaScript or TypeScript file into
+the PopClip environment and runs it. Optionally, if the file is a module, it can
+then call one of the module's exported functions.
+
+It is useful for running tests of your code in PopClip's environment, with the
+same libraries, globals etc.
+
+The test harness is activated by calling PopClip's executable (inside the
+PopClip.app package) with the parameter `run` followed by the filename to load
+and an optional function name to call. For example:
 
 ```bash
-/Applications/PopClip.app/Contents/MacOS/PopClip runjs test.js
+/Applications/PopClip.app/Contents/MacOS/PopClip run mymodule.js test
 ```
+
+If a function namer is supplied, it will be called with no parameters. If the
+function is an `async` function or returns a `Promise`, the test harness will
+wait for the function to complete before exiting. The return value of the
+function is printed to the console.
 
 Some notes:
 

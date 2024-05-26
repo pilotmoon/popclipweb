@@ -21,6 +21,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
+## Beta (as of Build 4610)
+
+### Changed
+
+- The [JavaScript test harness](/dev/js-environment#test-harness) has been improved.
+  - Now loads a module from a file, and optionally invokes a named function in that module.
+  - Now supports TypeScript files.
+  - Improved the tool output format.
+  - CHanged the command from `runjs` to `run`.
+
 ## PopClip 2024.5 (4578)
 
 ### Added
