@@ -193,14 +193,14 @@ Your functions can be `async`, and you can use the `await` keyword when calling
 any function that returns a Promise. PopClip handles the details of resolving
 promises internally.
 
-As a convenience, PopClip supplies a global function `sleep()` as a
+As a convenience, PopClip supplies a global function `util.sleep()` as a
 promise-based wrapper around `setTimeout()`:
 
 ```javascript
 // # popclip await example
 // name: Await Test
 // language: js
-await sleep(5000); // 5 second delay
+await util.sleep(5000); // 5 second delay
 popclip.showText("Boo!");
 ```
 
@@ -296,6 +296,12 @@ at the top of the file, like this:
 
 ## Test Harness
 
+::: warning Beta feature
+
+This section describes the test harness in [beta](/beta) Build 4610.
+
+:::
+
 PopClip has a command-line mode that loads a JavaScript or TypeScript file into
 the PopClip environment and runs it. Optionally, if the file is a module, it can
 then call one of the module's exported functions.
@@ -308,13 +314,19 @@ PopClip.app package) with the parameter `run` followed by the filename to load
 and an optional function name to call. For example:
 
 ```bash
-/Applications/PopClip.app/Contents/MacOS/PopClip run mymodule.js test
+/Applications/PopClip.app/Contents/MacOS/PopClip run myfile.js myfunc
 ```
 
 If a function name is supplied, it will be called with no parameters. If the
 function is an `async` function or returns a `Promise`, the test harness will
-wait for the function to complete before exiting. The return value of the
-function is printed to the console.
+wait for the function to complete before exiting. If the function completes
+successfully, the return value of the function is printed to the console.
+
+The shell exit status will be:
+
+- 0 if the scipt loads and runs without error and the called function (if any) completes
+  normally;
+- 1 if an error occurs (e.g. file not found, syntax error), or if the function throws an exception.
 
 Some notes:
 
@@ -325,3 +337,24 @@ Some notes:
   entitlement.
 - The test harness is a somewhat experimental feature at present. Please reach
   out to me if something does not seem to work as expected.
+
+### Example
+
+'foo.ts':
+
+```typescript
+print("file loading now");
+function sayHi(x: string) {
+  print(`hello ${x}`);
+}
+export async function test() {
+  sayHi("there");
+  await util.sleep(500);
+  sayHi("again");
+  return "that's all folks";
+}
+```
+
+Test harness output:
+
+![](./media/shot-harness-2.png "Example Test Harness output.")
