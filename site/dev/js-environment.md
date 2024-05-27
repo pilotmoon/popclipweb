@@ -92,6 +92,19 @@ platforms.
 The JavaScript reference I use and recommend is
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
 
+## Web API globals
+
+PopClip provides its own implementations a few commonly used global classes and functions that are not part of the
+standard library but come from the Web APIs that are normally only available in
+a browser environment. These are:
+
+- [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL),  [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
+- [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+- [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
+- [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout), [clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
+- [atob](https://developer.mozilla.org/en-US/docs/Web/API/atob), [btoa](https://developer.mozilla.org/en-US/docs/Web/API/btoa)
+- [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone)
+
 ## Using `require()`
 
 PopClip has a `require()` function for loading modules and JSON data from other
@@ -324,9 +337,10 @@ successfully, the return value of the function is printed to the console.
 
 The shell exit status will be:
 
-- 0 if the scipt loads and runs without error and the called function (if any) completes
-  normally;
-- 1 if an error occurs (e.g. file not found, syntax error), or if the function throws an exception.
+- 0 if the scipt loads and runs without error and the called function (if any)
+  completes normally;
+- 1 if an error occurs (e.g. file not found, syntax error), or if the function
+  throws an exception.
 
 Some notes:
 
