@@ -47,19 +47,17 @@ package.
 ## The Config file
 
 Every package must include a [config dictionary](./config.md). PopClip will try
-looking in the root of the package directory for the following named files:
+looking in the root of the package directory for a file with base name `Config`
+(case sensitive). The file is interpreted according to its extension:
 
-| File Name      | Format                 | Description                                                                     |
-| -------------- | ---------------------- | ------------------------------------------------------------------------------- |
-| `Config.plist` | Plist                  | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file. |
-| `Config.json`  | JSON                   | A [JSON](https://www.json.org/json-en.html) file.                               |
-| `Config.yaml`  | YAML                   | A [YAML 1.2](https://yaml.org) file.                                            |
-| `Config.js`    | JavaScript | A JavaScript [module](./js-modules.md).                           |
-
-<!-- | `Config.*`, or just `Config` | Other                  | Any file with config header using [inverted snippet syntax](./snippets.md#inverted-syntax). See [Example](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source-contrib/IconPreview.popclipext). | -->
-
-<!-- If multiple config files are present, PopClip will load them all, in the order
-listed above, and merge them into a single config dictionary. -->
+| File Name                                 | Format     | Description                                                                     |
+| ----------------------------------------- | ---------- | ------------------------------------------------------------------------------- |
+| `Config.plist`                            | Plist      | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file. |
+| `Config.json`                             | JSON       | A [JSON](https://www.json.org/json-en.html) file.                               |
+| `Config.yaml`                             | YAML       | A [YAML 1.2](https://yaml.org) file.                                            |
+| `Config.js`                               | JavaScript | A [JavaScript module](./js-modules.md) with snippet header.                     |
+| `Config.ts`                               | TypeScript | A [TypeScript module](./js-modules.md) with snippet header.                     |
+<!-- | `Config.<anything else>` or just `Config` | Other      | Other file with snippet header.                                                 | -->
 
 ::: info Historical note
 
