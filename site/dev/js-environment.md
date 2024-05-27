@@ -15,15 +15,19 @@ sandbox that cannot access the filesystem.
 
 ## PopClip globals
 
-PopClip provides a global object, `popclip`, and other globals, which are
-documented in detail in the
+PopClip predefines several global objects and functions in the JavaScript
+environment for extensions to use. These are documented in detail in the
 [JavaScript API Reference](https://pilotmoon.github.io/popclip-types/modules.html).
 The following is a summary of the commonly needed parts.
 
 ### Global `popclip` object
 
+#### Readonly Properties
+
 Scripts can access the selected text and other input via the following readonly
-properties of the `popclip` global:
+properties of the
+[`popclip`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html)
+global:
 
 - `popclip.input.text`: the full plain text selection
 - `popclip.input.matchedText`: the part of the text matching the requirement or
@@ -43,7 +47,11 @@ properties of the `popclip` global:
   property name is the option's identifier. Option values can be either strings
   or booleans
 
-Scripts can perform actions via calling methods on the `popclip` global:
+#### Methods
+
+Scripts can perform actions via calling methods on the
+[`popclip`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html)
+global:
 
 - [`popclip.pasteText()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pasteText):
   paste a given string (similar to `paste-result`)
@@ -65,16 +73,20 @@ Scripts can perform actions via calling methods on the `popclip` global:
 
 ### Global `pasteboard` object
 
-Scripts can also access the macOS clipboard directly, via the `pasteboard`
+Scripts can also have direct read/write access the macOS clipboard via the
+[`pasteboard`](https://pilotmoon.github.io/popclip-types/interfaces/Pasteboard.html)
 global:
 
 - `pasteboard.text` - the current plain text content of the clipboard, a
   read/write property.
 
-### Other globals
+### Global `print()` function
 
-There is also a global function `print()` for debug output, and a global
-[`require()`](#using-require) function.
+There is a global function
+[`print()`](https://pilotmoon.github.io/popclip-types/functions/print.html) for
+debug output. You can
+[view the debug output in the Console.app](./#debug-output) and also in the
+[test harness](#test-harness).
 
 ## Language version and Standard Library
 
@@ -92,17 +104,20 @@ platforms.
 The JavaScript reference I use and recommend is
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
 
-## Web API globals
+### Web API globals
 
-PopClip provides its own implementations a few commonly used global classes and functions that are not part of the
-standard library but come from the Web APIs that are normally only available in
-a browser environment. These are:
+PopClip provides its own implementations a few commonly used global classes and
+functions that are not part of the standard library but come from the Web APIs
+that are normally only available in a browser environment. These are:
 
-- [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL),  [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
+- [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL),
+  [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
 - [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
 - [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
-- [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout), [clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
-- [atob](https://developer.mozilla.org/en-US/docs/Web/API/atob), [btoa](https://developer.mozilla.org/en-US/docs/Web/API/btoa)
+- [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
+  [clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
+- [atob](https://developer.mozilla.org/en-US/docs/Web/API/atob),
+  [btoa](https://developer.mozilla.org/en-US/docs/Web/API/btoa)
 - [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone)
 
 ## Using `require()`
@@ -118,11 +133,18 @@ files. It takes a single string argument, interpreted as follows:
   against the names of the [bundled libraries](#bundled-libraries). If found,
   the library module is loaded and returned.
 
+The return value of `require()` is the exported value of the module, or the
+parsed JSON object. If the specified file or library module is not found, or an
+invalid path is supplied, `undefined` is returned.
+
 Results are cached, and subsequent calls to `require()` with the same argument
 will return the same object instance that was returned the first time.
 
 File paths beginning with `/` or using `..` to go up a directory level outside
 the package directory are not valid.
+
+TypeScript files can use `import` syntax to load modules, which will be
+transpiled to `require()` calls under the hood.
 
 ### Supported file types
 
@@ -137,11 +159,14 @@ The `require()` function can load the following file types:
 If no file name extension is specified, PopClip will try `.js`, `.ts`, `.json`
 in order.
 
-### Return value
+::: info Note on `.lzfse` files
 
-The return value of `require()` is the exported value of the module, or the
-parsed JSON object. If the specified file or library module is not found, or an
-invalid path is supplied, `undefined` is returned.
+The `require()` loader also looks for the `.js.lsfze` file extension. These are
+compressed javascript files. It's how the internal modules are stored in the app
+package. A couple of my published extensions also use this format but I haven't
+documented it yet.
+
+:::
 
 ## Bundled libraries
 
@@ -206,14 +231,14 @@ Your functions can be `async`, and you can use the `await` keyword when calling
 any function that returns a Promise. PopClip handles the details of resolving
 promises internally.
 
-As a convenience, PopClip supplies a global function `util.sleep()` as a
+As a convenience, PopClip supplies a global function `sleep()` as a
 promise-based wrapper around `setTimeout()`:
 
 ```javascript
 // # popclip await example
 // name: Await Test
 // language: js
-await util.sleep(5000); // 5 second delay
+await sleep(5000); // 5 second delay
 popclip.showText("Boo!");
 ```
 
@@ -363,7 +388,7 @@ function sayHi(x: string) {
 }
 export async function test() {
   sayHi("there");
-  await util.sleep(500);
+  await sleep(500);
   sayHi("again");
   return "that's all folks";
 }
