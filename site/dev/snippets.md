@@ -161,23 +161,10 @@ not use tabs for indenting. YAML does not allow it — use spaces instead.
 
 ## Inverted syntax
 
-When writing a snippet containing a script action, we often need to include a
-multi-line string for the script. Here's how this is done in pure YAML:
-
-```yaml
-#popclip multi-line script with YAML syntax
-name: Hello JS
-icon: Hi!
-javascript: |
-  const greeting = "Hello " + popclip.input.text;
-  popclip.showText(greeting);
-```
-
-In contrast, PopClip also supports an "inside out" approach, which looks like
-this:
+PopClip also supports an "inside out" snippet syntax, which looks like this:
 
 ```javascript
-// #popclip multi-line script with inverted syntax
+// #popclip
 // name: Hello JS
 // icon: Hi!
 // language: javascript
@@ -192,30 +179,30 @@ have to indent the script awkwardly in the YAML.
 The inverted syntax is supported for JavaScript, AppleScript and shell script
 actions.
 
-When using the inverted syntax, the snippet's whole text becomes the
-`javascript file`, `applescript file`, `shell script file`, or `module` for the
-extension, accordingly. The config header should be added using the appropriate
-comment style for the source language (see [examples](#inverted-syntax-examples)
-below).
+When using the inverted syntax, the whole text of the snippet becomes the
+`javascript file`, `module`, `applescript file` or `shell script file` for the
+extension. The config header should be added using the appropriate comment style
+for the source language (see [examples](#inverted-syntax-examples) below).
 
 ::: info When to use inverted syntax?
 
-Inverted syntax is most useful for snippets that are primarily scripts. In cases
-where the config is quite extensive or where the script is very short, the YAML
-approach might still be preferable.
+Inverted syntax is most useful when the script is multiple lines long, or when
+you want to take advantage of the language syntax highlighting and autocomplete
+features of your text editor.
 
 :::
 
 ### Inverted syntax config
 
-When using the inverted syntax, the following config fields have special
-meanings, to determine what type of action is created:
+When using the inverted syntax, the whole snippet text will be interpreted as if
+it was a file specified in the root of the config, as follows:
 
-| Key           | Type    | Description                                                                                                                                                                                    |
-| ------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `interpreter` | String  | When an interpreter is specified, a [Shell Script action](./shell-script-actions) will be created.                                                                                             |
-| `language`    | String  | Specify `javascript` or `typescript` to create a [JavaScript action](./js-actions) or [module](./js-modules). Specifiy `applescript` to create an [AppleScript action](./applescript-actions). |
-| `module`      | Boolean | For JavaScript and TypeScript language only, set `true` if the source file should be loaded as a module, or `false` (default) if it should be loaded as an action.                             |
+| To intepret as...   | Include these fields...                                                                                                                                                                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shell script file` | Specify `interpreter` string.                                                                                                                                                                                                                                   |
+| `applescript file`  | Specify `language: applescript`.                                                                                                                                                                                                                                |
+| `javascript file`   | Specify `language: javascript` or `language: typescript` and omit `module` field.                                                                                                                                                                               |
+| `module`            | Specify `language: javascript` or `language: typescript` with `module: true`. _Special case: In a package, if the config file is called `Config.js` or `Config.ts`, it is automatically interpreted as a module when both `language` and `module` are omitted._ |
 
 ### Inverted syntax examples
 
