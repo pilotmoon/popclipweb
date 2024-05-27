@@ -197,12 +197,12 @@ features of your text editor.
 When using the inverted syntax, the whole snippet text will be interpreted as if
 it was a file specified in the root of the config, as follows:
 
-| To intepret as...   | Include these fields...                                                                                                                                                                                                                                         |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `shell script file` | Specify `interpreter` string.                                                                                                                                                                                                                                   |
-| `applescript file`  | Specify `language: applescript`.                                                                                                                                                                                                                                |
-| `javascript file`   | Specify `language: javascript` or `language: typescript` and omit `module` field.                                                                                                                                                                               |
-| `module`            | Specify `language: javascript` or `language: typescript` with `module: true`. _Special case: In a package, if the config file is called `Config.js` or `Config.ts`, it is automatically interpreted as a module when both `language` and `module` are omitted._ |
+| To intepret as...   | Include these fields...                                                           |
+| ------------------- | --------------------------------------------------------------------------------- |
+| `shell script file` | Specify `interpreter` string.                                                     |
+| `applescript file`  | Specify `language: applescript`.                                                  |
+| `javascript file`   | Specify `language: javascript` or `language: typescript` and omit `module` field. |
+| `module`            | Specify `language: javascript` or `language: typescript` with `module: true`.<br> |
 
 ### Inverted syntax examples
 
