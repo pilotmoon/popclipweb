@@ -56,15 +56,14 @@ looking in the root of the package directory for a file with base name `Config`
 | `Config.json`                             | JSON                   | A [JSON](https://www.json.org/json-en.html) file.                               |
 | `Config.yaml`                             | YAML                   | A [YAML 1.2](https://yaml.org) file.                                            |
 | `Config.js`, `Config.ts`                  | JavaScript, TypeScript | [JavaScript or TypeScript module](./js-modules.md).                             |
-| `Config.<anything else>` or just `Config` | [Snippet](./snippets)  | Interpreted as snippet.                                                         |
+| `Config.<anything else>` or just `Config` | Snippet                | Interpreted as [snippet](./snippets).                                           |
 
 ::: info Historical note
 
 Plist was the original format for PopClip extensions, and many of the older
 extensions in <AaLink href="https://github.com/pilotmoon/PopClip-Extensions" />
-are in Plist format. Support for JSON and YAML was added later. I recommend
-using JSON or YAML for new extensions as they are easier for a human to read and
-write.
+are in Plist format. I recommend avoiding Plist for new extensions, as it is
+verbose and harder to read and edit than JSON or YAML.
 
 :::
 
