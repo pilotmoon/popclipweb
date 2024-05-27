@@ -10,8 +10,8 @@ titleTemplate: :title — PopClip Developer
 
 Module-based extensions let you use the full power of JavaScript or TypeScript
 to define your PopClip extension. This allows you use code to construct
-properties like `options` at load time, and to define `actions` dynamically, for example to
-generate titles or icons in response to the input text.
+properties like `options` at load time, and to define `actions` dynamically, for
+example to generate titles or icons in response to the input text.
 
 When you provide a config file called `Config.js` ot `Config.ts`, PopClip treats
 this as a JavaScript or TypeScript module and looks for the extension's
@@ -84,8 +84,12 @@ See the following examples from the PopClip Extensions Directory:
 ### Comment header
 
 In `Config.js` and `Config.ts` a YAML comment header must be provided defining
-`name` as the bare minumum. The header is in the same format as for a snippet.
-See [Snippets - Inverted syntax](./snippets#inverted-syntax).
+the extension's `name` and any other
+[static-only properties](#static-only-properties). The header is in the same
+format as for a snippet (see
+[Snippets - Inverted syntax](./snippets#inverted-syntax)) except that you do not
+specify `language` or `module` in the header. The file is automatically loaded
+as a module.
 
 ### Module format
 
