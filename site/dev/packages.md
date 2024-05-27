@@ -56,8 +56,7 @@ looking in the root of the package directory for a file with base name `Config`
 | `Config.json`                             | JSON                   | A [JSON](https://www.json.org/json-en.html) file.                                                                                                                                                                  |
 | `Config.yaml`                             | YAML                   | A [YAML 1.2](https://yaml.org) file.                                                                                                                                                                               |
 | `Config.js`, `Config.ts`                  | JavaScript, TypeScript | [JavaScript or TypeScript module](./js-modules.md) with [snippet header](./snippets#inverted-syntax). _It is automatically interpreted as a module when both `language` and `module` are omitted from the header._ |
-| `Config.applescript`                      | AppleScript            | AppleScript with [snippet header](./snippets#inverted-syntax).                                                                                                                                                     |
-| `Config.<anything else>` or just `Config` | Snippet                | Shell script with [snippet header](./snippets#inverted-syntax).                                                                                                                                                    |
+| `Config.<anything else>` or just `Config` | [Snippet](./snippets)  | Interpreted as snippet.                                                                                                                                                                                            |
 
 ::: info Historical note
 
