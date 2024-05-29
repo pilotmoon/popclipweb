@@ -336,7 +336,7 @@ at the top of the file, like this:
 
 ::: warning Beta feature
 
-This section describes the test harness in [beta](/beta) Build 4610.
+This section describes the test harness in [beta](/beta) Build 4615.
 
 :::
 
@@ -369,9 +369,11 @@ The shell exit status will be:
 
 Some notes:
 
-- When running in the test harness, the `popclip` global is not available.
 - Scripts can output strings with the global `print()` function (not
   `console.log()`).
+- When running in the test harness, the `popclip` object's properties will
+  return blank data. Its methods can be called but some will not have any
+  effect.
 - Scripts running in the test harness always have the network access
   entitlement.
 - The test harness is a somewhat experimental feature at present. Please reach
