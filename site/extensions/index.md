@@ -18,6 +18,6 @@ import Directory from '/src/Directory.vue'
 import InfoBox from '/src/InfoBox.vue'
 </script>
 
-<!-- <InfoBox /> -->
+<InfoBox />
 
 <Directory />
