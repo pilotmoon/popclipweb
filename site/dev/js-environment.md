@@ -351,7 +351,7 @@ extension code. I recommend [Bun](https://bun.sh/):
 bun install --dev typescript @popclip/types
 ```
 
-And then in your `tsconfig.json` file (add) add an explicit reference to the
+And then, in your `tsconfig.json` file, add an explicit reference to the
 types:
 
 ```json
