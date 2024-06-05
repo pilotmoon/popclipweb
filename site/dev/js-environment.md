@@ -88,37 +88,89 @@ debug output. You can
 [view the debug output in the Console.app](./#debug-output) and also in the
 [test harness](#test-harness).
 
-## Language version and Standard Library
+## Language version and libraries
 
 PopClip's JavaScript engine is Apple's
 [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),
-which is part of macOS. Thus, language features available will vary depending on
-the macOS version PopClip is running on. However, you can assume availability of
-language features up to at least ES2018 on all macOS versions that PopClip
-supports (10.15+).
+which is part of macOS. Language features will vary depending on the macOS
+version PopClip is running on. However, you can assume availability of language
+features up to at least ES2018 on all macOS versions that PopClip supports
+(10.15+).
 
-For the Standard Library, PopClip uses
-[core-js](https://github.com/zloirock/core-js) to provide ES2023 support on all
-platforms.
+::: tip JavaScript reference
 
-The JavaScript reference I use and recommend is
+The website I use and recommend to learn about the JavaScript language, the
+Standard Library and other APIs, is
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference).
 
-### Web API globals
+:::
 
-PopClip provides its own implementations a few commonly used global classes and
-functions that are not part of the standard library but come from the Web APIs
-that are normally only available in a browser environment. These are:
+### Standard built-in objects
 
+For the
+[Standard Library](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects),
+PopClip supplements the built-in JavaScript objects provided by macOS with
+polyfills from [core-js](https://github.com/zloirock/core-js). This means that
+you can use the latest features up to ES2023 on all macOS versions.
+
+### Web APIs and Node globals
+
+PopClip provides a limited subset of the standard
+[Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) that are normally
+available in a browser environment:
+
+- [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
 - [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL),
   [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
 - [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
-- [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
-- [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
-  [clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
 - [atob](https://developer.mozilla.org/en-US/docs/Web/API/atob),
   [btoa](https://developer.mozilla.org/en-US/docs/Web/API/btoa)
+- [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
+  [clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
 - [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone)
+
+Additionally, from the Node.js environment:
+
+- [Buffer](https://nodejs.org/api/buffer.html#buffer)
+
+All of the above functions and classes are accessible in the global scope.
+
+### Bundled libraries
+
+Some libraries from [NPM](https://www.npmjs.org/) are bundled within the PopClip
+app itself, and are available to load by scripts. These are:
+
+| Library                    | Version | Description                    |
+| -------------------------- | ------- | ------------------------------ |
+| axios                      | 1.6.7   | HTTP client                    |
+| case-anything              | 2.1.13  | Case conversion library        |
+| content-type               | 1.0.5   | Parse HTTP Content-Type header |
+| dom-serializer             | 2.0.0   | HTML serializer                |
+| emoji-regex                | 10.3.0  | Emoji regular expression       |
+| entities                   | 4.5.0   | HTML entity encoder/decoder    |
+| fast-json-stable-stringify | 2.1.0   | Stable JSON stringify          |
+| htmlparser2                | 9.1.0   | HTML parser                    |
+| js-yaml                    | 4.1.0   | YAML parser                    |
+| linkedom                   | 0.16.8  | DOM implementation             |
+| linkifyjs                  | 4.1.3   | Detect web links in text       |
+| rot13-cipher               | 1.0.0   | ROT13 cipher                   |
+| sanitize-html              | 2.12.1  | HTML sanitizer                 |
+| turndown                   | 7.1.2   | HTML to Markdown converter     |
+| typescript                 | 5.4.2   | TypeScript transpiler & tools  |
+
+Library modules may be loaded by name, for example:
+
+::: code-group
+
+```javascript
+const axios = require("axios");
+```
+
+```typescript
+import axios from "axios";
+```
+
+:::
 
 ## Using `require()`
 
@@ -165,43 +217,6 @@ The `require()` loader also looks for the `.js.lsfze` file extension. These are
 compressed javascript files. It's how the internal modules are stored in the app
 package. A couple of my published extensions also use this format but I haven't
 documented it yet.
-
-:::
-
-## Bundled libraries
-
-Some libraries from [NPM](https://www.npmjs.org/) are bundled within the PopClip
-app itself, and are available to load by scripts. These are:
-
-| Library                    | Version | Description                    |
-| -------------------------- | ------- | ------------------------------ |
-| axios                      | 1.6.7   | HTTP client                    |
-| case-anything              | 2.1.13  | Case conversion library        |
-| content-type               | 1.0.5   | Parse HTTP Content-Type header |
-| dom-serializer             | 2.0.0   | HTML serializer                |
-| emoji-regex                | 10.3.0  | Emoji regular expression       |
-| entities                   | 4.5.0   | HTML entity encoder/decoder    |
-| fast-json-stable-stringify | 2.1.0   | Stable JSON stringify          |
-| htmlparser2                | 9.1.0   | HTML parser                    |
-| js-yaml                    | 4.1.0   | YAML parser                    |
-| linkedom                   | 0.16.8  | DOM implementation             |
-| linkifyjs                  | 4.1.3   | Detect web links in text       |
-| rot13-cipher               | 1.0.0   | ROT13 cipher                   |
-| sanitize-html              | 2.12.1  | HTML sanitizer                 |
-| turndown                   | 7.1.2   | HTML to Markdown converter     |
-| typescript                 | 5.4.2   | TypeScript transpiler & tools  |
-
-Library modules may be loaded by name, for example:
-
-::: code-group
-
-```javascript
-const axios = require("axios");
-```
-
-```typescript
-import axios from "axios";
-```
 
 :::
 
@@ -312,25 +327,47 @@ loads files with a `.ts` extension as TypeScript.
 At load time, PopClip transpiles TypeScript files into JavaScript source.
 PopClip does not do any type validation on the TypeScript source.
 
-PopClip ships with a TypeScript type definitions file, `popclip.d.ts`, to assist
-in developing extensions. This will enable autocomplete and type-checking in
-TypeScript-aware editors such as VS Code. So that your editor can find the type
-definitions, you can reference the definitions file in your TypeScript code
-using a
-[triple-slash directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)
-at the top of the file, like this:
+### TypeScript configuration
 
-::: code-group
+When working with TypeScript files you'll want to provide a
+[tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
+file. For my current recommended `compilerOptions`, see the one in the
+PopClip-Extensions repo:
 
-```typescript [Standalone and Mac App Store editions]
-/// <reference path="/Applications/PopClip.app/Contents/Resources/popclip.d.ts" />
+- [Example tsconfig.json for PopClip extensions](https://github.com/pilotmoon/PopClip-Extensions/blob/master/tsconfig.json)
+
+### PopClip types package
+
+I have published the NPM package
+[`@popclip/types`](https://www.npmjs.com/package/@popclip/types), a TypeScript
+type definitions package to assist in developing extensions. This will enable
+autocomplete and type-checking in TypeScript-aware editors.
+
+Use an NPM-compatible JavaScript package manager to install both `typescript`
+itself and the types package in the directory where you are writing your
+extension code. I recommend [Bun](https://bun.sh/):
+
+```bash
+bun install --dev typescript @popclip/types
 ```
 
-```typescript [Setapp edition]
-/// <reference path="/Applications/Setapp/PopClip.app/Contents/Resources/popclip.d.ts" />
+And then in your `tsconfig.json` file (add) add an explicit reference to the
+types:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["@popclip/types"]
+  }
+}
 ```
 
-:::
+Once this is done, you should get autocomplete and type-checking in your editor
+and TypeScript's `tsc` will check your code for type errors:
+
+```bash
+bun run tsc --noEmit
+```
 
 ## Test Harness
 
