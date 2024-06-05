@@ -61,9 +61,9 @@ function formatActionTypes(ext: ExtInfo) {
     let typeString = lookup[type];
     if (type === "javascript") {
       let entitlementsString = "";
-      for (const entitlement of ext.entitlements) {        
+      for (const entitlement of ext.entitlements) {
         if (entitlement === "network") {
-          entitlementsString += "with internet access";        
+          entitlementsString += "with internet access";
         }
       }
       if (entitlementsString) {
@@ -124,7 +124,11 @@ function formatActionTypes(ext: ExtInfo) {
   <div v-if="ext.popclipVersionIsBeta" class="warning custom-block">
         <p class="custom-block-title">Needs PopClip Beta</p>        
         <p>This extension requires {{ ext.popclipDisplayVersion }} of PopClip, available from <a href="/beta">PopClip Beta</a>.</p>
-    </div>    
+  </div>    
+  <div v-if="ext.unlisted" class="warning custom-block">
+      <p class="custom-block-title">Unlisted Extension</p>        
+      <p>This extension is not shown in the directory index. It may be a pre-release or test extension.</p>
+  </div>    
 
   <div v-if="ext.demo" :class="$style.Card">
     <div :class="$style.CardHeader">Demo</div>

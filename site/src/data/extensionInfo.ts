@@ -38,6 +38,7 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   id: z.string(),
   created: z.coerce.date(),
   firstCreated: z.coerce.date(),
+  unlisted: z.boolean(),
   shortcode: z.string(),
   identifier: z.string(),
   icon: z.string().nullable(),
