@@ -21,15 +21,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
-## Beta (as of Build 4610)
+## PopClip 2024.5.2 (4615)
 
 ### Changed
 
-- The [JavaScript test harness](/dev/js-environment#test-harness) has been improved.
-  - Now loads a module from a file, and optionally invokes a named function in that module.
+- The [JavaScript test harness](/dev/js-environment#test-harness) has been
+  improved.
+  - Now loads a module from a file, and optionally invokes a named function in
+    that module.
   - Now supports TypeScript files.
   - Improved the tool output format.
   - Changed the command name from `runjs` to `run`.
+
+### Added
+
+- The
+  [`popclip.showText`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showText)
+  method now takes an optional `style` option which can be either `compact` or
+  `large`. The default style is `compact`, which is the same as the previous
+  behavior. The `large` style is a new style that shows the text full-screen in
+  a "large type" display.
 
 ## PopClip 2024.5 (4578)
 
