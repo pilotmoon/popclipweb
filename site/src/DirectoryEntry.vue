@@ -4,7 +4,7 @@ import type { ExtInfo } from "./data/extensionInfo";
 const props = defineProps<{
   ext: ExtInfo;
 }>();
-const newDate = Date.now() - 14 * 24 * 60 * 60 * 1000;
+const newDate = Date.now() - 30 * 24 * 60 * 60 * 1000;
 function isNew(ext: ExtInfo) {
   return ext.firstCreated.getTime() > newDate;
 }
