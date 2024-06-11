@@ -74,7 +74,7 @@ Download links for some further old versions are available on the
 ### License key for legacy macOS
 
 You may use the following license key to unlock PopClip for free on any macOS version before 10.15:
-[Download License Key](https://www.popclip.app/api/v2/licenseKeys/lk_iimPQ62Egziy/file?token=354IB4K45TwF1cLppgYdXKFOVQIq49GtyYxw4YAjIe86DD9ZpgMbKTh)
+[Download License Key](https://api.pilotmoon.com/v2/licenseKeys/lk_iimPQ62Egziy/file?token=354IB4K45TwF1cLppgYdXKFOVQIq49GtyYxw4YAjIe86DD9ZpgMbKTh)
 
 (Install and run PopClip first, then save the `.popcliplicense` file and double-click it.)
 
