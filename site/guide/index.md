@@ -62,17 +62,13 @@ _See also [Troubleshooting](/kb/troubleshooting) if you have questions about
 technical issues._
 
 - **Is there a version of PopClip for iPhone or iPad?**
-  Unfortunately PopClip would not be possible on on these devices due to the way iOS works.
+  Unfortunately PopClip would not be possible on these devices due to the way iOS works.
 
 - **Is there a version of PopClip for Windows?** I don't make a
   Windows version of PopClip and I have no plans to do so. There is a similar
   app for Windows called [SnipDo](https://snipdo-app.com/) (formerly Pantherbar)
   that was inspired by PopClip. However, I have no involvement with that app at
   all.
-
-- **Can you make the Dictionary action use the macOS pop-up dictionary instead
-  of the Dictionary app?** I'd love to do this, but it is technically not
-  possible (as far as I know).
 
 ## :earth_africa: Languages and translation
 
