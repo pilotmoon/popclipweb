@@ -121,8 +121,9 @@ following people and projects:
   other contributors.
 - [js-yaml](https://github.com/nodeca/js-yaml) (MIT license) Vitaly Puzrin and
   other contributors.
-- [linkedom](https://github.com/WebReflection/linkedom) (ISC License) by Andrea
+- [linkedom](https://github.com/WebReflection/linkedom) (ISC license) by Andrea
   Giammarchi.
+- [linkifyjs](https://github.com/Hypercontext/linkifyjs) (MIT license) by SoapBox Innovations Inc.
 - [sanitize-html](https://github.com/apostrophecms/sanitize-html) (MIT license)
   by P'unk Avenue LLC.
 - [turndown](https://github.com/mixmark-io/turndown) (MIT license) by Dom
