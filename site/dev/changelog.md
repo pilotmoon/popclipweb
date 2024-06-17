@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Beta
 
-## Added
+### Added
 
 - Added `oauth-1.0a` to built-in NPM modules.
 - Added [util.hmac()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#hmac) function for HMAC calculation (useful for extensions that need to use OAuth 1.0a).
