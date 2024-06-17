@@ -28,7 +28,7 @@ issues with specific apps.
 | Delay before PopClip bar appears.                                | If "3-finger drag" mode is enabled in Trackpad settings, there will be a delay. This can't be avoided because the delay is inserted by macOS.                                                                                                                                                                                                                        |
 | PopClip bar disappearing too quickly.                            | PopClip does not disappear on a timer, but only when you move the mouse away, click, scroll, or begin to type. (See: [Make popclip disappear](/guide/basics#make-popclip-disappear).) Keep the mouse near the PopClip bar to prevent it disappearing.                                                                                                                |
 | A specific extension is not working.                             | Try downloading the latest version of the extension. (Note that extensions do not autmatically update.)                                                                                                                                                                                                                                                              |
-| PopClip app launches but no user interface appears.              | You may be using an icon-hider app to hide PopClip's menu bar icon. Disable it or configure it not to hide PopClip. See [note](#a-note-about-icon-hider-apps).                                                                                                                |
+| PopClip app launches but no user interface appears.              | You may be using an icon-hider app to hide PopClip's menu bar icon.q Disable it or configure it not to hide PopClip. See [note](#a-note-about-icon-hider-apps).                                                                                                                |
 | PopClip has locked up / using 100% CPU.                          | Force Quit PopClip using Activity Monitor. If this happens repeatedly, please report it and any steps that cause the lock-up.                                                                                                                                                                                                                                        |
 | A "click" or "purr" sound when selecting text.                   | Check whether you are using either [Alfred](https://www.alfredapp.com/) or [LaunchBar](https://obdev.at/products/launchbar/index.html), and have the clipboard merging feature enabled. The way PopClip works is triggering this feature, so you will need to disable it. The checkbox is "Fast append selected text" in Alfred and "Enable ClipMerge" in LaunchBar. |
 | Can't set "Start at login"                                       | Quit PopClip and move it to the `/Applications` folder, if it is not there already. Then go to System Settings → Login Items → Open at Login. Delete any existing entry for PopClip from the list. Now try add PopClip again.                                                                                                                                        |
@@ -87,8 +87,8 @@ The following table lists apps that are known to have problems with PopClip.
 
 ![](media/shot-missing-actions-1.png#bar "Only Search and Copy are appearing! Is there something wrong?")
 
-To keep visual clutter down, PopClip's bar is intelligent; it only displays
-actions relevant to your current text selection and context. Here's a quick
+To keep visual clutter down, PopClip's bar is context-sensitive; it only displays
+actions relevant to your current text selection. Here's a quick
 rundown:
 
 - **Cut & Paste:** They'll show up when you use PopClip in text-editing apps,
