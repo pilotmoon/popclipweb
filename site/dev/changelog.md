@@ -23,6 +23,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Beta
 
+### Changed
+
+- JavaScript extensions can access `localhost` and local network addresses (unqualified domains and `.local` domains) using `http:` connections. An `https:` connection is still required to connect to fully qualified domains.
+
 ### Added
 
 - Added `oauth-1.0a` to built-in NPM modules.
