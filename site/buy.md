@@ -83,5 +83,6 @@ free.
 After you have used 250 actions in the app it will start to nag you periodically
 to buy a license key.
 
-If you have already used the free trial and you cannot afford PopClip,
-[email me](/support), and I will send you a 1-year license for free.
+After you have used up the free trial, I hope you will consider either buying a license or subscribing via Setapp, both of which directly support my work on the app.
+
+However, I understand that not everyone is in the financial position to do so. I never want money to be the reason that someone cannot use PopClip, so if you have already used up the free trial and you cannot afford to buy right now, email me, and I will send you a 1-year license for free.
