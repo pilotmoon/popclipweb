@@ -148,6 +148,12 @@ function formatActionTypes(ext: ExtInfo) {
     </div>
   </div>
 
+  <div v-if="ext.actionTypes.includes('javascript') && ext.owner=='github:17520'" :class="$style.Card">
+    <div :class="$style.CardHeader">Say Thanks</div>    
+    
+    <a href="https://buymeacoffee.com/pilotmoon"><img src="/bmac-button.png" width=200 /></a>
+  </div>
+
   <div :class="$style.Card">
     <div :class="$style.CardHeader">Info</div>    
     
