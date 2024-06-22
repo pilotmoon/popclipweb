@@ -44,6 +44,8 @@ Even though PopClip is not searchable in the MAS storefront, it is still part of
 
 ![](./media/shot-mas-account.png "Find PopClip in the Purchased list of your Mac App Store account.")
 
+In case the MAS fails to install PopClip from Purchased list, ensure that there are no other copies of PopClip anywhere (e.g. in Applications or Downloads folder), and try again.
+
 After installing PopClip from the MAS, run it once, quit it, and then follow the steps in [How to migrate](#how-to-migrate) above.
 
 ## Installing in future on a new Mac
