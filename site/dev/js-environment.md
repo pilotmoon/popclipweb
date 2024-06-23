@@ -371,12 +371,6 @@ bun run tsc --noEmit
 
 ## Test Harness
 
-::: warning Beta feature
-
-This section describes the test harness in [beta](/beta) Build 4615.
-
-:::
-
 PopClip has a command-line mode that loads a JavaScript or TypeScript file into
 the PopClip environment and runs it. Optionally, if the file is a module, it can
 then call one of the module's exported functions.
