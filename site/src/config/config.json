@@ -5,9 +5,7 @@
         
       },
       "popclip_lifetime": {
-        "fullPrice": 30,
-        "fullPriceCurrency": "USD",
-        "message": "★ Great Deal! ★"
+
       }
     },
     "iconsRoot": "https://icons.popclip.app",
