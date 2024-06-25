@@ -70,3 +70,16 @@ Example output:
 /Users/nick/Downloads/PopClip.app
 /Applications/Setapp/PopClip.app
 ```
+
+## Transfer extensions and settings to a different Mac
+
+Whilst there is no built in import/export or sync (yet), you can manually copy
+your existing extensions and settings to a different Mac by copying across the following:
+
+Extensions folder:
+
+`~/Library/Application Support/PopClip/Extensions` folder
+
+Preferences file:
+
+`~/Library/Preferences/com.pilotmoon.popclip.plist`
