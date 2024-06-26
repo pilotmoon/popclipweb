@@ -136,7 +136,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   `typescript` in the `language` field.
 - ~~PopClip ships with a TypeScript type definitions file, `popclip.d.ts`, inside
   the app bundle.~~ _This has now been removed as of v2024.5. Instead, use the [@popclip/types
-  NPM package](https://www.popclip.app/dev/js-environment#popclip-types-package).
+  NPM package](https://www.popclip.app/dev/js-environment#popclip-types-package)._
   You can configure your dev envionment to reference this to aid in developing your own extensions.
 - URL actions can now specify an optional `alternate url`, invoked by holding
   Option (⌥).
