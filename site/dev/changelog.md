@@ -134,9 +134,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   module-based extensions. This is done by specifying a file with the `.ts`
   extension in the `javascript file` or `module` field. For snippets, specify
   `typescript` in the `language` field.
-- PopClip ships with a TypeScript type definitions file, `popclip.d.ts`, inside
-  the app bundle. You can configure your code editor to reference this to aid in
-  developing your own extensions.
+- ~~PopClip ships with a TypeScript type definitions file, `popclip.d.ts`, inside
+  the app bundle.~~ _This has now been removed as of v2024.5. Instead, use the [@popclip/types
+  NPM package](https://www.popclip.app/dev/js-environment#popclip-types-package).
+  You can configure your dev envionment to reference this to aid in developing your own extensions.
 - URL actions can now specify an optional `alternate url`, invoked by holding
   Option (⌥).
 - URL actions now have an optional `clean query` flag to clean up newlines and
