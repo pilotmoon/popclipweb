@@ -101,7 +101,7 @@ function trackBuy(button) {
                 <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_2year?.displayPrice ?? "") }}</span>
                 <span v-if="store.paddleProducts.value.popclip_2year?.isTaxed" :class="$style.tax">+ tax</span>
             </div>
-            <div v-if="store.paddleProducts.value.popclip_2year?.isDiscounted && store.paddleProducts.value.popclip_2year?.message" :class="$style.priceMessage">
+            <div v-if="store.paddleProducts.value.popclip_2year?.message" :class="$style.priceMessage">
                 <span>{{ store.paddleProducts.value.popclip_2year?.message  }}</span>                
             </div>
             <div v-if="store.paddleProducts.value.popclip_2year?.coupon" :class="$style.couponInfo">
@@ -128,7 +128,7 @@ function trackBuy(button) {
                 <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_lifetime?.displayPrice ?? "") }}</span>
                 <span v-if="store.paddleProducts.value.popclip_lifetime?.isTaxed" :class="$style.tax">+ tax</span>
             </div>
-            <div v-if="store.paddleProducts.value.popclip_lifetime?.isDiscounted && store.paddleProducts.value.popclip_lifetime?.message" :class="$style.priceMessage">
+            <div v-if="store.paddleProducts.value.popclip_lifetime?.message" :class="$style.priceMessage">
                 <span>{{ store.paddleProducts.value.popclip_lifetime?.message  }}</span>                
             </div>
             <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon" :class="$style.couponInfo">

@@ -137,12 +137,14 @@ function preprocessProducts(productData: ProductsResult) {
     let isDiscounted = false;
     let message: string | null = null;
     const productConfig = config.pilotmoon.paddleProducts[productData.products[key].product];
+    if (productConfig.message) {
+      message = productConfig.message;
+    }
     if (productConfig.fullPrice) {
       displayListPrice = formatCurrency(
         productConfig.fullPrice,
         productConfig.fullPriceCurrency,
-      );
-      message = productConfig.message;
+      );      
       isDiscounted = product.paddleData.price.net < productConfig.fullPrice;      
     }
     else {
