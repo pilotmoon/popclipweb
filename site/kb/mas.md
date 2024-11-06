@@ -37,7 +37,7 @@ killall PopClip; brew reinstall popclip --force
 You can confirm the unlocked status by clicking View License in the About pane
 of PopClip's settings menu.
 
-![](./media/shot-mas-license-1.png "Standalone edition recognizing the MAS purchase")
+![](./media/shot-mas-license-2.jpg "Standalone edition recognizing the MAS purchase")
 
 ## ...but I don't have MAS PopClip already installed and it's not available in the store!
 
@@ -48,7 +48,7 @@ your purchased apps list. Install it by going to your account screen in the MAS
 and scroll down the Purchased list (it's ordered by purchase date, so you might
 have to scroll a long way if you bought it a long time ago).
 
-![](./media/shot-mas-account.png "Find PopClip in the Purchased list of your Mac App Store account.")
+![](./media/shot-mas-account.jpg "Find PopClip in the Purchased list of your Mac App Store account.")
 
 In case the MAS fails to install PopClip from Purchased list, ensure that there
 are no other copies of PopClip anywhere (e.g. in Applications or Downloads
