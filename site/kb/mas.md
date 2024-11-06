@@ -1,7 +1,8 @@
 # Migrate from the Mac App Store (MAS) edition to the Standalone edition
 
-The last released version of PopClip on the Mac App Store is 2023.9. If you have the MAS edition of PopClip, you can migrate for free to the
-Standalone edition to continue receiving updates.
+The last released version of PopClip on the Mac App Store is 2023.9. If you have
+the MAS edition of PopClip, you can migrate for free to the Standalone edition
+to continue receiving updates.
 
 ::: info From the developer
 
@@ -14,11 +15,13 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 
 ## How to migrate
 
-1. Quit your existing PopClip, if it is running.
-2. Download PopClip from the [download](/download) page, and unzip it.
-3. Put it in the `/Applications` folder, replacing the MAS edition. (MacOS will
-   ask for your password to confirm deletion of the MAS edition.)
-4. Run the new PopClip app. It will detect your Mac App Store purchase and
+1. Quit the MAS edition of PopClip, if it is running.
+2. Delete the MAS editition of PopClip from the `/Applications` folder by dragging it to the Trash.
+   (Do not use an app cleaner or uninstaller tool, as that will likely delete
+   your settings and extensions.)
+3. Download PopClip from the [download](/download) page, and unzip it.
+4. Put it in the `/Applications` folder.
+5. Run the new PopClip app. It will detect your Mac App Store purchase and
    unlock itself.
 
 ::: details Alternative: migrate using Homebrew
@@ -40,13 +43,19 @@ of PopClip's settings menu.
 
 ![](./media/shot-app-not-available.png#prefs "App not available? No problem, find it in your Account's purchased list.")
 
-Even though PopClip is not searchable in the MAS storefront, it is still part of your purchased apps list. Install it by going to your account screen in the MAS and scroll down the Purchased list (it's ordered by purchase date, so you might have to scroll a long way if you bought it a long time ago).
+Even though PopClip is not searchable in the MAS storefront, it is still part of
+your purchased apps list. Install it by going to your account screen in the MAS
+and scroll down the Purchased list (it's ordered by purchase date, so you might
+have to scroll a long way if you bought it a long time ago).
 
 ![](./media/shot-mas-account.png "Find PopClip in the Purchased list of your Mac App Store account.")
 
-In case the MAS fails to install PopClip from Purchased list, ensure that there are no other copies of PopClip anywhere (e.g. in Applications or Downloads folder), and try again.
+In case the MAS fails to install PopClip from Purchased list, ensure that there
+are no other copies of PopClip anywhere (e.g. in Applications or Downloads
+folder), and try again.
 
-After installing PopClip from the MAS, run it once, quit it, and then follow the steps in [How to migrate](#how-to-migrate) above.
+After installing PopClip from the MAS, run it once, quit it, and then follow the
+steps in [How to migrate](#how-to-migrate) above.
 
 ## Installing in future on a new Mac
 
