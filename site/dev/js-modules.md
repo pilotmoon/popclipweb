@@ -13,7 +13,7 @@ to define your PopClip extension. This allows you use code to construct
 properties like `options` at load time, and to define `actions` dynamically, for
 example to generate titles or icons in response to the input text.
 
-When you provide a config file called `Config.js` ot `Config.ts`, PopClip treats
+When you provide a config file called `Config.js` or `Config.ts`, PopClip treats
 this as a JavaScript or TypeScript module and looks for the extension's
 properties in the exported object, after first loading static properties from
 YAML in a comment header.
