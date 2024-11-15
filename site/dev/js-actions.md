@@ -11,7 +11,7 @@ internal state and lets them interact with PopClip itself.
 
 ::: tip Module-based extensions
 
-JavaScript actions provided a simplified way to run call in PopClip, for example
+JavaScript actions provide a simplified way to run call in PopClip, for example
 form a quick snippet. To access the full power of JavaScript, use a
 [module-based extension](./js-modules).
 
