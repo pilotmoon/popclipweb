@@ -40,6 +40,7 @@ async function initPaddle() {
     eventCallback: (args) => {
       log("Paddle event", args);
     },
+    completeDetails: true,
   });
 }
 
