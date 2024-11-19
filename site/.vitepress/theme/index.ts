@@ -10,6 +10,7 @@ import AaLink from "../../src/AaLink.vue";
 import DownloadButton from "../../src/DownloadButton.vue";
 import HomeFooter from "../../src/HomeFooter.vue";
 import StoreLoader from "../../src/StoreLoader.vue";
+import SupportEmailLink from "../../src/SupportEmailLink.vue";
 
 // element-plus css
 // https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/src/common/var.scss
@@ -35,5 +36,6 @@ export default {
     app.component("AaButton", AaButton);
     app.component("AaLink", AaLink);
     app.component("DownloadButton", DownloadButton);
+    app.component("SupportEmailLink", SupportEmailLink);
   },
 };

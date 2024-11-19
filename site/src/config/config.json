@@ -12,9 +12,12 @@
     },
     "iconsRoot": "https://icons.popclip.app",
     "apiRoot": "https://api.pilotmoon.com/v2",
+    "apiRoot_sandbox": "https://pltmn-rolo.eu.ngrok.io",
     "frontendRoot": "https://api.pilotmoon.com/frontend",
+    "frontendRoot_sandbox": "https://pltmn-twix.eu.ngrok.io/frontend",
     "publicRoot": "https://public.popclip.app",
-    "localAppRoot": "http://localhost:58906"
+    "localAppRoot": "http://localhost:58906",
+    "supportEmail": "support@pilotmoon.com"
   },
   "paddle": {
     "vendorId": 161988,

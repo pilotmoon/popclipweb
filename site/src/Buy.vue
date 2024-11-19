@@ -3,6 +3,7 @@ import { onMounted, computed } from "vue";
 import { loadScript } from "./helpers/loadScript";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { loadStore, useStoreState } from "./composables/useStoreState";
+import { usePurchaseInfo } from "./composables/usePurchaseInfo";
 import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
 import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
@@ -10,10 +11,14 @@ import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
 import { useData } from "vitepress";
+import { z } from "zod";
 
 const { isDark } = useData();
 const log = useLogger();
 const store = useStoreState();
+const purchaseInfo = usePurchaseInfo();
+
+
 const isLizhi = computed(() =>
   config.lizhi.countries.includes(store.countryCode.value),
 );
@@ -37,28 +42,85 @@ async function initPaddle() {
   }
   Paddle.Setup({
     vendor: config.paddle.vendorId,
-    eventCallback: (args) => {
+    eventCallback: async (args) => {
       log("Paddle event", args);
+      if (args.event === "Checkout.Complete") {
+        checkoutComplete(args);
+      }
     },
   });
+}
+
+function checkoutComplete(args) {
+  const eventData = z
+    .object({
+      checkout: z.object({
+        passthrough: z.string().optional(),
+      }),
+      user: z.object({
+        email: z.string(),
+        country: z.string(),
+      }),
+    })
+    .safeParse(args.eventData);
+
+  if (!eventData.success) {
+    log("Error parsing checkout data", eventData.error);
+    return;
+  }
+
+  let passthrough_obj;
+  try {
+    passthrough_obj = JSON.parse(eventData.data.checkout.passthrough);
+  } catch (e) {
+    log("Error parsing passthrough data", e);
+  }
+  passthrough_obj = z
+    .object({
+      flow_id: z.string().min(24).optional(),
+    })
+    .safeParse(passthrough_obj);
+  if (!passthrough_obj.success) {
+    log("Error getting passthrough data", passthrough_obj.error);
+    return;
+  }
+
+  if (!passthrough_obj.data.flow_id) {
+    log("No flow_id in passthrough data");
+    return;
+  }
+
+  // redirect
+  purchaseInfo.flowId.value = passthrough_obj.data.flow_id;
+  purchaseInfo.userEmail.value = eventData.data.user.email;
+  purchaseInfo.userCountry.value = eventData.data.user.country;
+  window.location.href = "/purchase-complete";
+}
+
+async function generateRandomKey() {
+  if (window.crypto) {
+    return window.crypto.randomUUID();
+  }
 }
 
 async function openPaddleCheckout(product) {
   await initPaddle();
   const coupon = readParams().get("coupon") ?? null;
   const email = readParams().get("email") ?? null;
-  log("Coupon", coupon);
-  if (sandbox) {
-    product = config.paddle.sandboxProductId
-  }   
+  log({ coupon, email });
   log("Opening Paddle checkout");
-  setTimeout(() => {
+  setTimeout(async () => {
     Paddle.Checkout.open({
-      product,
+      product: sandbox ? config.paddle.sandboxProductId : product,
       coupon,
-      email,
+      email: sandbox ? "pcweb.testing@pilotmoon.com" : email,
+      country: sandbox ? "GB" : null,
+      postcode: sandbox ? "SW1 1AA" : null,
       allowQuantity: false,
       displayModeTheme: isDark.value ? "dark" : "light",
+      passthrough: JSON.stringify({
+        flow_id: await generateRandomKey(),
+      }),
     });
   }, 200);
 }

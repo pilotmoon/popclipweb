@@ -18,7 +18,7 @@ If you're having a problem, please read the [Troubleshooting](/kb/troubleshootin
 
 ## :wave: Email
 
-To contact the developer directly, email Nick Moore at [support@pilotmoon.com](mailto:support@pilotmoon.com?subject=PopClip%20Feedback&body=Here's%20how%20I%20feel%20about%20PopClip:%0A%0A).
+To contact the developer directly, email Nick Moore at <SupportEmailLink subject="PopClip Feedback" body="Here's how I feel about PopClip:"/>.
 
 ## :speech_balloon: Forum
 
