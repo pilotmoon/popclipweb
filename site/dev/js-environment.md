@@ -128,6 +128,7 @@ available in a browser environment:
 - [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
   [clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
 - [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone)
+- [TextEncoder](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder) (`encode()` method only, `utf-8` encoding only).
 
 Additionally, from the Node.js environment:
 
@@ -153,10 +154,10 @@ app itself, and are available to load by scripts. These are:
 | js-yaml                    | 4.1.0   | YAML parser                    |
 | linkedom                   | 0.16.8  | DOM implementation             |
 | linkifyjs                  | 4.1.3   | Detect web links in text       |
+| oauth-1.0a                 | 2.2.6   | OAuth 1.0a library             |
 | rot13-cipher               | 1.0.0   | ROT13 cipher                   |
 | sanitize-html              | 2.12.1  | HTML sanitizer                 |
-| turndown                   | 7.1.2   | HTML to Markdown converter     |
-| typescript                 | 5.4.2   | TypeScript transpiler & tools  |
+| turndown                   | 7.1.2   | HTML to Markdown converter     |  
 
 Library modules may be loaded by name, for example:
 
