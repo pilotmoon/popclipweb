@@ -29,14 +29,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - TypeScript sources are now transpiled with [sucrase](https://www.npmjs.com/package/sucrase), instead of the full [typescript](https://www.npmjs.com/package/typescript) library. This reduces the size of the PopClip application by nearly 1MB.
 - When calling PopClip from the command line (to use the JavaScript test harness), it now prints usage information if missing or incorrect arguments are provided, instead of ignoring them.
 
-- ### Added
+### Added
 
 - Added `oauth-1.0a` to built-in NPM modules.
 - Added [util.hmac()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#hmac) function for HMAC calculation (useful for extensions that need to use OAuth 1.0a).
 - Added [util.getRandomValues()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getRandomValues) and [util.randomUuid()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#randomUuid).
-- The `popclip.openUrl()` method now has an `activate` option to control whether the target application is brought to the front. Default is `true`.
-- The `popclip.openUrl()` method now now can accept a [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL) object instead of a string. When a URL object is passed, the URL is serialized internally with `%20` instead of `+ for spaces. This solves a [mildly annoying pain-point](https://github.com/pilotmoon/PopClip-Extensions/blob/39e72253906bb5c09f523d1239b24e297fa323e7/source/Craft.popclipext/Config.ts#L43) for extensions that use URL objects to construct URLs.
-- The `popclip.copyText()` method now has a `notify` option to control whether the "Copied" indicator is shown when the text is copied. Default is `true`.
+- The [popclip.openUrl()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openUrl) method:
+  - now has an `activate` option to control whether the target application is brought to the front. Default is `true`.
+  - can now accept a [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL) object instead of a string. When a URL object is passed, the URL is serialized internally with `%20` instead of `+ for spaces. This solves a [mildly annoying pain-point](https://github.com/pilotmoon/PopClip-Extensions/blob/39e72253906bb5c09f523d1239b24e297fa323e7/source/Craft.popclipext/Config.ts#L43) for extensions that use URL objects to construct URLs.
+- The [popclip.copyText()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#copyText) method now has a `notify` option to control whether the "Copied" indicator is shown when the text is copied. Default is `true`.
 
 ## PopClip 2024.5.2 (4615)
 
