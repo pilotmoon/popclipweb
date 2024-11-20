@@ -54,8 +54,7 @@ Older versions of PopClip are available for older operating systems. See the
 When you first install the Standalone edition of PopClip, it operates in free
 trial mode. The free trial mode includes all features, but after you have used
 250 PopClip actions it will nag you to buy the app. You can
-[buy a license key](/buy) to unlock the app and remove the nagging. The Mac App
-Store and Setapp editions do not have a free trial mode.
+[buy a license key](/buy) to unlock the app and remove the nagging.
 
 ### Registering the license key
 
