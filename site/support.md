@@ -18,7 +18,7 @@ If you're having a problem, please read the [Troubleshooting](/kb/troubleshootin
 
 ## :wave: Email
 
-To contact the developer directly, email Nick Moore at <SupportEmailLink subject="PopClip Feedback" body="Here's how I feel about PopClip:"/>.
+To contact the developer directly, email Nick Moore at&ensp;<SupportEmailLink subject="PopClip Feedback" body="Here's how I feel about PopClip:"/>.
 
 ## :speech_balloon: Forum
 

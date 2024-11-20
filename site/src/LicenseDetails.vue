@@ -115,14 +115,14 @@ function licenseInfoString() {
   if (licenseKey.value.description) {
     info += `License type: ${licenseKey.value.description}\n`;
   }
+  if (licenseKey.value.expiryDate) {
+    info += `Updates until: ${formatDate(licenseKey.value.expiryDate)}\n`;
+  }
   if (licenseKey.value.date) {
     info += `Purchase date: ${formatDate(licenseKey.value.date)}\n`;
   }
   if (licenseKey.value.order) {
     info += `Purchase ref.: ${licenseKey.value.order}${licenseKey.value.origin ? ` (${licenseKey.value.origin})` : ""}\n`;
-  }
-  if (licenseKey.value.expiryDate) {
-    info += `Updates until: ${formatDate(licenseKey.value.expiryDate)}\n`;
   }
   return info;
 }
@@ -165,7 +165,7 @@ function kaboom() {
       <h1>Session Expired</h1>
       <p>Your session has expired because you closed the browser tab or window.</p>
       <p>If you bought a license key, it will have been sent to to the email address you provided at checkout.</p>
-      <p>If you need any help, please contact <SupportEmailLink />.</p>
+      <p>If you need any help, please contact&ensp;<SupportEmailLink />.</p>
     </div>
     <div v-else-if="state===State.Loading" style="text-align: center; padding-top: 0;">      
       <VueSpinnerGears color="var(--vp-c-text-2)" size="50" style="display: inline-block"/>
@@ -189,15 +189,15 @@ function kaboom() {
           <li v-if="licenseKey.name" ><span class=label>Name:</span> <span class="data">{{ licenseKey.name }}</span></li>
           <li v-if="licenseKey.email" ><span class=label>Email:</span> <span class="data">{{ licenseKey.email }}</span></li>
           <li v-if="licenseKey.description" ><span class=label>License type:</span> <span class="data">{{ licenseKey.description }}</span></li>
-          <li v-if="licenseKey.date" ><span class=label>Purchase date:</span> <span class="data">{{ formatDate(licenseKey.date) }}</span></li>
-          <li v-if="licenseKey.order" ><span class=label>Purchase ref.:</span> <span class="data">{{ licenseKey.order }}<span v-if="licenseKey.origin"> ({{ licenseKey.origin }})</span></span></li>
           <li v-if="licenseKey.expiryDate" ><span class=label>Updates until:</span> <span class="data">{{ formatDate(licenseKey.expiryDate) }}</span></li>
+          <li v-if="licenseKey.date" ><span class=label>Purchase date:</span> <span class="data">{{ formatDate(licenseKey.date) }}</span></li>
+          <li v-if="licenseKey.order" ><span class=label>Purchase ref.:</span> <span class="data">{{ licenseKey.order }}<span v-if="licenseKey.origin"> ({{ licenseKey.origin }})</span></span></li>          
         </ul>
         <AaButton :href=registerLink() size=big>Activate License</AaButton>            
       </div>
       
       <h3>Changes</h3>      
-      <p>If you want to change the registered name or email, please contact <SupportEmailLink subject="PopClip License Enquiry" :body="wrapInfo(licenseInfoString(), 'License Details')" />.</p>
+      <p>If you want to change the registered name or email, please contact&ensp;<SupportEmailLink subject="PopClip License Enquiry" :body="wrapInfo(licenseInfoString(), 'License Details')" />.</p>
       <h3>License Key File</h3>
       <p><DownloadButton size=smaller theme=outline :href=licenseFileLink() text="Download License Key File":text=licenseFileName()></DownloadButton></p>
       <p>To save a backup of your license key, download the file to your computer. Double-click the file to activate it.</p>
