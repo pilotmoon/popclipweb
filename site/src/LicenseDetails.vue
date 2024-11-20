@@ -181,8 +181,8 @@ function kaboom() {
       </pre>
     </div>
     <div v-else-if="state===State.Done">
-      <h1><button id="party" @click="kaboom">🎉</button> Thank you for your purchase</h1>
-      <p>You have successfully purchased PopClip. Thank you for your support!</p>         
+      <h1>Thank you for your purchase</h1>
+      <p>You have successfully purchased PopClip. <button id="party" @click="kaboom">🎉</button> Thank you for your support!</p>         
       <h2>Your PopClip License Key</h2> 
       <div class="license">
         <ul class="details-panel info custom-block">
