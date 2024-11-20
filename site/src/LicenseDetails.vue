@@ -122,7 +122,7 @@ function licenseInfoString() {
     info += `Purchase ref.: ${licenseKey.value.order}${licenseKey.value.origin ? ` (${licenseKey.value.origin})` : ""}\n`;
   }
   if (licenseKey.value.expiryDate) {
-    info += `Expiry date: ${formatDate(licenseKey.value.expiryDate)}\n`;
+    info += `Updates until: ${formatDate(licenseKey.value.expiryDate)}\n`;
   }
   return info;
 }
@@ -191,7 +191,7 @@ function kaboom() {
           <li v-if="licenseKey.description" ><span class=label>License type:</span> <span class="data">{{ licenseKey.description }}</span></li>
           <li v-if="licenseKey.date" ><span class=label>Purchase date:</span> <span class="data">{{ formatDate(licenseKey.date) }}</span></li>
           <li v-if="licenseKey.order" ><span class=label>Purchase ref.:</span> <span class="data">{{ licenseKey.order }}<span v-if="licenseKey.origin"> ({{ licenseKey.origin }})</span></span></li>
-          <li v-if="licenseKey.expiryDate" ><span class=label>Expiry date:</span> <span class="data">{{ formatDate(licenseKey.expiryDate) }}</span></li>
+          <li v-if="licenseKey.expiryDate" ><span class=label>Updates until:</span> <span class="data">{{ formatDate(licenseKey.expiryDate) }}</span></li>
         </ul>
         <AaButton :href=registerLink() size=big>Activate License</AaButton>            
       </div>
