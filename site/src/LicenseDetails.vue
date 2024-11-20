@@ -186,13 +186,15 @@ function kaboom() {
       <h2>Your PopClip License Key</h2> 
       <div class="license">
         <ul class="details-panel info custom-block">
-          <li v-if="licenseKey.name" ><span class=label>Name:</span> <span class="data">{{ licenseKey.name }}</span></li>
-          <li v-if="licenseKey.email" ><span class=label>Email:</span> <span class="data">{{ licenseKey.email }}</span></li>
+          <li><span class=label>Name:</span> <span class="data">{{ licenseKey.name }}</span></li>
+          <li><span class=label>Email:</span> <span class="data">{{ licenseKey.email }}</span></li>
           <li v-if="licenseKey.description" ><span class=label>License type:</span> <span class="data">{{ licenseKey.description }}</span></li>
-          <li v-if="licenseKey.expiryDate" ><span class=label>Updates until:</span> <span class="data">{{ formatDate(licenseKey.expiryDate) }}</span></li>
-          <!-- <li v-if="licenseKey.date" ><span class=label>Purchase date:</span> <span class="data">{{ formatDate(licenseKey.date) }}</span></li> -->
-          <!-- <li v-if="licenseKey.order" ><span class=label>Order #:</span> <span class="data">{{ licenseKey.order }}<span v-if="licenseKey.origin"> ({{ licenseKey.origin }})</span></span></li>           -->
+          <li v-if="licenseKey.expiryDate" ><span class=label>Updates until:</span> <span class="data">{{ formatDate(licenseKey.expiryDate) }}</span></li>          
         </ul>
+        <div class="extra-info">
+          <span><span class=label>Purchase date:</span> <span class="data">{{ formatDate(licenseKey.date) }}</span></span> /
+          <span><span class=label>Order #:</span> <span class="data">{{ licenseKey.order }} ({{ licenseKey.origin }})</span></span>
+        </div>
         <AaButton :href=registerLink() size=big>Activate License</AaButton>            
       </div>
       
@@ -228,5 +230,9 @@ ul.details-panel li span.label {
 }
 ul.details-panel li span.data {
   font-weight: normal;
+}
+div.extra-info {
+  margin-bottom: 1em;
+  color: var(--vp-c-text-2);
 }
 </style>
