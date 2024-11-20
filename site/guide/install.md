@@ -57,7 +57,7 @@ trial mode. The free trial mode includes all features, but after you have used
 [buy a license key](/buy) to unlock the app and remove the nagging. The Mac App
 Store and Setapp editions do not have a free trial mode.
 
-#### Registering the license key
+### Registering the license key
 
 Your license key will be delivered to you as file whose name ends with
 `.popcliplicense`. Save the license key file to your Mac and double click it.
