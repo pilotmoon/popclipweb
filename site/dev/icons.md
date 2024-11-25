@@ -213,7 +213,7 @@ icon is drawn.
 | `flip-y`           | Flip the icon vertically.                                                                                                                                                    |
 | `move-x=<percent>` | Move the icon horizontally by the specified distance, expressed as percentage of the icon's width. For example `move-x=10` to move 10% right or `move-x=-5` to move 5% left. |
 | `move-y=<percent>` | Move the icon vertically by the specified distance, expressed as percentage of the icon's height.                                                                            |
-| `scale=<percent>`  | Adjust the scale at which the icon is drawn. For example `scale=120` to enlarge to 100%, or `scale=90` to shrink to 90%.                                                     |
+| `scale=<percent>`  | Adjust the scale at which the icon is drawn. For example `scale=120` to enlarge to 120%, or `scale=90` to shrink to 90%.                                                     |
 | `rotate=<degrees>` | Rotate the icon by the specified number of degrees. For example `rotate=90` to rotate 90 degrees anticlockwise.                                                              |
 
 Examples:
