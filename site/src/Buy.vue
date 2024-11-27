@@ -217,14 +217,16 @@ function trackBuy(button) {
     </div>
     <div v-if="isLizhi" class="danger custom-block">
         <p class="custom-block-title">Warning: Avoid 🇨🇳 Chinese Scam Sellers!</p>
-        <p>Please not that the <b>only authorized company</b> to sell PopClip licenses in China is <b>DIGITALYCHEE (数码荔枝)</b>. Their official websites are:
+        <p>Please note that the <b>only authorized company</b> to sell PopClip licenses in China is <b>DIGITALYCHEE (数码荔枝)</b>. Their official websites are:
           ✅ <a href="https://lizhi.shop">lizhi.shop</a>,
           ✅ <a href="https://digitalychee.taobao.com">digitalychee.taobao.com</a>.
         </p>
           
           <p>❌🙅 Any other seller offering a license key is unauthorized.
-            The seller has obtained a single license key and sold it to multiple individuals, keeping all your money without paying me.
-            All such discovered license keys will be canceled.
+            The seller will claim that the license is genuine, but in fact they obtained a single license key and sold it to multiple individuals.
+            This is in violation of the terms of sale. 
+            The seller keeps all your money and does not pay me.
+            All such license keys discovered will be canceled.
             For more information, please see the <a href="/ipr-china">Intellectual Property Rights Statement</a>.
         </p>
     </div>   
