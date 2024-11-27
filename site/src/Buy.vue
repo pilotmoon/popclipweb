@@ -18,7 +18,6 @@ const log = useLogger();
 const store = useStoreState();
 const purchaseInfo = usePurchaseInfo();
 
-
 const isLizhi = computed(() =>
   config.lizhi.countries.includes(store.countryCode.value),
 );
@@ -190,7 +189,7 @@ function trackBuy(button) {
                 <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_lifetime?.displayPrice ?? "") }}</span>
                 <span v-if="store.paddleProducts.value.popclip_lifetime?.isTaxed" :class="$style.tax">+ tax</span>
             </div>
-            <div v-if="store.paddleProducts.value.popclip_lifetime?.message" :class="$style.priceMessage">
+            <div v-if="store.paddleProducts.value.popclip_lifetime?.message && !isLizhi" :class="$style.priceMessage">
                 <span>{{ store.paddleProducts.value.popclip_lifetime?.message  }}</span>                
             </div>
             <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon" :class="$style.couponInfo">
@@ -216,6 +215,17 @@ function trackBuy(button) {
         {{ store.isLoadedForCoupon !== null ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` :
             `Loading prices...` }}
     </div>
+    <div v-if="isLizhi" class="warning custom-block">
+        <p class="custom-block-title">Warning: Avoid fraudulent sellers in 🇨🇳 China!</p>
+        <p>Please not that the <b>ONLY</b> Chinese company authorized to sell PopClip licenses is <b>DIGITALYCHEE (数码荔枝)</b>, at the following websites:
+          ✅ <a href="https://lizhi.shop">lizhi.shop</a> and 
+          ✅ <a href="https://digitalychee.taobao.com">digitalychee.taobao.com</a>.
+        </p>
+          
+          <p>❌🙅 If you buy a license key from any other seller it is fraudulent and
+          invalid. For more information please see <a href="/ipr-china"> Intellectual Property Rights Statement</a>.
+        </p>
+    </div>   
 </template>
 
 <style module>

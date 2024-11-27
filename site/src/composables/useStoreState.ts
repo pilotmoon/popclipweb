@@ -20,8 +20,8 @@ export const useStoreState = createGlobalState(() => {
   //   "popclip-store-masUrl",
   //   getMacAppStoreUrl(config.mas.appId, config.mas.slug),
   // );
-  const lizhiPrice = useStorage("popclip-store-lizhiPrice", config.lizhi.price);
-  const lizhiUrl = useStorage("popclip-store-lizhiUrl", config.lizhi.storeUrl);
+  const lizhiPrice = config.lizhi.price;
+  const lizhiUrl = config.lizhi.storeUrl;
   return {
     countryCode,
     countryName,

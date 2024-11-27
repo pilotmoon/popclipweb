@@ -209,7 +209,8 @@ apply to that purchase.
 
 - Worldwide (subscriptions): Setapp (<https://setapp.com>)
 
-- In China: Digitalychee (<https://lizhi.io>) - [certificate](/lizhi)
+- In China: DIGITALYCHEE (<https://lizhi.io>). See: [Authorization Statement](/lizhi) and [Intellectual Property Rights
+  Statement](/ipr-china).
 
 <hr style="margin: 3em 0;">
 
