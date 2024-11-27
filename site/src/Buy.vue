@@ -215,15 +215,17 @@ function trackBuy(button) {
         {{ store.isLoadedForCoupon !== null ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` :
             `Loading prices...` }}
     </div>
-    <div v-if="isLizhi" class="warning custom-block">
+    <div v-if="isLizhi" class="danger custom-block">
         <p class="custom-block-title">Warning: Avoid fraudulent sellers in 🇨🇳 China!</p>
         <p>Please not that the <b>ONLY</b> Chinese company authorized to sell PopClip licenses is <b>DIGITALYCHEE (数码荔枝)</b>, at the following websites:
           ✅ <a href="https://lizhi.shop">lizhi.shop</a> and 
           ✅ <a href="https://digitalychee.taobao.com">digitalychee.taobao.com</a>.
         </p>
           
-          <p>❌🙅 If you buy a license key from any other seller it is fraudulent and
-          invalid. For more information please see <a href="/ipr-china"> Intellectual Property Rights Statement</a>.
+          <p>❌🙅 Any other seller offering a license key is unauthorized.
+            The seller has obtained a single license key and sold it to multiple individuals, keeping all the money without paying me.
+            All such discovered license keys will be canceled.
+            For more information, please see the <a href="/ipr-china">Intellectual Property Rights Statement</a>.
         </p>
     </div>   
 </template>
