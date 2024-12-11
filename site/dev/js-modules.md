@@ -228,7 +228,7 @@ exports.actions = (input, options, context) => {
 ```typescript
 // #popclip dynamic example
 // { name: Dynamic Title, entitlements: [dynamic], lang: ts, module: true }
-export const actions: Action[] = (input, options, context) => {
+export const actions: PopulationFunction = (input, options, context) => {
   return [{
     title: `<${input.text.slice(0, 10)}>`,
     code: (input, options, context) => {
