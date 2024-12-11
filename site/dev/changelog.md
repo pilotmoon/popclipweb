@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 </div>
 
-## Beta (as at Build 4675)
+## Beta (as at Build 4685)
 
 ### Changed
 
@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - can now accept a [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL) object instead of a string. When a URL object is passed, the URL is serialized internally with `%20` instead of `+` for spaces. This solves a [mildly annoying pain-point](https://github.com/pilotmoon/PopClip-Extensions/blob/39e72253906bb5c09f523d1239b24e297fa323e7/source/Craft.popclipext/Config.ts#L43) for extensions that use URL objects to construct URLs.
 - The [popclip.copyText()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#copyText) method now has a `notify` option to control whether the "Copied" indicator is shown when the text is copied. Default is `true`.
 - JavaScript API now has a global `TextEncoder` class which acts as a shim approximating the standard Web API class. This improves compatibility with some NPM modules.
+- Added `isurl` [requirements](actions#the-requirements-array) key. This requires that the selected text is a single URL (as opposed to text *containing* a url, which the existing `url` key specifies). This makes the `popclip.input.isUrl` property added in version 2024.5 available to non-JavaScript extensions.
 
 ## PopClip 2024.5.2 (4615)
 
