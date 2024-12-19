@@ -2,29 +2,31 @@
 outline: deep
 titleTemplate: :title — PopClip Developer
 ---
+
 # Actions
 
-Action properties can be placed either in an `action` dictionary, in an `actions` array, or at the top level. Properties set at the top level will apply to all actions unless
-overridden in the individual action.
+Action properties can be placed either in an `action` dictionary, in an
+`actions` array, or at the top level. Properties set at the top level will apply
+to all actions unless overridden in the individual action.
 
 ::: details Example: Action properties at top level
 
 Consider this extension, which defines two actions:
 
 ```yaml
-#popclip 
+#popclip
 name: HTML Demo
 actions:
-- title: Action A
-  icon: iconA.png
-  capture html: true // [!code focus:2]
-  after: show-result
-  javascript: return "Hi from Action A - " + popclip.input.html
-- title: Action B
-  icon: iconB.png
-  capture html: true // [!code focus:2]
-  after: show-result
-  javascript: return "Hi from Action B - " + popclip.input.html
+  - title: Action A
+    icon: iconA.png
+    capture html: true // [!code focus:2]
+    after: show-result
+    javascript: return "Hi from Action A - " + popclip.input.html
+  - title: Action B
+    icon: iconB.png
+    capture html: true // [!code focus:2]
+    after: show-result
+    javascript: return "Hi from Action B - " + popclip.input.html
 ```
 
 Since the `capture html` and `after` properties are the same for both actions,
@@ -36,12 +38,12 @@ name: HTML Demo
 capture html: true // [!code focus:2]
 after: show-result
 actions:
-- title: Action A
-  icon: iconA.png
-  javascript: return "Hi from Action A - " + popclip.input.html
-- title: Action B
-  icon: iconB.png
-  javascript: return "Hi from Action B - " + popclip.input.html
+  - title: Action A
+    icon: iconA.png
+    javascript: return "Hi from Action A - " + popclip.input.html
+  - title: Action B
+    icon: iconB.png
+    javascript: return "Hi from Action B - " + popclip.input.html
 ```
 
 :::
@@ -56,7 +58,7 @@ Consider this extension, which defines a single action:
 ```yaml
 #popclip
 name: Stickies
-action: 
+action:
   service name: Make Sticky
   capture html: true
 ```
@@ -75,24 +77,25 @@ capture html: true
 
 ## Common properties
 
-The following keys define properties common to all action types. All properties are optional.
+The following keys define properties common to all action types. All properties
+are optional.
 
-| Key                  | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| -------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`              | String (Localizable) | The title is displayed on the action button if there is no icon. For extensions with icons, the title is displayed in the tooltip. If omitted, the action will take the extension name as its title.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `icon`               | String               | The icon to show on the action button. See [Icons](./icons) for the icon specification format. If omitted, the action will take the extension icon as its icon. To explicitly specify no icon, set this field to `null`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `identifier`         | String               | A string to identify this action. In shell script and AppleScript actions, the identifier is passed to the script. The script can use this to find out which action was pressed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Key                  | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| -------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`              | String (Localizable) | The title is displayed on the action button if there is no icon. For extensions with icons, the title is displayed in the tooltip. If omitted, the action will take the extension name as its title.                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `icon`               | String               | The icon to show on the action button. See [Icons](./icons) for the icon specification format. If omitted, the action will take the extension icon as its icon. To explicitly specify no icon, set this field to `null`.                                                                                                                                                                                                                                                                                                                                                                                              |
+| `identifier`         | String               | A string to identify this action. In shell script and AppleScript actions, the identifier is passed to the script. The script can use this to find out which action was pressed.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `regex`              | String               | A [Regular Expression](http://regularexpressions.info/) to be applied to the selected text. The action will appear only if the text matches the regex, and the matching part of the text is passed to the action. The regex engine follows the [ICU specification](https://unicode-org.github.io/icu/userguide/strings/regexp.html). _Note: There is no need to use your own regex to match URLs, email addresses or file paths. Use one of the `requirements` keys `url`, `urls`, `email`, `emails` or `path` instead. Also be careful to avoid badly crafted regexes which never terminate against certain inputs._ |
-| `requirements`       | Array                | Array consisting of zero or more of the strings listed in [the `requirements` array](#the-requirements-array). All the requirements in the array must be satisfied for the action to appear. If the field is omitted, `[text]` is used by default. To specify no requirements, supply an empty array: `[]`.                                                                                                                                                                                                                                                                                                                                                                             |
-| `excluded apps`      | Array                | Array of bundle identifiers of applications. The action will not appear when PopClip is being used in any of the specified apps.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `required apps`      | Array                | Array of bundle identifiers of applications. The action will only appear when PopClip is being used in one of the specified apps. _Note: This field does not make PopClip do a check to see if the app is present on the computer. For that, use the `app` field._                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `before`             | String               | String to indicate an action PopClip should take _before_ performing the main action. See [The `before` and `after` strings](#the-before-and-after-strings).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `after`              | String               | String to indicate an action PopClip should take _after_ performing the main action. See [The `before` and `after` strings](#the-before-and-after-strings).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `app` or `apps`      | Dictionary or Array  | Dictionary, or array of dictionaries, describing the app(s) or website(s) associated with this action. You can, optionally, specify that the app must be present on the system for the action to work. See [The `app` dictionary](#the-app-dictionary).                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `stay visible`       | Boolean              | If `true`, the PopClip popup will not disappear after the user clicks the action. (An example is the Formatting extension.) Default is `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `capture html`       | Boolean              | If `true`, PopClip will attempt to capture HTML and Markdown for the selection. PopClip makes its best attempt to extract HTML, first of all from the selection's HTML source itself, if available. Failing that, it will convert any RTF text to HTML. And failing that, it will generate an HTML version of the plain text. It will then generate Markdown from the final HTML. Default is `false`.                                                                                                                                                                                                                                                                                   |
-| `restore pasteboard` | Boolean              | If true, then PopClip will restore the pasteboard to its previous contents after pasting text in the `paste-result` after-step. Default is `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Type-specific keys   | Varies               | See: [Shortcut actions](./shortcut-actions), [Service actions](./service-actions), [URL actions](./url-actions). [Key Press actions](./key-press-actions), [Shell Script actions](./shell-script-actions), [AppleScript actions](./applescript-actions), [JavaScript actions](./js-actions).                                                                                                                                                                                                                                                                                                                                                                                            |
+| `requirements`       | Array                | Array consisting of zero or more of the strings listed in [the `requirements` array](#the-requirements-array). All the requirements in the array must be satisfied for the action to appear. If the field is omitted, `[text]` is used by default. To specify no requirements, supply an empty array: `[]`.                                                                                                                                                                                                                                                                                                           |
+| `excluded apps`      | Array                | Array of bundle identifiers of applications. The action will not appear when PopClip is being used in any of the specified apps.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `required apps`      | Array                | Array of bundle identifiers of applications. The action will only appear when PopClip is being used in one of the specified apps. _Note: This field does not make PopClip do a check to see if the app is present on the computer. For that, use the `app` field._                                                                                                                                                                                                                                                                                                                                                    |
+| `before`             | String               | String to indicate an action PopClip should take _before_ performing the main action. See [The `before` and `after` strings](#the-before-and-after-strings).                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `after`              | String               | String to indicate an action PopClip should take _after_ performing the main action. See [The `before` and `after` strings](#the-before-and-after-strings).                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `app` or `apps`      | Dictionary or Array  | Dictionary, or array of dictionaries, describing the app(s) or website(s) associated with this action. You can, optionally, specify that the app must be present on the system for the action to work. See [The `app` dictionary](#the-app-dictionary).                                                                                                                                                                                                                                                                                                                                                               |
+| `stay visible`       | Boolean              | If `true`, the PopClip popup will not disappear after the user clicks the action. (An example is the Formatting extension.) Default is `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `capture html`       | Boolean              | If `true`, PopClip will attempt to capture HTML and Markdown for the selection. PopClip makes its best attempt to extract HTML, first of all from the selection's HTML source itself, if available. Failing that, it will convert any RTF text to HTML. And failing that, it will generate an HTML version of the plain text. It will then generate Markdown from the final HTML. Default is `false`.                                                                                                                                                                                                                 |
+| `restore pasteboard` | Boolean              | If true, then PopClip will restore the pasteboard to its previous contents after pasting text in the `paste-result` after-step. Default is `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Type-specific keys   | Varies               | See: [Shortcut actions](./shortcut-actions), [Service actions](./service-actions), [URL actions](./url-actions). [Key Press actions](./key-press-actions), [Shell Script actions](./shell-script-actions), [AppleScript actions](./applescript-actions), [JavaScript actions](./js-actions).                                                                                                                                                                                                                                                                                                                          |
 
 <!-- ### Action that does nothing
 
@@ -114,26 +117,27 @@ use for this is left as an exercise for the reader. -->
 These are the values supported by the `requirements` array. Additionally, you
 can prefix any requirement with `!` to negate it.
 
-| Value        | Description                                                                                                                                                                                                                      |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `text`       | One or more characters of text must be selected.                                                                                                                                                                                 |
-| `copy`       | Synonym for `text` (for backward compatibility).                                                                                                                                                                                 |
-| `cut`        | Text must be selected and the app's Cut command must be available.                                                                                                                                                               |
-| `paste`      | The app's Paste command must be available.                                                                                                                                                                                       |
-| `url`        | The text must contain exactly one web URL (http or https). _(see side effects below)_                                                                                                                                            |
-| `urls`       | The text must contain one or more web URLs (https or https).                                                                                                                                                                     |
-| `email`      | The text must contain exactly one email address. _(see side effects below)_                                                                                                                                                      |
-| `emails`     | The text must contain one or more email addresses.                                                                                                                                                                               |
-| `path`       | The text must be a local file path, and it must exist on the local file system. _(see side effects below)_                                                                                                                       |
-| `formatting` | The selected text control must support formatting. (PopClip makes its best guess about this, erring on the side of a false positive.)                                                                                            |
-| `option-foo=bar` | The option with identifier `foo` must be equal to the string `bar`. This mechanism allows actions to be enabled and disabled via options. Boolean option values map to the strings `1` and `0`.|
+| Value            | Description                                                                                                                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `text`           | One or more characters of text must be selected.                                                                                                                                                |
+| `copy`           | Synonym for `text` (for backward compatibility).                                                                                                                                                |
+| `cut`            | Text must be selected and the app's Cut command must be available.                                                                                                                              |
+| `paste`          | The app's Paste command must be available.                                                                                                                                                      |
+| `url`            | The text must _contain_ exactly one web URL (http or https). _(see side effects below)_                                                                                                         |
+| `isurl`          | The text must _be_ a valid web URL (http or https), with no other text apart from whitespace. _(see side effects below)_                                                                        |
+| `urls`           | The text must contain one or more web URLs (https or https).                                                                                                                                    |
+| `email`          | The text must contain exactly one email address. _(see side effects below)_                                                                                                                     |
+| `emails`         | The text must contain one or more email addresses.                                                                                                                                              |
+| `path`           | The text must be a local file path, and it must exist on the local file system. _(see side effects below)_                                                                                      |
+| `formatting`     | The selected text control must support formatting. (PopClip makes its best guess about this, erring on the side of a false positive.)                                                           |
+| `option-foo=bar` | The option with identifier `foo` must be equal to the string `bar`. This mechanism allows actions to be enabled and disabled via options. Boolean option values map to the strings `1` and `0`. |
 
 ::: info Note on side effect of `requirements` field
 
-When using a `url`, `email` or `path` requirement, the text passed to the action
+When using a `url`, `isurl`, `email` or `path` requirement, the text passed to the action
 will be modified.
 
-- For `url` requirement, only the matching URL will be passed, and it will be
+- For `url` and `isurl` requirements, only the matching URL will be passed, and it will be
   expanded to its full form, with `https://` prepended if no scheme is
   specified. For example, if the selected text is `go to apple.com`, the text
   passed to the action will be `https://apple.com`.
@@ -155,8 +159,8 @@ find the modified text as `popclip.input.matchedText` and the full text as
 
 ### The `before` and `after` strings
 
-The `cut`, `copy`, `paste` and `paste-plain` values can be used as the `before` string. All the
-values can be used as the `after` string.
+The `cut`, `copy`, `paste` and `paste-plain` values can be used as the `before`
+string. All the values can be used as the `after` string.
 
 | Value            | Description                                                                                                                                                                           |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
