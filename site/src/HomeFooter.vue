@@ -6,7 +6,7 @@ import InfoBox from './InfoBox.vue'
     <div class="container">
         <div class="HomeFooter">
             <div style="padding-bottom: 16px;" ><InfoBox /></div>
-            <Setapp />
+            <!-- <Setapp /> -->
         </div>        
     </div>
 </template>
