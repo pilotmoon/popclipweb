@@ -5025,7 +5025,7 @@
                   var l = this.polyglot.t("content", {
                       setappPricePerMonth: 9.99,
                       appName: this.appName,
-                      setappAppsCount: 240,
+                      setappAppsCount: 250,
                     }),
                     f = this.polyglot.t("cta");
                   return ((t, ...e) => new L(t, e, "html", Q))(
