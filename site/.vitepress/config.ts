@@ -14,6 +14,9 @@ export default defineConfig({
     hostname: "https://www.popclip.app",
   },
   themeConfig: {
+    footer: {      
+      copyright: 'Copyright © 2011-2025 Nicholas Moore, <a href="https://pilotmoon.com/about/">Pilotmoon Software</a>',
+    },
     search: {
       provider: "algolia",
       options: {

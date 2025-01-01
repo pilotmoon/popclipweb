@@ -142,8 +142,11 @@ other projects. So the full list would be much longer.
 
 ## Legal notices
 
+**PopClip software application**<br>
+Copyright © 2011-2025 Nicholas Moore, Pilotmoon Software.<br> All rights reserved.
+
 **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**<br>
-Copyright © 2023-2024 Nicholas Moore.<br> This work is licensed under a
+Copyright © 2011-2025 Nicholas Moore, Pilotmoon Software.<br> This work is licensed under a
 [Creative Commons BY-SA 4.0 License](http://creativecommons.org/licenses/by-sa/4.0/).
 
-**PopClip &reg;** is a registered trademark of Nicholas Moore.
+**PopClip &reg;** is a registered trademark.
