@@ -209,7 +209,7 @@ apply to that purchase.
 
 - Worldwide (subscriptions): Setapp (<https://setapp.com>)
 
-- In China: DIGITALYCHEE (<https://lizhi.io>). See: [Authorization Statement](/DIGITALLYCHEE) and [Intellectual Property Rights
+- In China: DIGITALYCHEE (<https://lizhi.io>). See: [Authorization Statement](/DIGITALYCHEE) and [Intellectual Property Rights
   Statement](/ipr-china).
 
 <hr style="margin: 3em 0;">
