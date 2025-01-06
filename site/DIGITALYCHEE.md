@@ -8,6 +8,8 @@ next: false
 
 # DIGITALYCHEE Authorization Statement
 
+<img src="./media/digitalycheelogo.png" alt="DIGITALYCHEE Logo" width="200" style="margin-top: 32px" />
+
 ## 授权证明
 
 **Pilotmoon Software** 授权 **苏州荔枝数码科技有限公司** 为中国区官方合作伙伴，  
