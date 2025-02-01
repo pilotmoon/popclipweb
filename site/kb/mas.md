@@ -16,9 +16,10 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 ## How to migrate
 
 1. Quit the MAS edition of PopClip, if it is running.
-2. Delete the MAS editition of PopClip from the `/Applications` folder by dragging it to the Trash.
-   (Do not use an app cleaner or uninstaller tool, as that will likely delete
-   your settings and extensions.)
+2. Use Finder to move the the MAS edition of PopClip from the
+   `/Applications` folder to the Trash. (Don't use
+   an app cleaner or uninstaller tool, as that will likely delete your settings
+   and extensions.)
 3. Download PopClip from the [download](/download) page, and unzip it.
 4. Put it in the `/Applications` folder.
 5. Run the new PopClip app. It will detect your Mac App Store purchase and
@@ -39,6 +40,19 @@ of PopClip's settings menu.
 
 ![](./media/shot-mas-license-2.jpg "Standalone edition recognizing the MAS purchase")
 
+## ...I get this weird macOS error though
+
+> The operation can't be completed because some items had to be skipped. For
+> each item, choose File > Get Info, make sure "Locked" is deselected, and then
+> check the Sharing & Permissions section. When you are sure the items are
+> unlocked and not designated as Read Only or No Access, try again.
+
+![](./media/shot-operation-locked-error.jpg "Error message when replacing the PopClip app without deleting the old one first")
+
+This Finder error occurs on macOS Sequoia if you ignore step 2 of the
+instructions and try to drag the new app over the existing MAS edition without
+deleting it first. To avoid this error message you must manually trash the MAS edition first.
+
 ## ...but I don't have MAS PopClip already installed and it's not available in the store!
 
 ![](./media/shot-app-not-available.png#prefs "App not available? No problem, find it in your Account's purchased list.")
@@ -57,7 +71,7 @@ folder), and try again.
 After installing PopClip from the MAS, run it once, quit it, and then follow the
 steps in [How to migrate](#how-to-migrate) above.
 
-## Installing in future on a new Mac
+## ...but what about installing in future on a new Mac?
 
 You may be thinking that you have to mess about installing the MAS edition
 first, then the Standalone edition, whenever you install PopClip on a new Mac.
