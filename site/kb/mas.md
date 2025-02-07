@@ -16,10 +16,9 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 ## How to migrate
 
 1. Quit the MAS edition of PopClip, if it is running.
-2. Use Finder to move the the MAS edition of PopClip from the
-   `/Applications` folder to the Trash. (Don't use
-   an app cleaner or uninstaller tool, as that will likely delete your settings
-   and extensions.)
+2. Use Finder to move the the MAS edition of PopClip from the `/Applications`
+   folder to the Trash. (Don't use an app cleaner or uninstaller tool, as that
+   will likely delete your settings and extensions.)
 3. Download PopClip from the [download](/download) page, and unzip it.
 4. Put it in the `/Applications` folder.
 5. Run the new PopClip app. It will detect your Mac App Store purchase and
@@ -51,7 +50,8 @@ of PopClip's settings menu.
 
 This Finder error occurs on macOS Sequoia if you ignore step 2 of the
 instructions and try to drag the new app over the existing MAS edition without
-deleting it first. To avoid this error message you must manually trash the MAS edition first.
+deleting it first. To avoid this error message you must manually trash the MAS
+edition first.
 
 ## ...but I don't have MAS PopClip already installed and it's not available in the store!
 
@@ -73,7 +73,9 @@ steps in [How to migrate](#how-to-migrate) above.
 
 ## ...but the App Store is broken on my old version of macOS
 
-[The Mac App Store currently doesn't work on macOS 10.14 and below.](https://mjtsai.com/blog/2025/02/06/mac-app-store-broken-on-macos-10-14-and-earlier/) Use the free [Legacy OS License key](/download#license-key-for-legacy-macos).
+The Mac App Store
+[currently doesn't work on macOS 10.14 and below](https://mjtsai.com/blog/2025/02/06/mac-app-store-broken-on-macos-10-14-and-earlier/).
+Use the free [Legacy OS License key](/download#license-key-for-legacy-macos).
 
 ## ...but what about installing in future on a new Mac?
 
@@ -96,7 +98,7 @@ iCloud account on the new Mac.
 
 - **How will I get future updates?**<br>After migrating to the Standalone
   edition, you will receive updates automatically through the in-app update
-  mechanism. Make sure that "Check for updates" is enabled in the PopClip
+  mechanism. Make sure that "Check for updates" is enabled in PopClip
   preferences.
 
 - **Are there any differences between the MAS and Standalone editions?**
@@ -107,9 +109,20 @@ iCloud account on the new Mac.
 - **How can I tell which edition of PopClip I have?**<br>In the PopClip
   preferences window, the About pane shows the edition of PopClip you are using.
 
-- **Can I get a license key for the Standalone edition?**<br>License keys can be
-  purchased on the [buy](/buy) page. I am currently offering MAS customers a 50%
-  discount. Please email proof of your MAS purchase to my
-  [support email](/support).
+- **After migrating, what kind of license do I have exactly?**<br>For MAS
+  customers who have migrated to the Standalone edition, I will apply the
+  published [update policy](/terms#update-policy). In summary:
+
+  - _Purchased from MAS on or after January 1, 2023:_ This will be treated as
+    equivalent to a lifetime license for update purposes.
+
+  - _Purchased from MAS before January 1, 2023:_ I will release free updates at
+    my discretion. In the future, I may release an update that requires payment
+    from you.
+
+- **Can I buy a new license key for the Standalone edition?**<br>I am currently
+  offering all MAS customers a 50% discount on the Lifetime License, which can
+  be purchased on the [buy](/buy) page. Please send proof of your MAS purchase
+  to my [support email](/support).
 
 ![](./media/shot-2024-3-about.png "About pane for PopClip 2024.3, Standalone edition")
