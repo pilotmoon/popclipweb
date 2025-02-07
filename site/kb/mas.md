@@ -71,6 +71,10 @@ folder), and try again.
 After installing PopClip from the MAS, run it once, quit it, and then follow the
 steps in [How to migrate](#how-to-migrate) above.
 
+## ...but the App Store is broken on my old version of macOS
+
+[The Mac App Store currently doesn't work on macOS 10.14 and below.](https://mjtsai.com/blog/2025/02/06/mac-app-store-broken-on-macos-10-14-and-earlier/) Use the free [Legacy OS License key](/download#license-key-for-legacy-macos).
+
 ## ...but what about installing in future on a new Mac?
 
 You may be thinking that you have to mess about installing the MAS edition
