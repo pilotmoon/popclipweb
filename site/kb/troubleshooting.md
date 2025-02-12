@@ -7,6 +7,14 @@ aside: false
 This page lists common problems and their possible solutions, as well as known
 issues with specific apps.
 
+::: warning #1 tip: PopClip should be running from the `/Applications` folder.
+
+Before doing anything else, check if PopClip is running from your Applications
+folder. Not Desktop, Downloads or anywhere else. If it is not there, move it
+there.
+
+:::
+
 ## Solutions to common problems
 
 | Problem                                                          | Possible Solution                                                                                                                                                                                                                                                                                                                                                    |
@@ -31,7 +39,8 @@ issues with specific apps.
 | PopClip app launches but no user interface appears.              | You may be using an icon-hider app to hide PopClip's menu bar icon. Disable it or configure it not to hide PopClip. See [note](#a-note-about-icon-hider-apps).                                                                                                                                                                                                       |
 | PopClip has locked up / using 100% CPU.                          | Force Quit PopClip using Activity Monitor. If this happens repeatedly, please report it and any steps that cause the lock-up.                                                                                                                                                                                                                                        |
 | A "click" or "purr" sound when selecting text.                   | Check whether you are using either [Alfred](https://www.alfredapp.com/) or [LaunchBar](https://obdev.at/products/launchbar/index.html), and have the clipboard merging feature enabled. The way PopClip works is triggering this feature, so you will need to disable it. The checkbox is "Fast append selected text" in Alfred and "Enable ClipMerge" in LaunchBar. |
-| Can't set "Start at login"                                       | Quit PopClip and move it to the `/Applications` folder, if it is not there already. Then go to System Settings → Login Items → Open at Login. Delete any existing entry for PopClip from the list. Now try add PopClip again.                                                                                                                                        |
+| Keychain error when setting extension password or API key.       | This error may occur if the PopClip app package has become corrupted on disk, or if you are using a cracked version of PopClip. Download and install a fresh copy of latest official version of PopClip.                                                                                                                                                             |
+| Miscellanous issues                                              | Check whether your PopClip app is outside your `/Applications` folder. If it is not there, move it there.                                                                                                                                                                                                                                                            |
 
 ## App compatibility
 
