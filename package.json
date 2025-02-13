@@ -35,6 +35,7 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "1.9.0",
     "@types/js-yaml": "4.0.9",
     "@types/node": "20.4.7"
   }
