@@ -203,89 +203,103 @@ const filteredIndex = computed(() => {
 </script>
 
 <template>
-    <div :class="$style.Links"><a href="https://public.popclip.app/extensions/popclip.rss">RSS</a></div>
-    <h1>PopClip Extensions Directory</h1>
-    <div :class="$style.Directory">        
-        <div :class="$style.Header">
-            <div :class="$style.Control">
-                Arrange:
-                <ElRadioGroup v-model="arrange">
-                    <ElRadioButton label="categories">Categories</ElRadioButton>
-                    <ElRadioButton label="alpha">A–Z</ElRadioButton>
-                    <ElRadioButton label="newest">New</ElRadioButton>
-                    <ElRadioButton label="updated">Updated</ElRadioButton>
-                </ElRadioGroup>
-            </div>
-            <div :class="$style.Control">
-                Filter:
-                <ElInput v-model="filter" placeholder="Type to filter" :prefix-icon="IconFilter" />
-            </div>
-        </div>
-        <div :class="$style.Info">
-            Showing {{ filteredIndex.count }} of {{ total }} extensions
-            <ElTag v-if="filter" closable @close="filter = ''">Filter: {{ filter }}</ElTag>
-        </div>
-        <div v-for="{ title, extensions, link, linkText } in filteredIndex.index">
-            <h2>{{ title }}</h2>
-            <DirectoryEntry v-for="ext in extensions" :key="ext.identifier" :ext="ext" />
-            <span :class="$style.Link" v-if="link"><a :href="link">{{ linkText }}</a></span>
-        </div>
+  <div :class="$style.Links">
+    <a href="https://public.popclip.app/extensions/popclip.rss">RSS</a>
+  </div>
+  <h1>PopClip Extensions Directory</h1>
+  <div :class="$style.Directory">
+    <div :class="$style.Header">
+      <div :class="$style.Control">
+        Arrange:
+        <ElRadioGroup v-model="arrange">
+          <ElRadioButton label="categories">Categories</ElRadioButton>
+          <ElRadioButton label="alpha">A–Z</ElRadioButton>
+          <ElRadioButton label="newest">New</ElRadioButton>
+          <ElRadioButton label="updated">Updated</ElRadioButton>
+        </ElRadioGroup>
+      </div>
+      <div :class="$style.Control">
+        Filter:
+        <ElInput
+          v-model="filter"
+          placeholder="Type to filter"
+          :prefix-icon="IconFilter"
+        />
+      </div>
     </div>
+    <div :class="$style.Info">
+      Showing {{ filteredIndex.count }} of {{ total }} extensions
+      <ElTag v-if="filter" closable @close="filter = ''"
+        >Filter: {{ filter }}</ElTag
+      >
+    </div>
+    <div v-for="{ title, extensions, link, linkText } in filteredIndex.index">
+      <h2>{{ title }}</h2>
+      <DirectoryEntry
+        v-for="ext in extensions"
+        :key="ext.identifier"
+        :ext="ext"
+      />
+      <span :class="$style.Link" v-if="link"
+        ><a :href="link">{{ linkText }}</a></span
+      >
+    </div>
+  </div>
 </template>
 
 <style module>
 .Links {
-    /* margin-top: -24px; */
-    text-align: right;
+  /* margin-top: -24px; */
+  text-align: right;
 }
 
 @media (max-width: 768px) {
-    .Links  {
-        margin-top: -16px;
-    }
+  .Links {
+    margin-top: -16px;
+  }
 }
 
 .Links a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .Directory h2 {
-    border: none;
-    font-size: 1.2rem;
-    margin: 0.5em 0 0.25em 0;
-    padding: 0;
+  border: none;
+  font-size: 1.2rem;
+  margin: 0.5em 0 0.25em 0;
+  padding: 0;
 }
 
 .Header {
-    margin: 24px 0 16px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
+  margin: 24px 0 16px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .Control {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .Info {
-    display: flex;
-    justify-content: flex-start;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
 
-    font-size: 14px;
-    text-align: left;
-    color: var(--vp-c-text-2);
+  font-size: 14px;
+  text-align: left;
+  color: var(--vp-c-text-2);
 }
 
 .Link {
-    font-size: 14px;
+  font-size: 14px;
 }
 .Link a {
-    text-decoration: none;
+  text-decoration: none;
 }
 </style>

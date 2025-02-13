@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 /* This is ripped from VPButton in default theme */
 const props = defineProps<{
-  tag?: string
-  size?: 'smaller' | 'small' | 'medium' | 'big'
-  theme?: 'brand' | 'alt' | 'outline' | 'bare'
-  href?: string
-}>()
+  tag?: string;
+  size?: "smaller" | "small" | "medium" | "big";
+  theme?: "brand" | "alt" | "outline" | "bare";
+  href?: string;
+}>();
 
 const classes = computed(() => [
-  props.size ?? 'medium',
-  props.theme ?? 'brand'
-])
+  props.size ?? "medium",
+  props.theme ?? "brand",
+]);
 
 const component = computed(() => {
   if (props.tag) {
-    return props.tag
+    return props.tag;
   }
 
-  return props.href ? 'a' : 'button'
-})
+  return props.href ? "a" : "button";
+});
 </script>
 
 <template>
@@ -155,7 +155,7 @@ const component = computed(() => {
   background-color: transparent;
 }
 
-.Button.bare {  
+.Button.bare {
   border-color: transparent;
   color: var(--vp-c-text-2);
   background-color: transparent;

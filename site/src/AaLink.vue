@@ -47,22 +47,23 @@ const href = computed(() => {
 </script>
 
 <template>
-    <span class="IconLink" v-if=ghDisplay>
-        <GithubFilled class="GithubIcon" />
-        <a :href="href"><span v-html=ghDisplay /></a>
-    </span>
-    <a v-else :href="href">
-        <slot />
-    </a>
+  <span class="IconLink" v-if="ghDisplay">
+    <GithubFilled class="GithubIcon" />
+    <a :href="href"><span v-html="ghDisplay" /></a>
+  </span>
+  <a v-else :href="href">
+    <slot />
+  </a>
 </template>
 
 <style scoped>
 .IconLink {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.25em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25em;
 }
 
 .GithubIcon {
-    align-self: center;
-}</style>
+  align-self: center;
+}
+</style>

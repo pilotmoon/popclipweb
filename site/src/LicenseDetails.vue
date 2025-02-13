@@ -124,55 +124,117 @@ function licenseInfoString() {
   }
   return info;
 }
-
-
 </script>
 
 <template>
-  <div>  
-    <div v-if="state===State.NoSession">
+  <div>
+    <div v-if="state === State.NoSession">
       <h1>Session Expired</h1>
-      <p>Your session has expired because you closed the browser tab or window.</p>
-      <p>If you bought a license key, it will have been sent to to the email address you provided at checkout.</p>
+      <p>
+        Your session has expired because you closed the browser tab or window.
+      </p>
+      <p>
+        If you bought a license key, it will have been sent to to the email
+        address you provided at checkout.
+      </p>
       <p>If you need any help, please contact&ensp;<SupportEmailLink />.</p>
     </div>
-    <div v-else-if="state===State.Loading" style="text-align: center; padding-top: 0;">      
-      <VueSpinnerGears color="var(--vp-c-text-2)" size="50" style="display: inline-block"/>
-      <p>Getting your license key... </p>
+    <div
+      v-else-if="state === State.Loading"
+      style="text-align: center; padding-top: 0"
+    >
+      <VueSpinnerGears
+        color="var(--vp-c-text-2)"
+        size="50"
+        style="display: inline-block"
+      />
+      <p>Getting your license key...</p>
       <p v-if="countdown <= 57">Please wait ({{ countdown }})</p>
-    </div>        
-    <div v-else-if="state===State.Failed">
+    </div>
+    <div v-else-if="state === State.Failed">
       <h1>Something went wrong</h1>
-      <p>Please contact <SupportEmailLink subject="PopClip Purchase Problem" :body="wrapInfo(diagnosticInfoString(), 'Diagnostic Information')"/>.</p>
+      <p>
+        Please contact
+        <SupportEmailLink
+          subject="PopClip Purchase Problem"
+          :body="wrapInfo(diagnosticInfoString(), 'Diagnostic Information')"
+        />.
+      </p>
       <h3>Diagnostic Information</h3>
-      <pre>
-{{ diagnosticInfoString() }}
+      <pre
+        >{{ diagnosticInfoString() }}
       </pre>
     </div>
-    <div v-else-if="state===State.Done">
+    <div v-else-if="state === State.Done">
       <h1>Thank you for your purchase</h1>
-      <p>You have successfully purchased PopClip. <button id="party" @click="kaboom">🎉</button> Thank you for your support!</p>         
-      <h2>Your PopClip License Key</h2> 
+      <p>
+        You have successfully purchased PopClip.
+        <button id="party" @click="kaboom">🎉</button> Thank you for your
+        support!
+      </p>
+      <h2>Your PopClip License Key</h2>
       <div class="license">
         <ul class="details-panel info custom-block">
-          <li><span class=label>Name:</span> <span class="data">{{ licenseKey.name }}</span></li>
-          <li><span class=label>Email:</span> <span class="data">{{ licenseKey.email }}</span></li>
-          <li v-if="licenseKey.description" ><span class=label>License type:</span> <span class="data">{{ licenseKey.description }}</span></li>
-          <li v-if="licenseKey.expiryDate" ><span class=label>Updates until:</span> <span class="data">{{ formatDate(licenseKey.expiryDate) }}</span></li>          
+          <li>
+            <span class="label">Name:</span>
+            <span class="data">{{ licenseKey.name }}</span>
+          </li>
+          <li>
+            <span class="label">Email:</span>
+            <span class="data">{{ licenseKey.email }}</span>
+          </li>
+          <li v-if="licenseKey.description">
+            <span class="label">License type:</span>
+            <span class="data">{{ licenseKey.description }}</span>
+          </li>
+          <li v-if="licenseKey.expiryDate">
+            <span class="label">Updates until:</span>
+            <span class="data">{{ formatDate(licenseKey.expiryDate) }}</span>
+          </li>
         </ul>
         <div class="extra-info">
-          <span><span class=label>Purchase date:</span> <span class="data">{{ formatDate(licenseKey.date) }}</span></span> /
-          <span><span class=label>Order #:</span> <span class="data">{{ licenseKey.order }} ({{ licenseKey.origin }})</span></span>
+          <span
+            ><span class="label">Purchase date:</span>
+            <span class="data">{{ formatDate(licenseKey.date) }}</span></span
+          >
+          /
+          <span
+            ><span class="label">Order #:</span>
+            <span class="data"
+              >{{ licenseKey.order }} ({{ licenseKey.origin }})</span
+            ></span
+          >
         </div>
-        <AaButton :href=registerLink() size=big>Activate License</AaButton>            
+        <AaButton :href="registerLink()" size="big">Activate License</AaButton>
       </div>
-      
-      <h3>Changes</h3>      
-      <p>If you want to change the registered name or email, please contact&ensp;<SupportEmailLink subject="PopClip License Enquiry" :body="wrapInfo(licenseInfoString(), 'License Details')" />.</p>
+
+      <h3>Changes</h3>
+      <p>
+        If you want to change the registered name or email, please
+        contact&ensp;<SupportEmailLink
+          subject="PopClip License Enquiry"
+          :body="wrapInfo(licenseInfoString(), 'License Details')"
+        />.
+      </p>
       <h3>License Key File</h3>
-      <p><DownloadButton size=smaller theme=outline :href=licenseFileLink() text="Download License Key File":text=licenseFileName()></DownloadButton></p>
-      <p>To save a backup of your license key, download the file to your computer. Double-click the file to activate it.</p>
-      <p>A link to your license key file has also been emailed to <b>{{ licenseKey.email }}</b>.</p>   
+      <p>
+        <DownloadButton
+          size="smaller"
+          theme="outline"
+          :href="licenseFileLink()"
+          text="Download License Key File"
+          :text="licenseFileName()"
+        ></DownloadButton>
+      </p>
+      <p>
+        To save a backup of your license key, download the file to your
+        computer. Double-click the file to activate it.
+      </p>
+      <p>
+        A link to your license key file has also been emailed to
+        <b>{{ licenseKey.email }}</b
+        >.
+      </p>
     </div>
   </div>
 </template>

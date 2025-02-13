@@ -5,10 +5,8 @@ import { loadStore } from './composables/useStoreState'
 onMounted(() => {
     loadStore();
 });
-
 </script>
 
 <template>
-    <div id="store-loader" />
+  <div id="store-loader" />
 </template>
-
