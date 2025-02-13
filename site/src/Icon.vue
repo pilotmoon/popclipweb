@@ -33,7 +33,7 @@ function iconUrl(specifier: string, color: string) {
     },
     cacheKey,
   );
-  return config.pilotmoon.iconsRoot + "/icon?" + query;
+  return `${config.pilotmoon.iconsRoot}/icon?${query}`;
 }
 
 function showPlaceholder() {

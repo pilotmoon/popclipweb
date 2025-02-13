@@ -16,13 +16,18 @@ import itunesCountries from "./itunesCountries.json";
 import paddleCountries from "./paddleCountries.json";
 
 // Given a two letter country code, return the corresponding app store info.
-export function getCountryInfo(countryCode: any) {
+export function getCountryInfo(countryCode: unknown) {
+  if (typeof countryCode !== "string") {
+    throw new Error("Country cose must be string");
+  }
   if (!/^[A-Z]{2}$/.test(countryCode)) {
     throw new Error(`Invalid country code: ${countryCode}`);
   }
   const itunesInfo = itunesCountries.find((x) => x[1] === countryCode);
   return {
     appStoreCode: String(itunesInfo?.[1] ?? ""),
-    countryName: String(paddleCountries[countryCode] ?? ""),
+    countryName: String(
+      paddleCountries[countryCode as keyof typeof paddleCountries] ?? "",
+    ),
   };
 }
