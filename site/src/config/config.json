@@ -1,9 +1,7 @@
 {
   "pilotmoon": {
     "paddleProducts": {
-      "popclip_2year": {
-        
-      },
+      "popclip_2year": {},
       "popclip_lifetime": {
         "fullPrice": 0,
         "fullPriceCurrency": "USD",
@@ -30,8 +28,9 @@
     "slug": "popclip"
   },
   "lizhi": {
-    "storeUrl": "https://lizhi.shop/site/products/id/612?cid=pchuiuf8",
-    "price": "CN¥129",
+    "storeUrl": "https://lizhi.shop/products/popclip?cid=pchuiuf8",
+    "standardPrice": "CN¥59",
+    "lifetimePrice": "CN¥129",
     "countries": ["CN", "TW", "MO", "HK"]
   },
   "setapp": {

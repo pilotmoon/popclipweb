@@ -20,7 +20,8 @@ export const useStoreState = createGlobalState(() => {
   //   "popclip-store-masUrl",
   //   getMacAppStoreUrl(config.mas.appId, config.mas.slug),
   // );
-  const lizhiPrice = ref(config.lizhi.price);
+  const lizhiStandardPrice = ref(config.lizhi.standardPrice);
+  const lizhiLifetimePrice = ref(config.lizhi.lifetimePrice);
   const lizhiUrl = ref(config.lizhi.storeUrl);
   return {
     countryCode,
@@ -28,7 +29,8 @@ export const useStoreState = createGlobalState(() => {
     paddleProducts,
     // masPrice,
     // masUrl,
-    lizhiPrice,
+    lizhiStandardPrice,
+    lizhiLifetimePrice,
     lizhiUrl,
     isLoadedForCoupon,
   };
@@ -75,9 +77,11 @@ type ProductsResult = z.infer<typeof ZProductsResult>;
 export async function loadStore() {
   const store = useStoreState();
 
-  const coupon = readParams().get("coupon") ?? ""
+  const coupon = readParams().get("coupon") ?? "";
   if (store.isLoadedForCoupon.value === coupon) {
-    log(`Store already loaded for ${store.countryCode.value} and coupon '${coupon}'`);
+    log(
+      `Store already loaded for ${store.countryCode.value} and coupon '${coupon}'`,
+    );
     return;
   }
 
@@ -136,7 +140,8 @@ function preprocessProducts(productData: ProductsResult) {
     let displayListPrice: string;
     let isDiscounted = false;
     let message: string | null = null;
-    const productConfig = config.pilotmoon.paddleProducts[productData.products[key].product];
+    const productConfig =
+      config.pilotmoon.paddleProducts[productData.products[key].product];
     if (productConfig.message) {
       message = productConfig.message;
     }
@@ -144,10 +149,9 @@ function preprocessProducts(productData: ProductsResult) {
       displayListPrice = formatCurrency(
         productConfig.fullPrice,
         productConfig.fullPriceCurrency,
-      );      
-      isDiscounted = product.paddleData.price.net < productConfig.fullPrice;      
-    }
-    else {
+      );
+      isDiscounted = product.paddleData.price.net < productConfig.fullPrice;
+    } else {
       displayListPrice = formatCurrency(
         product.paddleData.list_price.net,
         product.paddleData.currency,
@@ -155,7 +159,8 @@ function preprocessProducts(productData: ProductsResult) {
       isDiscounted =
         product.paddleData.price.net < product.paddleData.list_price.net;
     }
-    const isTaxed = product.paddleData.price.net < product.paddleData.price.gross;
+    const isTaxed =
+      product.paddleData.price.net < product.paddleData.price.gross;
     const processed: ProcessedProduct = {
       isTaxed,
       isDiscounted,

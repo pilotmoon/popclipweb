@@ -143,26 +143,20 @@ function trackBuy(button) {
             <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
         </div> -->
     <div :class="$style.box">
-      <div :class="$style.product">
-        <img src="/icon128.png" /> PopClip for macOS
-      </div>
+      <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
       <span :class="$style.title">Standard License</span><br />
       <span :class="$style.subtitle">✅ 2 years of free updates<br /></span>
-      <span :class="$style.subtitle"
-        >✅ Keep the last version you receive<br
-      /></span>
+      <span :class="$style.subtitle">✅ Keep the last version you receive<br /></span>
       <span :class="$style.subtitle">✅ Use on all your Macs<br /></span>
-      <span :class="$style.small"
-        ><a href="/terms">Full license terms</a><br
-      /></span>
+      <span :class="$style.small"><a href="/terms">Full license terms</a><br /></span>
+
+      <hr v-if="isLizhi" />
       <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br /></span>
       <AaButton
         :class="$style.buybutton"
         @click="
           trackBuy('Paddle');
-          openPaddleCheckout(
-            store.paddleProducts.value.popclip_2year?.productId,
-          );
+          openPaddleCheckout(store.paddleProducts.value.popclip_2year?.productId);
         "
         theme="brand"
         size="medium"
@@ -173,60 +167,45 @@ function trackBuy(button) {
         <Icon size="32"><ApplePay /></Icon> </AaButton
       ><br />
       <div :class="$style.prices">
-        <span
-          v-if="store.paddleProducts.value.popclip_2year?.isDiscounted"
-          :class="$style.listPrice"
-          >{{
-            roundPrice(
-              store.paddleProducts.value.popclip_2year.displayListPrice ?? "",
-            )
-          }}</span
-        >
-        <span :class="$style.price">{{
-          roundPrice(
-            store.paddleProducts.value.popclip_2year?.displayPrice ?? "",
-          )
+        <span v-if="store.paddleProducts.value.popclip_2year?.isDiscounted" :class="$style.listPrice">{{
+          roundPrice(store.paddleProducts.value.popclip_2year.displayListPrice ?? "")
         }}</span>
-        <span
-          v-if="store.paddleProducts.value.popclip_2year?.isTaxed"
-          :class="$style.tax"
-          >+ tax</span
-        >
+        <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_2year?.displayPrice ?? "") }}</span>
+        <span v-if="store.paddleProducts.value.popclip_2year?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
       </div>
-      <div
-        v-if="store.paddleProducts.value.popclip_2year?.message"
-        :class="$style.priceMessage"
-      >
+      <div v-if="store.paddleProducts.value.popclip_2year?.message && !isLizhi" :class="$style.priceMessage">
         <span>{{ store.paddleProducts.value.popclip_2year?.message }}</span>
       </div>
-      <div
-        v-if="store.paddleProducts.value.popclip_2year?.coupon"
-        :class="$style.couponInfo"
-      >
-        <span>{{
-          `Coupon "${store.paddleProducts.value.popclip_2year?.coupon ?? ""}" applied`
-        }}</span>
+      <div v-if="store.paddleProducts.value.popclip_2year?.coupon" :class="$style.couponInfo">
+        <span>{{ `Coupon "${store.paddleProducts.value.popclip_2year?.coupon ?? ""}" applied` }}</span>
       </div>
       <span :class="$style.subtitle">One-time purchase<br /></span>
-    </div>
-    <div :class="$style.box">
-      <div :class="$style.product">
-        <img src="/icon128.png" /> PopClip for macOS
+
+      <div v-if="isLizhi">
+        <hr />
+        <span :class="$style.subtitle">Buy from DIGITALYCHEE<br /></span>
+        <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
+          <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store" /> </a
+        ><br />
+        <span :class="$style.price">{{ roundPrice(store.lizhiStandardPrice.value) }}</span
+        ><br />
+        <span :class="$style.subtitle">One-time purchase<br /></span>
       </div>
+    </div>
+
+    <div :class="$style.box">
+      <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
       <span :class="$style.title">Lifetime License</span><br />
       <span :class="$style.subtitle">✅ Lifetime free updates<br /></span>
       <span :class="$style.subtitle">✅ Use on all your Macs<br /></span>
-      <span :class="$style.small"
-        ><a href="/terms">Full license terms</a><br
-      /></span>
+      <span :class="$style.small"><a href="/terms">Full license terms</a><br /></span>
+      <hr v-if="isLizhi" />
       <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br /></span>
       <AaButton
         :class="$style.buybutton"
         @click="
           trackBuy('Paddle');
-          openPaddleCheckout(
-            store.paddleProducts.value.popclip_lifetime?.productId,
-          );
+          openPaddleCheckout(store.paddleProducts.value.popclip_lifetime?.productId);
         "
         theme="brand"
         size="medium"
@@ -237,107 +216,49 @@ function trackBuy(button) {
         <Icon size="32"><ApplePay /></Icon> </AaButton
       ><br />
       <div :class="$style.prices">
-        <span
-          v-if="store.paddleProducts.value.popclip_lifetime?.isDiscounted"
-          :class="$style.listPrice"
-          >{{
-            roundPrice(
-              store.paddleProducts.value.popclip_lifetime.displayListPrice ??
-                "",
-            )
-          }}</span
-        >
-        <span :class="$style.price">{{
-          roundPrice(
-            store.paddleProducts.value.popclip_lifetime?.displayPrice ?? "",
-          )
+        <span v-if="store.paddleProducts.value.popclip_lifetime?.isDiscounted" :class="$style.listPrice">{{
+          roundPrice(store.paddleProducts.value.popclip_lifetime.displayListPrice ?? "")
         }}</span>
-        <span
-          v-if="store.paddleProducts.value.popclip_lifetime?.isTaxed"
-          :class="$style.tax"
-          >+ tax</span
-        >
+        <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_lifetime?.displayPrice ?? "") }} </span>
+        <span v-if="store.paddleProducts.value.popclip_lifetime?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
       </div>
-      <div
-        v-if="store.paddleProducts.value.popclip_lifetime?.message && !isLizhi"
-        :class="$style.priceMessage"
-      >
+      <div v-if="store.paddleProducts.value.popclip_lifetime?.message && !isLizhi" :class="$style.priceMessage">
         <span>{{ store.paddleProducts.value.popclip_lifetime?.message }}</span>
       </div>
-      <div
-        v-if="store.paddleProducts.value.popclip_lifetime?.coupon"
-        :class="$style.couponInfo"
-      >
-        <span>{{
-          `Coupon "${store.paddleProducts.value.popclip_lifetime?.coupon ?? ""}" applied`
-        }}</span>
+      <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon" :class="$style.couponInfo">
+        <span>{{ `Coupon "${store.paddleProducts.value.popclip_lifetime?.coupon ?? ""}" applied` }}</span>
       </div>
       <span :class="$style.subtitle">One-time purchase<br /></span>
-    </div>
-    <div
-      :class="$style.box"
-      :hidden="!isLizhi || store.isLoadedForCoupon === null"
-    >
-      <div :class="$style.product">
-        <img src="/icon128.png" /> PopClip for macOS
+
+      <div v-if="isLizhi">
+        <hr />
+        <span :class="$style.subtitle">Buy from DIGITALYCHEE<br /></span>
+        <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
+          <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store" /> </a
+        ><br />
+        <span :class="$style.price">{{ roundPrice(store.lizhiLifetimePrice.value) }}</span
+        ><br />
+        <span :class="$style.subtitle">One-time purchase<br /></span>
       </div>
-      <span :class="$style.title">Lifetime License</span><br />
-      <span :class="$style.subtitle">✅ Lifetime free updates<br /></span>
-      <span :class="$style.subtitle">✅ Use on all your Macs<br /></span>
-      <span :class="$style.small"
-        ><a href="/terms">Full license terms</a><br
-      /></span>
-      <span v-if="isLizhi" :class="$style.subtitle"
-        >Buy from DIGITALYCHEE<br
-      /></span>
-      <a
-        :href="store.lizhiUrl.value"
-        target="_blank"
-        @click="trackBuy('DIGITALYCHEE')"
-      >
-        <img
-          :class="$style.buybadge"
-          src="/badge-lizhi.svg"
-          alt="Buy from DIGITALYCHEE Store"
-        /> </a
-      ><br />
-      <span :class="$style.price">{{ roundPrice(store.lizhiPrice.value) }}</span
-      ><br />
-      <span :class="$style.subtitle">One-time purchase<br /></span>
     </div>
   </div>
-  <div
-    :class="
-      store.isLoadedForCoupon !== null
-        ? $style.infoLine
-        : $style.infoLineLoading
-    "
-  >
-    {{
-      store.isLoadedForCoupon !== null
-        ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}`
-        : `Loading prices...`
-    }}
+  <div :class="store.isLoadedForCoupon !== null ? $style.infoLine : $style.infoLineLoading">
+    {{ store.isLoadedForCoupon !== null ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` : `Loading prices...` }}
   </div>
-  <div v-if="isLizhi" class="danger custom-block">
+  <!-- <div v-if="isLizhi" class="danger custom-block">
     <p class="custom-block-title">Warning: Avoid 🇨🇳 Chinese Scam Sellers!</p>
     <p>
-      Please note that the <b>only authorized company</b> to sell PopClip
-      licenses in China is <b>DIGITALYCHEE (数码荔枝)</b>. Their official
-      websites are: ✅ <a href="https://lizhi.shop">lizhi.shop</a>, ✅
-      <a href="https://digitalychee.taobao.com">digitalychee.taobao.com</a>.
+      Please note that the <b>only authorized company</b> to sell PopClip licenses in China is <b>DIGITALYCHEE (数码荔枝)</b>. Their official websites are: ✅
+      <a href="https://lizhi.shop">lizhi.shop</a>, ✅ <a href="https://digitalychee.taobao.com">digitalychee.taobao.com</a>.
     </p>
 
     <p>
-      ❌🙅 Any other seller offering a license key is unauthorized. The seller
-      will claim that the license is genuine, but in fact they obtained a single
-      license key and sold it to multiple individuals. This is in violation of
-      the terms of sale. The seller keeps all your money and does not pay me.
-      All such license keys discovered will be canceled. For more information,
-      please see the
+      ❌🙅 Any other seller offering a license key is unauthorized. The seller will claim that the license is genuine, but in fact they obtained a single
+      license key and sold it to multiple individuals. This is in violation of the terms of sale. The seller keeps all your money and does not pay me. All such
+      license keys discovered will be canceled. For more information, please see the
       <a href="/ipr-china">Intellectual Property Rights Statement</a>.
     </p>
-  </div>
+  </div> -->
 </template>
 
 <style module>
