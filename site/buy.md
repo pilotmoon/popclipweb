@@ -78,6 +78,6 @@ After you have used up the free trial, I hope you will consider either buying a
 license or subscribing via Setapp, both of which directly support my work on the
 app.
 
-However, I understand that not everyone is in the financial position to buy. If
+However, I understand that not everyone is in the financial position to pay. If
 you have already used up the free trial and you cannot afford to buy right now,
 email me, and I will send you a 1-year license for free.
