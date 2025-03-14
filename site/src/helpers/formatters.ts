@@ -5,7 +5,7 @@ export function formatDate(dateStringOrDate: string | Date | null) {
     year: "numeric",
     month: "short",
     day: "numeric",
-    timeZone: "Europe/London",
+    timeZone: "UTC",
   });
 }
 
@@ -14,16 +14,14 @@ export function formatSize(size: number) {
   return size ? `${(size / 1024 / 1024).toFixed(2)} Mb` : "";
 }
 
-export function formatArchs(archs) {
+export function formatArchs(archs: string[]) {
   if (!archs) return "";
-  return (
-    `Processor${archs.length > 1 ? "s" : ""}: ${archs
-      .map((a) => {
-        if (a === "arm64") return "Apple Silicon";
-        if (a === "x86_64") return "Intel 64-bit";
-        if (a === "i386") return "Intel 32-bit";
-        return a;
-      })
-      .join(", ")}`
-  );
+  return `Processor${archs.length > 1 ? "s" : ""}: ${archs
+    .map((a) => {
+      if (a === "arm64") return "Apple Silicon";
+      if (a === "x86_64") return "Intel 64-bit";
+      if (a === "i386") return "Intel 32-bit";
+      return a;
+    })
+    .join(", ")}`;
 }
