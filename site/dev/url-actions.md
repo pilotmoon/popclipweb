@@ -19,9 +19,9 @@ optional fields, as follows:
 
 | Key             | Type               | Description                                                                                                                                                        |
 | --------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `url`           | String             | The URL to open when the user clicks the action. Use either `{popclip text}` or `***` as placeholder for the selected text.                                                        |
+| `url`           | String             | The URL to open when the user clicks the action. Use either `{popclip text}` or `***` as placeholder for the selected text.                                        |
 | `alternate url` | String (Optional)  | An alternate URL to open if the user holds Option (⌥) when invoking the action. Same format as `url`.                                                              |
-| `clean query`   | Boolean (Optional) | If `true`, all runs of consecutive whitespace and newlines in the text will be collapsed to a single space before being inserted into the URL. Default is `false`. |
+| `clean query`   | Boolean (Optional) | If `true`, newlines and tabs in the text will be replaced with a space, and consecutive spaces will be collapsed to a single space. Default is `false`.            |
 
 :::
 
