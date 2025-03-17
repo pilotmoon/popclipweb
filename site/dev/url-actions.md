@@ -23,8 +23,6 @@ optional fields, as follows:
 | `alternate url` | String (Optional)  | An alternate URL to open if the user holds Option (⌥) when invoking the action. Same format as `url`.                                                              |
 | `clean query`   | Boolean (Optional) | If `true`, newlines and tabs in the text will be replaced with a space, and consecutive spaces will be collapsed to a single space. Default is `false`.            |
 
-:::
-
 ## Input and output
 
 The selected plain text will be inserted into the URL, replacing the
