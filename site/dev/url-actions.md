@@ -28,7 +28,7 @@ optional fields, as follows:
 ## Input and output
 
 The selected plain text will be inserted into the URL, replacing the
-`{popclip text}` placeholder if present. PopClip will always trim leading and
+`{popclip text}` or `***` placeholder if present. PopClip will always trim leading and
 trailing whitespace and newlines, and URL-encode the text. Optionally, PopClip
 will perform further whitespace cleanup with the `clean query` flag.
 
