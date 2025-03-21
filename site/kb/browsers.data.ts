@@ -8,24 +8,27 @@ export const ZBrowser = z.object({
   homepageUrl: z.string().url().nullish(),
   supportsAware: z.boolean(),
   supportsPageInfo: z.boolean(),
-  supportsAddressbar: z.boolean(),
+  supportsAddressBar: z.boolean(),
   supportsBackgroundTab: z.boolean(),
   supportsOpenIn: z.boolean(),
 });
 type Browser = z.infer<typeof ZBrowser>;
 
-interface BrowsersData {
-  browsers: Browser[];
-}
-
+const ZBrowsersData = z.object({
+  browsers: z.array(ZBrowser),
+});
+type BrowsersData = z.infer<typeof ZBrowsersData>;
 declare const data: BrowsersData;
 export { data };
 export default defineLoader({
-  watch: ["./browsers.json"],
+  watch: ["../../extras/OpenInBrowser.popclipext/browsers.json"],
   load(watchedFiles): BrowsersData {
     const browsers: Browser[] = [];
     for (const file of watchedFiles) {
-      for (const browser of JSON.parse(fs.readFileSync(file, "utf-8"))) {
+      const data = ZBrowsersData.parse(
+        JSON.parse(fs.readFileSync(file, "utf-8")),
+      );
+      for (const browser of data.browsers) {
         browsers.push(browser);
       }
     }
