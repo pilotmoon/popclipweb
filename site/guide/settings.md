@@ -86,7 +86,7 @@ Set a keyboard shortcut for making PopClip appear. See [Activate with a keyboard
 - To remove or change the keyboard shortcut, click the button and then press the new keys or click the 'X' button.
 
 :::tip Choosing a keyboard shortcut
-You can use any key combination you like, but it's good to pick somehting that's easy to remember and doesn't conflict with other common shortcuts. Personally, I use ⌃⌘P.
+You can use any key combination you like, but it's good to pick something that's easy to remember and doesn't conflict with other common shortcuts. Personally, I use ⌃⌘P.
 :::
 
 ## <InlineIcon spec="bundle:gear" /> Actions pane
