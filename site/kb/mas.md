@@ -20,7 +20,7 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
    folder to the Trash. (Don't use an app cleaner or uninstaller tool, as that
    will likely delete your settings and extensions.)
 3. Download PopClip from the [download](/download) page, and unzip it.
-4. Put it in the `/Applications` folder.
+4. Use Finder to move it to the `/Applications` folder.
 5. Run the new PopClip app. It will detect your Mac App Store purchase and
    unlock itself.
 
