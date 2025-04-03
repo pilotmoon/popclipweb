@@ -1,8 +1,13 @@
+<script setup lang="ts">
+import PopClipVersion from "../src/PopClipVersion.vue";
+</script>
+
 # Migrate from the Mac App Store (MAS) edition to the Standalone edition
 
-The last released version of PopClip on the Mac App Store is 2023.9. If you have
-the MAS edition of PopClip, you can migrate for free to the Standalone edition
-to continue receiving updates.
+The latest version of PopClip is <PopClipVersion />, but PopClip is no longer
+distributed on the Mac App Store. If you are still using the last released Mac
+App Store version, 2023.9, then you can migrate for free to the Standalone
+edition to receive the latest updates.
 
 ::: info From the developer
 

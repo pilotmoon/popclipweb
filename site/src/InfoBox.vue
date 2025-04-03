@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from "vue";
-import {
-  loadLocalAppInfo,
-  useLocalAppInfo,
-} from "./composables/useLocalAppInfo";
+import { loadLocalAppInfo, useLocalAppInfo } from "./composables/useLocalAppInfo";
+import PopClipVersion from "./PopClipVersion.vue";
 
 const localAppInfo = useLocalAppInfo();
 const shouldShowInfoBox = computed(() => {
@@ -23,13 +21,7 @@ onMounted(() => {
         height="24px"
         role="img"
         viewBox="0 0 24 24"
-        style="
-          fill: var(--vp-c-text-1);
-          display: inline-block;
-          height: 16px;
-          vertical-align: middle;
-          margin: 0px -4px 0px -3px;
-        "
+        style="fill: var(--vp-c-text-1); display: inline-block; height: 16px; vertical-align: middle; margin: 0px -4px 0px -3px"
       >
         <title>App Store</title>
         <path
@@ -37,11 +29,9 @@ onMounted(() => {
         ></path></svg
       >&nbsp;Information for Mac App Store customers
     </p>
-    <!-- <p>The last released version of PopClip on the Mac App Store is 2023.9. This is the final update that will be available through the store. You can continue to receive PopClip updates by <a href="/kb/mas">migrating to the Standalone edition</a>.</p> -->
     <p>
-      The latest version of PopClip is not available on the the Mac App Store.
-      You can continue to receive PopClip updates by
-      <a href="/kb/mas">migrating to the Standalone edition</a>.
+      The latest version of PopClip is <PopClipVersion />, but PopClip is no longer distributed on the Mac App Store. If you are still using the last released
+      Mac App Store version, 2023.9, then you can <a href="/kb/mas">migrate for free to the Standalone edition</a> to receive the latest updates.
     </p>
   </div>
 </template>
