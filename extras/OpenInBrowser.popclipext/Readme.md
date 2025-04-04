@@ -15,6 +15,7 @@ The extension has an action for each of the following browsers:
 - Mullvad
 - Opera
 - Orion
+- Quark
 - Tor Browser
 - Vivaldi
 - Waterfox
@@ -27,12 +28,17 @@ will not appear.
 
 ## Acknowledgements
 
-Icons from Font Awesome Brands and Simple Icons. Arc browser icon from
-<https://logotyp.us/logo/arc-browser/>. Waterfox icon from
+Icons from Font Awesome Brands and Simple Icons via Iconify. Arc browser icon
+from <https://logotyp.us/logo/arc-browser/>. Waterfox icon from
 <https://commons.wikimedia.org/wiki/File:Waterfox_logo_in_2023.png>. Zen icon
-from <https://github.com/zen-browser/branding>.
+from <https://github.com/zen-browser/branding>. Quark icon from
+<https://logodad.com/svg/quark-browser>.
 
 ## Changelog
+
+### 2025-04-04
+
+- Add Quark browser.
 
 ### 2025-03-21
 

@@ -6,11 +6,11 @@
 // entitlements: [dynamic]
 // description: >-
 //   Open URLs in a specific browser. Supports Safari, Chrome, Firefox, Arc, Brave,
-//   DEVONagent Pro, DuckDuckGo, Edge, Mullvad, Opera, Orion, Tor Browser, Vivaldi,
+//   DEVONagent Pro, DuckDuckGo, Edge, Mullvad, Opera, Orion, Quark, Tor Browser, Vivaldi,
 //   Waterfox and Zen.
 // keywords: >-
 //   Safari Chrome Firefox Arc Brave DEVONagent Pro DuckDuckGo Edge Mullvad Opera
-//   Orion Tor Browser Vivaldi Waterfox Zen
+//   Orion Quark Tor Browser Vivaldi Waterfox Zen
 
 import { browsers } from "./browsers.json";
 
