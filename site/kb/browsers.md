@@ -54,7 +54,7 @@ The table contains columns for each of the following features:
   single-click in the browser's address bar.
 
 - **Background Tab:** This column indicates whether the browser supports
-  openening searches and URLs in a background tab by holding down the Shift key.
+  opening searches and URLs in a background tab by holding down the Shift key.
 
 - **Open In:** This column indicates whether the browser is available as a
   target in the
