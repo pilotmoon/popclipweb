@@ -13,11 +13,8 @@ import { formatDate } from "./helpers/formatters";
     </div>
     <ul>
       <li v-for="(item, index) in data.news.slice(0, 3)">
-        <a :href="item.url" v-html="item.title"></a>
-        <small>{{ formatDate(item.date) }}</small>
-        <div :class="$style.Excerpt" v-if="index === 0 && item.excerpt">
-          <span v-html="item.excerpt" /> <a :href="item.url">more</a>
-        </div>
+        <a :href="item.url" v-html="item.title"></a> <small>{{ formatDate(item.date) }}</small>
+        <div :class="$style.Excerpt" v-if="index === 0 && item.excerpt"><span v-html="item.excerpt" /> <a :href="item.url">more</a></div>
       </li>
     </ul>
   </div>
