@@ -324,6 +324,17 @@
       "icon": "icons/simple-icons-vivaldi.svg"
     },
     {
+      "name": "Vivaldi Snapshot",
+      "group": "chromium",
+      "supportsAware": false,
+      "supportsPageInfo": true,
+      "supportsAddressBar": false,
+      "supportsBackgroundTab": true,
+      "supportsOpenIn": false,
+      "bundleId": "com.vivaldi.Vivaldi.snapshot",
+      "homepageUrl": "https://vivaldi.com/blog/snapshots/"
+    },
+    {
       "name": "Waterfox",
       "group": "firefox",
       "supportsAware": true,
