@@ -10,6 +10,7 @@ The extension has an action for each of the following browsers:
 - Arc
 - Brave
 - DEVONagent Pro
+- Dia
 - DuckDuckGo
 - Edge
 - Mullvad
@@ -35,6 +36,10 @@ from <https://github.com/zen-browser/branding>. Quark icon from
 <https://logodad.com/svg/quark-browser>.
 
 ## Changelog
+
+### 2025-07-16
+
+- Add Dia browser.
 
 ### 2025-04-04
 

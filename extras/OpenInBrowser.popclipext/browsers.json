@@ -70,6 +70,18 @@
       "icon": "icons/devontech-dap.svg"
     },
     {
+      "name": "Dia",
+      "group": "arc",
+      "supportsAware": false,
+      "supportsPageInfo": false,
+      "supportsAddressBar": false,
+      "supportsBackgroundTab": false,
+      "supportsOpenIn": true,
+      "bundleId": "company.thebrowser.dia",
+      "homepageUrl": "https://www.diabrowser.com/",
+      "icon": "icons/dia.svg"
+    },
+    {
       "name": "DuckDuckGo",
       "group": "other",
       "supportsAware": true,
