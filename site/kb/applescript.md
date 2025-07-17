@@ -6,7 +6,7 @@ PopClip has an AppleScript interface that allows you to control PopClip from Aut
 
 ### **Properties**
 
-- **enabled**: Wether PopClip is on or off (Boolean).
+- **enabled**: Whether PopClip is on or off (Boolean).
 
 ### **Commands**
 
