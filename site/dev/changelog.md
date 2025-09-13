@@ -17,7 +17,7 @@ kept in this file.
 
 <div class="info custom-block" style="padding-top: 8px">
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 </div>
 
