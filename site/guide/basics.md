@@ -2,6 +2,12 @@
 outline: deep
 ---
 
+<script setup>
+import GuideVersionBanner from '/src/GuideVersionBanner.vue'
+</script>
+
+<GuideVersionBanner />
+
 # Basic Usage
 
 This page will teach you the fundamentals of PopClip: how to get the PopClip bar

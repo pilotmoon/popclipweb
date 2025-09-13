@@ -2,6 +2,12 @@
 outline: deep
 ---
 
+<script setup>
+import GuideVersionBanner from '/src/GuideVersionBanner.vue'
+</script>
+
+<GuideVersionBanner />
+
 # Actions
 
 The buttons that appear in the PopClip bar perform **actions**. PopClip comes

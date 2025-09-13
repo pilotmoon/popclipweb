@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import DirectoryCount from '/src/DirectoryCount.vue'
+import GuideVersionBanner from '/src/GuideVersionBanner.vue'
 </script>
 
 # Extensions
+
+<GuideVersionBanner />
 
 Extensions add new actions to PopClip. You can install ready-made extensions and
 also create your own.

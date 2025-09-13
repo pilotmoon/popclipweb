@@ -1,7 +1,14 @@
 ---
 outline: deep
 ---
+
+<script setup>
+import GuideVersionBanner from '/src/GuideVersionBanner.vue'
+</script>
+
 # Settings
+
+<GuideVersionBanner />
 
 This page will give you a comprehensive overview of PopClip's settings.
 

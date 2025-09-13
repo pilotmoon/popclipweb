@@ -5,6 +5,7 @@ outline: deep
 <script setup lang="ts">
 import NewsBox from '/src/NewsBox.vue'
 import InfoBox from '/src/InfoBox.vue'
+import GuideVersionBanner from '/src/GuideVersionBanner.vue'
 </script>
 
 # Welcome
@@ -22,61 +23,37 @@ select text on your screen.
 
 ![PopClip screenshot](/media/popclip.jpg "Screenshot of PopClip")
 
-PopClip's [actions](/guide/actions) range from simple copy-paste and web
-searches to complex tasks such as translating text. Using
-[extensions](/extensions/), you can add more actions to PopClip to adapt it to
-your needs. Think of PopClip as a context-aware assistant that provides a set of
-tools you can use instantly in any app.
+PopClip's actions range from simple copy-paste and web searches to complex tasks
+such as translating text. Using [extensions](/extensions/), you can add more
+actions to PopClip to adapt it to your needs. Think of PopClip as a
+context-aware assistant that provides a set of tools you can use instantly in
+any app.
 
 PopClip is available for macOS only. It is a [paid](/buy) app with a
 [free trial](/download). It has been in continuous development since 2011.
 
-## :open_book: **Site contents**
-
-This website aims to be a complete resource for PopClip users. It contains all
-the documentation for PopClip in one place, with the following sections:
-
-- The **User Guide** is an introduction to PopClip. [Install](/guide/install)
-  PopClip and learn the [basic concepts](/guide/basics) of the user interface.
-  Take a tour of the [built-in actions](/guide/actions), see how to customize
-  the [settings](/guide/settings) and add [extensions](/guide/extensions).
-
-- Vital **App Info**, including [download links](/download),
-  [purchase information](/buy), [version history](/changelog), and
-  [support](/support) details.
-
-- The **Knowledge Base** section, with a detailed
-  [troubleshooting guide](/kb/troubleshooting) and technical articles.
-
-- **Policies** including [license terms](/terms) and [privacy](/privacy) policy.
-
-- A **Developer Reference** section with [detailed documentation](/dev/) on how
-  to create PopClip extensions.
-
-Finally, there is the [Extensions Directory](/extensions/), a dedicated section
-of the site for browsing ready-made extensions to add to PopClip.
+Want to get started? Check out the [Installation](install) page.
 
 ## :thinking: Frequently asked questions
 
 _See also [Troubleshooting](/kb/troubleshooting) if you have questions about
 technical issues._
 
-- **Is there a version of PopClip for iPhone or iPad?**
-  Unfortunately PopClip would not be possible on these devices due to the way iOS works.
+- **Is there a version of PopClip for iPhone or iPad?** Unfortunately PopClip
+  would not be possible on these devices due to the way iOS works.
 
-- **Is there a version of PopClip for Windows?** I don't make a
-  Windows version of PopClip and I have no plans to do so. There is a similar
-  app for Windows called [SnipDo](https://snipdo-app.com/) (formerly Pantherbar)
-  that was inspired by PopClip. However, I have no involvement with that app at
-  all.
+- **Is there a version of PopClip for Windows?** I don't make a Windows version
+  of PopClip and I have no plans to do so. There is a similar app for Windows
+  called [SnipDo](https://snipdo-app.com/) (formerly Pantherbar) that was
+  inspired by PopClip. However, I have no involvement with that app at all.
 
 ## :earth_africa: Languages and translation
 
 PopClip's user interface is developed in English and is translated into Chinese
-(Traditional and Simplified), French, Danish, Dutch, German, Italian, Japanese, Korean,
-Brazilian Portuguese, Polish, Russian, Slovak, Spanish, Ukrainian, Vietnamese and Turkish. These
-translations have been produced by a mix of paid translation services and
-volunteer users.
+(Traditional and Simplified), French, Danish, Dutch, German, Italian, Japanese,
+Korean, Brazilian Portuguese, Polish, Russian, Slovak, Spanish, Ukrainian,
+Vietnamese and Turkish. These translations have been produced by a mix of paid
+translation services and volunteer users.
 
 Users can contribute translations in their own language using the CrowdIn
 platform. If you would like to add or suggest changes to translations, please go
@@ -123,7 +100,8 @@ following people and projects:
   other contributors.
 - [linkedom](https://github.com/WebReflection/linkedom) (ISC license) by Andrea
   Giammarchi.
-- [linkifyjs](https://github.com/Hypercontext/linkifyjs) (MIT license) by SoapBox Innovations Inc.
+- [linkifyjs](https://github.com/Hypercontext/linkifyjs) (MIT license) by
+  SoapBox Innovations Inc.
 - [sanitize-html](https://github.com/apostrophecms/sanitize-html) (MIT license)
   by P'unk Avenue LLC.
 - [turndown](https://github.com/mixmark-io/turndown) (MIT license) by Dom
@@ -142,11 +120,12 @@ other projects. So the full list would be much longer.
 
 ## Legal notices
 
-**PopClip software application**<br>
-Copyright © 2011-2025 Nicholas Moore, Pilotmoon Software.<br> All rights reserved.
+**PopClip software application**<br> Copyright © 2011-2025 Nicholas Moore,
+Pilotmoon Software.<br> All rights reserved.
 
 **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**<br>
-Copyright © 2011-2025 Nicholas Moore, Pilotmoon Software.<br> This work is licensed under a
+Copyright © 2011-2025 Nicholas Moore, Pilotmoon Software.<br> This work is
+licensed under a
 [Creative Commons BY-SA 4.0 License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 **PopClip &reg;** is a registered trademark.

@@ -5,9 +5,12 @@ outline: deep
 <script setup>
 import AaLink from "/src/AaLink.vue";
 import InfoBox from "/src/InfoBox.vue";
+import GuideVersionBanner from "/src/GuideVersionBanner.vue";
 </script>
 
 # Installation
+
+<GuideVersionBanner />
 
 <InfoBox />
 
@@ -32,10 +35,10 @@ There are 2 ways to obtain PopClip:
   month. If you're a Setapp customer, PopClip is included in your subscription.
   Simply search for "PopClip" in the Setapp interface and click Install.
 
-I refer to the above two variants of PopClip as _editions_. The editions
-share the same features and abilities, and the only significant difference is
-the way you obtain the app and how you buy it. There are some minor differences,
-which I will point out where relevant.
+I refer to the above two variants of PopClip as _editions_. The editions share
+the same features and abilities, and the only significant difference is the way
+you obtain the app and how you buy it. There are some minor differences, which I
+will point out where relevant.
 
 ### Requirements
 
