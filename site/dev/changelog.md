@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## PopClip 2025.9 (5118)
 
-There were no changes to extension programming interface in this release.
+There were no changes to the extension programming interface in this release.
 
 ## PopClip 2024.12 (4688)
 
@@ -216,7 +216,7 @@ There were no changes to extension programming interface in this release.
 
 ## PopClip 2023.7 (4151)
 
-There were no changes to extension programming interface in this release.
+There were no changes to the extension programming interface in this release.
 
 ## PopClip 2022.12 (4069)
 
