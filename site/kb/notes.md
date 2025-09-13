@@ -1,3 +1,7 @@
+<script setup>
+import PageInfoBrowserList from "/src/PageInfoBrowserList.vue";
+</script>
+
 # Technical notes
 
 This page is a home for some technical details that didn't quite fit anywhere
@@ -17,7 +21,6 @@ PopClip versions are presented in the form `version string (build number)`, for
 example `2023.7 (4151)`, with the following meaning:
 
 - **Version string:**
-
   - **Production releases:** Production releases of PopClip have a version
     string in the form `year.month`, e.g. `2023.7`, corresponding to when the
     version was released. In case of multiple releases in the same month, a
@@ -74,7 +77,8 @@ Example output:
 ## Transfer extensions and settings to a different Mac
 
 Whilst there is no built in import/export or sync (yet), you can manually copy
-your existing extensions and settings to a different Mac by copying across the following:
+your existing extensions and settings to a different Mac by copying across the
+following:
 
 Extensions folder:
 
@@ -83,3 +87,20 @@ Extensions folder:
 Preferences file:
 
 `~/Library/Preferences/com.pilotmoon.popclip.plist`
+
+## Browser support for website exclusion
+
+The PopClip feature for excluding websites only works in some browsers — these
+have "Page Info" checked on the [browser support](browsers) table.
+
+✅ Website exclusion works in the following browsers:
+
+<i>
+<PageInfoBrowserList />
+</i>
+
+❌ The following browsers are **not supported**:
+
+<i>
+<PageInfoBrowserList unsupported/>
+</i>
