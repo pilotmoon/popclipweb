@@ -339,9 +339,9 @@
       "name": "Vivaldi Snapshot",
       "group": "chromium",
       "supportsAware": true,
-      "supportsPageInfo": false,
+      "supportsPageInfo": true,
       "supportsAddressBar": false,
-      "supportsBackgroundTab": false,
+      "supportsBackgroundTab": true,
       "supportsOpenIn": false,
       "bundleId": "com.vivaldi.Vivaldi.snapshot",
       "homepageUrl": "https://vivaldi.com/blog/snapshots/"
