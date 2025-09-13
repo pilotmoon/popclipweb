@@ -72,7 +72,7 @@
     {
       "name": "Dia",
       "group": "arc",
-      "supportsAware": false,
+      "supportsAware": true,
       "supportsPageInfo": false,
       "supportsAddressBar": false,
       "supportsBackgroundTab": false,
@@ -267,7 +267,7 @@
     {
       "name": "Quark",
       "group": "chrome",
-      "supportsAware": false,
+      "supportsAware": true,
       "supportsPageInfo": false,
       "supportsAddressBar": false,
       "supportsBackgroundTab": false,
@@ -338,7 +338,7 @@
     {
       "name": "Vivaldi Snapshot",
       "group": "chromium",
-      "supportsAware": false,
+      "supportsAware": true,
       "supportsPageInfo": false,
       "supportsAddressBar": false,
       "supportsBackgroundTab": false,
@@ -394,7 +394,7 @@
     {
       "name": "Zen",
       "group": "firefox",
-      "supportsAware": false,
+      "supportsAware": true,
       "supportsPageInfo": false,
       "supportsAddressBar": false,
       "supportsBackgroundTab": false,
