@@ -32,6 +32,7 @@
       "supportsAddressBar": true,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.brave.Browser.beta",
       "homepageUrl": "https://brave.com/download-beta/"
     },
@@ -43,6 +44,7 @@
       "supportsAddressBar": true,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.brave.Browser.nightly",
       "homepageUrl": "https://brave.com/download-nightly/"
     },
@@ -113,6 +115,7 @@
       "supportsAddressBar": true,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.google.Chrome.canary",
       "homepageUrl": "https://www.google.com/chrome/canary/"
     },
@@ -136,6 +139,7 @@
       "supportsAddressBar": false,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.microsoft.edgemac.Beta",
       "homepageUrl": "https://www.microsoftedgeinsider.com/welcome"
     },
@@ -147,6 +151,7 @@
       "supportsAddressBar": false,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.microsoft.edgemac.Canary",
       "homepageUrl": "https://www.microsoftedgeinsider.com/welcome?channel=canary"
     },
@@ -158,6 +163,7 @@
       "supportsAddressBar": false,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.microsoft.edgemac.Dev",
       "homepageUrl": "https://www.microsoftedgeinsider.com/welcome?channel=dev"
     },
@@ -181,6 +187,7 @@
       "supportsAddressBar": false,
       "supportsBackgroundTab": false,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "org.mozilla.firefoxdeveloperedition",
       "homepageUrl": "https://www.mozilla.org/firefox/developer/"
     },
@@ -192,6 +199,7 @@
       "supportsAddressBar": false,
       "supportsBackgroundTab": false,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "org.mozilla.nightly",
       "homepageUrl": "https://www.mozilla.org/firefox/channel/desktop/"
     },
@@ -227,6 +235,7 @@
       "supportsAddressBar": true,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.operasoftware.OperaNext",
       "homepageUrl": "https://www.opera.com/browsers/opera/beta"
     },
@@ -238,6 +247,7 @@
       "supportsAddressBar": true,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.operasoftware.OperaDeveloper",
       "homepageUrl": "https://www.opera.com/browsers/opera/beta"
     },
@@ -249,6 +259,7 @@
       "supportsAddressBar": true,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.operasoftware.OperaGX",
       "homepageUrl": "https://www.opera.com/gx"
     },
@@ -297,6 +308,7 @@
       "supportsAddressBar": true,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.apple.SafariTechnologyPreview",
       "homepageUrl": "https://developer.apple.com/safari/technology-preview/"
     },
@@ -343,6 +355,7 @@
       "supportsAddressBar": false,
       "supportsBackgroundTab": true,
       "supportsOpenIn": false,
+      "isVariant": true,
       "bundleId": "com.vivaldi.Vivaldi.snapshot",
       "homepageUrl": "https://vivaldi.com/blog/snapshots/"
     },

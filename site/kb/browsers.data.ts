@@ -11,6 +11,8 @@ export const ZBrowser = z.object({
   supportsAddressBar: z.boolean(),
   supportsBackgroundTab: z.boolean(),
   supportsOpenIn: z.boolean(),
+  // Flag for dev/beta/canary/nightly/preview builds
+  isVariant: z.boolean().optional().default(false),
 });
 type Browser = z.infer<typeof ZBrowser>;
 
