@@ -74,6 +74,12 @@ Example output:
 /Applications/Setapp/PopClip.app
 ```
 
+To delete them all:
+
+```
+mdfind -0 "kMDItemCFBundleIdentifier == 'com.pilotmoon.popclip*'" | xargs -0 -n1 rm -r
+```
+
 ## Transfer extensions and settings to a different Mac
 
 Whilst there is no built in import/export or sync (yet), you can manually copy
