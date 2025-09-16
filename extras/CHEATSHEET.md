@@ -138,8 +138,15 @@ shortcut name: My Shortcut Name
 
 ## Regex and Matching
 
-- `regex`: If set, action shows only when the selection matches. In JS, captures are in `popclip.input.regexResult`.
-- `requirements`: Common values include `text`, `urls`, `paste`. Example: `requirements: [text, paste]`.
+Order and narrowing:
+- First, `requirements` are evaluated. If you use `url`, `isurl`, `email`, or `path`, PopClip narrows the working text to that detected value and normalizes it (URLs expanded to full form, paths standardized). If any requirement is not met, the action is hidden.
+- Next, `regex` (if present) is applied to the current working text. If it matches, the match is passed to the action; otherwise the action is hidden.
+
+Access in scripts:
+- JavaScript: `popclip.input.matchedText` (narrowed), `popclip.input.regexResult` (capture array), `popclip.input.text` (full selection).
+- Shell/AppleScript: `POPCLIP_TEXT` / `{popclip text}` (narrowed), `POPCLIP_FULL_TEXT` / `{popclip full text}` (full).
+
+Tip: Prefer `requirements` for URL/email/path detection instead of custom regex.
 
 ## Options (User Settings)
 
@@ -278,4 +285,3 @@ javascript: return popclip.input.markdown
 - For URL templates, PopClip always trims and URL‑encodes the inserted text; use `clean query: true` to normalize whitespace.
 - For JS TypeScript files in packages, `.ts` is supported; return strings only.
 - Prefer Iconify/SF Symbols or short text icons for quick snippets.
-
