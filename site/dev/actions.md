@@ -151,9 +151,8 @@ PopClip evaluates filters in this order:
    text from step 1. If it matches, the regex match becomes the text passed to
    the action; if not, the action is hidden.
 
-Actions can assume they receive a valid URL, email, or path when those
-requirements are used. Scripts can still read both the final narrowed string and
-the original full selection via:
+Scripts can still read both the final narrowed string and the original full
+selection via:
 
 - Shell/AppleScript: `POPCLIP_TEXT` / `{popclip text}` (narrowed) and
   `POPCLIP_FULL_TEXT` / `{popclip full text}` (full)
