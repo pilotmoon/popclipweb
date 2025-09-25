@@ -40,14 +40,6 @@ PopClip will respond when selecting text by the following methods:
 - Click once, then **hold Shift (⇧) and click** elsewhere to select between the
   two points.
 
-::: tip Force PopClip to appear
-
-In case PopClip does not respond, **hold the Fn key or the Globe 🌐 key** (depending on your Mac model or keyboard)
-while selecting the text. This provides an extra hint to PopClip that you are
-selecting text, and in many cases this will make PopClip appear.
-
-:::
-
 ### Long press with the mouse or trackpad
 
 To make PopClip appear without selecting text, you can **long press** the mouse
@@ -103,8 +95,9 @@ are a few ways to do this:
 
 - **Disable auto-appear completely**, by turning PopClip off in settings.
 
-- **Disable auto-appear in a particular application**, by adding it to the
-  [Excluded Apps](./settings.md#excluded-apps-pane) list in PopClip settings.
+- **Disable auto-appear in a particular application or website**, by adding an
+  exclusion rule [exclusion rule](./settings.md#excluded-apps-pane) in PopClip
+  settings.
 
 - To suppress PopClip temporarily, **Hold down the Command (⌘) key** while
   selecting text with the mouse or trackpad.
