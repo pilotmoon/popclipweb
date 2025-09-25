@@ -5,12 +5,9 @@ outline: deep
 <script setup>
 import AaLink from "/src/AaLink.vue";
 import InfoBox from "/src/InfoBox.vue";
-import GuideVersionBanner from "/src/GuideVersionBanner.vue";
 </script>
 
 # Installation
-
-<GuideVersionBanner />
 
 <InfoBox />
 
@@ -42,7 +39,7 @@ will point out where relevant.
 
 ### Requirements
 
-The latest version of PopClip requires macOS 10.15 (Catalina) or later. It is
+The latest version of PopClip requires macOS 11 (Big Sur) or later. It is
 compatible with both Intel and Apple Silicon Macs.
 
 <div class="info custom-block" style="padding-top: 8px">
@@ -83,11 +80,10 @@ the PopClip app to launch it.
 
 ### Granting Accessibility permission
 
-When you first launch PopClip, its icon (initially greyed out) will appear in
-the menu bar and a message will appear on screen: _To continue, PopClip needs to
-enable Accessibility access._
+When you first launch PopClip, its settings window will appear on the on screen
+with the message: _Accessibility access is required._
 
-![Accessibility request message](./media/shot-ax-request.png "PopClip requesting Accessibility permission")
+![Accessibility request message](./media/shot-ax-request-2025.9.jpg "PopClip requesting Accessibility permission")
 
 #### Why is Accessibility permission needed?
 
@@ -102,21 +98,22 @@ action such as a web search. See also [Privacy Policy](/privacy).
 
 #### How to grant Accessibility permission
 
-Click the Enable PopClip button and a macOS dialog appears:
+Click the Request Accessibility Access button and a macOS dialog appears:
 
-![Accessibility request dialog](./media/shot-ax-dialog.jpg "macOS Accessibility Access dialog")
+![Accessibility request dialog](./media/shot-ax-dialog-tahoe.jpg "macOS Accessibility Access dialog")
 
 Now click Open System Settings and you will be taken to the Security & Privacy
-pane of System Preferences. On macOS 13.0 and above it looks like this:
+pane of System Settingscurl. On macOS 26.0 and above it looks like this:
 
-![Accessibility settings](./media/shot-ax-settings.png "macOS Accessibility settings in the Privacy & Security pane")
+![Accessibility settings](./media/shot-ax-settings-tahoe.jpg "macOS Accessibility settings in the Privacy & Security pane")
 
 Toggle the slider for PopClip to on. You will be prompted to enter your password
 to confirm the change.
 
-Finally, PopClip will show the Welcome to PopClip message:
+After access is granted, the General settings pane will change to show its full
+contents:
 
-![Welcome to PopClip](./media/shot-welcome.png "Welcome to PopClip message")
+![Welcome to PopClip](./media/shot-general-welcome.jpg "General settings revealed")
 
 Next, we will put PopClip though its paces!
 
