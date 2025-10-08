@@ -24,10 +24,9 @@ The following is a summary of the commonly needed parts.
 
 #### Readonly Properties
 
-Scripts can access the selected text and other input via the following readonly
-properties of the
-[`popclip`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html)
-global:
+Scripts can access the selected text and other input via properties of the
+[`popclip global`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html). Commonly used properties are:
+
 
 - `popclip.input.text`: the full plain text selection
 - `popclip.input.matchedText`: the part of the text matching the requirement or
@@ -39,7 +38,8 @@ global:
 - `popclip.input.markdown`: the markdownified html (if `capture html` is set)
 - `popclip.input.data.urls`: array of detected web URLs
 - `popclip.context.browserUrl`, `popclip.context.browserTitle`: browser page URL
-  and title, if available.
+  and title, if available
+- `popclip.context.appName`, `popclip.context.appIdentifier`: app name and bundle identifier
 - `popclip.modifiers.command`, `popclip.modifiers.option`,
   `popclip.modifiers.shift`, `popclip.modifiers.control`: booleans for modifier
   keys pressed
