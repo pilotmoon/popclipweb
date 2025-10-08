@@ -1,22 +1,37 @@
 ---
 titleTemplate: :title — PopClip Developer
 ---
+
 # Script variables
 
-When calling a script from a PopClip extension, the script receives a set of variables that describe the context in which the action was triggered. These variables are available in JavaScript, Shell Script, and AppleScript actions.
+When calling a script from a PopClip extension, the script receives a set of
+variables that describe the context in which the action was triggered. These
+variables are available in JavaScript, Shell Script, and AppleScript actions.
 
 ## JavaScript variables
 
-In JavaScript, you access variables in the `popclip` global object. See [JavaScript environment](https://www.popclip.app/dev/js-environment).
+In JavaScript, you access variables as properties under the `popclip` global.
+See:
+
+- [`popclip.input`](https://pilotmoon.github.io/popclip-types/interfaces/Input.html)
+  (e.g. `popclip.input.text`)
+- [`popclip.context`](https://pilotmoon.github.io/popclip-types/interfaces/Context.html)
+  (e.g. `popclip.context.browserUrl`)
+- [`popclip.options`](https://pilotmoon.github.io/popclip-types/interfaces/Options.html)
+- [`popclip.modifiers`](https://pilotmoon.github.io/popclip-types/interfaces/Modifiers.html)
+
+See also [JavaScript environment](https://www.popclip.app/dev/js-environment).
 
 ## Shell Script and AppleScript variables
 
-All values are provided as strings. Where no value is available, it will be set to an empty string.
+All values are provided as strings. Where no value is available, it will be set
+to an empty string.
 
-Within a shell script, PopClip sets script variables named like this: `POPCLIP_TEXT`,
-`POPCLIP_BROWSER_TITLE`, `POPCLIP_OPTION_FOO`, etc.
+Within a shell script, PopClip sets script variables named like this:
+`POPCLIP_TEXT`, `POPCLIP_BROWSER_TITLE`, `POPCLIP_OPTION_FOO`, etc.
 
-Within an AppleScript, PopClip pre-processes the script to replace placeholders with strings. Placeholders look like this: `{popclip text}`,
+Within an AppleScript, PopClip pre-processes the script to replace placeholders
+with strings. Placeholders look like this: `{popclip text}`,
 `{popclip browser title}`, `{popclip option foo}`, etc.
 
 ### Available variables
