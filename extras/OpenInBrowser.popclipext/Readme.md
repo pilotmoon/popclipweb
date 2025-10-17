@@ -9,6 +9,7 @@ The extension has an action for each of the following browsers:
 - Firefox
 - Arc
 - Brave
+- Comet
 - DEVONagent Pro
 - Dia
 - DuckDuckGo
@@ -36,6 +37,10 @@ from <https://github.com/zen-browser/branding>. Quark icon from
 <https://logodad.com/svg/quark-browser>.
 
 ## Changelog
+
+### 2025-10-17
+
+- Add Comet browser.
 
 ### 2025-07-16
 

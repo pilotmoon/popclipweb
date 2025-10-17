@@ -60,6 +60,18 @@
       "homepageUrl": "https://www.chromium.org/"
     },
     {
+      "name": "Comet",
+      "group": "chromium",
+      "supportsAware": false,
+      "supportsPageInfo": false,
+      "supportsAddressBar": false,
+      "supportsBackgroundTab": false,
+      "supportsOpenIn": true,
+      "bundleId": "ai.perplexity.comet",
+      "homepageUrl": "https://www.perplexity.ai/comet",
+      "icon": "icons/comet-browser.svg"
+    },
+    {
       "name": "DEVONagent Pro",
       "group": "other",
       "supportsAware": true,

@@ -5,11 +5,11 @@
 // icon: mdi-open-in-browser.svg
 // entitlements: [dynamic]
 // description: >-
-//   Open URLs in a specific browser. Supports Safari, Chrome, Firefox, Arc, Brave, Dia,
-//   DEVONagent Pro, DuckDuckGo, Edge, Mullvad, Opera, Orion, Quark, Tor Browser, Vivaldi,
-//   Waterfox and Zen.
+//   Open URLs in a specific browser. Supports Safari, Chrome, Firefox, Arc, Brave, Comet,
+//   Dia, DEVONagent Pro, DuckDuckGo, Edge, Mullvad, Opera, Orion, Quark, Tor Browser,
+//   Vivaldi, Waterfox and Zen.
 // keywords: >-
-//   Safari Chrome Firefox Arc Brave Dia DEVONagent Pro DuckDuckGo Edge Mullvad Opera
+//   Safari Chrome Firefox Arc Brave Comet Dia DEVONagent Pro DuckDuckGo Edge Mullvad Opera
 //   Orion Quark Tor Browser Vivaldi Waterfox Zen
 
 import { browsers } from "./browsers.json";
