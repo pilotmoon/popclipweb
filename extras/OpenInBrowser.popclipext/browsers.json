@@ -132,6 +132,18 @@
       "homepageUrl": "https://www.google.com/chrome/canary/"
     },
     {
+      "name": "Helium",
+      "group": "chromium",
+      "supportsAware": false,
+      "supportsPageInfo": false,
+      "supportsAddressBar": false,
+      "supportsBackgroundTab": false,
+      "supportsOpenIn": true,
+      "bundleId": "net.imput.helium",
+      "homepageUrl": "https://helium.computer/",
+      "icon": "icons/helium-browser.svg"
+    },
+    {
       "name": "Microsoft Edge",
       "group": "chromium",
       "supportsAware": true,

@@ -14,6 +14,7 @@ The extension has an action for each of the following browsers:
 - Dia
 - DuckDuckGo
 - Edge
+- Helium
 - Mullvad
 - Opera
 - Orion
@@ -34,9 +35,13 @@ Icons from Font Awesome Brands and Simple Icons via Iconify. Arc browser icon
 from <https://logotyp.us/logo/arc-browser/>. Waterfox icon from
 <https://commons.wikimedia.org/wiki/File:Waterfox_logo_in_2023.png>. Zen icon
 from <https://github.com/zen-browser/branding>. Quark icon from
-<https://logodad.com/svg/quark-browser>.
+<https://logodad.com/svg/quark-browser>. Helium icon SVG from Helium website.
 
 ## Changelog
+
+### 2025-10-18
+
+- Add Helium browser.
 
 ### 2025-10-17
 
