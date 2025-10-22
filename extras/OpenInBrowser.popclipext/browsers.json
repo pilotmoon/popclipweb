@@ -49,6 +49,17 @@
       "homepageUrl": "https://brave.com/download-nightly/"
     },
     {
+      "name": "ChatGPT Atlas",
+      "group": "chromium",
+      "supportsAware": false,
+      "supportsPageInfo": false,
+      "supportsAddressBar": false,
+      "supportsBackgroundTab": false,
+      "supportsOpenIn": false,
+      "bundleId": "com.openai.atlas",
+      "homepageUrl": "https://chatgpt.com/atlas/"
+    },
+    {
       "name": "Chromium",
       "group": "chromium",
       "supportsAware": true,
