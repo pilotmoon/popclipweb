@@ -55,9 +55,10 @@
       "supportsPageInfo": false,
       "supportsAddressBar": false,
       "supportsBackgroundTab": false,
-      "supportsOpenIn": false,
+      "supportsOpenIn": true,
       "bundleId": "com.openai.atlas",
-      "homepageUrl": "https://chatgpt.com/atlas/"
+      "homepageUrl": "https://chatgpt.com/atlas/",
+      "icon": "icons/compass.svg"
     },
     {
       "name": "Chromium",

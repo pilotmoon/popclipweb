@@ -9,6 +9,7 @@ The extension has an action for each of the following browsers:
 - Firefox
 - Arc
 - Brave
+- ChatGPT Atlas
 - Comet
 - DEVONagent Pro
 - Dia
@@ -36,8 +37,14 @@ from <https://logotyp.us/logo/arc-browser/>. Waterfox icon from
 <https://commons.wikimedia.org/wiki/File:Waterfox_logo_in_2023.png>. Zen icon
 from <https://github.com/zen-browser/branding>. Quark icon from
 <https://logodad.com/svg/quark-browser>. Helium icon SVG from Helium website.
+Compass icon for ChatGPT Atlas is `location-compass-1` by
+[Streamline](https://www.streamlinehq.com/).
 
 ## Changelog
+
+### 2025-10-22
+
+- Add ChatGPT Atlas browser.
 
 ### 2025-10-18
 
