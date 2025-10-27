@@ -25,6 +25,7 @@ const pinned = data.production.filter((r) => r.pin);
 <Download
 name="PopClip"
 :ver="prod.versionString"
+:build="prod.version"
 :date="prod.date"
 :size="prod.size"
 :os="prod.minimumSystemVersion"
@@ -64,7 +65,7 @@ type.
 
 <ul>
   <li v-for="r in pinned">
-    <b>PopClip {{ r.versionString }}</b> ({{ formatDate(r.date) }})<br>
+    <b>PopClip {{ r.versionString }}</b> ({{ r.version }}) {{ formatDate(r.date) }}<br>
     Requires macOS {{ r.minimumSystemVersion }} or above. {{ formatArchs(r.archs) }}.<br>
     <DownloadButton :href="r.url" size="smaller" theme="outline" />&ensp;Zip file, {{ formatSize(r.size) }}
   </li>

@@ -3,6 +3,7 @@ import { formatDate, formatSize, formatArchs } from "./helpers/formatters";
 const props = defineProps<{
   name: string;
   ver: string;
+  build: number;
   date: string;
   notes: string;
   os: string;
@@ -17,14 +18,11 @@ const props = defineProps<{
   <div :class="$style.downloadBox">
     <div>
       <span :class="$style.promote"> {{ props.name }} {{ props.ver }}</span
-      ><span v-if="channel !== 'production'" :class="$style.splash"
-        >&ensp; {{ channel }}</span
+      ><span> ({{ build }})</span><span v-if="channel !== 'production'" :class="$style.splash">&ensp; {{ channel }}</span
       >&ensp;{{ formatDate(props.date) }}&ensp;
       <a :href="props.notes">Release notes</a>
     </div>
-    <div style="margin: 6px 0 0 0">
-      Requires macOS {{ props.os }} or above. {{ formatArchs(props.archs) }}.
-    </div>
+    <div style="margin: 6px 0 0 0">Requires macOS {{ props.os }} or above. {{ formatArchs(props.archs) }}.</div>
     <div style="margin: 8px 0 0 0">
       <DownloadButton :href="props.url" size="small" />&ensp; Zip file,
       {{ formatSize(props.size) }}
