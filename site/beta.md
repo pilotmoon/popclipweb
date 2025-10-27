@@ -15,8 +15,8 @@ const beta = data.beta[0];
 # PopClip Beta
 
 Anyone is welcome to use the beta release, a preview of the next version of
-PopClip. The beta release is more likely to contain bugs. Please report any
-issues you find.
+PopClip. Beta releases are more frequent and let you get early access to new
+features and fixes. Please report any bugs you find.
 
 :::tip Beta access
 for&nbsp;<SetappIcon style="fill: var(--vp-c-text-1); display: inline-block; height:16px; vertical-align: middle; margin: 0 -7px 0 -3px;" />&nbsp;<AaLink cfg="setapp.referralUrl">Setapp</AaLink>
@@ -48,6 +48,8 @@ existing copy of the PopClip app. PopClip beta will preserve your current
 settings and extensions.
 
 ## Beta Version History
+
+See also: [Production Version History](/changelog)
 
 <div :class="$style.history">
 <Changelog channel="beta" />
