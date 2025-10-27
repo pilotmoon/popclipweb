@@ -25,8 +25,8 @@ The following is a summary of the commonly needed parts.
 #### Readonly Properties
 
 Scripts can access the selected text and other input via properties of the
-[`popclip global`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html). Commonly used properties are:
-
+[`popclip global`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html).
+Commonly used properties are:
 
 - `popclip.input.text`: the full plain text selection
 - `popclip.input.matchedText`: the part of the text matching the requirement or
@@ -39,7 +39,8 @@ Scripts can access the selected text and other input via properties of the
 - `popclip.input.data.urls`: array of detected web URLs
 - `popclip.context.browserUrl`, `popclip.context.browserTitle`: browser page URL
   and title, if available
-- `popclip.context.appName`, `popclip.context.appIdentifier`: app name and bundle identifier
+- `popclip.context.appName`, `popclip.context.appIdentifier`: app name and
+  bundle identifier
 - `popclip.modifiers.command`, `popclip.modifiers.option`,
   `popclip.modifiers.shift`, `popclip.modifiers.control`: booleans for modifier
   keys pressed
@@ -128,7 +129,8 @@ available in a browser environment:
 - [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
   [clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
 - [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone)
-- [TextEncoder](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder) (`encode()` method only, `utf-8` encoding only).
+- [TextEncoder](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder)
+  (`encode()` method only, `utf-8` encoding only).
 
 Additionally, from the Node.js environment:
 
@@ -141,23 +143,27 @@ All of the above functions and classes are accessible in the global scope.
 Some libraries from [NPM](https://www.npmjs.org/) are bundled within the PopClip
 app itself, and are available to load by scripts. These are:
 
-| Library                    | Version | Description                    |
-| -------------------------- | ------- | ------------------------------ |
-| axios                      | 1.6.7   | HTTP client                    |
-| case-anything              | 2.1.13  | Case conversion library        |
-| content-type               | 1.0.5   | Parse HTTP Content-Type header |
-| dom-serializer             | 2.0.0   | HTML serializer                |
-| emoji-regex                | 10.3.0  | Emoji regular expression       |
-| entities                   | 4.5.0   | HTML entity encoder/decoder    |
-| fast-json-stable-stringify | 2.1.0   | Stable JSON stringify          |
-| htmlparser2                | 9.1.0   | HTML parser                    |
-| js-yaml                    | 4.1.0   | YAML parser                    |
-| linkedom                   | 0.16.8  | DOM implementation             |
-| linkifyjs                  | 4.1.3   | Detect web links in text       |
-| oauth-1.0a                 | 2.2.6   | OAuth 1.0a library             |
-| rot13-cipher               | 1.0.0   | ROT13 cipher                   |
-| sanitize-html              | 2.12.1  | HTML sanitizer                 |
-| turndown                   | 7.1.2   | HTML to Markdown converter     |  
+| Library                      | Version | Description                              |
+| ---------------------------- | ------- | ---------------------------------------- |
+| `axios`                      | 1.12.2  | HTTP client                              |
+| `buffer`                     | 6.0.3   | Node-compatible `Buffer` implementation  |
+| `case-anything`              | 2.1.13  | Case conversion utilities                |
+| `content-type`               | 1.0.5   | Parse HTTP `Content-Type` headers        |
+| `dom-serializer`             | 2.0.0   | Serialize DOM nodes to HTML              |
+| `emoji-regex`                | 10.5.0  | Regular expression matching emojis       |
+| `entities`                   | 7.0.0   | HTML entity encoder/decoder              |
+| `fast-json-stable-stringify` | 2.1.0   | Deterministic JSON stringify             |
+| `fast-plist`                 | 0.1.3   | Parse and serialize macOS property lists |
+| `htmlparser2`                | 10.0.0  | HTML parser                              |
+| `js-yaml`                    | 4.1.0   | YAML parser                              |
+| `linkedom`                   | 0.18.12 | Lightweight DOM implementation           |
+| `linkifyjs`                  | 4.3.2   | Detect and linkify URLs in text          |
+| `oauth-1.0a`                 | 2.2.6   | OAuth 1.0a signing helpers               |
+| `rot13-cipher`               | 1.0.0   | ROT13 encoder/decoder                    |
+| `sanitize-html`              | 2.17.0  | HTML sanitizer                           |
+| `sucrase`                    | 3.35.0  | Fast TypeScript/JS transformer           |
+| `turndown`                   | 7.2.1   | HTML to Markdown converter               |
+| `valibot`                    | 1.1.0   | Validation and parsing library           |
 
 Library modules may be loaded by name, for example:
 
@@ -352,8 +358,7 @@ extension code. I recommend [Bun](https://bun.sh/):
 bun install --dev typescript @popclip/types
 ```
 
-And then, in your `tsconfig.json` file, add an explicit reference to the
-types:
+And then, in your `tsconfig.json` file, add an explicit reference to the types:
 
 ```json
 {
