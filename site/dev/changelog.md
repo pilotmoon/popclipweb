@@ -21,6 +21,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 </div>
 
+## PopClip 2025.9.2 (5155)
+
+- Disable JavaScript inspectability in Safari by default. (Enable with
+  `defaults write com.pilotmoon.popclip EnableJSInspection -bool true`.)
+- JavaScript: Updated bundled npm libraries to latest versions.
+- JavaScript: Added `valibot` and `fast-plist` to bundled npm libraries.
+
 ## PopClip 2025.9 (5118)
 
 There were no changes to the extension programming interface in this release.
