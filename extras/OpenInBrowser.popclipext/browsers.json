@@ -149,7 +149,7 @@
       "supportsAware": true,
       "supportsPageInfo": true,
       "supportsAddressBar": true,
-      "supportsBackgroundTab": false,
+      "supportsBackgroundTab": true,
       "supportsOpenIn": true,
       "bundleId": "net.imput.helium",
       "homepageUrl": "https://helium.computer/",
