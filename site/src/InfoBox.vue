@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
-import { loadLocalAppInfo, useLocalAppInfo } from "./composables/useLocalAppInfo";
+// import { computed, onMounted } from "vue";
+// import { loadLocalAppInfo, useLocalAppInfo } from "./composables/useLocalAppInfo";
 import PopClipVersion from "./PopClipVersion.vue";
 
-const localAppInfo = useLocalAppInfo();
-const shouldShowInfoBox = computed(() => {
-  const edition = localAppInfo.health.value?.releaseEdition;
-  return !(edition && edition !== "appstore");
-});
-onMounted(() => {
-  loadLocalAppInfo();
-});
+// -- removed due to chrome warning on connecting to local devices --
+// const localAppInfo = useLocalAppInfo();
+// const shouldShowInfoBox = computed(() => {
+//   const edition = localAppInfo.health.value?.releaseEdition;
+//   return !(edition && edition !== "appstore");
+// });
+// onMounted(() => {
+//   loadLocalAppInfo();
+// });
+
+const shouldShowInfoBox = true;
 </script>
 
 <template>

@@ -31,7 +31,7 @@ const releases = computed(() => {
       </h2>
       <div :class="$style.info">
         <DownloadButton v-if="release.url && release.size && !release.zap && (release.pin || index < 5)" :href="release.url" size="smaller" theme="outline" />
-        <ElTag v-if="release.size" type="">{{ formatSize(release.size) }}</ElTag>
+        <ElTag v-if="release.size">{{ formatSize(release.size) }}</ElTag>
         <ElTag v-if="release.minimumSystemVersion" type="success">≥ macOS {{ release.minimumSystemVersion }}</ElTag>
         <ElTag v-if="release.archs?.includes('i386')" type="warning">Intel 32-bit</ElTag>
         <ElTag v-if="release.archs?.includes('x86_64')" type="warning">Intel 64-bit</ElTag>
