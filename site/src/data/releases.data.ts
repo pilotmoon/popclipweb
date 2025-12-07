@@ -30,16 +30,16 @@ declare const data: Data;
 export { data };
 
 export default defineLoader({
-  load
+  load,
 });
 
-export async function load():  Promise<Data> {
+export async function load(): Promise<Data> {
   // use respective CMS client library if needed
   const { data: dataProd } = await axios.get(
-    "https://pilotmoon.com/popclip/releases.json",
+    "https://pilotmoon.com/meta/popclip-releases.json",
   );
   const { data: dataBeta } = await axios.get(
-    "https://pilotmoon.com/popclip/releases-beta.json",
+    "https://pilotmoon.com/meta/popclip-releases-beta.json",
   );
   const result = {
     production: ZReleases.parse(dataProd),
