@@ -27,7 +27,8 @@ id="g$(git rev-parse HEAD | cut -c 1-11)"
 # the full destination path
 dest="${SSH_USER}@${SSH_HOST}:$site_dir/${id}"
 echo "Sending files to ${dest}"
-rsync -avzc "${src}/" "${dest}"
+# Ensure the remote folder mirrors the local build, even when reusing the same id.
+rsync -avzc --delete-delay "${src}/" "${dest}"
 
 # complete the deployment on the server
 ssh ${SSH_USER}@${SSH_HOST} 'bash -s' <<END_SCRIPT
