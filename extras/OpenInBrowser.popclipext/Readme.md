@@ -16,6 +16,7 @@ The extension has an action for each of the following browsers:
 - DuckDuckGo
 - Edge
 - Helium
+- iCab
 - Mullvad
 - Opera
 - Orion
@@ -41,6 +42,10 @@ Compass icon for ChatGPT Atlas is `location-compass-1` by
 [Streamline](https://www.streamlinehq.com/).
 
 ## Changelog
+
+### 2026-02-26
+
+- Add iCab browser.
 
 ### 2025-10-22
 

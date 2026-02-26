@@ -156,6 +156,18 @@
       "icon": "icons/helium-browser.svg"
     },
     {
+      "name": "iCab",
+      "group": "other",
+      "supportsAware": false,
+      "supportsPageInfo": false,
+      "supportsAddressBar": false,
+      "supportsBackgroundTab": false,
+      "supportsOpenIn": true,
+      "bundleId": "de.icab.iCab",
+      "homepageUrl": "https://www.icab.de/",
+      "icon": "icons/icab.svg"
+    },
+    {
       "name": "Microsoft Edge",
       "group": "chromium",
       "supportsAware": true,
