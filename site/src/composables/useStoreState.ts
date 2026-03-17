@@ -5,8 +5,8 @@ import { useLogger } from "../composables/useLogger";
 import config from "../config/config.json";
 import { getCountryInfo } from "../helpers/countries/getCountryInfo";
 import { getMacAppStoreUrl } from "../helpers/getMacAppStoreUrl";
-import { useDeploymentInfo } from "./useDeploymentInfo";
 import { readParams } from "../helpers/readParams";
+import { useDeploymentInfo } from "./useDeploymentInfo";
 
 const log = useLogger();
 
@@ -123,6 +123,7 @@ function formatCurrency(value: number, currencyCode: string) {
 
 function preprocessProducts(productData: ProductsResult) {
   const result: Record<string, ProcessedProduct> = {};
+  const configuredProducts = config.pilotmoon.paddleProducts;
   for (const [key, product] of Object.entries(productData.products)) {
     let coupon: string | null = null;
     let displayDiscount: string | null = null;
@@ -141,11 +142,13 @@ function preprocessProducts(productData: ProductsResult) {
     let isDiscounted = false;
     let message: string | null = null;
     const productConfig =
-      config.pilotmoon.paddleProducts[productData.products[key].product];
-    if (productConfig.message) {
+      configuredProducts[
+        productData.products[key].product as keyof typeof configuredProducts
+      ];
+    if ("message" in productConfig) {
       message = productConfig.message;
     }
-    if (productConfig.fullPrice) {
+    if ("fullPrice" in productConfig) {
       displayListPrice = formatCurrency(
         productConfig.fullPrice,
         productConfig.fullPriceCurrency,
