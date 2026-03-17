@@ -3,8 +3,9 @@
   "scripts": {
     "docs:dev": "./makeEnv && source .env && vitepress dev site",
     "docs:preview": "./makeEnv && source .env && vitepress preview site",
-    "docs:build": "./makeEnv && source .env && npm run docs:build-ci",
-    "docs:build-ci": "npx patch-package && vitepress build site"
+    "docs:build": "bun run check && ./makeEnv && source .env && npm run docs:build-ci",
+    "docs:build-ci": "npx patch-package && vitepress build site",
+    "check": "bunx tsc --noEmit"
   },
   "dependencies": {
     "@ant-design/icons-vue": "6.1.0",
