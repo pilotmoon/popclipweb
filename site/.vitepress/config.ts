@@ -1,7 +1,8 @@
-import { defineConfig } from "vitepress";
-import imageFigures from "markdown-it-image-figures";
 import { html5Media } from "markdown-it-html5-media";
+import imageFigures from "markdown-it-image-figures";
 import ElementPlus from "unplugin-element-plus/vite";
+import { defineConfig } from "vitepress";
+import mediaFigures from "./markdown/mediaFigures.ts";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -14,8 +15,9 @@ export default defineConfig({
     hostname: "https://www.popclip.app",
   },
   themeConfig: {
-    footer: {      
-      copyright: 'Copyright © 2011-2025 Nicholas Moore, <a href="https://pilotmoon.com/about/">Pilotmoon Software</a>',
+    footer: {
+      copyright:
+        'Copyright © 2011-2025 Nicholas Moore, <a href="https://pilotmoon.com/about/">Pilotmoon Software</a>',
     },
     search: {
       provider: "algolia",
@@ -105,8 +107,7 @@ export default defineConfig({
               items: [
                 {
                   text: "API reference",
-                  link:
-                    "https://pilotmoon.github.io/popclip-types/modules.html",
+                  link: "https://pilotmoon.github.io/popclip-types/modules.html",
                 },
               ],
             },
@@ -191,6 +192,7 @@ export default defineConfig({
         figcaption: "title",
         copyAttrs: "^class$",
       });
+      md.use(mediaFigures);
     },
   },
   vite: {
