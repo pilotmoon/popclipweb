@@ -2,10 +2,6 @@
 outline: deep
 ---
 
-<script setup>
-import GuideVersionBanner from '/src/GuideVersionBanner.vue'
-</script>
-
 <GuideVersionBanner />
 
 # Basic Usage
@@ -15,10 +11,10 @@ to appear and disappear, and control when it can show up.
 
 ## Make PopClip appear
 
-### Select text with the mouse or trackpad
+### Appear when selecting text
 
-PopClip runs in the background and waits for you to select text with your mouse
-or trackpad.
+Whenever "Appear automatically" is turned on in settings, PopClip runs in the
+background and waits for you to select text with your mouse or trackpad.
 
 **Try it:** Drag the pointer over some text to select it. PopClip will appear
 automatically.
@@ -35,23 +31,32 @@ for help.
 PopClip will respond when selecting text by the following methods:
 
 - **Drag the pointer** over the text.
-- **Double-click** a word to select it.
-- **Triple-click** to select a whole paragraph.
+- **Double-click** a word to select it (or double-click and drag).
+- **Triple-click** to select a whole line or paragraph (or triple-click and
+  drag).
 - Click once, then **hold Shift (⇧) and click** elsewhere to select between the
   two points.
 
-### Long press with the mouse or trackpad
+PopClip will not appear when selecting text purely with the keyboard, for
+example, holding Shift and pressing Arrow keys. In that situation, you can
+trigger PopClip with the keyboard shortcut.
 
-To make PopClip appear without selecting text, you can **long press** the mouse
-or trackpad button. PopClip appears after you hold the button for 0.5 seconds.
+### Appear without selecting text
+
+To make PopClip appear _without_ selecting text, you can **long press** the
+mouse or trackpad button. PopClip appears after you hold the button for 0.5
+seconds.
 
 ![](./media/anim-insert-1.mp4 "A long press makes PopClip appear without a a selection.")
 
-### Activate with a keyboard shortcut
+For the long press trigger to work, "Appear automatically" must be turned on in
+settings.
+
+### Appear with keyboard shortcut
 
 In PopClip's settings, you can
 [set a keyboard shortcut](./settings#keyboard-shortcut) for making PopClip
-appear.
+appear. This works even when "Appear automatically" is turned off.
 
 When activated with the keyboard shortcut, PopClip appears in keyboard control
 mode. PopClip's bar will respond to keyboard input as follows:
@@ -64,14 +69,7 @@ mode. PopClip's bar will respond to keyboard input as follows:
 
 ![](./media/anim-keyboard-2.mp4 "Selecting actions using the arrow keys and Return.")
 
-::: tip Works always!
-
-PopClip's keyboard shortcut works even when PopClip is turned off, or disabled
-in the current app.
-
-:::
-
-### Activate with AppleScript
+### Appear with AppleScript
 
 For integration with other tools, you can also
 [make PopClip appear using AppleScript](/kb/applescript).
@@ -93,7 +91,8 @@ make it disappear without selecting an action by doing one of the following:
 Sometimes, you might want to prevent PopClip from appearing automatically. There
 are a few ways to do this:
 
-- **Disable auto-appear completely**, by turning PopClip off in settings.
+- **Disable auto-appear completely**, by turning off "Appear automatically" in
+  settings.
 
 - **Disable auto-appear in a particular application or website**, by adding an
   exclusion rule [exclusion rule](./settings.md#excluded-apps-pane) in PopClip

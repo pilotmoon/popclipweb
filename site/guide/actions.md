@@ -2,12 +2,6 @@
 outline: deep
 ---
 
-<script setup>
-import GuideVersionBanner from '/src/GuideVersionBanner.vue'
-</script>
-
-<GuideVersionBanner />
-
 # Actions
 
 The buttons that appear in the PopClip bar perform **actions**. PopClip comes
@@ -50,7 +44,7 @@ any formatting from the text.
 
 **Settings:**
 
-![](./media/shot-prefs-copy-2.png#pref "Copy settings.")
+![](./media/shot-settings-copy.png#pref "Copy settings.")
 
 - **Show as Icon**: When enabled, shows the actions's button as an icon instead
   of text.
@@ -58,8 +52,8 @@ any formatting from the text.
 ### <InlineIcon spec="bundle:search" /> Search
 
 The Search action opens a web search for the selected text. The default search
-engine is Google (except if your Mac's region is China, in
-which case it's Baidu). You can change the search engine in the actions's settings.
+engine is Google (except if your Mac's region is China, in which case it's
+Baidu). You can change the search engine in the actions's settings.
 
 Searches open in the current app if it is a [known browser](/kb/browsers), or
 else in the system default browser.
@@ -70,13 +64,14 @@ Always available, subject to a maximum length limit.
 
 **Modifiers:**
 
-Hold **Shift (⇧)** to open the search in a background tab, in [supported browsers](/kb/browsers).
+Hold **Shift (⇧)** to open the search in a background tab, in
+[supported browsers](/kb/browsers).
 
 Hold **Option (⌥)** to use the alternate search engine, if set.
 
 **Settings:**
 
-![](./media/shot-prefs-search-2.png#pref "Search settings.")
+![](./media/shot-settings-search.png#pref "Search settings.")
 
 - **Search URL**: The URL of the search engine. The placeholder `***` will be
   replaced with the selected text. For example, the default Google search URL is
@@ -96,7 +91,8 @@ URLs open in the current app if it is a [known browser](/kb/browsers), or else
 in the system default browser.
 
 In addition to web URLs, PopClip detects single instances of the following URL
-schemes: `bluesky:`, `craftdocs:`, `evernote:`, `ftp:`, `hook:`, `message:`, `omnifocus:`, `spotify:`, `x-devonthink-item`.
+schemes: `bluesky:`, `craftdocs:`, `evernote:`, `ftp:`, `hook:`, `message:`,
+`omnifocus:`, `spotify:`, `x-devonthink-item`.
 
 **Try it:** `https://apple.com` `xkcd.com`
 `spotify:track:421Gp1eSmOIcD6alTWowFR`
@@ -108,7 +104,8 @@ text itself; links that are behind hyperlinks cannot be detected.
 
 **Modifiers:**
 
-Hold **Shift (⇧)** to open the URLs in a background tab, in [supported browsers](/kb/browsers).
+Hold **Shift (⇧)** to open the URLs in a background tab, in
+[supported browsers](/kb/browsers).
 
 Hold **Option (⌥)** to copy the URLs to the clipboard as a list, instead of
 opening them.
@@ -196,7 +193,7 @@ replacing the text.
 
 **Settings:**
 
-![](./media/shot-prefs-spelling-3.png#pref "Spelling settings.")
+![](./media/shot-settings-spelling.png#pref "Spelling settings.")
 
 - **Languages**: You can select up to two languages for spellchecking, choosing
   from any that are available on the operating system. If you only want to check
