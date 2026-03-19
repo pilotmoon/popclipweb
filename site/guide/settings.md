@@ -4,6 +4,7 @@ outline: deep
 
 <script setup>
 import SetappInline from '/src/SetappInline.vue'
+import StatusIconInline from '/src/StatusIconInline.vue'
 </script>
 
 # Settings
@@ -12,7 +13,7 @@ This page gives an overview of PopClip's status menu and settings window.
 
 ## The status menu
 
-PopClip's status menu is accessed by clicking the <InlineIcon spec="bundle:status-icon-thicker" /> icon in the menu bar.
+PopClip's status menu is accessed by clicking the&#x00A0;<StatusIconInline /> icon in the menu bar.
 
 ![](./media/shot-status-menu.png "PopClip menu bar icon and status menu.")
 
@@ -29,7 +30,7 @@ PopClip in the Applications folder while it is already running.
 
 The settings window has three tabs: <InlineIcon spec="symbol:lightswitch.off.square.fill" />
 **General**, <InlineIcon spec="symbol:puzzlepiece.extension" />
-**Actions** and <InlineIcon spec="bundle:status-icon-thicker" /> **App**.
+**Actions** and <StatusIconInline /> **App**.
 
 ## <InlineIcon spec="symbol:lightswitch.off.square.fill" /> General tab
 
@@ -120,7 +121,7 @@ down in the list.
 The Spelling action is always at the top of the list and can't be moved.
 :::
 
-## <InlineIcon spec="bundle:status-icon-thicker" /> App tab
+## <StatusIconInline /> App tab
 
 ![](./media/shot-settings-app.png#pref "App tab.")
 
@@ -129,7 +130,7 @@ application-wide settings.
 
 The top of the tab shows the version and edition of PopClip you are using. The
 links underneath open the PopClip website <InlineIcon spec="symbol:globe" />,
-this user guide <InlineIcon spec="symbol:book.closed" />, a new email message to the developer (me) <InlineIcon spec="symbol:envelope" />, and the [PopClip Forum](https://forum.popclip.app/) <InlineIcon spec="symbol:bubble.left.and.bubble.right" />.
+this user guide <InlineIcon spec="symbol:book.closed" />, a new email message to the developer <InlineIcon spec="symbol:envelope" />, and the [PopClip Forum](https://forum.popclip.app/) <InlineIcon spec="symbol:bubble.left.and.bubble.right" />.
 
 ### Software Update
 
