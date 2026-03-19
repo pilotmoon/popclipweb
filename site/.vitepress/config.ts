@@ -17,7 +17,7 @@ export default defineConfig({
   themeConfig: {
     footer: {
       copyright:
-        'Copyright © 2011-2025 Nicholas Moore, <a href="https://pilotmoon.com/about/">Pilotmoon Software</a>',
+        'Copyright © 2011-2026 Nicholas Moore, <a href="https://pilotmoon.com/about/">Pilotmoon Software</a>',
     },
     search: {
       provider: "algolia",
