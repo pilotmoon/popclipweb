@@ -175,6 +175,5 @@ because PopClip access and updates are managed by Setapp.
 The <InlineIcon spec="symbol:line.3.horizontal" /> menu provides these
 commands:
 
-- <InlineIcon spec="symbol:ant" /> **Debug Console...** opens a console showing debug output that can help with
-  diagnosing problems.
+- <InlineIcon spec="symbol:ant" /> **Debug Console...** opens a console showing debug output that can help with diagnosing problems.
 - <InlineIcon spec="symbol:door.left.hand.open" /> **Quit PopClip** quits PopClip. Shortcut: `⌘Q`
