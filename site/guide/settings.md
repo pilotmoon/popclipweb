@@ -25,8 +25,13 @@ The status menu has three items:
 
 ## The settings window
 
-You can open the settings window from the status menu, or by double-clicking
-PopClip in the Applications folder while it is already running.
+You can open the settings window from the status menu, by double-clicking
+PopClip in the Applications folder while it is already running, or with
+[AppleScript](/kb/applescript).
+
+:::tip Keyboard shortcuts
+When the settings window has focus, press `⌘W` to close it or `⌘Q` to quit PopClip.
+:::
 
 The settings window has three tabs: <InlineIcon spec="symbol:lightswitch.off.square.fill" />
 **General**, <InlineIcon spec="symbol:puzzlepiece.extension" />
@@ -38,7 +43,7 @@ The settings window has three tabs: <InlineIcon spec="symbol:lightswitch.off.squ
 
 The General tab contains the settings for when PopClip appears and how it looks.
 
-### Appear automatically
+### <InlineIcon spec="symbol:pointer.arrow.motionlines" /> Appear automatically
 
 When enabled, PopClip appears automatically when you
 [select text with the pointer](./basics#appear-when-selecting-text), or when
@@ -47,7 +52,7 @@ PopClip only appears when you trigger it manually with the [keyboard shortcut](#
 
 <a id="excluded-apps-pane"></a>
 
-### Rules
+### <InlineIcon spec="symbol:nosign" /> Rules
 
 Click **Apps...** or **Websites...** to choose where PopClip should not appear
 automatically.
@@ -57,7 +62,7 @@ Website rules only work in supported browsers. See
 [Browser support for website exclusion](/kb/notes#browser-support-for-website-exclusion).
 :::
 
-### Keyboard shortcut
+### <InlineIcon spec="symbol:keyboard" /> Keyboard shortcut
 
 Set a keyboard shortcut for making PopClip appear. See
 [Appear with a keyboard shortcut](./basics#appear-with-a-keyboard-shortcut)
@@ -128,14 +133,21 @@ The Spelling action is always at the top of the list and can't be moved.
 The App tab contains information about your copy of PopClip, along with
 application-wide settings.
 
-The top of the tab shows the version and edition of PopClip you are using. The
+The top of the tab shows the version and edition of PopClip you are using (Standalone or Setapp). The
 links underneath open the PopClip website <InlineIcon spec="symbol:globe" />,
 this user guide <InlineIcon spec="symbol:book.closed" />, a new email message to the developer <InlineIcon spec="symbol:envelope" />, and the [PopClip Forum](https://forum.popclip.app/) <InlineIcon spec="symbol:bubble.left.and.bubble.right" />.
 
 ### Software Update
 
-In the Standalone edition, the **Software Update** section shows whether you are
-up to date and lets you check for updates manually.
+In the Standalone edition, the **Software Update** section shows whether PopClip
+is up to date and when it last checked for updates.
+
+The <InlineIcon spec="symbol:arrow.clockwise" /> menu button provides update options:
+
+- <InlineIcon spec="symbol:arrow.clockwise" /> **Check for updates** checks immediately. Shortcut: `⌘R`
+- **Automatic updates** lets you choose **Off**, **Notify only** or
+  **Install automatically**.
+- **Include beta versions** controls whether to consider beta versions when checking for updates.
 
 ### Your License
 
@@ -159,3 +171,10 @@ because PopClip access and updates are managed by Setapp.
 - **Show in menu bar:** When enabled, the PopClip icon is shown in your menu
   bar. To show PopClip's settings again after disabling this option,
   double-click PopClip in the Applications folder while it is running.
+
+The <InlineIcon spec="symbol:line.3.horizontal" /> menu button provides these
+additional commands:
+
+- <InlineIcon spec="symbol:ant" /> **Debug Console...** opens a console showing debug output that can help with
+  diagnosing problems.
+- <InlineIcon spec="symbol:door.left.hand.open" /> **Quit PopClip** quits PopClip. Shortcut: `⌘Q`
