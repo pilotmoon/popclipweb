@@ -5,7 +5,8 @@
     "docs:preview": "./makeEnv && source .env && vitepress preview site",
     "docs:build": "bun run check && ./makeEnv && source .env && npm run docs:build-ci",
     "docs:build-ci": "npx patch-package && vitepress build site",
-    "check": "bunx tsc --noEmit"
+    "check": "bunx tsc --noEmit",
+    "format:md": "prettier --write \"**/*.md\""
   },
   "dependencies": {
     "@ant-design/icons-vue": "6.1.0",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@types/canvas-confetti": "1.9.0",
     "@types/js-yaml": "4.0.9",
-    "@types/node": "20.4.7"
+    "@types/node": "20.4.7",
+    "prettier": "^3.6.2"
   }
 }

@@ -8,8 +8,8 @@ lastUpdated: false
 import Download from '/src/Download.vue';
 import AaLink from "/src/AaLink.vue";
 import InfoBox from '/src/InfoBox.vue';
+import SetappInline from '/src/SetappInline.vue'
 import { data } from "/src/data/releases.data";
-import { SetappIcon } from 'vue3-simple-icons'
 import { formatDate, formatSize, formatArchs } from "/src/helpers/formatters";
 
 const prod = data.production[0];
@@ -46,8 +46,7 @@ The trial is fully functional and includes all features for 250 uses.
 <!-- If you already bought PopClip from the&nbsp;<AppstoreIcon style="fill: var(--vp-c-text-1); display: inline-block; height:16px; vertical-align: middle; margin:  0 -4px 0 -3px;" />&nbsp;<AaLink cfg="mas.storeUrl">Mac App Store</AaLink>, you can sign in to the store and install PopClip
 again for free. -->
 
-If you're
-a&nbsp;<SetappIcon style="fill: var(--vp-c-text-1); display: inline-block; height:16px; vertical-align: middle; margin: 0 -7px 0 -3px;" />&nbsp;<AaLink cfg="setapp.referralUrl">Setapp</AaLink>
+If you're a <SetappInline><AaLink cfg="setapp.referralUrl">Setapp</AaLink></SetappInline>
 subscriber, PopClip is included in your subscription. You can install PopClip
 from the Setapp app.
 

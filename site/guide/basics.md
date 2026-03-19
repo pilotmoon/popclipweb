@@ -2,9 +2,7 @@
 outline: deep
 ---
 
-<GuideVersionBanner />
-
-# Basic Usage
+# Basics
 
 This page will teach you the fundamentals of PopClip: how to get the PopClip bar
 to appear and disappear, and control when it can show up.
@@ -52,7 +50,7 @@ seconds.
 For the long press trigger to work, "Appear automatically" must be turned on in
 settings.
 
-### Appear with keyboard shortcut
+### Appear with a keyboard shortcut
 
 In PopClip's settings, you can
 [set a keyboard shortcut](./settings#keyboard-shortcut) for making PopClip
@@ -94,9 +92,8 @@ are a few ways to do this:
 - **Disable auto-appear completely**, by turning off "Appear automatically" in
   settings.
 
-- **Disable auto-appear in a particular application or website**, by adding an
-  exclusion rule [exclusion rule](./settings.md#excluded-apps-pane) in PopClip
-  settings.
+- **Disable auto-appear in a particular application or website**, by adding a
+  [rule](./settings.md#excluded-apps-pane) in PopClip settings.
 
 - To suppress PopClip temporarily, **Hold down the Command (⌘) key** while
   selecting text with the mouse or trackpad.

@@ -129,7 +129,7 @@ export default defineConfig({
           text: "User Guide",
           items: [
             { text: "Installation", link: "/guide/install" },
-            { text: "Basic Usage", link: "/guide/basics" },
+            { text: "Basics", link: "/guide/basics" },
             { text: "Actions", link: "/guide/actions" },
             { text: "Settings", link: "/guide/settings" },
             { text: "Extensions", link: "/guide/extensions" },

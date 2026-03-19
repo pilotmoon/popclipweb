@@ -13,7 +13,8 @@
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "ignore": ["**/*.md"]
   },
   "files": {
     "ignore": ["./site/.vitepress", "./site/public"]
