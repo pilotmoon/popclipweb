@@ -48,7 +48,7 @@ The General tab contains the settings for when PopClip appears and how it looks.
 When enabled, PopClip appears automatically when you
 [select text with the pointer](./basics#appear-when-selecting-text), or when
 you [click and hold](./basics#appear-without-selecting-text). When disabled,
-PopClip only appears when you trigger it manually with the [keyboard shortcut](#keyboard-shortcut) or [AppleScript](/kb/applescript).
+PopClip appears only when you trigger it manually with the [keyboard shortcut](#keyboard-shortcut) or [AppleScript](/kb/applescript).
 
 <a id="excluded-apps-pane"></a>
 
@@ -109,9 +109,9 @@ For details about the built-in actions and their settings, see
 
 ### Action settings
 
-You can enable or disable actions by checking or un-checking the box next to the
-action name. Click the cog button (<InlineIcon spec="bundle:gear" />) next to
-the action name to access that action's settings.
+Turn actions on or off using the checkbox next to each action name. Click the
+cog button (<InlineIcon spec="bundle:gear" />) next to an action name to access
+that action's settings.
 
 Click **Get Extensions** to open the [extensions directory](/extensions/).
 
@@ -130,19 +130,19 @@ The Spelling action is always at the top of the list and can't be moved.
 
 ![](./media/shot-settings-app.png#pref "App tab.")
 
-The App tab contains information about your copy of PopClip, along with
-application-wide settings.
+The App tab contains information about your copy of PopClip and app-wide
+settings.
 
-The top of the tab shows the version and edition of PopClip you are using (Standalone or Setapp). The
+The top of the tab shows your PopClip version and edition (Standalone or Setapp). The
 links underneath open the PopClip website <InlineIcon spec="symbol:globe" />,
-this user guide <InlineIcon spec="symbol:book.closed" />, a new email message to the developer <InlineIcon spec="symbol:envelope" />, and the [PopClip Forum](https://forum.popclip.app/) <InlineIcon spec="symbol:bubble.left.and.bubble.right" />.
+this user guide <InlineIcon spec="symbol:book.closed" />, an email to the developer <InlineIcon spec="symbol:envelope" />, and the [PopClip Forum](https://forum.popclip.app/) <InlineIcon spec="symbol:bubble.left.and.bubble.right" />.
 
 ### Software Update
 
 In the Standalone edition, the **Software Update** section shows whether PopClip
 is up to date and when it last checked for updates.
 
-The <InlineIcon spec="symbol:arrow.clockwise" /> menu button provides update options:
+The <InlineIcon spec="symbol:arrow.clockwise" /> menu provides these options:
 
 - <InlineIcon spec="symbol:arrow.clockwise" /> **Check for updates** checks immediately. Shortcut: `⌘R`
 - **Automatic updates** lets you choose **Off**, **Notify only** or
@@ -172,8 +172,8 @@ because PopClip access and updates are managed by Setapp.
   bar. To show PopClip's settings again after disabling this option,
   double-click PopClip in the Applications folder while it is running.
 
-The <InlineIcon spec="symbol:line.3.horizontal" /> menu button provides these
-additional commands:
+The <InlineIcon spec="symbol:line.3.horizontal" /> menu provides these
+commands:
 
 - <InlineIcon spec="symbol:ant" /> **Debug Console...** opens a console showing debug output that can help with
   diagnosing problems.
