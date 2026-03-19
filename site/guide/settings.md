@@ -12,7 +12,7 @@ This page gives an overview of PopClip's status menu and settings window.
 
 ## The status menu
 
-PopClip's status menu is accessed by clicking the <InlineIcon spec="bundle:status-icon" /> icon in the menu bar.
+PopClip's status menu is accessed by clicking the <InlineIcon spec="bundle:status-icon-thicker" /> icon in the menu bar.
 
 ![](./media/shot-status-menu.png "PopClip menu bar icon and status menu.")
 
@@ -29,7 +29,7 @@ PopClip in the Applications folder while it is already running.
 
 The settings window has three tabs: <InlineIcon spec="symbol:lightswitch.off.square.fill" />
 **General**, <InlineIcon spec="symbol:puzzlepiece.extension" />
-**Actions** and <InlineIcon spec="bundle:status-icon" /> **App**.
+**Actions** and <InlineIcon spec="bundle:status-icon-thicker" /> **App**.
 
 ## <InlineIcon spec="symbol:lightswitch.off.square.fill" /> General tab
 
@@ -120,7 +120,7 @@ down in the list.
 The Spelling action is always at the top of the list and can't be moved.
 :::
 
-## <InlineIcon spec="bundle:status-icon" /> App tab
+## <InlineIcon spec="bundle:status-icon-thicker" /> App tab
 
 ![](./media/shot-settings-app.png#pref "App tab.")
 
