@@ -140,7 +140,7 @@ this user guide <InlineIcon spec="symbol:book.closed" />, an email to the develo
 ### Software Update
 
 In the Standalone edition, the **Software Update** section shows whether PopClip
-is up to date and when it last checked for updates.
+is up to date and lets you control updates.
 
 The <InlineIcon spec="symbol:arrow.clockwise" /> menu provides these options:
 
