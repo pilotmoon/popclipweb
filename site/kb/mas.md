@@ -39,10 +39,10 @@ killall PopClip; brew reinstall popclip --force
 
 :::
 
-You can confirm the unlocked status by clicking View License in the About pane
-of PopClip's settings menu.
+You can confirm the license status by viewing the license details in the App pane
+of PopClip's settings window.
 
-![](./media/shot-mas-license-2.jpg "Standalone edition recognizing the MAS purchase")
+![](./media/shot-mas-license-3.jpg "Standalone edition recognizing the MAS purchase")
 
 ## ...I get this weird macOS error though
 
@@ -112,12 +112,11 @@ iCloud account on the new Mac.
   distribution is different.
 
 - **How can I tell which edition of PopClip I have?**<br>In the PopClip
-  preferences window, the About pane shows the edition of PopClip you are using.
+  preferences window, the App or About pane shows the edition of PopClip you are using.
 
 - **After migrating, what kind of license do I have exactly?**<br>For MAS
   customers who have migrated to the Standalone edition, I will apply the
   published [update policy](/terms#update-policy). In summary:
-
   - _Purchased from MAS on or after January 1, 2023:_ This will be treated as
     equivalent to a lifetime license for update purposes.
 
@@ -129,5 +128,3 @@ iCloud account on the new Mac.
   offering all MAS customers a 50% discount on the Lifetime License, which can
   be purchased on the [buy](/buy) page. Please send proof of your MAS purchase
   to my [support email](/support).
-
-![](./media/shot-2024-3-about.png "About pane for PopClip 2024.3, Standalone edition")
