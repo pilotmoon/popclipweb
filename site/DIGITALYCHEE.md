@@ -6,22 +6,22 @@ prev: false
 next: false
 ---
 
-# DIGITALYCHEE Authorization Statement
+# 授权证明 — Authorization Certificate
 
-<img src="./media/digitalycheelogo.png" alt="DIGITALYCHEE Logo" width="200" style="margin-top: 32px" />
+<img src="./media/digitalychee.webp" alt="DIGITALYCHEE Logo" width="200" style="margin-top: 32px" />
 
-## 授权证明
+**Pilotmoon Software 授权「数码荔枝」为大中国区官方合作伙伴**
 
-**Pilotmoon Software** 授权 **苏州荔枝数码科技有限公司** 为中国区官方合作伙伴，  
-并享有本公司旗下正版软件 **PopClip** 在中国的销售资质。  
-该合作伙伴的商城名为 「**数码荔枝正版软件**」商城，  
-商城网址为：<https://lizhi.shop>, <https://digitalychee.taobao.com>  
-请勿在其他未经授权的网站购买我们的软件。  
-我们不再为这样的顾客提供任何售后服务，  
-包括：密钥找回、版本更新、技术支持。
+We authorize DIGITALYCHEE as our official partner in China
 
-<!-- ![Logo](/hp/img/lizhi.png) -->
+**负责以下软件在中国的销售事宜**
 
-## AUTHORIZATION CERTIFICATE
+Responsible for the sales of the following product(s)
 
-We, Pilotmoon Software, the developer of PopClip, authorize DIGITALYCHEE TECHNOLOGY CO, LTD as our official partner in China, and it owns the right to sell our copyrighted software on their store: <https://lizhi.shop>, <https://digitalychee.taobao.com>. Please don't purchase our products from any other websites. Purchases from unauthorized websites will not receive official customer support, such as license retrieval, software updates, and technical assistance.
+**PopClip**
+
+**该合作伙伴的销售渠道**
+
+Authorized Sales Channels
+
+[lizhi.shop](https://lizhi.shop/) / [digitalychee.taobao.com](https://digitalychee.taobao.com/)
