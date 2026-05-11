@@ -6,9 +6,11 @@ prev: false
 next: false
 ---
 
-# 授权证明 — Authorization Certificate
+<img src="./media/digitalychee.webp" alt="DIGITALYCHEE Logo" width="200" style="margin: 32px 0" />
 
-<img src="./media/digitalychee.webp" alt="DIGITALYCHEE Logo" width="200" style="margin-top: 32px" />
+# 授权证明
+
+Authorization Certificate
 
 **Pilotmoon Software 授权「数码荔枝」为大中国区官方合作伙伴**
 
