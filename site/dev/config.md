@@ -119,7 +119,6 @@ of the extension itself. All properties are optional except `name`.
 | `macos version`       | String               | Minimum version number of Mac OS X needed by this extension. For example `10.8.2` or `11.0`.                                                                                                                                                                     |
 | `popclip version`     | Integer              | Minimum PopClip version required. This is the integer build number e.g. `4151`. Specifying the current PopClip version here can help preserve your extension's functionality in future, because PopClip applies backward-compatibility rules for old extensions. |
 | `options`             | Array                | Array of dictionaries defining the options for this extension, if any. See [The `options` array](#the-options-array).                                                                                                                                            |
-| `options title`       | String (Localizable) | Title to appear at the top of the options window. Default is `Options for <extension name>`.                                                                                                                                                                     |
 | `entitlements`        | Array                | Only applies to JavaScript extensions. The possible values are `network` (allows use of XMLHttpRequest) and `dynamic` (allows dynamically generated actions).                                                                                                    |
 | `action` or `actions` | Dictionary or Array  | A dictionary or array of dictionaries defining the action(s) for this extension. See [Actions](./actions).                                                                                                                                                       |
 
@@ -168,13 +167,13 @@ following structure.
 
 The `type` field of an option dictionary can be one of the following:
 
-| Type       | Description                                                                          |
-| ---------- | ------------------------------------------------------------------------------------ |
-| `string`   | A text field.                                                                        |
-| `boolean`  | A checkbox.                                                                          |
-| `multiple` | A multiple choice list. The `values` field must be provided.                         |
-| `secret`   | Concealed text entry. The value persisted in the keychain.                           |
-| `heading`  | Acts as a heading to group options together.                                         |
+| Type       | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| `string`   | A text field.                                                |
+| `boolean`  | A checkbox.                                                  |
+| `multiple` | A multiple choice list. The `values` field must be provided. |
+| `secret`   | Concealed text entry. The value persisted in the keychain.   |
+| `heading`  | Acts as a heading to group options together.                 |
 
 ## Config notes
 
@@ -216,7 +215,7 @@ The following language codes are supported:
 ::: info Example of localized string
 
 ```yaml
-name: 
+name:
   en: My Extension
   fr: Mon Extension
   zh-hans: 我的扩展
