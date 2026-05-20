@@ -151,29 +151,29 @@ saved in PopClip's preferences on behalf of the extension. Options appear in the
 UI in the order they appear in the `options` array. An option dictionary has the
 following structure.
 
-| Key             | Type                 | Required?                    | Description                                                                                                                                                                                                                                                       |
-| --------------- | -------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier`    | String               | Required                     | Identifying string for this option. This is passed to your script. The identifier will be downcased or upcased for AppleScript and Shell Script targets, respectively — see [Script variables](./script-variables.md).                                            |
-| `type`          | String               | Required                     | See [Option types](#option-types).                                                                                                                                                                                                                                |
-| `label`         | String (Localizable) | Optional                     | The label to appear in the UI for this option. If omitted, the identifier is displayed.                                                                                                                                                                           |
-| `description`   | String (Localizable) | Optional                     | A longer description to appear in the UI to explain this option.                                                                                                                                                                                                  |
-| `default value` | String               | Optional                     | This field specifies the default value of the option. If omitted, `string` options default to the empty string, `boolean` options default to `true`, and `multiple` options default to the top item in the list. A `password` field may not have a default value. |
-| `values`        | Array                | Required for `multiple` type | Array of strings representing the possible values for the multiple choice option.                                                                                                                                                                                 |
-| `value labels`  | Array                | Optional                     | Array of "human friendly" strings corresponding to the multiple choice values. This is used only in the PopClip options UI, and is not passed to the script. If omitted, the option values themselves are shown.                                                  |
-| `inset`         | Boolean              | Optional                     | If true, the option field will be shown inset to the right of the label, instead of under it. Default is false.                                                                                                                                                   |
-| `icon`          | String               | Optional                     | For `boolean` options only. Specify an icon to appear next to the check box.                                                                                                                                                                                      |
+| Key             | Type                 | Required?                    | Description                                                                                                                                                                                                                                                     |
+| --------------- | -------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier`    | String               | Required                     | Identifying string for this option. This is passed to your script. The identifier will be downcased or upcased for AppleScript and Shell Script targets, respectively — see [Script variables](./script-variables.md).                                          |
+| `type`          | String               | Required                     | See [Option types](#option-types).                                                                                                                                                                                                                              |
+| `label`         | String (Localizable) | Optional                     | The label to appear in the UI for this option. If omitted, the identifier is displayed.                                                                                                                                                                         |
+| `description`   | String (Localizable) | Optional                     | A longer description to appear in the UI to explain this option.                                                                                                                                                                                                |
+| `default value` | String               | Optional                     | This field specifies the default value of the option. If omitted, `string` options default to the empty string, `boolean` options default to `true`, and `multiple` options default to the top item in the list. A `secret` field may not have a default value. |
+| `values`        | Array                | Required for `multiple` type | Array of strings representing the possible values for the multiple choice option.                                                                                                                                                                               |
+| `value labels`  | Array                | Optional                     | Array of "human friendly" strings corresponding to the multiple choice values. This is used only in the PopClip options UI, and is not passed to the script. If omitted, the option values themselves are shown.                                                |
+| `inset`         | Boolean              | Optional                     | If true, the option field will be shown inset to the right of the label, instead of under it. Default is false.                                                                                                                                                 |
+| `icon`          | String               | Optional                     | For `boolean` options only. Specify an icon to appear next to the check box.                                                                                                                                                                                    |
 
 #### Option types
 
 The `type` field of an option dictionary can be one of the following:
 
-| Type       | Description                                                  |
-| ---------- | ------------------------------------------------------------ |
-| `string`   | A text field.                                                |
-| `boolean`  | A checkbox.                                                  |
-| `multiple` | A multiple choice list. The `values` field must be provided. |
-| `secret`   | Concealed text entry. The value persisted in the keychain.   |
-| `heading`  | Acts as a heading to group options together.                 |
+| Type       | Description                                                               |
+| ---------- | ------------------------------------------------------------------------- |
+| `string`   | A text field.                                                             |
+| `boolean`  | A checkbox.                                                               |
+| `multiple` | A multiple choice list. An array of `values` strings must be provided.    |
+| `secret`   | Concealed text entry. The value is persisted in the keychain.             |
+| `heading`  | Shows as a text heading in the settings user interface. Carries no value. |
 
 ## Config notes
 
