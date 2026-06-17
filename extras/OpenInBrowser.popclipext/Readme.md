@@ -14,6 +14,7 @@ The extension has an action for each of the following browsers:
 - DEVONagent Pro
 - Dia
 - DuckDuckGo
+- Ecosia
 - Edge
 - Helium
 - iCab
@@ -42,6 +43,10 @@ Compass icon for ChatGPT Atlas is `location-compass-1` by
 [Streamline](https://www.streamlinehq.com/).
 
 ## Changelog
+
+### 2026-06-17
+
+- Add Ecosia browser.
 
 ### 2026-02-26
 

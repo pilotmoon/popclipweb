@@ -120,6 +120,18 @@
       "icon": "icons/simple-icons-duckduckgo.svg"
     },
     {
+      "name": "Ecosia",
+      "group": "chromium",
+      "supportsAware": true,
+      "supportsPageInfo": true,
+      "supportsAddressBar": true,
+      "supportsBackgroundTab": true,
+      "supportsOpenIn": true,
+      "bundleId": "org.ecosia.browser",
+      "homepageUrl": "https://www.ecosia.org/browser",
+      "icon": "icons/simple-icons-ecosia.svg"
+    },
+    {
       "name": "Google Chrome",
       "group": "chromium",
       "supportsAware": true,
