@@ -2,80 +2,106 @@
 editLink: false
 ---
 
-# Privacy Policy
+# PopClip Privacy Policy
 
 ## Introduction
 
 I am [Nicholas Moore](https://pilotmoon.com/about), a sole trader in the United
 Kingdom doing business using the trading name Pilotmoon Software. I run an
-independent software business and make my income by selling Mac apps. No part of
-my business involves gathering your personal data, tracking you, or targeting
-ads at you. I only collect information as necessary to provide my services to
-you, as described below.
-
-## Buying from the Mac App Store
-
-When you buy my product from the Mac App Store, your order will be processed by
-Apple. Apple does not pass any of your personal information on to me. Therefore,
-I cannot assist with individual Mac App Store orders; order inquiries should be
-directed to [Apple Support](https://getsupport.apple.com/).
+independent software business and make my income by selling Mac apps. I have no
+interest in gathering your personal data, tracking you, or targeting
+ads at you. I only collect information as necessary to provide PopClip and
+its supporting services to you.
 
 ## Buying a license key
 
-When you buy a license key for my product, your order will be processed by a
+When you buy a license key for PopClip, your order will be processed by a
 reseller. I use [Paddle](https://paddle.com/) as my reseller worldwide and
 [Digitalychee](https://lizhi.io/) in China. The reseller will pass me your name
 and email address, which will be encoded as part of your license key. I retain
 this information so I can help you if you contact me about an order.
 
-## Using my apps
+## Subscribing via Setapp
 
-Some features of my apps require an internet connection. I do not want to be
-responsible for storing sensitive data, and so my apps are designed to avoid
-sending data to my own servers wherever possible. None of my apps send any data
-away from your device except as described below or where otherwise explicitly
+PopClip is also available through the [Setapp](https://setapp.com) subscription
+platform. When you access PopClip via Setapp, your usage is subject to Setapp's
+privacy policy. Setapp does not pass me your personal details.
+
+## Using PopClip
+
+Some features of PopClip involve access to the internet. I do not want to be
+responsible for storing sensitive data, so PopClip is designed to avoid
+sending sensitive data to my own servers wherever possible. PopClip never sends
+any data away from your device except as described below, or where explicitly
 indicated within the app.
 
-### Extensions
+### Using extensions
 
-Some of my apps offer the ability to install extensions that interact with
-third-party services on the internet. (For example, "send to Instapaper" or
-"translate with Google Translate".) All such communication occurs directly
+PopClip offers the ability to install extensions that interact with
+third-party services on the internet. All such communication occurs directly
 between your device and the third party using secure HTTPS APIs; my servers do
 not act as an intermediary. Your use of these extensions is subject to the
 policies of the relevant third-party services.
 
-Where extensions require login details such as a username and password, these
-are stored locally on your device in the operating system's secure keychain.
-Your login details are never sent to my servers.
+### Stored secrets
 
-### Update checking
+Some extensions save secrets such as passwords, auth tokens, or API keys.
+PopClip stores these secrets in Apple's secure iCloud Keychain. Stored secrets
+are never sent to my servers.
 
-My apps include update-checking functionality. When auto-update is on, the app
-will periodically contact my web server to see if an update is available. Update
-checking may send me anonymous system information, such as the app version and
-operating system version. You can disable update checking within the app's
-preferences.
+### iCloud sync
+
+PopClip includes iCloud sync functionality backed by Apple's CloudKit
+infrastructure. CloudKit syncs your installed extensions, actions layout, and
+action settings (except secrets). Access to sync is via your iCloud account
+(as set up in System Settings) and is subject to Apple's privacy policies.
+
+### Icon library access
+
+PopClip includes icons from [Iconify](https://iconify.design/), a library of
+open source icons. PopClip retrieves icon files directly from Iconify's servers
+(`api.iconify.design`). Iconify's privacy policy applies.
+
+### Automatic updates
+
+PopClip includes automatic update functionality. When auto-update is on, the
+app will periodically contact my web server (`softwareupdate.pilotmoon.com`
+for app updates, and `public.popclip.app` for extension updates) to see if any
+updates are available. Update checking sends the information listed in
+[App profile data](#app-profile-data). You can disable update
+checking within the app's preferences.
+
+### Upgrade eligibility checks
+
+PopClip includes buttons that link to discounted license upgrade offer pages
+hosted on my website. These links embed the information listed in
+[App profile data](#app-profile-data).
+
+### App profile data
+
+PopClip sends the following information to my servers when performing update
+checks and generating upgrade links:
+
+- app installation identifier (a random GUID generated per install)
+- macOS version
+- app version and edition
+- preferred system language
+- App Store country code
+- App Store purchase date (if applicable)
+- license key identifier (a SHA1 hash of your license key, if applicable)
+
+This data is processed for the purpose of understanding installed user base
+statistics, validating upgrade eligibility, and detecting leaked license keys.
 
 ### Crash reporting
 
-My apps have crash-reporting functionality. If a crash occurs, the app will send
-the technical details of the crash to me to help me fix it. Crash reporting
-functionality is provided by [Microsoft App Center](https://appcenter.ms/).
-
-### Analytics
-
-My apps have analytics functionality. When enabled, the app will report
-anonymous usage data to me, including the type of computer, the version of
-macOS, the number of times the app is used, the number of times each feature
-within the app is used, and the identifiers of other applications you interact
-with using the app. This helps me improve the app and improve compatibility with
-other apps. No personal information or user data is recorded. Analytics
-functionality is provided by [Microsoft App Center](https://appcenter.ms/).
+PopClip has crash reporting functionality. If a crash occurs, the app will send
+the technical details of the crash to me to help me fix it. Crash reports are
+sent directly to my server (`crashreport.pilotmoon.com`).
 
 ### Log files
 
-My apps keep local log files for debugging and diagnostic purposes. These logs
+PopClip keeps local log files for debugging and diagnostic purposes. These logs
 may record the actions you take within the app. All log files stay on your
 device.
 
@@ -100,27 +126,21 @@ The PopClip forum (<https://forum.popclip.app>) is self-hosted using
 [Discourse](https://www.discourse.org/) software. The forum contains its own
 [privacy notice](https://forum.popclip.app/privacy).
 
-## Mailing list
-
-I have a mailing list for sending out marketing emails. You will not be added to
-my mailing list unless you explicitly request to be added. You can unsubscribe
-yourself from the mailing list at any time. My mailing list provider is
-[MailChimp](https://mailchimp.com/).
-
 ## Other third-party services
 
 I also use the following third-party vendors to provide my services to you:
 
-- My web hosts are [Gandi](https://www.gandi.net/) and
-  [DigitalOcean](htts://digitalocean.com).
+- My web host is [DigitalOcean](https://digitalocean.com).
 - My email host is [Fastmail](https://www.fastmail.com/).
 - I use [Groove](https://groovehq.com/) to manage my email help desk.
 - I use [GitHub](https://www.github.com/pilotmoon/) to host public code
   repositories and track issues.
-- I use [PayPal](https://www.paypal.com/) to accept payments and donations.
-- I use [X](https://twitter.com/) to communicate with you.
+- I use [Buy me a Coffee](https://buymeacoffee.com/pilotmoon) to accept
+  donations.
 
 ## Changes to this policy
 
 This privacy policy may be updated from time to time. I will always publish the
 latest version here on my website.
+
+[View history of Privacy Policy changes on GitHub](https://github.com/pilotmoon/popclipweb/commits/main/site/privacy.md)
