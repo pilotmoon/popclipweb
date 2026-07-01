@@ -5,9 +5,11 @@ import { usePurchaseInfo } from "./composables/usePurchaseInfo";
 import { useTitle } from "@vueuse/core";
 import config from "./config/config.json";
 import { useDeploymentInfo } from "./composables/useDeploymentInfo";
+import { useLogger } from "./composables/useLogger";
 import { formatDate } from "/src/helpers/formatters";
 import { kaboom } from "/src/helpers/confetti";
 
+const log = useLogger();
 const purchaseInfo = usePurchaseInfo();
 const title = useTitle();
 const timestamp = new Date().toISOString();
@@ -27,24 +29,29 @@ const state = ref(State.Loading);
 
 onMounted(async () => {
   if (!purchaseInfo.flowId.value) {
+    log("[license] no flowId in session — checkout did not complete here, or session was lost");
     state.value = State.NoSession;
     title.value = "Session Expired";
     return;
   }
+  log(`[license] polling for license, flowId=${purchaseInfo.flowId.value}, mode=${sandbox ? "test" : "live"}`);
   for (; countdown.value > 0; countdown.value -= 1) {
     try {
       await loadLicenseKey();
       if (licenseKey.value) {
+        log("[license] license received from backend", licenseKey.value);
         state.value = State.Done;
         kaboom();
         return;
       }
+      log(`[license] poll ${61 - countdown.value}: backend has no license yet (webhook may not have fired)`);
     } catch (e) {
-      console.error(e);
+      console.error("[license] poll error", e);
       lastError = e.message;
     }
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
+  log("[license] gave up after polling — backend never produced a license for this flowId");
   state.value = State.Failed;
 });
 
@@ -54,9 +61,10 @@ async function loadLicenseKey() {
     : config.pilotmoon.frontendRoot;
   const flowId = purchaseInfo.flowId.value;
   const mode = sandbox ? "test" : "live";
-  const fetchResponse = await fetch(
-    `${endpoint}/store/getLicense?flowId=${flowId}&mode=${mode}`,
-  );
+  const url = `${endpoint}/store/getLicense?flowId=${flowId}&mode=${mode}`;
+  log(`[license] GET ${url}`);
+  const fetchResponse = await fetch(url);
+  log(`[license] getLicense responded ${fetchResponse.status}`);
   if (!fetchResponse.ok) {
     throw new Error(`HTTP fetch failed, code ${fetchResponse.status}`);
   }

@@ -52,6 +52,12 @@ const component = computed(() => {
   text-decoration: none;
 }
 
+.Button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .Button .ButtonInner {
   height: 40px;
 }

@@ -111,10 +111,12 @@ const ZProcessedProduct = z.object({
   coupon: z.string().nullable(),
   message: z.string().nullable(),
   productId: z.number(),
+  priceNet: z.number(), // net unit price, for computing offer-discounted prices client-side
+  currency: z.string(),
 });
 type ProcessedProduct = z.infer<typeof ZProcessedProduct>;
 
-function formatCurrency(value: number, currencyCode: string) {
+export function formatCurrency(value: number, currencyCode: string) {
   return new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: currencyCode,
@@ -173,6 +175,8 @@ function preprocessProducts(productData: ProductsResult) {
       coupon,
       message,
       productId: product.paddleData.product_id,
+      priceNet: product.paddleData.price.net,
+      currency: product.paddleData.currency,
     };
     result[key] = processed;
   }

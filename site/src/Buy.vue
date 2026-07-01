@@ -1,27 +1,19 @@
 <script setup type="ts">
 import { onMounted, computed } from "vue";
-import { loadScript } from "./helpers/loadScript";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { loadStore, useStoreState } from "./composables/useStoreState";
-import { usePurchaseInfo } from "./composables/usePurchaseInfo";
-import { useDeploymentInfo } from "./composables/useDeploymentInfo";
-import { useLogger } from "./composables/useLogger";
+import { usePaddleCheckout } from "./composables/usePaddleCheckout";
 import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
-import { useData } from "vitepress";
-import { z } from "zod";
 
-const { isDark } = useData();
-const log = useLogger();
 const store = useStoreState();
-const purchaseInfo = usePurchaseInfo();
 
 const isLizhi = computed(() =>
      config.lizhi.countries.includes(store.countryCode.value),
 );
-const sandbox = useDeploymentInfo().isLocalhost;
+const { openCheckout } = usePaddleCheckout();
 
 function queryBool(val) {
   return val === "" || val === "1";
@@ -34,94 +26,10 @@ onMounted(() => {
   }
 });
 
-async function initPaddle() {
-     await loadScript(config.paddle.script);
-  if (sandbox) {
-    Paddle.Environment.set("sandbox");
-  }
-  Paddle.Setup({
-    vendor: config.paddle.vendorId,
-    eventCallback: async (args) => {
-      log("Paddle event", args);
-      if (args.event === "Checkout.Complete") {
-        checkoutComplete(args);
-      }
-    },
-  });
-}
-
-function checkoutComplete(args) {
-  const eventData = z
-    .object({
-      checkout: z.object({
-        passthrough: z.string().optional(),
-      }),
-      user: z.object({
-        email: z.string(),
-        country: z.string(),
-      }),
-    })
-    .safeParse(args.eventData);
-
-  if (!eventData.success) {
-    log("Error parsing checkout data", eventData.error);
-    return;
-  }
-
-  let passthrough_obj;
-  try {
-    passthrough_obj = JSON.parse(eventData.data.checkout.passthrough);
-  } catch (e) {
-    log("Error parsing passthrough data", e);
-  }
-  passthrough_obj = z
-    .object({
-      flow_id: z.string().min(24).optional(),
-    })
-    .safeParse(passthrough_obj);
-  if (!passthrough_obj.success) {
-    log("Error getting passthrough data", passthrough_obj.error);
-    return;
-  }
-
-  if (!passthrough_obj.data.flow_id) {
-    log("No flow_id in passthrough data");
-    return;
-  }
-
-  // redirect
-  purchaseInfo.flowId.value = passthrough_obj.data.flow_id;
-  purchaseInfo.userEmail.value = eventData.data.user.email;
-  purchaseInfo.userCountry.value = eventData.data.user.country;
-  window.location.href = "/purchase-complete";
-}
-
-async function generateRandomKey() {
-  if (window.crypto) {
-    return window.crypto.randomUUID();
-  }
-}
-
 async function openPaddleCheckout(product) {
-  await initPaddle();
   const coupon = readParams().get("coupon") ?? null;
   const email = readParams().get("email") ?? null;
-  log({ coupon, email });
-  log("Opening Paddle checkout");
-  setTimeout(async () => {
-    Paddle.Checkout.open({
-      product: sandbox ? config.paddle.sandboxProductId : product,
-      coupon,
-      email: sandbox ? "pcweb.testing@pilotmoon.com" : email,
-      country: sandbox ? "GB" : null,
-      postcode: sandbox ? "SW1 1AA" : null,
-      allowQuantity: false,
-      displayModeTheme: isDark.value ? "dark" : "light",
-      passthrough: JSON.stringify({
-        flow_id: await generateRandomKey(),
-      }),
-    });
-  }, 200);
+  await openCheckout({ product, coupon, email });
 }
 
 function roundPrice(price) {
@@ -146,8 +54,12 @@ function trackBuy(button) {
       <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
       <span :class="$style.title">Standard License</span><br />
       <span :class="$style.subtitle">✅ 2 years of free updates<br /></span>
-      <span :class="$style.subtitle">✅ Keep the last version you receive<br /></span>
       <span :class="$style.subtitle">✅ Use on all your Macs<br /></span>
+      <span :class="$style.subtitle">✅ Keep the last version you receive<br /></span>
+      <!-- <div :class="$style.features">
+        <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on 5 Macs</span>
+        <span :class="$style.feature"><span :class="$style.featureIcon">☁️</span> Free iCloud sync</span>
+      </div> -->
       <span :class="$style.small"><a href="/terms">Full license terms</a><br /></span>
 
       <hr v-if="isLizhi" />
@@ -198,6 +110,11 @@ function trackBuy(button) {
       <span :class="$style.title">Lifetime License</span><br />
       <span :class="$style.subtitle">✅ Lifetime free updates<br /></span>
       <span :class="$style.subtitle">✅ Use on all your Macs<br /></span>
+      <!-- <span :class="$style.subtitle">✅ Never expires<br /></span> -->
+      <!-- <div :class="$style.features">
+        <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on 5 Macs</span>
+        <span :class="$style.feature"><span :class="$style.featureIcon">☁️</span> Free iCloud sync</span>
+      </div> -->
       <span :class="$style.small"><a href="/terms">Full license terms</a><br /></span>
       <hr v-if="isLizhi" />
       <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br /></span>
@@ -303,6 +220,27 @@ function trackBuy(button) {
 
 .box span.subtitle {
   font-size: 14px;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  margin: 4px 0 6px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.featureIcon {
+  font-size: 13px;
+  filter: grayscale(1);
+  opacity: 0.65;
 }
 
 .box span.small {
