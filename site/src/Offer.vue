@@ -327,27 +327,65 @@ function expiredLicenseSegment(v: LicenseVariant): SegmentData {
   };
 }
 
-// Receipt takes precedence: every MAS offer (free / 50% off) beats the license 30%,
-// so a customer with a receipt gets the MAS deal. A pre-2023 receipt held alongside a
-// license key keeps that 50% deal but is presented as a license upgrade. The
-// license-only offer applies when there's no receipt, split by whether the key has expired.
+// ---- offer rule table -----------------------------------------------------
+
+// Facts available to each rule's matcher/builder, derived once per evaluation so
+// individual rules don't each need to re-derive them from signedParams/licenseExpired.
+interface OfferContext {
+  rpd?: string;
+  lxd?: string;
+  expired: boolean;
+}
+
+interface OfferRule {
+  name: string; // for debugging only
+  matches(ctx: OfferContext): boolean;
+  build(ctx: OfferContext): SegmentData;
+}
+
+// Rules are evaluated in order; the first whose `matches` returns true wins. Every MAS offer
+// (free / 50% off) beats the license 30%, so a customer with a receipt gets the MAS deal. A
+// pre-2023 receipt held alongside a license key keeps that 50% deal but is presented as a
+// license upgrade. The license-only offer applies when there's no receipt, split by whether
+// the key has expired.
+const offerRules: OfferRule[] = [
+  {
+    name: "mas-free",
+    matches: (ctx) => !!ctx.rpd && ctx.rpd >= "2023-01-01",
+    build: () => masFreeSegment(),
+  },
+  {
+    // pre-2023 receipt + license key: the license offer, but at 50% and acknowledging the receipt
+    name: "mas-receipt-with-license",
+    matches: (ctx) => !!ctx.rpd && !!ctx.lxd,
+    build: (ctx) => {
+      const v = receiptLicenseVariant();
+      return ctx.expired ? expiredLicenseSegment(v) : expiringLicenseSegment(v);
+    },
+  },
+  {
+    // free 2-year only for pre-cutoff customers (those already gated out of the app)
+    name: "mas-discount",
+    matches: (ctx) => !!ctx.rpd,
+    build: (ctx) => masDiscountSegment(ctx.rpd! < GATED_BEFORE),
+  },
+  {
+    // fallback: no receipt, same offer at 30%
+    name: "license-only",
+    matches: () => true,
+    build: (ctx) => {
+      const v = pureLicenseVariant();
+      return ctx.expired ? expiredLicenseSegment(v) : expiringLicenseSegment(v);
+    },
+  },
+];
+
 const segment = computed<SegmentData>(() => {
   const sp = signedParams.value;
-  const rpd = sp?.rpd;
-  const expired = licenseExpired.value;
-  if (rpd) {
-    if (rpd >= "2023-01-01") return masFreeSegment();
-    // pre-2023 receipt + license key: the license offer, but at 50% and acknowledging the receipt
-    if (sp?.lxd) {
-      const v = receiptLicenseVariant();
-      return expired ? expiredLicenseSegment(v) : expiringLicenseSegment(v);
-    }
-    // free 2-year only for pre-cutoff customers (those already gated out of the app)
-    return masDiscountSegment(rpd < GATED_BEFORE);
-  }
-  // license only: same offer at 30%
-  const v = pureLicenseVariant();
-  return expired ? expiredLicenseSegment(v) : expiringLicenseSegment(v);
+  const ctx: OfferContext = { rpd: sp?.rpd, lxd: sp?.lxd, expired: licenseExpired.value };
+  const rule = offerRules.find((r) => r.matches(ctx));
+  if (!rule) throw new Error("no offer rule matched"); // unreachable: "license-only" always matches
+  return rule.build(ctx);
 });
 
 const ZCouponResponse = z.object({ coupon: z.string(), productId: z.string() });
