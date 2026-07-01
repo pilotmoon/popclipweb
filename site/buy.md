@@ -60,11 +60,6 @@ license key at a discounted rate. Please [email me](/support) for a quote.
 
 Your purchase is subject to the [Terms of License](/terms).
 
-## Student Discount
-
-Students can get a discount on a personal license key via
-[Student App Centre](https://studentappcentre.com/app/popclip).
-
 ## Free
 
 PopClip has a free trial mode which is fully functional. So if you just want to
