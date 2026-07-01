@@ -1,7 +1,7 @@
 <script setup type="ts">
 import { onMounted, computed } from "vue";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
-import { loadStore, useStoreState } from "./composables/useStoreState";
+import { loadStore, useStoreState, roundPrice } from "./composables/useStoreState";
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
 import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
@@ -30,10 +30,6 @@ async function openPaddleCheckout(product) {
   const coupon = readParams().get("coupon") ?? null;
   const email = readParams().get("email") ?? null;
   await openCheckout({ product, coupon, email });
-}
-
-function roundPrice(price) {
-  return price.endsWith(".00") ? price.substring(0, price.length - 3) : price;
 }
 
 function trackBuy(button) {

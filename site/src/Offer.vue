@@ -2,7 +2,7 @@
 import { onMounted, ref, computed } from "vue";
 import { z } from "zod";
 import config from "./config/config.json";
-import { loadStore, useStoreState, formatCurrency } from "./composables/useStoreState";
+import { loadStore, useStoreState, formatCurrency, roundPrice } from "./composables/useStoreState";
 import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
@@ -81,11 +81,6 @@ onMounted(() => {
   }
 });
 
-// Strip a trailing ".00" from a formatted price, matching the Buy page.
-function roundPrice(price: string): string {
-  return price.endsWith(".00") ? price.slice(0, -3) : price;
-}
-
 // The price fields shown on a card, mirroring the Buy page: a struck-through original
 // price (when discounted), the actual price (or "Free"), and a "+ tax" flag. The offer
 // discount is applied at the Paddle checkout, so the discounted price is computed here
@@ -162,21 +157,35 @@ const FINEPRINT_TAIL = `One upgrade per customer. Questions?&nbsp;<a href="/supp
 // only these customers are offered the free 2-year fallback. More recent buyers aren't gated
 // yet, so they get the upgrade offer only.
 const GATED_BEFORE = "2019-01-01";
+// The year before GATED_BEFORE, for the "bought PopClip in ${year} or earlier" FAQ copy below —
+// derived so the wording can't drift out of sync with the actual cutoff date.
+const GATED_BEFORE_YEAR = Number(GATED_BEFORE.slice(0, 4)) - 1;
+
+// Shared shape for every "Lifetime License" primary card; only the badge/CTA
+// wording/footnote/claim differ between the free, 50%-off, and license-holder offers.
+function lifetimeCard(percent: number, opts: { badge: string; ctaLabel: string; footnote: string; claim: string }): CardData {
+  return {
+    badge: opts.badge,
+    title: "Lifetime License",
+    bullets: ["Lifetime free updates", "Never expires"],
+    ...lifetimePricing(percent),
+    ctaLabel: opts.ctaLabel,
+    footnote: opts.footnote,
+    claim: opts.claim,
+  };
+}
 
 // MAS receipt bought 2023 or later: treated as a Lifetime holder, so the key is free.
 function masFreeSegment(): SegmentData {
   return {
     headline: "Mac App Store Upgrade Offer",
     intro: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. Your Mac App Store purchase qualifies for a free Lifetime License key.`,
-    primary: {
+    primary: lifetimeCard(100, {
       badge: "Your upgrade is free",
-      title: "Lifetime License",
-      bullets: ["Lifetime free updates", "Never expires"],
-      ...lifetimePricing(100),
       ctaLabel: "Claim free Lifetime License",
       footnote: "No charge at checkout.",
       claim: "freeLifetime",
-    },
+    }),
     secondary: {
       kind: "alt",
       title: "Want to support the app?",
@@ -193,15 +202,12 @@ function masFreeSegment(): SegmentData {
 
 // The 50%-off Lifetime card, shared by the Mac App Store and receipt+license cases.
 function lifetime50Primary(): CardData {
-  return {
+  return lifetimeCard(50, {
     badge: "Your offer — 50% off",
-    title: "Lifetime License",
-    bullets: ["Lifetime free updates", "Never expires"],
-    ...lifetimePricing(50),
     ctaLabel: "Buy Lifetime License — 50% off",
     footnote: "One-time purchase.",
     claim: "lifetime50",
-  };
+  });
 }
 
 // The "free 2-year instead" fallback offered alongside the 50% deal.
@@ -224,7 +230,7 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
     primary: lifetime50Primary(),
     faq: {
       heading: "Why do I need a license key?",
-      body: "Until now, PopClip has detected your Mac App Store purchase in the Standalone edition as a temporary measure to ease the move away from the store. But PopClip is now moving to requiring license keys for all users. After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy their license key, discounted in recognition of your original purchase. The requirement is being introduced in stages, beginning (in PopClip 2026.7) with customers who bought PopClip in 2018 or earlier. Your purchase supports the ongoing development of the app.",
+      body: `Until now, PopClip has detected your Mac App Store purchase in the Standalone edition as a temporary measure to ease the move away from the store. But PopClip is now moving to requiring license keys for all users. After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy their license key, discounted in recognition of your original purchase. The requirement is being introduced in stages, beginning (in PopClip 2026.7) with customers who bought PopClip in ${GATED_BEFORE_YEAR} or earlier. Your purchase supports the ongoing development of the app.`,
     },
     fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };
@@ -255,15 +261,12 @@ function renewalSecondary(): SecondaryData {
 // The Lifetime offer card for license holders. Differs only by discount: 30% for a plain
 // license holder, 50% when they also have a pre-2023 Mac App Store receipt.
 function licenseLifetimePrimary(percent: 30 | 50): CardData {
-  return {
+  return lifetimeCard(percent, {
     badge: `Your offer — ${percent}% off Lifetime`,
-    title: "Lifetime License",
-    bullets: ["Lifetime free updates", "Never expires"],
-    ...lifetimePricing(percent),
     ctaLabel: "Upgrade to Lifetime",
     footnote: "One-time purchase.",
     claim: percent === 50 ? "lifetime50" : "lifetime30",
-  };
+  });
 }
 
 // The few bits that distinguish the pure-license offer from the receipt+license offer.

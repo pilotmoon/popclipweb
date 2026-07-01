@@ -123,6 +123,11 @@ export function formatCurrency(value: number, currencyCode: string) {
   }).format(value);
 }
 
+// Strip a trailing ".00" from a formatted price, e.g. "US$12.00" -> "US$12".
+export function roundPrice(price: string): string {
+  return price.endsWith(".00") ? price.slice(0, -3) : price;
+}
+
 function preprocessProducts(productData: ProductsResult) {
   const result: Record<string, ProcessedProduct> = {};
   const configuredProducts = config.pilotmoon.paddleProducts;
