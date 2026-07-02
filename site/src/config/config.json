@@ -23,6 +23,12 @@
     "sandboxProductId": 41687,
     "script": "https://cdn.paddle.com/paddle/paddle.js"
   },
+  "paddleBilling": {
+    "enabled": false,
+    "script": "https://cdn.paddle.com/paddle/v2/paddle.js",
+    "clientToken": "",
+    "sandboxClientToken": "test_9d56ea8184c46a77bdc7dd850c9"
+  },
   "mas": {
     "appId": "445189367",
     "slug": "popclip"

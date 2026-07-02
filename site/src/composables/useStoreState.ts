@@ -7,6 +7,7 @@ import { getCountryInfo } from "../helpers/countries/getCountryInfo";
 import { getMacAppStoreUrl } from "../helpers/getMacAppStoreUrl";
 import { readParams } from "../helpers/readParams";
 import { useDeploymentInfo } from "./useDeploymentInfo";
+import { isBillingActive } from "./usePaddleBillingCheckout";
 
 const log = useLogger();
 
@@ -85,6 +86,10 @@ export async function loadStore() {
     return;
   }
 
+  if (isBillingActive()) {
+    return loadStoreBilling(store, coupon);
+  }
+
   log("Loading prices", { coupon });
   const fetchResponse = await fetch(
     `${config.pilotmoon.frontendRoot}/store/getProducts?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupons=${coupon}`,
@@ -110,11 +115,112 @@ const ZProcessedProduct = z.object({
   displayDiscount: z.string().nullable(),
   coupon: z.string().nullable(),
   message: z.string().nullable(),
-  productId: z.number(),
-  priceNet: z.number(), // net unit price, for computing offer-discounted prices client-side
+  // Classic-only fields
+  productId: z.number().optional(),
+  priceNet: z.number().optional(), // net unit price, for computing offer-discounted prices client-side
+  // Billing-only fields; displayPrice is tax-inclusive where Paddle
+  // anchors the price as gross (tax_mode "location"), and taxNote carries
+  // the "inc. tax" caption when so
+  priceId: z.string().optional(),
+  taxNote: z.string().nullable().optional(),
   currency: z.string(),
 });
 type ProcessedProduct = z.infer<typeof ZProcessedProduct>;
+
+// --- Paddle Billing store loading --------------------------------------------
+
+const ZBillingTotals = z.object({
+  subtotal: z.string(),
+  discount: z.string(),
+  tax: z.string(),
+  total: z.string(),
+});
+
+const ZBillingProductsResult = z.object({
+  countryCode: z.string(),
+  currencyCode: z.string(),
+  discount: z.object({ id: z.string(), code: z.string().nullable() }).nullable(),
+  products: z.record(
+    z.string(),
+    z.object({
+      vendor: z.literal("paddle_billing"),
+      product: z.string(),
+      priceId: z.string(),
+      taxMode: z.string(),
+      taxRate: z.string(),
+      unitTotals: ZBillingTotals, // amounts in minor units, e.g. "1299"
+      formattedUnitTotals: ZBillingTotals,
+    }),
+  ),
+});
+
+// Format an amount given in the currency's minor unit (e.g. cents), taking
+// care of zero-decimal currencies like JPY.
+function formatMinorUnits(amountMinor: number, currencyCode: string) {
+  const format = new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: currencyCode,
+  });
+  const digits = format.resolvedOptions().maximumFractionDigits ?? 2;
+  return format.format(amountMinor / 10 ** digits);
+}
+
+async function loadStoreBilling(
+  store: ReturnType<typeof useStoreState>,
+  coupon: string,
+) {
+  const sandbox = useDeploymentInfo().isLocalhost;
+  const endpoint = sandbox
+    ? config.pilotmoon.frontendRoot_sandbox
+    : config.pilotmoon.frontendRoot;
+  const mode = sandbox ? "test" : "live";
+  log("Loading prices (billing)", { coupon, mode });
+  const fetchResponse = await fetch(
+    `${endpoint}/store/getProductsBilling?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupon=${coupon}&mode=${mode}`,
+  );
+  if (!fetchResponse.ok) {
+    log("Failed to load prices (billing)");
+    return;
+  }
+  const result = ZBillingProductsResult.parse(await fetchResponse.json());
+
+  const processed: Record<string, ProcessedProduct> = {};
+  const configuredProducts = config.pilotmoon.paddleProducts;
+  for (const [key, product] of Object.entries(result.products)) {
+    const isDiscounted = Number(product.unitTotals.discount) > 0;
+    // reconstruct the undiscounted total for the strikethrough list price
+    // (tax is charged on the discounted subtotal, so undiscounted total =
+    // subtotal * (1 + rate) regardless of inclusive/exclusive anchoring)
+    const listTotalMinor = Math.round(
+      Number(product.unitTotals.subtotal) * (1 + Number(product.taxRate)),
+    );
+    const productConfig =
+      configuredProducts[key as keyof typeof configuredProducts];
+    processed[key] = {
+      isDiscounted,
+      isTaxed: false, // billing display prices are tax-inclusive; see taxNote
+      displayPrice: product.formattedUnitTotals.total,
+      displayListPrice: formatMinorUnits(listTotalMinor, result.currencyCode),
+      displayDiscount: isDiscounted ? product.formattedUnitTotals.discount : null,
+      coupon: isDiscounted ? (result.discount?.code ?? null) : null,
+      message:
+        productConfig && "message" in productConfig
+          ? productConfig.message
+          : null,
+      priceId: product.priceId,
+      taxNote: Number(product.unitTotals.tax) > 0 ? "inc. tax" : null,
+      currency: result.currencyCode,
+    };
+  }
+
+  store.countryCode.value = result.countryCode;
+  store.countryName.value = result.countryCode
+    ? getCountryInfo(result.countryCode).countryName
+    : "";
+  store.paddleProducts.value = z.record(ZProcessedProduct).parse(processed);
+  store.isLoadedForCoupon.value = coupon;
+  log(`Prices loaded (billing) for '${store.countryCode.value}'`);
+}
 
 export function formatCurrency(value: number, currencyCode: string) {
   return new Intl.NumberFormat(undefined, {

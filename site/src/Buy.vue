@@ -3,6 +3,7 @@ import { onMounted, computed } from "vue";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { loadStore, useStoreState, roundPrice } from "./composables/useStoreState";
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
+import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePaddleBillingCheckout";
 import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
@@ -14,6 +15,7 @@ const isLizhi = computed(() =>
      config.lizhi.countries.includes(store.countryCode.value),
 );
 const { openCheckout } = usePaddleCheckout();
+const { openCheckout: openBillingCheckout } = usePaddleBillingCheckout();
 
 function queryBool(val) {
   return val === "" || val === "1";
@@ -26,10 +28,20 @@ onMounted(() => {
   }
 });
 
+// `product` is the processed product from the store (or undefined for the
+// ?go auto-open, which only works once the store has loaded)
 async function openPaddleCheckout(product) {
   const coupon = readParams().get("coupon") ?? null;
   const email = readParams().get("email") ?? null;
-  await openCheckout({ product, coupon, email });
+  if (isBillingActive()) {
+    if (!product?.priceId) {
+      console.error("[buy] no priceId for billing checkout", product);
+      return;
+    }
+    await openBillingCheckout({ priceId: product.priceId, discountCode: coupon, email });
+  } else {
+    await openCheckout({ product: product?.productId, coupon, email });
+  }
 }
 
 function trackBuy(button) {
@@ -64,7 +76,7 @@ function trackBuy(button) {
         :class="$style.buybutton"
         @click="
           trackBuy('Paddle');
-          openPaddleCheckout(store.paddleProducts.value.popclip_2year?.productId);
+          openPaddleCheckout(store.paddleProducts.value.popclip_2year);
         "
         theme="brand"
         size="medium"
@@ -80,6 +92,9 @@ function trackBuy(button) {
         }}</span>
         <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_2year?.displayPrice ?? "") }}</span>
         <span v-if="store.paddleProducts.value.popclip_2year?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
+        <span v-else-if="store.paddleProducts.value.popclip_2year?.taxNote && !isLizhi" :class="$style.tax">{{
+          store.paddleProducts.value.popclip_2year.taxNote
+        }}</span>
       </div>
       <div v-if="store.paddleProducts.value.popclip_2year?.message && !isLizhi" :class="$style.priceMessage">
         <span>{{ store.paddleProducts.value.popclip_2year?.message }}</span>
@@ -118,7 +133,7 @@ function trackBuy(button) {
         :class="$style.buybutton"
         @click="
           trackBuy('Paddle');
-          openPaddleCheckout(store.paddleProducts.value.popclip_lifetime?.productId);
+          openPaddleCheckout(store.paddleProducts.value.popclip_lifetime);
         "
         theme="brand"
         size="medium"
@@ -134,6 +149,9 @@ function trackBuy(button) {
         }}</span>
         <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_lifetime?.displayPrice ?? "") }} </span>
         <span v-if="store.paddleProducts.value.popclip_lifetime?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
+        <span v-else-if="store.paddleProducts.value.popclip_lifetime?.taxNote && !isLizhi" :class="$style.tax">{{
+          store.paddleProducts.value.popclip_lifetime.taxNote
+        }}</span>
       </div>
       <div v-if="store.paddleProducts.value.popclip_lifetime?.message && !isLizhi" :class="$style.priceMessage">
         <span>{{ store.paddleProducts.value.popclip_lifetime?.message }}</span>
