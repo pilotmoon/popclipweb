@@ -196,17 +196,18 @@ async function loadStoreBilling(
     const taxMinor = Number(product.unitTotals.tax);
     const isDiscounted = discountMinor > 0;
     // Display depends on the price's tax mode:
-    // - "location": Paddle anchors the advertised price as tax-inclusive
-    //   where that's the convention. Display the total (it's simply the
-    //   price you pay); caption "+ tax" only where the preview has no tax,
-    //   i.e. exclusive-anchored countries where checkout may add it.
-    // - otherwise (exclusive/"external"): net prices with tax added at
-    //   checkout, presented like the Classic site: display the (possibly
-    //   discounted) subtotal, caption "+ tax" when tax was computed.
+    // - "external" (exclusive): net prices with tax added at checkout,
+    //   presented like the Classic site: display the (possibly discounted)
+    //   subtotal, caption "+ tax" when tax was computed.
+    // - otherwise ("location"/"internal", tax-inclusive): the advertised
+    //   price includes tax. Display the total (it's simply the price you
+    //   pay); caption "+ tax" only where the preview has no tax, i.e.
+    //   exclusive-anchored countries where checkout may add it.
+    const exclusive = product.taxMode === "external";
     let displayPrice: string;
     let displayListPrice: string;
     let taxNote: string | null;
-    if (product.taxMode === "location") {
+    if (!exclusive) {
       displayPrice = product.formattedUnitTotals.total;
       // undiscounted total: tax is charged on the discounted subtotal, so
       // reconstruct as subtotal * (1 + rate)
@@ -240,10 +241,9 @@ async function loadStoreBilling(
       priceId: product.priceId,
       taxNote,
       // numeric counterpart of displayPrice, for client-side discount math
-      priceMinor:
-        product.taxMode === "location"
-          ? Number(product.unitTotals.total)
-          : subtotalMinor - discountMinor,
+      priceMinor: exclusive
+        ? subtotalMinor - discountMinor
+        : Number(product.unitTotals.total),
       currency: result.currencyCode,
     };
   }
