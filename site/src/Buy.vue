@@ -151,7 +151,7 @@ function trackBuy(button) {
       <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
       <span :class="$style.title">Standard License</span><br />
       <span :class="$style.subtitle">✅ 2 years of free updates<br /></span>
-      <span :class="$style.subtitle">✅ Use on all your Macs<br /></span>
+      <span :class="$style.subtitle">✅ Use on up to 5 Macs<br /></span>
       <span :class="$style.subtitle">✅ Keep the last version you receive<br /></span>
       <!-- <div :class="$style.features">
         <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on 5 Macs</span>
@@ -209,7 +209,7 @@ function trackBuy(button) {
       <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
       <span :class="$style.title">Lifetime License</span><br />
       <span :class="$style.subtitle">✅ Lifetime free updates<br /></span>
-      <span :class="$style.subtitle">✅ Use on all your Macs<br /></span>
+      <span :class="$style.subtitle">✅ Use on up to 5 Macs<br /></span>
       <!-- <span :class="$style.subtitle">✅ Never expires<br /></span> -->
       <!-- <div :class="$style.features">
         <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on 5 Macs</span>

@@ -28,8 +28,8 @@ license to receive further updates.
 versions of PopClip.
 
 **Personal license** means means the license is for your personal use only. You
-can use PopClip on all your personal Macs at home and work. You may not share
-the license key with others.
+can use PopClip on up to 5 personal Macs at the same time, at home and at work.
+You may not share the license key with others.
 
 :::
 
