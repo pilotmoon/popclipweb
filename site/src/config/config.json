@@ -39,7 +39,7 @@
     "storeUrl": "https://lizhi.shop/products/popclip?cid=pchuiuf8",
     "standardPrice": "CN¥59",
     "lifetimePrice": "CN¥129",
-    "countries": ["CN", "TW", "MO", "HK"]
+    "countries": ["CN"]
   },
   "setapp": {
     "script": "https://developer.setapp.com/setapp-banner/index.js",
