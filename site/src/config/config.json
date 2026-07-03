@@ -28,7 +28,7 @@
     "preCheckout": true,
     "preCheckoutOwnerEmail": false,
     "script": "https://cdn.paddle.com/paddle/v2/paddle.js",
-    "clientToken": "",
+    "clientToken": "live_3677f1d14e72f490ec8ae93fb08",
     "sandboxClientToken": "test_9d56ea8184c46a77bdc7dd850c9"
   },
   "mas": {
