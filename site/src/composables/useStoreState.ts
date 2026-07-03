@@ -203,12 +203,19 @@ async function loadStoreBilling(
     //   price includes tax. Display the total (it's simply the price you
     //   pay); caption "+ tax" only where the preview has no tax, i.e.
     //   exclusive-anchored countries where checkout may add it.
+    // All display strings are formatted here from the minor-unit amounts
+    // (browser-locale Intl) rather than using Paddle's pre-formatted
+    // strings, whose conventions differ (e.g. Paddle renders CNY as
+    // "59.00 元" where Intl gives "CN¥59.00", or "¥59.00" for zh locales).
     const exclusive = product.taxMode === "external";
     let displayPrice: string;
     let displayListPrice: string;
     let taxNote: string | null;
     if (!exclusive) {
-      displayPrice = product.formattedUnitTotals.total;
+      displayPrice = formatMinorUnits(
+        Number(product.unitTotals.total),
+        result.currencyCode,
+      );
       // undiscounted total: tax is charged on the discounted subtotal, so
       // reconstruct as subtotal * (1 + rate)
       displayListPrice = formatMinorUnits(
@@ -221,7 +228,7 @@ async function loadStoreBilling(
         subtotalMinor - discountMinor,
         result.currencyCode,
       );
-      displayListPrice = product.formattedUnitTotals.subtotal;
+      displayListPrice = formatMinorUnits(subtotalMinor, result.currencyCode);
       taxNote = taxMinor > 0 ? "+ tax" : null;
     }
     const productConfig =
@@ -232,7 +239,9 @@ async function loadStoreBilling(
       isTaxed: false, // superseded by taxNote in the billing path
       displayPrice,
       displayListPrice,
-      displayDiscount: isDiscounted ? product.formattedUnitTotals.discount : null,
+      displayDiscount: isDiscounted
+        ? formatMinorUnits(discountMinor, result.currencyCode)
+        : null,
       coupon: isDiscounted ? (result.discount?.code ?? null) : null,
       message:
         productConfig && "message" in productConfig
