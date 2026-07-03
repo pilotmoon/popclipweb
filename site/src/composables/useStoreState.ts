@@ -108,6 +108,7 @@ export async function loadStore() {
 }
 
 const ZProcessedProduct = z.object({
+  product: z.string().optional(), // product slug, e.g. "popclip_2year"
   isDiscounted: z.boolean(),
   isTaxed: z.boolean(),
   displayPrice: z.string(),
@@ -187,20 +188,46 @@ async function loadStoreBilling(
   const processed: Record<string, ProcessedProduct> = {};
   const configuredProducts = config.pilotmoon.paddleProducts;
   for (const [key, product] of Object.entries(result.products)) {
-    const isDiscounted = Number(product.unitTotals.discount) > 0;
-    // reconstruct the undiscounted total for the strikethrough list price
-    // (tax is charged on the discounted subtotal, so undiscounted total =
-    // subtotal * (1 + rate) regardless of inclusive/exclusive anchoring)
-    const listTotalMinor = Math.round(
-      Number(product.unitTotals.subtotal) * (1 + Number(product.taxRate)),
-    );
+    const subtotalMinor = Number(product.unitTotals.subtotal);
+    const discountMinor = Number(product.unitTotals.discount);
+    const taxMinor = Number(product.unitTotals.tax);
+    const isDiscounted = discountMinor > 0;
+    // Display depends on the price's tax mode:
+    // - "location": Paddle anchors the advertised price as tax-inclusive
+    //   where that's the convention. Display the total (it's simply the
+    //   price you pay); caption "+ tax" only where the preview has no tax,
+    //   i.e. exclusive-anchored countries where checkout may add it.
+    // - otherwise (exclusive/"external"): net prices with tax added at
+    //   checkout, presented like the Classic site: display the (possibly
+    //   discounted) subtotal, caption "+ tax" when tax was computed.
+    let displayPrice: string;
+    let displayListPrice: string;
+    let taxNote: string | null;
+    if (product.taxMode === "location") {
+      displayPrice = product.formattedUnitTotals.total;
+      // undiscounted total: tax is charged on the discounted subtotal, so
+      // reconstruct as subtotal * (1 + rate)
+      displayListPrice = formatMinorUnits(
+        Math.round(subtotalMinor * (1 + Number(product.taxRate))),
+        result.currencyCode,
+      );
+      taxNote = taxMinor > 0 ? null : "+ tax";
+    } else {
+      displayPrice = formatMinorUnits(
+        subtotalMinor - discountMinor,
+        result.currencyCode,
+      );
+      displayListPrice = product.formattedUnitTotals.subtotal;
+      taxNote = taxMinor > 0 ? "+ tax" : null;
+    }
     const productConfig =
       configuredProducts[key as keyof typeof configuredProducts];
     processed[key] = {
+      product: key,
       isDiscounted,
-      isTaxed: false, // billing display prices are tax-inclusive; see taxNote
-      displayPrice: product.formattedUnitTotals.total,
-      displayListPrice: formatMinorUnits(listTotalMinor, result.currencyCode),
+      isTaxed: false, // superseded by taxNote in the billing path
+      displayPrice,
+      displayListPrice,
       displayDiscount: isDiscounted ? product.formattedUnitTotals.discount : null,
       coupon: isDiscounted ? (result.discount?.code ?? null) : null,
       message:
@@ -208,7 +235,7 @@ async function loadStoreBilling(
           ? productConfig.message
           : null,
       priceId: product.priceId,
-      taxNote: Number(product.unitTotals.tax) > 0 ? "inc. tax" : null,
+      taxNote,
       currency: result.currencyCode,
     };
   }

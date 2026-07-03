@@ -87,7 +87,7 @@ export function usePaddleBillingCheckout() {
     log("[checkout] openCheckout requested with options", options);
     await initPaddle();
     currentFlowId = window.crypto?.randomUUID();
-    const email = options.email ?? (sandbox ? "pcweb.testing@pilotmoon.com" : null);
+    const email = options.email ?? null;
     const checkoutOptions = {
       items: [{ priceId: options.priceId, quantity: 1 }],
       ...(options.discountCode ? { discountCode: options.discountCode } : {}),
@@ -108,5 +108,14 @@ export function usePaddleBillingCheckout() {
     Paddle.Checkout.open(checkoutOptions);
   }
 
-  return { openCheckout };
+  // Initialize Paddle.js without opening a checkout ourselves. Used when
+  // the page is visited via a Paddle transaction link (?_ptxn=txn_...):
+  // Paddle.js detects the parameter on Initialize and opens the checkout
+  // for that transaction automatically.
+  async function initForTransactionCheckout() {
+    log("[checkout] initializing for a _ptxn transaction link");
+    await initPaddle();
+  }
+
+  return { openCheckout, initForTransactionCheckout };
 }

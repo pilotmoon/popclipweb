@@ -1,9 +1,11 @@
 <script setup type="ts">
-import { onMounted, computed } from "vue";
+import { onMounted, computed, ref } from "vue";
+import { useSessionStorage } from "@vueuse/core";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { loadStore, useStoreState, roundPrice } from "./composables/useStoreState";
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
 import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePaddleBillingCheckout";
+import PreCheckoutDialog from "./PreCheckoutDialog.vue";
 import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
@@ -15,7 +17,7 @@ const isLizhi = computed(() =>
      config.lizhi.countries.includes(store.countryCode.value),
 );
 const { openCheckout } = usePaddleCheckout();
-const { openCheckout: openBillingCheckout } = usePaddleBillingCheckout();
+const { openCheckout: openBillingCheckout, initForTransactionCheckout } = usePaddleBillingCheckout();
 
 function queryBool(val) {
   return val === "" || val === "1";
@@ -23,25 +25,103 @@ function queryBool(val) {
 
 onMounted(() => {
   loadStore();
+  // #name= and #email= params (e.g. from the PopClip upgrade flow) seed
+  // the dialog; after that it tracks whatever the user last confirmed
+  const nameParam = readParams().get("name");
+  if (nameParam) {
+    storedName.value = nameParam;
+  }
+  const emailParam = readParams().get("email");
+  if (emailParam) {
+    storedEmail.value = emailParam;
+  }
   if (queryBool(readParams().get("go"))) {
     openPaddleCheckout();
   }
+  // Paddle transaction links (the default payment link setting points at
+  // this page) carry a real query param, ?_ptxn=txn_...; initializing
+  // Paddle.js is enough — it detects the param and opens the checkout.
+  if (isBillingActive() && new URLSearchParams(window.location.search).has("_ptxn")) {
+    initForTransactionCheckout();
+  }
 });
+
+// Pre-checkout dialog for the billing checkout: collects email (and the
+// license name, when enabled). Values are prefilled from the remembered
+// (or #email=/#name= passed-in) values, so a repeat click is a single
+// Enter to confirm. Session storage: remembered for this tab only, not
+// across visits.
+const storedName = useSessionStorage("popclip-license-name", "");
+const storedEmail = useSessionStorage("popclip-license-email", "");
+const showDialog = ref(false);
+const pendingProduct = ref(null);
+const initialName = computed(() => storedName.value || "");
+const initialEmail = computed(() => storedEmail.value || "");
+
+const productTitles = {
+  popclip_2year: "Buy Standard License",
+  popclip_lifetime: "Buy Lifetime License",
+};
+const dialogTitle = computed(
+  () => productTitles[pendingProduct.value?.product] ?? "Buy PopClip License",
+);
 
 // `product` is the processed product from the store (or undefined for the
 // ?go auto-open, which only works once the store has loaded)
 async function openPaddleCheckout(product) {
-  const coupon = readParams().get("coupon") ?? null;
-  const email = readParams().get("email") ?? null;
   if (isBillingActive()) {
     if (!product?.priceId) {
       console.error("[buy] no priceId for billing checkout", product);
       return;
     }
-    await openBillingCheckout({ priceId: product.priceId, discountCode: coupon, email });
+    if (config.paddleBilling.preCheckout) {
+      pendingProduct.value = product;
+      showDialog.value = true;
+    } else {
+      // no pre-checkout step: Paddle collects the email; any values seeded
+      // from #email=/#name= params still pass through
+      await openBillingCheckoutFor(product, {
+        email: storedEmail.value || null,
+        name: storedName.value || null,
+        ownerEmail: null,
+      });
+    }
   } else {
+    const coupon = readParams().get("coupon") ?? null;
+    const email = readParams().get("email") ?? null;
     await openCheckout({ product: product?.productId, coupon, email });
   }
+}
+
+async function openBillingCheckoutFor(product, { email, name, ownerEmail }) {
+  const coupon = readParams().get("coupon") ?? null;
+  await openBillingCheckout({
+    priceId: product.priceId,
+    discountCode: coupon,
+    email: email || null,
+    customData: {
+      ...(name ? { license_name: name } : {}),
+      ...(ownerEmail ? { license_email: ownerEmail } : {}),
+    },
+  });
+}
+
+async function detailsConfirmed({ email, name, ownerEmail }) {
+  storedEmail.value = email;
+  if (name) {
+    storedName.value = name;
+  }
+  showDialog.value = false;
+  const product = pendingProduct.value;
+  pendingProduct.value = null;
+  if (product) {
+    await openBillingCheckoutFor(product, { email, name, ownerEmail });
+  }
+}
+
+function detailsCancelled() {
+  showDialog.value = false;
+  pendingProduct.value = null;
 }
 
 function trackBuy(button) {
@@ -50,6 +130,15 @@ function trackBuy(button) {
 </script>
 
 <template>
+  <PreCheckoutDialog
+    :open="showDialog"
+    :title="dialogTitle"
+    :owner-email-option="config.paddleBilling.preCheckoutOwnerEmail"
+    :initial-name="initialName"
+    :initial-email="initialEmail"
+    @confirm="detailsConfirmed"
+    @cancel="detailsCancelled"
+  />
   <div :class="$style.container">
     <!-- <div :class="$style.box">
             <span>Buy from the Mac App Store</span><br>

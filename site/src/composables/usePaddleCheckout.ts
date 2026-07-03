@@ -103,9 +103,9 @@ export function usePaddleCheckout() {
           // (Backend test coupons target this same id.) Live uses the real product id.
           product: sandbox ? config.paddle.sandboxProductId : options.product,
           coupon: options.coupon ?? null,
-          email: sandbox ? "pcweb.testing@pilotmoon.com" : (options.email ?? null),
-          country: sandbox ? "GB" : null,
-          postcode: sandbox ? "SW1 1AA" : null,
+          email: options.email ?? null,
+          country: null,
+          postcode: null,
           allowQuantity: false,
           displayModeTheme: isDark.value ? "dark" : "light",
           passthrough: JSON.stringify(passthrough),

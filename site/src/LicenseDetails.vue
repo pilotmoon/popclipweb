@@ -99,6 +99,17 @@ function licenseFileName() {
   return licenseKey.value?.file?.name || "";
 }
 
+// the delivery (payer) email, when it differs from the license email
+// (i.e. a separate license owner email was supplied at pre-checkout)
+function deliveryEmail() {
+  const payer = purchaseInfo.userEmail.value;
+  if (!payer) return "";
+  if (licenseKey.value?.email && payer.toLowerCase() === licenseKey.value.email.toLowerCase()) {
+    return "";
+  }
+  return payer;
+}
+
 function diagnosticInfoString() {
   return `Timestamp: ${timestamp}
 Last error: ${lastError}
@@ -167,7 +178,7 @@ function licenseInfoString() {
       <h2>Your PopClip License Key</h2>
       <div class="license">
         <ul class="details-panel info custom-block">
-          <li>
+          <li v-if="licenseKey.name">
             <span class="label">Name: </span>
             <span class="data">{{ licenseKey.name }}</span>
           </li>
@@ -196,22 +207,26 @@ function licenseInfoString() {
         <AaButton :href="registerLink()" size="big">Activate License</AaButton>
       </div>
 
+      <h3>License Key File</h3>
+
+      <p v-if="purchaseInfo.userEmail.value">
+        Your license key file has been emailed to
+        <b>{{ purchaseInfo.userEmail.value }}</b
+        >.
+      </p>
+      <p v-else>Your license key file has been emailed to the address you provided at checkout.</p>
+
+      <!-- <p>To save a backup of your license key, download the file to your computer. Double-click the file to activate it.</p>
+      <p>
+        <DownloadButton size="smaller" theme="outline" :href="licenseFileLink()" text="Download License Key File" :text="licenseFileName()"></DownloadButton>
+      </p> -->
+
       <h3>Changes</h3>
       <p>
         If you want to change the registered name or email, please contact&ensp;<SupportEmailLink
           subject="PopClip License Enquiry"
           :body="wrapInfo(licenseInfoString(), 'License Details')"
         />.
-      </p>
-      <h3>License Key File</h3>
-      <p>
-        <DownloadButton size="smaller" theme="outline" :href="licenseFileLink()" text="Download License Key File" :text="licenseFileName()"></DownloadButton>
-      </p>
-      <p>To save a backup of your license key, download the file to your computer. Double-click the file to activate it.</p>
-      <p>
-        A link to your license key file has also been emailed to
-        <b>{{ licenseKey.email }}</b
-        >.
       </p>
     </div>
   </div>
@@ -246,5 +261,6 @@ ul.details-panel li span.data {
 div.extra-info {
   margin-bottom: 1em;
   color: var(--vp-c-text-2);
+  text-align: center;
 }
 </style>
