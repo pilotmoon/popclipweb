@@ -24,7 +24,7 @@
     "script": "https://cdn.paddle.com/paddle/paddle.js"
   },
   "paddleBilling": {
-    "enabled": false,
+    "enabled": true,
     "preCheckout": true,
     "preCheckoutOwnerEmail": false,
     "script": "https://cdn.paddle.com/paddle/v2/paddle.js",
