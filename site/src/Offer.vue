@@ -2,17 +2,19 @@
 import { onMounted, ref, computed } from "vue";
 import { z } from "zod";
 import config from "./config/config.json";
-import { loadStore, useStoreState, formatCurrency, roundPrice } from "./composables/useStoreState";
+import { loadStore, useStoreState, formatMinorUnits, roundPrice } from "./composables/useStoreState";
 import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
-import { usePaddleCheckout } from "./composables/usePaddleCheckout";
+import { usePaddleBillingCheckout } from "./composables/usePaddleBillingCheckout";
 import { formatDate } from "./helpers/formatters";
 import OfferCard from "./OfferCard.vue";
+import PreCheckoutDialog from "./PreCheckoutDialog.vue";
+import { useSessionStorage } from "@vueuse/core";
 
 const log = useLogger();
 const store = useStoreState();
 const sandbox = useDeploymentInfo().isLocalhost;
-const { openCheckout } = usePaddleCheckout();
+const { openCheckout } = usePaddleBillingCheckout();
 
 // ---- signed offer params ------------------------------------------------
 
@@ -33,13 +35,19 @@ interface SignedParams {
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-// Read the signed offer params from either the URL fragment (preferred) or the
-// query string, so PopClip can use whichever is convenient. The dates are
-// optional, but at least one must be present for the upgrade page to make sense.
-function readSignedParams(): SignedParams | null {
+// The merged fragment + query params (fragment preferred), so PopClip can
+// use whichever is convenient.
+function readOfferParams(): URLSearchParams {
   const hash = (window.location.hash || "").replace(/^#/, "");
   const p = new URLSearchParams(window.location.search);
   for (const [k, v] of new URLSearchParams(hash)) p.set(k, v);
+  return p;
+}
+
+// Read the signed offer params. The dates are optional, but at least one
+// must be present for the upgrade page to make sense.
+function readSignedParams(): SignedParams | null {
+  const p = readOfferParams();
   const params: SignedParams = {
     id: p.get("id") ?? "",
     sig: p.get("sig") ?? "",
@@ -76,16 +84,81 @@ onMounted(() => {
     purchaseYear.value = (params.rpd ?? params.lpd)?.slice(0, 4) ?? "";
     status.value = "valid";
     loadStore(); // populate prices for display
+    // Unsigned email/name params (PopClip passes the licensee's existing
+    // details for convenience) seed the pre-checkout dialog. They are not
+    // part of the signature and are never sent to the backend.
+    const p = readOfferParams();
+    const emailParam = p.get("email");
+    if (emailParam) storedEmail.value = emailParam;
+    const nameParam = p.get("name");
+    if (nameParam) storedName.value = nameParam;
   } else {
     status.value = "invalid";
   }
 });
 
+// ---- pre-checkout dialog --------------------------------------------------
+
+// Same capture and session persistence as the Buy page: the dialog always
+// shows before checkout (when enabled), prefilled with the remembered or
+// passed-in values.
+const storedName = useSessionStorage("popclip-license-name", "");
+const storedEmail = useSessionStorage("popclip-license-email", "");
+const showDialog = ref(false);
+const pendingClaim = ref<string | null>(null);
+const initialName = computed(() => storedName.value || "");
+const initialEmail = computed(() => storedEmail.value || "");
+
+const CLAIM_TITLES: Record<string, string> = {
+  lifetime50: "Buy Lifetime License",
+  lifetime30: "Buy Lifetime License",
+  freeLifetime: "Claim Lifetime License",
+  free2year: "Claim Standard License",
+  renew2year: "Renew Standard License",
+};
+const dialogTitle = computed(() => CLAIM_TITLES[pendingClaim.value ?? ""] ?? "Buy PopClip License");
+
+// The buyer details confirmed in the dialog (or taken straight from the
+// stored values when the dialog is disabled), passed into the checkout.
+interface BuyerDetails {
+  email: string | null;
+  name: string | null;
+  ownerEmail: string | null;
+}
+
+async function detailsConfirmed(details: BuyerDetails) {
+  storedEmail.value = details.email ?? "";
+  if (details.name) storedName.value = details.name;
+  showDialog.value = false;
+  const claim = pendingClaim.value;
+  pendingClaim.value = null;
+  if (!claim) return;
+  if (claim === "renew2year") await renewStandard(details);
+  else await startClaim(claim, details);
+}
+
+function detailsCancelled() {
+  showDialog.value = false;
+  pendingClaim.value = null;
+}
+
+// customData for the checkout: the signed offer details plus the buyer's
+// chosen license name / owner email from the dialog.
+function checkoutCustomData(claim: string, details: BuyerDetails) {
+  return {
+    ...offerPassthrough(claim),
+    ...(details.name ? { license_name: details.name } : {}),
+    ...(details.ownerEmail ? { license_email: details.ownerEmail } : {}),
+  };
+}
+
 // The price fields shown on a card, mirroring the Buy page: a struck-through original
-// price (when discounted), the actual price (or "Free"), and a "+ tax" flag. The offer
+// price (when discounted), the actual price (or "Free"), and a tax caption. The offer
 // discount is applied at the Paddle checkout, so the discounted price is computed here
-// from the regular net price (the exact total still shows in the Paddle overlay).
-type PriceFields = Pick<CardData, "listPrice" | "priceLabel" | "priceIsDiscount" | "taxed" | "discountNote">;
+// from the regular price (the exact total still shows in the Paddle overlay). A
+// percentage discount scales the price linearly, whether it's a tax-inclusive total
+// or a net amount, so the displayed basis (priceMinor) works for both tax modes.
+type PriceFields = Pick<CardData, "listPrice" | "priceLabel" | "priceIsDiscount" | "taxNote" | "discountNote">;
 
 function lifetimePricing(percentOff: number): PriceFields {
   const p = store.paddleProducts.value.popclip_lifetime;
@@ -93,12 +166,12 @@ function lifetimePricing(percentOff: number): PriceFields {
   if (percentOff >= 100) {
     return { listPrice: roundPrice(p.displayPrice), priceLabel: "Free", priceIsDiscount: true };
   }
-  const net = p.priceNet * (1 - percentOff / 100);
+  const discountedMinor = Math.round(p.priceMinor * (1 - percentOff / 100));
   return {
     listPrice: percentOff > 0 ? roundPrice(p.displayPrice) : undefined,
-    priceLabel: roundPrice(formatCurrency(net, p.currency)),
+    priceLabel: roundPrice(formatMinorUnits(discountedMinor, p.currency)),
     priceIsDiscount: false,
-    taxed: p.isTaxed,
+    taxNote: p.taxNote ?? undefined,
     discountNote: percentOff > 0 ? `${percentOff}% off` : undefined,
   };
 }
@@ -107,7 +180,7 @@ function lifetimePricing(percentOff: number): PriceFields {
 function twoYearPricing(): PriceFields {
   const p = store.paddleProducts.value.popclip_2year;
   if (!p) return { priceLabel: "" };
-  return { priceLabel: roundPrice(p.displayPrice), priceIsDiscount: false, taxed: p.isTaxed };
+  return { priceLabel: roundPrice(p.displayPrice), priceIsDiscount: false, taxNote: p.taxNote ?? undefined };
 }
 
 // License expiry (for the license-holder copy): the date, whether it has passed,
@@ -127,7 +200,7 @@ interface CardData {
   listPrice?: string;
   priceLabel: string;
   priceIsDiscount?: boolean; // false for a plain full price (renewal)
-  taxed?: boolean; // show "+ tax" after the price (mirrors the Buy page)
+  taxNote?: string; // tax caption after the price, e.g. "+ tax" (mirrors the Buy page)
   discountNote?: string; // brand-coloured "N% off" line under the price
   ctaLabel: string;
   ctaTheme?: "brand" | "alt";
@@ -388,7 +461,7 @@ const segment = computed<SegmentData>(() => {
   return rule.build(ctx);
 });
 
-const ZCouponResponse = z.object({ coupon: z.string(), productId: z.string() });
+const ZDiscountResponse = z.object({ discountId: z.string(), priceId: z.string() });
 
 // The signed offer details passed through to the Paddle webhook for context/tracking.
 function offerPassthrough(claim: string) {
@@ -405,16 +478,27 @@ function offerPassthrough(claim: string) {
   };
 }
 
-// Route a card's CTA: the full-price renewal opens the checkout directly; every other claim
-// is a discount, so it goes through getOfferCoupon to mint a coupon first.
+// Route a card's CTA through the pre-checkout dialog first (when enabled); the
+// confirmed details then flow into the claim/renewal checkout.
 function onBuy(claim: string) {
-  if (claim === "renew2year") renewStandard();
-  else startClaim(claim);
+  if (busyOffer.value) return;
+  if (config.paddleBilling.preCheckout) {
+    pendingClaim.value = claim;
+    showDialog.value = true;
+    return;
+  }
+  const details: BuyerDetails = {
+    email: storedEmail.value || null,
+    name: storedName.value || null,
+    ownerEmail: null,
+  };
+  if (claim === "renew2year") renewStandard(details);
+  else startClaim(claim, details);
 }
 
-// Ask the Twix backend for a coupon for this claim within the signed offer (it
+// Ask the Twix backend for a discount for this claim within the signed offer (it
 // verifies the signature and validates the claim), then open the Paddle checkout.
-async function startClaim(claim: string) {
+async function startClaim(claim: string, details: BuyerDetails) {
   if (!signedParams.value || busyOffer.value) return;
   couponError.value = false;
   busyOffer.value = claim;
@@ -434,28 +518,37 @@ async function startClaim(claim: string) {
     if (sp.lkh) query.set("lkh", sp.lkh);
     if (sp.scc) query.set("scc", sp.scc);
     const res = await fetch(`${base}/store/getOfferCoupon?${query}`);
-    if (!res.ok) throw new Error(`coupon request failed: ${res.status}`);
-    const { coupon, productId } = ZCouponResponse.parse(await res.json());
+    if (!res.ok) throw new Error(`discount request failed: ${res.status}`);
+    const { discountId, priceId } = ZDiscountResponse.parse(await res.json());
     // pass the signed offer details through to the Paddle webhook
-    await openCheckout({ product: productId, coupon, passthrough: offerPassthrough(claim) });
+    await openCheckout({
+      priceId,
+      discountId,
+      email: details.email,
+      customData: checkoutCustomData(claim, details),
+    });
   } catch (e) {
-    log("Failed to get upgrade coupon", e);
+    log("Failed to get upgrade discount", e);
     couponError.value = true;
   } finally {
     busyOffer.value = null;
   }
 }
 
-// The 2-year renewal is a plain full-price purchase (no coupon), so it skips getOfferCoupon and
-// opens the Paddle checkout directly for the Standard product (id from the loaded store).
-async function renewStandard() {
+// The 2-year renewal is a plain full-price purchase (no discount), so it skips getOfferCoupon
+// and opens the Paddle checkout directly for the Standard price (id from the loaded store).
+async function renewStandard(details: BuyerDetails) {
   if (!signedParams.value || busyOffer.value) return;
   couponError.value = false;
   busyOffer.value = "renew2year";
   try {
-    const productId = store.paddleProducts.value.popclip_2year?.productId;
-    if (!productId) throw new Error("popclip_2year product not loaded yet");
-    await openCheckout({ product: productId, passthrough: offerPassthrough("renew2year") });
+    const priceId = store.paddleProducts.value.popclip_2year?.priceId;
+    if (!priceId) throw new Error("popclip_2year product not loaded yet");
+    await openCheckout({
+      priceId,
+      email: details.email,
+      customData: checkoutCustomData("renew2year", details),
+    });
   } catch (e) {
     log("Failed to start renewal checkout", e);
     couponError.value = true;
@@ -466,6 +559,15 @@ async function renewStandard() {
 </script>
 
 <template>
+  <PreCheckoutDialog
+    :open="showDialog"
+    :title="dialogTitle"
+    :owner-email-option="config.paddleBilling.preCheckoutOwnerEmail"
+    :initial-name="initialName"
+    :initial-email="initialEmail"
+    @confirm="detailsConfirmed"
+    @cancel="detailsCancelled"
+  />
   <div v-if="status === 'loading'" :class="$style.center">Checking your offer…</div>
 
   <div v-else-if="status === 'invalid'" :class="$style.center">

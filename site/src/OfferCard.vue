@@ -9,7 +9,7 @@ interface Props {
   listPrice?: string; // struck-through regular price (shown when discounted)
   priceLabel: string; // main price line: the actual price, or "Free"
   priceIsDiscount?: boolean; // true → brand style (used for "Free"); false → plain price
-  taxed?: boolean; // show "+ tax" after the price
+  taxNote?: string; // tax caption after the price, e.g. "+ tax"
   discountNote?: string; // brand-coloured "N% off" line under the price
   ctaLabel: string;
   ctaTheme?: "brand" | "alt";
@@ -47,7 +47,7 @@ defineEmits<{ (e: "buy", claim: string): void }>();
       </div>
       <div :class="$style.prices">
         <span :class="priceIsDiscount ? $style.discount : $style.price">{{ priceLabel }}</span>
-        <span v-if="taxed" :class="$style.tax">+ tax</span>
+        <span v-if="taxNote" :class="$style.tax">{{ taxNote }}</span>
       </div>
     </div>
     <AaButton :class="$style.buybutton" @click="$emit('buy', claim)" :theme="ctaTheme" :size="ctaSize" :disabled="busy">{{ ctaLabel }}</AaButton>

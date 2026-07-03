@@ -18,6 +18,8 @@ export function isBillingActive() {
 export interface OpenBillingCheckoutOptions {
   priceId: string;
   discountCode?: string | null;
+  // a codeless discount applied by id (e.g. minted by getOfferCoupon)
+  discountId?: string | null;
   email?: string | null;
   // extra fields merged into the checkout customData alongside flow_id
   customData?: Record<string, unknown>;
@@ -91,6 +93,7 @@ export function usePaddleBillingCheckout() {
     const checkoutOptions = {
       items: [{ priceId: options.priceId, quantity: 1 }],
       ...(options.discountCode ? { discountCode: options.discountCode } : {}),
+      ...(options.discountId ? { discountId: options.discountId } : {}),
       ...(email ? { customer: { email } } : {}),
       customData: {
         flow_id: currentFlowId,

@@ -124,6 +124,9 @@ const ZProcessedProduct = z.object({
   // the "inc. tax" caption when so
   priceId: z.string().optional(),
   taxNote: z.string().nullable().optional(),
+  // unit total in minor units, for computing offer-discounted prices
+  // client-side (a percentage discount scales the total linearly)
+  priceMinor: z.number().optional(),
   currency: z.string(),
 });
 type ProcessedProduct = z.infer<typeof ZProcessedProduct>;
@@ -157,7 +160,7 @@ const ZBillingProductsResult = z.object({
 
 // Format an amount given in the currency's minor unit (e.g. cents), taking
 // care of zero-decimal currencies like JPY.
-function formatMinorUnits(amountMinor: number, currencyCode: string) {
+export function formatMinorUnits(amountMinor: number, currencyCode: string) {
   const format = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: currencyCode,
@@ -236,6 +239,11 @@ async function loadStoreBilling(
           : null,
       priceId: product.priceId,
       taxNote,
+      // numeric counterpart of displayPrice, for client-side discount math
+      priceMinor:
+        product.taxMode === "location"
+          ? Number(product.unitTotals.total)
+          : subtotalMinor - discountMinor,
       currency: result.currencyCode,
     };
   }
