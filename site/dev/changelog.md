@@ -21,6 +21,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 </div>
 
+## Beta / Unreleased
+
+- Please stand by for documentation update for the new Beta 5898.
+
 ## PopClip 2025.9.2 (5155)
 
 - Disable JavaScript inspectability in Safari by default. (Enable with
