@@ -2,11 +2,7 @@
   "pilotmoon": {
     "paddleProducts": {
       "popclip_2year": {},
-      "popclip_lifetime": {
-        "fullPrice": 0,
-        "fullPriceCurrency": "USD",
-        "message": "★ Great Deal ★"
-      }
+      "popclip_lifetime": {}
     },
     "iconsRoot": "https://icons.popclip.app",
     "apiRoot": "https://api.pilotmoon.com/v2",

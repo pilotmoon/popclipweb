@@ -210,7 +210,7 @@ function trackBuy(button) {
       <span :class="$style.title">Lifetime License</span><br />
       <span :class="$style.subtitle">✅ Lifetime free updates<br /></span>
       <span :class="$style.subtitle">✅ Use on up to 5 Macs<br /></span>
-      <!-- <span :class="$style.subtitle">✅ Never expires<br /></span> -->
+      <span :class="$style.subtitle">✅ Never expires<br /></span>
       <!-- <div :class="$style.features">
         <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on 5 Macs</span>
         <span :class="$style.feature"><span :class="$style.featureIcon">☁️</span> Free iCloud sync</span>
