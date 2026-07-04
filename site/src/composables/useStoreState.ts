@@ -115,7 +115,6 @@ const ZProcessedProduct = z.object({
   displayListPrice: z.string(),
   displayDiscount: z.string().nullable(),
   coupon: z.string().nullable(),
-  message: z.string().nullable(),
   // Classic-only fields
   productId: z.number().optional(),
   priceNet: z.number().optional(), // net unit price, for computing offer-discounted prices client-side
@@ -143,7 +142,9 @@ const ZBillingTotals = z.object({
 const ZBillingProductsResult = z.object({
   countryCode: z.string(),
   currencyCode: z.string(),
-  discount: z.object({ id: z.string(), code: z.string().nullable() }).nullable(),
+  discount: z
+    .object({ id: z.string(), code: z.string().nullable() })
+    .nullable(),
   products: z.record(
     z.string(),
     z.object({
@@ -242,11 +243,7 @@ async function loadStoreBilling(
       displayDiscount: isDiscounted
         ? formatMinorUnits(discountMinor, result.currencyCode)
         : null,
-      coupon: isDiscounted ? (result.discount?.code ?? null) : null,
-      message:
-        productConfig && "message" in productConfig
-          ? productConfig.message
-          : null,
+      coupon: isDiscounted ? result.discount?.code ?? null : null,
       priceId: product.priceId,
       taxNote,
       // numeric counterpart of displayPrice, for client-side discount math
@@ -302,23 +299,12 @@ function preprocessProducts(productData: ProductsResult) {
       configuredProducts[
         productData.products[key].product as keyof typeof configuredProducts
       ];
-    if ("message" in productConfig) {
-      message = productConfig.message;
-    }
-    if ("fullPrice" in productConfig) {
-      displayListPrice = formatCurrency(
-        productConfig.fullPrice,
-        productConfig.fullPriceCurrency,
-      );
-      isDiscounted = product.paddleData.price.net < productConfig.fullPrice;
-    } else {
-      displayListPrice = formatCurrency(
-        product.paddleData.list_price.net,
-        product.paddleData.currency,
-      );
-      isDiscounted =
-        product.paddleData.price.net < product.paddleData.list_price.net;
-    }
+    displayListPrice = formatCurrency(
+      product.paddleData.list_price.net,
+      product.paddleData.currency,
+    );
+    isDiscounted =
+      product.paddleData.price.net < product.paddleData.list_price.net;
     const isTaxed =
       product.paddleData.price.net < product.paddleData.price.gross;
     const processed: ProcessedProduct = {
@@ -328,7 +314,6 @@ function preprocessProducts(productData: ProductsResult) {
       displayListPrice,
       displayDiscount,
       coupon,
-      message,
       productId: product.paddleData.product_id,
       priceNet: product.paddleData.price.net,
       currency: product.paddleData.currency,
