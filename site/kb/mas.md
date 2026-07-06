@@ -125,6 +125,6 @@ iCloud account on the new Mac.
     from you.
 
 - **Can I buy a new license key for the Standalone edition?**<br>I am currently
-  offering all MAS customers a 50% discount on the Lifetime License, which can
+  offering all MAS customers a 30% discount on the Lifetime License, which can
   be purchased on the [buy](/buy) page. Please send proof of your MAS purchase
   to my [support email](/support).

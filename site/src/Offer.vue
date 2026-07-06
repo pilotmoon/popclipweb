@@ -120,7 +120,6 @@ const initialName = computed(() => storedName.value || "");
 const initialEmail = computed(() => storedEmail.value || "");
 
 const CLAIM_TITLES: Record<string, string> = {
-  lifetime50: "Buy Lifetime License",
   lifetime30: "Buy Lifetime License",
   freeLifetime: "Claim Lifetime License",
   free2year: "Claim Standard License",
@@ -245,7 +244,7 @@ const GATED_BEFORE = "2019-01-01";
 const GATED_BEFORE_YEAR = Number(GATED_BEFORE.slice(0, 4)) - 1;
 
 // Shared shape for every "Lifetime License" primary card; only the badge/CTA
-// wording/footnote/claim differ between the free, 50%-off, and license-holder offers.
+// wording/footnote/claim differ between the free and 30%-off offers.
 function lifetimeCard(percent: number, opts: { badge: string; ctaLabel: string; footnote: string; claim: string }): CardData {
   return {
     badge: opts.badge,
@@ -272,8 +271,8 @@ function masFreeSegment(): SegmentData {
     secondary: {
       kind: "alt",
       title: "Want to support the app?",
-      html: `Your Lifetime License is free to claim. But if you'd like to support PopClip's continued development, you can choose to pay for it at 50% off instead. Thank you! (<a href="/terms">terms</a>)`,
-      cta: { label: "Buy Lifetime at 50% off", theme: "alt", claim: "lifetime50" },
+      html: `Your Lifetime License is free to claim. But if you'd like to support PopClip's continued development, you can choose to pay for it at 30% off instead. Thank you! (<a href="/terms">terms</a>)`,
+      cta: { label: "Buy Lifetime at 30% off", theme: "alt", claim: "lifetime30" },
     },
     faq: {
       heading: "Why do I need a license key?",
@@ -283,17 +282,17 @@ function masFreeSegment(): SegmentData {
   };
 }
 
-// The 50%-off Lifetime card, shared by the Mac App Store and receipt+license cases.
-function lifetime50Primary(): CardData {
-  return lifetimeCard(50, {
-    badge: "Your offer — 50% off",
-    ctaLabel: "Buy Lifetime License — 50% off",
+// The 30%-off Lifetime card for the Mac App Store offer.
+function masLifetimePrimary(): CardData {
+  return lifetimeCard(30, {
+    badge: "Your offer — 30% off",
+    ctaLabel: "Buy Lifetime License — 30% off",
     footnote: "One-time purchase.",
-    claim: "lifetime50",
+    claim: "lifetime30",
   });
 }
 
-// The "free 2-year instead" fallback offered alongside the 50% deal.
+// The "free 2-year instead" fallback offered alongside the 30% deal.
 function freeTwoYearAlt(): SecondaryData {
   return {
     kind: "alt",
@@ -303,14 +302,14 @@ function freeTwoYearAlt(): SecondaryData {
   };
 }
 
-// MAS receipt bought before 2023: Lifetime at 50% off. The free 2-year fallback is only
+// MAS receipt bought before 2023: Lifetime at 30% off. The free 2-year fallback is only
 // offered to customers already gated out of the app (bought before the receipt cutoff);
 // more recent buyers who aren't gated yet get just the upgrade offer, like an expiring license.
 function masDiscountSegment(freeTwoYear: boolean): SegmentData {
   const seg: SegmentData = {
     headline: "Mac App Store Upgrade Offer",
     intro: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. To move from your Mac App Store purchase to a Standalone edition license key, here is your upgrade offer:`,
-    primary: lifetime50Primary(),
+    primary: masLifetimePrimary(),
     faq: {
       heading: "Why do I need a license key?",
       body: `Until now, PopClip has detected your Mac App Store purchase in the Standalone edition as a temporary measure to ease the move away from the store. But PopClip is now moving to requiring license keys for all users. After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy their license key, discounted in recognition of your original purchase. The requirement is being introduced in stages, beginning (in PopClip 2026.7) with customers who bought PopClip in ${GATED_BEFORE_YEAR} or earlier. Your purchase supports the ongoing development of the app.`,
@@ -341,39 +340,35 @@ function renewalSecondary(): SecondaryData {
   };
 }
 
-// The Lifetime offer card for license holders. Differs only by discount: 30% for a plain
-// license holder, 50% when they also have a pre-2023 Mac App Store receipt.
-function licenseLifetimePrimary(percent: 30 | 50): CardData {
-  return lifetimeCard(percent, {
-    badge: `Your offer — ${percent}% off Lifetime`,
+// The Lifetime offer card for license holders — 30% off, same as the MAS deal.
+function licenseLifetimePrimary(): CardData {
+  return lifetimeCard(30, {
+    badge: "Your offer — 30% off Lifetime",
     ctaLabel: "Upgrade to Lifetime",
     footnote: "One-time purchase.",
-    claim: percent === 50 ? "lifetime50" : "lifetime30",
+    claim: "lifetime30",
   });
 }
 
 // The few bits that distinguish the pure-license offer from the receipt+license offer.
 // Everything else in the two license-style segments is identical.
 interface LicenseVariant {
-  percent: 30 | 50;
   introPrefix: string; // optional thanks-for-being-a-customer opening line
   fineprint: string;
 }
 
-// Plain license holder: 30% off, no thanks line, framed purely as a Standalone license.
+// Plain license holder: framed purely as a Standalone license.
 function pureLicenseVariant(): LicenseVariant {
   return {
-    percent: 30,
     introPrefix: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. `,
     fineprint: `Offer for your Standalone license dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };
 }
 
-// License holder who is also an original (pre-2023) Mac App Store customer: same offer at
-// 50%, with a thanks line and the Mac App Store receipt acknowledged.
+// License holder who is also an original (pre-2023) Mac App Store customer: same offer,
+// with the Mac App Store receipt acknowledged in the fine print.
 function receiptLicenseVariant(): LicenseVariant {
   return {
-    percent: 50,
     introPrefix: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. `,
     fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };
@@ -386,7 +381,7 @@ function expiringLicenseSegment(v: LicenseVariant): SegmentData {
   return {
     headline: "Lifetime Upgrade Offer",
     intro: `${v.introPrefix}Your current license expires on <strong>${formattedExpiry.value}</strong>. You don't need a new license yet, but you have the following upgrade offer:`,
-    primary: licenseLifetimePrimary(v.percent),
+    primary: licenseLifetimePrimary(),
     faq: {
       heading: "Why upgrade to Lifetime?",
       body: `Your current license will expire on ${formattedExpiry.value} and stop receiving new updates. A Lifetime License never expires and includes all future updates.`,
@@ -400,7 +395,7 @@ function expiredLicenseSegment(v: LicenseVariant): SegmentData {
   return {
     headline: "License Upgrade Offer",
     intro: `${v.introPrefix}Your PopClip Standalone license expired on <strong>${formattedExpiry.value}</strong>. Upgrade or renew your license to keep getting updates.`,
-    primary: licenseLifetimePrimary(v.percent),
+    primary: licenseLifetimePrimary(),
     secondary: renewalSecondary(),
     faq: {
       heading: "Why do I need a new license?",
@@ -426,11 +421,11 @@ interface OfferRule {
   build(ctx: OfferContext): SegmentData;
 }
 
-// Rules are evaluated in order; the first whose `matches` returns true wins. Every MAS offer
-// (free / 50% off) beats the license 30%, so a customer with a receipt gets the MAS deal. A
-// pre-2023 receipt held alongside a license key keeps that 50% deal but is presented as a
-// license upgrade. The license-only offer applies when there's no receipt, split by whether
-// the key has expired.
+// Rules are evaluated in order; the first whose `matches` returns true wins. All paid
+// upgrades are 30% off Lifetime; the rules differ in presentation and extras (free claims,
+// fallbacks). A pre-2023 receipt held alongside a license key is presented as a license
+// upgrade with the receipt acknowledged. The license-only offer applies when there's no
+// receipt, split by whether the key has expired.
 const offerRules: OfferRule[] = [
   {
     name: "mas-free",
@@ -438,7 +433,7 @@ const offerRules: OfferRule[] = [
     build: () => masFreeSegment(),
   },
   {
-    // pre-2023 receipt + license key: the license offer, but at 50% and acknowledging the receipt
+    // pre-2023 receipt + license key: the license offer, acknowledging the receipt
     name: "mas-receipt-with-license",
     matches: (ctx) => !!ctx.rpd && !!ctx.lxd,
     build: (ctx) => {
@@ -453,7 +448,7 @@ const offerRules: OfferRule[] = [
     build: (ctx) => masDiscountSegment(ctx.rpd! < GATED_BEFORE),
   },
   {
-    // fallback: no receipt, same offer at 30%
+    // fallback: no receipt, the same 30% offer framed as a license upgrade
     name: "license-only",
     matches: () => true,
     build: (ctx) => {
