@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from "vue";
+import { onMounted, onUnmounted, ref, computed } from "vue";
 import { z } from "zod";
 import config from "./config/config.json";
 import { loadStore, useStoreState, formatMinorUnits, roundPrice } from "./composables/useStoreState";
@@ -7,6 +7,7 @@ import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
 import { usePaddleBillingCheckout } from "./composables/usePaddleBillingCheckout";
 import { formatDate } from "./helpers/formatters";
+import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import OfferCard from "./OfferCard.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
 import { useSessionStorage } from "@vueuse/core";
@@ -95,6 +96,15 @@ onMounted(() => {
   } else {
     status.value = "invalid";
   }
+  // React to #country= changes without a reload (matches the Buy page);
+  // loadStore's guard no-ops when the coupon+country key is unchanged.
+  const reloadOnHashChange = () => {
+    if (status.value === "valid") loadStore();
+  };
+  window.addEventListener("hashchange", reloadOnHashChange);
+  onUnmounted(() =>
+    window.removeEventListener("hashchange", reloadOnHashChange),
+  );
 });
 
 // ---- pre-checkout dialog --------------------------------------------------
@@ -590,6 +600,10 @@ async function renewStandard(details: BuyerDetails) {
 
     <OfferCard v-bind="segment.primary" :busy="anyBusy" @buy="onBuy" />
 
+    <div :class="store.isLoadedForCoupon !== null ? $style.infoLine : $style.infoLineLoading">
+      {{ store.isLoadedForCoupon !== null ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` : `Loading prices...` }}
+    </div>
+
     <template v-if="segment.secondary">
       <template v-if="segment.secondary.kind === 'card'">
         <div :class="$style.orLabel">{{ segment.secondary.label }}</div>
@@ -627,6 +641,18 @@ async function renewStandard(details: BuyerDetails) {
   text-align: left;
   margin: 0 auto 16px auto;
   color: var(--vp-c-danger-1);
+}
+
+.infoLine {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.infoLineLoading {
+  text-align: center;
+  margin-top: 18px;
+
+  color: var(--vp-c-text-2);
 }
 
 /* Small connector between the Lifetime hero and the renewal card. */

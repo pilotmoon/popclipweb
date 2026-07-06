@@ -79,15 +79,18 @@ export async function loadStore() {
   const store = useStoreState();
 
   const coupon = readParams().get("coupon") ?? "";
-  if (store.isLoadedForCoupon.value === coupon) {
-    log(
-      `Store already loaded for ${store.countryCode.value} and coupon '${coupon}'`,
-    );
+  const country = readParams().get("country") ?? "";
+  // Guard key includes country so a #country= change re-fetches (it doesn't
+  // change the coupon). Pipe-joined; neither a coupon nor a country code
+  // contains a pipe.
+  const loadKey = `${coupon}|${country}`;
+  if (store.isLoadedForCoupon.value === loadKey) {
+    log(`Store already loaded for ${store.countryCode.value} (key '${loadKey}')`);
     return;
   }
 
   if (isBillingActive()) {
-    return loadStoreBilling(store, coupon);
+    return loadStoreBilling(store, coupon, country, loadKey);
   }
 
   log("Loading prices", { coupon });
@@ -103,7 +106,7 @@ export async function loadStore() {
   store.countryCode.value = productData.countryCode;
   store.countryName.value = countryInfo.countryName;
   store.paddleProducts.value = preprocessProducts(productData);
-  store.isLoadedForCoupon.value = coupon;
+  store.isLoadedForCoupon.value = loadKey;
   log(`Prices loaded for ${store.countryCode.value}`);
 }
 
@@ -173,17 +176,18 @@ export function formatMinorUnits(amountMinor: number, currencyCode: string) {
 async function loadStoreBilling(
   store: ReturnType<typeof useStoreState>,
   coupon: string,
+  // #country=XX forces the displayed prices to that country instead of
+  // geolocating the caller's IP — for testing localized prices without a
+  // VPN. Display-only: the Paddle checkout passes no address, so it always
+  // re-resolves the buyer's real country at payment. Allowed in production.
+  country: string,
+  loadKey: string,
 ) {
   const sandbox = useDeploymentInfo().isLocalhost;
   const endpoint = sandbox
     ? config.pilotmoon.frontendRoot_sandbox
     : config.pilotmoon.frontendRoot;
   const mode = sandbox ? "test" : "live";
-  // #country=XX forces the displayed prices to that country instead of
-  // geolocating the caller's IP — for testing localized prices without a
-  // VPN. Display-only: the Paddle checkout passes no address, so it always
-  // re-resolves the buyer's real country at payment. Allowed in production.
-  const country = readParams().get("country");
   log("Loading prices (billing)", { coupon, mode, country });
   const fetchResponse = await fetch(
     `${endpoint}/store/getProductsBilling?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupon=${coupon}&mode=${mode}${
@@ -266,7 +270,7 @@ async function loadStoreBilling(
     ? getCountryInfo(result.countryCode).countryName
     : "";
   store.paddleProducts.value = z.record(ZProcessedProduct).parse(processed);
-  store.isLoadedForCoupon.value = coupon;
+  store.isLoadedForCoupon.value = loadKey;
   log(`Prices loaded (billing) for '${store.countryCode.value}'`);
 }
 

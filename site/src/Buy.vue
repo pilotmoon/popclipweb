@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { onMounted, computed, ref } from "vue";
+import { onMounted, onUnmounted, computed, ref } from "vue";
 import { useSessionStorage } from "@vueuse/core";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { loadStore, useStoreState, roundPrice } from "./composables/useStoreState";
@@ -25,6 +25,12 @@ function queryBool(val) {
 
 onMounted(() => {
   loadStore();
+  // Re-fetch prices when the URL fragment changes (e.g. #country=JP) so the
+  // display reacts live without a reload; loadStore's guard no-ops when the
+  // coupon+country key is unchanged.
+  const reloadOnHashChange = () => loadStore();
+  window.addEventListener("hashchange", reloadOnHashChange);
+  onUnmounted(() => window.removeEventListener("hashchange", reloadOnHashChange));
   // #name= and #email= params (e.g. from the PopClip upgrade flow) seed
   // the dialog; after that it tracks whatever the user last confirmed
   const nameParam = readParams().get("name");
