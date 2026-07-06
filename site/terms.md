@@ -113,7 +113,7 @@ App Store purchases are subject to Apple's
 App Store and license key purchases have separate license agreements for separate
 editions of the product, and are not transferable between each other. However,
 as a temporary measure, to ease the move away from the App Store, the Standalone
-edition of PopClip has recognized App Store purchase receipts and treated them
+edition of PopClip has recognised App Store purchase receipts and treated them
 like valid license keys.
 
 Under the terms in force throughout the period of App Store sales, the provision
@@ -121,24 +121,28 @@ of updates was at my sole discretion, and the App Store purchase terms did not
 specify any entitlement to future updates. In practice, updates have been
 provided free of charge to all App Store customers to date.
 
-Starting with version 2026.7, I am introducing upgrade
-pricing for the oldest purchases: PopClip no longer treats App Store purchases
-made in 2018 or before as valid license keys. Affected customers may continue
-using the last version of PopClip that accepts their receipt (2025.9.2), or
-obtain a license key to use current versions.
+Starting in July 2026, I am introducing a paid upgrade requirement for older
+Mac App Store purchases. This is being introduced in stages, beginning with the
+oldest purchases. PopClip versions released in July 2026 or later treat App
+Store purchases as follows, depending on the date of purchase:
 
-### App Store upgrade pricing
+| App Store purchase date              | Treatment                                                         |
+| ------------------------------------ | ----------------------------------------------------------------- |
+| Before January 1, 2019               | No longer recognised. A license key is now required.              |
+| January 1, 2019 to December 31, 2022 | Recognised temporarily. A license key will be required in future. |
+| On or after January 1, 2023          | Recognised temporarily. Eligible for a free Lifetime License.     |
 
-For App Store purchases I will apply the following upgrade pricing:
+Where an App Store purchase is no longer recognised, you may continue using the
+last version of PopClip that accepts your receipt, or obtain a license key to
+use current versions.
 
-- Purchased from App Store before January 1, 2023: eligible to purchase a
-  Lifetime License at a 50% discount.
+::: info Upgrade offers
 
-- Purchased from App Store on or after January 1, 2023: eligible for a free
-  Lifetime License.
+Discount offers may be available for App Store customers wishing to buy
+a license key. To see the current available offer, click the "Upgrade..."
+button in the Buy pane of PopClip's settings.
 
-These offers can be claimed by clicking the Upgrade button within the App pane
-of PopClip's settings.
+:::
 
 ## Refund policy
 
