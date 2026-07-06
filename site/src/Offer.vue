@@ -45,8 +45,13 @@ function readOfferParams(): URLSearchParams {
   return p;
 }
 
+// Offers whose wording doesn't reference a purchase/expiry date, so a link
+// with just id + offer + sig is valid.
+const DATELESS_OFFERS = ["support"];
+
 // Read the signed offer params. The dates are optional, but at least one
-// must be present for the upgrade page to make sense.
+// must be present for the upgrade page to make sense (the support offer
+// needs none).
 function readSignedParams(): SignedParams | null {
   const p = readOfferParams();
   const params: SignedParams = {
@@ -63,7 +68,8 @@ function readSignedParams(): SignedParams | null {
   const scc = p.get("scc");
   if (scc) params.scc = scc;
   const dates = [params.rpd, params.lpd, params.lxd];
-  const ok = params.id.length > 0 && params.sig.length > 0 && params.offer.length > 0 && dates.some((d) => d) && dates.every((d) => !d || DATE_RE.test(d));
+  const datesOk = (DATELESS_OFFERS.includes(params.offer) || dates.some((d) => d)) && dates.every((d) => !d || DATE_RE.test(d));
+  const ok = params.id.length > 0 && params.sig.length > 0 && params.offer.length > 0 && datesOk;
   return ok ? params : null;
 }
 
@@ -102,9 +108,7 @@ onMounted(() => {
     if (status.value === "valid") loadStore();
   };
   window.addEventListener("hashchange", reloadOnHashChange);
-  onUnmounted(() =>
-    window.removeEventListener("hashchange", reloadOnHashChange),
-  );
+  onUnmounted(() => window.removeEventListener("hashchange", reloadOnHashChange));
 });
 
 // ---- pre-checkout dialog --------------------------------------------------
@@ -320,6 +324,28 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
   return seg;
 }
 
+// Generic support-granted discount: the same deal as the upgrade offer (30%
+// off Lifetime, or a free 2-year), with no receipt or license dates — links
+// are minted ad hoc, e.g. by support. Wording is deliberately generic.
+function supportSegment(): SegmentData {
+  return {
+    headline: "PopClip Support Discount",
+    intro: `Thanks for your interest in PopClip. Here is your discount offer:`,
+    primary: masLifetimePrimary(),
+    secondary: {
+      kind: "alt",
+      title: "Not able to pay right now?",
+      html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-year license</strong> instead, for 2 years of updates.`,
+      cta: { label: "Claim a free 2-year license", theme: "alt", claim: "free2year" },
+    },
+    faq: {
+      heading: "About this offer",
+      body: "This discount link was provided to you by PopClip support. It can be used once, for a license for your own use.",
+    },
+    fineprint: FINEPRINT_TAIL,
+  };
+}
+
 // Full-price 2-year renewal, offered as the secondary to an expired-license holder. It's a
 // plain full-price purchase (no coupon), so it opens the checkout directly rather than going
 // through getOfferCoupon — see renewStandard().
@@ -410,6 +436,7 @@ function expiredLicenseSegment(v: LicenseVariant): SegmentData {
 // Facts available to each rule's matcher/builder, derived once per evaluation so
 // individual rules don't each need to re-derive them from signedParams/licenseExpired.
 interface OfferContext {
+  offer: string;
   rpd?: string;
   lxd?: string;
   expired: boolean;
@@ -427,6 +454,12 @@ interface OfferRule {
 // upgrade with the receipt acknowledged. The license-only offer applies when there's no
 // receipt, split by whether the key has expired.
 const offerRules: OfferRule[] = [
+  {
+    // the generic support-granted discount has its own wording, regardless of dates
+    name: "support",
+    matches: (ctx) => ctx.offer === "support",
+    build: () => supportSegment(),
+  },
   {
     name: "mas-free",
     matches: (ctx) => !!ctx.rpd && ctx.rpd >= "2023-01-01",
@@ -460,7 +493,7 @@ const offerRules: OfferRule[] = [
 
 const segment = computed<SegmentData>(() => {
   const sp = signedParams.value;
-  const ctx: OfferContext = { rpd: sp?.rpd, lxd: sp?.lxd, expired: licenseExpired.value };
+  const ctx: OfferContext = { offer: sp?.offer ?? "", rpd: sp?.rpd, lxd: sp?.lxd, expired: licenseExpired.value };
   const rule = offerRules.find((r) => r.matches(ctx));
   if (!rule) throw new Error("no offer rule matched"); // unreachable: "license-only" always matches
   return rule.build(ctx);
