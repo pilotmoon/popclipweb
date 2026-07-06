@@ -179,9 +179,16 @@ async function loadStoreBilling(
     ? config.pilotmoon.frontendRoot_sandbox
     : config.pilotmoon.frontendRoot;
   const mode = sandbox ? "test" : "live";
-  log("Loading prices (billing)", { coupon, mode });
+  // #country=XX forces the displayed prices to that country instead of
+  // geolocating the caller's IP — for testing localized prices without a
+  // VPN. Display-only: the Paddle checkout passes no address, so it always
+  // re-resolves the buyer's real country at payment. Allowed in production.
+  const country = readParams().get("country");
+  log("Loading prices (billing)", { coupon, mode, country });
   const fetchResponse = await fetch(
-    `${endpoint}/store/getProductsBilling?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupon=${coupon}&mode=${mode}`,
+    `${endpoint}/store/getProductsBilling?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupon=${coupon}&mode=${mode}${
+      country ? `&country=${encodeURIComponent(country)}` : ""
+    }`,
   );
   if (!fetchResponse.ok) {
     log("Failed to load prices (billing)");
