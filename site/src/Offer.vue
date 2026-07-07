@@ -301,7 +301,7 @@ function freeTwoYearAlt(): SecondaryData {
   return {
     kind: "alt",
     title: "Not able to pay right now?",
-    html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-year license</strong> instead, for 2 more years of updates. You can still claim a Lifetime discount later.`,
+    html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-year Standard License</strong> instead, for 2 more years of updates. You can still claim a Lifetime discount later.`,
     cta: { label: "Claim a free 2-year license", theme: "alt", claim: "free2year" },
   };
 }
@@ -335,7 +335,7 @@ function supportSegment(): SegmentData {
     secondary: {
       kind: "alt",
       title: "Not able to pay right now?",
-      html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-year license</strong> instead, for 2 years of updates.`,
+      html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-year Standard License</strong> instead, for 2 years of updates.`,
       cta: { label: "Claim a free 2-year license", theme: "alt", claim: "free2year" },
     },
     faq: {
