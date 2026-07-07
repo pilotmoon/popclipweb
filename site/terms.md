@@ -9,13 +9,12 @@ editLink: false
 _I_, _me_: [Nicholas Moore](https://pilotmoon.com/about), a sole trader in the
 United Kingdom doing business using the trading name Pilotmoon Software.
 
-_Product_: the PopClip software application. The scope of the product does not
+_Product_: The PopClip software application. The scope of the product does not
 include any extensions (see [Extensions](#extensions) below).
 
-_You_: a free trial user or a licensed user of the product.
+_You_: A licensed individual or organization, or an individual using the free trial.
 
-_Authorized reseller_: a business authorized by me to sell license keys for
-the product to end customers (see
+_Authorized reseller_: A business authorized by me to sell license keys to you (see
 [Appendix A](#appendix-a-authorized-resellers-and-subscription-services)).
 
 _App Store_: Apple's Mac App Store.
@@ -26,7 +25,7 @@ Where the product has a free trial mode, I grant you the right to use the
 product free of charge for the period of the trial. The trial mode may include
 purchase reminders and limitations on usage.
 
-I encourage you to make use of the free trial before buying to see if the
+I encourage you to make use of the free trial before buying, to find out if the
 product is suitable for your needs.
 
 ## License purchases
@@ -36,9 +35,10 @@ License keys may only be purchased through an authorized reseller.
 ### License grant
 
 In consideration of the purchase fee paid by you to the reseller, I grant you a
-non-exclusive, non-transferable, non-sublicensable, perpetual, irrevocable,
-royalty-free right and license to use the product, subject to these terms and
-the reseller's terms.
+non-exclusive, non-transferable, non-sublicensable, perpetual (subject to the
+[update policy](#update-policy)), irrevocable (subject to the [revocation](#revocation)
+provisions), royalty-free right and license to use the product, subject to these
+terms and the reseller's terms.
 
 ### Registration and activation
 
@@ -71,12 +71,12 @@ License keys may be _personal_ or _multi-user_ licenses:
   within any rolling 30-day period. (Computer installations may be reassigned
   without a formal de-registration process.)
 
-### Revocation of misused licenses
+### Revocation
 
-If you share, publish, or otherwise allow the use of your license key beyond
-the allowed number of users or computers, the license will be revoked, and you
-may no longer use the product. In such cases, I may use technical means to
-disable the use of the license key.
+If I determine that a license key has been shared, published, leaked, resold, or
+otherwise used or distributed beyond the scope permitted by these terms, I may
+revoke the license. After a license is revoked, you may no longer use the product
+and I may use technical means to disable the use of the license key.
 
 ### Update policy
 
