@@ -89,7 +89,7 @@ Your entitlement to future updates depends on the type of license you have:
 - Standard License (time-limited): The license period begins on the day of
   purchase and ends on the expiry date shown in the license details. This
   license entitles you to use all product updates I release within the license
-  period. Upon expiry, you may continue to use the last version of the product
+  period. Upon expiry, you may continue to use any version of the product
   released during the license period, but you will need to purchase a new
   license to receive further updates.
 
