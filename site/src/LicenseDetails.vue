@@ -170,12 +170,21 @@ function licenseInfoString() {
       </pre>
     </div>
     <div v-else-if="state === State.Done">
-      <h1>Thank you for your purchase</h1>
-      <p>
-        You have successfully purchased PopClip.
-        <button id="party" @click="kaboom">🎉</button> Thank you for your support!
-      </p>
-      <h2>Your PopClip License Key</h2>
+      <template v-if="licenseKey.paid">
+        <h1>Thank you for your purchase</h1>
+        <p>
+          Your PopClip license key is ready.
+          <button id="party" @click="kaboom">🎉</button>
+        </p>
+      </template>
+      <template v-else>
+        <h1>Your license is ready</h1>
+        <p>
+          Your PopClip license key has been generated.
+          <button id="party" @click="kaboom">🎉</button>
+        </p>
+      </template>
+      <h2>Your License Key</h2>
       <div class="license">
         <ul class="details-panel info custom-block">
           <li v-if="licenseKey.name">
@@ -210,9 +219,9 @@ function licenseInfoString() {
       <h3>License Key File</h3>
 
       <p v-if="purchaseInfo.userEmail.value">
-        Your license key file has been emailed to
+        A reusable copy of your license key has been emailed to
         <b>{{ purchaseInfo.userEmail.value }}</b
-        >.
+        >. Please keep it somewhere safe.
       </p>
       <p v-else>Your license key file has been emailed to the address you provided at checkout.</p>
 
