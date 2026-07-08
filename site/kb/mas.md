@@ -6,8 +6,8 @@ import PopClipVersion from "../src/PopClipVersion.vue";
 
 The latest version of PopClip is <PopClipVersion />, but it is not available as
 an update on the Mac App Store. If you are still using the last released Mac App
-Store version, 2023.9, then you can migrate for free to the Standalone edition
-to receive the latest updates.
+Store version, 2023.9, then you can migrate to the Standalone edition to receive
+the latest updates.
 
 ::: info From the developer
 
