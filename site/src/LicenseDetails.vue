@@ -218,17 +218,16 @@ function licenseInfoString() {
 
       <h3>License Key File</h3>
 
-      <p v-if="purchaseInfo.userEmail.value">
-        A reusable copy of your license key has been emailed to
-        <b>{{ purchaseInfo.userEmail.value }}</b
-        >. Please keep it somewhere safe.
-      </p>
-      <p v-else>Your license key file has been emailed to the address you provided at checkout.</p>
-
-      <!-- <p>To save a backup of your license key, download the file to your computer. Double-click the file to activate it.</p>
+      <p>Download the file to save a reusable copy of your license key. Double-click it to activate PopClip with it.</p>
       <p>
         <DownloadButton size="smaller" theme="outline" :href="licenseFileLink()" text="Download License Key File" :text="licenseFileName()"></DownloadButton>
-      </p> -->
+      </p>
+
+      <p>
+        A copy of the license key file has been emailed to
+        <b>{{ purchaseInfo.userEmail.value }}</b
+        >.
+      </p>
 
       <h3>Changes</h3>
       <p>
