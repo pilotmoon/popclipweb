@@ -87,8 +87,8 @@ onMounted(() => {
   const params = readSignedParams();
   if (params) {
     signedParams.value = params;
-    purchaseDate.value = params.rpd ?? params.lpd ?? "";
-    purchaseYear.value = (params.rpd ?? params.lpd)?.slice(0, 4) ?? "";
+    purchaseDate.value = params.lpd ?? params.rpd ?? "";
+    purchaseYear.value = (params.lpd ?? params.rpd)?.slice(0, 4) ?? "";
     status.value = "valid";
     loadStore(); // populate prices for display
     // Unsigned email/name params (PopClip passes the licensee's existing
@@ -384,19 +384,10 @@ interface LicenseVariant {
 }
 
 // Plain license holder: framed purely as a Standalone license.
-function pureLicenseVariant(): LicenseVariant {
+function licenseVariant(): LicenseVariant {
   return {
-    introPrefix: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. `,
+    introPrefix: ``,
     fineprint: `Offer for your Standalone license dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
-  };
-}
-
-// License holder who is also an original (pre-2023) Mac App Store customer: same offer,
-// with the Mac App Store receipt acknowledged in the fine print.
-function receiptLicenseVariant(): LicenseVariant {
-  return {
-    introPrefix: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. `,
-    fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };
 }
 
@@ -470,7 +461,7 @@ const offerRules: OfferRule[] = [
     name: "mas-receipt-with-license",
     matches: (ctx) => !!ctx.rpd && !!ctx.lxd,
     build: (ctx) => {
-      const v = receiptLicenseVariant();
+      const v = licenseVariant();
       return ctx.expired ? expiredLicenseSegment(v) : expiringLicenseSegment(v);
     },
   },
@@ -485,7 +476,7 @@ const offerRules: OfferRule[] = [
     name: "license-only",
     matches: () => true,
     build: (ctx) => {
-      const v = pureLicenseVariant();
+      const v = licenseVariant();
       return ctx.expired ? expiredLicenseSegment(v) : expiringLicenseSegment(v);
     },
   },
