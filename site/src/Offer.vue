@@ -387,7 +387,7 @@ interface LicenseVariant {
 function licenseVariant(): LicenseVariant {
   return {
     introPrefix: ``,
-    fineprint: `Offer for your Standalone license dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
+    fineprint: `Offer for your license dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };
 }
 
