@@ -17,11 +17,22 @@ In all other cases, PopClip will ask macOS to open the URL in the default app ap
 An Open URL action is defined by the presence of a `url` field, plus additional
 optional fields, as follows:
 
-| Key             | Type               | Description                                                                                                                                                        |
-| --------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `url`           | String             | The URL to open when the user clicks the action. Use either `{popclip text}` or `***` as placeholder for the selected text.                                        |
-| `alternate url` | String (Optional)  | An alternate URL to open if the user holds Option (⌥) when invoking the action. Same format as `url`.                                                              |
-| `clean query`   | Boolean (Optional) | If `true`, newlines and tabs in the text will be replaced with a space, and consecutive spaces will be collapsed to a single space. Default is `false`.            |
+| Key              | Type               | Description                                                                                                                                                        |
+| ---------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `url`            | String             | The URL to open when the user clicks the action. Use either `{popclip text}` or `***` as placeholder for the selected text.                                        |
+| `clean query`    | Boolean (Optional) | If `true`, newlines and tabs in the text will be replaced with a space, and consecutive spaces will be collapsed to a single space. Default is `false`.            |
+| `spaces as plus` | Boolean (Optional) | If `true`, spaces in the inserted text are encoded as `+` instead of `%20`. Some search engines (for example Amazon) expect this format. Default is `false`.       |
+
+::: info Verbatim search with the Option key
+
+If the user holds Option (⌥) when invoking the action, PopClip wraps the
+inserted text in double quotes, so that search engines treat it as an
+exact-phrase search.
+
+_The `alternate url` property supported by earlier versions of PopClip was
+removed in PopClip 2026.7. If present in a config, it is now ignored._
+
+:::
 
 ## Input and output
 

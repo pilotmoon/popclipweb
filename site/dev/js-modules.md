@@ -46,10 +46,10 @@ The following JavaScript snippet defines a complete module-based extension:
 const theNumber = String(Math.floor(Math.random() * 100));
 
 module.exports = {
-  icon: `square ${theNumber}`,
   actions: [
     {
       title: "The Title",
+      icon: `square ${theNumber}`,
       code: (input) => {
         return `The number is ${theNumber}. Your text is: ${input.text}`;
       },
@@ -63,7 +63,7 @@ Observe a few things:
 - The extension's `name` and the action's `after` step, `show-result`, are
   specified in the static config in the header.
 - At load time, the module generates a random number and saves it in a variable.
-- The module exports an `icon` property, displaying the random number in a
+- The action has an `icon` property, displaying the random number in a
   square.
 - The module defines its actions by exporting an `actions` array. See
   [Module actions](#module-actions).
@@ -122,8 +122,9 @@ Alternatively, you can provide static config in another format (e.g.
 ## Static-only properties
 
 Certain properties of the extension can only be defined in the static config,
-and cannot be overriden by the module. These are `identifier`, `popclipVersion`,
-`macosVersion` and `entitlements`.
+and cannot be overriden by the module. These are `name`, `icon`, `identifier`,
+`popclipVersion`, `macosVersion`, `entitlements`, `module`, `showAs`,
+`authServiceLabel` and `offersMultipleInstances`.
 
 ## Module actions
 
@@ -150,10 +151,11 @@ cannot mix regular actions and module actions in the same extension.
 Each action object has the same [properties](./actions) as a regular action,
 with the addition of the following:
 
-| Key     | Type          | Description                                                                                                                                                                         |
-| ------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `code`  | Function      | A function to run when the action is invoked. See: [Action function](#action-function).                                                                                             |
-| `regex` | RegExp Object | You may export a JavaScript [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp), and PopClip will use this instead of a string regex. |
+| Key       | Type              | Description                                                                                                                                                                         |
+| --------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `code`    | Function          | A function to run when the action is invoked. See: [Action function](#action-function).                                                                                             |
+| `regex`   | RegExp Object     | You may export a JavaScript [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp), and PopClip will use this instead of a string regex. |
+| `submenu` | Array or Function | An array of action objects to show in a submenu of this action, or a function generating them dynamically. See [Submenu functions](#submenu-functions).                             |
 
 ### Action function
 
@@ -167,21 +169,21 @@ The action function is called with the following arguments:
 
 ```javascript [synchronous]
 {
-  code: ((input, options, context) => {
+  code: (input, options, context) => {
     // ... do stuff ...
     doSomething();
     return someResult;
-  });
+  };
 }
 ```
 
 ```javascript [with async/await]
 {
-  code: (async (input, options, context) => {
+  code: async (input, options, context) => {
     // ... do stuff ...
     await doSomethingAsync();
     return someResult;
-  });
+  };
 }
 ```
 
@@ -216,12 +218,14 @@ returns an array of action objects.
 // #popclip dynamic example
 // { name: Dynamic Title, entitlements: [dynamic], lang: js, module: true }
 exports.actions = (input, options, context) => {
-  return [{
-    title: `<${input.text.slice(0, 10)}>`,
-    code: (input, options, context) => {
-      popclip.showText("Hi from Action");
+  return [
+    {
+      title: `<${input.text.slice(0, 10)}>`,
+      code: (input, options, context) => {
+        popclip.showText("Hi from Action");
+      },
     },
-  }];
+  ];
 };
 ```
 
@@ -229,12 +233,14 @@ exports.actions = (input, options, context) => {
 // #popclip dynamic example
 // { name: Dynamic Title, entitlements: [dynamic], lang: ts, module: true }
 export const actions: PopulationFunction = (input, options, context) => {
-  return [{
-    title: `<${input.text.slice(0, 10)}>`,
-    code: (input, options, context) => {
-      popclip.showText("Hi from Action");
+  return [
+    {
+      title: `<${input.text.slice(0, 10)}>`,
+      code: (input, options, context) => {
+        popclip.showText("Hi from Action");
+      },
     },
-  }];
+  ];
 };
 ```
 
@@ -245,6 +251,39 @@ The population function has the following limitations:
 - Cannot access the network (`XMLHttpRequest` is unavailable).
 - Cannot call methods on the `popclip` global object.
 - Cannot access `popclip.context.browserUrl` or `popclip.context.browserTitle`.
+
+### Submenu functions
+
+_New in PopClip 2026.7._
+
+An action object may define a `submenu` property, giving the action a submenu
+of child actions — see [Submenus](./actions#submenus). The value may be a
+static array of action objects, or a function.
+
+If a function is supplied, it is called at the moment the submenu opens, to
+generate the submenu's actions dynamically. It has the same signature and
+limitations as a [population function](#population-function), and likewise
+requires the `dynamic` entitlement.
+
+```typescript
+// #popclip submenu function example
+// { name: Sub Demo, icon: circle filled 3, entitlements: [dynamic], lang: ts, module: true }
+export const actions = [
+  {
+    title: "Word Menu",
+    // called when the submenu opens: one child action per word, capped at 3
+    submenu: (input) => {
+      return input.text
+        .split(/\s+/)
+        .slice(0, 3)
+        .map((word) => ({
+          title: word,
+          code: () => popclip.showText(`You chose: ${word}`),
+        }));
+    },
+  },
+];
+```
 
 ## Abbreviated forms
 

@@ -21,9 +21,66 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 </div>
 
-## Beta / Unreleased
+## PopClip 2026.7 (5992)
 
-- Please stand by for documentation update for the new Beta 5898.
+### Added
+
+- Actions can now have submenus, using the new `submenu` property. A submenu is
+  defined by an array of child actions, or (in JavaScript extensions) a
+  population function that generates the actions dynamically when the submenu
+  opens. The function form requires the `dynamic` entitlement. See [Submenus](actions#submenus) and [Submenu functions](js-modules#submenu-functions).
+- New top-level config properties:
+  - `show as`: set the action's default presentation to `icon` or `text`.
+  - `auth service label`: a label identifying the service to be signed in to, shown in
+    the action's settings UI.
+  - `offers multiple instances`: controls whether the user can duplicate the action
+    to create multiple instances.
+- New keys for [option](config#the-options-array) dictionaries:
+  - `multiline`: for `string` options, show a multi-line text field.
+  - `allow other`: for `multiple` options, adds an "Other…" choice allowing
+    the user to enter a free-text value.
+  - `allow none`: for `multiple` options, adds a "None" choice whose value is
+    the empty string.
+- Option `description` fields can now contain clickable links, written either
+  as bare URLs or in Markdown syntax: `[label](https://example.com)`.
+- URL actions: added `spaces as plus` property. If `true`, spaces in the query
+  are encoded as `+` instead of `%20` (some search engines, e.g. Amazon,
+  expect this).
+- JavaScript: The [auth function](https://pilotmoon.github.io/popclip-types/interfaces/Extension.html#auth)
+  can now return an [AuthResult](https://pilotmoon.github.io/popclip-types/interfaces/AuthResult.html)
+  object `{ secret, label, expiresIn }` instead of a bare secret string. The
+  `label` is displayed as the signed-in account identifier (e.g. username/email), and `expiresIn` (token
+  lifetime in seconds) lets PopClip treat the sign-in as expired after that
+  time.
+- JavaScript: New methods
+  [popclip.signInRequiredError()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#signInRequiredError)
+  and
+  [popclip.settingsRequiredError()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#settingsRequiredError)
+  return errors that an action can throw to send the user to the extension's
+  settings UI. The former also clears the stored `authsecret`, signing the
+  extension out.
+- JavaScript: Added
+  [popclip.openTemplateUrl()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openTemplateUrl) method.
+
+### Changed
+
+- JavaScript: The extension's `name` and `icon` are now
+  [static-only properties](js-modules#static-only-properties) — they can no
+  longer be defined dynamically by a module.
+- Holding Option (⌥) when clicking a URL or search action now performs a
+  "verbatim" search: the query is wrapped in double quotes so the search
+  engine treats it as an exact phrase. (This replaces the old `alternate url`
+  mechanism — see below.)
+- JavaScript: Updated bundled npm libraries to latest versions.
+
+### Removed
+
+- The `alternate url` property of URL actions has been removed. If present in
+  a config, it is now ignored. The Option (⌥) key now triggers the verbatim
+  search behaviour instead.
+- JavaScript: Removed the `util.buildQueryUrl()` function. Use
+  `popclip.openTemplateUrl()` or construct URLs with the standard `URL` class
+  instead.
 
 ## PopClip 2025.9.2 (5155)
 

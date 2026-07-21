@@ -71,6 +71,10 @@ global:
   [`popclip.showFailure()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showFailure),
   [`popclip.showSettings()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showSettings):
   show a check mark, shaking-X, or Pop up the extension's settings.
+- [`popclip.signInRequiredError()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#signInRequiredError),
+  [`popclip.settingsRequiredError()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#settingsRequiredError):
+  construct errors that the action can throw to indicate that the user needs to
+  sign in again or adjust the extension's settings.
 
 ### Global `pasteboard` object
 
@@ -150,18 +154,18 @@ app itself, and are available to load by scripts. These are:
 | `case-anything`              | 2.1.13  | Case conversion utilities                |
 | `content-type`               | 1.0.5   | Parse HTTP `Content-Type` headers        |
 | `dom-serializer`             | 2.0.0   | Serialize DOM nodes to HTML              |
-| `emoji-regex`                | 10.5.0  | Regular expression matching emojis       |
+| `emoji-regex`                | 10.6.0  | Regular expression matching emojis       |
 | `entities`                   | 7.0.0   | HTML entity encoder/decoder              |
 | `fast-json-stable-stringify` | 2.1.0   | Deterministic JSON stringify             |
 | `fast-plist`                 | 0.1.3   | Parse and serialize macOS property lists |
 | `htmlparser2`                | 10.0.0  | HTML parser                              |
 | `js-yaml`                    | 4.1.0   | YAML parser                              |
 | `linkedom`                   | 0.18.12 | Lightweight DOM implementation           |
-| `linkifyjs`                  | 4.3.2   | Detect and linkify URLs in text          |
+| `linkifyjs`                  | 4.3.3   | Detect and linkify URLs in text          |
 | `oauth-1.0a`                 | 2.2.6   | OAuth 1.0a signing helpers               |
 | `rot13-cipher`               | 1.0.0   | ROT13 encoder/decoder                    |
 | `sanitize-html`              | 2.17.0  | HTML sanitizer                           |
-| `sucrase`                    | 3.35.0  | Fast TypeScript/JS transformer           |
+| `sucrase`                    | 3.35.1  | Fast TypeScript/JS transformer           |
 | `turndown`                   | 7.2.1   | HTML to Markdown converter               |
 | `valibot`                    | 1.1.0   | Validation and parsing library           |
 

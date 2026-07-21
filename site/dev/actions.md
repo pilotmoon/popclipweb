@@ -96,22 +96,8 @@ are optional.
 | `capture html`       | Boolean              | If `true`, PopClip will attempt to capture HTML and Markdown for the selection. PopClip makes its best attempt to extract HTML, first of all from the selection's HTML source itself, if available. Failing that, it will convert any RTF text to HTML. And failing that, it will generate an HTML version of the plain text. It will then generate Markdown from the final HTML. Default is `false`.                                                                                                               |
 | `capture rtf`        | Boolean              | If `true`, PopClip will attempt to capture Rich Text (RTF) content for the selection. If no RTF content is found, and it will generate an RTF version of the plain text. Default is `false`.                                                                                                                                                                                                                                                                                                                        |
 | `restore pasteboard` | Boolean              | If true, then PopClip will restore the pasteboard to its previous contents after pasting text in the `paste-result` after-step. Default is `false`.                                                                                                                                                                                                                                                                                                                                                                 |
+| `submenu`            | Array                | An array of actions to show in a submenu of this action. See [Submenus](#submenus).                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Type-specific keys   | Varies               | See: [Shortcut actions](./shortcut-actions), [Service actions](./service-actions), [URL actions](./url-actions). [Key Press actions](./key-press-actions), [Shell Script actions](./shell-script-actions), [AppleScript actions](./applescript-actions), [JavaScript actions](./js-actions).                                                                                                                                                                                                                        |
-
-<!-- ### Action that does nothing
-
-If you want to define an action with no specific type, i.e. one that does
-nothing, you can simply omit all the type-specific properties. However in this
-case you must at least provide an empty `action` dictionary, as follows:
-
-```yaml
-#popclip
-name: Do Nothing
-action: {}
-```
-
-An action that does nothing will appear greyed out in the PopClip bar. Finding a
-use for this is left as an exercise for the reader. -->
 
 ### The `requirements` array
 
@@ -181,8 +167,7 @@ JavaScript variant using the capture array:
 name: Domain WHOIS 2
 requirements: [url]
 regex: https?:\/\/([^\/]+)
-javascript:
-  popclip.openUrl('https://www.whois.com/whois/' + popclip.input.regexResult[1])
+javascript: popclip.openUrl('https://www.whois.com/whois/' + popclip.input.regexResult[1])
 ```
 
 Here, the full URL is the regex match, and the domain is taken from capture
@@ -222,3 +207,46 @@ The `app` field is a dictionary with the following structure:
 
 To specify multiple apps, use the `apps` field instead, supplying an array of
 dictionaries.
+
+## Submenus
+
+_New in PopClip 2026.7._
+
+An action can define a submenu of child actions, using the `submenu` property.
+The value is an array of action dictionaries (or a single action dictionary).
+Submenus can be nested.
+
+If the action defines no behaviour of its own, it will appear like folder
+and the submenu will open on mouse hover.
+
+If the action has its own behavior, it will appear like a regular action button
+and the user can display the submenu by secondary click (Control-click or right-click).
+
+The `submenu` property can also be placed at the top level of the config, to
+make the whole extension appear as a single button that opens a submenu. In
+that case, it cannot be combined with the `action` or `actions` fields.
+
+```yaml
+#popclip
+name: Search Menu
+icon: symbol:magnifyingglass
+submenu:
+  - title: Google
+    url: https://www.google.com/search?q=***
+  - title: Wikipedia
+    url: https://en.wikipedia.org/wiki/Special:Search?search=***
+  - separator: true
+  - title: Startpage
+    url: https://www.startpage.com/sp/search?query=***
+```
+
+JavaScript extensions can alternatively supply a function as the `submenu`
+value, to generate the submenu's actions dynamically when it opens. This
+requires the `dynamic` entitlement. See
+[Submenu functions](./js-modules#submenu-functions).
+
+### Separators
+
+Within a `submenu` array, you can insert a separator
+gap between actions by adding the special entry `{ separator: true }`, as
+shown in the example above.
