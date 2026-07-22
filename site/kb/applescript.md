@@ -15,6 +15,7 @@ Automator workflows and other automation software.
   foreground app.
 - **show settings [pane "General"|"Actions"|"App"]**: Show PopClip's settings
   window, optionally specifying a pane to show.
+- **show icon picker**: Show PopClip's standalone Icon Picker window.
 
 ## Examples
 
@@ -45,6 +46,12 @@ or
 tell application "PopClip" to show settings pane "General"
 tell application "PopClip" to show settings pane "Actions"
 tell application "PopClip" to show settings pane "App"
+```
+
+To show the icon picker:
+
+```applescript
+tell application "PopClip" to show icon picker
 ```
 
 Notes:
