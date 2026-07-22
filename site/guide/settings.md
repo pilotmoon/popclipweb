@@ -19,9 +19,9 @@ PopClip's status menu is accessed by clicking the&#x00A0;<StatusIconInline /> ic
 
 The status menu has three items:
 
-- <InlineIcon spec="symbol:pointer.arrow.motionlines" /> **Appear automatically:** A toggle item that turns [automatic appearance](#appear-automatically) on or off.
+- **Appear automatically:** A toggle item that turns [automatic appearance](#appear-automatically) on or off.
 - <InlineIcon spec="symbol:gearshape.fill" /> **Settings...:** Opens the settings window. Shortcut: `⌘,`
-- <InlineIcon spec="symbol:door.left.hand.open" /> **Quit PopClip:** Quits PopClip. Shortcut: `⌘Q`
+- **Quit PopClip:** Quits PopClip. Shortcut: `⌘Q`
 
 ## The settings window
 
@@ -98,37 +98,39 @@ obscuring the selection.
 
 ## <InlineIcon spec="symbol:puzzlepiece.extension" /> Actions tab
 
-![](./media/shot-settings-actions.png#pref "Actions tab.")
+![](./media/shot-settings-actions-2.png#pref "Actions tab.")
 
-The Actions tab lists all the built-in actions and installed extensions.
+The Actions tab lists all your actions — built-in actions and installed
+extensions — in the order they appear in the PopClip bar. Here you can turn
+actions on and off, adjust their settings, arrange them into folders, and
+customize their names and icons — see [Organizing Actions](./organizing).
 
 :::tip Built-in actions
 For details about the built-in actions and their settings, see
-[Actions](/guide/actions).
+[Built-in Actions](/guide/actions).
 :::
 
-### Action settings
+The tab also has:
 
-Turn actions on or off using the checkbox next to each action name. Click the
-cog button (<InlineIcon spec="bundle:gear" />) next to an action name to access
-that action's settings.
+- a **Search field** (shortcut: `⌘F`) to filter the actions list,
+- the **+** menu to create [folders and separators](./organizing#folders),
+- a **Get Extensions** button, which opens the
+  [extensions directory](/extensions/), and
+- the [Tools menu](#tools-menu) (<InlineIcon spec="symbol:wrench.and.screwdriver" />).
 
-Click **Get Extensions** to open the [extensions directory](/extensions/).
+### <InlineIcon spec="symbol:wrench.and.screwdriver" /> Tools menu
 
-#### Re-ordering actions
+The **Tools menu** at the bottom of the Actions tab contains:
 
-To re-order the actions, drag the handle at the far right of an action row up or
-down in the list.
-
-![](./media/anim-settings-actions-reorder.mp4 "Re-ordering actions in the Actions tab.")
-
-::: info Spelling action
-The Spelling action is always at the top of the list and can't be moved.
-:::
+- **Manage Extensions…** (shortcut: `⌘E`): opens a sheet listing your
+  installed extensions. See
+  [Managing installed extensions](./extensions#managing-installed-extensions).
+- **iCloud Sync**: toggles syncing of your actions setup between your Macs
+  via iCloud. See [iCloud Sync](/kb/sync).
 
 ## <StatusIconInline /> App tab
 
-![](./media/shot-settings-app.png#pref "App tab.")
+![](./media/shot-settings-app-2.png#pref "App tab.")
 
 The App tab contains information about your copy of PopClip and app-wide
 settings.

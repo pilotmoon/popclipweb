@@ -119,7 +119,7 @@ other projects. So the full list would be much longer.
 
 ## Legal notices
 
-**PopClip software application**<br> Copyright © 2011-2025 Nicholas Moore,
+**PopClip software application**<br> Copyright © 2011-2026 Nicholas Moore,
 Pilotmoon Software.<br> All rights reserved.
 
 **PopClip website, https&#58;&#47;&#47;www&period;popclip&period;app&#47;**<br>

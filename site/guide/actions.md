@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Actions
+# Built-in Actions
 
 The buttons that appear in the PopClip bar perform **actions**. PopClip comes
 with a set of built-in actions, and you can add more by installing
@@ -16,9 +16,14 @@ always see all the actions in the PopClip bar. See:
 
 :::
 
-## Built-in actions
+::: tip Make them your own
 
-### <InlineIcon spec="bundle:cut" /> <InlineIcon spec="bundle:copy" /> <InlineIcon spec="bundle:paste" /> Cut, Copy and Paste
+You can rearrange, rename, restyle and even delete any of the actions,
+including the built-in ones. See [Organizing Actions](./organizing).
+
+:::
+
+## <InlineIcon spec="bundle:cut" /> <InlineIcon spec="bundle:copy" /> <InlineIcon spec="bundle:paste" /> Cut, Copy and Paste
 
 The Cut, Copy and Paste actions work just like the usual clipboard functions on
 your Mac.
@@ -39,21 +44,18 @@ trackpad button.
 
 **Modifiers:**
 
-Hold **Shift (⌥)** to perform the action with plain text only. This will remove
+Hold **Shift (⇧)** to perform the action with plain text only. This will remove
 any formatting from the text.
 
 **Settings:**
 
-![](./media/shot-settings-copy.png#pref "Copy settings.")
+None. (To show these actions as icons instead of text, use the **Show As**
+command — see [Organizing Actions](./organizing#show-as-icon-or-text).)
 
-- **Show as Icon**: When enabled, shows the actions's button as an icon instead
-  of text.
-
-### <InlineIcon spec="bundle:search" /> Search
+## <InlineIcon spec="bundle:search" /> Search
 
 The Search action opens a web search for the selected text. The default search
-engine is Google (except if your Mac's region is China, in which case it's
-Baidu). You can change the search engine in the actions's settings.
+engine is Google. You can change the search engine in the action's settings.
 
 Searches open in the current app if it is a [known browser](/kb/browsers), or
 else in the system default browser.
@@ -67,20 +69,29 @@ Always available, subject to a maximum length limit.
 Hold **Shift (⇧)** to open the search in a background tab, in
 [supported browsers](/kb/browsers).
 
-Hold **Option (⌥)** to use the alternate search engine, if set.
+Hold **Option (⌥)** to search for the exact phrase by wraping the search text
+in double quotes.
 
 **Settings:**
 
-![](./media/shot-settings-search.png#pref "Search settings.")
+![](./media/shot-settings-search-3.png#pref "Search settings.")
 
-- **Search URL**: The URL of the search engine. The placeholder `***` will be
-  replaced with the selected text. For example, the default Google search URL is
-  `https://www.google.com/search?q=***`.
+- **Search Engine**: Choose the website to search, either:
+  - choose from a list of **preset search engines** (Baidu, Bing,
+    Brave, DuckDuckGo, Ecosia, Google, Kagi, NAVER, Startpage, Yahoo, Yahoo
+    Japan and Yandex); or
+  - choose **Other…** to enter a **custom search URL**. In a
+    custom URL, the placeholder `***` will be replaced with the selected text —
+    for example, `https://www.google.com/search?q=***`.
 
-- **Alternate Search URL**: An optional second search engine, which can be
-  triggered by holding the **Option (⌥)** key.
+::: tip Multiple search engines
 
-### <InlineIcon spec="bundle:link" /> Open Link
+To have several search actions for different engines, duplicate the Search
+action — see [Duplicating actions](./organizing#duplicating-actions).
+
+:::
+
+## <InlineIcon spec="bundle:link" /> Open Link
 
 The Open Link action opens any web URLs (`http:` and `https:`) detected in the
 selected text. If the text contains multiple web URLs, all of them will open in
@@ -114,7 +125,7 @@ opening them.
 
 None.
 
-### <InlineIcon spec="bundle:book" /> Dictionary
+## <InlineIcon spec="bundle:book" /> Dictionary
 
 The Dictionary action looks up the selected text in the macOS Dictionary app.
 The Dictionary app will open and show the definition of the word.
@@ -137,7 +148,7 @@ in the settings of macOS Dictionary app.
 
 ![](./media/shot-macos-dict-1.png "macOS Dictionary app settings.")
 
-### <InlineIcon spec="bundle:folder" /> Reveal in Finder
+## <InlineIcon spec="bundle:folder" /> Reveal in Finder
 
 The Reveal in Finder action opens the folder containing the selected file path,
 or, if the selected text is a folder path, opens the folder itself.
@@ -156,7 +167,7 @@ None.
 
 None.
 
-### <InlineIcon spec="bundle:spelling" /> Spelling
+## <InlineIcon spec="bundle:spelling" /> Spelling
 
 ![](./media/anim-spelling-3.mp4 "The Spelling action in use.")
 
@@ -193,7 +204,7 @@ replacing the text.
 
 **Settings:**
 
-![](./media/shot-settings-spelling.png#pref "Spelling settings.")
+![](./media/shot-settings-spelling-3.png#pref "Spelling settings.")
 
 - **Languages**: You can select up to two languages for spellchecking, choosing
   from any that are available on the operating system. If you only want to check

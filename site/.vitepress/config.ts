@@ -130,9 +130,10 @@ export default defineConfig({
           items: [
             { text: "Installation", link: "/guide/install" },
             { text: "Basics", link: "/guide/basics" },
-            { text: "Actions", link: "/guide/actions" },
-            { text: "Settings", link: "/guide/settings" },
+            { text: "Built-in Actions", link: "/guide/actions" },
             { text: "Extensions", link: "/guide/extensions" },
+            { text: "Organizing Actions", link: "/guide/organizing" },
+            { text: "Settings", link: "/guide/settings" },
           ],
         },
         {
@@ -153,6 +154,7 @@ export default defineConfig({
           items: [
             { text: "Mac App Store migration", link: "/kb/mas" },
             { text: "Troubleshooting", link: "/kb/troubleshooting" },
+            { text: "iCloud Sync", link: "/kb/sync" },
             { text: "AppleScript interface", link: "/kb/applescript" },
             { text: "Browser support", link: "/kb/browsers" },
             { text: "Paths and identifiers", link: "/kb/paths" },

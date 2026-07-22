@@ -59,11 +59,12 @@ appear. This works even when "Appear automatically" is turned off.
 When activated with the keyboard shortcut, PopClip appears in keyboard control
 mode. PopClip's bar will respond to keyboard input as follows:
 
-| Key                   | Action                         |
-| --------------------- | ------------------------------ |
-| Arrow keys (←→, ↑↓)   | Change the highlighted action  |
-| Return (↵), Space bar | Perform the highlighted action |
-| Esc key               | Dismiss PopClip                |
+| Key                        | Action                                |
+| -------------------------- | ------------------------------------- |
+| Left-right arrow keys (←→) | Select the next or previous action    |
+| Up-down arrow keys (↑↓)    | Enter or leave the highlighted folder |
+| Return (↵)                 | Perform the highlighted action        |
+| Esc key (or any other key) | Dismiss PopClip                       |
 
 ![](./media/anim-keyboard-2.mp4 "Selecting actions using the arrow keys and Return.")
 
