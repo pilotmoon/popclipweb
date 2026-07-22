@@ -2,7 +2,8 @@
   "pilotmoon": {
     "paddleProducts": {
       "popclip_2year": {},
-      "popclip_lifetime": {}
+      "popclip_lifetime": {},
+      "popclip_1year": {}
     },
     "iconsRoot": "https://icons.popclip.app",
     "apiRoot": "https://api.pilotmoon.com/v2",

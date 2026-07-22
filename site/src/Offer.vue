@@ -47,7 +47,7 @@ function readOfferParams(): URLSearchParams {
 
 // Offers whose wording doesn't reference a purchase/expiry date, so a link
 // with just id + offer + sig is valid.
-const DATELESS_OFFERS = ["support"];
+const DATELESS_OFFERS = ["support", "free1year"];
 
 // Read the signed offer params. The dates are optional, but at least one
 // must be present for the upgrade page to make sense (the support offer
@@ -126,7 +126,8 @@ const initialEmail = computed(() => storedEmail.value || "");
 const CLAIM_TITLES: Record<string, string> = {
   lifetime30: "Buy Lifetime License",
   freeLifetime: "Claim Lifetime License",
-  free2year: "Claim Standard License",
+  free2year: "Claim Standard License", // legacy claim, no live path produces it anymore
+  free1year: "Claim 1-Year License",
   renew2year: "Renew Standard License",
 };
 const dialogTitle = computed(() => CLAIM_TITLES[pendingClaim.value ?? ""] ?? "Buy PopClip License");
@@ -194,6 +195,14 @@ function twoYearPricing(): PriceFields {
   const p = store.paddleProducts.value.popclip_2year;
   if (!p) return { priceLabel: "" };
   return { priceLabel: roundPrice(p.displayPrice), priceIsDiscount: false, taxNote: p.taxNote ?? undefined };
+}
+
+// The 1-year license is offer-only (always given away at 100% off), so this only
+// ever renders the "Free" branch of the same logic lifetimePricing(100) uses.
+function oneYearPricing(): PriceFields {
+  const p = store.paddleProducts.value.popclip_1year;
+  if (!p) return { priceLabel: "" };
+  return { listPrice: roundPrice(p.displayPrice), priceLabel: "Free", priceIsDiscount: true };
 }
 
 // License expiry (for the license-holder copy): the date, whether it has passed,
@@ -296,20 +305,21 @@ function masLifetimePrimary(): CardData {
   });
 }
 
-// The "free 2-year instead" fallback offered alongside the 30% deal.
-function freeTwoYearAlt(): SecondaryData {
+// The "free 1-year instead" fallback offered alongside the 30% deal, shared by the
+// Mac App Store upgrade and support offers (both give the same fallback).
+function freeOneYearAlt(): SecondaryData {
   return {
     kind: "alt",
     title: "Not able to pay right now?",
-    html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-year Standard License</strong> instead, for 2 more years of updates. You can still claim a Lifetime discount later.`,
-    cta: { label: "Claim a free 2-year license", theme: "alt", claim: "free2year" },
+    html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 1-Year License</strong> instead, for a year of updates. You can still claim a Lifetime discount later.`,
+    cta: { label: "Claim a free 1-year license", theme: "alt", claim: "free1year" },
   };
 }
 
-// MAS receipt bought before 2023: Lifetime at 30% off. The free 2-year fallback is only
+// MAS receipt bought before 2023: Lifetime at 30% off. The free 1-year fallback is only
 // offered to customers already gated out of the app (bought before the receipt cutoff);
 // more recent buyers who aren't gated yet get just the upgrade offer, like an expiring license.
-function masDiscountSegment(freeTwoYear: boolean): SegmentData {
+function masDiscountSegment(freeOneYear: boolean): SegmentData {
   const seg: SegmentData = {
     headline: "Mac App Store Upgrade Offer",
     intro: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. To move from your Mac App Store purchase to a Standalone edition license key, here is your upgrade offer:`,
@@ -320,27 +330,45 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
     },
     fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };
-  if (freeTwoYear) seg.secondary = freeTwoYearAlt();
+  if (freeOneYear) seg.secondary = freeOneYearAlt();
   return seg;
 }
 
 // Generic support-granted discount: the same deal as the upgrade offer (30%
-// off Lifetime, or a free 2-year), with no receipt or license dates — links
+// off Lifetime, or a free 1-year), with no receipt or license dates — links
 // are minted ad hoc, e.g. by support. Wording is deliberately generic.
 function supportSegment(): SegmentData {
   return {
     headline: "PopClip Support Discount",
     intro: `Thanks for your interest in PopClip. Here is your discount offer:`,
     primary: masLifetimePrimary(),
-    secondary: {
-      kind: "alt",
-      title: "Not able to pay right now?",
-      html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-year Standard License</strong> instead, for 2 years of updates.`,
-      cta: { label: "Claim a free 2-year license", theme: "alt", claim: "free2year" },
-    },
+    secondary: freeOneYearAlt(),
     faq: {
       heading: "About this offer",
       body: "This discount link was provided to you by PopClip support. It can be used once, for a license for your own use.",
+    },
+    fineprint: FINEPRINT_TAIL,
+  };
+}
+
+// Dedicated giveaway: a free 1-Year License offered as the sole item, with no Lifetime
+// deal alongside it. Dateless and generically worded like the support offer, for ad hoc links.
+function free1YearSegment(): SegmentData {
+  return {
+    headline: "PopClip Free License",
+    intro: `Thanks for your interest in PopClip. Here's your free 1-year license:`,
+    primary: {
+      badge: "Your license is free",
+      title: "1-Year License",
+      bullets: ["1 year of free updates", "Use the latest version"],
+      ...oneYearPricing(),
+      ctaLabel: "Claim free 1-Year License",
+      footnote: "No charge at checkout.",
+      claim: "free1year",
+    },
+    faq: {
+      heading: "About this offer",
+      body: "This free license link was provided to you as part of a PopClip promotion. It can be used once, for a license for your own use.",
     },
     fineprint: FINEPRINT_TAIL,
   };
@@ -450,6 +478,12 @@ const offerRules: OfferRule[] = [
     name: "support",
     matches: (ctx) => ctx.offer === "support",
     build: () => supportSegment(),
+  },
+  {
+    // dedicated single-item giveaway: the 1-year license only, no Lifetime deal
+    name: "free1year",
+    matches: (ctx) => ctx.offer === "free1year",
+    build: () => free1YearSegment(),
   },
   {
     name: "mas-free",
