@@ -234,8 +234,7 @@ interface CardData {
 // The secondary slot is either a full product card (e.g. the renewal) or a terse
 // "alt" box (e.g. "support the app" / "free 2-year").
 type SecondaryData =
-  | { kind: "card"; label: string; card: CardData }
-  | { kind: "alt"; title: string; html: string; cta: { label: string; theme: "brand" | "alt"; claim: string } };
+  { kind: "card"; label: string; card: CardData } | { kind: "alt"; title: string; html: string; cta: { label: string; theme: "brand" | "alt"; claim: string } };
 
 interface SegmentData {
   headline: string;
@@ -360,7 +359,7 @@ function free1YearSegment(): SegmentData {
     primary: {
       badge: "Your license is free",
       title: "1-Year License",
-      bullets: ["1 year of free updates", "Use the latest version"],
+      bullets: ["1 year of free updates", "Keep the last version you receive"],
       ...oneYearPricing(),
       ctaLabel: "Claim free 1-Year License",
       footnote: "No charge at checkout.",
@@ -368,7 +367,7 @@ function free1YearSegment(): SegmentData {
     },
     faq: {
       heading: "About this offer",
-      body: "This free license link was provided to you as part of a PopClip promotion. It can be used once, for a license for your own use.",
+      body: "This free license link was provided just for you — please don't share it. It can be used once, for a license for your own personal use.",
     },
     fineprint: FINEPRINT_TAIL,
   };
