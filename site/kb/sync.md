@@ -4,8 +4,7 @@ outline: deep
 
 # iCloud Sync
 
-PopClip can sync your actions setup between all your Macs using iCloud. This
-article explains what syncs, how to turn it on and off, and what to expect.
+PopClip can sync your extensions and actions between all your Macs using iCloud.
 
 ## What is synced
 
