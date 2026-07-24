@@ -77,6 +77,10 @@ const status = ref<"loading" | "valid" | "invalid">("loading");
 const purchaseDate = ref<string>("");
 const purchaseYear = ref<string>("");
 const signedParams = ref<SignedParams | null>(null);
+// The full offer URL, captured on mount (never at module scope — this component is
+// server-rendered at build time, where there is no `window`). Embedded in the support
+// mailto so support can see exactly which offer the customer is writing about.
+const offerLink = ref<string>("");
 const couponError = ref(false);
 const busyOffer = ref<string | null>(null);
 // Disables the buy/renew buttons while any claim is in flight — only one checkout
@@ -84,6 +88,7 @@ const busyOffer = ref<string | null>(null);
 const anyBusy = computed(() => busyOffer.value !== null);
 
 onMounted(() => {
+  offerLink.value = window.location.href;
   const params = readSignedParams();
   if (params) {
     signedParams.value = params;
@@ -254,7 +259,26 @@ interface SegmentData {
   fineprint: string;
 }
 
-const FINEPRINT_TAIL = `One upgrade per customer. Questions?&nbsp;<a href="/support">Contact support</a>.`;
+// A mailto: to support, prefilled with a blank message area and the offer link in a footer
+// block below it. Encoding matches SupportEmailLink.vue (searchParams encodes spaces as
+// "+", which mail clients show literally, so they're swapped back to %20). The offer link
+// can't go in the subject or a page link — it's what identifies the customer's offer.
+const SUPPORT_SUBJECT = "PopClip Offer Enquiry";
+
+function supportMailtoHref(): string {
+  const url = new URL(`mailto:${encodeURIComponent(config.pilotmoon.supportEmail)}`);
+  url.searchParams.set("subject", SUPPORT_SUBJECT);
+  url.searchParams.set("body", `\n\n=== Offer Link\n${offerLink.value}\n===\n`);
+  // `&` between the query params must be escaped for the href attribute, since the
+  // fineprint is injected with v-html.
+  return url.href.replaceAll("+", "%20").replaceAll("&", "&amp;");
+}
+
+// Shared tail of every segment's fineprint. Built per-render (not a module constant) so it
+// picks up offerLink once mounted.
+function fineprintTail(): string {
+  return `One upgrade per customer. Questions?&nbsp;<a href="${supportMailtoHref()}">Contact support</a>.`;
+}
 
 // MAS receipts before this date are gated out of the app (matches PopClip's receipt cutoff);
 // only these customers are offered the free 2-year fallback. More recent buyers aren't gated
@@ -304,7 +328,7 @@ function masFreeSegment(): SegmentData {
       heading: "Why do I need a license key?",
       body: "PopClip is moving from Mac App Store purchase detection to requiring license keys for all users. Because you bought PopClip from the Mac App Store in 2023 or later, your purchase qualifies for a free upgrade to a Lifetime License.",
     },
-    fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
+    fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${fineprintTail()}`,
   };
 }
 
@@ -377,7 +401,7 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
 
  After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy a Lifetime License, discounted in recognition of your original purchase. Alternatively, claim a free Standard License, deferring any need to pay for another two years.`,
     },
-    fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
+    fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${fineprintTail()}`,
   };
   if (freeTwoYear) {
     seg.secondary = config.experiments.masFreeTwoYearAltBox ? freeTwoYearAlt() : freeTwoYearSecondary();
@@ -398,7 +422,7 @@ function supportSegment(): SegmentData {
       heading: "About this offer",
       body: "This discount link was provided to you by PopClip support. It can be used once, for a license for your own use.",
     },
-    fineprint: FINEPRINT_TAIL,
+    fineprint: fineprintTail(),
   };
 }
 
@@ -421,7 +445,7 @@ function free1YearSegment(): SegmentData {
       heading: "About this offer",
       body: "This free license link was provided just for you — please don't share it. It can be used once, for a license for your own personal use.",
     },
-    fineprint: FINEPRINT_TAIL,
+    fineprint: fineprintTail(),
   };
 }
 
@@ -466,7 +490,7 @@ interface LicenseVariant {
 function licenseVariant(): LicenseVariant {
   return {
     introPrefix: ``,
-    fineprint: `Offer for your license dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
+    fineprint: `Offer for your license dated ${purchaseDate.value}. ${fineprintTail()}`,
   };
 }
 
