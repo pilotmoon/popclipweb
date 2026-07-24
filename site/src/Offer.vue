@@ -331,7 +331,7 @@ function freeOneYearAlt(): SecondaryData {
 function freeTwoYearSecondary(): SecondaryData {
   return {
     kind: "card",
-    label: "or, if cost or payment is an issue",
+    label: "or, claim a free 2-year license",
     card: {
       title: "Standard License",
       bullets: ["2 years of free updates", "Keep the last version you receive"],
