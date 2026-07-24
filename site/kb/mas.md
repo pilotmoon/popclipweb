@@ -29,16 +29,6 @@ Thank you for your support and understanding. —Nick Moore, PopClip developer.
 5. Run the new PopClip app. It will detect your Mac App Store purchase and
    unlock itself.
 
-::: details Alternative: migrate using Homebrew
-
-[Homebrew](https://brew.sh/) users can perform the migration with this command:
-
-```
-killall PopClip; brew reinstall popclip --force
-```
-
-:::
-
 You can confirm the license status by viewing the license details in the App pane
 of PopClip's settings window.
 
