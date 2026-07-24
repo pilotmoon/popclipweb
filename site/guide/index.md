@@ -52,14 +52,10 @@ PopClip's user interface is developed in English and is translated into Chinese
 (Traditional and Simplified), French, Danish, Dutch, German, Italian, Japanese,
 Korean, Brazilian Portuguese, Polish, Russian, Slovak, Spanish, Ukrainian,
 Vietnamese and Turkish. These translations have been produced by a mix of paid
-translation services and volunteer users.
+translation services, volunteer users, and machine translation tools.
 
-Users can contribute translations in their own language using the CrowdIn
-platform. If you would like to add or suggest changes to translations, please go
-to the
-[Pilotmoon Apps project on CrowdIn](https://crowdin.com/project/pilotmoon-apps).
-If your language does not exist in the project, send me an email so I can add
-it.
+Translation strings files are published on GitHub: <https://github.com/pilotmoon/PopClip-Localization>. Contributions of corrections or improvements to existing translations are welcome.
+New languages will be considered on request.
 
 The documentation is only available in English.
 
