@@ -126,7 +126,7 @@ const initialEmail = computed(() => storedEmail.value || "");
 const CLAIM_TITLES: Record<string, string> = {
   lifetime30: "Buy Lifetime License",
   freeLifetime: "Claim Lifetime License",
-  free2year: "Claim Standard License", // legacy claim, no live path produces it anymore
+  free2year: "Claim Standard License", // the Mac App Store offer's free 2-year fallback
   free1year: "Claim 1-Year License",
   renew2year: "Renew Standard License",
 };
@@ -195,6 +195,14 @@ function twoYearPricing(): PriceFields {
   const p = store.paddleProducts.value.popclip_2year;
   if (!p) return { priceLabel: "" };
   return { priceLabel: roundPrice(p.displayPrice), priceIsDiscount: false, taxNote: p.taxNote ?? undefined };
+}
+
+// The free 2-year fallback (100% off popclip_2year via the `free2year` claim), mirroring
+// oneYearPricing() below but for the 2-year product.
+function freeTwoYearPricing(): PriceFields {
+  const p = store.paddleProducts.value.popclip_2year;
+  if (!p) return { priceLabel: "" };
+  return { listPrice: roundPrice(p.displayPrice), priceLabel: "Free", priceIsDiscount: true };
 }
 
 // The 1-year license is offer-only (always given away at 100% off), so this only
@@ -304,8 +312,9 @@ function masLifetimePrimary(): CardData {
   });
 }
 
-// The "free 1-year instead" fallback offered alongside the 30% deal, shared by the
-// Mac App Store upgrade and support offers (both give the same fallback).
+// The "free 1-year instead" fallback offered alongside the 30% deal, for the support offer
+// (ad hoc links with no receipt date). The Mac App Store offer uses freeTwoYearSecondary()
+// below instead — a full-card presentation of the equivalent free 2-year fallback.
 function freeOneYearAlt(): SecondaryData {
   return {
     kind: "alt",
@@ -315,21 +324,46 @@ function freeOneYearAlt(): SecondaryData {
   };
 }
 
-// MAS receipt bought before 2023: Lifetime at 30% off. The free 1-year fallback is only
+// The "free 2-year instead" fallback for the Mac App Store upgrade offer, presented as a
+// full secondary card (like renewalSecondary() below) rather than the terse alt box, using
+// the `free2year` claim — same 100%-off mechanism as the support offer's free1year, just
+// a 2-year term and full-card treatment for this flow.
+function freeTwoYearSecondary(): SecondaryData {
+  return {
+    kind: "card",
+    label: "or, get a free license key with 2 more years of updates",
+    card: {
+      title: "Standard License",
+      bullets: ["2 years of free updates", "Keep the last version you receive"],
+      ...freeTwoYearPricing(),
+      ctaLabel: "Claim free 2-Year License",
+      ctaTheme: "alt",
+      ctaSize: "medium",
+      footnote: "No charge at checkout.",
+      claim: "free2year",
+    },
+  };
+}
+
+// MAS receipt bought before 2023: Lifetime at 30% off. The free 2-year fallback is only
 // offered to customers already gated out of the app (bought before the receipt cutoff);
 // more recent buyers who aren't gated yet get just the upgrade offer, like an expiring license.
-function masDiscountSegment(freeOneYear: boolean): SegmentData {
+function masDiscountSegment(freeTwoYear: boolean): SegmentData {
   const seg: SegmentData = {
     headline: "Mac App Store Upgrade Offer",
     intro: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. To move from your Mac App Store purchase to a Standalone edition license key, here is your upgrade offer:`,
     primary: masLifetimePrimary(),
     faq: {
       heading: "Why do I need a license key?",
-      body: `Until now, PopClip has detected your Mac App Store purchase in the Standalone edition as a temporary measure to ease the move away from the store. But PopClip is now moving to requiring license keys for all users. After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy their license key, discounted in recognition of your original purchase. The requirement is being introduced in stages, beginning (in PopClip 2026.7) with customers who bought PopClip in ${GATED_BEFORE_YEAR} or earlier. Your purchase supports the ongoing development of the app.`,
+      body: `Until now, PopClip has detected your Mac App Store purchase in the Standalone edition as a temporary measure to ease the move away from the store. But it's time to cut this last tie with the Mac App Store. PopClip will soon require license keys for all users. The requirement is being introduced in stages, beginning (in PopClip 2026.7) with customers who bought PopClip in ${GATED_BEFORE_YEAR} or earlier.
+
+ After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy a Lifetime License, discounted in recognition of your original purchase. Alternatively, claim a free Standard License, for two more years of free updates.
+
+      Your purchase supports the ongoing development of the app.`,
     },
     fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };
-  if (freeOneYear) seg.secondary = freeOneYearAlt();
+  if (freeTwoYear) seg.secondary = freeTwoYearSecondary();
   return seg;
 }
 
