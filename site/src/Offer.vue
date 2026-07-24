@@ -237,6 +237,7 @@ interface CardData {
   ctaSize?: "big" | "medium";
   footnote: string;
   claim: string;
+  extraFeatures?: { icon: string; label: string }[]; // appended to the card's constant features row
 }
 
 // The secondary slot is either a full product card (e.g. the renewal) or a terse
@@ -277,6 +278,11 @@ function lifetimeCard(percent: number, opts: { badge: string; ctaLabel: string; 
   };
 }
 
+// Highlighted (green) features row note, used only on the Mac App Store upgrade offer —
+// the paid upgrade is pitched there partly as supporting the app, which doesn't apply to
+// the license-holder or support-granted offers.
+const SUPPORTS_DEVELOPMENT = { icon: "🚀", label: "Supports ongoing app development" };
+
 // MAS receipt bought 2023 or later: treated as a Lifetime holder, so the key is free.
 function masFreeSegment(): SegmentData {
   return {
@@ -305,7 +311,7 @@ function masFreeSegment(): SegmentData {
 // The 30%-off Lifetime card for the Mac App Store offer.
 function masLifetimePrimary(): CardData {
   return lifetimeCard(30, {
-    badge: "Your offer — 30% off",
+    badge: "Your offer — 30% off Lifetime",
     ctaLabel: "Buy Lifetime License — 30% off",
     footnote: "One-time purchase.",
     claim: "lifetime30",
@@ -364,14 +370,12 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
   const seg: SegmentData = {
     headline: "Mac App Store Upgrade Offer",
     intro: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. To move from your Mac App Store purchase to a Standalone edition license key, here is your upgrade offer:`,
-    primary: masLifetimePrimary(),
+    primary: { ...masLifetimePrimary(), extraFeatures: [SUPPORTS_DEVELOPMENT] },
     faq: {
       heading: "Why do I need a license key?",
       body: `Until now, PopClip has detected your Mac App Store purchase in the Standalone edition as a temporary measure to ease the move away from the store. But it's time to cut this last tie with the Mac App Store. PopClip will soon require license keys for all users. The requirement is being introduced in stages, beginning (in PopClip 2026.7) with customers who bought PopClip in ${GATED_BEFORE_YEAR} or earlier.
 
- After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy a Lifetime License, discounted in recognition of your original purchase. Alternatively, claim a free Standard License, for two more years of free updates.
-
-      Your purchase supports the ongoing development of the app.`,
+ After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy a Lifetime License, discounted in recognition of your original purchase. Alternatively, claim a free Standard License, deferring any need to pay for another two years.`,
     },
     fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };

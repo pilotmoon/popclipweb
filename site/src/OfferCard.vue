@@ -18,12 +18,16 @@ interface Props {
   claim: string; // backend claim opened when the CTA is clicked
   secondary?: boolean; // neutral border + slightly smaller (secondary card)
   busy?: boolean; // disables the CTA while a checkout is already in flight
+  // Appended to the constant features row (Macs / iCloud sync), e.g. the
+  // "supports development" note on the paid Lifetime card.
+  extraFeatures?: { icon: string; label: string }[];
 }
 withDefaults(defineProps<Props>(), {
   ctaTheme: "brand",
   ctaSize: "big",
   priceIsDiscount: true,
   busy: false,
+  extraFeatures: () => [],
 });
 defineEmits<{ (e: "buy", claim: string): void }>();
 </script>
@@ -37,8 +41,13 @@ defineEmits<{ (e: "buy", claim: string): void }>();
       <template v-for="(bullet, i) in bullets" :key="i">✅ {{ bullet }}<br /></template>
     </div>
     <div :class="$style.features">
-      <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on up to 5 Macs</span>
-      <span :class="$style.feature"><span :class="$style.featureIcon">☁️</span> Free iCloud sync</span>
+      <div :class="$style.featureRow">
+        <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on up to 5 Macs</span>
+        <span :class="$style.feature"><span :class="$style.featureIcon">☁️</span> Free iCloud sync</span>
+      </div>
+      <div v-if="extraFeatures.length" :class="[$style.featureRow, $style.featureRowHighlight]">
+        <span v-for="(f, i) in extraFeatures" :key="i" :class="$style.feature"><span :class="$style.featureIcon">{{ f.icon }}</span> {{ f.label }}</span>
+      </div>
     </div>
     <div :class="$style.priceArea">
       <div v-if="listPrice || discountNote" :class="$style.priceWas">
@@ -112,13 +121,33 @@ defineEmits<{ (e: "buy", claim: string): void }>();
   margin-bottom: 6px;
 }
 
+/* Feature notes, stacked in rows: the constant pair, then any extraFeatures below. */
 .features {
   display: flex;
-  justify-content: center;
-  gap: 18px;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
   font-size: 13px;
   color: var(--vp-c-text-2);
   margin-bottom: 14px;
+}
+
+.featureRow {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* extraFeatures row: picked out in green rather than the muted grey of the
+   constant features above it. The icon keeps its own colour (no grayscale). */
+.featureRowHighlight {
+  color: var(--vp-c-green-1);
+  font-weight: 600;
+}
+
+.featureRowHighlight .featureIcon {
+  filter: none;
+  opacity: 1;
 }
 
 .feature {
