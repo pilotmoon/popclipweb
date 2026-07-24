@@ -240,6 +240,70 @@ submenu:
     url: https://www.startpage.com/sp/search?query=***
 ```
 
+### Example: Shell Script with supplementary actions
+
+This example [package](./packages) extension shows a submenu used to offer
+variants of an action alongside a main one. It is an adaptation of the
+[Comment extension](https://github.com/ttscoff/popclipextensions/tree/master/Comment.popclipext)
+by Brett Terpstra. The supplementary actions each
+specify an `identifier`, which is how the script can tell which action was
+clicked.
+
+`Config.yaml`:
+
+```yaml
+name: Comment
+icon: symbol:text.bubble
+shell script file: comment.rb
+after: paste-result
+submenu:
+  - title: Hash Comment
+    identifier: hash
+    shell script file: comment.rb
+    after: paste-result
+  - title: Slash Comment
+    identifier: slash
+    shell script file: comment.rb
+    after: paste-result
+  - title: CSS Comment
+    identifier: css
+    shell script file: comment.rb
+    after: paste-result
+```
+
+`comment.rb` (with executable flag set):
+
+```ruby
+#!/usr/bin/ruby
+input = ENV['POPCLIP_TEXT']
+case ENV['POPCLIP_ACTION_IDENTIFIER']
+when 'hash'
+  print input.split("\n").map {|line|
+    "# #{line}"
+  }.join("\n")
+when 'css'
+  space = input.match(/^((?:\n\s*)*)\S.*?((?:\n\s*)*)$/m)
+  print "#{space[1]}/* #{input.strip} */#{space[2]}"
+when 'slash'
+  print input.split("\n").map {|line|
+    "// #{line}"
+  }.join("\n")
+else # HTML
+  space = input.match(/^([\s\n]*)\S.*?([\s\n]*)$/m)
+  print "#{space[1]}<!-- #{input.strip} -->#{space[2]}"
+end
+```
+
+::: info No top-level fallback in submenus
+
+Note that `shell script file` and `after` are repeated for each action in the
+submenu. Unlike the `actions` array, properties set at the top level of the
+config do not act as fallback values for the actions in a `submenu`.
+
+:::
+
+### Submenu functions
+
 JavaScript extensions can alternatively supply a function as the `submenu`
 value, to generate the submenu's actions dynamically when it opens. This
 requires the `dynamic` entitlement. See
