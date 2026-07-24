@@ -41,5 +41,8 @@
   "setapp": {
     "script": "https://developer.setapp.com/setapp-banner/index.js",
     "referralUrl": "https://go.setapp.com/stp304?refAppId=159&refVendorId=92"
+  },
+  "experiments": {
+    "masFreeTwoYearAltBox": false
   }
 }

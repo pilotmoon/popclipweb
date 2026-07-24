@@ -345,6 +345,18 @@ function freeTwoYearSecondary(): SecondaryData {
   };
 }
 
+// Simpler "alt" box variant of the same free 2-year fallback (same claim, just the plain
+// treatment previously used for free 1-year). Kept alongside freeTwoYearSecondary() for
+// A/B experimentation, toggled by config.experiments.masFreeTwoYearAltBox.
+function freeTwoYearAlt(): SecondaryData {
+  return {
+    kind: "alt",
+    title: "Not able to pay right now?",
+    html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-Year License</strong> instead, for two years of updates. You can still claim a Lifetime discount later.`,
+    cta: { label: "Claim a free 2-year license", theme: "alt", claim: "free2year" },
+  };
+}
+
 // MAS receipt bought before 2023: Lifetime at 30% off. The free 2-year fallback is only
 // offered to customers already gated out of the app (bought before the receipt cutoff);
 // more recent buyers who aren't gated yet get just the upgrade offer, like an expiring license.
@@ -363,7 +375,9 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
     },
     fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${FINEPRINT_TAIL}`,
   };
-  if (freeTwoYear) seg.secondary = freeTwoYearSecondary();
+  if (freeTwoYear) {
+    seg.secondary = config.experiments.masFreeTwoYearAltBox ? freeTwoYearAlt() : freeTwoYearSecondary();
+  }
   return seg;
 }
 
