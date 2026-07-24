@@ -375,7 +375,7 @@ function freeTwoYearSecondary(): SecondaryData {
     label: "or, if you're not willing or able to pay right now",
     card: {
       title: "Standard License",
-      bullets: ["2 years of free updates", "Keep the last version you receive"],
+      bullets: ["2 more years of free updates", "Keep the last version you receive"],
       ...freeTwoYearPricing(),
       ctaLabel: "Claim free 2-Year License",
       ctaTheme: "alt",
