@@ -78,10 +78,9 @@ const status = ref<"loading" | "valid" | "invalid">("loading");
 const purchaseDate = ref<string>("");
 const purchaseYear = ref<string>("");
 const signedParams = ref<SignedParams | null>(null);
-// The full offer URL, captured on mount (never at module scope — this component is
-// server-rendered at build time, where there is no `window`). Embedded in the support
-// mailto so support can see exactly which offer the customer is writing about.
-const offerLink = ref<string>("");
+// The page URL, captured on mount (never at module scope — this component is
+// server-rendered at build time, where there is no `window`).
+const pageUrl = ref<string>("");
 const couponError = ref(false);
 const busyOffer = ref<string | null>(null);
 // Disables the buy/renew buttons while any claim is in flight — only one checkout
@@ -89,7 +88,7 @@ const busyOffer = ref<string | null>(null);
 const anyBusy = computed(() => busyOffer.value !== null);
 
 onMounted(() => {
-  offerLink.value = window.location.href;
+  pageUrl.value = window.location.href;
   const params = readSignedParams();
   if (params) {
     signedParams.value = params;
@@ -261,6 +260,23 @@ interface SegmentData {
 }
 
 const SUPPORT_SUBJECT = "PopClip Offer Enquiry";
+
+// The offer link embedded in the support mailto: the page URL plus the country the store
+// resolved for this visitor, so support both sees which country was used and reproduces
+// the same prices on opening the link. It's a computed rather than a one-shot capture
+// because the country arrives asynchronously with the store — by the time anyone clicks
+// through, it has resolved. The country goes in the fragment, not the query string,
+// because that's where the price override is read from (see helpers/readParams.ts).
+const offerLink = computed(() => {
+  if (!pageUrl.value) return "";
+  const country = store.countryCode.value;
+  if (!country) return pageUrl.value;
+  const url = new URL(pageUrl.value);
+  const fragment = new URLSearchParams(url.hash.replace(/^#/, ""));
+  fragment.set("country", country);
+  url.hash = fragment.toString();
+  return url.href;
+});
 
 // Shared tail of every segment's fineprint. Built per-render (not a module constant) so it
 // picks up offerLink once mounted. Unlike everywhere else on the site, the link is built
@@ -450,7 +466,7 @@ function free1YearSegment(): SegmentData {
 function renewalSecondary(): SecondaryData {
   return {
     kind: "card",
-    label: "or renew your Standard license",
+    label: "or renew your Standard License",
     card: {
       title: "Standard License",
       bullets: ["2 more years of free updates", "Keep the last version you receive"],
