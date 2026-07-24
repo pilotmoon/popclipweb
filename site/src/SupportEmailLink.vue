@@ -2,25 +2,18 @@
 import config from "./config/config.json";
 import { computed } from "vue";
 import { MailOutlined } from "@ant-design/icons-vue";
+import { supportMailtoHref } from "./helpers/supportMailto";
 
 const props = defineProps<{
   email?: string;
   subject?: string;
-  body?: string;
+  body?: string; // sits above the writing space
+  footer?: string; // sits below the writing space
 }>();
 
 const email = computed(() => props.email || config.pilotmoon.supportEmail);
 
-const href = computed(() => {
-  const url = new URL(`mailto:${encodeURIComponent(email.value)}`);
-  if (props.subject) {
-    url.searchParams.set("subject", props.subject);
-  }
-  if (props.body) {
-    url.searchParams.set("body", `${props.body.trim()}\n\n`);
-  }
-  return url.href.replaceAll("+", "%20");
-});
+const href = computed(() => supportMailtoHref(props));
 </script>
 
 <template>

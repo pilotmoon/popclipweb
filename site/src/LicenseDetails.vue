@@ -8,6 +8,7 @@ import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
 import { formatDate } from "/src/helpers/formatters";
 import { kaboom } from "/src/helpers/confetti";
+import { infoBlock } from "/src/helpers/supportMailto";
 
 const log = useLogger();
 const purchaseInfo = usePurchaseInfo();
@@ -69,10 +70,6 @@ async function loadLicenseKey() {
     throw new Error(`HTTP fetch failed, code ${fetchResponse.status}`);
   }
   licenseKey.value = await fetchResponse.json();
-}
-
-function wrapInfo(info, title) {
-  return `=== ${title}\n${info.trim()}\n===`;
 }
 
 function registerLink() {
@@ -162,7 +159,7 @@ function licenseInfoString() {
       <h1>Something went wrong</h1>
       <p>
         Please contact
-        <SupportEmailLink subject="PopClip Purchase Problem" :body="wrapInfo(diagnosticInfoString(), 'Diagnostic Information')" />.
+        <SupportEmailLink subject="PopClip Purchase Problem" :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')" />.
       </p>
       <h3>Diagnostic Information</h3>
       <pre
@@ -233,7 +230,7 @@ function licenseInfoString() {
       <p>
         If you want to change the registered name or email, please contact&ensp;<SupportEmailLink
           subject="PopClip License Enquiry"
-          :body="wrapInfo(licenseInfoString(), 'License Details')"
+          :body="infoBlock(licenseInfoString(), 'License Details')"
         />.
       </p>
     </div>

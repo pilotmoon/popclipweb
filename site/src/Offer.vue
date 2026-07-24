@@ -8,6 +8,7 @@ import { useLogger } from "./composables/useLogger";
 import { usePaddleBillingCheckout } from "./composables/usePaddleBillingCheckout";
 import { formatDate } from "./helpers/formatters";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
+import { infoBlock, supportMailtoHref } from "./helpers/supportMailto";
 import OfferCard from "./OfferCard.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
 import { useSessionStorage } from "@vueuse/core";
@@ -259,25 +260,19 @@ interface SegmentData {
   fineprint: string;
 }
 
-// A mailto: to support, prefilled with a blank message area and the offer link in a footer
-// block below it. Encoding matches SupportEmailLink.vue (searchParams encodes spaces as
-// "+", which mail clients show literally, so they're swapped back to %20). The offer link
-// can't go in the subject or a page link — it's what identifies the customer's offer.
 const SUPPORT_SUBJECT = "PopClip Offer Enquiry";
 
-function supportMailtoHref(): string {
-  const url = new URL(`mailto:${encodeURIComponent(config.pilotmoon.supportEmail)}`);
-  url.searchParams.set("subject", SUPPORT_SUBJECT);
-  url.searchParams.set("body", `\n\n=== Offer Link\n${offerLink.value}\n===\n`);
-  // `&` between the query params must be escaped for the href attribute, since the
-  // fineprint is injected with v-html.
-  return url.href.replaceAll("+", "%20").replaceAll("&", "&amp;");
-}
-
 // Shared tail of every segment's fineprint. Built per-render (not a module constant) so it
-// picks up offerLink once mounted.
+// picks up offerLink once mounted. Unlike everywhere else on the site, the link is built
+// from the raw helper rather than <SupportEmailLink>: the fineprint is an HTML string
+// rendered with v-html, which can't host a component. That also means the `&` separating
+// the mailto's query params has to be escaped by hand for the href attribute.
 function fineprintTail(): string {
-  return `One upgrade per customer. Questions?&nbsp;<a href="${supportMailtoHref()}">Contact support</a>.`;
+  const href = supportMailtoHref({
+    subject: SUPPORT_SUBJECT,
+    footer: infoBlock(offerLink.value, "Offer Link"),
+  }).replaceAll("&", "&amp;");
+  return `One upgrade per customer. Questions?&nbsp;<a href="${href}">Contact support</a>.`;
 }
 
 // MAS receipts before this date are gated out of the app (matches PopClip's receipt cutoff);
