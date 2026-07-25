@@ -69,7 +69,8 @@
       "supportsBackgroundTab": true,
       "supportsOpenIn": true,
       "bundleId": "org.chromium.Chromium",
-      "homepageUrl": "https://www.chromium.org/"
+      "homepageUrl": "https://www.chromium.org/",
+      "icon": "icons/chromium.svg"
     },
     {
       "name": "Comet",

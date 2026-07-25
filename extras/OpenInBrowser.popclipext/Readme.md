@@ -10,6 +10,7 @@ The extension has an action for each of the following browsers:
 - Arc
 - Brave
 - ChatGPT Atlas
+- Chromium
 - Comet
 - DEVONagent Pro
 - Dia
