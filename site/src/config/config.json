@@ -43,6 +43,6 @@
     "referralUrl": "https://go.setapp.com/stp304?refAppId=159&refVendorId=92"
   },
   "experiments": {
-    "masFreeTwoYearAltBox": false
+    "masFreeTwoYearAltBox": true
   }
 }

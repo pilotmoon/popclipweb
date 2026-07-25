@@ -392,7 +392,7 @@ function freeTwoYearSecondary(): SecondaryData {
 function freeTwoYearAlt(): SecondaryData {
   return {
     kind: "alt",
-    title: "Not willing or able to pay right now?",
+    title: "Not able to pay right now?",
     html: `I don't want cost or payment issues to lock you out. Claim a <strong>free 2-year Standard License</strong> instead, for two more years of updates. You can still claim a Lifetime discount later.`,
     cta: { label: "Claim a free 2-year license", theme: "alt", claim: "free2year" },
   };
