@@ -67,7 +67,7 @@
       "supportsPageInfo": true,
       "supportsAddressBar": true,
       "supportsBackgroundTab": true,
-      "supportsOpenIn": false,
+      "supportsOpenIn": true,
       "bundleId": "org.chromium.Chromium",
       "homepageUrl": "https://www.chromium.org/"
     },
