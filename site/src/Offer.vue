@@ -405,7 +405,7 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
   const seg: SegmentData = {
     headline: "Mac App Store Upgrade Offer",
     intro: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. To move from your Mac App Store purchase to a Standalone edition license key, here is your upgrade offer:`,
-    primary: { ...masLifetimePrimary(), extraFeatures: [SUPPORTS_DEVELOPMENT] },
+    primary: { ...masLifetimePrimary(), extraFeatures: [] },
     faq: {
       heading: "Why do I need a license key?",
       body: `Until now, PopClip has detected your Mac App Store purchase in the Standalone edition as a temporary measure to ease the move away from the store. But it's time to cut this last tie with the Mac App Store. PopClip will soon require license keys for all users. The requirement is being introduced in stages, beginning (in PopClip 2026.7) with customers who bought PopClip in ${GATED_BEFORE_YEAR} or earlier.
