@@ -5,13 +5,18 @@ import PopClipVersion from "../src/PopClipVersion.vue";
 # Migrate from the Mac App Store (MAS) edition to the Standalone edition
 
 The latest version of PopClip is <PopClipVersion />, but it is not available as
-an update on the Mac App Store. If you are still using the last released Mac App
+an update on the Mac App Store, bacause [PopClip left the Mac App Store in 2024](https://forum.popclip.app/t/popclip-is-leaving-the-mac-app-store/2188). If you are still using the last released Mac App
 Store version, 2023.9, then you can migrate to the Standalone edition to receive
 the latest updates.
 
 ## PopClip 2026.7 is a paid update
 
-PopClip 2026.7 is an **optional paid update** for customers who bought PopClip in 2018 or earlier. After updating to this version, PopClip will revert to trial mode with 250 uses for you to try all features. The "Upgrade…" button in the App settings pane leads to two offers: (1) 30% off a Lifetime License (free updates forever) — current offer price US$22.40 + tax, or local equivalent; or (2) a **free** Standard License (2 more years of updates) — nothing to pay. You can also choose not to update, and continue using your current version as-is. _This is the first paid update in PopClip's history, after 15 years of free updates. Your license purchase will support the ongoing development of the app._
+PopClip 2026.7 is an **optional paid update** for Mac App Store customers who bought PopClip in 2018 or earlier. Upon detecting your MAS purchase, PopClip will show an _Upgrade…_ button in the App settings tab. This leads to a choice of two offers:
+
+1. 30% off a Lifetime License (free updates forever) — current offer price US$22.40 + tax, or local equivalent; or
+2. a **free** Standard License (2 more years of updates) — nothing to pay.
+
+_This is the first paid update in PopClip's history, after 15 years of free updates. Your license purchase will support the ongoing development of the app._
 
 ## How to migrate
 
