@@ -302,6 +302,42 @@ config do not act as fallback values for the actions in a `submenu`.
 
 :::
 
+### Example: JavaScript module version
+
+Here is the same extension expressed as a
+[module-based](./js-modules) snippet, in JavaScript. In a module, there is no
+need for action identifiers — each action supplies its own `code` function
+inline:
+
+```javascript
+// #popclip
+// name: Comment
+// icon: symbol:text.bubble
+// language: javascript
+// module: true
+
+exports.actions = [
+  {
+    title: "Comment",
+    code: (input) => popclip.pasteText(`<!-- ${input.text.trim()} -->`),
+    submenu: [
+      {
+        title: "Hash Comment",
+        code: (input) => popclip.pasteText(input.text.replaceAll(/^/gm, "# ")),
+      },
+      {
+        title: "Slash Comment",
+        code: (input) => popclip.pasteText(input.text.replaceAll(/^/gm, "// ")),
+      },
+      {
+        title: "CSS Comment",
+        code: (input) => popclip.pasteText(`/* ${input.text.trim()} */`),
+      },
+    ],
+  },
+];
+```
+
 ### Submenu functions
 
 JavaScript extensions can alternatively supply a function as the `submenu`
