@@ -9,14 +9,9 @@ an update on the Mac App Store. If you are still using the last released Mac App
 Store version, 2023.9, then you can migrate to the Standalone edition to receive
 the latest updates.
 
-::: info From the developer
+## PopClip 2026.7 is a paid update
 
-I apologise for the inconvenience of having to migrate away from the Mac App
-Store. I wrote an explanation for why PopClip left the store in a
-[forum post](https://forum.popclip.app/t/popclip-is-leaving-the-mac-app-store/2188).
-Thank you for your support and understanding. —Nick Moore, PopClip developer.
-
-:::
+PopClip 2026.7 is an **optional paid update** for customers who bought PopClip in 2018 or earlier. After updating to this version, PopClip will revert to trial mode with 250 uses for you to try all features. The "Upgrade…" button in the App settings pane leads to two offers: (1) 30% off a Lifetime License (free updates forever) — current offer price US$22.40 + tax, or local equivalent; or (2) a **free** Standard License (2 more years of updates) — nothing to pay. You can also choose not to update, and continue using your current version as-is. _This is the first paid update in PopClip's history, after 15 years of free updates. Your license purchase will support the ongoing development of the app._
 
 ## How to migrate
 
