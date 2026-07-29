@@ -372,7 +372,7 @@ function freeOneYearAlt(): SecondaryData {
 function freeTwoYearSecondary(): SecondaryData {
   return {
     kind: "card",
-    label: "or, if you're not willing or able to pay right now",
+    label: "or, if now is not a good time",
     card: {
       title: "Standard License",
       bullets: ["2 more years of free updates", "Keep the last version you receive"],
