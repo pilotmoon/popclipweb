@@ -33,6 +33,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   [popclip.pressKey()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKey)
   takes an options object as its third argument, with the same `target` choice:
   `popclip.pressKey('command space', 0, { target: 'hid' })`.
+- JavaScript: `popclip.pressKey()` now returns a promise that resolves once the
+  press has been made. Await it when a later step depends on the press having
+  landed. A bare call still works: presses are made in order, and PopClip waits
+  for any un-awaited presses to complete before running the action's
+  after-steps.
+- JavaScript: new
+  [popclip.pressKeys()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKeys)
+  method presses a sequence of key combos, with optional waits, as one unit:
+  `await popclip.pressKeys(['command space', 'wait 100', 'command v'])`. Entries
+  take the same forms as `key combos` config entries; the same `target` option
+  as `pressKey` applies to the whole sequence.
 
 ### Changed
 
