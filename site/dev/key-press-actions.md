@@ -13,10 +13,32 @@ presses, as if it was performed by the user.
 A Key Press action is defined by the presence of a `key combo` or `key combos`
 field, as follows:
 
-| Key          | Type    | Description                                                                                                     |
-| ------------ | ------- | --------------------------------------------------------------------------------------------------------------- |
-| `key combo`  | String  | The key combination to press, as defined in [String format](#string-format).                                    |
-| `key combos` | Array   | Instead of a single key combo, you can supply array of them. PopClip will press all the key combos in sequence. |
+| Key                | Type   | Description                                                                                                     |
+| ------------------ | ------ | --------------------------------------------------------------------------------------------------------------- |
+| `key combo`        | String | The key combination to press, as defined in [String format](#string-format).                                    |
+| `key combos`       | Array  | Instead of a single key combo, you can supply array of them. PopClip will press all the key combos in sequence. |
+| `key combo target` | String | Where to post the presses: `app` (the default), `session` or `hid`. See [Target](#target).                      |
+
+## Target
+
+The `key combo target` field says where PopClip posts the key events:
+
+| Value     | Description                                                                                                 |
+| --------- | ----------------------------------------------------------------------------------------------------------- |
+| `app`     | To the process of the application the action is acting on, using `CGEventPostToPid()`. This is the default. |
+| `session` | To the session event tap, `kCGSessionEventTap`.                                                             |
+| `hid`     | To the HID event tap, `kCGHIDEventTap`.                                                                     |
+
+If a key combo does not have the effect you expect with the default `app` target, it is worth
+trying the others. A combo belonging to the system rather than to any particular
+application is a case for `session` or `hid`:
+
+```yaml
+#popclip
+name: Spotlight
+key combo: command space
+key combo target: session
+```
 
 ## Input and output
 
@@ -59,7 +81,7 @@ The format is: `<modifiers> <key>`, where:
 /*
  *  Summary:
  *    Virtual keycodes
- *  
+ *
  *  Discussion:
  *    These constants are the virtual keycodes defined originally in
  *    Inside Mac Volume V, pg. V-191. They identify physical keys on a
@@ -232,21 +254,22 @@ Pressing a sequence of keys:
 name: Paste and Enter
 icon: square monospaced ↵
 requirements: [paste] # only show action when there is something to paste
-key combos: 
-- command v
-- return
+key combos:
+  - command v
+  - return
 ```
 
 Pressing a sequence of keys, with a wait included:
 
 ```yaml
-#popclip 
+#popclip
 name: Spotlight
 before: copy # puts selected text on the clipboard
+key combo target: session # the combos are for Spotlight, not the app
 key combos:
-- command space
-- wait 50 # waits 50 milliseconds
-- command v
+  - command space
+  - wait 50 # waits 50 milliseconds
+  - command v
 ```
 
 A "Superscript" extension, supporting a couple of different apps:
@@ -256,8 +279,8 @@ A "Superscript" extension, supporting a couple of different apps:
 name: Superscript
 icon: iconify:tabler:superscript
 actions:
-- required apps: [com.microsoft.Word]
-  key combo: command shift =
-- required apps: [com.apple.iWork.Pages]
-  key combo: command control +
+  - required apps: [com.microsoft.Word]
+    key combo: command shift =
+  - required apps: [com.apple.iWork.Pages]
+    key combo: command control +
 ```

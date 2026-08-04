@@ -21,6 +21,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 </div>
 
+## Beta / Unreleased
+
+### Added
+
+- Key Press actions: new `key combo target` property, choosing where PopClip
+  posts the key events: to the process of the application the action is acting on
+  (`app`, the default), to the session event tap (`session`), or to the HID event
+  tap (`hid`). See [Key Press actions](key-press-actions#target).
+- JavaScript:
+  [popclip.pressKey()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKey)
+  takes an options object as its third argument, with the same `target` choice:
+  `popclip.pressKey('command space', 0, { target: 'hid' })`.
+
+### Changed
+
+- Simulated key presses are now posted to the process of the application the
+  action is acting on, rather than to the session event tap. This fixes presses
+  going astray when PopClip's own popup holds keyboard focus — a `stay visible`
+  action invoked from the keyboard-activated popup, for example, where the popup
+  was receiving the key presses meant for the app behind it. Use the new
+  `key combo target` property to get the old behaviour for a given action.
+
 ## PopClip 2026.7 (5992)
 
 ### Added
