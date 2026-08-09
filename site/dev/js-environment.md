@@ -64,6 +64,12 @@ global:
   open a URL (similar to a URL action)
 - [`popclip.pressKey()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKey):
   presses a key combo (similar to a key press extension)
+- [`popclip.pressKeys()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKeys):
+  presses a sequence of key combos, with optional waits between them
+- [`popclip.runAppleScript()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScript),
+  [`popclip.runAppleScriptFile()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScriptFile):
+  run an AppleScript, from source text or from a file in the extension package
+  (requires the `script` entitlement)
 - [`popclip.performCommand()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#performCommand):
   perform a cut, copy or paste command in the foreground app (simlar to the
   `before` and `after` steps)

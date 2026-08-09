@@ -203,7 +203,7 @@ The function may indicate an error by throwing an exception, as per
 
 To use a population function, the `dynamic` entitlement must be present in the
 `entitlements` array in the static config. This cannot be set if the `network`
-entitlement is also being used.
+or `script` entitlement is also being used.
 
 :::
 
