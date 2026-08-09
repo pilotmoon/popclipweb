@@ -42,6 +42,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `await popclip.pressKeys(['command space', 'wait 100', 'command v'], { target: 'session' })`. Entries
   take the same forms as `key combos` config entries; the same `target` option
   as `pressKey` applies to the whole sequence.
+- New `script` entitlement, required to use the new AppleScript-running JavaScript methods
+  below. Like `network`, it cannot be combined with `dynamic`.
+- JavaScript: new
+  [popclip.runAppleScript()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScript)
+  and
+  [popclip.runAppleScriptFile()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScriptFile)
+  methods run an AppleScript.
+  ```js
+  const result = await popclip.runAppleScript(
+    'on greet(a)\nreturn "hello " & a\nend greet',
+    { handler: "greet", parameters: [popclip.input.text] },
+  );
+  ```
 
 ### Changed
 
@@ -51,6 +64,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   action invoked from the keyboard-activated popup, for example, where the popup
   was receiving the key presses meant for the app behind it. Use the new
   `key combo target` property to get the old behaviour for a given action.
+- Static AppleScript actions now run through the same machinery as
+  `popclip.runAppleScript()`. Behaviour is unchanged, with one fix:
+  `{popclip option ...}` placeholder values substituted into AppleScript source
+  are now escaped as string literals, as `{popclip text}` always was — so an
+  option value containing a quote no longer breaks (or injects into) the
+  script.
+- When macOS refuses an Apple event because the user has denied an automation
+  permission, PopClip now shows an alert naming the extension and directing the
+  user to the Automation pane in System Settings, instead of failing silently
+  with only the error indicator.
 
 ## PopClip 2026.7 (5992)
 
