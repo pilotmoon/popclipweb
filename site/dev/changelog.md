@@ -112,6 +112,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   ```js
   await popclip.performCommand("copy");
   ```
+- Documentation: removed the documented claim that population functions may not
+  read `popclip.context.browserUrl` and `popclip.context.browserTitle`, which was incorrect.
 
 ## PopClip 2026.7 (5992)
 

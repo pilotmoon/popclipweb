@@ -246,39 +246,20 @@ export const actions: PopulationFunction = (input, options, context) => {
 
 :::
 
+### Restrictions during population
+
 The population function has the following limitations:
 
-- Cannot access the network (`XMLHttpRequest` is unavailable).
-- Cannot call functions on the `popclip` global object.
-- Cannot access `popclip.context.browserUrl` or `popclip.context.browserTitle`.
+- Cannot access the network — `XMLHttpRequest` is unavailable.
+- Cannot call _functions_ on the `popclip` global object.
+- Cannot call `sleep()`, `setTimeout()` or `setInterval()`.
+- Cannot access `secret` options in `popclip.options`.
 
-### Queries during population
+_Properties_ on the `popclip` global (`popclip.input`, `popclip.context`, `popclip.options` and `popclip.modifiers`)
+_may_ be read during population — with the exception of `secret` options.
 
-The `popclip` functions are restricted because these functions _do_ something — pasting, pressing keys,
-opening URLs. Population runs every time the bar appears, before the user has
-chosen anything, so nothing there should have an effect.
-
-The functions on the [`util`](./js-environment#global-util-object) global
-may be called freely. That is what lets an extension decide whether an action is worth offering at all,
-rather than offering one that turns out to have nothing to do:
-
-```javascript
-// #popclip spelling example
-// name: Correct Spelling
-// entitlements: [dynamic]
-// language: javascript
-// module: true
-exports.actions = (input) => {
-  const word = input.text.trim();
-  const guesses = util.getSpellingGuesses(word, { language: "en", limit: 3 });
-  // No suggestions means the word is spelled correctly, or is not a word at
-  // all. Returning an empty array means the action never appears.
-  return guesses.map((guess) => ({
-    title: guess,
-    code: () => popclip.pasteText(guess, { restore: true }),
-  }));
-};
-```
+Functions on the [`util`](./js-environment#global-util-object) global
+may be called freely during population.
 
 ### Submenu functions
 
