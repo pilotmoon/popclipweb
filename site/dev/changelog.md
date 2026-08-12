@@ -31,23 +31,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   application. You can also drag the files onto the PopClip menu bar icon.
 - New `script` entitlement, required to use the new AppleScript-running JavaScript methods
   below. Like `network`, it cannot be combined with `dynamic`.
-- Key Press actions: new `key combo target` property, choosing where PopClip
-  posts the key events: to the process of the application the action is acting on
-  (`app`, the default), to the session event tap (`session`), or to the HID event
-  tap (`hid`). See [Key Press actions](key-press-actions#target).
-- JavaScript:
-  [popclip.pressKey()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKey)
-  takes an options object as its third argument, with the same `target` choice:
-  `popclip.pressKey('command space', 0, { target: 'session' })`.
-- JavaScript: `popclip.pressKey()` now returns a promise that resolves once the
-  press has been made. Await it when a later step depends on the press having
-  completed.
-- JavaScript: new
-  [popclip.pressKeys()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKeys)
-  method presses a sequence of key combos, with optional waits, as one unit:
-  `await popclip.pressKeys(['command space', 'wait 100', 'command v'], { target: 'session' })`. Entries
-  take the same forms as `key combos` config entries; the same `target` option
-  as `pressKey` applies to the whole sequence.
 - JavaScript: new
   [popclip.runAppleScript()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScript)
   and
@@ -93,6 +76,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     limit: 5,
   });
   ```
+- Key Press actions: new `key combo target` property, choosing where PopClip
+  posts the key events: to the process of the application the action is acting on
+  (`app`, the default), to the session event tap (`session`), or to the HID event
+  tap (`hid`). See [Key Press actions](key-press-actions#target).
+- JavaScript:
+  [popclip.pressKey()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKey)
+  takes an options object as its third argument, with the same `target` choice:
+  `popclip.pressKey('command space', 0, { target: 'session' })`.
+- JavaScript: `popclip.pressKey()` now returns a promise that resolves once the
+  press has been made. Await it when a later step depends on the press having
+  completed.
+- JavaScript: new
+  [popclip.pressKeys()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKeys)
+  method presses a sequence of key combos, with optional waits, as one unit:
+  `await popclip.pressKeys(['command space', 'wait 100', 'command v'], { target: 'session' })`. Entries
+  take the same forms as `key combos` config entries; the same `target` option
+  as `pressKey` applies to the whole sequence.
 - New [action properties](actions#common-properties):
   - `wants primary display`: the action asks to be the one centred above the pointer when the popup appears.
   - `wants initial display`: for an action with a submenu, the submenu asks to be already open
