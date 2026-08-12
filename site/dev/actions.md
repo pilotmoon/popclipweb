@@ -169,7 +169,7 @@ JavaScript variant using the capture array:
 name: Domain WHOIS 2
 requirements: [url]
 regex: https?:\/\/([^\/]+)
-javascript: popclip.openUrl('https://www.whois.com/whois/' + popclip.input.regexResult[1])
+javascript: popclip.openUrl('https://www.whois.com/whois/' + encodeURIComponent(popclip.input.regexResult[1]))
 ```
 
 Here, the full URL is the regex match, and the domain is taken from capture
