@@ -102,20 +102,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Simulated key presses are now posted to the process of the application the
   action is acting on, rather than to the session event tap. This fixes presses
-  going astray when PopClip's own popup holds keyboard focus — a `stay visible`
-  action invoked from the keyboard-activated popup, for example, where the popup
-  was receiving the key presses meant for the app behind it. Use the new
+  going astray when PopClip's own popup holds keyboard focus. Use the new
   `key combo target` property to get the old behaviour for a given action.
-- Static AppleScript actions now run through the same machinery as
-  `popclip.runAppleScript()`. Behaviour is unchanged, with one fix:
-  `{popclip option ...}` placeholder values substituted into AppleScript source
-  are now escaped as string literals, as `{popclip text}` always was — so an
-  option value containing a quote no longer breaks (or injects into) the
-  script.
-- When macOS refuses an Apple event because the user has denied an automation
-  permission, PopClip now shows an alert naming the extension and directing the
-  user to the Automation pane in System Settings, instead of failing silently
-  with only the error indicator.
 - JavaScript: `popclip.pasteText()`, `popclip.pasteContent()`,
   `popclip.copyText()`, `popclip.copyContent()`, `popclip.performCommand()` and
   `popclip.share()` now return promises. Previously documented as returning
@@ -124,26 +112,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   ```js
   await popclip.performCommand("copy");
   ```
-  A copy or cut resolves once the resulting clipboard state is readable, and
-  rejects if the application never answered. A paste resolves once the command
-  has been delivered. `share()` settles from the sharing service, and
-  deliberately holds nothing open while its compose window is up.
-- JavaScript: the `transform` option of the paste and copy methods now accepts
-  `"none"`, as documented. The value had never worked, because the
-  implementation looked for a different word; any unrecognised value was quietly
-  treated as no transform, so the documented spelling appeared to work by
-  accident. It now does so by design.
-
-### Fixed
-
-- JavaScript: passing a non-string where the paste and copy methods expect text
-  now throws, instead of being silently converted. `popclip.pasteText(42)`
-  previously pasted `"42"`; it now reports an error.
-  ::: warning Possible breakage
-  An extension relying on that conversion — passing a number, or an object with
-  a `toString()` — will now fail where it used to work. The fix is to convert
-  explicitly: `popclip.pasteText(String(value))`.
-  :::
 
 ## PopClip 2026.7 (5992)
 
