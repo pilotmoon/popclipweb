@@ -249,12 +249,38 @@ export const actions: PopulationFunction = (input, options, context) => {
 The population function has the following limitations:
 
 - Cannot access the network (`XMLHttpRequest` is unavailable).
-- Cannot call methods on the `popclip` global object.
+- Cannot call functions on the `popclip` global object.
 - Cannot access `popclip.context.browserUrl` or `popclip.context.browserTitle`.
 
-### Submenu functions
+### Queries during population
 
-_New in PopClip 2026.7._
+The `popclip` functions are restricted because these functions _do_ something — pasting, pressing keys,
+opening URLs. Population runs every time the bar appears, before the user has
+chosen anything, so nothing there should have an effect.
+
+The functions on the [`util`](./js-environment#global-util-object) global
+may be called freely. That is what lets an extension decide whether an action is worth offering at all,
+rather than offering one that turns out to have nothing to do:
+
+```javascript
+// #popclip spelling example
+// name: Correct Spelling
+// entitlements: [dynamic]
+// language: javascript
+// module: true
+exports.actions = (input) => {
+  const word = input.text.trim();
+  const guesses = util.getSpellingGuesses(word, { language: "en", limit: 3 });
+  // No suggestions means the word is spelled correctly, or is not a word at
+  // all. Returning an empty array means the action never appears.
+  return guesses.map((guess) => ({
+    title: guess,
+    code: () => popclip.pasteText(guess, { restore: true }),
+  }));
+};
+```
+
+### Submenu functions
 
 An action object may define a `submenu` property, giving the action a submenu
 of child actions — see [Submenus](./actions#submenus). The value may be a

@@ -17,11 +17,11 @@ In all other cases, PopClip will ask macOS to open the URL in the default app ap
 An Open URL action is defined by the presence of a `url` field, plus additional
 optional fields, as follows:
 
-| Key              | Type               | Description                                                                                                                                                        |
-| ---------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `url`            | String             | The URL to open when the user clicks the action. Use either `{popclip text}` or `***` as placeholder for the selected text.                                        |
-| `clean query`    | Boolean (Optional) | If `true`, newlines and tabs in the text will be replaced with a space, and consecutive spaces will be collapsed to a single space. Default is `false`.            |
-| `spaces as plus` | Boolean (Optional) | If `true`, spaces in the inserted text are encoded as `+` instead of `%20`. Some search engines (for example Amazon) expect this format. Default is `false`.       |
+| Key              | Type               | Description                                                                                                                                                  |
+| ---------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `url`            | String             | The URL to open when the user clicks the action. Use either `{popclip text}` or `***` as placeholder for the selected text.                                  |
+| `clean query`    | Boolean (Optional) | If `true`, newlines and tabs in the text will be replaced with a space, and consecutive spaces will be collapsed to a single space. Default is `false`.      |
+| `spaces as plus` | Boolean (Optional) | If `true`, spaces in the inserted text are encoded as `+` instead of `%20`. Some search engines (for example Amazon) expect this format. Default is `false`. |
 
 ::: info Verbatim search with the Option key
 
@@ -48,7 +48,22 @@ URL actions never return any output.
 
 ::: tip Advanced behaviours
 
-If you need to customize the generation of the URL string or specify a particular app to open the URL, don't use an Open URL action. Instead, use an AppleScript action and the `popclip.openUrl()` function.
+If a plain Open URL action isn't enough, use a [JavaScript action](./js-actions). There are two functions:.
+
+- [`popclip.openUrl()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openUrl) opens a URL you have built yourself.
+- [`popclip.openTemplateUrl()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openTemplateUrl) takes the same `***` placeholder as the `url` property and does the encoding for you.
+
+```javascript
+await popclip.openTemplateUrl(
+  "https://example.com/?q=***",
+  popclip.input.text,
+  {
+    app: "com.google.Chrome",
+  },
+);
+```
+
+Both take the same options, and both return a promise that resolves once the URL has been handed to the browser.
 
 :::
 
@@ -91,10 +106,10 @@ name: Wiktionary
 icon: iconify:ooui:logo-wiktionary
 url: https://{popclip option subdomain}.wiktionary.org/wiki/{popclip text}
 options:
-- type: string
-  identifier: subdomain
-  label: Site subdomain
-  defaultValue: en
+  - type: string
+    identifier: subdomain
+    label: Site subdomain
+    defaultValue: en
 ```
 
 ```json

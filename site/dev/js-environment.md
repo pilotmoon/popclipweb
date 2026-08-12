@@ -73,14 +73,30 @@ global:
 - [`popclip.performCommand()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#performCommand):
   perform a cut, copy or paste command in the foreground app (simlar to the
   `before` and `after` steps)
+- [`popclip.runShortcut()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runShortcut):
+  run a macOS Shortcut by name (similar to a
+  [Shortcut action](./shortcut-actions))
+- [`popclip.revealFile()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#revealFile):
+  show a file or folder in the Finder
 - [`popclip.showSuccess()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showSuccess),
   [`popclip.showFailure()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showFailure),
   [`popclip.showSettings()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showSettings):
-  show a check mark, shaking-X, or Pop up the extension's settings.
+  show a check mark, shaking-X, or Pop up the extension's settings
 - [`popclip.signInRequiredError()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#signInRequiredError),
   [`popclip.settingsRequiredError()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#settingsRequiredError):
   construct errors that the action can throw to indicate that the user needs to
-  sign in again or adjust the extension's settings.
+  sign in or adjust the extension's settings
+
+### Global `util` object
+
+Where the methods on `popclip` _do_ something, the functions on the
+[`util`](https://pilotmoon.github.io/popclip-types/interfaces/Util.html) global
+are passive. They include general helpers — randomization, encoding, hashing, locale
+and time zone information, and macOS dictionary and spelling lookups.
+
+Unlike the methods on `popclip`, these can be called from a
+[population function](./js-modules#population-function) — see
+[Queries during population](./js-modules#queries-during-population).
 
 ### Global `pasteboard` object
 

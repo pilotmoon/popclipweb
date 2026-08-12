@@ -1,6 +1,7 @@
 ---
 titleTemplate: :title — PopClip Developer
 ---
+
 # Shortcut actions
 
 In a Shortcut action, PopClip will invoke a macOS [Shortcut](https://support.apple.com/en-gb/guide/shortcuts-mac/apdf22b0444c/mac) by name.
@@ -13,9 +14,9 @@ Shortcuts are only available on macOS 12.0 and above. On earlier versions of mac
 
 A shortcut action is defined by the presence of a `shortcut name` field, as follows:
 
-|Key|Type|Description|
-|---|----|-----------|
-|`shortcut name`|String|The name of the macOS Shortcut to call. This must exactly match its name in the Shortcuts app.|
+| Key             | Type   | Description                                                                                    |
+| --------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| `shortcut name` | String | The name of the macOS Shortcut to call. This must exactly match its name in the Shortcuts app. |
 
 ## Input and output
 
@@ -30,3 +31,27 @@ The following example snippet defines an extension with a single shortcut action
 name: Run My Shortcut
 shortcut name: My Shortcut Name
 ```
+
+## Running a shortcut from JavaScript
+
+For anything beyond "send the selection, paste what comes back" — choosing the
+shortcut based on the text, passing something other than the selection, or doing
+more with the result — use
+[`popclip.runShortcut()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runShortcut)
+from a [JavaScript action](./js-actions) instead. It takes the same shortcut
+name and resolves with the shortcut's output.
+
+```javascript
+// #popclip shortcut js example
+// name: Summarize
+// language: javascript
+// after: show-result
+const summary = await popclip.runShortcut("Summarize Text", {
+  input: popclip.input.text,
+});
+return summary;
+```
+
+An extension can only invoke shortcuts the user has
+built and installed themselves. A name that is not in the user's library rejects
+with an error.

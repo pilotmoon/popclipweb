@@ -25,6 +25,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Files with `.js`, `.ts`, and `.yaml` extensions can now be opened
+  directly as extension [snippets](snippets), the same as `.popcliptxt` files.
+  PopClip appears in the Open With menu for them, without becoming their default
+  application. You can also drag the files onto the PopClip menu bar icon.
+- New `script` entitlement, required to use the new AppleScript-running JavaScript methods
+  below. Like `network`, it cannot be combined with `dynamic`.
 - Key Press actions: new `key combo target` property, choosing where PopClip
   posts the key events: to the process of the application the action is acting on
   (`app`, the default), to the session event tap (`session`), or to the HID event
@@ -42,8 +48,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `await popclip.pressKeys(['command space', 'wait 100', 'command v'], { target: 'session' })`. Entries
   take the same forms as `key combos` config entries; the same `target` option
   as `pressKey` applies to the whole sequence.
-- New `script` entitlement, required to use the new AppleScript-running JavaScript methods
-  below. Like `network`, it cannot be combined with `dynamic`.
 - JavaScript: new
   [popclip.runAppleScript()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScript)
   and
@@ -55,6 +59,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     { handler: "greet", parameters: [popclip.input.text] },
   );
   ```
+- JavaScript: new
+  [popclip.runShortcut()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runShortcut)
+  method runs a macOS Shortcut by name.
+  ```js
+  const summary = await popclip.runShortcut("Summarize Text", {
+    input: popclip.input.text,
+  });
+  ```
+- JavaScript: new
+  [popclip.revealFile()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#revealFile)
+  method shows a file or folder in the Finder. Takes an absolute path — the kind
+  found in `popclip.input.data.paths` — with a leading `~` expanded.
+  ```js
+  popclip.revealFile(popclip.input.data.paths[0]);
+  popclip.revealFile("~/Downloads");
+  ```
+- JavaScript: new dictionary functions on the `util` global:
+  [util.hasDictionaryDefinition()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#hasDictionaryDefinition)
+  and
+  [util.getDictionaryDefinition()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getDictionaryDefinition),
+  looking words up in the same dictionaries as the macOS Dictionary app.
+- JavaScript: new spelling functions on the `util` global:
+  [util.checkSpelling()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#checkSpelling),
+  [util.getSpellingGuesses()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getSpellingGuesses),
+  [util.getSpellingLanguages()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getSpellingLanguages)
+  and
+  [util.getPreferredSpellingLanguages()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getPreferredSpellingLanguages),
+  via the system spell checker.
+  ```js
+  const guesses = util.getSpellingGuesses(popclip.input.text, {
+    language: "en",
+    limit: 5,
+  });
+  ```
+- New [action properties](actions#common-properties):
+  - `wants primary display`: the action asks to be the one centred above the pointer when the popup appears.
+  - `wants initial display`: for an action with a submenu, the submenu asks to be already open
+    when the popup appears.
 
 ### Changed
 
@@ -74,6 +116,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   permission, PopClip now shows an alert naming the extension and directing the
   user to the Automation pane in System Settings, instead of failing silently
   with only the error indicator.
+- JavaScript: `popclip.pasteText()`, `popclip.pasteContent()`,
+  `popclip.copyText()`, `popclip.copyContent()`, `popclip.performCommand()` and
+  `popclip.share()` now return promises. Previously documented as returning
+  nothing, so this is purely additive — existing calls are unaffected. Await one
+  when a later step depends on it having finished:
+  ```js
+  await popclip.performCommand("copy");
+  ```
+  A copy or cut resolves once the resulting clipboard state is readable, and
+  rejects if the application never answered. A paste resolves once the command
+  has been delivered. `share()` settles from the sharing service, and
+  deliberately holds nothing open while its compose window is up.
+- JavaScript: the `transform` option of the paste and copy methods now accepts
+  `"none"`, as documented. The value had never worked, because the
+  implementation looked for a different word; any unrecognised value was quietly
+  treated as no transform, so the documented spelling appeared to work by
+  accident. It now does so by design.
+
+### Fixed
+
+- JavaScript: passing a non-string where the paste and copy methods expect text
+  now throws, instead of being silently converted. `popclip.pasteText(42)`
+  previously pasted `"42"`; it now reports an error.
+  ::: warning Possible breakage
+  An extension relying on that conversion — passing a number, or an object with
+  a `toString()` — will now fail where it used to work. The fix is to convert
+  explicitly: `popclip.pasteText(String(value))`.
+  :::
 
 ## PopClip 2026.7 (5992)
 
