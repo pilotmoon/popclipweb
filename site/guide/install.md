@@ -103,7 +103,7 @@ Click the Request Accessibility Access button and a macOS dialog appears:
 ![Accessibility request dialog](./media/shot-ax-dialog-tahoe.jpg "macOS Accessibility Access dialog")
 
 Now click Open System Settings and you will be taken to the Security & Privacy
-pane of System Settingscurl. On macOS 26.0 and above it looks like this:
+pane of System Settings. On macOS 26.0 and above it looks like this:
 
 ![Accessibility settings](./media/shot-ax-settings-tahoe.jpg "macOS Accessibility settings in the Privacy & Security pane")
 
