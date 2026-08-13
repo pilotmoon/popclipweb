@@ -5032,7 +5032,7 @@
                     })(this.locale, this.defaultLocale);
                   this.polyglot.extend(Ot[p]);
                   var l = this.polyglot.t("content", {
-                      setappPricePerMonth: 9.99,
+                      setappPricePerMonth: 14.99,
                       appName: this.appName,
                       setappAppsCount: 260,
                     }),

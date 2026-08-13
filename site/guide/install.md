@@ -28,7 +28,7 @@ There are 2 ways to obtain PopClip:
   Store</AaLink>. -->
 
 - **Setapp**: <AaLink cfg="setapp.referralUrl">Setapp</AaLink> is a subscription
-  service for Mac apps, offering access to hundreds of Mac apps for $9.99 per
+  service for Mac apps, offering access to hundreds of Mac apps for $14.99 per
   month. If you're a Setapp customer, PopClip is included in your subscription.
   Simply search for "PopClip" in the Setapp interface and click Install.
 
