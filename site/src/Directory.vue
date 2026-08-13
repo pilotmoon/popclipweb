@@ -204,6 +204,8 @@ const filteredIndex = computed(() => {
 
 <template>
   <div :class="$style.Links">
+    <a href="/extensions/submit">Submit</a> ·
+    <a href="/extensions/authors/">Authors</a> ·
     <a href="https://public.popclip.app/extensions/popclip.rss">RSS</a>
   </div>
   <h1>PopClip Extensions Directory</h1>

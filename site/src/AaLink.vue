@@ -8,6 +8,9 @@ const store = useStoreState();
 const props = defineProps<{
   href?: string;
   cfg?: string;
+  // render the icon and text without linking, for places that already
+  // carry their own link
+  noLink?: boolean;
 }>();
 
 const ghDisplay = computed(() => {
@@ -49,7 +52,8 @@ const href = computed(() => {
 <template>
   <span class="IconLink" v-if="ghDisplay">
     <GithubFilled class="GithubIcon" />
-    <a :href="href"><span v-html="ghDisplay" /></a>
+    <a v-if="!noLink" :href="href"><span v-html="ghDisplay" /></a>
+    <span v-else v-html="ghDisplay" />
   </span>
   <a v-else :href="href">
     <slot />

@@ -214,5 +214,8 @@ export default defineConfig({
     if (pageData.frontmatter.isExtensionPage) {
       pageData.title = pageData.params?.name;
     }
+    if (pageData.frontmatter.isAuthorPage) {
+      pageData.title = pageData.params?.name || pageData.params?.githubHandle;
+    }
   },
 });

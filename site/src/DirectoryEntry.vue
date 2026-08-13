@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import Icon from "./Icon.vue";
+import { withBase } from "vitepress";
+import { computed } from "vue";
 import type { ExtInfo } from "./data/extensionInfo";
 const props = defineProps<{
   ext: ExtInfo;
 }>();
+// absolute, so entries work from anywhere: the directory index and
+// author pages sit at different depths
+const href = computed(() => withBase(`/extensions/x/${props.ext.shortcode}`));
 const newDate = Date.now() - 30 * 24 * 60 * 60 * 1000;
 function isNew(ext: ExtInfo) {
   return ext.firstCreated.getTime() > newDate;
@@ -21,12 +26,12 @@ function isNew(ext: ExtInfo) {
       />
     </div>
     <div :class="$style.EntryIcon">
-      <a :href="'x/' + props.ext.shortcode">
+      <a :href="href">
         <Icon v-if="props.ext.icon" :spec="props.ext.icon" :height="64" />
       </a>
     </div>
     <div :class="$style.EntryMain">
-      <a :class="$style.EntryName" :href="'x/' + props.ext.shortcode">
+      <a :class="$style.EntryName" :href="href">
         <div :class="$style.EntryName">{{ props.ext.name }}</div>
       </a>
       <span :class="$style.EntryFlash" v-if="isNew(props.ext)">New!</span>

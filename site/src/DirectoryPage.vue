@@ -3,6 +3,13 @@ import { useData } from "vitepress";
 import { useSlots } from "vue";
 import Icon from "./Icon.vue";
 import type { ExtInfo, PartialExtInfo } from "./data/extensionInfo.js";
+import {
+  authorByOwner,
+  authorName,
+  authorPath,
+  isOwnAuthor,
+} from "./data/authorLinks.js";
+import { data as authors } from "./data/authors.data";
 import { formatDate } from "./helpers/formatters.js";
 import { ElPopover } from "element-plus";
 import { ShieldTask16Filled } from "@vicons/fluent";
@@ -19,6 +26,13 @@ const ext: ExtInfo = {
     sourceDate: pv.sourceDate ? new Date(pv.sourceDate) : null,
   })),
 } as ExtInfo;
+const author = authorByOwner(authors, ext.owner);
+// only contributed extensions get a "by ..." byline. an extension from
+// our own account is not necessarily ours: many in the PopClip-Extensions
+// repo were written by other people, and the record only tells us who
+// owns the repo -- so a byline naming us would take their credit. (the
+// Maintainer row below is shown for everyone, since that much is true.)
+const contributedAuthor = author && !isOwnAuthor(author) ? author : null;
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 function extractSourceMessage(info: PartialExtInfo) {
@@ -70,7 +84,6 @@ function formatActionTypes(ext: ExtInfo) {
 
 <template>
   <div :class="$style.Breadcrumb">
-    <!-- ← <a href="/extensions/">Back to Directory</a> -->
     <a href="/extensions/">← PopClip Extensions Directory</a>
   </div>
 
@@ -79,6 +92,12 @@ function formatActionTypes(ext: ExtInfo) {
       <Icon v-if="ext.icon" :spec="ext.icon" :height="64" />
       {{ ext.name }}
     </h1>
+
+    <!-- contributed extensions are attributed to their author; our own
+         need no byline -->
+    <div v-if="contributedAuthor" :class="$style.Byline">
+      by <a :href="authorPath(contributedAuthor)">{{ authorName(contributedAuthor) }}</a>
+    </div>
 
     <div :class="$style.SideBySide">
       <div :class="$style.Description" v-html="ext.description"></div>
@@ -113,9 +132,12 @@ function formatActionTypes(ext: ExtInfo) {
     <p class="custom-block-title">Needs PopClip Beta</p>
     <p>This extension requires {{ ext.popclipDisplayVersion }} of PopClip, available from <a href="/beta">PopClip Beta</a>.</p>
   </div>
-  <div v-if="ext.unlisted" class="warning custom-block">
-    <p class="custom-block-title">Unlisted Extension</p>
-    <p>This extension is not shown in the directory index. It may be a pre-release or test extension.</p>
+  <div v-if="ext.unlisted" class="info custom-block">
+    <p class="custom-block-title">Author's Extension</p>
+    <p v-if="author">
+      This extension is published on <a :href="authorPath(author)">{{ authorName(author) }}'s page</a> rather than in the main directory listing.
+    </p>
+    <p v-else>This extension is published on its author's page rather than in the main directory listing.</p>
   </div>
 
   <div v-if="ext.demo" :class="$style.Card">
@@ -166,6 +188,13 @@ function formatActionTypes(ext: ExtInfo) {
           v-if="ext.license.url"
           :href="ext.license.url"
         >{{ ext.license.name }}</a><template v-else>{{ ext.license.name }}</template>
+      </li>
+      <!-- "maintainer", not "author": the record tells us who owns the
+           source repo, which is all we actually know -->
+      <li v-if="author">
+        <span :class="$style.CardDataLabel">Maintainer</span><br /><a
+          :href="authorPath(author)"
+        >{{ authorName(author) }}</a>
       </li>
       <li>
         <span :class="$style.CardDataLabel">Source</span><br />
@@ -221,6 +250,13 @@ a.Subdued {
 }
 .Breadcrumb a {
   text-decoration: none;
+}
+
+.Byline {
+  /* the h1 has no bottom margin of its own */
+  margin-top: 4px;
+  margin-bottom: 16px;
+  color: var(--vp-c-text-2);
 }
 
 .Main {
