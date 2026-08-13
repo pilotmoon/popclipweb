@@ -4,8 +4,8 @@ import {
   type ExtInfo,
   load,
   type FileInfo,
+  publicRoot,
 } from "../../src/data/extensionInfo.ts";
-import * as config from "../../src/config/config.json";
 import axios from "axios";
 import pLimit from "p-limit";
 
@@ -29,7 +29,7 @@ async function getMarkdown(markdownUrl: string, files: FileInfo[]) {
         }
         return {
           tagName,
-          attribs: { ...attribs, src: config.pilotmoon.publicRoot + blobUrl },
+          attribs: { ...attribs, src: publicRoot + blobUrl },
         };
       },
     },
@@ -45,12 +45,27 @@ async function getMarkdown(markdownUrl: string, files: FileInfo[]) {
 
 async function processReadme(ext: ExtInfo) {
   if (ext.readme) {
-    ext.readme = await getMarkdown(ext.readme, ext.files);
-    console.log(
-      `Rendered ${ext.readme?.length} bytes readme`,
-      ext.shortcode,
-      ext.identifier,
-    );
+    // a readme that can't be fetched or rendered shouldn't take down the
+    // whole site build -- drop it and carry on. (expected in local
+    // development against a local backend: blob urls point at the
+    // production public root, which has no local-only blobs.)
+    try {
+      ext.readme = await getMarkdown(ext.readme, ext.files);
+      console.log(
+        `Rendered ${ext.readme?.length} bytes readme`,
+        ext.shortcode,
+        ext.identifier,
+      );
+    } catch (err) {
+      const status = (err as { response?: { status?: number } })?.response
+        ?.status;
+      console.warn(
+        `Failed to render readme for ${ext.shortcode} (${ext.identifier}): ${
+          status ?? err
+        }`,
+      );
+      ext.readme = null;
+    }
   }
 }
 

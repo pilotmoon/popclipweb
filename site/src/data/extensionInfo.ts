@@ -17,7 +17,10 @@ const ZFileInfo = z.object({
 });
 export type FileInfo = z.infer<typeof ZFileInfo>;
 
-const ZLicenseInfo = z.object({ name: z.string(), url: z.string() });
+const ZLicenseInfo = z.object({
+  name: z.string(),
+  url: z.string().nullable(),
+});
 type LicenseInfo = z.infer<typeof ZLicenseInfo>;
 
 const ZAltString = z.object({
@@ -71,15 +74,26 @@ const ZGithubLicenseInfo = z.object({
 });
 
 const licenseCache = new Map<string, LicenseInfo>();
-async function getLicenseInfo(ext: ExtInfo) {
-  let info = { name: "MIT License", url: "/extensions/license" }; // default
+const noLicense: LicenseInfo = { name: "No license specified", url: null };
+
+async function getLicenseInfo(ext: ExtInfo): Promise<LicenseInfo> {
+  // only a github repo has a license we can detect. gist-origin
+  // extensions (from the retired gist submission path) report none.
   const repoId = ext.source?.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)/)
     ?.[1];
-  if (repoId) {
-    if (licenseCache.has(repoId)) {
-      return licenseCache.get(repoId);
-    }
-    console.log(`Getting license info for ${repoId}`);
+  if (!repoId) {
+    return noLicense;
+  }
+  const cached = licenseCache.get(repoId);
+  if (cached) {
+    return cached;
+  }
+  console.log(`Getting license info for ${repoId}`);
+  // github detects a license file in the repo root (Licensee); a repo may
+  // legitimately have none, in which case say so rather than claiming a
+  // license the author never granted
+  let info = noLicense;
+  try {
     const response = await gh.get(`repos/${repoId}/license`);
     const parseResult = ZGithubLicenseInfo.safeParse(response.data);
     if (parseResult.success) {
@@ -88,8 +102,12 @@ async function getLicenseInfo(ext: ExtInfo) {
         url: parseResult.data.html_url,
       };
     }
-    licenseCache.set(repoId, info);
+  } catch (err) {
+    const status = (err as { response?: { status?: number } })?.response
+      ?.status;
+    console.warn(`No license detected for ${repoId} (${status ?? err})`);
   }
+  licenseCache.set(repoId, info);
   return info;
 }
 
@@ -211,9 +229,16 @@ function adjustFirstCreated(date: Date, identifier: string) {
 }
 
 // adjust blob paths to full URLs
+// PILOTMOON_PUBLIC_ROOT overrides the public asset root, for developing
+// against a local backend: set it to the public proxy's /test path,
+// which reverse-proxies to the local rolo (blob urls are fetched
+// unauthenticated by the browser, so they can't go direct)
+export const publicRoot = process.env.PILOTMOON_PUBLIC_ROOT ||
+  config.pilotmoon.publicRoot;
+
 function adjustPublicPath(path: string | null) {
   if (path?.startsWith("/")) {
-    return config.pilotmoon.publicRoot + path;
+    return publicRoot + path;
   }
   return path;
 }

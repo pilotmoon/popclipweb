@@ -162,7 +162,10 @@ function formatActionTypes(ext: ExtInfo) {
         {{ formatActionTypes(ext) }}
       </li>
       <li v-if="ext.license">
-        <span :class="$style.CardDataLabel">License</span><br /><a :href="ext.license.url">{{ ext.license.name }}</a>
+        <span :class="$style.CardDataLabel">License</span><br /><a
+          v-if="ext.license.url"
+          :href="ext.license.url"
+        >{{ ext.license.name }}</a><template v-else>{{ ext.license.name }}</template>
       </li>
       <li>
         <span :class="$style.CardDataLabel">Source</span><br />
