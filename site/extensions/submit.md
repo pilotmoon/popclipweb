@@ -30,7 +30,7 @@ from the Config file and sign and zip the extension.
 
 ## Submission agreement
 
-By submitting an extension, you agree to the following:
+By submitting an extension, you agree to the following. If you don't agree, please don't submit.
 
 - **You keep your copyright.** Your extension remains yours. Nothing here
   transfers ownership of it to me.
@@ -40,13 +40,13 @@ By submitting an extension, you agree to the following:
   your submitted files, to package and sign them, to distribute the result
   through this directory and through PopClip's update mechanism, and to show your
   extension's name, description, icon, readme, demo and other content on this website.
-- **Permission for users.** You allow anyone to download and use your extension
-  through PopClip. If you include a license file, that license governs whatever
+- **Permission for users.** You allow anyone to download and use your extension.
+  If you include a license file, that license governs whatever
   else people may do with your code.
 - **You are responsible for it.** Be prepared to be contacted by other PopClip users via GitHub about bugs, feature requests, etc.
-  Be aware that things may break. For example, a third-party service may change its API, or a macOS update may break something.
+  Be aware that things may break. For example, a third-party service may change its API, or a macOS update or PopClip update may break something.
   If you are not willing to maintain and update your extension, please do not submit it.
-  If your extension had issues and you don't fix them, I may remove it from the directory.
+  If your extension has issues and you don't fix them, I may remove it from the directory.
 - **Do no harm.** It goes without saying that your extension must absolutely respect
   the user and must never do anything to harm the user or their computer.
   Respect their privacy, too: if your extension sends the selected text, or any
