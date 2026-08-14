@@ -204,7 +204,8 @@ const filteredIndex = computed(() => {
 
 <template>
   <div :class="$style.Links">
-    <a href="/extensions/submit">Submit</a> ·
+    <!-- the /extensions/submit page still builds, but isn't linked from
+         here until it carries real submission instructions -->
     <a href="/extensions/authors/">Authors</a> ·
     <a href="https://public.popclip.app/extensions/popclip.rss">RSS</a>
   </div>
