@@ -39,7 +39,7 @@ By submitting an extension, you agree to the following. If you don't agree, plea
 - **Permission to distribute.** You give me permission, without payment, to store
   your submitted files, to package and sign them, to distribute the result
   through this directory and through PopClip's update mechanism, and to show your
-  extension's name, description, icon, readme, demo and other content on this website.
+  extension's name, description, icon, readme, demo video, author credit, and other content and metadata on this website.
 - **Permission for users.** You allow anyone to download and use your extension.
   If you include a license file, that license governs whatever
   else people may do with your code.
@@ -50,7 +50,7 @@ By submitting an extension, you agree to the following. If you don't agree, plea
 - **Do no harm.** It goes without saying that your extension must absolutely respect
   the user and must never do anything to harm the user or their computer.
   Respect their privacy, too: if your extension sends the selected text, or any
-  other data, to a third-party service, say so plainly in your readme. Never
+  other data, to you or to a third-party service, say so plainly in your readme. Never
   collect or transmit anything the user wouldn't expect.
 - **Publication is at my discretion.** I decide what gets published and what
   appears on the front page, and I may unpublish anything at any time.
@@ -113,7 +113,7 @@ To keep the final file size down, readme and demo files are automatically exclud
 
 ### Changelog
 
-If you wish to include a changelog, please put it at the foot of your readme:
+I encourage you to include a changelog to let users know what has changed in each version. Put it at the foot of your readme. Suggested format:
 
 ```markdown
 ## Changelog
@@ -129,7 +129,7 @@ from the final packaged extension.
 
 ### Credits
 
-The directory will automatically credit you as the extension's author by linking to your repository
+The directory will automatically credit you as the extension's author and maintainer by linking to your repository
 and GitHub user page. Put any additional acknowledgements in your readme.
 
 ### License
@@ -140,7 +140,7 @@ GitHub detects it and the directory displays the license name
 
 ## 2. Install the GitHub app
 
-Install **[PopClip Directory](https://github.com/apps/popclip-directory)** on the
+Install the **[PopClip Directory GitHub app](https://github.com/apps/popclip-directory)** on the
 repository (or repositories) you want to submit from.
 
 You can install it on all your repositories or select individual ones. It makes
