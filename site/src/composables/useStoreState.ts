@@ -178,8 +178,9 @@ async function loadStoreBilling(
   coupon: string,
   // #country=XX forces the displayed prices to that country instead of
   // geolocating the caller's IP — for testing localized prices without a
-  // VPN. Display-only: the Paddle checkout passes no address, so it always
-  // re-resolves the buyer's real country at payment. Allowed in production.
+  // VPN. The same param also pre-fills the checkout's country (see
+  // usePaddleBillingCheckout), which the buyer can change on the first
+  // checkout screen. Allowed in production.
   country: string,
   loadKey: string,
 ) {

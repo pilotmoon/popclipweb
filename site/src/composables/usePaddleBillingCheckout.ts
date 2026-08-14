@@ -1,6 +1,7 @@
 import { useData } from "vitepress";
 import config from "../config/config.json";
 import { loadScript } from "../helpers/loadScript";
+import { readParams } from "../helpers/readParams";
 import { useDeploymentInfo } from "./useDeploymentInfo";
 import { useLogger } from "./useLogger";
 import { usePurchaseInfo } from "./usePurchaseInfo";
@@ -72,6 +73,9 @@ export function usePaddleBillingCheckout() {
       return;
     }
     purchaseInfo.flowId.value = currentFlowId;
+    // the transaction id lets the license page ask the backend about
+    // payment progress (e.g. deferred-capture methods like WeChat Pay)
+    purchaseInfo.transactionId.value = data?.transaction_id ?? null;
     purchaseInfo.userEmail.value = data?.customer?.email ?? null;
     purchaseInfo.userCountry.value =
       data?.customer?.address?.country_code ??
@@ -90,11 +94,21 @@ export function usePaddleBillingCheckout() {
     await initPaddle();
     currentFlowId = window.crypto?.randomUUID();
     const email = options.email ?? null;
+    // #country=XX (the same param that forces displayed prices) also
+    // pre-fills the checkout's country, so Paddle localizes currency and
+    // payment methods to it rather than geolocating the IP — lets localized
+    // checkouts be tested without a VPN. The buyer can still change the
+    // country on the first checkout screen.
+    const country = readParams().get("country")?.toUpperCase() || null;
+    const customer = {
+      ...(email ? { email } : {}),
+      ...(country ? { address: { countryCode: country } } : {}),
+    };
     const checkoutOptions = {
       items: [{ priceId: options.priceId, quantity: 1 }],
       ...(options.discountCode ? { discountCode: options.discountCode } : {}),
       ...(options.discountId ? { discountId: options.discountId } : {}),
-      ...(email ? { customer: { email } } : {}),
+      ...(email || country ? { customer } : {}),
       customData: {
         flow_id: currentFlowId,
         ...(options.customData ?? {}),

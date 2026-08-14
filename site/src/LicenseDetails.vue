@@ -15,6 +15,9 @@ const purchaseInfo = usePurchaseInfo();
 const title = useTitle();
 const timestamp = new Date().toISOString();
 const licenseKey = ref(null);
+// payment progress reported by the backend when there's no license yet
+// ({ object: "transactionStatus", status, paymentMethodType? })
+const txnStatus = ref(null);
 const sandbox = useDeploymentInfo().isLocalhost;
 const countdown = ref(60);
 let lastError = null;
@@ -22,11 +25,18 @@ let lastError = null;
 const State = {
   NoSession: Symbol("no-session"),
   Loading: Symbol("loading"),
-  Failed: Symbol("failed"),
+  Delayed: Symbol("delayed"),
+  PaymentPending: Symbol("payment-pending"),
+  PaymentFailed: Symbol("payment-failed"),
   Done: Symbol("done"),
 };
 
 const state = ref(State.Loading);
+
+// how long to keep slow-polling once the payment is known to be pending
+// capture (e.g. WeChat Pay typically captures within ~10 minutes)
+const PENDING_POLL_INTERVAL_MS = 10000;
+const PENDING_POLL_LIMIT = 180; // × 10s = 30 minutes
 
 onMounted(async () => {
   if (!purchaseInfo.flowId.value) {
@@ -37,24 +47,51 @@ onMounted(async () => {
   }
   log(`[license] polling for license, flowId=${purchaseInfo.flowId.value}, mode=${sandbox ? "test" : "live"}`);
   for (; countdown.value > 0; countdown.value -= 1) {
-    try {
-      await loadLicenseKey();
-      if (licenseKey.value) {
-        log("[license] license received from backend", licenseKey.value);
-        state.value = State.Done;
-        kaboom();
-        return;
-      }
-      log(`[license] poll ${61 - countdown.value}: backend has no license yet (webhook may not have fired)`);
-    } catch (e) {
-      console.error("[license] poll error", e);
-      lastError = e.message;
-    }
+    if (await poll()) return;
+    if (txnStatus.value?.status === "pending") break;
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
+  if (txnStatus.value?.status === "pending") {
+    log("[license] payment is pending capture — switching to slow polling");
+    state.value = State.PaymentPending;
+    title.value = "Payment Processing";
+    for (let i = 0; i < PENDING_POLL_LIMIT; i++) {
+      await new Promise((resolve) => setTimeout(resolve, PENDING_POLL_INTERVAL_MS));
+      if (await poll()) return;
+    }
+    log("[license] still pending after slow polling — leaving the pending message up");
+    return;
+  }
   log("[license] gave up after polling — backend never produced a license for this flowId");
-  state.value = State.Failed;
+  state.value = State.Delayed;
+  title.value = "Order Processing";
 });
+
+// One poll of the backend. Returns true when polling should stop because a
+// terminal state (Done / PaymentFailed) was reached.
+async function poll() {
+  try {
+    await loadLicenseKey();
+    if (licenseKey.value) {
+      log("[license] license received from backend", licenseKey.value);
+      state.value = State.Done;
+      title.value = "Thank You";
+      kaboom();
+      return true;
+    }
+    if (txnStatus.value?.status === "failed") {
+      log("[license] backend reports the payment failed");
+      state.value = State.PaymentFailed;
+      title.value = "Payment Not Completed";
+      return true;
+    }
+    log(`[license] poll: no license yet (payment status: ${txnStatus.value?.status ?? "unknown"})`);
+  } catch (e) {
+    console.error("[license] poll error", e);
+    lastError = e.message;
+  }
+  return false;
+}
 
 async function loadLicenseKey() {
   const endpoint = sandbox
@@ -62,14 +99,34 @@ async function loadLicenseKey() {
     : config.pilotmoon.frontendRoot;
   const flowId = purchaseInfo.flowId.value;
   const mode = sandbox ? "test" : "live";
-  const url = `${endpoint}/store/getLicense?flowId=${flowId}&mode=${mode}`;
+  const transactionId = purchaseInfo.transactionId.value;
+  let url = `${endpoint}/store/getLicense?flowId=${flowId}&mode=${mode}`;
+  if (transactionId) {
+    url += `&transactionId=${transactionId}`;
+  }
   log(`[license] GET ${url}`);
   const fetchResponse = await fetch(url);
   log(`[license] getLicense responded ${fetchResponse.status}`);
   if (!fetchResponse.ok) {
     throw new Error(`HTTP fetch failed, code ${fetchResponse.status}`);
   }
-  licenseKey.value = await fetchResponse.json();
+  const body = await fetchResponse.json();
+  if (body?.object === "transactionStatus") {
+    txnStatus.value = body;
+  } else {
+    licenseKey.value = body;
+  }
+}
+
+// display name for the payment method holding up the license
+function paymentMethodName() {
+  const names = {
+    wechat_pay: "WeChat Pay",
+    pix: "Pix",
+    upi: "UPI",
+    mb_way: "MB WAY",
+  };
+  return names[txnStatus.value?.paymentMethodType] ?? "Your payment method";
 }
 
 function registerLink() {
@@ -111,6 +168,8 @@ function diagnosticInfoString() {
   return `Timestamp: ${timestamp}
 Last error: ${lastError}
 Purchase flow ID: ${purchaseInfo.flowId.value}
+Transaction ID: ${purchaseInfo.transactionId.value}
+Payment status: ${txnStatus.value ? `${txnStatus.value.status} (${txnStatus.value.paymentMethodType ?? "unknown method"})` : null}
 User email: ${purchaseInfo.userEmail.value}
 User country: ${purchaseInfo.userCountry.value}`;
 }
@@ -155,11 +214,51 @@ function licenseInfoString() {
       <p>Getting your license key...</p>
       <p v-if="countdown <= 57">Please wait ({{ countdown }})</p>
     </div>
-    <div v-else-if="state === State.Failed">
-      <h1>Something went wrong</h1>
+    <div v-else-if="state === State.PaymentPending">
+      <h1>Your payment is being processed</h1>
       <p>
-        Please contact
-        <SupportEmailLink subject="PopClip Purchase Problem" :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')" />.
+        {{ paymentMethodName() }} confirms payments after a short delay &mdash; usually within about 10 minutes.
+      </p>
+      <p>
+        Once the payment is confirmed, your PopClip license key will be emailed to
+        <b>{{ purchaseInfo.userEmail.value }}</b
+        >.
+      </p>
+      <p>
+        You can safely close this page &mdash; there's no need to wait here. If you leave it open, it will update
+        automatically when your license is ready.
+      </p>
+      <p>
+        If nothing arrives within an hour, please check your spam folder or contact&ensp;<SupportEmailLink
+          subject="PopClip Purchase Enquiry"
+          :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')"
+        />.
+      </p>
+    </div>
+    <div v-else-if="state === State.PaymentFailed">
+      <h1>Payment not completed</h1>
+      <p>Your payment could not be completed, and you have not been charged.</p>
+      <p>
+        You can try the purchase again, or contact
+        <SupportEmailLink subject="PopClip Purchase Problem" :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')" />
+        if you think something's wrong.
+      </p>
+      <h3>Diagnostic Information</h3>
+      <pre
+        >{{ diagnosticInfoString() }}
+      </pre>
+    </div>
+    <div v-else-if="state === State.Delayed">
+      <h1>Your license key is on its way</h1>
+      <p>It's taking a little longer than usual to confirm your order.</p>
+      <p>
+        Your license key will be emailed to
+        <b>{{ purchaseInfo.userEmail.value }}</b>
+        as soon as it's ready &mdash; you don't need to stay on this page.
+      </p>
+      <p>
+        If it hasn't arrived within an hour, please contact
+        <SupportEmailLink subject="PopClip Purchase Enquiry" :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')" />.
       </p>
       <h3>Diagnostic Information</h3>
       <pre
