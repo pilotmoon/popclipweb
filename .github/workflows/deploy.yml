@@ -3,6 +3,11 @@ name: Deploy Site
 on:
   push:
     branches: [ main ]
+  # twix dispatches this when published extensions change, so the site
+  # picks up directory content without waiting for a push or the nightly
+  # build. Dispatching builds current main; re-running an old run would
+  # rebuild that run's commit.
+  workflow_dispatch:
 
 env:
   SSH_USER: "${{ vars.DEPLOY_SSH_USER }}"
