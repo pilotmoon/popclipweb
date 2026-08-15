@@ -122,6 +122,20 @@ The readme can include inline images. For example, in markdown: `![](_screenshot
 Image files must be contained inside the package itselgg -- externally hosted images are not allowed and will be scrubbed. Use an underscore name prefix to [hide](#hidden-files) images and keep them out of the final downloadable zip.
 :::
 
+### Keywords
+
+The directory's search box matches against your extension's **name** and
+the names of any associated apps — but **not** its
+description. If there are other words people might search for, add a
+`keywords` field to your Config:
+
+```yaml
+keywords: quotation marks curly smart
+```
+
+The `keywords` field is one plain string, not an array: just words separated by
+spaces. Matching is case-insensitive.
+
 ### Changelog
 
 I encourage you to include a changelog to let users know what has changed in each version. Put it at the foot of your readme. Suggested format:

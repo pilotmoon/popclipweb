@@ -114,6 +114,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   ```
 - Documentation: removed the documented claim that population functions may not
   read `popclip.context.browserUrl` and `popclip.context.browserTitle`, which was incorrect.
+- Documentation: added the previously undocumented `keywords` config field to
+  the [top level properties](config#top-level-properties) table. It supplies
+  extra search words for the extension's directory listing.
 
 ## PopClip 2026.7 (5992)
 
