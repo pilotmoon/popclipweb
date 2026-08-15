@@ -10,8 +10,15 @@ const props = defineProps<{
 // author pages sit at different depths
 const href = computed(() => withBase(`/extensions/x/${props.ext.shortcode}`));
 const newDate = Date.now() - 30 * 24 * 60 * 60 * 1000;
+// new to the DIRECTORY, keyed off the first-listed date: an extension can
+// be published (own page only) long before it is curated into the index,
+// and the badge should not have burned out by then. never-listed
+// extensions (e.g. on author pages) get no badge. firstListed may arrive
+// as a Date or, via a data loader's JSON round-trip, a string.
 function isNew(ext: ExtInfo) {
-  return ext.firstCreated.getTime() > newDate;
+  return (
+    ext.firstListed != null && new Date(ext.firstListed).getTime() > newDate
+  );
 }
 </script>
 

@@ -43,6 +43,8 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   unlisted: z.boolean(),
   category: z.string().nullable(),
   flagship: z.boolean(),
+  // nullish, not nullable: tolerate an api that predates the field
+  firstListed: z.coerce.date().nullish(),
   shortcode: z.string(),
   identifier: z.string(),
   icon: z.string().nullable(),

@@ -25,6 +25,9 @@ const extsMap = new Map(
         firstCreated: new Date(e.firstCreated),
         created: new Date(e.created),
         updatedDate: new Date(e.sourceDate ?? 0),
+        // when the extension entered the directory index; firstCreated
+        // fallback covers records predating the firstListed field
+        listedDate: new Date(e.firstListed ?? e.firstCreated),
       },
     ]),
 );
@@ -37,10 +40,13 @@ const alphaSection: Section = {
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((e) => e.identifier),
 };
+// "newest" means newest in the directory: ordered by when each extension
+// was listed, not when it was first published (the two differ for
+// extensions that spent time published-but-unlisted)
 const newestSection: Section = {
   title: "All Extensions (Newest first)",
   members: [...extsMap.values()]
-    .sort((a, b) => b.firstCreated.getTime() - a.firstCreated.getTime())
+    .sort((a, b) => b.listedDate.getTime() - a.listedDate.getTime())
     .map((e) => e.identifier),
 };
 const updatedSection: Section = {
