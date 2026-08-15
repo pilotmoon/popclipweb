@@ -113,11 +113,17 @@ function formatActionTypes(ext: ExtInfo) {
             title="Source Verified"
             :width="260"
             trigger="hover"
-            content="Built and signed by the PopClip Extensions Directory from public source code on GitHub."
           >
             <template #reference>
               <div :class="$style.DownloadInfo"><ShieldTask16Filled /> Source Verified</div>
             </template>
+            <div :class="$style.Small">
+              Built and signed by the PopClip Extensions Directory from public
+              source code on GitHub.<template v-if="ext.source">{{ " "
+                }}<a :href="ext.source">View the exact source</a> this version
+                was built from.</template
+              >
+            </div>
           </ElPopover>
         </ClientOnly>
       </div>
