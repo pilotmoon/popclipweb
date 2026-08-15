@@ -73,7 +73,10 @@ export default {
   async paths() {
     console.log("In paths loader");
     console.time("load paths");
-    const extensions = await load();
+    // load() returns the memoized shared array; clone before
+    // processReadme swaps each readme url for rendered html, so the
+    // html never leaks into the directory page's data payload
+    const extensions = (await load()).map((ext) => ({ ...ext }));
     const limit = pLimit(30);
     await Promise.all(extensions.map((ext) => limit(() => processReadme(ext))));
     console.timeEnd("load paths");

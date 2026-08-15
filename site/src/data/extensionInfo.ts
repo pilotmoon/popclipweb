@@ -101,7 +101,19 @@ async function getDisplayVersion(ext: ExtInfo) {
   return { versionString: "", isBeta: false };
 }
 
-export async function load() {
+// vitepress executes data loaders more than once per build -- once
+// while resolving dynamic route paths and again inside the server
+// bundle, as separate module instances in the same process -- so the
+// api sweep is memoized on globalThis, the only scope the instances
+// share. callers get the SAME array and objects: anyone who mutates
+// them must clone first (as the readme paths loader does).
+const globalCache = globalThis as { __pcwebExtensions?: Promise<ExtInfo[]> };
+export function load(): Promise<ExtInfo[]> {
+  globalCache.__pcwebExtensions ??= loadFromApi();
+  return globalCache.__pcwebExtensions;
+}
+
+async function loadFromApi() {
   console.log("In extensions loader");
   console.time("load extensions");
   let cursor: string | undefined;

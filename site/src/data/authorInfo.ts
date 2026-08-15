@@ -24,7 +24,16 @@ export type AuthorInfo = z.infer<typeof ZAuthorInfo>;
 // the API client, whose top level throws without a key -- fine at build
 // time, fatal if a client component ever imports it
 
-export async function load(): Promise<AuthorInfo[]> {
+// memoized on globalThis for the same reason as the extensions loader
+// (vitepress runs loaders more than once per build in separate module
+// instances); nobody mutates author objects, so sharing is safe as-is
+const globalCache = globalThis as { __pcwebAuthors?: Promise<AuthorInfo[]> };
+export function load(): Promise<AuthorInfo[]> {
+  globalCache.__pcwebAuthors ??= loadFromApi();
+  return globalCache.__pcwebAuthors;
+}
+
+async function loadFromApi(): Promise<AuthorInfo[]> {
   console.log("In authors loader");
   console.time("load authors");
   const authors: AuthorInfo[] = [];
