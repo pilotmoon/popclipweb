@@ -50,8 +50,11 @@ const displayName = computed(() => author.name || author.githubHandle);
           <a v-if="author.websiteUrl" :href="author.websiteUrl">{{
             author.websiteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
           }}</a>
+          <!-- "identity", not just "verified": the extension pages use
+               "Source Verified" for provenance, and one word meaning two
+               different things across the site helps nobody -->
           <span v-if="author.verified" :class="$style.Verified">
-            <ShieldTask16Filled /> Verified Author
+            <ShieldTask16Filled /> Identity Verified
           </span>
         </div>
         <p v-if="author.bio" :class="$style.Bio">{{ author.bio }}</p>
