@@ -143,11 +143,11 @@ function formatActionTypes(ext: ExtInfo) {
     <p>This extension requires {{ ext.popclipDisplayVersion }} of PopClip, available from <a href="/beta">PopClip Beta</a>.</p>
   </div>
   <div v-if="ext.unlisted" class="info custom-block">
-    <p class="custom-block-title">Author's Extension</p>
+    <p class="custom-block-title">Unlisted Extension</p>
     <p v-if="author">
-      This extension is published on <a :href="authorPath(author)">{{ authorName(author) }}'s page</a> rather than in the main directory listing.
+      This extension is published on <a :href="authorPath(author)">{{ authorName(author) }}'s page</a> but is not listed in the main directory index.
     </p>
-    <p v-else>This extension is published on its author's page rather than in the main directory listing.</p>
+    <p v-else>This extension is published on its author's page but is not listed in the main directory index.</p>
   </div>
 
   <div v-if="ext.demo" :class="$style.Card">

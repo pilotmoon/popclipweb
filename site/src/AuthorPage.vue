@@ -82,7 +82,13 @@ const displayName = computed(() => author.name || author.githubHandle);
       {{ extensions.length }}
       {{ extensions.length === 1 ? "Extension" : "Extensions" }}
     </div>
-    <DirectoryEntry v-for="ext in extensions" :key="ext.id" :ext="ext" />
+    <!-- no bylines: every entry here shares this page's author -->
+    <DirectoryEntry
+      v-for="ext in extensions"
+      :key="ext.id"
+      :ext="ext"
+      :byline="false"
+    />
     <p v-if="!extensions.length" :class="$style.Empty">
       Nothing published here yet.
     </p>

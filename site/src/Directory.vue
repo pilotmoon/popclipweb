@@ -4,7 +4,13 @@ import { data as exts } from "./data/extensions.data";
 import { data as categoryDefs, type Section } from "./data/directory.data";
 import { IconFilter } from "@tabler/icons-vue";
 import DirectoryEntry from "./DirectoryEntry.vue";
-import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from "element-plus";
+import {
+  ElCheckbox,
+  ElInput,
+  ElRadioButton,
+  ElRadioGroup,
+  ElTag,
+} from "element-plus";
 import { computed, onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { useData } from "vitepress";
 import { useDebounceFn } from "@vueuse/core";
@@ -14,47 +20,55 @@ const defaultFilter = "";
 const filter = ref(defaultFilter);
 const defaultArrange = "categories";
 const arrange = ref(defaultArrange);
+// off by default: the directory shows the curated index; the toggle
+// expands every arrangement to include unlisted extensions too
+const showUnlisted = ref(false);
 
-const extsMap = new Map(
-  exts
-    .filter((e) => !e.unlisted)
-    .map((e) => [
-      e.identifier,
-      {
-        ...e,
-        firstCreated: new Date(e.firstCreated),
-        created: new Date(e.created),
-        updatedDate: new Date(e.sourceDate ?? 0),
-        // when the extension entered the directory index; firstCreated
-        // fallback covers records predating the firstListed field
-        listedDate: new Date(e.firstListed ?? e.firstCreated),
-      },
-    ]),
+// every published extension, keyed by identifier
+const allMap = new Map(
+  exts.map((e) => [
+    e.identifier,
+    {
+      ...e,
+      firstCreated: new Date(e.firstCreated),
+      created: new Date(e.created),
+      updatedDate: new Date(e.sourceDate ?? 0),
+      // when the extension entered the directory index; firstCreated
+      // fallback covers records predating the firstListed field
+      listedDate: new Date(e.firstListed ?? e.firstCreated),
+    },
+  ]),
 );
-const epochDate = new Date(0);
 
-// define the categories
-const alphaSection: Section = {
+// the extensions currently on display
+const extsMap = computed(
+  () =>
+    new Map([...allMap].filter(([, e]) => showUnlisted.value || !e.unlisted)),
+);
+
+// define the arrangements
+const alphaSection = computed<Section>(() => ({
   title: "All Extensions (Alphabetical)",
-  members: [...extsMap.values()]
+  members: [...extsMap.value.values()]
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((e) => e.identifier),
-};
+}));
 // "newest" means newest in the directory: ordered by when each extension
 // was listed, not when it was first published (the two differ for
-// extensions that spent time published-but-unlisted)
-const newestSection: Section = {
+// extensions that spent time published-but-unlisted). unlisted
+// extensions, when shown, order by their first-publication fallback
+const newestSection = computed<Section>(() => ({
   title: "All Extensions (Newest first)",
-  members: [...extsMap.values()]
+  members: [...extsMap.value.values()]
     .sort((a, b) => b.listedDate.getTime() - a.listedDate.getTime())
     .map((e) => e.identifier),
-};
-const updatedSection: Section = {
+}));
+const updatedSection = computed<Section>(() => ({
   title: "All Extensions (Recently updated first)",
-  members: [...extsMap.values()]
+  members: [...extsMap.value.values()]
     .sort((a, b) => b.updatedDate.getTime() - a.updatedDate.getTime())
     .map((e) => e.identifier),
-};
+}));
 // within a section: flagships first, then the rest, each group A-Z
 function sectionOrder(list: ExtInfo[]): string[] {
   return list
@@ -66,19 +80,21 @@ function sectionOrder(list: ExtInfo[]): string[] {
     .map((e) => e.identifier);
 }
 
-function categories(): Section[] {
+const categoriesIndex = computed<Section[]>(() => {
   // 5 newset extensions
   const newTitle = "Newly Added";
   const newest = {
     title: newTitle,
-    members: newestSection.members.slice(0, 5),
+    members: newestSection.value.members.slice(0, 5),
     link: "#a=newest",
     special: true,
   };
-  // group the listed extensions by category slug
+  // group the listed extensions by category slug. an unlisted extension
+  // may carry a category (staged for when it is listed), but while
+  // unlisted it belongs only to the section of its own below
   const bySlug = new Map<string, ExtInfo[]>();
-  for (const ext of extsMap.values()) {
-    if (!ext.category) continue;
+  for (const ext of extsMap.value.values()) {
+    if (ext.unlisted || !ext.category) continue;
     const list = bySlug.get(ext.category) ?? [];
     list.push(ext);
     bySlug.set(ext.category, list);
@@ -96,7 +112,7 @@ function categories(): Section[] {
   // this is where curation gaps show themselves
   const leftovers = [
     ...[...bySlug.values()].flat(),
-    ...[...extsMap.values()].filter((e) => !e.category),
+    ...[...extsMap.value.values()].filter((e) => !e.unlisted && !e.category),
   ];
   if (leftovers.length) {
     sections.push({
@@ -104,18 +120,30 @@ function categories(): Section[] {
       members: sectionOrder(leftovers),
     });
   }
+  // when shown, the unlisted extensions form their own final section,
+  // kept apart from Not Categorized (which tracks curation gaps)
+  const unlisted = [...extsMap.value.values()].filter((e) => e.unlisted);
+  if (unlisted.length) {
+    sections.push({
+      title: "Unlisted Extensions",
+      members: sectionOrder(unlisted),
+    });
+  }
   return [newest, ...sections];
-}
-const arrangements = new Map([
-  ["categories", { label: "Categories", index: categories() }],
-  ["alpha", { label: "A–Z", index: [alphaSection] }],
-  ["newest", { label: "New", index: [newestSection] }],
-  ["updated", { label: "Updated", index: [updatedSection] }],
-]);
+});
+const arrangements = computed(
+  () =>
+    new Map([
+      ["categories", { label: "Categories", index: categoriesIndex.value }],
+      ["alpha", { label: "A–Z", index: [alphaSection.value] }],
+      ["newest", { label: "New", index: [newestSection.value] }],
+      ["updated", { label: "Updated", index: [updatedSection.value] }],
+    ]),
+);
 
 // total number of extensons
 const total = computed(() => {
-  return extsMap.size;
+  return extsMap.value.size;
 });
 
 // track filter term
@@ -131,7 +159,7 @@ const {
 function title() {
   const parts: string[] = [];
   if (arrange.value !== defaultArrange) {
-    parts.push(arrangements.get(arrange.value)?.label || arrange.value);
+    parts.push(arrangements.value.get(arrange.value)?.label || arrange.value);
   }
   if (filter.value !== defaultFilter) {
     parts.push(`"${filter.value}"`);
@@ -162,16 +190,20 @@ function writeParams(params: URLSearchParams) {
   // update the filter
   arrange.value = params.get("a") || defaultArrange;
   filter.value = params.get("q") || defaultFilter;
+  showUnlisted.value = params.get("u") === "1";
 }
 
 // watch filter/arrange change
-watch([filter, arrange], ([newFilter, newArrange]) => {
+watch([filter, arrange, showUnlisted], ([newFilter, newArrange, newShow]) => {
   const params = new URLSearchParams();
   if (newArrange !== defaultArrange) {
     params.set("a", newArrange);
   }
   if (newFilter !== defaultFilter) {
     params.set("q", newFilter);
+  }
+  if (newShow) {
+    params.set("u", "1");
   }
   writeParams(params);
 });
@@ -192,7 +224,7 @@ onBeforeUnmount(() => {
 });
 
 const selectedIndex = computed(() => {
-  return arrangements.get(arrange.value)?.index ?? [];
+  return arrangements.value.get(arrange.value)?.index ?? [];
 });
 
 const filteredIndex = computed(() => {
@@ -203,7 +235,7 @@ const filteredIndex = computed(() => {
     linkText?: string;
     extensions: ExtInfo[];
   }[] = [];
-  const all = new Set<string>(arrangements.get("alpha")?.index[0].members);
+  const all = new Set<string>(arrangements.value.get("alpha")?.index[0].members);
   const filterValue = filter.value.toLowerCase();
   for (const section of selectedIndex.value) {
     if (filterValue && section.special) {
@@ -211,7 +243,7 @@ const filteredIndex = computed(() => {
     }
     const extensions: ExtInfo[] = [];
     for (const identifier of section.members) {
-      const ext = extsMap.get(identifier);
+      const ext = extsMap.value.get(identifier);
       if (ext?.filterTerms?.includes(filterValue)) {
         extensions.push(ext);
         uniques.add(identifier);
@@ -231,7 +263,7 @@ const filteredIndex = computed(() => {
   if (filterValue && all.size > 0) {
     const extensions: ExtInfo[] = [];
     for (const identifier of all) {
-      const ext = extsMap.get(identifier);
+      const ext = extsMap.value.get(identifier);
       if (ext?.filterTerms?.includes(filterValue)) {
         extensions.push(ext);
         uniques.add(identifier);
@@ -280,6 +312,11 @@ const filteredIndex = computed(() => {
       <ElTag v-if="filter" closable @close="filter = ''"
         >Filter: {{ filter }}</ElTag
       >
+      <span :class="$style.ShowUnlisted">
+        <ElCheckbox v-model="showUnlisted" size="small"
+          >Show unlisted extensions</ElCheckbox
+        >
+      </span>
     </div>
     <div v-for="{ title, extensions, link, linkText } in filteredIndex.index">
       <h2>{{ title }}</h2>
@@ -349,5 +386,10 @@ const filteredIndex = computed(() => {
 }
 .Link a {
   text-decoration: none;
+}
+
+/* sits at the right of the info row, under the filter field */
+.ShowUnlisted {
+  margin-left: auto;
 }
 </style>
