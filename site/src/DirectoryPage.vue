@@ -117,7 +117,7 @@ function formatActionTypes(ext: ExtInfo) {
             <template #reference>
               <div :class="$style.DownloadInfo"><ShieldTask16Filled /> Source Verified</div>
             </template>
-            <div :class="$style.Small">
+            <div :class="$style.Provenance">
               Built and signed by the PopClip Extensions Directory from public
               source code on GitHub.<template v-if="ext.source">{{ " "
                 }}<a :href="ext.source">View the exact source</a> this version
@@ -246,6 +246,17 @@ function formatActionTypes(ext: ExtInfo) {
 <style module>
 .Small {
   font-size: 14px;
+}
+
+/* the popover is teleported to <body>, outside the theme's document
+   styles, so a link inside it renders as plain text unless we say
+   otherwise (css module class names are global, so they still apply) */
+.Provenance {
+  font-size: 14px;
+}
+.Provenance a {
+  color: var(--vp-c-brand-1);
+  text-decoration: underline;
 }
 .Subdued {
   color: var(--vp-c-text-2);
