@@ -2,6 +2,7 @@
 import { useData } from "vitepress";
 import { computed } from "vue";
 import { ShieldTask16Filled } from "@vicons/fluent";
+import { ElPopover } from "element-plus";
 import type { AuthorInfo } from "./data/authorInfo.js";
 import type { ExtInfo } from "./data/extensionInfo.js";
 import { data as exts } from "./data/extensions.data";
@@ -52,10 +53,24 @@ const displayName = computed(() => author.name || author.githubHandle);
           }}</a>
           <!-- "identity", not just "verified": the extension pages use
                "Source Verified" for provenance, and one word meaning two
-               different things across the site helps nobody -->
-          <span v-if="author.verified" :class="$style.Verified">
-            <ShieldTask16Filled /> Identity Verified
-          </span>
+               different things across the site helps nobody. the note
+               keeps it to the fact, so it doesn't read as an endorsement
+               of the person's work -->
+          <ClientOnly v-if="author.verified">
+            <ElPopover
+              placement="bottom"
+              title="Identity Verified"
+              :width="280"
+              trigger="hover"
+              content="This GitHub account has been confirmed as belonging to the person named."
+            >
+              <template #reference>
+                <span :class="$style.Verified">
+                  <ShieldTask16Filled /> Identity Verified
+                </span>
+              </template>
+            </ElPopover>
+          </ClientOnly>
         </div>
         <p v-if="author.bio" :class="$style.Bio">{{ author.bio }}</p>
       </div>
