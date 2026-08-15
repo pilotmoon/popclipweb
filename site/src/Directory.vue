@@ -131,16 +131,20 @@ const categoriesIndex = computed<Section[]>(() => {
       members: sectionOrder(leftovers),
     });
   }
-  // when shown, the unlisted extensions form their own final section,
-  // kept apart from Not Categorized (which tracks curation gaps)
+  // when shown, the unlisted extensions form a section of their own,
+  // kept apart from Not Categorized (which tracks curation gaps). its
+  // position answers the user's intent: deliberately ticking the box
+  // hoists it to the top (they asked to see these, so show them --
+  // unlisted is a curation state, not a lesser tier), while during a
+  // search (which widens the scope automatically) it stays at the
+  // bottom so curated matches lead the results
   const unlisted = [...extsMap.value.values()].filter((e) => e.unlisted);
-  if (unlisted.length) {
-    sections.push({
-      title: "Unlisted Extensions",
-      members: sectionOrder(unlisted),
-    });
-  }
-  return [newest, ...sections];
+  const unlistedSection: Section[] = unlisted.length
+    ? [{ title: "Unlisted Extensions", members: sectionOrder(unlisted) }]
+    : [];
+  return showUnlisted.value
+    ? [newest, ...unlistedSection, ...sections]
+    : [newest, ...sections, ...unlistedSection];
 });
 const arrangements = computed(
   () =>
