@@ -2,7 +2,7 @@
 import type { ExtInfo } from "./data/extensionInfo";
 import { data as exts } from "./data/extensions.data";
 import { data as categoryDefs, type Section } from "./data/directory.data";
-import { IconFilter } from "@tabler/icons-vue";
+import { IconSearch } from "@tabler/icons-vue";
 import DirectoryEntry from "./DirectoryEntry.vue";
 import {
   ElCheckbox,
@@ -24,6 +24,15 @@ const arrange = ref(defaultArrange);
 // expands every arrangement to include unlisted extensions too
 const showUnlisted = ref(false);
 
+// searching always covers everything: search intent is "does it exist?",
+// and a search that misses a published extension reads as "no". the
+// curation signal survives in the results via the Unlisted tag and, in
+// the categories arrangement, the trailing Unlisted Extensions section.
+const searching = computed(() => filter.value !== defaultFilter);
+const effectiveShowUnlisted = computed(
+  () => showUnlisted.value || searching.value,
+);
+
 // every published extension, keyed by identifier
 const allMap = new Map(
   exts.map((e) => [
@@ -43,7 +52,9 @@ const allMap = new Map(
 // the extensions currently on display
 const extsMap = computed(
   () =>
-    new Map([...allMap].filter(([, e]) => showUnlisted.value || !e.unlisted)),
+    new Map(
+      [...allMap].filter(([, e]) => effectiveShowUnlisted.value || !e.unlisted),
+    ),
 );
 
 // define the arrangements
@@ -141,10 +152,9 @@ const arrangements = computed(
     ]),
 );
 
-// total number of extensons
-const total = computed(() => {
-  return extsMap.value.size;
-});
+// total number of extensions: always the true total, so the curated
+// view reads "223 of 233" and the gap itself points at the checkbox
+const total = allMap.size;
 
 // track filter term
 const trackFilterTerm = useDebounceFn(() => {
@@ -299,21 +309,24 @@ const filteredIndex = computed(() => {
         </ElRadioGroup>
       </div>
       <div :class="$style.Control">
-        Filter:
+        Search:
         <ElInput
           v-model="filter"
-          placeholder="Type to filter"
-          :prefix-icon="IconFilter"
+          placeholder="Type to search"
+          :prefix-icon="IconSearch"
         />
       </div>
     </div>
     <div :class="$style.Info">
       Showing {{ filteredIndex.count }} of {{ total }} extensions
       <ElTag v-if="filter" closable @close="filter = ''"
-        >Filter: {{ filter }}</ElTag
+        >Search: {{ filter }}</ElTag
       >
+      <!-- while searching, scope is forced to everything and the checkbox
+           would be a dead control: swap it for the rule itself -->
       <span :class="$style.ShowUnlisted">
-        <ElCheckbox v-model="showUnlisted" size="small"
+        <template v-if="searching">search includes unlisted extensions</template>
+        <ElCheckbox v-else v-model="showUnlisted" size="small"
           >Show unlisted extensions</ElCheckbox
         >
       </span>
