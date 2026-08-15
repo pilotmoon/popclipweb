@@ -82,6 +82,11 @@ Example structure:
 
 Do not submit a zipped `.popclipextz` file — it will not work.
 
+::: warning Paths must not change
+After you submit an extension for the first time, its source path must not change.
+If you rename a package folder or move it within the repo, your next submission will fail.
+:::
+
 ### Required fields
 
 Your extension's Config **must** contain all of the following, or it will be rejected automatically:
@@ -110,6 +115,12 @@ You can enhance your directory listing with an optional readme file and demo vid
 - A `demo.mp4` or `demo.gif` in the root of the package folder is shown as a looping demo video.
 
 To keep the final file size down, readme and demo files are automatically excluded from the zipped extension that users download.
+
+::: tip Images in readme
+The readme can include inline images. For example, in markdown: `![](_screenshot1.png)`
+
+Image files must be contained inside the package itselgg -- externally hosted images are not allowed and will be scrubbed. Use an underscore name prefix to [hide](#hidden-files) images and keep them out of the final downloadable zip.
+:::
 
 ### Changelog
 
@@ -170,25 +181,19 @@ The keys are:
 - **`versionPrefix`** (optional) — a prefix your tags use, e.g. `v`. It's
   stripped off to get the version number, and tags without it are ignored.
 
-Example of multiple patterns, skipping a work-in-progress folder:
+Example of multiple patterns, skipping an excluded extension:
 
 ```yaml
 include:
   - "*.popclipext"
   - "extras/*.popclipext"
-exclude: "experimental/**"
+exclude: "MySecretExtension.popclipext"
 versionPrefix: v
-```
-
-Match every package in the repo, including in subfolders:
-
-```yaml
-include: "**/*.popclipext"
 ```
 
 In patterns, `*` matches within a single path segment and `**` matches across
 segments — so `experimental/*` covers that folder's immediate contents, while
-`experimental/**` covers everything beneath it at any depth.
+`experimental/**` covers everything beneath it at any depth. (The pattern engine is [picomatch](https://github.com/micromatch/picomatch) with default settings.)
 
 ## 4. Tag a version and push
 
@@ -209,7 +214,7 @@ git push origin main v1.2
 
 Or publish a release through the GitHub website, which creates the tag for you.
 
-::: tip
+::: tip Tag tips
 Tags can be annotated or lightweight, it does not matter.
 Make sure to push both the commit itself and the tag. If in doubt, `git push && git push --tags` usually does the trick!
 :::
