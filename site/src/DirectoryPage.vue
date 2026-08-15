@@ -118,7 +118,7 @@ function formatActionTypes(ext: ExtInfo) {
               <div :class="$style.DownloadInfo"><ShieldTask16Filled /> Source Verified</div>
             </template>
             <div :class="$style.Provenance">
-              Built and signed by the PopClip extensions directory from public
+              Built and signed by the PopClip Extensions Directory from public
               source code.
               <div v-if="ext.source" :class="$style.ProvenanceSource">
                 <AaLink :href="ext.source" full />
