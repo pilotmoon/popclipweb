@@ -104,15 +104,19 @@ function formatActionTypes(ext: ExtInfo) {
       <div :class="$style.Download">
         <DownloadButton size="small" :href="ext.download" />
         <ClientOnly>
+          <!-- the badge text has to stand on its own: the popover is
+               hover-only, so on a touch device this word is the whole
+               claim. it states provenance, which is a property of how we
+               build the package rather than of how closely it was read -->
           <ElPopover
             placement="bottom"
-            title="Verified Extension"
-            :width="200"
+            title="Source Verified"
+            :width="260"
             trigger="hover"
-            content="This extension has been vetted and approved by the developer of PopClip."
+            content="Built and signed by the PopClip Extensions Directory from public source code on GitHub."
           >
             <template #reference>
-              <div :class="$style.DownloadInfo"><ShieldTask16Filled /> Verified</div>
+              <div :class="$style.DownloadInfo"><ShieldTask16Filled /> Source Verified</div>
             </template>
           </ElPopover>
         </ClientOnly>
@@ -314,6 +318,8 @@ a.Subdued {
   gap: 2px;
   font-size: 14px;
   color: var(--vp-c-text-2);
+  /* wider than the button above it, so don't let it break in two */
+  white-space: nowrap;
 }
 
 .DownloadInfo svg {
