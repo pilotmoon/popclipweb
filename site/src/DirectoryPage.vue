@@ -316,9 +316,9 @@ a.Subdued {
   flex-direction: row;
   line-height: 14px;
   gap: 2px;
-  font-size: 14px;
+  /* small enough to sit within the width of the button above it */
+  font-size: 12px;
   color: var(--vp-c-text-2);
-  /* wider than the button above it, so don't let it break in two */
   white-space: nowrap;
 }
 
