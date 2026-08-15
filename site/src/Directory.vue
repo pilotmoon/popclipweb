@@ -152,9 +152,10 @@ const arrangements = computed(
     ]),
 );
 
-// total number of extensions: always the true total, so the curated
-// view reads "223 of 233" and the gap itself points at the checkbox
-const total = allMap.size;
+// total number of extensions in the current scope: the curated count
+// normally, everything when unlisted are shown (or while searching,
+// which always covers everything)
+const total = computed(() => extsMap.value.size);
 
 // track filter term
 const trackFilterTerm = useDebounceFn(() => {
