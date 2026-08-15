@@ -118,15 +118,40 @@ async function loadLicenseKey() {
   }
 }
 
-// display name for the payment method holding up the license
-function paymentMethodName() {
-  const names = {
-    wechat_pay: "WeChat Pay",
-    pix: "Pix",
-    upi: "UPI",
-    mb_way: "MB WAY",
-  };
-  return names[txnStatus.value?.paymentMethodType] ?? "Your payment method";
+// display name and expected confirmation time for the payment method
+// holding up the license. Timings per Paddle's payment method docs:
+// WeChat Pay typically captures within ~10 minutes; Pix and UPI typically
+// capture immediately, with 10 minutes as the worst case.
+const paymentMethods = {
+  wechat_pay: {
+    name: "WeChat Pay",
+    timing: "usually within about 10 minutes",
+  },
+  pix: {
+    name: "Pix",
+    timing: "usually within moments, though occasionally up to 10 minutes",
+  },
+  upi: {
+    name: "UPI",
+    timing: "usually within moments, though occasionally up to 10 minutes",
+  },
+  blik: {
+    name: "BLIK",
+    timing: "usually within moments, though occasionally up to 10 minutes",
+  },
+  mb_way: {
+    name: "MB WAY",
+    timing: "usually within a few minutes",
+  },
+};
+
+function paymentMethodInfo() {
+  return (
+    paymentMethods[txnStatus.value?.paymentMethodType] ?? {
+      name: "Your payment method",
+      timing: "usually within a few minutes",
+    }
+  );
 }
 
 function registerLink() {
@@ -217,7 +242,7 @@ function licenseInfoString() {
     <div v-else-if="state === State.PaymentPending">
       <h1>Your payment is being processed</h1>
       <p>
-        {{ paymentMethodName() }} confirms payments after a short delay &mdash; usually within about 10 minutes.
+        {{ paymentMethodInfo().name }} confirms payments after a short delay &mdash; {{ paymentMethodInfo().timing }}.
       </p>
       <p>
         Once the payment is confirmed, your PopClip license key will be emailed to
