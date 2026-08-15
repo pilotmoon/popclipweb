@@ -1,36 +1,41 @@
 import { defineLoader } from "vitepress";
 import { z } from "zod";
-import fs from "node:fs";
-import jsYaml from "js-yaml";
-import { gh } from "./gh";
+import { api } from "./pilotmoonApi";
 
-const ZSection = z.object({
+// category definitions from the backend's categories collection (which
+// replaced the pcx-directory repo's categories.yaml). membership is the
+// `category` field on each extension, so the sections themselves are
+// assembled in Directory.vue where the extension data already lives.
+const ZCategoryDef = z.object({
+  slug: z.string(),
   title: z.string(),
-  members: z.array(z.string()),
-  link: z.string().optional(),
-  special: z.boolean().optional(),
+  priority: z.number(),
 });
-export type Section = z.infer<typeof ZSection>;
+export type CategoryDef = z.infer<typeof ZCategoryDef>;
 
-declare const data: Section[];
+// a section of the directory listing as rendered; members are extension
+// identifiers
+export interface Section {
+  title: string;
+  members: string[];
+  link?: string;
+  special?: boolean;
+}
+
+declare const data: CategoryDef[];
 export { data };
 export default defineLoader({
   async load() {
-    const indexYaml = Buffer.from((
-      await gh.get(
-        "https://api.github.com/repos/pilotmoon/pcx-directory/contents/categories.yaml",
-      )
-    ).data.content, "base64").toString("utf-8");    
-    const parseResult = z
-      .record(z.array(z.string()))
-      .safeParse(jsYaml.load(indexYaml));
+    const response = await api.get("categories", {
+      params: { format: "json", limit: 1000 },
+    });
+    const parseResult = z.array(ZCategoryDef).safeParse(response.data);
     if (!parseResult.success) {
-      throw new Error("Failed to parse directory index");
+      throw new Error("Failed to parse categories");
     }
-    const arr: Section[] = [];
-    for (const [title, members] of Object.entries(parseResult.data)) {
-      arr.push({ title, members });
-    }
-    return arr;
+    // page order: priority ascending, ties by title
+    return parseResult.data.sort(
+      (a, b) => a.priority - b.priority || a.title.localeCompare(b.title),
+    );
   },
 });

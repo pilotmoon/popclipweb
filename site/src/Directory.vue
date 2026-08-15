@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ExtInfo } from "./data/extensionInfo";
 import { data as exts } from "./data/extensions.data";
-import { data as index, type Section } from "./data/directory.data";
+import { data as categoryDefs, type Section } from "./data/directory.data";
 import { IconFilter } from "@tabler/icons-vue";
 import DirectoryEntry from "./DirectoryEntry.vue";
 import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from "element-plus";
@@ -49,6 +49,17 @@ const updatedSection: Section = {
     .sort((a, b) => b.updatedDate.getTime() - a.updatedDate.getTime())
     .map((e) => e.identifier),
 };
+// within a section: flagships first, then the rest, each group A-Z
+function sectionOrder(list: ExtInfo[]): string[] {
+  return list
+    .sort(
+      (a, b) =>
+        (b.flagship ? 1 : 0) - (a.flagship ? 1 : 0) ||
+        a.name.localeCompare(b.name),
+    )
+    .map((e) => e.identifier);
+}
+
 function categories(): Section[] {
   // 5 newset extensions
   const newTitle = "Newly Added";
@@ -58,7 +69,36 @@ function categories(): Section[] {
     link: "#a=newest",
     special: true,
   };
-  return [newest, ...index];
+  // group the listed extensions by category slug
+  const bySlug = new Map<string, ExtInfo[]>();
+  for (const ext of extsMap.values()) {
+    if (!ext.category) continue;
+    const list = bySlug.get(ext.category) ?? [];
+    list.push(ext);
+    bySlug.set(ext.category, list);
+  }
+  const sections: Section[] = [];
+  for (const def of categoryDefs) {
+    const members = bySlug.get(def.slug);
+    if (members) {
+      sections.push({ title: def.title, members: sectionOrder(members) });
+      bySlug.delete(def.slug);
+    }
+  }
+  // always-visible tail section: anything listed but not claimed by a
+  // category above (no category, or a slug that no longer exists) --
+  // this is where curation gaps show themselves
+  const leftovers = [
+    ...[...bySlug.values()].flat(),
+    ...[...extsMap.values()].filter((e) => !e.category),
+  ];
+  if (leftovers.length) {
+    sections.push({
+      title: "Not Categorized",
+      members: sectionOrder(leftovers),
+    });
+  }
+  return [newest, ...sections];
 }
 const arrangements = new Map([
   ["categories", { label: "Categories", index: categories() }],
