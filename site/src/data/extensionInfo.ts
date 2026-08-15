@@ -3,7 +3,6 @@ import { classicExtensions } from "./classic.ts";
 import * as config from "../config/config.json";
 import { api } from "./pilotmoonApi.ts";
 import sanitizeHtml from "sanitize-html";
-import { gh } from "./gh.ts";
 import { type Data as ReleasesData, load as loadReleases, type Release } from './releases.data';
 
 // what we get back from the extensions endpoint of the API
@@ -68,50 +67,11 @@ export const ZExtInfo = ZPartialExtInfo.extend({
 });
 export type ExtInfo = z.infer<typeof ZExtInfo>;
 
-const ZGithubLicenseInfo = z.object({
-  html_url: z.string(),
-  license: z.object({
-    name: z.string(),
-  }),
-});
-
-const licenseCache = new Map<string, LicenseInfo>();
+// the license comes from the API with the rest of the extension data,
+// captured by the backend at submission time (previously detected here
+// with one github call per repo, the slowest part of the build). an
+// absent license still gets its "none" wording here.
 const noLicense: LicenseInfo = { name: "No license specified", url: null };
-
-async function getLicenseInfo(ext: ExtInfo): Promise<LicenseInfo> {
-  // only a github repo has a license we can detect. gist-origin
-  // extensions (from the retired gist submission path) report none.
-  const repoId = ext.source?.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)/)
-    ?.[1];
-  if (!repoId) {
-    return noLicense;
-  }
-  const cached = licenseCache.get(repoId);
-  if (cached) {
-    return cached;
-  }
-  console.log(`Getting license info for ${repoId}`);
-  // github detects a license file in the repo root (Licensee); a repo may
-  // legitimately have none, in which case say so rather than claiming a
-  // license the author never granted
-  let info = noLicense;
-  try {
-    const response = await gh.get(`repos/${repoId}/license`);
-    const parseResult = ZGithubLicenseInfo.safeParse(response.data);
-    if (parseResult.success) {
-      info = {
-        name: parseResult.data.license.name,
-        url: parseResult.data.html_url,
-      };
-    }
-  } catch (err) {
-    const status = (err as { response?: { status?: number } })?.response
-      ?.status;
-    console.warn(`No license detected for ${repoId} (${status ?? err})`);
-  }
-  licenseCache.set(repoId, info);
-  return info;
-}
 
 let releasesCache: ReleasesData;
 async function getDisplayVersion(ext: ExtInfo) {
@@ -176,7 +136,7 @@ export async function load() {
       ext.readme = adjustPublicPath(findSpecialFile("readme.md", ext.files));
       ext.download = adjustPublicPath(ext.download);
       ext.filterTerms = compileFilterTerms(ext);
-      ext.license = await getLicenseInfo(ext);
+      ext.license = ext.license ?? noLicense;
       ext.actionTypes = adjustActionTypes(ext);
       ext.popclipDisplayVersion = versionString;
       ext.popclipVersionIsBeta = isBeta;
