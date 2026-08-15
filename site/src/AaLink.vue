@@ -11,6 +11,9 @@ const props = defineProps<{
   // render the icon and text without linking, for places that already
   // carry their own link
   noLink?: boolean;
+  // keep the commit in the displayed path instead of eliding it, where
+  // the point being made is that the link is pinned to one commit
+  full?: boolean;
 }>();
 
 const ghDisplay = computed(() => {
@@ -18,7 +21,9 @@ const ghDisplay = computed(() => {
   let result = "";
   if (props.href?.startsWith("https://github.com/")) {
     result = props.href.replace(/^https:\/\/github.com\//, "");
-    result = result.replace(/tree\/[a-z0-9]+\//, ".../");
+    if (!props.full) {
+      result = result.replace(/tree\/[a-z0-9]+\//, ".../");
+    }
   } else if (props.href?.startsWith("https://gist.github.com/")) {
     result = props.href.replace(/https:\/\/gist.github.com\//, "gist:");
     result = result.replace(/\/[a-f0-9]+$/, "/...");

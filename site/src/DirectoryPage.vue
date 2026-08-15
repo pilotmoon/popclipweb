@@ -111,18 +111,18 @@ function formatActionTypes(ext: ExtInfo) {
           <ElPopover
             placement="bottom"
             title="Source Verified"
-            :width="260"
+            :width="320"
             trigger="hover"
           >
             <template #reference>
               <div :class="$style.DownloadInfo"><ShieldTask16Filled /> Source Verified</div>
             </template>
             <div :class="$style.Provenance">
-              Built and signed by the PopClip Extensions Directory from public
-              source code on GitHub.<template v-if="ext.source">{{ " "
-                }}<a :href="ext.source">View the exact source</a> this version
-                was built from.</template
-              >
+              Built and signed by the PopClip extensions directory from public
+              source code.
+              <div v-if="ext.source" :class="$style.ProvenanceSource">
+                <AaLink :href="ext.source" full />
+              </div>
             </div>
           </ElPopover>
         </ClientOnly>
@@ -257,6 +257,15 @@ function formatActionTypes(ext: ExtInfo) {
 .Provenance a {
   color: var(--vp-c-brand-1);
   text-decoration: underline;
+}
+
+.ProvenanceSource {
+  margin-top: 8px;
+  /* the full path carries the commit, so it is long: set it smaller and
+     let it break rather than overflow */
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 .Subdued {
   color: var(--vp-c-text-2);
