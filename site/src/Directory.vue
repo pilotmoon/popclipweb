@@ -252,6 +252,13 @@ const filteredIndex = computed(() => {
   }[] = [];
   const all = new Set<string>(arrangements.value.get("alpha")?.index[0].members);
   const filterValue = filter.value.toLowerCase();
+  // every typed word must match somewhere in the extension's terms, in
+  // any order and each as a substring ("markdown html" and
+  // "html markdown" find the same things, and a half-typed word matches
+  // as you go). splitting also makes stray whitespace harmless
+  const words = filterValue.split(/\s+/).filter(Boolean);
+  const matches = (terms: string | null | undefined) =>
+    words.every((w) => terms?.includes(w));
   for (const section of selectedIndex.value) {
     if (filterValue && section.special) {
       continue;
@@ -259,7 +266,7 @@ const filteredIndex = computed(() => {
     const extensions: ExtInfo[] = [];
     for (const identifier of section.members) {
       const ext = extsMap.value.get(identifier);
-      if (ext?.filterTerms?.includes(filterValue)) {
+      if (ext && matches(ext.filterTerms)) {
         extensions.push(ext);
         uniques.add(identifier);
       }
@@ -279,7 +286,7 @@ const filteredIndex = computed(() => {
     const extensions: ExtInfo[] = [];
     for (const identifier of all) {
       const ext = extsMap.value.get(identifier);
-      if (ext?.filterTerms?.includes(filterValue)) {
+      if (ext && matches(ext.filterTerms)) {
         extensions.push(ext);
         uniques.add(identifier);
       }
