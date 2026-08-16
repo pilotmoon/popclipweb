@@ -117,7 +117,7 @@ To keep the final file size down, readme and demo files are automatically exclud
 ::: tip Images in readme
 The readme can include inline images. For example, in markdown: `![](_screenshot1.png)`
 
-Image files must be contained inside the package itselgg -- externally hosted images are not allowed and will be scrubbed. Use an underscore name prefix to [hide](#hidden-files) images and keep them out of the final downloadable zip.
+Image files must be contained inside the package itself -- externally hosted images are not allowed and will be scrubbed. Use an underscore name prefix to [hide](#hidden-files) images and keep them out of the final downloadable zip.
 :::
 
 ### Keywords
