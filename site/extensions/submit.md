@@ -81,7 +81,7 @@ Example structure:
 Do not submit a zipped `.popclipextz` file — it will not work.
 
 ::: warning Paths must not change
-After you submit an extension for the first time, its source path must not change.
+After you submit an extension for the first time, its source repo and path must not change.
 If you rename a package folder or move it within the repo, your next submission will fail.
 :::
 
