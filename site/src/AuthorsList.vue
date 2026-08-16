@@ -27,11 +27,16 @@ const rows = computed(() => {
 
   <h1>Authors Index</h1>
 
+  <div class="info custom-block">
+    <p>
+      Get your own author page here! See
+      <a href="/extensions/submit">Submit an Extension</a>.
+    </p>
+  </div>
+
   <ul :class="$style.Authors">
     <li v-for="row in rows" :key="row.author.id" :class="$style.Author">
-      <a :class="$style.Name" :href="authorPath(row.author)">{{
-        authorName(row.author)
-      }}</a>
+      <a :class="$style.Name" :href="authorPath(row.author)">{{ authorName(row.author) }}</a>
       <!-- the row name is already the link to the author page, so show
            the github identity as plain marked-up text. shown for every
            author, even when it repeats a name-less author's handle, so
@@ -39,9 +44,7 @@ const rows = computed(() => {
       <span :class="$style.Handle">
         <AaLink :href="row.author.githubUrl" no-link />
       </span>
-      <span :class="$style.Count"
-        >{{ row.count }} {{ row.count === 1 ? "extension" : "extensions" }}</span
-      >
+      <span :class="$style.Count">{{ row.count }} {{ row.count === 1 ? "extension" : "extensions" }}</span>
     </li>
   </ul>
 </template>
