@@ -55,6 +55,14 @@ export function usePaddleBillingCheckout() {
       token,
       eventCallback: (event: any) => {
         log(`[checkout] Paddle event: ${event?.name}`, event?.data);
+        if (event?.name?.startsWith?.("checkout.")) {
+          beaconCheckoutEvent(event.name, event.data);
+          // capture the transaction id as soon as any event carries it, so
+          // it is known even for checkouts that never reach completion
+          if (currentFlowId && event.data?.transaction_id) {
+            purchaseInfo.transactionId.value = event.data.transaction_id;
+          }
+        }
         if (event?.name === "checkout.completed") {
           checkoutCompleted(event.data);
         }
@@ -62,6 +70,34 @@ export function usePaddleBillingCheckout() {
     });
     paddleInitialized = true;
     log("[checkout] Paddle.Initialize complete");
+  }
+
+  // Report a Paddle.js checkout event to the backend, which records it in
+  // the request log. Diagnostic: deferred-capture methods (e.g. WeChat Pay)
+  // show customers never arriving at the license page, and these beacons
+  // record how far each checkout actually got. sendBeacon so events still
+  // go out as the tab is being closed; params in the query string because
+  // sendBeacon can't send preflight-free JSON bodies.
+  function beaconCheckoutEvent(name: string, data: any) {
+    if (!currentFlowId) return;
+    try {
+      const endpoint = sandbox
+        ? config.pilotmoon.frontendRoot_sandbox
+        : config.pilotmoon.frontendRoot;
+      const params = new URLSearchParams({
+        flowId: currentFlowId,
+        mode: sandbox ? "test" : "live",
+        event: name,
+      });
+      if (data?.transaction_id) {
+        params.set("transactionId", data.transaction_id);
+      }
+      const method = data?.payment?.method_details?.type;
+      if (method) params.set("method", method);
+      navigator.sendBeacon(`${endpoint}/store/checkoutEvent?${params}`, "");
+    } catch (e) {
+      log("[checkout] beacon failed", e);
+    }
   }
 
   // On a completed checkout, capture the buyer details and redirect to the
