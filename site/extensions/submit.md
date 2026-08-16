@@ -45,8 +45,6 @@ By submitting an extension, you agree to the following. If you don't agree, plea
   else people may do with your code.
 - **You are responsible for it.** Be prepared to be contacted by other PopClip users via GitHub about bugs, feature requests, etc.
   Be aware that things may break. For example, a third-party service may change its API, or a macOS update or PopClip update may break something.
-  If you are not willing to maintain and update your extension, please do not submit it.
-  If your extension has issues and you don't fix them, I may remove it from the directory.
 - **Do no harm.** It goes without saying that your extension must absolutely respect
   the user and must never do anything to harm the user or their computer.
   Respect their privacy, too: if your extension sends the selected text, or any
