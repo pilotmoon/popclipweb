@@ -356,12 +356,10 @@ const filteredIndex = computed(() => {
       v-for="{ title, extensions, link, linkText, titleLink } in filteredIndex.index"
     >
       <h2>
-        <a
-          v-if="titleLink"
-          :href="titleLink"
-          :class="$style.SectionTitleLink"
-          >{{ title }}</a
-        ><template v-else>{{ title }}</template>
+        {{ title
+        }}<a v-if="titleLink" :href="titleLink" :class="$style.SectionView"
+          >view</a
+        >
       </h2>
       <DirectoryEntry
         v-for="ext in extensions"
@@ -436,12 +434,15 @@ const filteredIndex = computed(() => {
   margin-left: auto;
 }
 
-/* section headings that have a page of their own: quiet link, colored as text */
-.SectionTitleLink {
-  color: inherit;
+/* small link beside headings that have a page of their own ("view all"
+   once the front page truncates) */
+.SectionView {
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 10px;
   text-decoration: none;
 }
-.SectionTitleLink:hover {
+.SectionView:hover {
   text-decoration: underline;
 }
 </style>
