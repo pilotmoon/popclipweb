@@ -2,7 +2,7 @@
 import type { ExtInfo } from "./data/extensionInfo";
 import { data as exts } from "./data/extensions.data";
 import { data as directoryData, type Section } from "./data/directory.data";
-import { IconSearch } from "@tabler/icons-vue";
+import { IconLink, IconSearch } from "@tabler/icons-vue";
 import DirectoryEntry from "./DirectoryEntry.vue";
 import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from "element-plus";
 import { computed, onMounted, onBeforeUnmount, ref, watch } from "vue";
@@ -187,6 +187,9 @@ const categoriesIndex = computed<Section[]>(() => {
         members: visible.map((e) => e.identifier),
         // search covers the whole membership, not just the selection
         fullMembers: sectionOrder(members),
+        // every category heading reveals a link to its page on hover;
+        // the counted footer appears only when truncated
+        pageLink: `/extensions/categories/${def.slug}`,
         ...(truncated
           ? {
               link: `/extensions/categories/${def.slug}`,
@@ -317,6 +320,7 @@ const filteredIndex = computed(() => {
     title: string;
     link?: string;
     linkText?: string;
+    pageLink?: string;
     extensions: ExtInfo[];
   }[] = [];
   const all = new Set<string>(arrangements.value.get("alpha")?.index[0].members);
@@ -352,6 +356,7 @@ const filteredIndex = computed(() => {
         title: section.title,
         link: section.link,
         linkText: section.linkText ?? `View all in "${section.title}" →`,
+        pageLink: section.pageLink,
         extensions,
       });
     }
@@ -415,8 +420,19 @@ const filteredIndex = computed(() => {
         >search includes unlisted extensions</span
       >
     </div>
-    <div v-for="{ title, extensions, link, linkText } in filteredIndex.index">
-      <h2>{{ title }}</h2>
+    <div
+      v-for="{ title, extensions, link, linkText, pageLink } in filteredIndex.index"
+    >
+      <h2 :class="$style.SectionHeading">
+        {{ title
+        }}<a
+          v-if="pageLink"
+          :href="pageLink"
+          :class="$style.PageLink"
+          :aria-label="`${title} category page`"
+          ><IconLink :size="16"
+        /></a>
+      </h2>
       <DirectoryEntry
         v-for="ext in extensions"
         :key="ext.identifier"
@@ -488,6 +504,28 @@ const filteredIndex = computed(() => {
 /* sits at the right of the info row, under the search field */
 .SearchNote {
   margin-left: auto;
+}
+
+/* link icon to a section's own page, revealed on heading hover (also on
+   keyboard focus; touch users have the footers, info boxes and index) */
+.PageLink {
+  opacity: 0;
+  margin-left: 8px;
+  vertical-align: -2px;
+  color: var(--vp-c-text-3);
+  transition: opacity 0.15s;
+  /* keep the icon on the heading's line (the svg is block by default) */
+  display: inline-block;
+}
+.PageLink svg {
+  display: block;
+}
+.SectionHeading:hover .PageLink,
+.PageLink:focus-visible {
+  opacity: 1;
+}
+.PageLink:hover {
+  color: var(--vp-c-brand-1);
 }
 
 </style>

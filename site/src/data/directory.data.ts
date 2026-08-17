@@ -36,6 +36,8 @@ export interface Section {
   // when clicking it actually shows more than the section does
   link?: string;
   linkText?: string;
+  // the section's own page, revealed as a link icon on heading hover
+  pageLink?: string;
   special?: boolean;
 }
 
