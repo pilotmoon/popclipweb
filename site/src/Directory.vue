@@ -159,13 +159,19 @@ const categoriesIndex = computed<Section[]>(() => {
       // (the random picks are the stand-in for popularity ranking.)
       const limit = def.frontPageLimit ?? DEFAULT_CATEGORY_LIMIT;
       const flagships = members.filter((m) => m.flagship).sort(byName);
-      const fresh = randomPick(
-        members.filter((m) => !m.flagship && isNewlyListed(m)),
-        NEW_PER_CATEGORY_LIMIT,
-        `${def.slug}:new`,
-      );
+      // the new slots go to the NEWEST few; any further new entries
+      // remain eligible for the random pick below like everyone else
+      const fresh = members
+        .filter((m) => !m.flagship && isNewlyListed(m))
+        .sort(
+          (a, b) =>
+            new Date(b.firstListed as string | Date).getTime() -
+            new Date(a.firstListed as string | Date).getTime(),
+        )
+        .slice(0, NEW_PER_CATEGORY_LIMIT)
+        .sort(byName);
       const rest = members.filter(
-        (m) => !m.flagship && !fresh.includes(m) && !isNewlyListed(m),
+        (m) => !m.flagship && !fresh.includes(m),
       );
       const visible = [
         ...flagships,

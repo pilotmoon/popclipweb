@@ -11,8 +11,8 @@ export const NEWLY_ADDED_LIMIT = 5;
 // entries always fit, even past the limit
 export const DEFAULT_CATEGORY_LIMIT = 10;
 
-// at most this many New! entries per category section (a daily-rotating
-// random pick when there are more)
+// this many guaranteed slots per category section for the NEWEST new
+// entries; further new entries stay eligible for the random selection
 export const NEW_PER_CATEGORY_LIMIT = 3;
 
 // how long an extension counts as newly listed: drives both the New!
