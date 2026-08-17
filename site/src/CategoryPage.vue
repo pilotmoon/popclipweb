@@ -21,9 +21,12 @@ const extensions = computed<ExtInfo[]>(() =>
 </script>
 
 <template>
+  <!-- no "Categories" segment: on the front page, categories sit
+       directly under the directory as sections, and this trail mirrors
+       that. (the categories index remains reachable elsewhere.) -->
   <div :class="$style.Breadcrumb">
     <a href="/extensions/">PopClip Extensions Directory</a> /
-    <a href="/extensions/categories/">Categories</a> / {{ category.title }}
+    {{ category.title }}
   </div>
 
   <div :class="$style.Main">
