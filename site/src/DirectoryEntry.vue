@@ -10,6 +10,7 @@ import {
   isOwnAuthor,
 } from "./data/authorLinks.js";
 import { data as authors } from "./data/authors.data";
+import { NEW_WINDOW_DAYS } from "./directoryTuning.js";
 const props = withDefaults(
   defineProps<{
     ext: ExtInfo;
@@ -28,7 +29,7 @@ const bylineAuthor = computed(() => {
   const author = authorByOwner(authors, props.ext.owner);
   return author && !isOwnAuthor(author) ? author : null;
 });
-const newDate = Date.now() - 30 * 24 * 60 * 60 * 1000;
+const newDate = Date.now() - NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000;
 // new to the DIRECTORY, keyed off the first-listed date: an extension can
 // be published (own page only) long before it is curated into the index,
 // and the badge should not have burned out by then. never-listed

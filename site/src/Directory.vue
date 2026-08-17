@@ -9,17 +9,14 @@ import { computed, onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { useData } from "vitepress";
 import { useDebounceFn } from "@vueuse/core";
 
-const categoryDefs = directoryData.categories;
+import {
+  DEFAULT_CATEGORY_LIMIT,
+  NEW_PER_CATEGORY_LIMIT,
+  NEW_WINDOW_DAYS,
+  NEWLY_ADDED_LIMIT,
+} from "./directoryTuning.js";
 
-// presentation tuning
-const NEWLY_ADDED_LIMIT = 5;
-// a category section shows at most this many entries (unless its record
-// overrides it), except that flagships and new entries always fit
-const DEFAULT_CATEGORY_LIMIT = 10;
-// at most this many New! entries per category section
-const NEW_PER_CATEGORY_LIMIT = 3;
-// how long an extension counts as newly listed (matches the New! badge)
-const NEW_WINDOW_DAYS = 30;
+const categoryDefs = directoryData.categories;
 
 // filter/arrange state
 const defaultFilter = "";
