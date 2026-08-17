@@ -196,6 +196,10 @@ include: "source/*.popclipext"
 versionPrefix: v
 ```
 
+::: warning Glob patterns must be quoted
+Strings containing an asterisk (`*`) must be quoted in YAML.
+:::
+
 The keys are:
 
 - **`include`** (required) — one or more paths or glob patterns matching your
@@ -208,8 +212,17 @@ Example of multiple include patterns:
 
 ```yaml
 include:
-  - "Alpha.popclipext"
-  - "Beta.popclipext"
+  - Alpha.popclipext
+  - Beta.popclipext
+versionPrefix: v
+```
+
+Example of using `exclude`:
+
+```yaml
+include: "*.popclipext"
+exclude:
+  - Gamma.popclipext
 versionPrefix: v
 ```
 
