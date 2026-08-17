@@ -233,10 +233,10 @@ segments — so `experimental/*` covers that folder's immediate contents, while
 ## 4. Tag a version and push
 
 Version numbers are one to four non-negative integers separated by dots, with no
-leading zeros.
+leading zeros. (Zero on its own is fine.)
 
-- Valid: `1`, `1.0`, `159`, `3.6.2`, `5076.95.0.1`
-- Not valid: `1.00`, `1.7-beta2`
+- Valid: `0.1`, `1`, `1.0`, `159`, `3.6.2`, `5076.95.0.1`
+- Not valid: `1.00`, `2.05`, `1.7-beta2`
 
 Each new version must be higher than the last one you submitted.
 
