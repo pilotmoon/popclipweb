@@ -172,13 +172,14 @@ GitHub detects it and the directory displays the license name
 Install the **[PopClip Directory GitHub app](https://github.com/apps/popclip-directory)** on the
 repository (or repositories) you want to submit from.
 
-You can install it on all your repositories or select individual ones. It makes
-no difference: a repository takes part only if it contains the configuration file
-described below, so the app can sit harmlessly on repositories that have nothing
-to do with PopClip.
+I recommend installing it on **selected repositories only** — just the ones
+you submit extensions from. Installing on all repositories works too (a
+repository takes part only if it contains the configuration file described
+below), but selecting repositories keeps the app's access to the minimum.
 
-The app asks for **read access to code**, so it can fetch your extension's files,
-and **read and write access to checks**, so it can report results on your commits.
+The app asks for **read access to code**, which GitHub requires for the app
+to receive tag-push events and to fetch your extension's files, and
+**read and write access to checks**, so it can report results on your commits.
 It cannot modify your code.
 
 ## 3. Add a configuration file
