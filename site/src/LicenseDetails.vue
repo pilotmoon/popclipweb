@@ -246,7 +246,7 @@ function licenseInfoString() {
       </p>
       <p>
         Once the payment is confirmed, your PopClip license key will be emailed to
-        <b>{{ purchaseInfo.userEmail.value }}</b
+        <b>{{ purchaseInfo.userEmail.value || "the email address you provided at checkout" }}</b
         >.
       </p>
       <p>
@@ -278,7 +278,7 @@ function licenseInfoString() {
       <p>It's taking a little longer than usual to confirm your order.</p>
       <p>
         Your license key will be emailed to
-        <b>{{ purchaseInfo.userEmail.value }}</b>
+        <b>{{ purchaseInfo.userEmail.value || "the email address you provided at checkout" }}</b>
         as soon as it's ready &mdash; you don't need to stay on this page.
       </p>
       <p>

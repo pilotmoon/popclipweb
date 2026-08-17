@@ -114,7 +114,14 @@ const categoriesIndex = computed<Section[]>(() => {
   for (const def of categoryDefs) {
     const members = bySlug.get(def.slug);
     if (members) {
-      sections.push({ title: def.title, members: sectionOrder(members) });
+      sections.push({
+        title: def.title,
+        members: sectionOrder(members),
+        // the heading links to the category's own page (deliberately not
+        // a "view more" footer: the front page currently shows every
+        // member anyway)
+        titleLink: `/extensions/categories/${def.slug}`,
+      });
       bySlug.delete(def.slug);
     }
   }
@@ -248,6 +255,7 @@ const filteredIndex = computed(() => {
     title: string;
     link?: string;
     linkText?: string;
+    titleLink?: string;
     extensions: ExtInfo[];
   }[] = [];
   const all = new Set<string>(arrangements.value.get("alpha")?.index[0].members);
@@ -277,6 +285,7 @@ const filteredIndex = computed(() => {
         title: section.title,
         link: section.link,
         linkText: `View all in "${section.title}" →`,
+        titleLink: section.titleLink,
         extensions,
       });
     }
@@ -343,8 +352,17 @@ const filteredIndex = computed(() => {
         >
       </span>
     </div>
-    <div v-for="{ title, extensions, link, linkText } in filteredIndex.index">
-      <h2>{{ title }}</h2>
+    <div
+      v-for="{ title, extensions, link, linkText, titleLink } in filteredIndex.index"
+    >
+      <h2>
+        <a
+          v-if="titleLink"
+          :href="titleLink"
+          :class="$style.SectionTitleLink"
+          >{{ title }}</a
+        ><template v-else>{{ title }}</template>
+      </h2>
       <DirectoryEntry
         v-for="ext in extensions"
         :key="ext.identifier"
@@ -416,5 +434,14 @@ const filteredIndex = computed(() => {
 /* sits at the right of the info row, under the filter field */
 .ShowUnlisted {
   margin-left: auto;
+}
+
+/* section headings that have a page of their own: quiet link, colored as text */
+.SectionTitleLink {
+  color: inherit;
+  text-decoration: none;
+}
+.SectionTitleLink:hover {
+  text-decoration: underline;
 }
 </style>

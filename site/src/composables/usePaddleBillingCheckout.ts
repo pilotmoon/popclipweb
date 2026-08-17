@@ -39,6 +39,11 @@ export function usePaddleBillingCheckout() {
   // The flow id is generated locally at checkout open, so on completion we
   // use this rather than parsing it back out of the event payload.
   let currentFlowId: string | null = null;
+  // Per-checkout state for the checkout.closed rescue below.
+  let paymentInitiated = false;
+  let completedFired = false;
+  let lastCustomerEmail: string | null = null;
+  let lastCustomerCountry: string | null = null;
 
   async function initPaddle() {
     const token = sandbox
@@ -57,10 +62,25 @@ export function usePaddleBillingCheckout() {
         log(`[checkout] Paddle event: ${event?.name}`, event?.data);
         if (event?.name?.startsWith?.("checkout.")) {
           beaconCheckoutEvent(event.name, event.data);
-          // capture the transaction id as soon as any event carries it, so
-          // it is known even for checkouts that never reach completion
+          // capture buyer details as soon as any event carries them, so
+          // they are known even for checkouts that never reach completion
           if (currentFlowId && event.data?.transaction_id) {
             purchaseInfo.transactionId.value = event.data.transaction_id;
+          }
+          if (event.data?.customer?.email) {
+            lastCustomerEmail = event.data.customer.email;
+          }
+          const country =
+            event.data?.customer?.address?.country_code ??
+            event.data?.customer?.address?.countryCode;
+          if (country) {
+            lastCustomerCountry = country;
+          }
+          if (event.name === "checkout.payment.initiated") {
+            paymentInitiated = true;
+          }
+          if (event.name === "checkout.closed") {
+            checkoutClosed();
           }
         }
         if (event?.name === "checkout.completed") {
@@ -100,6 +120,28 @@ export function usePaddleBillingCheckout() {
     }
   }
 
+  // Rescue for deferred-capture payment methods (WeChat Pay, UPI, Pix,
+  // BLIK...): Paddle.js does not emit checkout.completed for them even
+  // after the payment captures (observed Aug 2026, contrary to Paddle's
+  // docs), so buyers close the overlay having seen no confirmation. If a
+  // payment was initiated and the checkout closes without completing, send
+  // the buyer to the license page anyway — it asks the backend how far the
+  // payment actually got and shows the license, a payment-pending notice,
+  // or a payment-failed notice accordingly.
+  function checkoutClosed() {
+    if (!currentFlowId || !paymentInitiated || completedFired) {
+      log("[checkout] checkout closed, no rescue needed");
+      return;
+    }
+    purchaseInfo.flowId.value = currentFlowId;
+    purchaseInfo.userEmail.value = lastCustomerEmail;
+    purchaseInfo.userCountry.value = lastCustomerCountry;
+    log(
+      `[checkout] closed after payment initiated without completing; redirecting to /purchase-complete, flow_id=${currentFlowId}`,
+    );
+    window.location.href = "/purchase-complete";
+  }
+
   // On a completed checkout, capture the buyer details and redirect to the
   // license-delivery page, which polls the backend by flow id.
   function checkoutCompleted(data: any) {
@@ -108,6 +150,7 @@ export function usePaddleBillingCheckout() {
       log("[checkout] ERROR: no flow id for completed checkout");
       return;
     }
+    completedFired = true;
     purchaseInfo.flowId.value = currentFlowId;
     // the transaction id lets the license page ask the backend about
     // payment progress (e.g. deferred-capture methods like WeChat Pay)
@@ -129,6 +172,10 @@ export function usePaddleBillingCheckout() {
     log("[checkout] openCheckout requested with options", options);
     await initPaddle();
     currentFlowId = window.crypto?.randomUUID();
+    paymentInitiated = false;
+    completedFired = false;
+    lastCustomerEmail = options.email ?? null;
+    lastCustomerCountry = null;
     const email = options.email ?? null;
     // #country=XX (the same param that forces displayed prices) also
     // pre-fills the checkout's country, so Paddle localizes currency and

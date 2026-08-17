@@ -10,6 +10,7 @@ import {
   isOwnAuthor,
 } from "./data/authorLinks.js";
 import { data as authors } from "./data/authors.data";
+import { data as categoryDefs } from "./data/directory.data";
 import { formatDate } from "./helpers/formatters.js";
 import { ElPopover } from "element-plus";
 import { ShieldTask16Filled } from "@vicons/fluent";
@@ -33,6 +34,12 @@ const author = authorByOwner(authors, ext.owner);
 // owns the repo -- so a byline naming us would take their credit. (the
 // Maintainer row below is shown for everyone, since that much is true.)
 const contributedAuthor = author && !isOwnAuthor(author) ? author : null;
+// the category row shows only for listed extensions: an unlisted one may
+// carry a category as staging, but it isn't in that category's listing
+const categoryDef =
+  !ext.unlisted && ext.category
+    ? (categoryDefs.find((d) => d.slug === ext.category) ?? null)
+    : null;
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
 function extractSourceMessage(info: PartialExtInfo) {
@@ -198,6 +205,11 @@ function formatActionTypes(ext: ExtInfo) {
           v-if="ext.license.url"
           :href="ext.license.url"
         >{{ ext.license.name }}</a><template v-else>{{ ext.license.name }}</template>
+      </li>
+      <li v-if="categoryDef">
+        <span :class="$style.CardDataLabel">Category</span><br /><a
+          :href="`/extensions/categories/${categoryDef.slug}`"
+        >{{ categoryDef.title }}</a>
       </li>
       <!-- "maintainer", not "author": the record tells us who owns the
            source repo, which is all we actually know -->

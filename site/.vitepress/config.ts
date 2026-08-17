@@ -49,7 +49,20 @@ function openGraph(relativePath: string, params: Record<string, unknown>) {
     githubHandle?: string;
     bio?: string | null;
     avatarUrl?: string | null;
+    slug?: string;
+    title?: string;
   };
+  if (relativePath.startsWith("extensions/categories/") && p.slug && p.title) {
+    return metaTags({
+      "og:type": "website",
+      "og:site_name": "PopClip Extensions Directory",
+      "og:title": p.title,
+      "og:description":
+        p.description || `PopClip extensions in the ${p.title} category.`,
+      "og:url": `${siteRoot}/extensions/categories/${p.slug}`,
+      "twitter:card": "summary",
+    });
+  }
   if (relativePath.startsWith("extensions/x/") && p.shortcode) {
     return metaTags({
       "og:type": "website",
@@ -296,6 +309,9 @@ export default defineConfig({
     }
     if (pageData.frontmatter.isAuthorPage) {
       pageData.title = pageData.params?.name || pageData.params?.githubHandle;
+    }
+    if (pageData.frontmatter.isCategoryPage) {
+      pageData.title = pageData.params?.title;
     }
   },
 });
