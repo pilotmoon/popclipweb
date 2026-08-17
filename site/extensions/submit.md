@@ -26,8 +26,8 @@ First you will need to publish your extension in a public GitHub repository, if 
 Then, configure your repository using the instructions below.
 
 The directory automatically reads your extension source files each time you publish a git tag.
-It only does this once for each tag, so any change you want to make to the published extension
-requires a new tag.
+It only does this once for each tag, so any change you want to make to a published extension
+requires a new tag. ([Monorepos are supported.](#updating-one-extension-out-of-many))
 
 The directory stores copies of the source files and processes them. It will extract metadata
 from the Config file and sign and zip the extension.
