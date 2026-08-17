@@ -32,8 +32,10 @@ export interface Section {
   // the complete membership, searched instead of `members` when the user
   // types a query -- search always covers everything
   fullMembers?: string[];
-  // footer "View all in ..." link
+  // footer link, with its text ("View all 17 in ..."). only present
+  // when clicking it actually shows more than the section does
   link?: string;
+  linkText?: string;
   special?: boolean;
 }
 

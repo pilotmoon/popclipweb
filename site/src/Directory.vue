@@ -179,12 +179,20 @@ const categoriesIndex = computed<Section[]>(() => {
           `${def.slug}:rest`,
         ),
       ];
+      // the footer link only exists when there is genuinely more to see,
+      // and its count says so: "View all 17 in ..."
+      const truncated = visible.length < members.length;
       sections.push({
         title: def.title,
         members: visible.map((e) => e.identifier),
         // search covers the whole membership, not just the selection
         fullMembers: sectionOrder(members),
-        link: `/extensions/categories/${def.slug}`,
+        ...(truncated
+          ? {
+              link: `/extensions/categories/${def.slug}`,
+              linkText: `View all ${members.length} in "${def.title}" →`,
+            }
+          : {}),
       });
       bySlug.delete(def.slug);
     }
@@ -343,7 +351,7 @@ const filteredIndex = computed(() => {
       index.push({
         title: section.title,
         link: section.link,
-        linkText: `View all in "${section.title}" →`,
+        linkText: section.linkText ?? `View all in "${section.title}" →`,
         extensions,
       });
     }
