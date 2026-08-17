@@ -90,8 +90,16 @@ function formatActionTypes(ext: ExtInfo) {
 </script>
 
 <template>
+  <!-- the category reads as a breadcrumb: it is where the extension
+       lives in the directory, not a property of it -->
   <div :class="$style.Breadcrumb">
-    <a href="/extensions/">← PopClip Extensions Directory</a>
+    <a href="/extensions/">← PopClip Extensions Directory</a
+    ><template v-if="categoryDef">
+      /
+      <a :href="`/extensions/categories/${categoryDef.slug}`">{{
+        categoryDef.title
+      }}</a></template
+    >
   </div>
 
   <div :class="$style.Main">
@@ -205,11 +213,6 @@ function formatActionTypes(ext: ExtInfo) {
           v-if="ext.license.url"
           :href="ext.license.url"
         >{{ ext.license.name }}</a><template v-else>{{ ext.license.name }}</template>
-      </li>
-      <li v-if="categoryDef">
-        <span :class="$style.CardDataLabel">Category</span><br /><a
-          :href="`/extensions/categories/${categoryDef.slug}`"
-        >{{ categoryDef.title }}</a>
       </li>
       <!-- "maintainer", not "author": the record tells us who owns the
            source repo, which is all we actually know -->
