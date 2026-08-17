@@ -39,7 +39,8 @@ By submitting an extension, you agree to the following. If you don't agree, plea
 - **Permission to distribute.** You give me permission, without payment, to store
   your submitted files, to package and sign them, to distribute the result
   through this directory and through PopClip's update mechanism, and to show your
-  extension's name, description, icon, readme, author credit, and other content on this website.
+  extension's name, description, icon, readme, author credit, and other content on
+  this website and in the PopClip app.
 - **Permission for users.** You allow anyone to download and use your extension.
   If you include a license file, that license governs whatever
   else people may do with your code.
