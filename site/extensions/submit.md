@@ -66,9 +66,10 @@ By submitting an extension, you agree to the following. If you don't agree, plea
 
 ### Package
 
-Your extension should be a [`.popclipext` package](/dev/packages) within your repository.
+Each extension you want to submit should be a [`.popclipext` package](/dev/packages) within a public GitHub repository you own.
 
-You can include multiple extensions in one repository.
+Monorepo-style workflows are supported, so you can include multiple extensions in one repository — see [Updating one extension out of many](#updating-one-extension-out-of-many). Alternatively, you can submit extensions from separate repositories if you prefer.
+
 Example structure:
 
 ```
@@ -87,7 +88,7 @@ Do not submit a zipped `.popclipextz` file — it will not work.
 
 ::: warning Paths must not change
 After you submit an extension for the first time, its source repo and path must not change.
-If you rename a package folder or move it within the repo, your next submission will fail.
+If you rename a package folder, move it within the repo, or move it to a different repo, your next submission will fail.
 :::
 
 ### Required fields
@@ -106,8 +107,8 @@ Your extension's Config **must** contain all of the following, or it will be rej
 ### Limits
 
 - No more than **100 files** per extension.
-- No single file larger than **1 MiB**.
-- No more than **2 MiB** in total.
+- No single file larger than **1 MiB** (1,048,576 bytes).
+- No more than **2 MiB** in total (2,097,152 bytes).
 
 ### Readme and demo
 
@@ -120,10 +121,11 @@ You can enhance your directory listing with an optional readme file and demo vid
 
 To keep the final file size down, readme and demo files are automatically excluded from the zipped extension that users download.
 
-::: tip Images in readme
-The readme can include inline images. For example, in markdown: `![](_screenshot1.png)`
+::: tip Using images in readme files
+The readme can include inline images, specified as a path relative to the package root. For example, in markdown: `![](_images/screenshot.png)`.
+Use an [underscore name prefix](#hidden-files) to keep images out of the final downloadable zip.
 
-Image files must be contained inside the package itself -- externally hosted images are not allowed and will be scrubbed. Use an underscore name prefix to [hide](#hidden-files) images and keep them out of the final downloadable zip.
+Externally hosted images are not allowed and will be replaced with a "\[Remote image removed\]" placeholder when the readme is rendered.
 :::
 
 ### Keywords
@@ -134,7 +136,9 @@ description. If there are other words people might search for, add a
 `keywords` field to your Config:
 
 ```yaml
-keywords: quotation marks curly smart
+name: Convert
+description: Convert between imperial and metric (SI system) units.
+keywords: imperial metric si units conversion miles yards feet inches
 ```
 
 The `keywords` field is one plain string, not an array: just words separated by
@@ -153,7 +157,7 @@ I encourage you to include a changelog to let users know what has changed in eac
 
 ### Hidden files
 
-Any file or folder whose name starts with `.` or `_` is automatically excluded
+Any file or folder within the source package whose name starts with `.` or `_` is automatically excluded
 from the final packaged extension.
 
 ### Credits
@@ -200,13 +204,12 @@ The keys are:
 - **`versionPrefix`** (optional) — a prefix your tags use, e.g. `v`. It's
   stripped off to get the version number, and tags without it are ignored.
 
-Example of multiple patterns, skipping an excluded extension:
+Example of multiple include patterns:
 
 ```yaml
 include:
-  - "*.popclipext"
-  - "extras/*.popclipext"
-exclude: "MySecretExtension.popclipext"
+  - "Alpha.popclipext"
+  - "Beta.popclipext"
 versionPrefix: v
 ```
 
@@ -219,7 +222,7 @@ segments — so `experimental/*` covers that folder's immediate contents, while
 Version numbers are one to four non-negative integers separated by dots, with no
 leading zeros.
 
-- Valid: `1`, `1.6`, `5076.95.0`
+- Valid: `1`, `1.0`, `159`, `3.6.2`, `5076.95.0.1`
 - Not valid: `1.00`, `1.7-beta2`
 
 Each new version must be higher than the last one you submitted.
@@ -236,6 +239,30 @@ Or publish a release through the GitHub website, which creates the tag for you.
 ::: tip Tag tips
 Tags can be annotated or lightweight, it does not matter.
 Make sure to push both the commit itself and the tag. If in doubt, `git push && git push --tags` usually does the trick!
+:::
+
+### Updating one extension out of many
+
+A tag covers your whole repository, but that doesn't mean everything in it gets a
+new version. For each package matched by your `include` patterns, the directory
+compares that package folder's git hash against what it already holds:
+
+- **Unchanged** — skipped entirely. The extension keeps the version it already has.
+- **Changed, or new** — submitted, taking its version number from the new tag.
+
+So you can edit one extension in a repository of fifty, push a single tag, and
+only that extension gets a new version. (This is how my own [repository of 200+
+extensions](https://github.com/pilotmoon/PopClip-Extensions) works.)
+
+One consequence is that each extension's version is the tag in which it last
+changed, so version numbers across a repository drift apart. If `Alpha` and
+`Beta` are both at `1.0` and you edit only `Alpha` before tagging `v1.1`, then
+`Alpha` becomes `1.1` and `Beta` stays at `1.0`. That is normal and expected.
+
+::: tip Starting small
+If you have many extensions and would rather submit only one or two to begin
+with, name them individually in `include` instead of using a catch-all glob, and
+widen it when you're ready.
 :::
 
 ## 5. Watch for the result
@@ -255,7 +282,7 @@ You'll also get a **comment on the commit** — and an email, if you have GitHub
 
 ## 6. Review and publication
 
-Submissions aren't published automatically — each one is reviewed by hand.
+Submissions aren't published automatically — each one is reviewed by hand. This may take several days, or longer, so please be patient.
 
 Once published, your extension gets a page of its own and becomes downloadable as a signed `.popclipextz` file.
 
@@ -265,14 +292,12 @@ Your **author page** lists everything you've contributed and is yours to share:
 https://www.popclip.app/extensions/authors/your-github-username
 ```
 
-Extensions on your author page are not listed on the directory's front page right
+Extensions on your author page are not listed in the directory's main index right
 away. The index is curated: extensions are added to it selectively. A well-named, thoughtfully-designed extension,
 with a good icon, a clear open-source licence and a helpful readme makes that more likely, but there are no guarantees. Your
 author page link works either way, so you can share your extension immediately.
 
-**Please note: I choose which extensions to put on the front page at my sole discretion. Please do not contact me requesting your extension to be added.**
-
-All published extensions (whether included on the front page or not) are eligible for automatic updates within the PopClip app.
+All published extensions (whether listed in the main index or not) are eligible for automatic updates within the PopClip app.
 Updates are subject to the same review as initial submissions.
 
 ## Troubleshooting
