@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { data as categoryDefs } from "./data/directory.data";
+import { data as directoryData } from "./data/directory.data";
+
+const categoryDefs = directoryData.categories;
 </script>
 
 <template>

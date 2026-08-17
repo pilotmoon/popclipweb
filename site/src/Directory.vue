@@ -1,37 +1,38 @@
 <script setup lang="ts">
 import type { ExtInfo } from "./data/extensionInfo";
 import { data as exts } from "./data/extensions.data";
-import { data as categoryDefs, type Section } from "./data/directory.data";
+import { data as directoryData, type Section } from "./data/directory.data";
 import { IconSearch } from "@tabler/icons-vue";
 import DirectoryEntry from "./DirectoryEntry.vue";
-import {
-  ElCheckbox,
-  ElInput,
-  ElRadioButton,
-  ElRadioGroup,
-  ElTag,
-} from "element-plus";
+import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from "element-plus";
 import { computed, onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { useData } from "vitepress";
 import { useDebounceFn } from "@vueuse/core";
+
+const categoryDefs = directoryData.categories;
+
+// presentation tuning
+const NEWLY_ADDED_LIMIT = 5;
+// a category section shows at most this many entries (unless its record
+// overrides it), except that flagships and new entries always fit
+const DEFAULT_CATEGORY_LIMIT = 10;
+// at most this many New! entries per category section
+const NEW_PER_CATEGORY_LIMIT = 3;
+// how long an extension counts as newly listed (matches the New! badge)
+const NEW_WINDOW_DAYS = 30;
 
 // filter/arrange state
 const defaultFilter = "";
 const filter = ref(defaultFilter);
 const defaultArrange = "categories";
 const arrange = ref(defaultArrange);
-// off by default: the directory shows the curated index; the toggle
-// expands every arrangement to include unlisted extensions too
-const showUnlisted = ref(false);
 
-// searching always covers everything: search intent is "does it exist?",
-// and a search that misses a published extension reads as "no". the
-// curation signal survives in the results via the Unlisted tag and, in
-// the categories arrangement, the trailing Unlisted Extensions section.
+// searching always covers everything, unlisted extensions included:
+// search intent is "does it exist?", and a search that misses a
+// published extension reads as "no". browsing shows the curated index
+// only -- there is deliberately no browse toggle for unlisted; the
+// trailing Unlisted Extensions section exists only in search results.
 const searching = computed(() => filter.value !== defaultFilter);
-const effectiveShowUnlisted = computed(
-  () => showUnlisted.value || searching.value,
-);
 
 // every published extension, keyed by identifier
 const allMap = new Map(
@@ -49,13 +50,55 @@ const allMap = new Map(
   ]),
 );
 
-// the extensions currently on display
+// the extensions currently in play
 const extsMap = computed(
   () =>
-    new Map(
-      [...allMap].filter(([, e]) => effectiveShowUnlisted.value || !e.unlisted),
-    ),
+    new Map([...allMap].filter(([, e]) => searching.value || !e.unlisted)),
 );
+
+// deterministic per-build randomness: seeded from the build date and a
+// salt, so server render and client hydration agree exactly, while the
+// hourly site rebuilds rotate the selection daily. (a stand-in for the
+// popularity ranking that download data will eventually provide.)
+function seededRandom(seedString: string) {
+  let h = 1779033703 ^ seedString.length;
+  for (let i = 0; i < seedString.length; i++) {
+    h = Math.imul(h ^ seedString.charCodeAt(i), 3432918353);
+    h = (h << 13) | (h >>> 19);
+  }
+  return () => {
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    h ^= h >>> 16;
+    return (h >>> 0) / 4294967296;
+  };
+}
+
+// a seeded random pick of n items, presented alphabetically
+function randomPick(list: ExtInfo[], n: number, salt: string): ExtInfo[] {
+  if (n <= 0) return [];
+  if (list.length <= n) return [...list].sort(byName);
+  const rand = seededRandom(`${directoryData.day}:${salt}`);
+  const pool = [...list];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, n).sort(byName);
+}
+
+function byName(a: ExtInfo, b: ExtInfo) {
+  return a.name.localeCompare(b.name);
+}
+
+// newly listed, relative to the build date
+const newCutoff =
+  new Date(directoryData.day).getTime() - NEW_WINDOW_DAYS * 24 * 3600 * 1000;
+function isNewlyListed(e: ExtInfo & { firstListed?: unknown }) {
+  return (
+    e.firstListed != null && new Date(e.firstListed as string | Date).getTime() > newCutoff
+  );
+}
 
 // define the arrangements
 const alphaSection = computed<Section>(() => ({
@@ -92,17 +135,15 @@ function sectionOrder(list: ExtInfo[]): string[] {
 }
 
 const categoriesIndex = computed<Section[]>(() => {
-  // 5 newset extensions
-  const newTitle = "Newly Added";
   const newest = {
-    title: newTitle,
-    members: newestSection.value.members.slice(0, 5),
+    title: "Newly Added",
+    members: newestSection.value.members.slice(0, NEWLY_ADDED_LIMIT),
     link: "#a=newest",
     special: true,
   };
   // group the listed extensions by category slug. an unlisted extension
   // may carry a category (staged for when it is listed), but while
-  // unlisted it belongs only to the section of its own below
+  // unlisted it appears only in search results
   const bySlug = new Map<string, ExtInfo[]>();
   for (const ext of extsMap.value.values()) {
     if (ext.unlisted || !ext.category) continue;
@@ -114,12 +155,35 @@ const categoriesIndex = computed<Section[]>(() => {
   for (const def of categoryDefs) {
     const members = bySlug.get(def.slug);
     if (members) {
+      // the visible selection: every flagship, then up to a few New!
+      // entries, then a daily-rotating random pick of the rest up to
+      // the category's limit. flagships and new entries always fit,
+      // even if that overflows the limit. each group is alphabetical.
+      // (the random picks are the stand-in for popularity ranking.)
+      const limit = def.frontPageLimit ?? DEFAULT_CATEGORY_LIMIT;
+      const flagships = members.filter((m) => m.flagship).sort(byName);
+      const fresh = randomPick(
+        members.filter((m) => !m.flagship && isNewlyListed(m)),
+        NEW_PER_CATEGORY_LIMIT,
+        `${def.slug}:new`,
+      );
+      const rest = members.filter(
+        (m) => !m.flagship && !fresh.includes(m) && !isNewlyListed(m),
+      );
+      const visible = [
+        ...flagships,
+        ...fresh,
+        ...randomPick(
+          rest,
+          limit - flagships.length - fresh.length,
+          `${def.slug}:rest`,
+        ),
+      ];
       sections.push({
         title: def.title,
-        members: sectionOrder(members),
-        // footer link to the category's own page, in the same style as
-        // Newly Added's -- anticipating front-page truncation, which
-        // will make "view all" literally true
+        members: visible.map((e) => e.identifier),
+        // search covers the whole membership, not just the selection
+        fullMembers: sectionOrder(members),
         link: `/extensions/categories/${def.slug}`,
       });
       bySlug.delete(def.slug);
@@ -127,7 +191,7 @@ const categoriesIndex = computed<Section[]>(() => {
   }
   // always-visible tail section: anything listed but not claimed by a
   // category above (no category, or a slug that no longer exists) --
-  // this is where curation gaps show themselves
+  // this is where curation gaps show themselves. never truncated.
   const leftovers = [
     ...[...bySlug.values()].flat(),
     ...[...extsMap.value.values()].filter((e) => !e.unlisted && !e.category),
@@ -138,20 +202,14 @@ const categoriesIndex = computed<Section[]>(() => {
       members: sectionOrder(leftovers),
     });
   }
-  // when shown, the unlisted extensions form a section of their own,
-  // kept apart from Not Categorized (which tracks curation gaps). its
-  // position answers the user's intent: deliberately ticking the box
-  // hoists it to the top (they asked to see these, so show them --
-  // unlisted is a curation state, not a lesser tier), while during a
-  // search (which widens the scope automatically) it stays at the
-  // bottom so curated matches lead the results
+  // unlisted extensions surface only in search results (extsMap contains
+  // them only while searching), as a section of their own at the bottom
+  // so curated matches lead
   const unlisted = [...extsMap.value.values()].filter((e) => e.unlisted);
   const unlistedSection: Section[] = unlisted.length
     ? [{ title: "Unlisted Extensions", members: sectionOrder(unlisted) }]
     : [];
-  return showUnlisted.value
-    ? [newest, ...unlistedSection, ...sections]
-    : [newest, ...sections, ...unlistedSection];
+  return [newest, ...sections, ...unlistedSection];
 });
 const arrangements = computed(
   () =>
@@ -212,20 +270,16 @@ function writeParams(params: URLSearchParams) {
   // update the filter
   arrange.value = params.get("a") || defaultArrange;
   filter.value = params.get("q") || defaultFilter;
-  showUnlisted.value = params.get("u") === "1";
 }
 
 // watch filter/arrange change
-watch([filter, arrange, showUnlisted], ([newFilter, newArrange, newShow]) => {
+watch([filter, arrange], ([newFilter, newArrange]) => {
   const params = new URLSearchParams();
   if (newArrange !== defaultArrange) {
     params.set("a", newArrange);
   }
   if (newFilter !== defaultFilter) {
     params.set("q", newFilter);
-  }
-  if (newShow) {
-    params.set("u", "1");
   }
   writeParams(params);
 });
@@ -270,8 +324,14 @@ const filteredIndex = computed(() => {
     if (filterValue && section.special) {
       continue;
     }
+    // searching covers the complete membership; browsing shows the
+    // (possibly truncated) selection. no limits apply while searching.
+    const memberList =
+      filterValue && section.fullMembers
+        ? section.fullMembers
+        : section.members;
     const extensions: ExtInfo[] = [];
-    for (const identifier of section.members) {
+    for (const identifier of memberList) {
       const ext = extsMap.value.get(identifier);
       if (ext && matches(ext.filterTerms)) {
         extensions.push(ext);
@@ -341,14 +401,11 @@ const filteredIndex = computed(() => {
       <ElTag v-if="filter" closable @close="filter = ''"
         >Search: {{ filter }}</ElTag
       >
-      <!-- while searching, scope is forced to everything and the checkbox
-           would be a dead control: swap it for the rule itself -->
-      <span :class="$style.ShowUnlisted">
-        <template v-if="searching">search includes unlisted extensions</template>
-        <ElCheckbox v-else v-model="showUnlisted" size="small"
-          >Show unlisted extensions</ElCheckbox
-        >
-      </span>
+      <!-- browsing shows the curated index only; state the search rule
+           exactly when it applies -->
+      <span v-if="searching" :class="$style.SearchNote"
+        >search includes unlisted extensions</span
+      >
     </div>
     <div v-for="{ title, extensions, link, linkText } in filteredIndex.index">
       <h2>{{ title }}</h2>
@@ -420,8 +477,8 @@ const filteredIndex = computed(() => {
   text-decoration: none;
 }
 
-/* sits at the right of the info row, under the filter field */
-.ShowUnlisted {
+/* sits at the right of the info row, under the search field */
+.SearchNote {
   margin-left: auto;
 }
 

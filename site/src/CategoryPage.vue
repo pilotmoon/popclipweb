@@ -11,16 +11,12 @@ const category = params.value as unknown as CategoryPageDef;
 
 // the category's listed members: an unlisted extension may carry a
 // category (staged for when it is listed), but only listed ones belong
-// here. flagships first, then the rest, each group A-Z -- the same
-// order as the front page's section
+// here. plain alphabetical: the front page's section shows a curated
+// selection; this page is the complete, neutral listing
 const extensions = computed<ExtInfo[]>(() =>
   (exts as ExtInfo[])
     .filter((ext) => !ext.unlisted && ext.category === category.slug)
-    .sort(
-      (a, b) =>
-        (b.flagship ? 1 : 0) - (a.flagship ? 1 : 0) ||
-        a.name.localeCompare(b.name),
-    ),
+    .sort((a, b) => a.name.localeCompare(b.name)),
 );
 </script>
 

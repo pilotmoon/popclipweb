@@ -10,23 +10,37 @@ const ZCategoryDef = z.object({
   slug: z.string(),
   title: z.string(),
   priority: z.number(),
+  // per-category override of the front page's visible-entries cap
+  frontPageLimit: z.number().nullish(),
 });
 export type CategoryDef = z.infer<typeof ZCategoryDef>;
+
+export interface DirectoryData {
+  // the build date (YYYY-MM-DD): seeds the front page's daily-rotating
+  // selection, from the BUILD rather than the viewer's clock so server
+  // render and client hydration always agree
+  day: string;
+  categories: CategoryDef[];
+}
 
 // a section of the directory listing as rendered; members are extension
 // identifiers
 export interface Section {
   title: string;
+  // the members on display (possibly a truncated selection)
   members: string[];
+  // the complete membership, searched instead of `members` when the user
+  // types a query -- search always covers everything
+  fullMembers?: string[];
   // footer "View all in ..." link
   link?: string;
   special?: boolean;
 }
 
-declare const data: CategoryDef[];
+declare const data: DirectoryData;
 export { data };
 export default defineLoader({
-  async load() {
+  async load(): Promise<DirectoryData> {
     const response = await api.get("categories", {
       params: { format: "json", limit: 1000 },
     });
@@ -34,9 +48,12 @@ export default defineLoader({
     if (!parseResult.success) {
       throw new Error("Failed to parse categories");
     }
-    // page order: priority ascending, ties by title
-    return parseResult.data.sort(
-      (a, b) => a.priority - b.priority || a.title.localeCompare(b.title),
-    );
+    return {
+      day: new Date().toISOString().slice(0, 10),
+      // page order: priority ascending, ties by title
+      categories: parseResult.data.sort(
+        (a, b) => a.priority - b.priority || a.title.localeCompare(b.title),
+      ),
+    };
   },
 });

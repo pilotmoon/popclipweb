@@ -10,7 +10,7 @@ import {
   isOwnAuthor,
 } from "./data/authorLinks.js";
 import { data as authors } from "./data/authors.data";
-import { data as categoryDefs } from "./data/directory.data";
+import { data as directoryData } from "./data/directory.data";
 import { formatDate } from "./helpers/formatters.js";
 import { ElPopover } from "element-plus";
 import { ShieldTask16Filled } from "@vicons/fluent";
@@ -38,7 +38,7 @@ const contributedAuthor = author && !isOwnAuthor(author) ? author : null;
 // carry a category as staging, but it isn't in that category's listing
 const categoryDef =
   !ext.unlisted && ext.category
-    ? (categoryDefs.find((d) => d.slug === ext.category) ?? null)
+    ? (directoryData.categories.find((d) => d.slug === ext.category) ?? null)
     : null;
 const slots = useSlots();
 const hasReadme = typeof slots.default?.()?.[0]?.type === "string";
