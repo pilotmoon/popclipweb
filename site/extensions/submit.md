@@ -15,7 +15,7 @@ import PopClipVersion from "../src/PopClipVersion.vue";
 </script>
 
 <div style="color: var(--vp-c-text-2); margin-bottom: 32px;">
-<a href="/extensions/" style="text-decoration: none;">← PopClip Extensions Directory</a>
+<a href="/extensions/" style="text-decoration: none;">PopClip Extensions Directory</a> / Submit an Extension
 </div>
 
 # Submit an Extension

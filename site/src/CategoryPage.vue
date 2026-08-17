@@ -22,7 +22,8 @@ const extensions = computed<ExtInfo[]>(() =>
 
 <template>
   <div :class="$style.Breadcrumb">
-    <a href="/extensions/">← PopClip Extensions Directory</a>
+    <a href="/extensions/">PopClip Extensions Directory</a> /
+    <a href="/extensions/categories/">Categories</a> / {{ category.title }}
   </div>
 
   <div :class="$style.Main">

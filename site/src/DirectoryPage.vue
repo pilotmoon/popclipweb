@@ -91,15 +91,17 @@ function formatActionTypes(ext: ExtInfo) {
 
 <template>
   <!-- the category reads as a breadcrumb: it is where the extension
-       lives in the directory, not a property of it -->
+       lives in the directory, not a property of it. the current page
+       ends the trail, non-clickable -->
   <div :class="$style.Breadcrumb">
-    <a href="/extensions/">← PopClip Extensions Directory</a
+    <a href="/extensions/">PopClip Extensions Directory</a
     ><template v-if="categoryDef">
       /
       <a :href="`/extensions/categories/${categoryDef.slug}`">{{
         categoryDef.title
       }}</a></template
     >
+    / {{ ext.name }}
   </div>
 
   <div :class="$style.Main">

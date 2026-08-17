@@ -22,7 +22,7 @@ const rows = computed(() => {
 
 <template>
   <div :class="$style.Links">
-    <a href="/extensions/">← PopClip Extensions Directory</a>
+    <a href="/extensions/">PopClip Extensions Directory</a> / Authors
   </div>
 
   <h1>Authors Index</h1>

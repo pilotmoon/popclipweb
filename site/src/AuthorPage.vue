@@ -30,7 +30,8 @@ const displayName = computed(() => author.name || author.githubHandle);
 
 <template>
   <div :class="$style.Breadcrumb">
-    <a href="/extensions/">← PopClip Extensions Directory</a>
+    <a href="/extensions/">PopClip Extensions Directory</a> /
+    <a href="/extensions/authors/">Authors</a> / {{ displayName }}
   </div>
 
   <div :class="$style.Main">
