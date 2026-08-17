@@ -62,7 +62,7 @@ const displayName = computed(() => author.name || author.githubHandle);
               title="Identity Verified"
               :width="280"
               trigger="hover"
-              content="This GitHub account has been confirmed as belonging to the person named."
+              content="This author page has been confirmed as belonging to the person named."
             >
               <template #reference>
                 <span :class="$style.Verified">
