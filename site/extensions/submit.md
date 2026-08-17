@@ -10,6 +10,10 @@ editLink: false
 lastUpdated: false
 ---
 
+<script setup>
+import PopClipVersion from "../src/PopClipVersion.vue";
+</script>
+
 <div style="color: var(--vp-c-text-2); margin-bottom: 32px;">
 <a href="/extensions/" style="text-decoration: none;">← PopClip Extensions Directory</a>
 </div>
@@ -94,7 +98,8 @@ Your extension's Config **must** contain all of the following, or it will be rej
 - `identifier` — a unique identifier string. This is the primary identifier for your extension
   in the directory and it can never be changed.
 - `description` — a concise description to be shown in the directory. Typically one sentence.
-- `popclipVersion` — the minimum required PopClip version as an integer, e.g. `5115`.
+- `popclipVersion` — the minimum required PopClip version as an integer,
+  e.g. <code><PopClipVersion build /></code>, which is the current shipping version.
   Normally the version you tested against, but you can set an older version if you want to support older PopClip versions
   and you are sure your extension will be compatible.
 
