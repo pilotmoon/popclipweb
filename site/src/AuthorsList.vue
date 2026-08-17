@@ -58,7 +58,10 @@ const rows = computed(() => {
   text-decoration: none;
 }
 
-.Authors {
+/* doubled selector out-specifies the theme's .vp-doc ul, which
+   otherwise wins and adds indent (its bullets were coincidentally
+   suppressed by the rows being flex) */
+.Authors.Authors {
   list-style: none;
   padding: 0;
   margin: 24px 0 0;

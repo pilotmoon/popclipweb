@@ -44,7 +44,9 @@ for (const ext of exts) {
   margin: 0 0 16px;
 }
 
-.List {
+/* doubled selector out-specifies the theme's .vp-doc ul, which
+   otherwise wins and adds bullets and indent */
+.List.List {
   list-style: none;
   padding: 0;
   margin: 0;
