@@ -117,10 +117,10 @@ const categoriesIndex = computed<Section[]>(() => {
       sections.push({
         title: def.title,
         members: sectionOrder(members),
-        // the heading links to the category's own page (deliberately not
-        // a "view more" footer: the front page currently shows every
-        // member anyway)
-        titleLink: `/extensions/categories/${def.slug}`,
+        // footer link to the category's own page, in the same style as
+        // Newly Added's -- anticipating front-page truncation, which
+        // will make "view all" literally true
+        link: `/extensions/categories/${def.slug}`,
       });
       bySlug.delete(def.slug);
     }
@@ -255,7 +255,6 @@ const filteredIndex = computed(() => {
     title: string;
     link?: string;
     linkText?: string;
-    titleLink?: string;
     extensions: ExtInfo[];
   }[] = [];
   const all = new Set<string>(arrangements.value.get("alpha")?.index[0].members);
@@ -285,7 +284,6 @@ const filteredIndex = computed(() => {
         title: section.title,
         link: section.link,
         linkText: `View all in "${section.title}" →`,
-        titleLink: section.titleLink,
         extensions,
       });
     }
@@ -352,15 +350,8 @@ const filteredIndex = computed(() => {
         >
       </span>
     </div>
-    <div
-      v-for="{ title, extensions, link, linkText, titleLink } in filteredIndex.index"
-    >
-      <h2>
-        {{ title
-        }}<a v-if="titleLink" :href="titleLink" :class="$style.SectionView"
-          >view</a
-        >
-      </h2>
+    <div v-for="{ title, extensions, link, linkText } in filteredIndex.index">
+      <h2>{{ title }}</h2>
       <DirectoryEntry
         v-for="ext in extensions"
         :key="ext.identifier"
@@ -434,15 +425,4 @@ const filteredIndex = computed(() => {
   margin-left: auto;
 }
 
-/* small link beside headings that have a page of their own ("view all"
-   once the front page truncates) */
-.SectionView {
-  font-size: 14px;
-  font-weight: 400;
-  margin-left: 10px;
-  text-decoration: none;
-}
-.SectionView:hover {
-  text-decoration: underline;
-}
 </style>

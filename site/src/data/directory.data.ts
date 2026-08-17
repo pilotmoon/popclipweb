@@ -18,11 +18,8 @@ export type CategoryDef = z.infer<typeof ZCategoryDef>;
 export interface Section {
   title: string;
   members: string[];
-  // footer "View all in ..." link (used by truncated sections)
+  // footer "View all in ..." link
   link?: string;
-  // makes the section heading itself a link (used by category sections,
-  // which have a page of their own)
-  titleLink?: string;
   special?: boolean;
 }
 
