@@ -130,6 +130,8 @@ const initialEmail = computed(() => storedEmail.value || "");
 
 const CLAIM_TITLES: Record<string, string> = {
   lifetime30: "Buy Lifetime License",
+  lifetime25: "Buy Lifetime License",
+  lifetime20: "Buy Lifetime License",
   freeLifetime: "Claim Lifetime License",
   free2year: "Claim Standard License", // the Mac App Store offer's free 2-year fallback
   free1year: "Claim 1-Year License",
@@ -224,6 +226,22 @@ const today = new Date().toISOString().slice(0, 10);
 const licenseExpiry = computed(() => signedParams.value?.lxd ?? "");
 const licenseExpired = computed(() => licenseExpiry.value !== "" && licenseExpiry.value < today);
 const formattedExpiry = computed(() => (licenseExpiry.value ? formatDate(licenseExpiry.value) : ""));
+
+// The license-holder Lifetime deal. A license held alongside a Mac App Store receipt gets
+// the MAS rate (30%), regardless of license term. Otherwise it's term-based: 25% off for
+// 2-year licenses, 20% for 1-year, derived from the signed purchase→expiry span. Anything
+// from 1.5 years up (including longer or indeterminate terms — e.g. no purchase date in
+// the link) gets the 2-year rate.
+const licenseDeal = computed(() => {
+  const sp = signedParams.value;
+  if (sp?.rpd) return { percent: 30, claim: "lifetime30" };
+  if (sp?.lpd && sp?.lxd) {
+    const ms = new Date(sp.lxd).getTime() - new Date(sp.lpd).getTime();
+    const years = ms / (365.25 * 24 * 60 * 60 * 1000);
+    if (years < 1.5) return { percent: 20, claim: "lifetime20" };
+  }
+  return { percent: 25, claim: "lifetime25" };
+});
 
 // ---- offer matrix -------------------------------------------------------
 
@@ -480,13 +498,14 @@ function renewalSecondary(): SecondaryData {
   };
 }
 
-// The Lifetime offer card for license holders — 30% off, same as the MAS deal.
+// The Lifetime offer card for license holders — term-based discount (see licenseDeal).
 function licenseLifetimePrimary(): CardData {
-  return lifetimeCard(30, {
-    badge: "Your offer — 30% off Lifetime",
+  const { percent, claim } = licenseDeal.value;
+  return lifetimeCard(percent, {
+    badge: `Your offer — ${percent}% off Lifetime`,
     ctaLabel: "Upgrade to Lifetime",
     footnote: "One-time purchase.",
-    claim: "lifetime30",
+    claim,
   });
 }
 
@@ -553,11 +572,12 @@ interface OfferRule {
   build(ctx: OfferContext): SegmentData;
 }
 
-// Rules are evaluated in order; the first whose `matches` returns true wins. All paid
-// upgrades are 30% off Lifetime; the rules differ in presentation and extras (free claims,
-// fallbacks). A pre-2023 receipt held alongside a license key is presented as a license
-// upgrade with the receipt acknowledged. The license-only offer applies when there's no
-// receipt, split by whether the key has expired.
+// Rules are evaluated in order; the first whose `matches` returns true wins. Paid upgrades
+// are a discounted Lifetime: 30% off for Mac App Store receipts (with or without a license
+// key alongside), or the term-based license-holder rate (25% for 2-year, 20% for 1-year) —
+// see licenseDeal. A pre-2023 receipt held alongside a license key is presented as a
+// license upgrade with the receipt acknowledged. The license-only offer applies when
+// there's no receipt, split by whether the key has expired.
 const offerRules: OfferRule[] = [
   {
     // the generic support-granted discount has its own wording, regardless of dates
