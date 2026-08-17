@@ -2,7 +2,11 @@
 import { data as directoryData } from "./data/directory.data";
 import { data as exts } from "./data/extensions.data";
 
-const categoryDefs = directoryData.categories;
+// alphabetical here: the configured priority order is the front page's
+// presentation; this index is the neutral reference list
+const categoryDefs = [...directoryData.categories].sort((a, b) =>
+  a.title.localeCompare(b.title),
+);
 
 // listed members per category
 const counts = new Map<string, number>();
