@@ -78,6 +78,7 @@ export function usePaddleBillingCheckout() {
           }
           if (event.name === "checkout.payment.initiated") {
             paymentInitiated = true;
+            startPaymentWatch();
           }
           if (event.name === "checkout.closed") {
             checkoutClosed();
@@ -120,6 +121,79 @@ export function usePaddleBillingCheckout() {
     }
   }
 
+  // Background watch, started once a payment is initiated: poll the backend
+  // every few seconds and, as soon as the customer has actually paid
+  // (license issued, payment captured, or payment authorized and awaiting
+  // deferred capture), close the overlay ourselves and go to the license
+  // page. Needed because Paddle.js does not emit checkout.completed for
+  // deferred-capture methods (WeChat Pay, UPI, Pix, BLIK...) even after
+  // capture — observed Aug 2026, contrary to Paddle's docs — so without
+  // this the buyer pays and sees no confirmation. Crucially, "in_progress"
+  // (QR shown but unscanned, or 3DS underway) and "failed" never close the
+  // overlay: the customer may still be mid-payment, and Paddle's own UI
+  // handles retries.
+  let watchTimer: ReturnType<typeof setInterval> | null = null;
+
+  function startPaymentWatch() {
+    if (watchTimer) return;
+    const startedAt = Date.now();
+    log("[checkout] payment watch started");
+    watchTimer = setInterval(async () => {
+      if (completedFired || !currentFlowId) {
+        stopPaymentWatch();
+        return;
+      }
+      if (Date.now() - startedAt > 15 * 60 * 1000) {
+        log("[checkout] payment watch timed out");
+        stopPaymentWatch();
+        return;
+      }
+      const transactionId = purchaseInfo.transactionId.value;
+      if (!transactionId) return;
+      try {
+        const endpoint = sandbox
+          ? config.pilotmoon.frontendRoot_sandbox
+          : config.pilotmoon.frontendRoot;
+        const mode = sandbox ? "test" : "live";
+        const res = await fetch(
+          `${endpoint}/store/getLicense?flowId=${currentFlowId}&mode=${mode}&transactionId=${transactionId}`,
+        );
+        if (!res.ok) return; // 404: no license, no payment attempt yet
+        const body = await res.json();
+        const paid =
+          body?.object === "licenseKey" ||
+          (body?.object === "transactionStatus" &&
+            (body.status === "processing" || body.status === "pending"));
+        if (!paid) return;
+        if (completedFired) return; // completed fired while we were fetching
+        log(
+          `[checkout] payment watch: customer has paid (${
+            body?.object === "licenseKey" ? "license issued" : body.status
+          }); closing checkout`,
+        );
+        stopPaymentWatch();
+        purchaseInfo.flowId.value = currentFlowId;
+        purchaseInfo.userEmail.value = lastCustomerEmail;
+        purchaseInfo.userCountry.value = lastCustomerCountry;
+        try {
+          Paddle.Checkout.close();
+        } catch (e) {
+          log("[checkout] Checkout.close failed", e);
+        }
+        window.location.href = "/purchase-complete";
+      } catch (e) {
+        // network error — keep watching
+      }
+    }, 4000);
+  }
+
+  function stopPaymentWatch() {
+    if (watchTimer) {
+      clearInterval(watchTimer);
+      watchTimer = null;
+    }
+  }
+
   // Rescue for deferred-capture payment methods (WeChat Pay, UPI, Pix,
   // BLIK...): Paddle.js does not emit checkout.completed for them even
   // after the payment captures (observed Aug 2026, contrary to Paddle's
@@ -129,6 +203,7 @@ export function usePaddleBillingCheckout() {
   // payment actually got and shows the license, a payment-pending notice,
   // or a payment-failed notice accordingly.
   function checkoutClosed() {
+    stopPaymentWatch();
     if (!currentFlowId || !paymentInitiated || completedFired) {
       log("[checkout] checkout closed, no rescue needed");
       return;
@@ -151,6 +226,7 @@ export function usePaddleBillingCheckout() {
       return;
     }
     completedFired = true;
+    stopPaymentWatch();
     purchaseInfo.flowId.value = currentFlowId;
     // the transaction id lets the license page ask the backend about
     // payment progress (e.g. deferred-capture methods like WeChat Pay)
@@ -171,6 +247,7 @@ export function usePaddleBillingCheckout() {
   async function openCheckout(options: OpenBillingCheckoutOptions) {
     log("[checkout] openCheckout requested with options", options);
     await initPaddle();
+    stopPaymentWatch();
     currentFlowId = window.crypto?.randomUUID();
     paymentInitiated = false;
     completedFired = false;

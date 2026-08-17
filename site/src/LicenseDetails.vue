@@ -27,6 +27,7 @@ const State = {
   Loading: Symbol("loading"),
   Delayed: Symbol("delayed"),
   PaymentPending: Symbol("payment-pending"),
+  PaymentInProgress: Symbol("payment-in-progress"),
   PaymentFailed: Symbol("payment-failed"),
   Done: Symbol("done"),
 };
@@ -48,24 +49,41 @@ onMounted(async () => {
   log(`[license] polling for license, flowId=${purchaseInfo.flowId.value}, mode=${sandbox ? "test" : "live"}`);
   for (; countdown.value > 0; countdown.value -= 1) {
     if (await poll()) return;
-    if (txnStatus.value?.status === "pending") break;
+    if (isWaitState()) break;
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
-  if (txnStatus.value?.status === "pending") {
-    log("[license] payment is pending capture — switching to slow polling");
-    state.value = State.PaymentPending;
-    title.value = "Payment Processing";
+  if (isWaitState()) {
+    log(`[license] payment is ${txnStatus.value.status} — switching to slow polling`);
+    updateWaitState();
     for (let i = 0; i < PENDING_POLL_LIMIT; i++) {
       await new Promise((resolve) => setTimeout(resolve, PENDING_POLL_INTERVAL_MS));
       if (await poll()) return;
+      updateWaitState();
     }
-    log("[license] still pending after slow polling — leaving the pending message up");
+    log("[license] still waiting after slow polling — leaving the message up");
     return;
   }
   log("[license] gave up after polling — backend never produced a license for this flowId");
   state.value = State.Delayed;
   title.value = "Order Processing";
 });
+
+// "pending" = paid, capture in flight; "in_progress" = customer has not
+// completed payment yet (e.g. unscanned QR code). Both keep slow-polling,
+// and a flow can move between them, so re-map the state on every poll.
+function isWaitState() {
+  return ["pending", "in_progress"].includes(txnStatus.value?.status);
+}
+
+function updateWaitState() {
+  if (txnStatus.value?.status === "pending") {
+    state.value = State.PaymentPending;
+    title.value = "Payment Processing";
+  } else if (txnStatus.value?.status === "in_progress") {
+    state.value = State.PaymentInProgress;
+    title.value = "Waiting for Payment";
+  }
+}
 
 // One poll of the backend. Returns true when polling should stop because a
 // terminal state (Done / PaymentFailed) was reached.
@@ -255,6 +273,23 @@ function licenseInfoString() {
       </p>
       <p>
         If nothing arrives within an hour, please check your spam folder or contact&ensp;<SupportEmailLink
+          subject="PopClip Purchase Enquiry"
+          :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')"
+        />.
+      </p>
+    </div>
+    <div v-else-if="state === State.PaymentInProgress">
+      <h1>Waiting for your payment</h1>
+      <p>It looks like your payment hasn't been completed yet.</p>
+      <p>
+        If you've just paid in your banking or payment app, hang on &mdash; this page will update automatically once the
+        payment is confirmed, and your PopClip license key will be emailed to
+        <b>{{ purchaseInfo.userEmail.value || "the email address you provided at checkout" }}</b
+        >.
+      </p>
+      <p>If you decided not to complete the purchase, no payment has been taken and you can safely close this page.</p>
+      <p>
+        If you need any help, please contact&ensp;<SupportEmailLink
           subject="PopClip Purchase Enquiry"
           :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')"
         />.
