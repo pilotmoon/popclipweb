@@ -9,11 +9,11 @@ export const NEWLY_ADDED_LIMIT = 6;
 // a category section shows at most this many entries, unless its record
 // carries a frontPageLimit override -- except that flagships and new
 // entries always fit, even past the limit
-export const DEFAULT_CATEGORY_LIMIT = 12;
+export const DEFAULT_CATEGORY_LIMIT = 8;
 
 // this many guaranteed slots per category section for the NEWEST new
 // entries; further new entries stay eligible for the random selection
-export const NEW_PER_CATEGORY_LIMIT = 3;
+export const NEW_PER_CATEGORY_LIMIT = 2;
 
 // how long an extension counts as newly listed: drives both the New!
 // badge on entries and the new-entries grouping in category sections
