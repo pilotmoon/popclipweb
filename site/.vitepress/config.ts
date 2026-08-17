@@ -1,8 +1,85 @@
 import { html5Media } from "markdown-it-html5-media";
 import imageFigures from "markdown-it-image-figures";
 import ElementPlus from "unplugin-element-plus/vite";
-import { defineConfig } from "vitepress";
+import { defineConfig, type HeadConfig } from "vitepress";
+import siteConfig from "../src/config/config.json";
+import { querifyDescriptor } from "../src/helpers/iconDescriptor.js";
 import mediaFigures from "./markdown/mediaFigures.ts";
+
+const siteRoot = "https://www.popclip.app";
+
+// html description strings -> plain text for meta tags
+function plainText(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .trim();
+}
+
+function metaTags(entries: Record<string, string | null | undefined>) {
+  return Object.entries(entries).flatMap(([property, content]) =>
+    content
+      ? [
+          [
+            "meta",
+            property.startsWith("twitter:")
+              ? { name: property, content }
+              : { property, content },
+          ] as HeadConfig,
+        ]
+      : [],
+  );
+}
+
+// Open Graph tags for the dynamic pages, so pasted links unfurl into
+// meaningful previews (Discourse oneboxes, chat apps, social cards)
+// instead of the generic site tile. Icons are requested in a mid-grey
+// that stays visible on light and dark preview backgrounds (the color
+// only applies to monochrome template icons anyway).
+function openGraph(relativePath: string, params: Record<string, unknown>) {
+  const p = params as {
+    name?: string;
+    description?: string;
+    shortcode?: string;
+    icon?: string | null;
+    githubHandle?: string;
+    bio?: string | null;
+    avatarUrl?: string | null;
+  };
+  if (relativePath.startsWith("extensions/x/") && p.shortcode) {
+    return metaTags({
+      "og:type": "website",
+      "og:site_name": "PopClip Extensions Directory",
+      "og:title": p.name,
+      "og:description": p.description ? plainText(p.description) : null,
+      "og:url": `${siteRoot}/extensions/x/${p.shortcode}`,
+      "og:image": p.icon
+        ? `${siteConfig.pilotmoon.iconsRoot}/icon?${querifyDescriptor(
+            { specifier: p.icon.trim(), color: "#555555", height: 256 },
+            "a2",
+          )}`
+        : null,
+      "twitter:card": "summary",
+    });
+  }
+  if (relativePath.startsWith("extensions/authors/") && p.shortcode) {
+    const name = p.name || p.githubHandle;
+    return metaTags({
+      "og:type": "profile",
+      "og:site_name": "PopClip Extensions Directory",
+      "og:title": name,
+      "og:description": p.bio || (name ? `PopClip extensions by ${name}` : null),
+      "og:url": `${siteRoot}/extensions/authors/${p.shortcode}`,
+      "og:image": p.avatarUrl ?? null,
+      "twitter:card": "summary",
+    });
+  }
+  return [];
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -174,6 +251,9 @@ export default defineConfig({
         },
       ],
     },
+  },
+  transformHead({ pageData }) {
+    return openGraph(pageData.relativePath, pageData.params ?? {});
   },
   head: [
     ["link", { rel: "shortcut icon", href: "/icon32.png", type: "image/png" }],
