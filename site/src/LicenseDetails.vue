@@ -9,6 +9,7 @@ import { useLogger } from "./composables/useLogger";
 import { formatDate } from "/src/helpers/formatters";
 import { kaboom } from "/src/helpers/confetti";
 import { infoBlock } from "/src/helpers/supportMailto";
+import { readParams } from "/src/helpers/readParams";
 
 const log = useLogger();
 const purchaseInfo = usePurchaseInfo();
@@ -40,6 +41,30 @@ const PENDING_POLL_INTERVAL_MS = 10000;
 const PENDING_POLL_LIMIT = 180; // × 10s = 30 minutes
 
 onMounted(async () => {
+  // #preview=<state> shows a waiting/failure state without a purchase, for
+  // checking pages that only appear mid-payment (e.g. #preview=in_progress,
+  // optionally &method=pix). Harmless on production: renders static copy
+  // only, no license data involved.
+  const preview = readParams().get("preview");
+  if (preview) {
+    const previewStates = {
+      pending: State.PaymentPending,
+      in_progress: State.PaymentInProgress,
+      failed: State.PaymentFailed,
+      delayed: State.Delayed,
+    };
+    if (previewStates[preview]) {
+      txnStatus.value = {
+        object: "transactionStatus",
+        status: preview,
+        paymentMethodType: readParams().get("method") ?? undefined,
+      };
+      state.value = previewStates[preview];
+      title.value = "Preview";
+      log(`[license] preview mode: ${preview}`);
+      return;
+    }
+  }
   if (!purchaseInfo.flowId.value) {
     log("[license] no flowId in session — checkout did not complete here, or session was lost");
     state.value = State.NoSession;
