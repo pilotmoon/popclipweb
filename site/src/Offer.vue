@@ -429,7 +429,7 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
   const faq = freeTwoYear
     ? {
         heading: "Why is this a paid upgrade?",
-        body: `The latest version of PopClip is a paid upgrade for customers who bought the app from the Mac App Store in ${GATED_BEFORE_YEAR} or earlier. Your original purchase has included many years of free updates, and I hope it has given you good value. If this unexpected request for payment is a problem, please choose the free Standard License — you can keep using PopClip either way.
+        body: `The latest version of PopClip is a paid upgrade for customers who bought the app from the Mac App Store in ${GATED_BEFORE_YEAR} or earlier. Your original purchase has included many years of free updates, and I hope it has given you good value. If this unexpected request for payment is a problem, please choose the free 2-year Standard License — you can keep using PopClip either way.
 
 You are also free not to upgrade at all. Nothing has been lost: your original purchase remains valid, and you can go back to the version you were using before, available from the downloads page.
 
