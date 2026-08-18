@@ -429,7 +429,7 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
   const faq = freeTwoYear
     ? {
         heading: "Why is this a paid upgrade?",
-        body: `PopClip 2026.7 is a paid upgrade for customers who bought the app from the Mac App Store in ${GATED_BEFORE_YEAR} or earlier. Your original purchase has included many years of free updates, and I hope it has given you good value. If this unexpected request for payment is a problem, please choose the free Standard License — you can keep using PopClip either way.
+        body: `The latest version of PopClip is a paid upgrade for customers who bought the app from the Mac App Store in ${GATED_BEFORE_YEAR} or earlier. Your original purchase has included many years of free updates, and I hope it has given you good value. If this unexpected request for payment is a problem, please choose the free Standard License — you can keep using PopClip either way.
 
 You are also free not to upgrade at all. Nothing has been lost: your original purchase remains valid, and you can go back to the version you were using before, available from the downloads page.
 
@@ -437,7 +437,7 @@ The license key replaces the awkward system of App Store purchase detection, whi
       }
     : {
         heading: "Do I need to upgrade now?",
-        body: `Not yet — your Mac App Store purchase still unlocks the current version of PopClip. However, PopClip is moving to license keys for all users, replacing the awkward system of App Store purchase detection. (PopClip left the App Store in 2024.) This takes the form of a paid upgrade, arriving in stages by purchase date: the first stage, in PopClip 2026.7, covers purchases made in ${GATED_BEFORE_YEAR} or earlier, and a future update will reach your purchase date too.
+        body: `Not yet — your Mac App Store purchase still unlocks the current version of PopClip. However, PopClip is moving to license keys for all users, replacing the awkward system of App Store purchase detection. (PopClip left the App Store in 2024.) This takes the form of a paid upgrade, arriving in stages by purchase date: the first stage, starting in PopClip 2026.7, covers purchases made in ${GATED_BEFORE_YEAR} or earlier, and a future update will reach your purchase date too.
 
 You're welcome to upgrade now or wait until then. Either way, the Lifetime License is discounted in recognition of your original purchase. Buying it helps me keep maintaining and improving PopClip.`,
       };
