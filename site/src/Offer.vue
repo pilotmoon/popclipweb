@@ -9,6 +9,9 @@ import { usePaddleBillingCheckout } from "./composables/usePaddleBillingCheckout
 import { formatDate } from "./helpers/formatters";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { infoBlock, supportMailtoHref } from "./helpers/supportMailto";
+import { isRegionallyPriced } from "./data/regionalPricing";
+import { GlobeAmericas } from "@vicons/fa";
+import { Icon } from "@vicons/utils";
 import OfferCard from "./OfferCard.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
 import { useSessionStorage } from "@vueuse/core";
@@ -86,6 +89,7 @@ const busyOffer = ref<string | null>(null);
 // Disables the buy/renew buttons while any claim is in flight — only one checkout
 // can be started at a time, so this backstops the busyOffer guard against double-clicks.
 const anyBusy = computed(() => busyOffer.value !== null);
+const regionallyPriced = computed(() => isRegionallyPriced(store.countryCode.value));
 
 onMounted(() => {
   pageUrl.value = window.location.href;
@@ -459,9 +463,7 @@ function masDiscountSegment(freeTwoYear: boolean): SegmentData {
         heading: "Why is this a paid upgrade?",
         body: `The latest version of PopClip is a paid upgrade for customers who bought the app from the Mac App Store in ${GATED_BEFORE_YEAR} or earlier. Your original purchase has included many years of free updates, and I hope it has given you good value. If this unexpected request for payment is a problem, please choose the free 2-year Standard License — you can keep using PopClip either way.
 
-You are also free not to upgrade at all. Nothing has been lost: your original purchase remains valid, and you can go back to the version you were using before, available from the downloads page.
-
-The license key replaces the awkward system of App Store purchase detection, which required the old App Store version to be installed first. (PopClip left the App Store in 2024.) If you choose the Lifetime License, it helps me keep maintaining and improving PopClip.`,
+The license key replaces the awkward system of App Store purchase detection, which required the old App Store version to be installed first. (PopClip left the App Store in 2024.) If you choose the Lifetime License, it helps me keep maintaining and improving PopClip. Thank you for your understanding and support.`,
       }
     : {
         heading: "Do I need to upgrade now?",
@@ -805,7 +807,12 @@ async function renewStandard(details: BuyerDetails) {
     <OfferCard v-bind="segment.primary" :busy="anyBusy" @buy="onBuy" />
 
     <div :class="store.isLoadedForCoupon !== null ? $style.infoLine : $style.infoLineLoading">
-      {{ store.isLoadedForCoupon !== null ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` : `Loading prices...` }}
+      <template v-if="store.isLoadedForCoupon !== null">
+        {{ `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` }}
+        <span v-if="regionallyPriced" :class="$style.regionalNote">
+          · <a href="/regional-pricing"><Icon :class="$style.regionalIcon"><GlobeAmericas /></Icon> Regional pricing applied</a></span>
+      </template>
+      <template v-else>Loading prices...</template>
     </div>
 
     <template v-if="segment.secondary">
@@ -850,6 +857,21 @@ async function renewStandard(details: BuyerDetails) {
 .infoLine {
   text-align: center;
   margin-top: 18px;
+}
+
+.regionalNote {
+  font-size: 0.85em;
+}
+
+/* Green for emphasis (matches the site's other green accents); the `.infoLine`
+   prefix raises specificity above VitePress's `.vp-doc a` link color. */
+.infoLine .regionalNote a {
+  color: var(--vp-c-green-1);
+}
+
+/* Sit the glyph on the text baseline (icons render as inline SVG). */
+.regionalIcon {
+  vertical-align: -0.125em;
 }
 
 .infoLineLoading {

@@ -6,16 +6,18 @@ import { loadStore, useStoreState, roundPrice } from "./composables/useStoreStat
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
 import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePaddleBillingCheckout";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
-import { Paypal, ApplePay, CreditCard } from "@vicons/fa";
+import { Paypal, ApplePay, CreditCard, GlobeAmericas } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
+import { isRegionallyPriced } from "./data/regionalPricing";
 
 const store = useStoreState();
 
 const isLizhi = computed(() =>
      config.lizhi.countries.includes(store.countryCode.value),
 );
+const regionallyPriced = computed(() => isRegionallyPriced(store.countryCode.value));
 const { openCheckout } = usePaddleCheckout();
 const { openCheckout: openBillingCheckout, initForTransactionCheckout } = usePaddleBillingCheckout();
 
@@ -269,7 +271,12 @@ function trackBuy(button) {
     </div>
   </div>
   <div :class="store.isLoadedForCoupon !== null ? $style.infoLine : $style.infoLineLoading">
-    {{ store.isLoadedForCoupon !== null ? `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` : `Loading prices...` }}
+    <template v-if="store.isLoadedForCoupon !== null">
+      {{ `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` }}
+      <span v-if="regionallyPriced" :class="$style.regionalNote">
+        · <a href="/regional-pricing"><Icon :class="$style.regionalIcon"><GlobeAmericas /></Icon> Regional pricing applied</a></span>
+    </template>
+    <template v-else>Loading prices...</template>
   </div>
   <!-- <div v-if="isLizhi" class="danger custom-block">
     <p class="custom-block-title">Warning: Avoid 🇨🇳 Chinese Scam Sellers!</p>
@@ -410,6 +417,21 @@ function trackBuy(button) {
 
 .infoLine {
   text-align: center;
+}
+
+.regionalNote {
+  font-size: 0.85em;
+}
+
+/* Green for emphasis (matches the site's other green accents); the `.infoLine`
+   prefix raises specificity above VitePress's `.vp-doc a` link color. */
+.infoLine .regionalNote a {
+  color: var(--vp-c-green-1);
+}
+
+/* Sit the glyph on the text baseline (icons render as inline SVG). */
+.regionalIcon {
+  vertical-align: -0.125em;
 }
 
 .infoLineLoading {
