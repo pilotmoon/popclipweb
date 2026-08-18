@@ -17,27 +17,29 @@ field, as follows:
 | ------------------ | ------ | --------------------------------------------------------------------------------------------------------------- |
 | `key combo`        | String | The key combination to press, as defined in [String format](#string-format).                                    |
 | `key combos`       | Array  | Instead of a single key combo, you can supply array of them. PopClip will press all the key combos in sequence. |
-| `key combo target` | String | Where to post the presses: `app` (the default), `session` or `hid`. See [Target](#target).                      |
+| `key combo target` | String | Where to post the presses: `session` (the default), `app` or `hid`. See [Target](#target).                      |
 
 ## Target
 
 The `key combo target` field says where PopClip posts the key events:
 
-| Value     | Description                                                                                                 |
-| --------- | ----------------------------------------------------------------------------------------------------------- |
-| `app`     | To the process of the application the action is acting on, using `CGEventPostToPid()`. This is the default. |
-| `session` | To the session event tap, `kCGSessionEventTap`.                                                             |
-| `hid`     | To the HID event tap, `kCGHIDEventTap`.                                                                     |
+| Value     | Description                                                                            |
+| --------- | -------------------------------------------------------------------------------------- |
+| `session` | To the session event tap, `kCGSessionEventTap`. This is the default.                   |
+| `app`     | To the process of the application the action is acting on, using `CGEventPostToPid()`. |
+| `hid`     | To the HID event tap, `kCGHIDEventTap`.                                                |
 
-If a key combo does not have the effect you expect with the default `app` target, it is worth
-trying the others. A combo belonging to the system rather than to any particular
-application is a case for `session` or `hid`:
+Use the `app` target if the key combination is intended only for the target app — an example would be
+a formatting extension that presses ⌘B, ⌘I and ⌘U. Keep the default `session` if the key combination is
+intended to activate a global shortcut. Posting to `hid` is not normally needed, but it may work in
+some cases where posting to `session` fails.
 
 ```yaml
 #popclip
-name: Spotlight
-key combo: command space
-key combo target: session
+name: Bold
+key combo: command b
+key combo target: app
+stay visible: true
 ```
 
 ## Input and output
@@ -265,7 +267,6 @@ Pressing a sequence of keys, with a wait included:
 #popclip
 name: Spotlight
 before: copy # puts selected text on the clipboard
-key combo target: session # the combos are for Spotlight, not the app
 key combos:
   - command space
   - wait 50 # waits 50 milliseconds
