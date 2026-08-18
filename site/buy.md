@@ -51,6 +51,10 @@ from Setapp as well.
 
 <Setapp />
 
+## Terms and Conditions
+
+Your purchase is subject to the [Terms of License](/terms).
+
 ## Volume Purchase
 
 If you are buying for a team or organization you can purchase a multi-user
@@ -61,10 +65,6 @@ license key at a discounted rate. Please [email me](/support) for a quote.
 To keep PopClip reasonably affordable everywhere, prices are set lower in some
 countries. See [Regional Pricing](/regional-pricing) for how it works and which
 countries are included.
-
-## Terms and Conditions
-
-Your purchase is subject to the [Terms of License](/terms).
 
 ## Free
 
