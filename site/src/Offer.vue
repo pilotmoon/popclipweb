@@ -137,7 +137,11 @@ const CLAIM_TITLES: Record<string, string> = {
   free1year: "Claim 1-Year License",
   renew2year: "Renew Standard License",
 };
-const dialogTitle = computed(() => CLAIM_TITLES[pendingClaim.value ?? ""] ?? "Buy PopClip License");
+const dialogTitle = computed(() => {
+  // renew2year is "Renew" only for a 2-year license holder — see isStandardRenewal.
+  if (pendingClaim.value === "renew2year" && !isStandardRenewal.value) return "Buy Standard License";
+  return CLAIM_TITLES[pendingClaim.value ?? ""] ?? "Buy PopClip License";
+});
 
 // The buyer details confirmed in the dialog (or taken straight from the
 // stored values when the dialog is disabled), passed into the checkout.
@@ -226,6 +230,30 @@ const today = new Date().toISOString().slice(0, 10);
 const licenseExpiry = computed(() => signedParams.value?.lxd ?? "");
 const licenseExpired = computed(() => licenseExpiry.value !== "" && licenseExpiry.value < today);
 const formattedExpiry = computed(() => (licenseExpiry.value ? formatDate(licenseExpiry.value) : ""));
+
+// License term from the signed purchase→expiry dates, rounded to the nearest
+// whole year (1, 2, …), or null when a date is missing or the span rounds to
+// zero. Nearest-year rounding sidesteps leap-day wrinkles, and only whole-year
+// terms are sold anyway (same ms-based measure as licenseDeal above).
+const licenseTermYears = computed<number | null>(() => {
+  const sp = signedParams.value;
+  if (!sp?.lpd || !sp?.lxd) return null;
+  const ms = new Date(sp.lxd).getTime() - new Date(sp.lpd).getTime();
+  const years = Math.round(ms / (365.25 * 24 * 60 * 60 * 1000));
+  return years >= 1 ? years : null;
+});
+
+// "2-year PopClip license" when the term is known, else the plain "PopClip license".
+// A digit rather than the word form ("two-year"), matching the card wording.
+const licensePhrase = computed(() => {
+  const y = licenseTermYears.value;
+  return y !== null ? `${y}-year PopClip license` : "PopClip license";
+});
+
+// Only a 2-year (Standard) license holder genuinely "renews". 1-year licenses are
+// free comps — those holders never paid — so they (and unknown terms) get "buy"
+// wording everywhere the renewal purchase is mentioned.
+const isStandardRenewal = computed(() => licenseTermYears.value === 2);
 
 // The license-holder Lifetime deal. A license held alongside a Mac App Store receipt gets
 // the MAS rate (30%), regardless of license term. Otherwise it's term-based: 25% off for
@@ -496,16 +524,17 @@ function free1YearSegment(): SegmentData {
 
 // Full-price 2-year renewal, offered as the secondary to an expired-license holder. It's a
 // plain full-price purchase (no coupon), so it opens the checkout directly rather than going
-// through getOfferCoupon — see renewStandard().
+// through getOfferCoupon — see renewStandard(). Renew-vs-buy wording: isStandardRenewal.
 function renewalSecondary(): SecondaryData {
+  const isRenewal = isStandardRenewal.value;
   return {
     kind: "card",
-    label: "or renew your Standard License",
+    label: isRenewal ? "or renew your Standard License" : "or buy a Standard License",
     card: {
       title: "Standard License",
       bullets: ["2 more years of free updates", "Keep the last version you receive"],
       ...twoYearPricing(),
-      ctaLabel: "Renew for 2 years",
+      ctaLabel: isRenewal ? "Renew for 2 years" : "Buy for 2 years",
       ctaTheme: "alt",
       ctaSize: "medium",
       footnote: "One-time purchase.",
@@ -560,12 +589,12 @@ function expiringLicenseSegment(v: LicenseVariant): SegmentData {
 function expiredLicenseSegment(v: LicenseVariant): SegmentData {
   return {
     headline: "License Upgrade Offer",
-    intro: `${v.introPrefix}Your PopClip Standalone license expired on <strong>${formattedExpiry.value}</strong>. Upgrade or renew your license to keep getting updates.`,
+    intro: `${v.introPrefix}Your ${licensePhrase.value} expired on <strong>${formattedExpiry.value}</strong>. ${isStandardRenewal.value ? "Upgrade or renew your license" : "Buy a new license"} to keep getting updates.`,
     primary: licenseLifetimePrimary(),
     secondary: renewalSecondary(),
     faq: {
       heading: "Why do I need a new license?",
-      body: `Your current license has expired, so it no longer receives new updates. You'll need a new license to use the latest version and future updates. Alternatively, you can keep using the previous version indefinitely with your currrent license. You can download the previous version from the downloads page.`,
+      body: `Your current license has expired, so it no longer receives new updates. You'll need a new license to use the latest version and future updates. Alternatively, you can keep using the previous version indefinitely with your current license. You can download the previous version from the downloads page.`,
     },
     fineprint: v.fineprint,
   };
