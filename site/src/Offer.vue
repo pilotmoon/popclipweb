@@ -306,7 +306,7 @@ function fineprintTail(): string {
     subject: SUPPORT_SUBJECT,
     footer: infoBlock(offerLink.value, "Offer Link"),
   }).replaceAll("&", "&amp;");
-  return `One upgrade per customer. Questions?&nbsp;<a href="${href}">Contact support</a>.`;
+  return `Questions?&nbsp;<a href="${href}">Contact support</a>.`;
 }
 
 // MAS receipts before this date are gated out of the app (matches PopClip's receipt cutoff);
@@ -420,16 +420,32 @@ function freeTwoYearAlt(): SecondaryData {
 // offered to customers already gated out of the app (bought before the receipt cutoff);
 // more recent buyers who aren't gated yet get just the upgrade offer, like an expiring license.
 function masDiscountSegment(freeTwoYear: boolean): SegmentData {
+  // The two audiences are in different situations, so each gets its own FAQ. Gated
+  // customers (pre-cutoff receipts) are already locked out of the latest version and see
+  // the free 2-year card on this page, so their FAQ answers the payment question directly
+  // and steers price-sensitive customers to the free option. Non-gated recent buyers still
+  // have a working app and no free option on the page, so their FAQ explains what's coming
+  // and that upgrading is optional for now.
+  const faq = freeTwoYear
+    ? {
+        heading: "Why is this a paid upgrade?",
+        body: `PopClip 2026.7 is a paid upgrade for customers who bought the app from the Mac App Store in ${GATED_BEFORE_YEAR} or earlier. Your original purchase has included many years of free updates, and I hope it has given you good value. If this unexpected request for payment is a problem, please choose the free Standard License — you can keep using PopClip either way.
+
+You are also free not to upgrade at all. Nothing has been lost: your original purchase remains valid, and you can go back to the version you were using before, available from the downloads page.
+
+The license key replaces the awkward system of App Store purchase detection, which required the old App Store version to be installed first. (PopClip left the App Store in 2024.) If you choose the Lifetime License, it helps me keep maintaining and improving PopClip.`,
+      }
+    : {
+        heading: "Do I need to upgrade now?",
+        body: `Not yet — your Mac App Store purchase still unlocks the current version of PopClip. However, PopClip is moving to license keys for all users, replacing the awkward system of App Store purchase detection. (PopClip left the App Store in 2024.) This takes the form of a paid upgrade, arriving in stages by purchase date: the first stage, in PopClip 2026.7, covers purchases made in ${GATED_BEFORE_YEAR} or earlier, and a future update will reach your purchase date too.
+
+You're welcome to upgrade now or wait until then. Either way, the Lifetime License is discounted in recognition of your original purchase. Buying it helps me keep maintaining and improving PopClip.`,
+      };
   const seg: SegmentData = {
     headline: "Mac App Store Upgrade Offer",
     intro: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. To move from your Mac App Store purchase to a Standalone edition license key, here is your upgrade offer:`,
     primary: { ...masLifetimePrimary(), extraFeatures: [SUPPORTS_DEVELOPMENT] },
-    faq: {
-      heading: "Why do I need a license key?",
-      body: `Until now, PopClip has detected your Mac App Store purchase in the Standalone edition as a temporary measure to ease the move away from the store. But it's time to cut this last tie with the Mac App Store. PopClip will soon require license keys for all users. The requirement is being introduced in stages, beginning (in PopClip 2026.7) with customers who bought PopClip in ${GATED_BEFORE_YEAR} or earlier.
-
- After many years of free updates, and with a major new update now arriving, I am asking Mac App Store customers to buy a Lifetime License, discounted in recognition of your original purchase. Alternatively, claim a free Standard License, deferring any need to pay for another two years.`,
-    },
+    faq,
     fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${fineprintTail()}`,
   };
   if (freeTwoYear) {
@@ -870,6 +886,8 @@ async function renewStandard(details: BuyerDetails) {
   line-height: 1.5;
   color: var(--vp-c-text-2);
   margin: 0;
+  /* Paragraph breaks in FAQ body strings are real newlines, not markup. */
+  white-space: pre-line;
 }
 
 .fineprint {
