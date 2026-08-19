@@ -100,7 +100,9 @@ function formatActionTypes(ext: ExtInfo) {
       <a :href="`/extensions/categories/${categoryDef.slug}`">{{
         categoryDef.title
       }}</a></template
-    >
+    ><!-- unlisted extensions sit in no category listing, so a pseudo
+         category names where they live; there is no page for it -->
+    <template v-if="ext.unlisted"> / Unlisted Extensions</template>
     / {{ ext.name }}
   </div>
 
