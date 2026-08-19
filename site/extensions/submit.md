@@ -25,7 +25,7 @@ Extensions are submitted from **public GitHub repositories**.
 First you will need to publish your extension in a public GitHub repository, if you have not done so already.
 Then, configure your repository using the instructions below.
 
-The directory automatically reads your extension source files each time you publish a git tag.
+The directory automatically reads your _changed_ extension source files each time you publish a git tag.
 It only does this once for each tag, so any change you want to make to a published extension
 requires a new tag. ([Monorepos are supported.](#updating-one-extension-out-of-many))
 
