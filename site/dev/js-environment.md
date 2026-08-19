@@ -304,7 +304,7 @@ PopClip provides its own implementation of
 (XHR). This is the only way for JavaScript code to access the network.
 
 PopClip is also bundled with the HTTP library
-[axios](https://axios-http.com/docs/intro), which is an easier to use wrapper
+[axios](https://axios.rest/pages/getting-started/examples/commonjs.html), which is an easier to use wrapper
 around XHR.
 
 Due to macOS's App Transport Security, PopClip can only access `https:` URLs.

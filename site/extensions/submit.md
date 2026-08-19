@@ -99,10 +99,15 @@ Your extension's Config **must** contain all of the following, or it will be rej
 - `identifier` — a unique identifier string. This is the primary identifier for your extension
   in the directory and it can never be changed.
 - `description` — a concise description to be shown in the directory. Typically one sentence.
-- `popclipVersion` — the minimum required PopClip version as an integer,
+- `popclip version` — the minimum required PopClip version as an integer,
   e.g. <code><PopClipVersion build /></code>, which is the current shipping version.
   Normally the version you tested against, but you can set an older version if you want to support older PopClip versions
   and you are sure your extension will be compatible.
+
+Additionally, for extensions with Shell Script actions:
+
+- `shell script rationale` — an explanation of why the extension needs to use a shell script and
+  can't be implemented with JavaScript. See [Shell script policy](#shell-script-policy).
 
 ### Limits
 
@@ -313,6 +318,77 @@ author page link works either way, so you can share your extension immediately.
 All published extensions (whether listed in the main index or not) are eligible for automatic updates within the PopClip app.
 Updates are subject to the same review as initial submissions.
 
+## Shell script policy
+
+Extensions submitted to the directory should use [**JavaScript actions**](/dev/js-actions) in
+preference to Shell Script actions. Use a shell script only when the action
+genuinely needs one to do something that would be impossible with PopClip's
+internal JavaScript API.
+
+If your extension does have a Shell Script action, its Config must include a
+`shell script rationale` field giving a brief explanation (at least 20 characters) of why the
+action needs a shell script:
+
+```yaml
+shell script rationale: Sends the selected text to the printer using lpr.
+```
+
+**A submission with a shell script action and no rationale is rejected
+automatically.** There is no required format for the rationale: a sentence saying what the script does that JavaScript cannot is all that is needed.
+
+Why? Shell scripts run with full user privileges and can do anything, which makes
+them harder to review and easy to get wrong. For example, unescaped user text
+interpolated into a command can have unintended consequences. JavaScript actions
+run in PopClip's sandboxed [JavaScript environment](/dev/js-environment) and can
+work with the selected text, clipboard, apps and URLs, and with the `network` entitlement they have [network access](/dev/js-environment#network-access-from-javascript) for making API calls.
+JavaScript actions execute more quickly too, since they don't have to shell out to an external task.
+
+::: info Example: the same action, both ways
+
+A shell script action that searches GitHub for the selected text and opens the
+first matching repo, as an installable [snippet](/dev/snippets) — select the
+whole block and PopClip will offer to install it:
+
+```sh
+#!/bin/sh
+# #popclip
+# name: Repo Search (sh)
+json=$(curl -s "https://api.github.com/search/repositories?q=$POPCLIP_URLENCODED_TEXT")
+url=$(echo "$json" | python3 -c "import json,sys; print(json.load(sys.stdin)['items'][0]['html_url'])")
+open "$url"
+```
+
+This is a carefully written script: it quotes its variables and uses PopClip's
+pre-encoded `POPCLIP_URLENCODED_TEXT` instead of interpolating the raw
+selection. Even so, it has to bring in an external tool to parse the JSON —
+here `python3`, which macOS doesn't ship. It spawns three processes to
+do what is really one HTTP request. And it runs with full user privileges, so
+a reviewer still has to read it defensively.
+
+The same action as JavaScript:
+
+```js
+// #popclip
+// name: Repo Search (js)
+// language: javascript
+// entitlements: [network]
+const axios = require("axios");
+const response = await axios.get("https://api.github.com/search/repositories", {
+  params: { q: popclip.input.text }, // encoded correctly, automatically
+});
+popclip.openUrl(response.data.items[0].html_url);
+```
+
+Nothing to escape, nothing to install, no processes spawned. Even the last line is
+better: the shell's `open` can only launch the default browser, while
+`popclip.openUrl()` opens the link in the browser the user is actually working
+in, with PopClip's usual modifier behaviours like holding Shift to open it
+in the background.
+
+:::
+
+This policy applies not just to Bash/Zsh etc., but any script executed using the Shell Script action type. This includes Python, Ruby, Perl, etc.
+
 ## Troubleshooting
 
 - The GitHub repository must be **public**.
@@ -321,3 +397,5 @@ Updates are subject to the same review as initial submissions.
   commit, and its `include` patterns must actually match your package folders.
 - The tag must match your `versionPrefix`, if you set one.
 - You must actually push the tag to GitHub as well as the commit.
+- An extension with a shell script action must have a
+  [shell script rationale](#shell-script-policy) in its Config.

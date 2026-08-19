@@ -1,11 +1,19 @@
 ---
 titleTemplate: :title — PopClip Developer
 ---
+
 # Shell Script actions
 
 A Shell Script action runs a shell script, either directly or from a file. The
 script can be written in any language that can be executed from the command
 line, such as Zsh, Python, Ruby, Perl, etc.
+
+::: warning Submitting to the directory
+Extensions submitted to the [Extensions Directory](/extensions/) should use
+JavaScript actions in preference to Shell Script actions. A submission with a
+Shell Script action must include a
+[`shell script rationale`](/extensions/submit#shell-script-policy) in its Config.
+:::
 
 ## Properties
 
@@ -100,7 +108,7 @@ say
 # #popclip
 # name: Say (option)
 # stdin: text
-# options: 
+# options:
 # - { identifier: voice, type: string, label: Voice, defaultValue: Daniel }
 say -v $POPCLIP_OPTION_VOICE
 ```

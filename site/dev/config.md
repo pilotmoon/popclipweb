@@ -126,6 +126,7 @@ of the extension itself. All properties are optional except `name`.
 | `show as`                   | String               | Sets the default presentation of the extension's actions in the PopClip bar: `icon` or `text`. If omitted, the default is `icon`. (The user can override this per action.)                                                                                       |
 | `auth service label`        | String (Localizable) | For extensions with a sign-in (`auth` function): a label identifying the service to which the user is being asked to sign in. Used in UI prompts like _Sign in to your [label] account_. If omitted, the extension name is used.                                 |
 | `offers multiple instances` | Boolean              | Controls whether PopClip enables the Duplicate and New Instance commands for this extension. By default, PopClip allows multiple instances if the action has any options. Setting this property will override the automatic behavior.                            |
+| `shell script rationale`    | String               | A brief explanation of why the extension needs a [Shell Script action](./shell-script-actions) instead of JavaScript. Not used by the app; required when [submitting](/extensions/submit#shell-script-policy) an extension with a Shell Script action to the directory. |
 
 ### The `identifier` field
 

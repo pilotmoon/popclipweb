@@ -97,6 +97,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - `wants primary display`: the action asks to be the one centred above the pointer when the popup appears.
   - `wants initial display`: for an action with a submenu, the submenu asks to be already open
     when the popup appears.
+- New `shell script rationale` config field: a brief explanation of why an
+  extension needs a Shell Script action instead of JavaScript. Ignored by the
+  app; the [Extensions Directory](/extensions/submit#shell-script-policy) requires it
+  for submissions with a Shell Script action.
 
 ### Changed
 
