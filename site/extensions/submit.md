@@ -334,7 +334,12 @@ shell script rationale: Sends the selected text to the printer using lpr.
 ```
 
 **A submission with a shell script action and no rationale is rejected
-automatically.** There is no required format for the rationale: a sentence saying what the script does that JavaScript cannot is all that is needed.
+automatically.** If yours is rejected for this reason, the right response is
+usually not to write a rationale — it is to re-implement the action in
+JavaScript, which is typically a straightforward port (see the example below).
+Add a rationale only when the action genuinely cannot be done in JavaScript.
+There is no required format for the rationale: a sentence saying what the
+script does that JavaScript cannot is all that is needed.
 
 Why? Shell scripts run with full user privileges and can do anything, which makes
 them harder to review and easy to get wrong. For example, unescaped user text
