@@ -352,7 +352,7 @@ whole block and PopClip will offer to install it:
 ```sh
 #!/bin/sh
 # #popclip
-# name: Repo Search (sh)
+# name: Lucky Repo (sh)
 json=$(curl -s "https://api.github.com/search/repositories?q=$POPCLIP_URLENCODED_TEXT")
 url=$(echo "$json" | python3 -c "import json,sys; print(json.load(sys.stdin)['items'][0]['html_url'])")
 open "$url"
@@ -369,7 +369,7 @@ The same action as JavaScript:
 
 ```js
 // #popclip
-// name: Repo Search (js)
+// name: Lucky Repo (js)
 // language: javascript
 // entitlements: [network]
 const axios = require("axios");
