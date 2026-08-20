@@ -2,6 +2,6 @@ node_modules/
 .env
 site/.vitepress/dist
 site/.vitepress/cache
+site/.vitepress/.temp
 .DS_Store
 bun.lock
-.vitepress/.temp
