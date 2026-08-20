@@ -14,7 +14,7 @@ import StudentDiscount from '/src/StudentDiscount.vue'
 
 # PopClip Student Discount
 
-Students in full-time education can claim a **half-price Standard License**,
+Students in full-time education can claim a **half-price 2-year Standard License**,
 which also comes with a 25% discount on a Lifetime License upgrade afterwards.
 
 To claim the student discount, please fill in the form below.

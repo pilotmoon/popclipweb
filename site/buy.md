@@ -62,7 +62,7 @@ license key at a discounted rate. Please [email me](/support) for a quote.
 
 ## Student Discount
 
-Students in full-time education can claim a half-price Standard License, which
+Students in full-time education can claim a half-price 2-year Standard License, which
 also comes with a 25% discount on a Lifetime License upgrade afterwards. To
 claim the student discount, go to the [student discount page](/student).
 
