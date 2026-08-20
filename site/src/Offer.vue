@@ -551,13 +551,13 @@ function mas50Segment(): SegmentData {
 }
 
 // The issued-for line in the student fineprint: the claimed details from the
-// self-service form, presented data-style ('institution "X", country Y') so
+// self-service form, presented data-style ('institution "X", Y') so
 // free-text institution names can't warp a sentence.
 function studentIssueLine(): string {
   const sp = signedParams.value;
   if (!sp?.edu) return "";
   const country = sp.cou ? (paddleCountries as Record<string, string>)[sp.cou] ?? sp.cou : "";
-  return `Student offer issued for institution "${escapeHtml(sp.edu)}"${country ? `, country ${escapeHtml(country)}` : ""}. `;
+  return `Student offer issued for institution "${escapeHtml(sp.edu)}"${country ? `, ${escapeHtml(country)}` : ""}. `;
 }
 
 // Student discount: a half-price Standard License as the sole item. No Lifetime deal
