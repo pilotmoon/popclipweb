@@ -544,17 +544,23 @@ function studentSegment(): SegmentData {
     headline: "PopClip Student Discount",
     intro: `Thanks for your interest in PopClip. Here is your student discount offer:`,
     primary: {
-      badge: "Your offer — 50% off Standard",
+      badge: "Your offer — 50% off Standard + Lifetime discount",
       title: "Standard License",
       bullets: ["2 years of free updates", "Keep the last version you receive"],
       ...discountPricing("popclip_2year", 50),
       ctaLabel: "Buy Standard License — 50% off",
       footnote: "One-time purchase.",
       claim: "standard50",
+      // highlighted row (same slot as the MAS card's supports-development
+      // note): as a license holder they'll qualify for the standard 25%
+      // Lifetime upgrade offer after buying
+      extraFeatures: [{ icon: "⬆️", label: "Upgrade to Lifetime later for 25% off" }],
     },
     faq: {
       heading: "About this offer",
-      body: "This student discount link was provided to you by PopClip support. It can be used once, for a license for your own use.",
+      body: `This student discount link was provided to you by PopClip support. It can be used once, for a license for your own use.
+
+Your purchase qualifies you for a 25% discount on a Lifetime License. After activation, you'll find the offer link in PopClip's settings.`,
     },
     fineprint: fineprintTail(),
   };
@@ -882,7 +888,11 @@ async function renewStandard(details: BuyerDetails) {
       <template v-if="store.isLoadedForCoupon !== null">
         {{ `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` }}
         <span v-if="regionallyPriced" :class="$style.regionalNote">
-          · <a href="/regional-pricing"><Icon :class="$style.regionalIcon"><GlobeAmericas /></Icon> Regional pricing applied</a></span>
+          ·
+          <a href="/regional-pricing"
+            ><Icon :class="$style.regionalIcon"><GlobeAmericas /></Icon> Regional pricing applied</a
+          ></span
+        >
       </template>
       <template v-else>Loading prices...</template>
     </div>
