@@ -334,16 +334,15 @@ shell script rationale: Sends the selected text to the printer using lpr.
 ```
 
 **A submission with a shell script action and no rationale is rejected
-automatically.** If yours is rejected for this reason, the right response is
-usually not to write a rationale — it is to re-implement the action in
-JavaScript, which is typically a straightforward port (see the example below).
-Add a rationale only when the action genuinely cannot be done in JavaScript.
-There is no required format for the rationale: a sentence saying what the
-script does that JavaScript cannot is all that is needed.
+automatically.** Add a rationale only when the action genuinely cannot be done in JavaScript.
+Otherwise, you should port the extension to JavaScript before submitting again.
 
-Why? Shell scripts run with full user privileges and can do anything, which makes
-them harder to review and easy to get wrong. For example, unescaped user text
-interpolated into a command can have unintended consequences. JavaScript actions
+Why? Shell scripts run with full user privileges and can access anything on the
+user's Mac. They require a much higher level of scrutiny and are thus more demanding to review.
+For that reason, I only want to have to review and sign shell scripts if they are absolutely necessary
+for the function of the extension.
+
+JavaScript actions
 run in PopClip's sandboxed [JavaScript environment](/dev/js-environment) and can
 work with the selected text, clipboard, apps and URLs, and with the `network` entitlement they have [network access](/dev/js-environment#network-access-from-javascript) for making API calls.
 JavaScript actions execute more quickly too, since they don't have to shell out to an external task.
