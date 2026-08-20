@@ -17,7 +17,7 @@ PopClip's prices are based on US dollar pricing, but the cost of living varies
 a great deal around the world. To keep PopClip reasonably affordable
 everywhere, I set lower prices in the countries listed below.
 
-The price for your country is applied automatically, based on your location.
+The price for your country is adjusted automatically, based on your location.
 Prices are set in the local currency where possible, and rounded. The exact
 adjustment varies from the nominal percentage due to currency conversion,
 rounding and local tax differences.
