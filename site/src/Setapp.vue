@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
 const blurb = computed(
   () =>
     `Setapp is the best place to get apps. Get ${props.appName} on Setapp ` +
-    `with dozens of other apps in one subscription for $${props.pricePerMonth}/mos. ` +
+    `with dozens of other apps in one subscription for $${props.pricePerMonth}/mo ` +
     "+ tax. No extra fees, no ads.",
 );
 
