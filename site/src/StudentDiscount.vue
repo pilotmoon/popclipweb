@@ -37,7 +37,7 @@ async function submit() {
   busy.value = true;
   try {
     const base = sandbox ? config.pilotmoon.frontendRoot_sandbox : config.pilotmoon.frontendRoot;
-    const query = new URLSearchParams({ edu: institution.value.trim(), cty: country.value });
+    const query = new URLSearchParams({ edu: institution.value.trim(), cou: country.value });
     // hold the "Preparing" state for a few seconds alongside the mint call
     const [res] = await Promise.all([
       fetch(`${base}/store/getStudentOffer?${query}`),

@@ -38,7 +38,7 @@ interface SignedParams {
   lkh?: string; // license key hash (optional)
   scc?: string; // App Store storefront country, ISO alpha-3 (optional)
   edu?: string; // claimed educational institution (student offer, optional)
-  cty?: string; // claimed country, ISO alpha-2 (student offer, optional)
+  cou?: string; // claimed country, ISO alpha-2 (student offer, optional)
   isd?: string; // link issue date (self-service-minted offers, optional)
 }
 
@@ -82,8 +82,8 @@ function readSignedParams(): SignedParams | null {
   if (scc) params.scc = scc;
   const edu = p.get("edu");
   if (edu) params.edu = edu;
-  const cty = p.get("cty");
-  if (cty) params.cty = cty;
+  const cou = p.get("cou");
+  if (cou) params.cou = cou;
   const isd = p.get("isd");
   if (isd) params.isd = isd;
   const dates = [params.rpd, params.lpd, params.lxd];
@@ -556,7 +556,7 @@ function mas50Segment(): SegmentData {
 function studentIssueLine(): string {
   const sp = signedParams.value;
   if (!sp?.edu) return "";
-  const country = sp.cty ? (paddleCountries as Record<string, string>)[sp.cty] ?? sp.cty : "";
+  const country = sp.cou ? (paddleCountries as Record<string, string>)[sp.cou] ?? sp.cou : "";
   return `Student offer issued for institution "${escapeHtml(sp.edu)}"${country ? `, country ${escapeHtml(country)}` : ""}. `;
 }
 
@@ -807,7 +807,7 @@ function offerPassthrough(claim: string) {
     license_key_hash: sp.lkh,
     store_country_code: sp.scc,
     student_institution: sp.edu,
-    student_country: sp.cty,
+    student_country: sp.cou,
     offer_issue_date: sp.isd,
   };
 }
@@ -852,7 +852,7 @@ async function startClaim(claim: string, details: BuyerDetails) {
     if (sp.lkh) query.set("lkh", sp.lkh);
     if (sp.scc) query.set("scc", sp.scc);
     if (sp.edu) query.set("edu", sp.edu);
-    if (sp.cty) query.set("cty", sp.cty);
+    if (sp.cou) query.set("cou", sp.cou);
     if (sp.isd) query.set("isd", sp.isd);
     const res = await fetch(`${base}/store/getOfferCoupon?${query}`);
     if (!res.ok) throw new Error(`discount request failed: ${res.status}`);
