@@ -9,6 +9,7 @@ import { usePaddleBillingCheckout } from "./composables/usePaddleBillingCheckout
 import { formatDate } from "./helpers/formatters";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { infoBlock, supportMailtoHref } from "./helpers/supportMailto";
+import paddleCountries from "./helpers/countries/paddleCountries.json";
 import { isRegionallyPriced } from "./data/regionalPricing";
 import { GlobeAmericas } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
@@ -36,9 +37,17 @@ interface SignedParams {
   lxd?: string; // license expiry date (optional)
   lkh?: string; // license key hash (optional)
   scc?: string; // App Store storefront country, ISO alpha-3 (optional)
+  edu?: string; // claimed educational institution (student offer, optional)
+  cty?: string; // claimed country, ISO alpha-2 (student offer, optional)
+  isd?: string; // link issue date (self-service-minted offers, optional)
 }
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+// Minimal HTML escape for user-supplied text interpolated into v-html strings.
+function escapeHtml(s: string): string {
+  return s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+}
 
 // The merged fragment + query params (fragment preferred), so PopClip can
 // use whichever is convenient.
@@ -71,6 +80,12 @@ function readSignedParams(): SignedParams | null {
   if (lkh) params.lkh = lkh;
   const scc = p.get("scc");
   if (scc) params.scc = scc;
+  const edu = p.get("edu");
+  if (edu) params.edu = edu;
+  const cty = p.get("cty");
+  if (cty) params.cty = cty;
+  const isd = p.get("isd");
+  if (isd) params.isd = isd;
   const dates = [params.rpd, params.lpd, params.lxd];
   const datesOk = (DATELESS_OFFERS.includes(params.offer) || dates.some((d) => d)) && dates.every((d) => !d || DATE_RE.test(d));
   const ok = params.id.length > 0 && params.sig.length > 0 && params.offer.length > 0 && datesOk;
@@ -535,6 +550,16 @@ function mas50Segment(): SegmentData {
   };
 }
 
+// The issued-for line in the student fineprint: the claimed details from the
+// self-service form, presented data-style ('institution "X", country Y') so
+// free-text institution names can't warp a sentence.
+function studentIssueLine(): string {
+  const sp = signedParams.value;
+  if (!sp?.edu) return "";
+  const country = sp.cty ? (paddleCountries as Record<string, string>)[sp.cty] ?? sp.cty : "";
+  return `Student offer issued for institution "${escapeHtml(sp.edu)}"${country ? `, country ${escapeHtml(country)}` : ""}. `;
+}
+
 // Student discount: a half-price Standard License as the sole item. No Lifetime deal
 // upfront — a Standard license fits the temporary nature of student status, and the
 // buyer gets the usual 25% Lifetime upgrade offer when the license expires. Dateless
@@ -558,11 +583,14 @@ function studentSegment(): SegmentData {
     },
     faq: {
       heading: "About this offer",
-      body: `This student discount link was provided to you by PopClip support. It can be used once, for a license for your own use.
+      body: `This student discount is for students in full-time education. The link can be used once, for a license for your own use.
 
 Your purchase qualifies you for a 25% discount on a Lifetime License. After activation, you'll find the offer link in PopClip's settings.`,
     },
-    fineprint: fineprintTail(),
+    // echo the claimed details back, data-style rather than sentence flow (a
+    // gentle honesty nudge for the self-service form). Escaped: the fineprint
+    // renders via v-html and the fragment isn't signature-checked client-side.
+    fineprint: `${studentIssueLine()}${fineprintTail()}`,
   };
 }
 
@@ -769,6 +797,9 @@ function offerPassthrough(claim: string) {
     license_expiry_date: sp.lxd,
     license_key_hash: sp.lkh,
     store_country_code: sp.scc,
+    student_institution: sp.edu,
+    student_country: sp.cty,
+    offer_issue_date: sp.isd,
   };
 }
 
@@ -811,6 +842,9 @@ async function startClaim(claim: string, details: BuyerDetails) {
     if (sp.lxd) query.set("lxd", sp.lxd);
     if (sp.lkh) query.set("lkh", sp.lkh);
     if (sp.scc) query.set("scc", sp.scc);
+    if (sp.edu) query.set("edu", sp.edu);
+    if (sp.cty) query.set("cty", sp.cty);
+    if (sp.isd) query.set("isd", sp.isd);
     const res = await fetch(`${base}/store/getOfferCoupon?${query}`);
     if (!res.ok) throw new Error(`discount request failed: ${res.status}`);
     const { discountId, priceId } = ZDiscountResponse.parse(await res.json());

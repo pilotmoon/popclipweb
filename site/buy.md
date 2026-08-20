@@ -60,6 +60,12 @@ Your purchase is subject to the [Terms of License](/terms).
 If you are buying for a team or organization you can purchase a multi-user
 license key at a discounted rate. Please [email me](/support) for a quote.
 
+## Student Discount
+
+Students in full-time education can claim a half-price Standard License, which
+also comes with a 25% discount on a Lifetime License upgrade afterwards. To
+claim the student discount, go to the [student discount page](/student).
+
 ## Regional Pricing
 
 To keep PopClip reasonably affordable everywhere, prices are set lower in some
