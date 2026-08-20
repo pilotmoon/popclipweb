@@ -55,6 +55,12 @@ from Setapp as well.
 
 Your purchase is subject to the [Terms of License](/terms).
 
+## Regional Pricing
+
+To keep PopClip reasonably affordable everywhere, prices are set lower in some
+countries. See [Regional Pricing](/regional-pricing) for how it works and which
+countries are included.
+
 ## Volume Purchase
 
 If you are buying for a team or organization you can purchase a multi-user
@@ -65,12 +71,6 @@ license key at a discounted rate. Please [email me](/support) for a quote.
 Students in full-time education can claim a half-price 2-year Standard License, which
 also comes with a 25% discount on a Lifetime License upgrade afterwards. To
 claim the student discount, go to the [student discount page](/student-discount).
-
-## Regional Pricing
-
-To keep PopClip reasonably affordable everywhere, prices are set lower in some
-countries. See [Regional Pricing](/regional-pricing) for how it works and which
-countries are included.
 
 ## Free
 
