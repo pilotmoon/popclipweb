@@ -783,6 +783,15 @@ const segment = computed<SegmentData>(() => {
   return rule.build(ctx);
 });
 
+// FAQ body paragraphs, split on blank lines and rendered as separate <p>s so
+// the spacing is a controlled margin rather than pre-line blank lines.
+const faqParagraphs = computed(() =>
+  segment.value.faq.body
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter((p) => p),
+);
+
 const ZDiscountResponse = z.object({ discountId: z.string(), priceId: z.string() });
 
 // The signed offer details passed through to the Paddle webhook for context/tracking.
@@ -947,7 +956,7 @@ async function renewStandard(details: BuyerDetails) {
 
     <div :class="$style.faq">
       <div :class="$style.faqHeading">{{ segment.faq.heading }}</div>
-      <p :class="$style.faqText">{{ segment.faq.body }}</p>
+      <p v-for="(para, i) in faqParagraphs" :key="i" :class="$style.faqText">{{ para }}</p>
     </div>
 
     <p :class="$style.fineprint" v-html="segment.fineprint"></p>
@@ -1053,14 +1062,23 @@ async function renewStandard(details: BuyerDetails) {
   line-height: 1.5;
   color: var(--vp-c-text-2);
   margin: 0;
-  /* Paragraph breaks in FAQ body strings are real newlines, not markup. */
-  white-space: pre-line;
 }
 
-.fineprint {
+/* Narrow, consistent paragraph rhythm within the FAQ (and matched by the
+   fineprint's margin below). */
+.faq .faqText + .faqText {
+  margin-top: 8px;
+}
+
+/* Doubled class raises specificity above VitePress's `.vp-doc p` rule, which
+   otherwise overrides line-height (28px) and margin. The margin and tight
+   line-height match the FAQ's paragraph rhythm, so the fineprint reads as a
+   continuation rather than a separate block. */
+.fineprint.fineprint {
   text-align: center;
   font-size: 12px;
+  line-height: 1.5;
   color: var(--vp-c-text-2);
-  margin-top: 24px;
+  margin: 8px auto 0 auto;
 }
 </style>
