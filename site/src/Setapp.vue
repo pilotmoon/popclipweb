@@ -74,7 +74,9 @@ const buttonLink = computed(() => link("banner"));
 </template>
 
 <style module>
-/* Setapp's own typefaces, self-hosted so the banner makes no external calls. */
+/* Setapp's own typefaces, self-hosted so the banner makes no external calls.
+   Fixel is MacPaw's, released free under the Open Font License, which permits
+   this redistribution: https://fixel.macpaw.com/ */
 @font-face {
   font-family: "FixelText";
   src: url("/fonts/FixelText-Medium.woff2") format("woff2");
