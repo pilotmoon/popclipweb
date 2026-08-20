@@ -5,14 +5,17 @@
 // details are signed into it and end up recorded on the license). The
 // "Preparing your offer" pause is a little ceremony — the mint itself is
 // quick — before jumping to the minted offer page.
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { z } from "zod";
 import config from "./config/config.json";
+import { loadStore, useStoreState } from "./composables/useStoreState";
 import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
+import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import paddleCountries from "./helpers/countries/paddleCountries.json";
 
 const log = useLogger();
+const store = useStoreState();
 const sandbox = useDeploymentInfo().isLocalhost;
 
 const confirmed = ref(false);
@@ -20,6 +23,21 @@ const institution = ref("");
 const country = ref("");
 const busy = ref(false);
 const failed = ref(false);
+
+// Pre-fill the country from the store's detected pricing country (persisted
+// from any prior visit, and refreshed by loadStore below). Only while the
+// visitor hasn't picked one themselves — a detected value never overrides a
+// manual choice.
+onMounted(() => loadStore());
+watch(
+  store.countryCode,
+  (code) => {
+    if (!country.value && code && code in paddleCountries) {
+      country.value = code;
+    }
+  },
+  { immediate: true },
+);
 
 const countries = Object.entries(paddleCountries as Record<string, string>)
   .map(([code, name]) => ({ code, name }))
@@ -72,10 +90,13 @@ async function submit() {
         </label>
         <label :class="$style.fieldLabel">
           Country
-          <select :class="$style.select" v-model="country">
-            <option value="" disabled>Select country…</option>
-            <option v-for="c in countries" :key="c.code" :value="c.code">{{ c.name }}</option>
-          </select>
+          <span :class="$style.selectWrap">
+            <span v-if="country" :class="$style.flag">{{ getFlagEmoji(country) }}</span>
+            <select :class="[$style.select, country && $style.selectWithFlag]" v-model="country">
+              <option value="" disabled>Select country…</option>
+              <option v-for="c in countries" :key="c.code" :value="c.code">{{ c.name }}</option>
+            </select>
+          </span>
         </label>
         <p v-if="failed" :class="$style.error">
           Sorry, something went wrong preparing your offer. Please try again, or <a href="/support">contact support</a>.
@@ -130,6 +151,29 @@ async function submit() {
 .select:focus {
   outline: none;
   border-color: var(--vp-c-brand-1);
+}
+
+/* The chosen country's flag, overlaid inside the select's left edge (native
+   selects can't render it in the closed field themselves). */
+.selectWrap {
+  position: relative;
+  display: block;
+}
+
+.selectWrap .select {
+  width: 100%;
+}
+
+.flag {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.selectWithFlag {
+  padding-left: 34px;
 }
 
 .submit {
