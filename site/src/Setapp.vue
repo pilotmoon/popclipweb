@@ -29,15 +29,13 @@ const props = withDefaults(defineProps<Props>(), {
 // Their English copy, with the same placeholders filled in.
 const blurb = computed(
   () =>
-    `Setapp is the best place to get apps. Buy ${props.appName} on Setapp or get it ` +
+    `Setapp is the best place to get apps. Get ${props.appName} on Setapp ` +
     `with dozens of other apps in one subscription for $${props.pricePerMonth}/mos. ` +
     "+ tax. No extra fees, no ads.",
 );
 
 // Their link builder: source slug from the app name, campaign per click target.
-const slug = computed(() =>
-  props.appName.toLowerCase().replace(/[^0-9a-zA-Z]/g, "_"),
-);
+const slug = computed(() => props.appName.toLowerCase().replace(/[^0-9a-zA-Z]/g, "_"));
 function link(target: string) {
   const campaign = `${slug.value}_main_${target}`;
   const query = new URLSearchParams({
@@ -65,28 +63,11 @@ const buttonLink = computed(() => link("banner"));
         </div>
       </div>
       <div :class="$style.content">
-        <a
-          :class="$style.logo"
-          :href="logoLink"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <img
-            src="/setapp-logo.svg"
-            height="44"
-            width="236"
-            alt="Setapp logo"
-          />
+        <a :class="$style.logo" :href="logoLink" target="_blank" rel="noreferrer noopener">
+          <img src="/setapp-logo.svg" height="44" width="236" alt="Setapp logo" />
         </a>
         <div>{{ blurb }}</div>
-        <a
-          :class="$style.button"
-          class="no-icon"
-          :href="buttonLink"
-          target="_blank"
-          rel="noreferrer noopener"
-          >Try Free</a
-        >
+        <a :class="$style.button" class="no-icon" :href="buttonLink" target="_blank" rel="noreferrer noopener">Try Free</a>
       </div>
     </div>
   </div>
