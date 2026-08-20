@@ -51,7 +51,7 @@ function readOfferParams(): URLSearchParams {
 
 // Offers whose wording doesn't reference a purchase/expiry date, so a link
 // with just id + offer + sig is valid.
-const DATELESS_OFFERS = ["support", "free1year"];
+const DATELESS_OFFERS = ["support", "free1year", "student"];
 
 // Read the signed offer params. The dates are optional, but at least one
 // must be present for the upgrade page to make sense (the support offer
@@ -133,11 +133,13 @@ const initialName = computed(() => storedName.value || "");
 const initialEmail = computed(() => storedEmail.value || "");
 
 const CLAIM_TITLES: Record<string, string> = {
+  lifetime50: "Buy Lifetime License",
   lifetime30: "Buy Lifetime License",
   lifetime25: "Buy Lifetime License",
   lifetime20: "Buy Lifetime License",
   freeLifetime: "Claim Lifetime License",
   free2year: "Claim Standard License", // the Mac App Store offer's free 2-year fallback
+  standard50: "Buy Standard License",
   free1year: "Claim 1-Year License",
   renew2year: "Renew Standard License",
 };
@@ -189,8 +191,8 @@ function checkoutCustomData(claim: string, details: BuyerDetails) {
 // or a net amount, so the displayed basis (priceMinor) works for both tax modes.
 type PriceFields = Pick<CardData, "listPrice" | "priceLabel" | "priceIsDiscount" | "taxNote" | "discountNote">;
 
-function lifetimePricing(percentOff: number): PriceFields {
-  const p = store.paddleProducts.value.popclip_lifetime;
+function discountPricing(product: "popclip_lifetime" | "popclip_2year" | "popclip_1year", percentOff: number): PriceFields {
+  const p = store.paddleProducts.value[product];
   if (!p) return { priceLabel: "" };
   if (percentOff >= 100) {
     return { listPrice: roundPrice(p.displayPrice), priceLabel: "Free", priceIsDiscount: true };
@@ -203,6 +205,10 @@ function lifetimePricing(percentOff: number): PriceFields {
     taxNote: p.taxNote ?? undefined,
     discountNote: percentOff > 0 ? `${percentOff}% off` : undefined,
   };
+}
+
+function lifetimePricing(percentOff: number): PriceFields {
+  return discountPricing("popclip_lifetime", percentOff);
 }
 
 // Full-price 2-year renewal pricing (no discount).
@@ -484,18 +490,71 @@ You're welcome to upgrade now or wait until then. Either way, the Lifetime Licen
   return seg;
 }
 
-// Generic support-granted discount: the same deal as the upgrade offer (30%
-// off Lifetime, or a free 1-year), with no receipt or license dates — links
-// are minted ad hoc, e.g. by support. Wording is deliberately generic.
+// Generic support-granted discount: 20% off Lifetime, or a free 1-year, with
+// no receipt or license dates — links are minted ad hoc, e.g. by support.
+// Wording is deliberately generic.
 function supportSegment(): SegmentData {
   return {
     headline: "PopClip Support Discount",
     intro: `Thanks for your interest in PopClip. Here is your discount offer:`,
-    primary: masLifetimePrimary(),
+    primary: lifetimeCard(20, {
+      badge: "Your offer — 20% off Lifetime",
+      ctaLabel: "Buy Lifetime License — 20% off",
+      footnote: "One-time purchase.",
+      claim: "lifetime20",
+    }),
     secondary: freeOneYearAlt(),
     faq: {
       heading: "About this offer",
       body: "This discount link was provided to you by PopClip support. It can be used once, for a license for your own use.",
+    },
+    fineprint: fineprintTail(),
+  };
+}
+
+// Extra Mac App Store upgrade discount, sent directly by Nick to customers in certain
+// cases: 50% off Lifetime as the sole item, no free alternative. Presented within the
+// support family (same headline/FAQ as the support offer), with a hybrid intro that
+// acknowledges the receipt year — an rpd is required in the link (the backend claim
+// and the fineprint reference it too).
+function mas50Segment(): SegmentData {
+  return {
+    headline: "PopClip Support Discount",
+    intro: `Thanks for being a PopClip user since <strong>${purchaseYear.value}</strong>. Here is your discount offer:`,
+    primary: lifetimeCard(50, {
+      badge: "Your offer — 50% off Lifetime",
+      ctaLabel: "Buy Lifetime License — 50% off",
+      footnote: "One-time purchase.",
+      claim: "lifetime50",
+    }),
+    faq: {
+      heading: "About this offer",
+      body: "This discount link was provided to you by PopClip support. It can be used once, for a license for your own use.",
+    },
+    fineprint: `Offer for your Mac App Store purchase dated ${purchaseDate.value}. ${fineprintTail()}`,
+  };
+}
+
+// Student discount: a half-price Standard License as the sole item. No Lifetime deal
+// upfront — a Standard license fits the temporary nature of student status, and the
+// buyer gets the usual 25% Lifetime upgrade offer when the license expires. Dateless
+// and generically worded like the support offer, for ad hoc links.
+function studentSegment(): SegmentData {
+  return {
+    headline: "PopClip Student Discount",
+    intro: `Thanks for your interest in PopClip. Here is your student discount offer:`,
+    primary: {
+      badge: "Your offer — 50% off Standard",
+      title: "Standard License",
+      bullets: ["2 years of free updates", "Keep the last version you receive"],
+      ...discountPricing("popclip_2year", 50),
+      ctaLabel: "Buy Standard License — 50% off",
+      footnote: "One-time purchase.",
+      claim: "standard50",
+    },
+    faq: {
+      heading: "About this offer",
+      body: "This student discount link was provided to you by PopClip support. It can be used once, for a license for your own use.",
     },
     fineprint: fineprintTail(),
   };
@@ -637,6 +696,19 @@ const offerRules: OfferRule[] = [
     name: "free1year",
     matches: (ctx) => ctx.offer === "free1year",
     build: () => free1YearSegment(),
+  },
+  {
+    // support-granted extra MAS discount: 50% off Lifetime only (must precede the
+    // rpd-matched rules below — mas50 links carry an rpd)
+    name: "mas50",
+    matches: (ctx) => ctx.offer === "mas50",
+    build: () => mas50Segment(),
+  },
+  {
+    // student discount: half-price Standard, or 20% off Lifetime
+    name: "student",
+    matches: (ctx) => ctx.offer === "student",
+    build: () => studentSegment(),
   },
   {
     name: "mas-free",
