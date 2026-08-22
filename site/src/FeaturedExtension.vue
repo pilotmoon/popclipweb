@@ -156,6 +156,13 @@ const bylineAuthor = computed(() => {
   font-size: 14px;
   margin-top: 8px;
 }
+/* app links in the description: underlined but in the text colour, so
+   the box reads as one piece rather than a scatter of blue. nested
+   selector to outrank vp-doc's link styling */
+.Featured .Text .Description a {
+  color: inherit;
+  text-decoration: underline;
+}
 
 /* pinned to the bottom of the text column: links left, button right */
 .Footer {
