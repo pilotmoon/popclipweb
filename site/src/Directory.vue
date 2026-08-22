@@ -100,9 +100,7 @@ const alphaSection = computed<Section>(() => ({
   title: "All Extensions (Alphabetical)",
   members: [...extsMap.value.values()].sort(byName).map((e) => e.identifier),
 }));
-// the download ranking, in the open: this arrangement is the one place
-// the order is shown as such. elsewhere rank only steers which members
-// a category section selects, never the order they appear in.
+// the download ranking across the whole directory, as one list
 const popularSection = computed<Section>(() => ({
   title: "All Extensions (Most popular first)",
   members: [...extsMap.value.values()].sort(byRank).map((e) => e.identifier),
@@ -123,10 +121,9 @@ const updatedSection = computed<Section>(() => ({
     .sort((a, b) => b.updatedDate.getTime() - a.updatedDate.getTime())
     .map((e) => e.identifier),
 }));
-// within a section: flagships first, then the rest, each group A-Z.
-// position is the flagship's only visible signal (there is no badge),
-// so it keeps the top spot; nothing else about the order carries
-// meaning, and in particular popularity never shows through it
+// the tail sections (Not Categorized, Unlisted): flagships first, then
+// the rest, each group A-Z. category sections order by popularity
+// instead -- see categoriesIndex
 function sectionOrder(list: ExtInfo[]): string[] {
   return list
     .sort(
@@ -163,9 +160,10 @@ const categoriesIndex = computed<Section[]>(() => {
       // NOT have surfaced, so nothing is ever permanently buried.
       // flagships and new entries always fit, even past the limit.
       //
-      // the visible ORDER is a different matter: flagships first, then
-      // everything else as one alphabetical run. the formation decides
-      // who is on the row, not where they stand on it.
+      // the visible ORDER is then simply popularity, whoever got in and
+      // however: flagships tend to be popular so they tend to lead, and
+      // unranked entries (new, or never downloaded) sit at the bottom
+      // until downloads carry them up.
       const limit = def.frontPageLimit ?? DEFAULT_CATEGORY_LIMIT;
       const flagships = members.filter((m) => m.flagship);
       // the new slots go to the NEWEST few; any further new entries
@@ -195,18 +193,18 @@ const categoriesIndex = computed<Section[]>(() => {
       );
       const ranked = surfaced.slice(0, slots - wildcardSlots);
       const wildcards = randomPick(buried, wildcardSlots, `${def.slug}:wild`);
-      const visible = [
-        ...flagships.sort(byName),
-        ...[...fresh, ...ranked, ...wildcards].sort(byName),
-      ];
+      const visible = [...flagships, ...fresh, ...ranked, ...wildcards].sort(
+        byRank,
+      );
       // the footer link only exists when there is genuinely more to see,
       // and its count says so: "View all 17 in ..."
       const truncated = visible.length < members.length;
       sections.push({
         title: def.title,
         members: visible.map((e) => e.identifier),
-        // search covers the whole membership, not just the selection
-        fullMembers: sectionOrder(members),
+        // search covers the whole membership, not just the selection,
+        // in the same popularity order
+        fullMembers: [...members].sort(byRank).map((e) => e.identifier),
         // every category heading reveals a link to its page on hover;
         // the counted footer appears only when truncated
         pageLink: `/extensions/categories/${def.slug}`,
