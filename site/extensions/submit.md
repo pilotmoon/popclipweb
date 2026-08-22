@@ -133,6 +133,10 @@ Use an [underscore name prefix](#hidden-files) to keep images out of the final d
 Externally hosted images are not allowed and will be replaced with a "\[Remote image removed\]" placeholder when the readme is rendered.
 :::
 
+::: tip The Featured slot
+The directory's front page opens with a Featured box showing one extension a day. To be eligible, an extension needs a demo in **MP4** format (not GIF) with an aspect ratio of roughly 2:1 — anywhere between 3:2 and 5:2 is accepted. Editorial criteria also apply.
+:::
+
 ### Keywords
 
 The directory's search box matches against your extension's **name** and
