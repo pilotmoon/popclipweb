@@ -28,6 +28,35 @@ export interface OpenBillingCheckoutOptions {
 
 let paddleInitialized = false;
 
+// Per-checkout state, module-level rather than per-composable-instance.
+//
+// Paddle.js is a single global and Paddle.Initialize runs once, so its
+// eventCallback stays bound to the composable instance that happened to
+// initialize it. Every later call of usePaddleBillingCheckout() — a second
+// component (Buy.vue and Offer.vue both call it), or just the same one
+// remounting after a client-side navigation — builds a fresh closure that
+// the callback knows nothing about. Held in the closure, this state would
+// then split in two: openCheckout on the current instance stamps its flow
+// id into the checkout's customData, and so onto the license, while the
+// callback on the original instance reports the beacons, polls getLicense
+// and sets purchaseInfo with a different one. Observed in production on
+// 22 Aug 2026, where it left a buyer who had paid polling a 404 that could
+// never resolve, because the license was filed under a flow id that no
+// longer existed anywhere on the page.
+//
+// The flow id is generated locally at checkout open, so on completion we use
+// this rather than parsing it back out of the event payload.
+let currentFlowId: string | null = null;
+// Per-checkout state for the checkout.closed rescue below.
+let paymentInitiated = false;
+let completedFired = false;
+let lastCustomerEmail: string | null = null;
+let lastCustomerCountry: string | null = null;
+// module-level for the same reason: startPaymentWatch runs from the event
+// callback, while openCheckout — which must stop any watch still running —
+// may be called on the other instance.
+let watchTimer: ReturnType<typeof setInterval> | null = null;
+
 // Paddle Billing checkout setup and post-checkout handling. Counterpart of
 // usePaddleCheckout (Classic), which it replaces at the migration cutover.
 export function usePaddleBillingCheckout() {
@@ -35,15 +64,6 @@ export function usePaddleBillingCheckout() {
   const log = useLogger();
   const purchaseInfo = usePurchaseInfo();
   const sandbox = useDeploymentInfo().isLocalhost;
-
-  // The flow id is generated locally at checkout open, so on completion we
-  // use this rather than parsing it back out of the event payload.
-  let currentFlowId: string | null = null;
-  // Per-checkout state for the checkout.closed rescue below.
-  let paymentInitiated = false;
-  let completedFired = false;
-  let lastCustomerEmail: string | null = null;
-  let lastCustomerCountry: string | null = null;
 
   async function initPaddle() {
     const token = sandbox
@@ -132,8 +152,6 @@ export function usePaddleBillingCheckout() {
   // (QR shown but unscanned, or 3DS underway) and "failed" never close the
   // overlay: the customer may still be mid-payment, and Paddle's own UI
   // handles retries.
-  let watchTimer: ReturnType<typeof setInterval> | null = null;
-
   function startPaymentWatch() {
     if (watchTimer) return;
     const startedAt = Date.now();
@@ -247,12 +265,7 @@ export function usePaddleBillingCheckout() {
   async function openCheckout(options: OpenBillingCheckoutOptions) {
     log("[checkout] openCheckout requested with options", options);
     await initPaddle();
-    stopPaymentWatch();
-    currentFlowId = window.crypto?.randomUUID();
-    paymentInitiated = false;
-    completedFired = false;
-    lastCustomerEmail = options.email ?? null;
-    lastCustomerCountry = null;
+    beginCheckoutFlow(options.email ?? null);
     const email = options.email ?? null;
     // #country=XX (the same param that forces displayed prices) also
     // pre-fills the checkout's country, so Paddle localizes currency and
@@ -285,12 +298,34 @@ export function usePaddleBillingCheckout() {
     Paddle.Checkout.open(checkoutOptions);
   }
 
+  // Start a checkout: drop any watch still running for the previous one,
+  // reset the per-checkout state, and mint the flow id that identifies this
+  // checkout in the beacons, the payment watch and purchaseInfo.
+  function beginCheckoutFlow(email: string | null) {
+    stopPaymentWatch();
+    currentFlowId = window.crypto?.randomUUID();
+    paymentInitiated = false;
+    completedFired = false;
+    lastCustomerEmail = email;
+    lastCustomerCountry = null;
+  }
+
   // Initialize Paddle.js without opening a checkout ourselves. Used when
   // the page is visited via a Paddle transaction link (?_ptxn=txn_...):
   // Paddle.js detects the parameter on Initialize and opens the checkout
   // for that transaction automatically.
   async function initForTransactionCheckout() {
     log("[checkout] initializing for a _ptxn transaction link");
+    // Mint a flow id for this checkout too, before Paddle.js opens it. It
+    // cannot reach the transaction's custom data — Paddle fixed that when
+    // the payment link was issued — so the license will not carry it, and
+    // the license lookup falls back to the transaction id. But without a
+    // flow id here the event callback drops every beacon, never starts the
+    // payment watch, and bails out of checkoutCompleted without sending the
+    // buyer to their license at all. Minting one also clears any state left
+    // by an earlier checkout in this page session, which would otherwise
+    // file this one under the previous checkout's flow id.
+    beginCheckoutFlow(null);
     await initPaddle();
   }
 
