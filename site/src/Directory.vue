@@ -180,19 +180,20 @@ const categoriesIndex = computed<Section[]>(() => {
         (m) => !m.flagship && !fresh.includes(m),
       );
       const slots = Math.max(0, limit - flagships.length - fresh.length);
-      // what the ranking alone would show in those slots
       const byPopularity = [...rest].sort(byRank);
-      const surfaced = byPopularity.slice(0, slots);
       // reserve the wildcard slots, but only if there is anyone left to
-      // be a wildcard: a small category just shows its ranked members
-      const buried = byPopularity.slice(slots);
+      // be a wildcard: a small category just shows its ranked members.
+      // the pool is everyone below the RANKED cut -- including the two
+      // the wildcards displaced -- so every member not shown on merit
+      // has the same chance, and nobody is permanently buried
       const wildcardSlots = Math.min(
         WILDCARD_PER_CATEGORY_LIMIT,
         slots,
-        buried.length,
+        Math.max(0, byPopularity.length - slots),
       );
-      const ranked = surfaced.slice(0, slots - wildcardSlots);
-      const wildcards = randomPick(buried, wildcardSlots, `${def.slug}:wild`);
+      const ranked = byPopularity.slice(0, slots - wildcardSlots);
+      const pool = byPopularity.slice(slots - wildcardSlots);
+      const wildcards = randomPick(pool, wildcardSlots, `${def.slug}:wild`);
       const visible = [...flagships, ...fresh, ...ranked, ...wildcards].sort(
         byRank,
       );
