@@ -114,6 +114,7 @@ const featured = computed<ExtInfo | null>(() => {
   const pool = listed
     .filter(
       (e) =>
+        e.featurable !== false && // the curation veto, on the family
         e.demo?.endsWith(".mp4") &&
         e.demoAspect != null &&
         e.demoAspect >= FEATURED_MIN_ASPECT &&

@@ -31,7 +31,7 @@ export const NEW_WINDOW_DAYS = 21;
 // the popularity ranking. automatic, with no per-extension flag: the
 // pool is large enough to rotate and keeps pace with new demos for free.
 // (mp4 only, by decision: gifs are excluded even where one exists.)
-export const FEATURED_RANK_FRACTION = 0.5;
+export const FEATURED_RANK_FRACTION = 0.75;
 
 // demo aspect ratios vary (the house format is 2:1; a few are ultra-
 // wide strips). the Featured box admits width/height within this range

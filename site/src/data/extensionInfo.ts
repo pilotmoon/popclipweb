@@ -52,6 +52,9 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   // the score behind it is deliberately not public. nullish for the
   // same reason as firstListed
   popularity: z.object({ rank: z.number().int().positive() }).nullish(),
+  // family-level curation veto for the Featured box; nullish for the
+  // same reason as above
+  featurable: z.boolean().nullish(),
   shortcode: z.string(),
   identifier: z.string(),
   icon: z.string().nullable(),
