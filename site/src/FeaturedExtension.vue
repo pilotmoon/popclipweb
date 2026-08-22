@@ -57,7 +57,10 @@ const bylineAuthor = computed(() => {
 .Featured {
   display: flex;
   gap: 20px;
-  align-items: center;
+  /* stretch, not center: the text column runs the full height of the
+     box so its download button can sit at the bottom; everything else
+     starts at the top */
+  align-items: stretch;
   margin: 16px 0 0;
   padding: 16px;
   border-radius: 8px;
@@ -67,6 +70,8 @@ const bylineAuthor = computed(() => {
 .Text {
   flex: 1 1 0;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* same voice as the extension page's card headers */
@@ -124,8 +129,11 @@ const bylineAuthor = computed(() => {
   margin-top: 8px;
 }
 
+/* bottom-right of the box */
 .Download {
-  margin-top: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  align-self: flex-end;
 }
 
 .Media {
