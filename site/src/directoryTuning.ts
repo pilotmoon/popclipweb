@@ -25,3 +25,15 @@ export const WILDCARD_PER_CATEGORY_LIMIT = 1;
 // how long an extension counts as newly listed: drives both the New!
 // badge on entries and the new-entries grouping in category sections
 export const NEW_WINDOW_DAYS = 21;
+
+// the Featured box at the top of the front page rotates daily through
+// the extensions that have an mp4 demo and sit in this top fraction of
+// the popularity ranking. automatic, with no per-extension flag: the
+// pool is large enough to rotate and keeps pace with new demos for free.
+// (mp4 only, by decision: gifs are excluded even where one exists.)
+export const FEATURED_RANK_FRACTION = 0.5;
+
+// demo aspect ratios vary (the house format is 2:1; a few are ultra-
+// wide strips). the Featured box admits width/height within this range
+export const FEATURED_MIN_ASPECT = 1.5;
+export const FEATURED_MAX_ASPECT = 2.6;

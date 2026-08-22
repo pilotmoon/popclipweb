@@ -1,7 +1,9 @@
 import { z } from "zod";
 import { classicExtensions } from "./classic.ts";
 import * as config from "../config/config.json";
+import axios from "axios";
 import { api } from "./pilotmoonApi.ts";
+import { mp4Aspect } from "./mp4Dimensions.ts";
 import sanitizeHtml from "sanitize-html";
 import { type Data as ReleasesData, load as loadReleases, type Release } from './releases.data';
 
@@ -66,6 +68,9 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   popclipVersion: z.number().nullable(),
   // extras that we add:
   demo: z.string().nullish(),
+  // width/height of an mp4 demo, read from the file at build time; only
+  // probed for listed extensions, and only used by the Featured box
+  demoAspect: z.number().nullish(),
   readme: z.string().nullish(),
   filterTerms: z.string().nullish(),
   license: ZLicenseInfo.nullish(),
@@ -151,6 +156,11 @@ async function loadFromApi() {
         findSpecialFile("demo.mp4", ext.files) ??
           findSpecialFile("demo.gif", ext.files),
       );
+      // the Featured box gates on aspect ratio, which only the file
+      // knows. listed mp4s only: a few dozen small files per build
+      if (!ext.unlisted && ext.demo?.endsWith(".mp4")) {
+        ext.demoAspect = await probeAspect(ext.demo);
+      }
       const { versionString, isBeta } = await getDisplayVersion(ext);
       ext.readme = adjustPublicPath(findSpecialFile("readme.md", ext.files));
       ext.download = adjustPublicPath(ext.download);
@@ -172,6 +182,21 @@ async function loadFromApi() {
   console.log(`Loaded ${exts.length} extensions from the API`);
   console.timeEnd("load extensions");
   return exts;
+}
+
+// fetch a demo and read its dimensions; a failure just means the demo
+// is not eligible for the Featured box, never a failed build
+async function probeAspect(url: string): Promise<number | null> {
+  try {
+    const response = await axios.get<ArrayBuffer>(url, {
+      responseType: "arraybuffer",
+      timeout: 30_000,
+    });
+    return mp4Aspect(response.data);
+  } catch (error) {
+    console.warn(`Could not read demo dimensions for ${url}: ${error}`);
+    return null;
+  }
 }
 
 function adjustActionTypes(ext: ExtInfo) {

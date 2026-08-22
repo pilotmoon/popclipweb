@@ -4,6 +4,7 @@ import { data as exts } from "./data/extensions.data";
 import { data as directoryData, type Section } from "./data/directory.data";
 import { IconLink, IconSearch } from "@tabler/icons-vue";
 import DirectoryEntry from "./DirectoryEntry.vue";
+import FeaturedExtension from "./FeaturedExtension.vue";
 import { ElInput, ElRadioButton, ElRadioGroup, ElTag } from "element-plus";
 import { computed, onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { useData } from "vitepress";
@@ -11,6 +12,9 @@ import { useDebounceFn } from "@vueuse/core";
 
 import {
   DEFAULT_CATEGORY_LIMIT,
+  FEATURED_MAX_ASPECT,
+  FEATURED_MIN_ASPECT,
+  FEATURED_RANK_FRACTION,
   NEW_PER_CATEGORY_LIMIT,
   NEW_WINDOW_DAYS,
   NEWLY_ADDED_LIMIT,
@@ -94,6 +98,34 @@ function isNewlyListed(e: ExtInfo & { firstListed?: unknown }) {
     e.firstListed != null && new Date(e.firstListed as string | Date).getTime() > newCutoff
   );
 }
+
+// the Featured box: one extension a day from the pool of listed
+// extensions with an mp4 demo of a box-friendly aspect ratio, in the
+// top fraction of the ranking. a
+// deterministic daily ROUND-ROBIN rather than a random draw, so every
+// eligible extension gets its turn (random would repeat and skip); the
+// pool is sorted by identifier so the sequence is stable as it changes.
+// seeded from the build date like the serendipity picks, so server and
+// client agree.
+const featured = computed<ExtInfo | null>(() => {
+  const listed = [...allMap.values()].filter((e) => !e.unlisted);
+  const rankedCount = listed.filter((e) => e.popularity).length;
+  const cutoff = Math.ceil(rankedCount * FEATURED_RANK_FRACTION);
+  const pool = listed
+    .filter(
+      (e) =>
+        e.demo?.endsWith(".mp4") &&
+        e.demoAspect != null &&
+        e.demoAspect >= FEATURED_MIN_ASPECT &&
+        e.demoAspect <= FEATURED_MAX_ASPECT &&
+        e.popularity != null &&
+        e.popularity.rank <= cutoff,
+    )
+    .sort((a, b) => a.identifier.localeCompare(b.identifier));
+  if (pool.length === 0) return null;
+  const dayIndex = Math.floor(Date.parse(directoryData.day) / 86_400_000);
+  return pool[dayIndex % pool.length];
+});
 
 // define the arrangements
 const alphaSection = computed<Section>(() => ({
@@ -410,6 +442,12 @@ const filteredIndex = computed(() => {
   </div>
   <h1>PopClip Extensions Directory</h1>
   <div :class="$style.Directory">
+    <!-- the featured box belongs to browsing the default index: it gives
+         way to search results and to the other arrangements -->
+    <FeaturedExtension
+      v-if="featured && !searching && arrange === defaultArrange"
+      :ext="featured"
+    />
     <div :class="$style.Header">
       <div :class="$style.Control">
         Arrange:
