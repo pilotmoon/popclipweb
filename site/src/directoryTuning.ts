@@ -20,7 +20,7 @@ export const NEW_PER_CATEGORY_LIMIT = 2;
 // draw from members the popularity ranking would NOT have surfaced, so
 // nothing is permanently buried below the fold. the remaining slots go
 // to the highest-ranked members.
-export const WILDCARD_PER_CATEGORY_LIMIT = 2;
+export const WILDCARD_PER_CATEGORY_LIMIT = 1;
 
 // how long an extension counts as newly listed: drives both the New!
 // badge on entries and the new-entries grouping in category sections
