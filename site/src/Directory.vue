@@ -442,12 +442,6 @@ const filteredIndex = computed(() => {
   </div>
   <h1>PopClip Extensions Directory</h1>
   <div :class="$style.Directory">
-    <!-- the featured box belongs to browsing the default index: it gives
-         way to search results and to the other arrangements -->
-    <FeaturedExtension
-      v-if="featured && !searching && arrange === defaultArrange"
-      :ext="featured"
-    />
     <div :class="$style.Header">
       <div :class="$style.Control">
         Arrange:
@@ -479,6 +473,13 @@ const filteredIndex = computed(() => {
         >search includes unlisted extensions</span
       >
     </div>
+    <!-- the featured box belongs to browsing the default index: it gives
+         way to search results and to the other arrangements. it sits
+         below the controls, so their position never depends on it -->
+    <FeaturedExtension
+      v-if="featured && !searching && arrange === defaultArrange"
+      :ext="featured"
+    />
     <div
       v-for="{ title, extensions, link, linkText, pageLink } in filteredIndex.index"
     >
