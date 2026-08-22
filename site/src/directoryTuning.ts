@@ -15,6 +15,13 @@ export const DEFAULT_CATEGORY_LIMIT = 8;
 // entries; further new entries stay eligible for the random selection
 export const NEW_PER_CATEGORY_LIMIT = 2;
 
+// of the slots a category section has left after flagships and new
+// entries, this many are serendipity picks: a daily-rotating random
+// draw from members the popularity ranking would NOT have surfaced, so
+// nothing is permanently buried below the fold. the remaining slots go
+// to the highest-ranked members.
+export const WILDCARD_PER_CATEGORY_LIMIT = 2;
+
 // how long an extension counts as newly listed: drives both the New!
 // badge on entries and the new-entries grouping in category sections
 export const NEW_WINDOW_DAYS = 21;

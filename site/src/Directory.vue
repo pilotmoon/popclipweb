@@ -14,7 +14,9 @@ import {
   NEW_PER_CATEGORY_LIMIT,
   NEW_WINDOW_DAYS,
   NEWLY_ADDED_LIMIT,
+  WILDCARD_PER_CATEGORY_LIMIT,
 } from "./directoryTuning.js";
+import { byName, byRank } from "./directoryOrder.js";
 
 const categoryDefs = directoryData.categories;
 
@@ -55,8 +57,8 @@ const extsMap = computed(
 
 // deterministic per-build randomness: seeded from the build date and a
 // salt, so server render and client hydration agree exactly, while the
-// hourly site rebuilds rotate the selection daily. (a stand-in for the
-// popularity ranking that download data will eventually provide.)
+// hourly site rebuilds rotate the selection daily. used for the
+// serendipity slots in each category section (see categoriesIndex).
 function seededRandom(seedString: string) {
   let h = 1779033703 ^ seedString.length;
   for (let i = 0; i < seedString.length; i++) {
@@ -71,21 +73,17 @@ function seededRandom(seedString: string) {
   };
 }
 
-// a seeded random pick of n items, presented alphabetically
+// a seeded random pick of n items
 function randomPick(list: ExtInfo[], n: number, salt: string): ExtInfo[] {
   if (n <= 0) return [];
-  if (list.length <= n) return [...list].sort(byName);
+  if (list.length <= n) return [...list];
   const rand = seededRandom(`${directoryData.day}:${salt}`);
   const pool = [...list];
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(rand() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  return pool.slice(0, n).sort(byName);
-}
-
-function byName(a: ExtInfo, b: ExtInfo) {
-  return a.name.localeCompare(b.name);
+  return pool.slice(0, n);
 }
 
 // newly listed, relative to the build date
@@ -100,9 +98,14 @@ function isNewlyListed(e: ExtInfo & { firstListed?: unknown }) {
 // define the arrangements
 const alphaSection = computed<Section>(() => ({
   title: "All Extensions (Alphabetical)",
-  members: [...extsMap.value.values()]
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map((e) => e.identifier),
+  members: [...extsMap.value.values()].sort(byName).map((e) => e.identifier),
+}));
+// the download ranking, in the open: this arrangement is the one place
+// the order is shown as such. elsewhere rank only steers which members
+// a category section selects, never the order they appear in.
+const popularSection = computed<Section>(() => ({
+  title: "All Extensions (Most popular first)",
+  members: [...extsMap.value.values()].sort(byRank).map((e) => e.identifier),
 }));
 // "newest" means newest in the directory: ordered by when each extension
 // was listed, not when it was first published (the two differ for
@@ -120,13 +123,14 @@ const updatedSection = computed<Section>(() => ({
     .sort((a, b) => b.updatedDate.getTime() - a.updatedDate.getTime())
     .map((e) => e.identifier),
 }));
-// within a section: flagships first, then the rest, each group A-Z
+// within a section: flagships first, then the rest, each group A-Z.
+// position is the flagship's only visible signal (there is no badge),
+// so it keeps the top spot; nothing else about the order carries
+// meaning, and in particular popularity never shows through it
 function sectionOrder(list: ExtInfo[]): string[] {
   return list
     .sort(
-      (a, b) =>
-        (b.flagship ? 1 : 0) - (a.flagship ? 1 : 0) ||
-        a.name.localeCompare(b.name),
+      (a, b) => (b.flagship ? 1 : 0) - (a.flagship ? 1 : 0) || byName(a, b),
     )
     .map((e) => e.identifier);
 }
@@ -152,15 +156,20 @@ const categoriesIndex = computed<Section[]>(() => {
   for (const def of categoryDefs) {
     const members = bySlug.get(def.slug);
     if (members) {
-      // the visible selection: every flagship, then up to a few New!
-      // entries, then a daily-rotating random pick of the rest up to
-      // the category's limit. flagships and new entries always fit,
-      // even if that overflows the limit. each group is alphabetical.
-      // (the random picks are the stand-in for popularity ranking.)
+      // the visible SELECTION is a formation: every flagship, then up to
+      // a few New! entries, then the rest of the category's slots filled
+      // by download rank -- except the last couple, which are daily-
+      // rotating serendipity picks drawn from members the ranking would
+      // NOT have surfaced, so nothing is ever permanently buried.
+      // flagships and new entries always fit, even past the limit.
+      //
+      // the visible ORDER is a different matter: flagships first, then
+      // everything else as one alphabetical run. the formation decides
+      // who is on the row, not where they stand on it.
       const limit = def.frontPageLimit ?? DEFAULT_CATEGORY_LIMIT;
-      const flagships = members.filter((m) => m.flagship).sort(byName);
+      const flagships = members.filter((m) => m.flagship);
       // the new slots go to the NEWEST few; any further new entries
-      // remain eligible for the random pick below like everyone else
+      // compete for the remaining slots like everyone else
       const fresh = members
         .filter((m) => !m.flagship && isNewlyListed(m))
         .sort(
@@ -168,19 +177,27 @@ const categoriesIndex = computed<Section[]>(() => {
             new Date(b.firstListed as string | Date).getTime() -
             new Date(a.firstListed as string | Date).getTime(),
         )
-        .slice(0, NEW_PER_CATEGORY_LIMIT)
-        .sort(byName);
+        .slice(0, NEW_PER_CATEGORY_LIMIT);
       const rest = members.filter(
         (m) => !m.flagship && !fresh.includes(m),
       );
+      const slots = Math.max(0, limit - flagships.length - fresh.length);
+      // what the ranking alone would show in those slots
+      const byPopularity = [...rest].sort(byRank);
+      const surfaced = byPopularity.slice(0, slots);
+      // reserve the wildcard slots, but only if there is anyone left to
+      // be a wildcard: a small category just shows its ranked members
+      const buried = byPopularity.slice(slots);
+      const wildcardSlots = Math.min(
+        WILDCARD_PER_CATEGORY_LIMIT,
+        slots,
+        buried.length,
+      );
+      const ranked = surfaced.slice(0, slots - wildcardSlots);
+      const wildcards = randomPick(buried, wildcardSlots, `${def.slug}:wild`);
       const visible = [
-        ...flagships,
-        ...fresh,
-        ...randomPick(
-          rest,
-          limit - flagships.length - fresh.length,
-          `${def.slug}:rest`,
-        ),
+        ...flagships.sort(byName),
+        ...[...fresh, ...ranked, ...wildcards].sort(byName),
       ];
       // the footer link only exists when there is genuinely more to see,
       // and its count says so: "View all 17 in ..."
@@ -230,6 +247,7 @@ const arrangements = computed(
     new Map([
       ["categories", { label: "Categories", index: categoriesIndex.value }],
       ["alpha", { label: "A–Z", index: [alphaSection.value] }],
+      ["popular", { label: "Popular", index: [popularSection.value] }],
       ["newest", { label: "New", index: [newestSection.value] }],
       ["updated", { label: "Updated", index: [updatedSection.value] }],
     ]),
@@ -399,6 +417,7 @@ const filteredIndex = computed(() => {
         <ElRadioGroup v-model="arrange">
           <ElRadioButton label="categories">Categories</ElRadioButton>
           <ElRadioButton label="alpha">A–Z</ElRadioButton>
+          <ElRadioButton label="popular">Popular</ElRadioButton>
           <ElRadioButton label="newest">New</ElRadioButton>
           <ElRadioButton label="updated">Updated</ElRadioButton>
         </ElRadioGroup>

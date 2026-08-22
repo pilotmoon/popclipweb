@@ -45,6 +45,11 @@ export const ZExtInfo = ZPartialExtInfo.extend({
   flagship: z.boolean(),
   // nullish, not nullable: tolerate an api that predates the field
   firstListed: z.coerce.date().nullish(),
+  // download ranking from the extension's family record: 1 = most
+  // downloaded, null = unranked (new, or never downloaded). rank only --
+  // the score behind it is deliberately not public. nullish for the
+  // same reason as firstListed
+  popularity: z.object({ rank: z.number().int().positive() }).nullish(),
   shortcode: z.string(),
   identifier: z.string(),
   icon: z.string().nullable(),

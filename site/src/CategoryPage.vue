@@ -5,6 +5,7 @@ import type { CategoryPageDef } from "../extensions/categories/[slug].paths";
 import type { ExtInfo } from "./data/extensionInfo.js";
 import { data as exts } from "./data/extensions.data";
 import DirectoryEntry from "./DirectoryEntry.vue";
+import { byName } from "./directoryOrder.js";
 
 const { params } = useData();
 const category = params.value as unknown as CategoryPageDef;
@@ -16,7 +17,7 @@ const category = params.value as unknown as CategoryPageDef;
 const extensions = computed<ExtInfo[]>(() =>
   (exts as ExtInfo[])
     .filter((ext) => !ext.unlisted && ext.category === category.slug)
-    .sort((a, b) => a.name.localeCompare(b.name)),
+    .sort(byName),
 );
 </script>
 
