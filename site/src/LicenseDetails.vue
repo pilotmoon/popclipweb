@@ -197,6 +197,31 @@ function paymentMethodInfo() {
   );
 }
 
+// Report license-button clicks to the backend request log, mirroring
+// beaconCheckoutEvent in usePaddleBillingCheckout. Diagnostic: lets server
+// logs confirm the buyer actually used their key (activated or downloaded),
+// not just saw it. sendBeacon so the event still goes out if the click
+// navigates away (the activate link leaves the page on some setups).
+function beaconLicenseEvent(name) {
+  if (!purchaseInfo.flowId.value) return;
+  try {
+    const endpoint = sandbox
+      ? config.pilotmoon.frontendRoot_sandbox
+      : config.pilotmoon.frontendRoot;
+    const params = new URLSearchParams({
+      flowId: purchaseInfo.flowId.value,
+      mode: sandbox ? "test" : "live",
+      event: name,
+    });
+    if (purchaseInfo.transactionId.value) {
+      params.set("transactionId", purchaseInfo.transactionId.value);
+    }
+    navigator.sendBeacon(`${endpoint}/store/checkoutEvent?${params}`, "");
+  } catch (e) {
+    log("[license] beacon failed", e);
+  }
+}
+
 function registerLink() {
   if (!licenseKey.value?.file?.data) {
     return "";
@@ -394,14 +419,16 @@ function licenseInfoString() {
             ><span class="label">Order #: </span> <span class="data">{{ licenseKey.order }} ({{ licenseKey.origin }})</span></span
           >
         </div>
-        <AaButton :href="registerLink()" size="big">Activate License</AaButton>
+        <AaButton :href="registerLink()" size="big" @click="beaconLicenseEvent('license.activate_clicked')"
+          >Activate License</AaButton
+        >
       </div>
 
       <h3>License Key File</h3>
 
       <p>Download the file to save a reusable copy of your license key. Double-click it to activate PopClip with it.</p>
       <p>
-        <DownloadButton size="smaller" theme="outline" :href="licenseFileLink()" text="Download License Key File" :text="licenseFileName()"></DownloadButton>
+        <DownloadButton size="smaller" theme="outline" :href="licenseFileLink()" text="Download License Key File" :text="licenseFileName()" @click="beaconLicenseEvent('license.download_clicked')"></DownloadButton>
       </p>
 
       <p>
