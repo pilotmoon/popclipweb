@@ -5,19 +5,20 @@ import type { CategoryPageDef } from "../extensions/categories/[slug].paths";
 import type { ExtInfo } from "./data/extensionInfo.js";
 import { data as exts } from "./data/extensions.data";
 import DirectoryEntry from "./DirectoryEntry.vue";
-import { byName } from "./directoryOrder.js";
+import { byRank } from "./directoryOrder.js";
 
 const { params } = useData();
 const category = params.value as unknown as CategoryPageDef;
 
 // the category's listed members: an unlisted extension may carry a
 // category (staged for when it is listed), but only listed ones belong
-// here. plain alphabetical: the front page's section shows a curated
-// selection; this page is the complete, neutral listing
+// here. ordered by popularity, unranked last, the same as the front
+// page's section -- so that section reads as a prefix of this page,
+// and "View all N" continues the row rather than re-sorting it
 const extensions = computed<ExtInfo[]>(() =>
   (exts as ExtInfo[])
     .filter((ext) => !ext.unlisted && ext.category === category.slug)
-    .sort(byName),
+    .sort(byRank),
 );
 </script>
 
