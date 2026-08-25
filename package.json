@@ -4,9 +4,9 @@
     "docs:dev": "./makeEnv && source .env && vitepress dev site",
     "docs:dev-local": "./makeEnv && source .env && PILOTMOON_API_ROOT=http://localhost:1234 PILOTMOON_PUBLIC_ROOT=https://public.popclip.app/test PILOTMOON_API_KEY=${PILOTMOON_LOCAL_API_KEY:-$PILOTMOON_API_KEY} vitepress dev site",
     "docs:preview": "./makeEnv && source .env && vitepress preview site",
-    "docs:build": "bun run check && ./makeEnv && source .env && npm run docs:build-ci",
+    "docs:build": "npm run check && ./makeEnv && source .env && npm run docs:build-ci",
     "docs:build-ci": "npx patch-package && vitepress build site",
-    "check": "bunx tsc --noEmit",
+    "check": "tsc --noEmit",
     "format:md": "prettier --write \"**/*.md\""
   },
   "dependencies": {
