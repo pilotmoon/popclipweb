@@ -50,8 +50,8 @@ URL actions never return any output.
 
 If a plain Open URL action isn't enough, use a [JavaScript action](./js-actions). There are two functions:.
 
-- [`popclip.openUrl()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openUrl) opens a URL you have built yourself.
-- [`popclip.openTemplateUrl()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openTemplateUrl) takes the same `***` placeholder as the `url` property and does the encoding for you.
+- [`popclip.openUrl()`](/dev/api/interfaces/PopClip.html#openurl) opens a URL you have built yourself.
+- [`popclip.openTemplateUrl()`](/dev/api/interfaces/PopClip.html#opentemplateurl) takes the same `***` placeholder as the `url` property and does the encoding for you.
 
 ```javascript
 await popclip.openTemplateUrl(

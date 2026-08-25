@@ -37,7 +37,7 @@ shortcut name: My Shortcut Name
 For anything beyond "send the selection, paste what comes back" — choosing the
 shortcut based on the text, passing something other than the selection, or doing
 more with the result — use
-[`popclip.runShortcut()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runShortcut)
+[`popclip.runShortcut()`](/dev/api/interfaces/PopClip.html#runshortcut)
 from a [JavaScript action](./js-actions) instead. It takes the same shortcut
 name and resolves with the shortcut's output.
 

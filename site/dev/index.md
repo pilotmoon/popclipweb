@@ -94,6 +94,24 @@ code editor such as [VS Code](https://code.visualstudio.com/),
 [BBEdit](https://www.barebones.com/products/bbedit/), or
 [Nova](https://nova.app/).
 
+### Type definitions
+
+The complete TypeScript definitions for PopClip's JavaScript API are published
+as a single file:
+
+[**popclip.d.ts**](/dev/popclip.d.ts)
+
+As well as the `popclip` object and other globals available to scripts, this
+file describes the extension config format itself — see the `ActionProperties`,
+`Extension`, `Option` and `Requirement` types. Point your editor at it for
+autocomplete and type checking, or give it to an AI coding assistant as a
+complete reference for writing extensions.
+
+The same definitions are available as the
+[`@popclip/types`](https://www.npmjs.com/package/@popclip/types) npm package,
+and browsable as HTML in the
+[JavaScript API Reference](/dev/api/).
+
 ### Turn off unsigned warning
 
 If the unsigned extension warning gets annoying while you test your work, you

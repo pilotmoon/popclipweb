@@ -132,7 +132,9 @@ and cannot be overriden by the module. These are `name`, `icon`, `identifier`,
 
 A more detailed definition of the action object, action function and population
 function may be found in the
-[JavaScript API Reference](https://pilotmoon.github.io/popclip-types/modules.html).
+[JavaScript API Reference](/dev/api/),
+or in [**popclip.d.ts**](/dev/popclip.d.ts), which is the same API as a single
+TypeScript definitions file.
 
 :::
 
