@@ -14,16 +14,26 @@ import { usePurchaseInfo } from "./usePurchaseInfo";
 // page could reach them: both only run somewhere the buyer no longer was.
 // A buy page is somewhere they plausibly come back to, and this is what
 // notices when they do.
+// Methods whose capture happens away from the browser, and which Paddle
+// reports as "in_progress" throughout — never "pending" — so an unconfirmed
+// payment on one of them may equally be a payment already made. Every other
+// method reports "pending" once the money is authorized, so "in_progress"
+// there really does mean the buyer did not pay.
+const DEFERRED_METHODS = ["wechat_pay", "upi", "pix", "blik", "mb_way"];
+
 export interface OutstandingPurchase {
   // "paying": the money is in hand and nothing has been delivered. The only
   //   kind that stops a new checkout, because it is the only one where
   //   buying again means paying twice.
-  // "unfinished": a checkout was opened and the payment never went through.
-  //   Worth a quiet word, no more — they may have changed their mind.
+  // "unconfirmed": a deferred-method payment that Paddle has not confirmed.
+  //   Cannot be told apart from one already made, so it is raised without
+  //   claiming either way. Never raised for a method that would have said
+  //   "pending" if the money were in hand: there, unconfirmed means unpaid,
+  //   the buyer knows it, and saying so would only be noise.
   // "undelivered": a paid license exists that this browser has never shown.
   //   Does not stop anything: buying a second license is a real thing people
   //   do, and this one is only here so they can find the first.
-  kind: "paying" | "unfinished" | "undelivered";
+  kind: "paying" | "unconfirmed" | "undelivered";
   attempt: PurchaseAttempt;
   method?: string;
 }
@@ -74,8 +84,11 @@ export const useOutstandingPurchase = createGlobalState(() => {
             outstanding.value = { kind: "paying", attempt, method };
             return;
           }
-          if (body.status === "in_progress") {
-            outstanding.value = { kind: "unfinished", attempt, method };
+          if (
+            body.status === "in_progress" &&
+            DEFERRED_METHODS.includes(method)
+          ) {
+            outstanding.value = { kind: "unconfirmed", attempt, method };
             return;
           }
           // "failed" says the buyer has been charged nothing and knows it.

@@ -8,7 +8,7 @@ import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 // that came to anything — and no request is made either.
 const { outstanding, check, goToStatus } = useOutstandingPurchase();
 
-const PREVIEW_KINDS = ["paying", "undelivered", "unfinished"];
+const PREVIEW_KINDS = ["paying", "undelivered", "unconfirmed"];
 
 onMounted(() => {
   // #preview=<kind> shows a notice without a purchase, matching the hook of
@@ -39,8 +39,9 @@ onMounted(() => {
     <p>You bought a PopClip license recently and this browser has not shown it to you yet.</p>
     <p><a href="#" @click.prevent="goToStatus">See your license key</a></p>
   </div>
-  <div v-else-if="outstanding?.kind === 'unfinished'" class="info custom-block">
-    <p>You started a purchase but did not finish it. You have not been charged.</p>
-    <p><a href="#" @click.prevent="goToStatus">Check your purchase</a></p>
+  <div v-else-if="outstanding?.kind === 'unconfirmed'" class="info custom-block">
+    <p class="custom-block-title">You may have already paid</p>
+    <p>A payment you started has not been confirmed yet. This can take up to 10 minutes.</p>
+    <p><a href="#" @click.prevent="goToStatus">Check your payment</a></p>
   </div>
 </template>
