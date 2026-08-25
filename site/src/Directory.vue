@@ -405,10 +405,17 @@ const filteredIndex = computed(() => {
       all.delete(identifier);
     }
     if (extensions.length > 0) {
+      // while searching, the complete membership is already on show, so
+      // the "View all" footer link would point at nothing extra
       index.push({
         title: section.title,
-        link: section.link,
-        linkText: section.linkText ?? `View all in "${section.title}" →`,
+        ...(filterValue
+          ? {}
+          : {
+              link: section.link,
+              linkText:
+                section.linkText ?? `View all in "${section.title}" →`,
+            }),
         pageLink: section.pageLink,
         extensions,
       });

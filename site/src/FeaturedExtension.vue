@@ -32,7 +32,7 @@ const bylineAuthor = computed(() => {
 <template>
   <div :class="$style.Featured">
     <div :class="$style.Text">
-      <div :class="$style.Label">Featured</div>
+      <div :class="$style.Label">Featured Extension</div>
       <!-- the icon and title go to the extension's page, but quietly:
            plain text, no link colour, like the icon in the rows. the
            buttons below are the announced ways onward -->
@@ -202,12 +202,15 @@ const bylineAuthor = computed(() => {
   margin-right: 6px;
 }
 
-/* the video sets the box's height and sits flush with its top, right
-   and bottom edges; straight-sided on the left */
+/* the video is a fixed 200px tall; normally that sets the box's height
+   and it sits flush with the top, right and bottom edges, but when a
+   long text column makes the box taller, the video stays 200px and
+   centers vertically rather than clinging to the top */
 .Media {
   flex: 0 0 auto;
   max-width: 50%;
   display: flex;
+  align-items: center;
 }
 .Media video {
   display: block;
