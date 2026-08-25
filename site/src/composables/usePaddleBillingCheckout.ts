@@ -86,6 +86,12 @@ export function usePaddleBillingCheckout() {
           // they are known even for checkouts that never reach completion
           if (currentFlowId && event.data?.transaction_id) {
             purchaseInfo.transactionId.value = event.data.transaction_id;
+            // and against this checkout in the attempt list, which — unlike
+            // the single slot above — survives the next checkout opening
+            purchaseInfo.noteAttemptTransaction(
+              currentFlowId,
+              event.data.transaction_id,
+            );
           }
           if (event.data?.customer?.email) {
             lastCustomerEmail = event.data.customer.email;
@@ -152,9 +158,16 @@ export function usePaddleBillingCheckout() {
   // (QR shown but unscanned, or 3DS underway) and "failed" never close the
   // overlay: the customer may still be mid-payment, and Paddle's own UI
   // handles retries.
+  //
+  // The watch also sweeps earlier checkouts from this tab, less often. A
+  // buyer who leaves a deferred-capture checkout and comes back to start
+  // another has two payments outstanding, and it is the abandoned one that
+  // the current checkout points at; without the sweep, the first one landing
+  // goes unnoticed here and on the license page alike.
   function startPaymentWatch() {
     if (watchTimer) return;
     const startedAt = Date.now();
+    let ticks = 0;
     log("[checkout] payment watch started");
     watchTimer = setInterval(async () => {
       if (completedFired || !currentFlowId) {
@@ -166,43 +179,83 @@ export function usePaddleBillingCheckout() {
         stopPaymentWatch();
         return;
       }
+      ticks += 1;
       const transactionId = purchaseInfo.transactionId.value;
-      if (!transactionId) return;
-      try {
-        const endpoint = sandbox
-          ? config.pilotmoon.frontendRoot_sandbox
-          : config.pilotmoon.frontendRoot;
-        const mode = sandbox ? "test" : "live";
-        const res = await fetch(
-          `${endpoint}/store/getLicense?flowId=${currentFlowId}&mode=${mode}&transactionId=${transactionId}`,
-        );
-        if (!res.ok) return; // 404: no license, no payment attempt yet
-        const body = await res.json();
-        const paid =
-          body?.object === "licenseKey" ||
-          (body?.object === "transactionStatus" &&
-            (body.status === "processing" || body.status === "pending"));
-        if (!paid) return;
-        if (completedFired) return; // completed fired while we were fetching
-        log(
-          `[checkout] payment watch: customer has paid (${
-            body?.object === "licenseKey" ? "license issued" : body.status
-          }); closing checkout`,
-        );
-        stopPaymentWatch();
-        purchaseInfo.flowId.value = currentFlowId;
-        purchaseInfo.userEmail.value = lastCustomerEmail;
-        purchaseInfo.userCountry.value = lastCustomerCountry;
-        try {
-          Paddle.Checkout.close();
-        } catch (e) {
-          log("[checkout] Checkout.close failed", e);
+      if (transactionId) {
+        if (await checkAttemptPaid({ flowId: currentFlowId, transactionId })) {
+          return;
         }
-        window.location.href = "/purchase-complete";
-      } catch (e) {
-        // network error — keep watching
+      }
+      if (ticks % 3 !== 0) return;
+      for (const attempt of purchaseInfo.recentAttempts()) {
+        if (attempt.flowId === currentFlowId) continue;
+        if (attempt.delivered) continue; // already shown to the buyer
+        if (!attempt.transactionId) continue;
+        if (!watchTimer) return; // rescued by an earlier attempt in this pass
+        if (await checkAttemptPaid(attempt)) return;
       }
     }, 4000);
+  }
+
+  // Ask the backend how far one checkout's payment got. Returns true when the
+  // buyer has paid and the rescue has fired, so the caller should stop.
+  async function checkAttemptPaid(attempt: {
+    flowId?: string | null;
+    transactionId?: string | null;
+  }) {
+    const isCurrent = attempt.flowId === currentFlowId;
+    try {
+      const endpoint = sandbox
+        ? config.pilotmoon.frontendRoot_sandbox
+        : config.pilotmoon.frontendRoot;
+      const params = new URLSearchParams({ mode: sandbox ? "test" : "live" });
+      if (attempt.flowId) params.set("flowId", attempt.flowId);
+      if (attempt.transactionId) {
+        params.set("transactionId", attempt.transactionId);
+      }
+      const res = await fetch(`${endpoint}/store/getLicense?${params}`);
+      if (!res.ok) return false; // 404: no license, no payment attempt yet
+      const body = await res.json();
+      const paid =
+        body?.object === "licenseKey" ||
+        (body?.object === "transactionStatus" &&
+          (body.status === "processing" || body.status === "pending"));
+      if (!paid) return false;
+      // A free license on an earlier checkout is not a lost payment — free
+      // claims deliver at once — and claiming the free year before upgrading
+      // is a path we offer, so one is often sitting in the tab. Never let it
+      // interrupt the checkout the buyer is in the middle of. On the current
+      // checkout it is of course exactly what they asked for.
+      if (!isCurrent && body?.object === "licenseKey" && !body.paid) {
+        return false;
+      }
+      if (completedFired) return false; // completed fired while we were fetching
+      log(
+        `[checkout] payment watch: customer has paid (${
+          body?.object === "licenseKey" ? "license issued" : body.status
+        }) on flow ${attempt.flowId}${
+          isCurrent ? "" : " (an earlier checkout)"
+        }; closing checkout`,
+      );
+      stopPaymentWatch();
+      // point the license page at the checkout that was actually paid, which
+      // is not necessarily the one still on screen
+      purchaseInfo.adoptAttempt({
+        flowId: body?.flowId ?? attempt.flowId,
+        transactionId: attempt.transactionId,
+      });
+      purchaseInfo.userEmail.value = lastCustomerEmail;
+      purchaseInfo.userCountry.value = lastCustomerCountry;
+      try {
+        Paddle.Checkout.close();
+      } catch (e) {
+        log("[checkout] Checkout.close failed", e);
+      }
+      window.location.href = "/purchase-complete";
+      return true;
+    } catch (e) {
+      return false; // network error — keep watching
+    }
   }
 
   function stopPaymentWatch() {
@@ -249,6 +302,7 @@ export function usePaddleBillingCheckout() {
     // the transaction id lets the license page ask the backend about
     // payment progress (e.g. deferred-capture methods like WeChat Pay)
     purchaseInfo.transactionId.value = data?.transaction_id ?? null;
+    purchaseInfo.noteAttemptTransaction(currentFlowId, data?.transaction_id);
     purchaseInfo.userEmail.value = data?.customer?.email ?? null;
     purchaseInfo.userCountry.value =
       data?.customer?.address?.country_code ??
@@ -308,6 +362,9 @@ export function usePaddleBillingCheckout() {
     completedFired = false;
     lastCustomerEmail = email;
     lastCustomerCountry = null;
+    // remember it alongside any earlier checkouts in this tab, so a payment
+    // still outstanding from one of those can still be found
+    purchaseInfo.noteAttempt(currentFlowId);
   }
 
   // Initialize Paddle.js without opening a checkout ourselves. Used when

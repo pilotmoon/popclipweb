@@ -65,15 +65,27 @@ onMounted(async () => {
       return;
     }
   }
-  if (!purchaseInfo.flowId.value) {
-    log("[license] no flowId in session — checkout did not complete here, or session was lost");
+  // Either id identifies the order to the backend, and the transaction id is
+  // the stronger of the two. Only when the tab holds neither is there nothing
+  // to ask about — a checkout that happened in another tab or another session.
+  if (!purchaseInfo.flowId.value && !purchaseInfo.transactionId.value) {
+    log("[license] no flowId or transactionId in session — checkout did not complete here, or session was lost");
     state.value = State.NoSession;
     title.value = "Session Expired";
     return;
   }
-  log(`[license] polling for license, flowId=${purchaseInfo.flowId.value}, mode=${sandbox ? "test" : "live"}`);
+  log(`[license] polling for license, flowId=${purchaseInfo.flowId.value}, transactionId=${purchaseInfo.transactionId.value}, mode=${sandbox ? "test" : "live"}`);
+  let sweptOnce = false;
   for (; countdown.value > 0; countdown.value -= 1) {
     if (await poll()) return;
+    // A buyer who abandoned a checkout and started another arrives here
+    // pointed at the second one, so check the first early rather than making
+    // them sit through the countdown. After the current checkout has been
+    // asked about, though: this purchase answers itself before any other.
+    if (!sweptOnce) {
+      sweptOnce = true;
+      if (await sweepOtherAttempts()) return;
+    }
     if (isWaitState()) break;
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
@@ -83,11 +95,13 @@ onMounted(async () => {
     for (let i = 0; i < PENDING_POLL_LIMIT; i++) {
       await new Promise((resolve) => setTimeout(resolve, PENDING_POLL_INTERVAL_MS));
       if (await poll()) return;
+      if (await sweepOtherAttempts()) return;
       updateWaitState();
     }
     log("[license] still waiting after slow polling — leaving the message up");
     return;
   }
+  if (await sweepOtherAttempts()) return;
   log("[license] gave up after polling — backend never produced a license for this flowId");
   state.value = State.Delayed;
   title.value = "Order Processing";
@@ -117,6 +131,12 @@ async function poll() {
     await loadLicenseKey();
     if (licenseKey.value) {
       log("[license] license received from backend", licenseKey.value);
+      // this checkout has been answered, so the sweep above must not offer it
+      // back as the outcome of some later one
+      purchaseInfo.markDelivered({
+        flowId: purchaseInfo.flowId.value,
+        transactionId: purchaseInfo.transactionId.value,
+      });
       state.value = State.Done;
       title.value = "Thank You";
       kaboom();
@@ -137,28 +157,81 @@ async function poll() {
 }
 
 async function loadLicenseKey() {
+  const body = await fetchLicense({
+    flowId: purchaseInfo.flowId.value,
+    transactionId: purchaseInfo.transactionId.value,
+  });
+  if (body?.object === "transactionStatus") {
+    txnStatus.value = body;
+  } else {
+    licenseKey.value = body;
+  }
+}
+
+// Ask the backend about one checkout. Either id locates it; the backend
+// prefers the transaction id when both are given.
+async function fetchLicense(attempt) {
   const endpoint = sandbox
     ? config.pilotmoon.frontendRoot_sandbox
     : config.pilotmoon.frontendRoot;
-  const flowId = purchaseInfo.flowId.value;
-  const mode = sandbox ? "test" : "live";
-  const transactionId = purchaseInfo.transactionId.value;
-  let url = `${endpoint}/store/getLicense?flowId=${flowId}&mode=${mode}`;
-  if (transactionId) {
-    url += `&transactionId=${transactionId}`;
+  const params = new URLSearchParams({ mode: sandbox ? "test" : "live" });
+  if (attempt.flowId) {
+    params.set("flowId", attempt.flowId);
   }
+  if (attempt.transactionId) {
+    params.set("transactionId", attempt.transactionId);
+  }
+  const url = `${endpoint}/store/getLicense?${params}`;
   log(`[license] GET ${url}`);
   const fetchResponse = await fetch(url);
   log(`[license] getLicense responded ${fetchResponse.status}`);
   if (!fetchResponse.ok) {
     throw new Error(`HTTP fetch failed, code ${fetchResponse.status}`);
   }
-  const body = await fetchResponse.json();
-  if (body?.object === "transactionStatus") {
-    txnStatus.value = body;
-  } else {
-    licenseKey.value = body;
+  return await fetchResponse.json();
+}
+
+// Look for the license under the other checkouts opened in this tab, newest
+// first. A buyer who leaves a deferred-capture checkout and comes back starts
+// a new one, which becomes the current attempt — so the payment that actually
+// landed can belong to a checkout this page is not pointed at.
+//
+// What it must never do is answer the purchase in hand with some other
+// purchase, so three things are excluded. Attempts already shown to the buyer
+// here: those went nowhere near missing. Free licenses: a free claim delivers
+// at once with no capture to wait on, so it can never be the payment we are
+// hunting for — but it is very often sitting in the tab, because claiming the
+// free year and then upgrading is a path we deliberately offer. And payment
+// statuses rather than licenses: what an older checkout is doing says nothing
+// the current one's own status doesn't say better.
+async function sweepOtherAttempts() {
+  for (const attempt of purchaseInfo.recentAttempts()) {
+    if (attempt.flowId === purchaseInfo.flowId.value) continue;
+    if (attempt.delivered) continue;
+    if (!attempt.flowId && !attempt.transactionId) continue;
+    try {
+      const body = await fetchLicense(attempt);
+      if (body?.object !== "licenseKey") continue;
+      if (!body.paid) {
+        log(`[license] sweep: skipping free license on flowId=${attempt.flowId}`);
+        continue;
+      }
+      log(`[license] license found under an earlier checkout in this tab, flowId=${attempt.flowId}`);
+      purchaseInfo.adoptAttempt({
+        flowId: body.flowId ?? attempt.flowId,
+        transactionId: attempt.transactionId,
+      });
+      purchaseInfo.markDelivered(attempt);
+      licenseKey.value = body;
+      state.value = State.Done;
+      title.value = "Thank You";
+      kaboom();
+      return true;
+    } catch (e) {
+      log("[license] sweep: nothing under this attempt", e.message);
+    }
   }
+  return false;
 }
 
 // display name and expected confirmation time for the payment method
