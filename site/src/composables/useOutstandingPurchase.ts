@@ -1,4 +1,4 @@
-import { createGlobalState } from "@vueuse/core";
+import { createGlobalState, useSessionStorage } from "@vueuse/core";
 import { computed, ref } from "vue";
 import config from "../config/config.json";
 import { useDeploymentInfo } from "./useDeploymentInfo";
@@ -42,9 +42,35 @@ export const useOutstandingPurchase = createGlobalState(() => {
   const outstanding = ref<OutstandingPurchase | null>(null);
   let asked = false;
 
+  // The checkout this buyer has already been told about and waved away. Held
+  // per checkout rather than as a plain flag, so that a payment they start
+  // after dismissing an earlier one is still raised.
+  const dismissedFor = useSessionStorage<string | null>(
+    "popclip-purchase-notice-dismissed",
+    null,
+  );
+  const dismissed = computed(
+    () =>
+      !!outstanding.value &&
+      dismissedFor.value === outstanding.value.attempt.flowId,
+  );
+
+  // Shown as a modal, so it cannot be scrolled past — these buyers pay twice
+  // or write in for want of noticing it.
+  const noticeOpen = computed(() => !!outstanding.value && !dismissed.value);
+
+  function dismiss() {
+    if (!outstanding.value) return;
+    dismissedFor.value = outstanding.value.attempt.flowId;
+  }
+
   // Only a payment already taken justifies standing between someone and a
-  // purchase they are trying to make.
-  const blocksCheckout = computed(() => outstanding.value?.kind === "paying");
+  // purchase they are trying to make — and only until they have been told.
+  // Someone who has read the notice and closed it has decided; a second
+  // license is theirs to buy, and refusing to sell it is not our place.
+  const blocksCheckout = computed(
+    () => outstanding.value?.kind === "paying" && !dismissed.value,
+  );
 
   async function check() {
     if (asked) return;
@@ -109,10 +135,12 @@ export const useOutstandingPurchase = createGlobalState(() => {
   // opening the Paddle overlay: asking someone to type their email and only
   // then telling them they have already paid wastes their effort and reads as
   // a fault.
+  // Guard for the top of anything that starts a purchase, for the race where
+  // the check comes back after the buyer has already clicked. The notice is
+  // open by definition whenever this returns true — blocksCheckout requires
+  // it — so there is nothing to do but let it stand.
   function interceptPurchase() {
-    if (!blocksCheckout.value) return false;
-    goToStatus();
-    return true;
+    return blocksCheckout.value;
   }
 
   // Hand the status page this checkout rather than whatever the tab was last
@@ -123,5 +151,13 @@ export const useOutstandingPurchase = createGlobalState(() => {
     window.location.href = "/purchase-status";
   }
 
-  return { outstanding, blocksCheckout, check, interceptPurchase, goToStatus };
+  return {
+    outstanding,
+    noticeOpen,
+    blocksCheckout,
+    check,
+    dismiss,
+    interceptPurchase,
+    goToStatus,
+  };
 });
