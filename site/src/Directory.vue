@@ -278,10 +278,10 @@ const arrangements = computed(
   () =>
     new Map([
       ["categories", { label: "Categories", index: categoriesIndex.value }],
-      ["alpha", { label: "A–Z", index: [alphaSection.value] }],
       ["popular", { label: "Popular", index: [popularSection.value] }],
       ["newest", { label: "New", index: [newestSection.value] }],
       ["updated", { label: "Updated", index: [updatedSection.value] }],
+      ["alpha", { label: "A–Z", index: [alphaSection.value] }],
     ]),
 );
 
@@ -453,12 +453,14 @@ const filteredIndex = computed(() => {
     <div :class="$style.Header">
       <div :class="$style.Control">
         Arrange:
+        <!-- tabs come from the arrangements map, in its order -->
         <ElRadioGroup v-model="arrange">
-          <ElRadioButton label="categories">Categories</ElRadioButton>
-          <ElRadioButton label="alpha">A–Z</ElRadioButton>
-          <ElRadioButton label="popular">Popular</ElRadioButton>
-          <ElRadioButton label="newest">New</ElRadioButton>
-          <ElRadioButton label="updated">Updated</ElRadioButton>
+          <ElRadioButton
+            v-for="[key, { label }] in arrangements"
+            :key="key"
+            :label="key"
+            >{{ label }}</ElRadioButton
+          >
         </ElRadioGroup>
       </div>
       <div :class="$style.Control">
