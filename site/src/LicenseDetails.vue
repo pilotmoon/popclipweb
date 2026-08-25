@@ -402,17 +402,23 @@ function licenseInfoString() {
       </p>
     </div>
     <div v-else-if="state === State.PaymentInProgress">
-      <h1>Waiting for your payment</h1>
-      <p>It looks like your payment hasn't been completed yet.</p>
+      <h1>Confirming your payment</h1>
       <p>
-        If you've just paid in your banking or payment app, hang on &mdash; this page will update automatically once the
-        payment is confirmed, and your PopClip license key will be emailed to
-        <b>{{ purchaseInfo.userEmail.value || "the email address you provided at checkout" }}</b
-        >.
+        {{ paymentMethodInfo().name }} confirms payments after a short delay &mdash; {{ paymentMethodInfo().timing }}
+        &mdash; so if you've already paid, there's nothing more for you to do.
       </p>
-      <p>If you decided not to complete the purchase, no payment has been taken and you can safely close this page.</p>
       <p>
-        If you need any help, please contact&ensp;<SupportEmailLink
+        Your PopClip license key will be emailed to
+        <b>{{ purchaseInfo.userEmail.value || "the email address you provided at checkout" }}</b>
+        as soon as the payment is confirmed. You can safely close this page &mdash; there's no need to wait here. If you
+        leave it open, it will update automatically when your license is ready.
+      </p>
+      <p>
+        If you haven't completed the payment, or decided not to go ahead, nothing has been charged and you can simply
+        close this page.
+      </p>
+      <p>
+        If nothing arrives within an hour, please check your spam folder or contact&ensp;<SupportEmailLink
           subject="PopClip Purchase Enquiry"
           :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')"
         />.
