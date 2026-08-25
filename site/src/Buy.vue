@@ -5,6 +5,7 @@ import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { loadStore, useStoreState, roundPrice } from "./composables/useStoreState";
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
 import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePaddleBillingCheckout";
+import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
 import { Paypal, ApplePay, CreditCard, GlobeAmericas } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
@@ -147,6 +148,7 @@ function trackBuy(button) {
     @confirm="detailsConfirmed"
     @cancel="detailsCancelled"
   />
+  <OutstandingPurchase />
   <div :class="$style.container">
     <!-- <div :class="$style.box">
             <span>Buy from the Mac App Store</span><br>

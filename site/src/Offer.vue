@@ -14,6 +14,7 @@ import { isRegionallyPriced } from "./data/regionalPricing";
 import { GlobeAmericas } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import OfferCard from "./OfferCard.vue";
+import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
 import { useSessionStorage } from "@vueuse/core";
 
@@ -905,6 +906,7 @@ async function renewStandard(details: BuyerDetails) {
     @confirm="detailsConfirmed"
     @cancel="detailsCancelled"
   />
+  <OutstandingPurchase />
   <div v-if="status === 'loading'" :class="$style.center">Checking your offer…</div>
 
   <div v-else-if="status === 'invalid'" :class="$style.center">

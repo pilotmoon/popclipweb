@@ -4,6 +4,7 @@ import { loadScript } from "../helpers/loadScript";
 import { readParams } from "../helpers/readParams";
 import { useDeploymentInfo } from "./useDeploymentInfo";
 import { useLogger } from "./useLogger";
+import { useOutstandingPurchase } from "./useOutstandingPurchase";
 import { usePurchaseInfo } from "./usePurchaseInfo";
 
 // Paddle.js v2 installs a global `Paddle` once the script loads.
@@ -63,6 +64,7 @@ export function usePaddleBillingCheckout() {
   const { isDark } = useData();
   const log = useLogger();
   const purchaseInfo = usePurchaseInfo();
+  const outstandingPurchase = useOutstandingPurchase();
   const sandbox = useDeploymentInfo().isLocalhost;
 
   async function initPaddle() {
@@ -318,6 +320,20 @@ export function usePaddleBillingCheckout() {
   // Open the Paddle overlay for a single item.
   async function openCheckout(options: OpenBillingCheckoutOptions) {
     log("[checkout] openCheckout requested with options", options);
+    // Guard against the double purchase. A buyer whose payment is still being
+    // confirmed — deferred capture takes about five minutes for WeChat Pay —
+    // has no confirmation of it anywhere, and clicking Buy again is the
+    // natural thing to do; observed in production on 25 Aug 2026. The notice
+    // on the page says so already, but a notice can be read past, and this is
+    // the moment where reading past it costs them money. Every checkout on
+    // the site opens through here, so one guard covers the buy page, both
+    // offer paths and the ?go auto-open. It fails open: if the check has not
+    // come back, or found nothing, the purchase proceeds as normal.
+    if (outstandingPurchase.blocksCheckout.value) {
+      log("[checkout] a payment from this tab is still being confirmed; showing its status instead of opening a checkout");
+      outstandingPurchase.goToStatus();
+      return;
+    }
     await initPaddle();
     beginCheckoutFlow(options.email ?? null);
     const email = options.email ?? null;
