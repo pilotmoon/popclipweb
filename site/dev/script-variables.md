@@ -13,12 +13,12 @@ variables are available in JavaScript, Shell Script, and AppleScript actions.
 In JavaScript, you access variables as properties under the `popclip` global.
 See:
 
-- [`popclip.input`](https://pilotmoon.github.io/popclip-types/interfaces/Input.html)
+- [`popclip.input`](/dev/api/interfaces/Input.html)
   (e.g. `popclip.input.text`)
-- [`popclip.context`](https://pilotmoon.github.io/popclip-types/interfaces/Context.html)
+- [`popclip.context`](/dev/api/interfaces/Context.html)
   (e.g. `popclip.context.browserUrl`)
-- [`popclip.options`](https://pilotmoon.github.io/popclip-types/interfaces/Options.html)
-- [`popclip.modifiers`](https://pilotmoon.github.io/popclip-types/interfaces/Modifiers.html)
+- [`popclip.options`](/dev/api/interfaces/Options.html)
+- [`popclip.modifiers`](/dev/api/interfaces/Modifiers.html)
 
 See also [JavaScript environment](https://www.popclip.app/dev/js-environment).
 

@@ -32,9 +32,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - New `script` entitlement, required to use the new AppleScript-running JavaScript methods
   below. Like `network`, it cannot be combined with `dynamic`.
 - JavaScript: new
-  [popclip.runAppleScript()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScript)
+  [popclip.runAppleScript()](/dev/api/interfaces/PopClip.html#runapplescript)
   and
-  [popclip.runAppleScriptFile()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScriptFile)
+  [popclip.runAppleScriptFile()](/dev/api/interfaces/PopClip.html#runapplescriptfile)
   methods run an AppleScript.
   ```js
   const result = await popclip.runAppleScript(
@@ -43,7 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   );
   ```
 - JavaScript: new
-  [popclip.runShortcut()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runShortcut)
+  [popclip.runShortcut()](/dev/api/interfaces/PopClip.html#runshortcut)
   method runs a macOS Shortcut by name.
   ```js
   const summary = await popclip.runShortcut("Summarize Text", {
@@ -51,7 +51,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   });
   ```
 - JavaScript: new
-  [popclip.revealFile()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#revealFile)
+  [popclip.revealFile()](/dev/api/interfaces/PopClip.html#revealfile)
   method shows a file or folder in the Finder. Takes an absolute path — the kind
   found in `popclip.input.data.paths` — with a leading `~` expanded.
   ```js
@@ -59,16 +59,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   popclip.revealFile("~/Downloads");
   ```
 - JavaScript: new dictionary functions on the `util` global:
-  [util.hasDictionaryDefinition()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#hasDictionaryDefinition)
+  [util.hasDictionaryDefinition()](/dev/api/interfaces/Util.html#hasdictionarydefinition)
   and
-  [util.getDictionaryDefinition()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getDictionaryDefinition),
+  [util.getDictionaryDefinition()](/dev/api/interfaces/Util.html#getdictionarydefinition),
   looking words up in the same dictionaries as the macOS Dictionary app.
 - JavaScript: new spelling functions on the `util` global:
-  [util.checkSpelling()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#checkSpelling),
-  [util.getSpellingGuesses()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getSpellingGuesses),
-  [util.getSpellingLanguages()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getSpellingLanguages)
+  [util.checkSpelling()](/dev/api/interfaces/Util.html#checkspelling),
+  [util.getSpellingGuesses()](/dev/api/interfaces/Util.html#getspellingguesses),
+  [util.getSpellingLanguages()](/dev/api/interfaces/Util.html#getspellinglanguages)
   and
-  [util.getPreferredSpellingLanguages()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getPreferredSpellingLanguages),
+  [util.getPreferredSpellingLanguages()](/dev/api/interfaces/Util.html#getpreferredspellinglanguages),
   via the system spell checker.
   ```js
   const guesses = util.getSpellingGuesses(popclip.input.text, {
@@ -81,14 +81,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   what PopClip has always done), to the process of the application the action is
   acting on (`app`), or to the HID event tap (`hid`). See [Key Press actions](key-press-actions#target).
 - JavaScript:
-  [popclip.pressKey()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKey)
+  [popclip.pressKey()](/dev/api/interfaces/PopClip.html#presskey)
   takes an options object as its third argument, with the same `target` choice:
   `popclip.pressKey('command b', 0, { target: 'app' })`.
 - JavaScript: `popclip.pressKey()` now returns a promise that resolves once the
   press has been made. Await it when a later step depends on the press having
   completed.
 - JavaScript: new
-  [popclip.pressKeys()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKeys)
+  [popclip.pressKeys()](/dev/api/interfaces/PopClip.html#presskeys)
   method presses a sequence of key combos, with optional waits, as one unit:
   `await popclip.pressKeys(['command space', 'wait 100', 'command v'], { target: 'session' })`. Entries
   take the same forms as `key combos` config entries; the same `target` option
@@ -143,21 +143,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - URL actions: added `spaces as plus` property. If `true`, spaces in the query
   are encoded as `+` instead of `%20` (some search engines, e.g. Amazon,
   expect this).
-- JavaScript: The [auth function](https://pilotmoon.github.io/popclip-types/interfaces/Extension.html#auth)
-  can now return an [AuthResult](https://pilotmoon.github.io/popclip-types/interfaces/AuthResult.html)
+- JavaScript: The [auth function](/dev/api/interfaces/Extension.html#auth)
+  can now return an [AuthResult](/dev/api/interfaces/AuthResult.html)
   object `{ secret, label, expiresIn }` instead of a bare secret string. The
   `label` is displayed as the signed-in account identifier (e.g. username/email), and `expiresIn` (token
   lifetime in seconds) lets PopClip treat the sign-in as expired after that
   time.
 - JavaScript: New methods
-  [popclip.signInRequiredError()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#signInRequiredError)
+  [popclip.signInRequiredError()](/dev/api/interfaces/PopClip.html#signinrequirederror)
   and
-  [popclip.settingsRequiredError()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#settingsRequiredError)
+  [popclip.settingsRequiredError()](/dev/api/interfaces/PopClip.html#settingsrequirederror)
   return errors that an action can throw to send the user to the extension's
   settings UI. The former also clears the stored `authsecret`, signing the
   extension out.
 - JavaScript: Added
-  [popclip.openTemplateUrl()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openTemplateUrl) method.
+  [popclip.openTemplateUrl()](/dev/api/interfaces/PopClip.html#opentemplateurl) method.
 
 ### Changed
 
@@ -209,15 +209,15 @@ There were no changes to the extension programming interface in this release.
 
 - Added `oauth-1.0a` to built-in NPM modules.
 - Added
-  [util.hmac()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#hmac)
+  [util.hmac()](/dev/api/interfaces/Util.html#hmac)
   function for HMAC calculation (useful for extensions that need to use OAuth
   1.0a).
 - Added
-  [util.getRandomValues()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#getRandomValues)
+  [util.getRandomValues()](/dev/api/interfaces/Util.html#getrandomvalues)
   and
-  [util.randomUuid()](https://pilotmoon.github.io/popclip-types/interfaces/Util.html#randomUuid).
+  [util.randomUuid()](/dev/api/interfaces/Util.html#randomuuid).
 - The
-  [popclip.openUrl()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openUrl)
+  [popclip.openUrl()](/dev/api/interfaces/PopClip.html#openurl)
   method:
   - now has an `activate` option to control whether the target application is
     brought to the front. Default is `true`.
@@ -227,7 +227,7 @@ There were no changes to the extension programming interface in this release.
     [mildly annoying pain-point](https://github.com/pilotmoon/PopClip-Extensions/blob/39e72253906bb5c09f523d1239b24e297fa323e7/source/Craft.popclipext/Config.ts#L43)
     for extensions that use URL objects to construct URLs.
 - The
-  [popclip.copyText()](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#copyText)
+  [popclip.copyText()](/dev/api/interfaces/PopClip.html#copytext)
   method now has a `notify` option to control whether the "Copied" indicator is
   shown when the text is copied. Default is `true`.
 - JavaScript API now has a global `TextEncoder` class which acts as a shim
@@ -254,7 +254,7 @@ There were no changes to the extension programming interface in this release.
 ### Added
 
 - The
-  [`popclip.showText`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showText)
+  [`popclip.showText`](/dev/api/interfaces/PopClip.html#showtext)
   method now takes an optional `style` option which can be either `compact` or
   `large`. The default style is `compact`, which is the same as the previous
   behavior. The `large` style is a new style that shows the text full-screen in

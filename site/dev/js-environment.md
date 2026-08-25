@@ -17,15 +17,23 @@ sandbox that cannot access the filesystem.
 
 PopClip predefines several global objects and functions in the JavaScript
 environment for extensions to use. These are documented in detail in the
-[JavaScript API Reference](https://pilotmoon.github.io/popclip-types/modules.html).
+[JavaScript API Reference](/dev/api/).
 The following is a summary of the commonly needed parts.
+
+::: tip Complete definitions in one file
+
+The same API is defined in
+[**popclip.d.ts**](/dev/popclip.d.ts), a single TypeScript definitions file.
+Use it for editor autocomplete, or hand it to an AI coding assistant.
+
+:::
 
 ### Global `popclip` object
 
 #### Readonly Properties
 
 Scripts can access the selected text and other input via properties of the
-[`popclip global`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html).
+[`popclip global`](/dev/api/interfaces/PopClip.html).
 Commonly used properties are:
 
 - `popclip.input.text`: the full plain text selection
@@ -51,46 +59,46 @@ Commonly used properties are:
 #### Methods
 
 Scripts can perform actions via calling methods on the
-[`popclip`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html)
+[`popclip`](/dev/api/interfaces/PopClip.html)
 global:
 
-- [`popclip.pasteText()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pasteText):
+- [`popclip.pasteText()`](/dev/api/interfaces/PopClip.html#pastetext):
   paste a given string (similar to `paste-result`)
-- [`popclip.copyText()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#copyText):
+- [`popclip.copyText()`](/dev/api/interfaces/PopClip.html#copytext):
   copy a string to the clipboard (similar to `copy-result`)
-- [`popclip.showText()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showText):
+- [`popclip.showText()`](/dev/api/interfaces/PopClip.html#showtext):
   show a string in the PopClip bar (similar to `show-result`)
-- [`popclip.openUrl()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#openUrl):
+- [`popclip.openUrl()`](/dev/api/interfaces/PopClip.html#openurl):
   open a URL (similar to a URL action)
-- [`popclip.pressKey()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKey):
+- [`popclip.pressKey()`](/dev/api/interfaces/PopClip.html#presskey):
   presses a key combo (similar to a key press extension)
-- [`popclip.pressKeys()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#pressKeys):
+- [`popclip.pressKeys()`](/dev/api/interfaces/PopClip.html#presskeys):
   presses a sequence of key combos, with optional waits between them
-- [`popclip.runAppleScript()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScript),
-  [`popclip.runAppleScriptFile()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runAppleScriptFile):
+- [`popclip.runAppleScript()`](/dev/api/interfaces/PopClip.html#runapplescript),
+  [`popclip.runAppleScriptFile()`](/dev/api/interfaces/PopClip.html#runapplescriptfile):
   run an AppleScript, from source text or from a file in the extension package
   (requires the `script` entitlement)
-- [`popclip.performCommand()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#performCommand):
+- [`popclip.performCommand()`](/dev/api/interfaces/PopClip.html#performcommand):
   perform a cut, copy or paste command in the foreground app (simlar to the
   `before` and `after` steps)
-- [`popclip.runShortcut()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#runShortcut):
+- [`popclip.runShortcut()`](/dev/api/interfaces/PopClip.html#runshortcut):
   run a macOS Shortcut by name (similar to a
   [Shortcut action](./shortcut-actions))
-- [`popclip.revealFile()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#revealFile):
+- [`popclip.revealFile()`](/dev/api/interfaces/PopClip.html#revealfile):
   show a file or folder in the Finder
-- [`popclip.showSuccess()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showSuccess),
-  [`popclip.showFailure()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showFailure),
-  [`popclip.showSettings()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#showSettings):
+- [`popclip.showSuccess()`](/dev/api/interfaces/PopClip.html#showsuccess),
+  [`popclip.showFailure()`](/dev/api/interfaces/PopClip.html#showfailure),
+  [`popclip.showSettings()`](/dev/api/interfaces/PopClip.html#showsettings):
   show a check mark, shaking-X, or Pop up the extension's settings
-- [`popclip.signInRequiredError()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#signInRequiredError),
-  [`popclip.settingsRequiredError()`](https://pilotmoon.github.io/popclip-types/interfaces/PopClip.html#settingsRequiredError):
+- [`popclip.signInRequiredError()`](/dev/api/interfaces/PopClip.html#signinrequirederror),
+  [`popclip.settingsRequiredError()`](/dev/api/interfaces/PopClip.html#settingsrequirederror):
   construct errors that the action can throw to indicate that the user needs to
   sign in or adjust the extension's settings
 
 ### Global `util` object
 
 Where the methods on `popclip` _do_ something, the functions on the
-[`util`](https://pilotmoon.github.io/popclip-types/interfaces/Util.html) global
+[`util`](/dev/api/interfaces/Util.html) global
 are passive. They include general helpers — randomization, encoding, hashing, locale
 and time zone information, and macOS dictionary and spelling lookups.
 
@@ -101,7 +109,7 @@ Unlike the methods on `popclip`, these can be called from a
 ### Global `pasteboard` object
 
 Scripts can also have direct read/write access the macOS clipboard via the
-[`pasteboard`](https://pilotmoon.github.io/popclip-types/interfaces/Pasteboard.html)
+[`pasteboard`](/dev/api/interfaces/Pasteboard.html)
 global:
 
 - `pasteboard.text` - the current plain text content of the clipboard, a
@@ -110,7 +118,7 @@ global:
 ### Global `print()` function
 
 There is a global function
-[`print()`](https://pilotmoon.github.io/popclip-types/functions/print.html) for
+[`print()`](/dev/api/functions/print.html) for
 debug output. You can
 [view the debug output in the Console.app](./#debug-output) and also in the
 [test harness](#test-harness).

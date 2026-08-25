@@ -5,6 +5,14 @@ import { defineConfig, type HeadConfig } from "vitepress";
 import siteConfig from "../src/config/config.json";
 import { querifyDescriptor } from "../src/helpers/iconDescriptor.js";
 import mediaFigures from "./markdown/mediaFigures.ts";
+import {
+  popclipTypesPlugin,
+  writePopClipTypes,
+} from "./popclipTypes.ts";
+import {
+  typedocReferencePlugin,
+  writeTypedocReference,
+} from "./typedocReference.ts";
 
 const siteRoot = "https://www.popclip.app";
 
@@ -100,6 +108,9 @@ export default defineConfig({
   titleTemplate: ":title — PopClip",
   description: "Instant text actions for macOS",
   cleanUrls: true,
+  // The /dev/api/ pages are typedoc output written into the dist by buildEnd,
+  // so the dead-link checker cannot see them.
+  ignoreDeadLinks: [/^\/dev\/api\//],
   lastUpdated: false,
   sitemap: {
     hostname: "https://www.popclip.app",
@@ -197,7 +208,13 @@ export default defineConfig({
               items: [
                 {
                   text: "API reference",
-                  link: "https://pilotmoon.github.io/popclip-types/modules.html",
+                  link: "/dev/api/",
+                  target: "_self",
+                },
+                {
+                  text: "Type definitions",
+                  link: "/dev/popclip.d.ts",
+                  target: "_blank",
                 },
               ],
             },
@@ -288,13 +305,27 @@ export default defineConfig({
         copyAttrs: "^class$",
       });
       md.use(mediaFigures);
+      // /dev/api/ pages are typedoc output, not VitePress pages. A target
+      // attribute makes the SPA router leave the links alone, so the browser
+      // fetches them normally instead of routing to a 404.
+      const defaultLinkOpen =
+        md.renderer.rules.link_open ??
+        ((tokens, idx, options, _env, self) =>
+          self.renderToken(tokens, idx, options));
+      md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+        const href = tokens[idx].attrGet("href");
+        if (href?.startsWith("/dev/api/")) {
+          tokens[idx].attrSet("target", "_self");
+        }
+        return defaultLinkOpen(tokens, idx, options, env, self);
+      };
     },
   },
   vite: {
     ssr: {
       noExternal: ["element-plus"],
     },
-    plugins: [ElementPlus({})],
+    plugins: [ElementPlus({}), popclipTypesPlugin(), typedocReferencePlugin()],
   },
   vue: {
     template: {
@@ -302,6 +333,10 @@ export default defineConfig({
         isCustomElement: (tag) => tag === "setapp-custom-banner",
       },
     },
+  },
+  buildEnd: async ({ outDir }) => {
+    writePopClipTypes(outDir);
+    await writeTypedocReference(outDir);
   },
   transformPageData: (pageData, { siteConfig }) => {
     if (pageData.frontmatter.isExtensionPage) {
