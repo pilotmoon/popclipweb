@@ -77,8 +77,8 @@ export function usePaddleCheckout() {
     purchaseInfo.flowId.value = parsed.data.flow_id;
     purchaseInfo.userEmail.value = eventData.data.user.email;
     purchaseInfo.userCountry.value = eventData.data.user.country;
-    log("[checkout] redirecting to /purchase-complete");
-    window.location.href = "/purchase-complete";
+    log("[checkout] redirecting to /purchase-status");
+    window.location.href = "/purchase-status";
   }
 
   async function generateRandomKey() {

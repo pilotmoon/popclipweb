@@ -114,6 +114,16 @@ export default defineConfig({
   lastUpdated: false,
   sitemap: {
     hostname: "https://www.popclip.app",
+    // The post-checkout page has no business in search results: of the states
+    // it can show, most are states a searcher arriving cold would find
+    // alarming ("We cannot find your purchase"), and none are useful without
+    // the purchase data held in the buyer's own tab. /purchase-complete is the
+    // retained alias for the same page, so it stays out too.
+    transformItems: (items) =>
+      items.filter(
+        (item) =>
+          item.url !== "purchase-status" && item.url !== "purchase-complete",
+      ),
   },
   themeConfig: {
     footer: {

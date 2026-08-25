@@ -251,7 +251,7 @@ export function usePaddleBillingCheckout() {
       } catch (e) {
         log("[checkout] Checkout.close failed", e);
       }
-      window.location.href = "/purchase-complete";
+      window.location.href = "/purchase-status";
       return true;
     } catch (e) {
       return false; // network error — keep watching
@@ -283,9 +283,9 @@ export function usePaddleBillingCheckout() {
     purchaseInfo.userEmail.value = lastCustomerEmail;
     purchaseInfo.userCountry.value = lastCustomerCountry;
     log(
-      `[checkout] closed after payment initiated without completing; redirecting to /purchase-complete, flow_id=${currentFlowId}`,
+      `[checkout] closed after payment initiated without completing; redirecting to /purchase-status, flow_id=${currentFlowId}`,
     );
-    window.location.href = "/purchase-complete";
+    window.location.href = "/purchase-status";
   }
 
   // On a completed checkout, capture the buyer details and redirect to the
@@ -311,8 +311,8 @@ export function usePaddleBillingCheckout() {
     log(
       `[checkout] flow_id=${currentFlowId}, email=${purchaseInfo.userEmail.value}, country=${purchaseInfo.userCountry.value}`,
     );
-    log("[checkout] redirecting to /purchase-complete");
-    window.location.href = "/purchase-complete";
+    log("[checkout] redirecting to /purchase-status");
+    window.location.href = "/purchase-status";
   }
 
   // Open the Paddle overlay for a single item.
