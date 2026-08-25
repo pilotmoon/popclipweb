@@ -8,7 +8,7 @@ import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
 import { formatDate } from "/src/helpers/formatters";
 import { kaboom } from "/src/helpers/confetti";
-import { infoBlock } from "/src/helpers/supportMailto";
+import { infoBlock, supportMailtoHref } from "/src/helpers/supportMailto";
 import { readParams } from "/src/helpers/readParams";
 
 const log = useLogger();
@@ -71,7 +71,7 @@ onMounted(async () => {
   if (!purchaseInfo.flowId.value && !purchaseInfo.transactionId.value) {
     log("[license] no flowId or transactionId in session — checkout did not complete here, or session was lost");
     state.value = State.NoSession;
-    title.value = "Session Expired";
+    title.value = "Purchase Not Found";
     return;
   }
   log(`[license] polling for license, flowId=${purchaseInfo.flowId.value}, transactionId=${purchaseInfo.transactionId.value}, mode=${sandbox ? "test" : "live"}`);
@@ -117,10 +117,10 @@ function isWaitState() {
 function updateWaitState() {
   if (txnStatus.value?.status === "pending") {
     state.value = State.PaymentPending;
-    title.value = "Payment Processing";
+    title.value = "Confirming Payment";
   } else if (txnStatus.value?.status === "in_progress") {
     state.value = State.PaymentInProgress;
-    title.value = "Waiting for Payment";
+    title.value = "Confirming Payment";
   }
 }
 
@@ -234,39 +234,27 @@ async function sweepOtherAttempts() {
   return false;
 }
 
-// display name and expected confirmation time for the payment method
-// holding up the license. Timings per Paddle's payment method docs:
-// WeChat Pay typically captures within ~10 minutes; Pix and UPI typically
-// capture immediately, with 10 minutes as the worst case.
-const paymentMethods = {
-  wechat_pay: {
-    name: "WeChat Pay",
-    timing: "usually within about 10 minutes",
-  },
-  pix: {
-    name: "Pix",
-    timing: "usually within moments, though occasionally up to 10 minutes",
-  },
-  upi: {
-    name: "UPI",
-    timing: "usually within moments, though occasionally up to 10 minutes",
-  },
-  blik: {
-    name: "BLIK",
-    timing: "usually within moments, though occasionally up to 10 minutes",
-  },
-  mb_way: {
-    name: "MB WAY",
-    timing: "usually within a few minutes",
-  },
+// How long the buyer is told to expect to wait. One figure for every method
+// rather than one each: per Paddle's payment method docs WeChat Pay captures
+// within ~10 minutes and Pix, UPI and BLIK typically capture at once with 10
+// minutes as the worst case, so ten covers all of them. Overstating is the
+// safe direction — a buyer told "a few minutes" who then waits ten concludes
+// something has gone wrong, which is the failure this page exists to prevent.
+const CONFIRM_TIME = "up to 10 minutes";
+
+// display name for the payment method holding up the license
+const paymentMethodNames = {
+  wechat_pay: "WeChat Pay",
+  pix: "Pix",
+  upi: "UPI",
+  blik: "BLIK",
+  mb_way: "MB WAY",
 };
 
-function paymentMethodInfo() {
+function paymentMethodName() {
   return (
-    paymentMethods[txnStatus.value?.paymentMethodType] ?? {
-      name: "Your payment method",
-      timing: "usually within a few minutes",
-    }
+    paymentMethodNames[txnStatus.value?.paymentMethodType] ??
+    "Your bank or payment app"
   );
 }
 
@@ -369,11 +357,26 @@ function licenseInfoString() {
 
 <template>
   <div>
+    <!-- Reached when this browser holds neither a flow id nor a transaction id.
+         Says what we can see rather than guessing why: a closed tab is only one
+         way to get here, alongside a different tab, a different browser and
+         cleared storage. -->
     <div v-if="state === State.NoSession">
-      <h1>Session Expired</h1>
-      <p>Your session has expired because you closed the browser tab or window.</p>
-      <p>If you bought a license key, it will have been sent to to the email address you provided at checkout.</p>
-      <p>If you need any help, please contact&ensp;<SupportEmailLink />.</p>
+      <h1>We cannot find your purchase</h1>
+      <p>This browser has no record of a purchase.</p>
+      <p>If you bought a license key, we have emailed it to the email address you gave at checkout.</p>
+      <p>
+        Please check your spam folder, or
+        <a
+          :href="
+            supportMailtoHref({
+              subject: 'PopClip Purchase Enquiry',
+              body: infoBlock(diagnosticInfoString(), 'Diagnostic Information'),
+            })
+          "
+          >contact support</a
+        >.
+      </p>
     </div>
     <div v-else-if="state === State.Loading" style="text-align: center; padding-top: 0">
       <VueSpinnerGears color="var(--vp-c-text-2)" size="50" style="display: inline-block" />
@@ -381,47 +384,54 @@ function licenseInfoString() {
       <p v-if="countdown <= 57">Please wait ({{ countdown }})</p>
     </div>
     <div v-else-if="state === State.PaymentPending">
-      <h1>Your payment is being processed</h1>
+      <h1>Confirming your payment</h1>
       <p>
-        {{ paymentMethodInfo().name }} confirms payments after a short delay &mdash; {{ paymentMethodInfo().timing }}.
+        Please wait for your license key. It will appear on this page. We will also email it to
+        <b>{{ purchaseInfo.userEmail.value || "the email address you gave at checkout" }}</b>.
       </p>
+      <p>{{ paymentMethodName() }} may take {{ CONFIRM_TIME }} to confirm your payment.</p>
+      <!-- Deliberately worded as running text with no address or icon. While the
+           buyer is waiting, a mail icon beside a support address reads as an
+           instruction to report a problem rather than a fallback, and waiting is
+           what we want them to do. The mailto behind it still carries the
+           diagnostics, which are what make the rare real report useful. -->
       <p>
-        Once the payment is confirmed, your PopClip license key will be emailed to
-        <b>{{ purchaseInfo.userEmail.value || "the email address you provided at checkout" }}</b
+        No email after one hour? Please check your spam folder, or
+        <a
+          :href="
+            supportMailtoHref({
+              subject: 'PopClip Purchase Enquiry',
+              body: infoBlock(diagnosticInfoString(), 'Diagnostic Information'),
+            })
+          "
+          >contact support</a
         >.
-      </p>
-      <p>
-        You can safely close this page &mdash; there's no need to wait here. If you leave it open, it will update
-        automatically when your license is ready.
-      </p>
-      <p>
-        If nothing arrives within an hour, please check your spam folder or contact&ensp;<SupportEmailLink
-          subject="PopClip Purchase Enquiry"
-          :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')"
-        />.
       </p>
     </div>
     <div v-else-if="state === State.PaymentInProgress">
       <h1>Confirming your payment</h1>
       <p>
-        {{ paymentMethodInfo().name }} confirms payments after a short delay &mdash; {{ paymentMethodInfo().timing }}
-        &mdash; so if you've already paid, there's nothing more for you to do.
+        Please wait for your license key. It will appear on this page. We will also email it to
+        <b>{{ purchaseInfo.userEmail.value || "the email address you gave at checkout" }}</b>.
       </p>
+      <p>{{ paymentMethodName() }} may take {{ CONFIRM_TIME }} to confirm your payment.</p>
+      <p>If you did not pay, you have not been charged.</p>
+      <!-- Deliberately worded as running text with no address or icon. While the
+           buyer is waiting, a mail icon beside a support address reads as an
+           instruction to report a problem rather than a fallback, and waiting is
+           what we want them to do. The mailto behind it still carries the
+           diagnostics, which are what make the rare real report useful. -->
       <p>
-        Your PopClip license key will be emailed to
-        <b>{{ purchaseInfo.userEmail.value || "the email address you provided at checkout" }}</b>
-        as soon as the payment is confirmed. You can safely close this page &mdash; there's no need to wait here. If you
-        leave it open, it will update automatically when your license is ready.
-      </p>
-      <p>
-        If you haven't completed the payment, or decided not to go ahead, nothing has been charged and you can simply
-        close this page.
-      </p>
-      <p>
-        If nothing arrives within an hour, please check your spam folder or contact&ensp;<SupportEmailLink
-          subject="PopClip Purchase Enquiry"
-          :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')"
-        />.
+        No email after one hour? Please check your spam folder, or
+        <a
+          :href="
+            supportMailtoHref({
+              subject: 'PopClip Purchase Enquiry',
+              body: infoBlock(diagnosticInfoString(), 'Diagnostic Information'),
+            })
+          "
+          >contact support</a
+        >.
       </p>
     </div>
     <div v-else-if="state === State.PaymentFailed">
@@ -438,16 +448,28 @@ function licenseInfoString() {
       </pre>
     </div>
     <div v-else-if="state === State.Delayed">
-      <h1>Your license key is on its way</h1>
-      <p>It's taking a little longer than usual to confirm your order.</p>
+      <!-- Reached after a minute with neither a license nor a payment status, so
+           we know less here than anywhere else on this page: the purchase may
+           still be settling, or may never have happened. The heading claims only
+           what we can see. -->
+      <h1>We are still processing your order</h1>
+      <p>This is taking a little longer than usual.</p>
       <p>
-        Your license key will be emailed to
-        <b>{{ purchaseInfo.userEmail.value || "the email address you provided at checkout" }}</b>
-        as soon as it's ready &mdash; you don't need to stay on this page.
+        We will email your license key to
+        <b>{{ purchaseInfo.userEmail.value || "the email address you gave at checkout" }}</b>
+        as soon as it is ready. This page has stopped checking, so you do not need to stay here.
       </p>
       <p>
-        If it hasn't arrived within an hour, please contact
-        <SupportEmailLink subject="PopClip Purchase Enquiry" :body="infoBlock(diagnosticInfoString(), 'Diagnostic Information')" />.
+        No email after one hour? Please check your spam folder, or
+        <a
+          :href="
+            supportMailtoHref({
+              subject: 'PopClip Purchase Enquiry',
+              body: infoBlock(diagnosticInfoString(), 'Diagnostic Information'),
+            })
+          "
+          >contact support</a
+        >.
       </p>
       <h3>Diagnostic Information</h3>
       <pre
