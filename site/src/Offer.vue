@@ -6,6 +6,7 @@ import { loadStore, useStoreState, formatMinorUnits, roundPrice } from "./compos
 import { useDeploymentInfo } from "./composables/useDeploymentInfo";
 import { useLogger } from "./composables/useLogger";
 import { usePaddleBillingCheckout } from "./composables/usePaddleBillingCheckout";
+import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import { formatDate } from "./helpers/formatters";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { infoBlock, supportMailtoHref } from "./helpers/supportMailto";
@@ -22,6 +23,7 @@ const log = useLogger();
 const store = useStoreState();
 const sandbox = useDeploymentInfo().isLocalhost;
 const { openCheckout } = usePaddleBillingCheckout();
+const { interceptPurchase } = useOutstandingPurchase();
 
 // ---- signed offer params ------------------------------------------------
 
@@ -817,6 +819,8 @@ function offerPassthrough(claim: string) {
 // confirmed details then flow into the claim/renewal checkout.
 function onBuy(claim: string) {
   if (busyOffer.value) return;
+  // before the dialog, not after it: see interceptPurchase
+  if (interceptPurchase()) return;
   if (config.paddleBilling.preCheckout) {
     pendingClaim.value = claim;
     showDialog.value = true;

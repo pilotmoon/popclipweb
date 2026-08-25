@@ -90,6 +90,18 @@ export const useOutstandingPurchase = createGlobalState(() => {
     }
   }
 
+  // Guard for the top of anything that starts a purchase. Returns true when it
+  // has taken over, having sent the buyer to the status of the payment already
+  // in flight. Call it before raising the pre-checkout dialog, not just before
+  // opening the Paddle overlay: asking someone to type their email and only
+  // then telling them they have already paid wastes their effort and reads as
+  // a fault.
+  function interceptPurchase() {
+    if (!blocksCheckout.value) return false;
+    goToStatus();
+    return true;
+  }
+
   // Hand the status page this checkout rather than whatever the tab was last
   // pointed at, and go there.
   function goToStatus() {
@@ -98,5 +110,5 @@ export const useOutstandingPurchase = createGlobalState(() => {
     window.location.href = "/purchase-status";
   }
 
-  return { outstanding, blocksCheckout, check, goToStatus };
+  return { outstanding, blocksCheckout, check, interceptPurchase, goToStatus };
 });

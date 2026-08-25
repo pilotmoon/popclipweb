@@ -1,5 +1,6 @@
 <script setup type="ts">
 import { onMounted } from "vue";
+import { readParams } from "/src/helpers/readParams";
 import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 
 // Notice shown at the top of the buy pages when this tab has a checkout still
@@ -7,7 +8,24 @@ import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 // that came to anything — and no request is made either.
 const { outstanding, check, goToStatus } = useOutstandingPurchase();
 
-onMounted(check);
+const PREVIEW_KINDS = ["paying", "undelivered", "unfinished"];
+
+onMounted(() => {
+  // #preview=<kind> shows a notice without a purchase, matching the hook of
+  // the same name on the license page. These states need a payment caught
+  // mid-flight to reach honestly, which a sandbox cannot produce for the
+  // deferred methods that motivate them. Harmless on production: it renders
+  // static copy and makes no request.
+  const preview = readParams().get("preview");
+  if (preview && PREVIEW_KINDS.includes(preview)) {
+    outstanding.value = {
+      kind: preview,
+      attempt: { flowId: "preview", transactionId: null, at: Date.now() },
+    };
+    return;
+  }
+  check();
+});
 </script>
 
 <template>

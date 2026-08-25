@@ -5,6 +5,7 @@ import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { loadStore, useStoreState, roundPrice } from "./composables/useStoreState";
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
 import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePaddleBillingCheckout";
+import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
 import { Paypal, ApplePay, CreditCard, GlobeAmericas } from "@vicons/fa";
@@ -21,6 +22,7 @@ const isLizhi = computed(() =>
 const regionallyPriced = computed(() => isRegionallyPriced(store.countryCode.value));
 const { openCheckout } = usePaddleCheckout();
 const { openCheckout: openBillingCheckout, initForTransactionCheckout } = usePaddleBillingCheckout();
+const { interceptPurchase } = useOutstandingPurchase();
 
 function queryBool(val) {
   return val === "" || val === "1";
@@ -78,6 +80,8 @@ const dialogTitle = computed(
 // `product` is the processed product from the store (or undefined for the
 // ?go auto-open, which only works once the store has loaded)
 async function openPaddleCheckout(product) {
+  // before the dialog, not after it: see interceptPurchase
+  if (interceptPurchase()) return;
   if (isBillingActive()) {
     if (!product?.priceId) {
       console.error("[buy] no priceId for billing checkout", product);
