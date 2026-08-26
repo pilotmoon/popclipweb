@@ -13,7 +13,7 @@ Extensions that talk to an external service on the user's behalf usually need
 a credential of some kind. This page describes the tools PopClip provides for
 signing in to services and storing secrets.
 
-## The simplest way: an API key option
+## API key authentication
 
 If the service just needs an API key that the user can obtain and paste in,
 you don't need any special machinery. Define an [option](./config#the-options-array)
@@ -21,7 +21,7 @@ of type `secret`: it appears as a concealed text field, and PopClip stores
 the value in the user's keychain.
 
 For anything more involved — validating a username and password, or an OAuth
-sign-in — use the `auth` function, described next.
+sign-in — use the `auth` function.
 
 ## The `auth` function
 
@@ -152,7 +152,7 @@ opens the settings UI for the user to sign in again. (The related
 sends the user to settings _without_ signing them out — for example when a
 required option is missing.)
 
-## Registering your extension as a client app
+## Registering as a client app
 
 Before you can use OAuth, you have to register an application with the service
 to obtain a client identifier. A few notes on doing that as an extension
@@ -165,9 +165,8 @@ PopClip icon.
 
 **Choose a name that tells the user what they are approving.** The name you
 register appears on the authorization page shown when the user signs in, so it
-is what they will use to decide whether to trust the request. Something like
-"Raindrop for PopClip (community extension)" or "Jane's Raindrop Clipper for
-PopClip" identifies both the integration and its author.
+is what they will use to decide whether to trust the request. Identify that it
+is an extension for PopClip and who made it. Example: _"Raindrop Extension for PopClip, by @author"_
 
 **Link to your own repository.** Where the service asks for a homepage or
 support URL, give the extension's own GitHub repository or web page, not this website.
@@ -182,7 +181,7 @@ If your extension is later published in the
 [PopClip Extensions Directory](/extensions/), get in touch and we can revisit
 the registration then.
 
-## Client secrets, and `util.clarify`
+## Storing the client secret
 
 If your registration gives you a client secret, you have a small problem: there is nowhere to hide it.
 Client secrets have to ship inside the extension, and an extension is source code that anyone can read.
@@ -196,36 +195,13 @@ import { credentials } from "./client.json"; // { "credentials": "<obscured stri
 const { client_id, client_secret } = util.clarify(credentials);
 ```
 
-To be clear: this is obfuscation and not security. Anyone determined can recover the values by reversing the process. That is an accepted limitation. Client credentials are embedded in ordinary apps too, and can be extracted from them just the same. Publish accordingly: treat an extension's client credentials as protected from casual exposure rather than secret.
+To be clear: this is obfuscation and not security. Anyone determined can recover the values by reversing the process. That is an accepted limitation. Client credentials are embedded in ordinary apps too, and can be extracted from them just the same. Treat an extension's client credentials as protected from casual exposure rather than secret.
 
 To prepare an obscured blob, apply the reverse of `clarify` to your JSON:
 encode it as Base64, then apply ROT13 to the result. You can do it right
 here:
 
 <ObscureTool />
-
-Or do the same with Node:
-
-```js
-// obscure.mjs — run with: node obscure.mjs
-const credentials = { client_id: "abc123", client_secret: "shhh" };
-const base64 = Buffer.from(JSON.stringify(credentials)).toString("base64");
-const obscured = base64.replace(/[a-z]/gi, (c) =>
-  String.fromCharCode(c.charCodeAt(0) + (c.toLowerCase() < "n" ? 13 : -13)),
-);
-console.log(obscured);
-// -> rlWwoTyyoaEsnJDvBvWuLzZkZwZvYPWwoTyyoaEsp2IwpzI0Vwbvp2ubnPW9
-```
-
-The printed string is what goes in the extension — the value of the
-`credentials` key in the `client.json` of the example above — ready to be read
-back with `util.clarify` at load time.
-
-Finally, note that some services support [PKCE](https://oauth.net/2/pkce/),
-a variant of OAuth designed for apps that cannot keep secrets. With PKCE
-there is no client secret at all — only the client identifier ships in the
-extension. If the service you are integrating with offers it, prefer it:
-the less there is to obscure, the better.
 
 ## Related config keys
 
