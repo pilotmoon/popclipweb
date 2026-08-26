@@ -193,7 +193,7 @@ plaintext, where they could be scraped or indexed:
 
 ```ts
 import { credentials } from "./client.json"; // { "credentials": "<obscured string>" }
-const { client_id, client_secret } = util.clarify(client);
+const { client_id, client_secret } = util.clarify(credentials);
 ```
 
 To be clear: this is obfuscation and not security. Anyone determined can recover the values by reversing the process. That is an accepted limitation. Client credentials are embedded in ordinary apps too, and can be extracted from them just the same. Publish accordingly: treat an extension's client credentials as protected from casual exposure rather than secret.
