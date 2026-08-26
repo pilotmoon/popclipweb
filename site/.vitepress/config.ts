@@ -4,6 +4,8 @@ import ElementPlus from "unplugin-element-plus/vite";
 import { defineConfig, type HeadConfig } from "vitepress";
 import siteConfig from "../src/config/config.json";
 import { querifyDescriptor } from "../src/helpers/iconDescriptor.js";
+import { llmDocsPlugin, writeLlmDocs } from "./llmDocs.ts";
+import { llmFilePaths, twinFiles } from "./llmPages.ts";
 import mediaFigures from "./markdown/mediaFigures.ts";
 import {
   popclipTypesPlugin,
@@ -118,11 +120,15 @@ export default defineConfig({
     // it can show, most are states a searcher arriving cold would find
     // alarming ("We cannot find your purchase"), and none are useful without
     // the purchase data held in the buyer's own tab. /purchase-complete is the
-    // retained alias for the same page, so it stays out too.
+    // retained alias for the same page, so it stays out too. /dev/all is the
+    // one-page developer reference -- all duplicate content, so the
+    // individual pages keep the search traffic.
     transformItems: (items) =>
       items.filter(
         (item) =>
-          item.url !== "purchase-status" && item.url !== "purchase-complete",
+          item.url !== "purchase-status" &&
+          item.url !== "purchase-complete" &&
+          item.url !== "dev/all",
       ),
   },
   themeConfig: {
@@ -178,6 +184,15 @@ export default defineConfig({
     ],
     sidebar: {
       "/dev/": [
+        {
+          text: "One Page",
+          link: "/dev/all",
+        },
+        {
+          text: "llms.txt",
+          link: "/llms.txt",
+          target: "_self",
+        },
         {
           text: "Developer Reference",
           items: [
@@ -293,7 +308,24 @@ export default defineConfig({
     },
   },
   transformHead({ pageData }) {
-    return openGraph(pageData.relativePath, pageData.params ?? {});
+    const head = openGraph(pageData.relativePath, pageData.params ?? {});
+    // Docs pages with a plain-Markdown twin (see llmDocs.ts) advertise it.
+    // The one-page view resolves to relativePath "dev/all.md", which is
+    // exactly the path of its generated Markdown counterpart.
+    if (
+      twinFiles.has(pageData.relativePath) ||
+      pageData.relativePath === "dev/all.md"
+    ) {
+      head.push([
+        "link",
+        {
+          rel: "alternate",
+          type: "text/markdown",
+          href: `${siteRoot}/${pageData.relativePath}`,
+        },
+      ]);
+    }
+    return head;
   },
   head: [
     ["link", { rel: "shortcut icon", href: "/icon32.png", type: "image/png" }],
@@ -315,16 +347,19 @@ export default defineConfig({
         copyAttrs: "^class$",
       });
       md.use(mediaFigures);
-      // /dev/api/ pages are typedoc output, not VitePress pages. A target
+      // /dev/api/ pages are typedoc output, and the llms/all.md files are
+      // plain files written by llmDocs.ts -- not VitePress pages. A target
       // attribute makes the SPA router leave the links alone, so the browser
-      // fetches them normally instead of routing to a 404.
+      // fetches them normally instead of routing to a 404. (It also makes
+      // VitePress's own link rule skip the href entirely: no clean-URL
+      // rewriting, no dead-link check.)
       const defaultLinkOpen =
         md.renderer.rules.link_open ??
         ((tokens, idx, options, _env, self) =>
           self.renderToken(tokens, idx, options));
       md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
         const href = tokens[idx].attrGet("href");
-        if (href?.startsWith("/dev/api/")) {
+        if (href && (href.startsWith("/dev/api/") || llmFilePaths.includes(href))) {
           tokens[idx].attrSet("target", "_self");
         }
         return defaultLinkOpen(tokens, idx, options, env, self);
@@ -335,7 +370,12 @@ export default defineConfig({
     ssr: {
       noExternal: ["element-plus"],
     },
-    plugins: [ElementPlus({}), popclipTypesPlugin(), typedocReferencePlugin()],
+    plugins: [
+      ElementPlus({}),
+      popclipTypesPlugin(),
+      typedocReferencePlugin(),
+      llmDocsPlugin(),
+    ],
   },
   vue: {
     template: {
@@ -347,6 +387,7 @@ export default defineConfig({
   buildEnd: async ({ outDir }) => {
     writePopClipTypes(outDir);
     await writeTypedocReference(outDir);
+    await writeLlmDocs(outDir);
   },
   transformPageData: (pageData, { siteConfig }) => {
     if (pageData.frontmatter.isExtensionPage) {

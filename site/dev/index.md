@@ -24,6 +24,14 @@ will be happy to help you there.
 
 :::
 
+::: info Markdown for LLMs
+
+Every page here has a plain Markdown twin — add `.md` to its URL. The whole
+reference is in one file at [/dev/all.md](/dev/all.md); see also
+[/llms.txt](/llms.txt).
+
+:::
+
 ## Extensions Overview
 
 ### Snippets and Packages
