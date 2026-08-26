@@ -14,6 +14,7 @@ import { usePurchaseInfo } from "./usePurchaseInfo";
 // page could reach them: both only run somewhere the buyer no longer was.
 // A buy page is somewhere they plausibly come back to, and this is what
 // notices when they do.
+
 // Methods whose capture happens away from the browser, and which Paddle
 // reports as "in_progress" throughout — never "pending" — so an unconfirmed
 // payment on one of them may equally be a payment already made. Every other
@@ -129,12 +130,6 @@ export const useOutstandingPurchase = createGlobalState(() => {
     }
   }
 
-  // Guard for the top of anything that starts a purchase. Returns true when it
-  // has taken over, having sent the buyer to the status of the payment already
-  // in flight. Call it before raising the pre-checkout dialog, not just before
-  // opening the Paddle overlay: asking someone to type their email and only
-  // then telling them they have already paid wastes their effort and reads as
-  // a fault.
   // Guard for the top of anything that starts a purchase, for the race where
   // the check comes back after the buyer has already clicked. The notice is
   // open by definition whenever this returns true — blocksCheckout requires
