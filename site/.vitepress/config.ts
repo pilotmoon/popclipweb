@@ -245,6 +245,7 @@ export default defineConfig({
               text: "Module-based extensions",
               link: "/dev/js-modules",
             },
+            { text: "Authentication", link: "/dev/auth" },
             { text: "Changelog", link: "/dev/changelog" },
           ],
         },

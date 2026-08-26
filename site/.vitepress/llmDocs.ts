@@ -134,6 +134,19 @@ const pagePatches: Record<
   [string | RegExp, string | (() => string)][]
 > = {
   "kb/browsers.md": [[/<table>[\s\S]*?<\/table>/, browserTable]],
+  "dev/auth.md": [
+    // the interactive obscuring tool is only useful rendered; the Node
+    // example that follows it serves the Markdown reader
+    [
+      `You can do it right
+here:
+
+<ObscureTool />
+
+Or do the same with Node:`,
+      "For example, with Node:",
+    ],
+  ],
   "dev/icons.md": [
     [
       "<IconExplorer />",

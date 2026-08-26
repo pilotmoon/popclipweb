@@ -140,6 +140,12 @@ export const llmSections: LlmSection[] = [
           "Defining a whole extension in JavaScript or TypeScript with defineExtension()",
       },
       {
+        file: "dev/auth.md",
+        title: "Authentication",
+        description:
+          "Signing in to external services: the auth function, OAuth flows, secret storage and util.clarify",
+      },
+      {
         file: "dev/changelog.md",
         title: "Developer Changelog",
         description:
