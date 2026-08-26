@@ -82,17 +82,8 @@ mdfind -0 "kMDItemCFBundleIdentifier == 'com.pilotmoon.popclip*'" | xargs -0 -n1
 
 ## Transfer extensions and settings to a different Mac
 
-Whilst there is no built in import/export or sync (yet), you can manually copy
-your existing extensions and settings to a different Mac by copying across the
-following:
-
-Extensions folder:
-
-`~/Library/Application Support/PopClip/Extensions` folder
-
-Preferences file:
-
-`~/Library/Preferences/com.pilotmoon.popclip.plist`
+Enable PopClip's [iCloud sync](sync) on your current Mac first.
+Everything will sync to the new Mac automatically.
 
 ## Browser support for website exclusion
 
