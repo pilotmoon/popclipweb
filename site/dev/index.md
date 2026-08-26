@@ -76,20 +76,6 @@ with no code needed:
 | [Service](./service-actions)        | Send the selected text to a macOS Service.              |
 | [Shortcut](./shortcut-actions)      | Send the selected text to a macOS Shortcut.             |
 
-### Filter rules
-
-Extensions have access to the following filtering mechanisms to prevent actions
-from appearing when they are not helpful:
-
-- Filter by the current application
-- Filter by matching a regular expression against the selected text
-- Filter by whether cut, paste, or formatting is available
-- Filter by whether the text contains a URL, email address, or file path
-- Filter by the current values of the extensions's options
-
-Filter rules are defined in the [action properties](./actions) under the `regex`
-key, `requirements` key, and `required apps`/`excluded apps` keys.
-
 ## Extension signing
 
 Please be aware that PopClip extensions can contain arbitrary executable code.
