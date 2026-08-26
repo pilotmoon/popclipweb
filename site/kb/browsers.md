@@ -20,7 +20,7 @@ support provided for each one. (See [Key to table](#key-to-table).)
 <th style="text-align: center">Basic</th>
 <th style="text-align: center">Page Info</th>
 <th style="text-align: center">Address Bar</th>
-<th style="text-align: center">Background Tab</th>
+<th style="text-align: center">Tab Control</th>
 <th style="text-align: center">Open In</th>
 </tr>
 </thead>
@@ -53,8 +53,10 @@ The table contains columns for each of the following features:
 - **Address Bar:** This column indicates if PopClip will pop-up when you
   single-click in the browser's address bar.
 
-- **Background Tab:** This column indicates whether the browser supports
-  opening searches and URLs in a background tab by holding down the Shift key.
+- **Tab Control:** This column indicates whether the browser supports opening tabs
+  next to the current one (instead of at the end) and opening searches and URLs in
+  background tab by holding down the Shift key. With unsupported browsers, PopClip falls
+  back to a simple "open URL" command and the browser handles the tab in its default way.
 
 - **Open In:** This column indicates whether the browser is available as a
   target in the
