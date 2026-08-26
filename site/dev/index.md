@@ -51,17 +51,30 @@ A PopClip extension can be either a [snippet](./snippets.md) or a
 
 ### Types of actions
 
-An extension defines one or more actions. Each action can be one of seven types:
+An extension defines one or more actions. Each action can be one of seven
+types. Three are script types, which run code that you provide:
 
-| Action Type                               | Description                                             |
-| ----------------------------------------- | ------------------------------------------------------- |
-| [Shortcut](./shortcut-actions)            | Send the selected text to a macOS Shortcut.             |
-| [Service](./service-actions)              | Send the selected text to a macOS Service.              |
-| [URL](./url-actions.md)                   | Open a URL, with the selected text inserted as a query. |
-| [Key Press](./key-press-actions.md)       | Press a key combination.                                |
-| [Shell Script](./shell-script-actions.md) | Run a shell script.                                     |
-| [AppleScript](./applescript-actions.md)   | Run an AppleScript script.                              |
-| [JavaScript](./js-actions.md)             | Run a JavaScript or TypeScript script.                  |
+| Action Type                               | Description                            |
+| ----------------------------------------- | -------------------------------------- |
+| [JavaScript](./js-actions.md)             | Run a JavaScript or TypeScript script. |
+| [AppleScript](./applescript-actions.md)   | Run an AppleScript script.             |
+| [Shell Script](./shell-script-actions.md) | Run a shell script.                    |
+
+JavaScript is the recommended script type. JavaScript actions have full access
+to PopClip's [JavaScript environment](./js-environment.md), and a
+[module-based extension](./js-modules.md) can define everything it does in
+JavaScript or TypeScript. Use the AppleScript and Shell Script types only when
+the job can't be done with JavaScript alone.
+
+The other four types are ready-made conveniences for performing common tasks,
+with no code needed:
+
+| Action Type                         | Description                                             |
+| ----------------------------------- | ------------------------------------------------------- |
+| [URL](./url-actions.md)             | Open a URL, with the selected text inserted as a query. |
+| [Key Press](./key-press-actions.md) | Press a key combination.                                |
+| [Service](./service-actions)        | Send the selected text to a macOS Service.              |
+| [Shortcut](./shortcut-actions)      | Send the selected text to a macOS Shortcut.             |
 
 ### Filter rules
 
