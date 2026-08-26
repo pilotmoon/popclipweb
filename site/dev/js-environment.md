@@ -154,23 +154,23 @@ PopClip provides a limited subset of the standard
 [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) that are normally
 available in a browser environment:
 
-- [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
-- [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL),
-  [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
-- [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
-- [atob](https://developer.mozilla.org/en-US/docs/Web/API/atob),
-  [btoa](https://developer.mozilla.org/en-US/docs/Web/API/btoa)
-- [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
-  [clearTimeout](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
-- [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone)
-- [TextEncoder](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder)
-  (`encode()` method only, `utf-8` encoding only).
+- [URL](/dev/api/classes/URL.html) and
+  [URLSearchParams](/dev/api/classes/URLSearchParams.html)
+- [XMLHttpRequest](/dev/api/classes/XMLHttpRequest.html)
+- [setTimeout](/dev/api/functions/setTimeout.html) and
+  [clearTimeout](/dev/api/functions/clearTimeout.html)
+- [setInterval](/dev/api/functions/setInterval.html) and
+  [clearInterval](/dev/api/functions/clearInterval.html)
+- [structuredClone](/dev/api/functions/structuredClone.html)
 
 Additionally, from the Node.js environment:
 
-- [Buffer](https://nodejs.org/api/buffer.html#buffer)
+- [Buffer](/dev/api/classes/Buffer.html)
 
-All of the above functions and classes are accessible in the global scope.
+Some further globals are present only as compatibility shims to support the bundled modules:
+`Blob`, `TextEncoder`, `atob` and `btoa`. These are
+reduced implementations, not recommended for direct use — prefer `Buffer` and
+the `util` encoding functions.
 
 ### Bundled libraries
 
@@ -308,7 +308,7 @@ array in the extension's config.
 :::
 
 PopClip provides its own implementation of
-[`XMLHttpRequest`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+[`XMLHttpRequest`](/dev/api/classes/XMLHttpRequest.html)
 (XHR). This is the only way for JavaScript code to access the network.
 
 PopClip is also bundled with the HTTP library
