@@ -182,10 +182,10 @@ If your extension is later published in the
 [PopClip Extensions Directory](/extensions/), get in touch and we can revisit
 the registration then.
 
-## Client identifiers, and `util.clarify`
+## Client secrets, and `util.clarify`
 
 If your registration gives you a client secret, you have a small problem: there is nowhere to hide it.
-Client credentials have to ship inside the extension, and an extension is source code that anyone can read.
+Client secrets have to ship inside the extension, and an extension is source code that anyone can read.
 
 The [`util.clarify`](/dev/api/interfaces/Util.html#clarify) function is used here. It deciphers a JSON object that has been lightly obscured —
 stringify, then Base64, then ROT13 — so the credentials at least don't sit in the source as
