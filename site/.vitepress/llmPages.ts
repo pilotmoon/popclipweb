@@ -268,3 +268,24 @@ export const llmPages: LlmPage[] = llmSections.flatMap(
 export const twinFiles: Set<string> = new Set(
   llmPages.map((page) => page.file),
 );
+
+/**
+ * Whether a page shows the visible "View as Markdown" link. Every twinned
+ * page advertises its twin via the head tag, but the visible link is only
+ * for reference-flavored pages: the dev subtree, the extension submission
+ * page, the knowledge base and the policies. The user guide and app-info
+ * pages stay link-free.
+ */
+export function showsTwinLink(file: string): boolean {
+  if (file === "dev/all.md") {
+    return true; // the one-page view; its twin is generated, not a manifest page
+  }
+  return (
+    twinFiles.has(file) &&
+    (file.startsWith("dev/") ||
+      file.startsWith("kb/") ||
+      file === "extensions/submit.md" ||
+      file === "terms.md" ||
+      file === "privacy.md")
+  );
+}

@@ -9,6 +9,7 @@ import AaButton from "../../src/AaButton.vue";
 import AaLink from "../../src/AaLink.vue";
 import DownloadButton from "../../src/DownloadButton.vue";
 import HomeFooter from "../../src/HomeFooter.vue";
+import MarkdownTwinLink from "../../src/MarkdownTwinLink.vue";
 import StoreLoader from "../../src/StoreLoader.vue";
 import SupportEmailLink from "../../src/SupportEmailLink.vue";
 
@@ -28,6 +29,7 @@ export default {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       "layout-bottom": () => h('div', [h(StoreLoader)]),
       "home-features-after": () => h('div', [h(HomeFooter)]),
+      "doc-before": () => h(MarkdownTwinLink),
     });
   },
   enhanceApp({ app, router, siteData }) {
