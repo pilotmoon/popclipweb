@@ -205,10 +205,11 @@ async function fetchLicense(attempt) {
 // statuses rather than licenses: what an older checkout is doing says nothing
 // the current one's own status doesn't say better.
 async function sweepOtherAttempts() {
-  for (const attempt of purchaseInfo.recentAttempts()) {
-    if (attempt.flowId === purchaseInfo.flowId.value) continue;
-    if (attempt.delivered) continue;
-    if (!attempt.flowId && !attempt.transactionId) continue;
+  const others = purchaseInfo.attemptsToSweep({
+    flowId: purchaseInfo.flowId.value,
+    transactionId: purchaseInfo.transactionId.value,
+  });
+  for (const attempt of others) {
     try {
       const body = await fetchLicense(attempt);
       if (body?.object !== "licenseKey") continue;

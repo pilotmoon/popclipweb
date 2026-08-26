@@ -99,6 +99,33 @@ export const usePurchaseInfo = createGlobalState(() => {
     return attempts.value.filter((a) => a.at >= cutoff).reverse();
   }
 
+  // The attempts worth asking the backend about, given whichever checkout is
+  // current. Excludes the current one — it answers for itself — but only when
+  // it matches on BOTH ids.
+  //
+  // Matching on the flow id alone was wrong. The current pair can hold a flow
+  // id from one checkout and a transaction id from another: checkoutClosed
+  // sets the flow id and leaves the transaction id to whatever the shared slot
+  // holds, so a second checkout opened while the first one's license page is
+  // still polling overwrites it. Seen in production on 25 Aug 2026 (flow
+  // 235bb84e polling transaction ...8w8ca16x, which belonged to flow 320e751f).
+  // Skipping on the flow id then skipped the very checkout the license page
+  // was opened for, which is the one attempt that most needed asking about.
+  function attemptsToSweep(current?: {
+    flowId?: string | null;
+    transactionId?: string | null;
+  }): PurchaseAttempt[] {
+    // named apart from the refs above, which they would otherwise shadow
+    const curFlow = current?.flowId ?? null;
+    const curTxn = current?.transactionId ?? null;
+    return recentAttempts().filter(
+      (a) =>
+        !a.delivered &&
+        (a.flowId || a.transactionId) &&
+        !(a.flowId === curFlow && (a.transactionId ?? null) === curTxn),
+    );
+  }
+
   // Make an attempt the current one, e.g. after finding its license.
   function adoptAttempt(attempt: {
     flowId?: string | null;
@@ -118,6 +145,7 @@ export const usePurchaseInfo = createGlobalState(() => {
     noteAttemptTransaction,
     markDelivered,
     recentAttempts,
+    attemptsToSweep,
     adoptAttempt,
   };
 });

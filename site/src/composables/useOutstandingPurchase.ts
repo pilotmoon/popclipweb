@@ -84,9 +84,7 @@ export const useOutstandingPurchase = createGlobalState(() => {
     const mode = sandbox ? "test" : "live";
     // Newest first, and nothing already shown to the buyer: a checkout they
     // have seen the outcome of is not outstanding, whatever it did.
-    for (const attempt of purchaseInfo.recentAttempts()) {
-      if (attempt.delivered) continue;
-      if (!attempt.flowId && !attempt.transactionId) continue;
+    for (const attempt of purchaseInfo.attemptsToSweep()) {
       try {
         const params = new URLSearchParams({ mode });
         if (attempt.flowId) params.set("flowId", attempt.flowId);

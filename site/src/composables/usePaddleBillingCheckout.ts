@@ -281,7 +281,7 @@ export function usePaddleBillingCheckout() {
       log("[checkout] checkout closed, no rescue needed");
       return;
     }
-    purchaseInfo.flowId.value = currentFlowId;
+    adoptCurrentFlow();
     purchaseInfo.userEmail.value = lastCustomerEmail;
     purchaseInfo.userCountry.value = lastCustomerCountry;
     log(
@@ -300,11 +300,10 @@ export function usePaddleBillingCheckout() {
     }
     completedFired = true;
     stopPaymentWatch();
-    purchaseInfo.flowId.value = currentFlowId;
     // the transaction id lets the license page ask the backend about
     // payment progress (e.g. deferred-capture methods like WeChat Pay)
-    purchaseInfo.transactionId.value = data?.transaction_id ?? null;
     purchaseInfo.noteAttemptTransaction(currentFlowId, data?.transaction_id);
+    adoptCurrentFlow(data?.transaction_id);
     purchaseInfo.userEmail.value = data?.customer?.email ?? null;
     purchaseInfo.userCountry.value =
       data?.customer?.address?.country_code ??
@@ -315,6 +314,22 @@ export function usePaddleBillingCheckout() {
     );
     log("[checkout] redirecting to /purchase-status");
     window.location.href = "/purchase-status";
+  }
+
+  // Point the license page at this checkout, both ids together. Taking the
+  // transaction id from this flow's own attempt rather than from the shared
+  // slot matters: the slot holds whichever checkout reported last, so a second
+  // checkout opened while this one's license page is still polling would leave
+  // the page asking about this flow with that one's transaction. Seen in
+  // production on 25 Aug 2026.
+  function adoptCurrentFlow(transactionId?: string | null) {
+    const attempt = purchaseInfo
+      .recentAttempts()
+      .find((a) => a.flowId === currentFlowId);
+    purchaseInfo.adoptAttempt({
+      flowId: currentFlowId,
+      transactionId: transactionId ?? attempt?.transactionId ?? null,
+    });
   }
 
   // Open the Paddle overlay for a single item.
