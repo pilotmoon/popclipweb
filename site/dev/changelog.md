@@ -21,6 +21,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 </div>
 
+## Beta / Unreleased
+
+### Fixed
+
+- JavaScript: [util.hmac()](/dev/api/interfaces/Util.html#hmac) read from the
+  start of the backing buffer when passed a `Uint8Array` view with a non-zero
+  offset, such as one made with `subarray()`, producing the wrong result. It
+  now reads the view's own bytes.
+
+### Added
+
+- JavaScript: new
+  [util.hash()](/dev/api/interfaces/Util.html#hash)
+  method computes a plain message digest. It is the counterpart to
+  [util.hmac()](/dev/api/interfaces/Util.html#hmac) and supports the same
+  algorithms — `sha1`, `md5`, `sha256`, `sha384`, `sha512` and `sha224` —
+  taking a `Uint8Array` and returning a `Uint8Array`.
+  ```js
+  const digest = util.hash(Buffer.from(popclip.input.text), "sha256");
+  const hex = Buffer.from(digest).toString("hex");
+  ```
+- JavaScript:
+  [util.base64Encode()](/dev/api/interfaces/Util.html#base64encode)
+  now accepts a `Uint8Array` as well as a string, so the output of
+  `util.hash()` or `util.hmac()` can be encoded directly. A string is encoded
+  as before, so existing calls are unaffected.
+- JavaScript:
+  [util.base64Decode()](/dev/api/interfaces/Util.html#base64decode)
+  can now return the decoded bytes as a `Uint8Array` rather than as a string,
+  for data that is not text.
+  ```js
+  const bytes = util.base64Decode(encoded, { bytes: true });
+  ```
+- JavaScript: [Buffer](/dev/api/classes/Buffer.html) now supports the
+  `"base64url"` encoding, both as a global and via `require("buffer")`. It
+  uses the standard URL-safe alphabet (`+/` → `-_`) and no padding when
+  encoding, and is interchangeable with `"base64"` when decoding.
+  ```js
+  Buffer.from("hello?~").toString("base64url"); // aGVsbG8_fg
+  ```
+
 ## Version 2026.8 (6159)
 
 ### Added
