@@ -58,11 +58,88 @@ function popclipVersions() {
 }
 
 // ---------------------------------------------------------------------------
-// Page-specific patches: exact-match replacements applied to the source
-// before general cleaning, for spots where mechanical rules can't produce
-// sensible text (component-driven passages).
+// Page-specific patches, applied to the source before general cleaning, for
+// spots where mechanical rules can't produce sensible text (component- and
+// data-driven passages). Find is an exact string or a regex (which must
+// match, like the string form); replace may be a function, evaluated at
+// generation time.
 
-const pagePatches: Record<string, [string, string][]> = {
+// The kb/browsers table is a Vue v-for over the browsers data; reproduce it
+// as a Markdown table from the same source file the data loader reads. If
+// that ever fails, the twin says so rather than shipping the raw template.
+function browserTable(): string {
+  try {
+    const raw = readFileSync(
+      path.join(siteDir, "../extras/OpenInBrowser.popclipext/browsers.json"),
+      "utf8",
+    );
+    const { browsers } = JSON.parse(raw) as {
+      browsers: {
+        name: string;
+        bundleId: string;
+        homepageUrl?: string | null;
+        supportsAware: boolean;
+        supportsPageInfo: boolean;
+        supportsAddressBar: boolean;
+        supportsBackgroundTab: boolean;
+        supportsOpenIn: boolean;
+      }[];
+    };
+    browsers.sort((a, b) => a.name.localeCompare(b.name)); // as the loader does
+    // plain "Y" rather than the page's ✅: this is a text file, and emoji
+    // also break monospace column alignment (they render two columns wide)
+    const yes = (flag: boolean) => (flag ? "Y" : "");
+    const header = [
+      "Browser",
+      "Bundle ID",
+      "Basic",
+      "Page Info",
+      "Address Bar",
+      "Tab Control",
+      "Open In",
+    ];
+    const cells = browsers.map((b) => [
+      // reference-style links keep the cells short; definitions follow the
+      // table
+      b.homepageUrl ? `[${b.name}]` : b.name,
+      `\`${b.bundleId}\``,
+      yes(b.supportsAware),
+      yes(b.supportsPageInfo),
+      yes(b.supportsAddressBar),
+      yes(b.supportsBackgroundTab),
+      yes(b.supportsOpenIn),
+    ]);
+    // pad the columns so the raw table reads aligned in a monospaced view
+    const widths = header.map((h, i) =>
+      Math.max(h.length, ...cells.map((row) => row[i].length)),
+    );
+    const pad = (s: string, i: number) => s + " ".repeat(widths[i] - s.length);
+    const line = (row: string[]) =>
+      `| ${row.map(pad).join(" | ")} |`;
+    const rule = widths.map((w, i) =>
+      i <= 1 ? "-".repeat(w) : `:${"-".repeat(Math.max(w - 2, 1))}:`,
+    );
+    const definitions = browsers
+      .filter((b) => b.homepageUrl)
+      .map((b) => `[${b.name}]: ${b.homepageUrl}`);
+    return [
+      line(header),
+      `| ${rule.join(" | ")} |`,
+      ...cells.map(line),
+      "",
+      ...definitions,
+    ].join("\n");
+  } catch (error) {
+    console.warn(`llmDocs: browser table generation failed: ${error}`);
+    return "_This content is unavailable in Markdown._";
+  }
+}
+
+const pagePatches: Record<
+  string,
+  [string | RegExp, string | (() => string)][]
+> = {
+  "kb/browsers.md": [[/<table>[\s\S]*?<\/table>/, browserTable]],
   "dev/icons.md": [
     [
       "<IconExplorer />",
@@ -423,10 +500,15 @@ function cleanInline(line: string, ctx: CleanContext, pageDir: string) {
 function cleanPage(source: string, ctx: CleanContext): string {
   let text = source;
   for (const [find, replace] of pagePatches[ctx.file] ?? []) {
-    if (!text.includes(find)) {
-      throw new Error(`llmDocs: stale patch for ${ctx.file}: ${find.slice(0, 60)}`);
+    const found =
+      typeof find === "string" ? text.includes(find) : find.test(text);
+    if (!found) {
+      throw new Error(
+        `llmDocs: stale patch for ${ctx.file}: ${String(find).slice(0, 60)}`,
+      );
     }
-    text = text.replace(find, replace);
+    const value = typeof replace === "function" ? replace() : replace;
+    text = text.replace(find, value);
   }
   // frontmatter
   text = text.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, "");

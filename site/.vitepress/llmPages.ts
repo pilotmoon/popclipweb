@@ -220,6 +220,12 @@ export const llmSections: LlmSection[] = [
         description: "Controlling the PopClip app itself from AppleScript",
       },
       {
+        file: "kb/browsers.md",
+        title: "Browser support",
+        description:
+          "The browsers PopClip knows about and the support level for each",
+      },
+      {
         file: "kb/paths.md",
         title: "Paths and identifiers",
         description: "File and folder paths and identifiers used by PopClip",
