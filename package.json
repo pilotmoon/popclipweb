@@ -7,7 +7,9 @@
     "docs:build": "npm run check && ./makeEnv && source .env && npm run docs:build-ci",
     "docs:build-ci": "npx patch-package && vitepress build site",
     "check": "tsc --noEmit",
-    "format:md": "prettier --write \"**/*.md\""
+    "format:md": "prettier --write \"**/*.md\"",
+    "types:link": "npm --prefix ../popclip-types run build && npm install --no-save ../popclip-types && readlink node_modules/@popclip/types",
+    "types:unlink": "npm install && npm ls @popclip/types"
   },
   "dependencies": {
     "@ant-design/icons-vue": "6.1.0",
