@@ -23,15 +23,15 @@ example `2023.7 (4151)`, with the following meaning:
 - **Version string:**
   - **Production releases:** Production releases of PopClip have a version
     string in the form `year.month`, e.g. `2023.7`, corresponding to when the
-    version was released. In case of multiple releases in the same month, a
-    third number is added, e.g. `2023.7.1`.
+    version was released. For minor bugfix releases, a third number is added,
+    e.g. `2023.7.1`.
 
-  - **Beta releases:** Beta versions have version strings such as `Build 4151`
-    which are not related to the release date.
+  - **Beta releases:** Beta versions have version strings such as `Build 4151`.
 
 - **Build number:** The number in parentheses after the version string is the
-  build number, which precisely identifies the release. It always increases
-  monotonically, so a higher build number means a newer release.
+  build number, which identifies the source code version that generated
+  this release. The build number increases monotonically — it's simply a count
+  of git commits on the release branch.
 
 ::: info Build number anomaly
 
