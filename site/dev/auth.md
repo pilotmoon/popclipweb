@@ -192,7 +192,7 @@ stringify, then Base64, then ROT13 — so the credentials at least don't sit in 
 plaintext, where they could be scraped or indexed:
 
 ```ts
-import { client } from "./client.json"; // { "client": "<obscured string>" }
+import { credentials } from "./client.json"; // { "credentials": "<obscured string>" }
 const { client_id, client_secret } = util.clarify(client);
 ```
 
@@ -218,7 +218,7 @@ console.log(obscured);
 ```
 
 The printed string is what goes in the extension — the value of the
-`client` key in the `client.json` of the example above — ready to be read
+`credentials` key in the `client.json` of the example above — ready to be read
 back with `util.clarify` at load time.
 
 Finally, note that some services support [PKCE](https://oauth.net/2/pkce/),
