@@ -152,16 +152,43 @@ opens the settings UI for the user to sign in again. (The related
 sends the user to settings _without_ signing them out — for example when a
 required option is missing.)
 
+## Registering your extension as a client app
+
+Before you can use OAuth, you have to register an application with the service
+to obtain a client identifier. A few notes on doing that as an extension
+author.
+
+**Register in your own name.** The registration is yours: you hold the
+credentials, and the service will contact you about quotas, policy changes and
+anything it considers abuse. Please don't register as just "PopClip", or use the
+PopClip icon.
+
+**Choose a name that tells the user what they are approving.** The name you
+register appears on the authorization page shown when the user signs in, so it
+is what they will use to decide whether to trust the request. Something like
+"Raindrop for PopClip (community extension)" or "Jane's Raindrop Clipper for
+PopClip" identifies both the integration and its author.
+
+**Link to your own repository.** Where the service asks for a homepage or
+support URL, give the extension's own GitHub repository or web page, not this website.
+
+**Register as a native or desktop app.** The redirect URL you need is the one
+supplied as `info.redirect`, which looks like
+`http://localhost:58906/callback/com.example.popclip.extension.myextension/auth`.
+Some services accept a `localhost` redirect only for apps registered as native
+or desktop clients, so choose that type if you are asked.
+
+If your extension is later published in the
+[PopClip Extensions Directory](/extensions/), get in touch and we can revisit
+the registration then.
+
 ## Client identifiers, and `util.clarify`
 
-There is a wrinkle with OAuth: the flow needs a client identifier, and
-usually a client secret, issued to the extension by the service — and there
-is nowhere to hide them. They have to ship inside the extension, and an
-extension is source code that anyone can read.
+If your registration gives you a client secret, you have a small problem: there is nowhere to hide it.
+Client credentials have to ship inside the extension, and an extension is source code that anyone can read.
 
-The [`util.clarify`](/dev/api/interfaces/Util.html#clarify) function takes
-the edge off. It deciphers a JSON object that has been lightly obscured —
-Base64, then ROT13 — so the credentials at least don't sit in the source as
+The [`util.clarify`](/dev/api/interfaces/Util.html#clarify) function is used here. It deciphers a JSON object that has been lightly obscured —
+stringify, then Base64, then ROT13 — so the credentials at least don't sit in the source as
 plaintext, where they could be scraped or indexed:
 
 ```ts
