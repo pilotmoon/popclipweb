@@ -96,10 +96,8 @@ PopClip will display a warning dialog when you try to install it:
 
 You can create extensions using any text editor. The macOS-included app TextEdit
 will suffice for simple snippets, but otherwise, I recommend using a dedicated
-code editor such as [VS Code](https://code.visualstudio.com/),
-[Sublime Text](https://www.sublimetext.com/),
-[BBEdit](https://www.barebones.com/products/bbedit/), or
-[Nova](https://nova.app/).
+code editor such as [BBEdit](https://www.barebones.com/products/bbedit/), [Nova](https://nova.app/),
+[Sublime Text](https://www.sublimetext.com/), [VS Code](https://code.visualstudio.com/), or [Zed](https://zed.dev/).
 
 ### Type definitions
 
