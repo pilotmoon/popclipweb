@@ -18,6 +18,13 @@ import PopClipVersion from "../src/PopClipVersion.vue";
 <a href="/extensions/" style="text-decoration: none;">PopClip Extensions Directory</a> / Submit an Extension
 </div>
 
+::: tip Want to make your own extension?
+
+Extensions can be as simple as a few lines of text. Learn how in the
+[Developer Documentation](/dev/).
+
+:::
+
 # Submit an Extension
 
 Extensions are submitted from **public GitHub repositories**.

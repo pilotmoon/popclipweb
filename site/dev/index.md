@@ -1,6 +1,6 @@
 ---
 outline: deep
-title: PopClip Extensions Developer Reference
+title: PopClip Extensions Developer Documentation
 titleTemplate: false
 prev:
   text: Privacy Policy
@@ -9,10 +9,10 @@ prev:
 
 <!-- markdownlint-disable MD025 -->
 
-# :robot: PopClip Extensions Developer Reference
+# :robot: PopClip Extensions Developer Documentation
 
-This section of the documentation provides a detailed specification of PopClip's
-extensions architecture. With this information, you can create your own
+This section of the website provides a detailed specification of PopClip's
+extension system. With this information, you can create your own
 extensions.
 
 ::: tip Getting help
@@ -151,3 +151,10 @@ and Category "Extension" in the Search field.
 You can add this as a saved search by clicking the Save button in the toolbar:
 
 ![Add Console app preset](./media/shot-console-preset-1.png "Adding a preset to the Console app.")
+
+## Show off your work
+
+If you create an extension that others might find useful, you are welcome to
+submit it for publication in the
+[PopClip Extensions Directory](/extensions/). See
+[Submit an Extension](/extensions/submit) for how it works.

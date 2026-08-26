@@ -89,7 +89,7 @@ Extension "Emojipedia"_ that appears in the PopClip bar.
 
 Notice that the first line of the snippet starts with `#popclip`. This is a
 special marker that tells PopClip that this is a snippet. For more about
-snippets, see [Snippets](/dev/snippets) in the developer reference.
+snippets, see [Snippets](/dev/snippets) in the developer docs.
 
 :::
 
@@ -138,4 +138,4 @@ PopClip will not see any changes you make in this folder and it will revert any 
 ## Creating your own extension
 
 For more about creating both snippets and downloadable extensions, see
-[Extensions Developer Reference](/dev/).
+[Developer Docs](/dev/).

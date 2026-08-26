@@ -43,7 +43,7 @@ export interface LlmSection {
 // Section order and page order mirror the sidebars in config.ts.
 export const llmSections: LlmSection[] = [
   {
-    title: "Developer Reference",
+    title: "Developer Docs",
     pages: [
       {
         file: "dev/index.md",
@@ -211,8 +211,7 @@ export const llmSections: LlmSection[] = [
       {
         file: "kb/sync.md",
         title: "iCloud Sync",
-        description:
-          "Syncing extensions and actions between Macs with iCloud",
+        description: "Syncing extensions and actions between Macs with iCloud",
       },
       {
         file: "kb/applescript.md",

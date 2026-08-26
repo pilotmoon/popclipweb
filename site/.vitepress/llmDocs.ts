@@ -1,9 +1,4 @@
-import {
-  copyFileSync,
-  mkdirSync,
-  readFileSync,
-  writeFileSync,
-} from "node:fs";
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
@@ -26,7 +21,7 @@ import {
 // From the same cleaned pages, three composite files are generated:
 //
 //   /dev/all.md      -- the extension-authoring corpus: every Developer
-//                       Reference page in one file
+//                       Docs page in one file
 //   /llms-full.txt   -- dev + guide + kb: everything about PopClip
 //   /llms.txt        -- the llmstxt.org index of all of the above
 //
@@ -114,8 +109,7 @@ function browserTable(): string {
       Math.max(h.length, ...cells.map((row) => row[i].length)),
     );
     const pad = (s: string, i: number) => s + " ".repeat(widths[i] - s.length);
-    const line = (row: string[]) =>
-      `| ${row.map(pad).join(" | ")} |`;
+    const line = (row: string[]) => `| ${row.map(pad).join(" | ")} |`;
     const rule = widths.map((w, i) =>
       i <= 1 ? "-".repeat(w) : `:${"-".repeat(Math.max(w - 2, 1))}:`,
     );
@@ -631,7 +625,10 @@ function cleanPage(source: string, ctx: CleanContext): string {
     out.push(line.trimEnd());
   }
 
-  const cleaned = `${out.join("\n").replace(/\n{3,}/g, "\n\n").trim()}\n`;
+  const cleaned = `${out
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()}\n`;
   verifyClean(cleaned, ctx);
   return cleaned;
 }
@@ -709,7 +706,7 @@ function slugifyHeading(text: string): string {
 }
 
 /**
- * The Developer Reference as one Markdown document for the /dev/all dynamic
+ * The Developer Docs as one Markdown document for the /dev/all dynamic
  * page (see dev/[onepage].paths.ts), which VitePress renders in the normal
  * site theme. Cleaned in "page" mode: only frontmatter, script/style blocks
  * and Vue components are removed; containers, code groups and relative
@@ -718,9 +715,9 @@ function slugifyHeading(text: string): string {
  */
 export async function devOnePageContent(): Promise<string> {
   const versions = await popclipVersions();
-  const dev = llmSections.find((s) => s.title === "Developer Reference");
+  const dev = llmSections.find((s) => s.title === "Developer Docs");
   if (!dev) {
-    throw new Error("llmDocs: no Developer Reference section");
+    throw new Error("llmDocs: no Developer Docs section");
   }
   // Heading slugs already claimed by earlier sections. When pages are
   // concatenated, a repeated heading gets a deduplicated anchor (-1), so a
@@ -735,9 +732,7 @@ export async function devOnePageContent(): Promise<string> {
       versions,
       mode: "page",
     });
-    const route = `/${page.file}`
-      .replace(/\.md$/, "")
-      .replace(/\/index$/, "/");
+    const route = `/${page.file}`.replace(/\.md$/, "").replace(/\/index$/, "/");
     const pageSlugs: string[] = [];
     let inFence = false;
     const lines = content.split("\n").map((line) => {
@@ -767,7 +762,7 @@ export async function devOnePageContent(): Promise<string> {
     return `---\n\n${h1}\n\n_Standalone page: [${route}](${route})_\n\n${body.replace(/^# .+\n+/, "")}`;
   });
   const intro = `::: info One Page Docs
-This is the entire Developer Reference on a single page. It is also available
+This is the entire Developer Docs on a single page. It is also available
 in plain Markdown format at [/dev/all.md](/dev/all.md), along with the other
 formats listed in [/llms.txt](/llms.txt).
 :::
@@ -784,13 +779,13 @@ function corpusEntry(page: CleanedPage): string {
 }
 
 function makeAllMd(pages: Map<string, CleanedPage>): string {
-  const dev = llmSections.find((s) => s.title === "Developer Reference");
+  const dev = llmSections.find((s) => s.title === "Developer Docs");
   if (!dev) {
-    throw new Error("llmDocs: no Developer Reference section");
+    throw new Error("llmDocs: no Developer Docs section");
   }
   const header = `# PopClip Extension Development — Complete Documentation
 
-> Every page of PopClip's extension developer reference, concatenated into
+> Every page of PopClip's extension developer docs, concatenated into
 > one file. Individual pages are at the source URLs given below. The
 > TypeScript type definitions for the JavaScript API and config format are
 > at ${siteRoot}/dev/popclip.d.ts.
@@ -806,7 +801,7 @@ function makeLlmsFull(pages: Map<string, CleanedPage>): string {
   const header = `# PopClip — Complete Documentation
 
 > All documentation for PopClip, the macOS text-selection actions app:
-> developer reference, user guide and knowledge base, concatenated into one
+> developer docs, user guide and knowledge base, concatenated into one
 > file. An index of the individual pages is at ${siteRoot}/llms.txt.
 
 `;
@@ -841,8 +836,8 @@ function makeLlmsTxt(): string {
 Key resources for extension development:
 
 - [Type definitions](${siteRoot}/dev/popclip.d.ts): Complete TypeScript definitions for PopClip's JavaScript API and extension config format
-- [Developer docs in one file](${siteRoot}${ALL_MD_PATH}): The whole extension developer reference as a single Markdown file
-- [All docs in one file](${siteRoot}${LLMS_FULL_PATH}): Developer reference, user guide and knowledge base as a single file
+- [Developer docs in one file](${siteRoot}${ALL_MD_PATH}): The whole extension developer docs as a single Markdown file
+- [All docs in one file](${siteRoot}${LLMS_FULL_PATH}): Developer docs, user guide and knowledge base as a single file
 
 The pages below are Markdown twins of the pages at the same URL without the
 \`.md\` suffix.

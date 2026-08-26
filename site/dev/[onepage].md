@@ -1,5 +1,5 @@
 ---
-title: Developer Reference — One Page
+title: Developer Docs — One Page
 titleTemplate: :title — PopClip Developer
 outline: [1, 1]
 editLink: false

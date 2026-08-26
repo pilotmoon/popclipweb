@@ -7,10 +7,7 @@ import { querifyDescriptor } from "../src/helpers/iconDescriptor.js";
 import { llmDocsPlugin, writeLlmDocs } from "./llmDocs.ts";
 import { llmFilePaths, twinFiles } from "./llmPages.ts";
 import mediaFigures from "./markdown/mediaFigures.ts";
-import {
-  popclipTypesPlugin,
-  writePopClipTypes,
-} from "./popclipTypes.ts";
+import { popclipTypesPlugin, writePopClipTypes } from "./popclipTypes.ts";
 import {
   typedocReferencePlugin,
   writeTypedocReference,
@@ -95,7 +92,8 @@ function openGraph(relativePath: string, params: Record<string, unknown>) {
       "og:type": "profile",
       "og:site_name": "PopClip Extensions Directory",
       "og:title": name,
-      "og:description": p.bio || (name ? `PopClip extensions by ${name}` : null),
+      "og:description":
+        p.bio || (name ? `PopClip extensions by ${name}` : null),
       "og:url": `${siteRoot}/extensions/authors/${p.shortcode}`,
       "og:image": p.avatarUrl ?? null,
       "twitter:card": "summary",
@@ -121,7 +119,7 @@ export default defineConfig({
     // alarming ("We cannot find your purchase"), and none are useful without
     // the purchase data held in the buyer's own tab. /purchase-complete is the
     // retained alias for the same page, so it stays out too. /dev/all is the
-    // one-page developer reference -- all duplicate content, so the
+    // one-page developer docs -- all duplicate content, so the
     // individual pages keep the search traffic.
     transformItems: (items) =>
       items.filter(
@@ -170,7 +168,7 @@ export default defineConfig({
         activeMatch: "(^/extensions/$)|(^/extensions/x)",
       },
       {
-        text: "Reference",
+        text: "Docs",
         activeMatch: "^(/dev/)",
         link: "/dev/",
       },
@@ -194,7 +192,7 @@ export default defineConfig({
           target: "_self",
         },
         {
-          text: "Developer Reference",
+          text: "Developer Docs",
           items: [
             { text: "Introduction", link: "/dev/" },
             { text: "Snippets", link: "/dev/snippets" },
@@ -301,7 +299,7 @@ export default defineConfig({
           ],
         },
         {
-          text: "Developer Reference",
+          text: "Developer Docs",
           link: "/dev/",
         },
       ],
@@ -359,7 +357,10 @@ export default defineConfig({
           self.renderToken(tokens, idx, options));
       md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
         const href = tokens[idx].attrGet("href");
-        if (href && (href.startsWith("/dev/api/") || llmFilePaths.includes(href))) {
+        if (
+          href &&
+          (href.startsWith("/dev/api/") || llmFilePaths.includes(href))
+        ) {
           tokens[idx].attrSet("target", "_self");
         }
         return defaultLinkOpen(tokens, idx, options, env, self);

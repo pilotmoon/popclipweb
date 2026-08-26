@@ -10,4 +10,4 @@ include features that are in beta.
 - {@link Extension} and {@link Action} — the shape of an extension object
 - {@link Buffer}, {@link XMLHttpRequest} and {@link BundledModule} — the environment and bundled libraries
 
-For tutorials and the config format, see the [Developer Reference](/dev/).
+For tutorials and the config format, see the [Developer Docs](/dev/).

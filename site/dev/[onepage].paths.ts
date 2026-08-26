@@ -1,4 +1,4 @@
-// The /dev/all route: the whole Developer Reference rendered as one
+// The /dev/all route: the whole Developer Docs rendered as one
 // VitePress page. The content is the same cleaned corpus that llmDocs.ts
 // serves as /dev/all.md, but cleaned in "page" mode so VitePress renders
 // containers, code groups and links natively.
