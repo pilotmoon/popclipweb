@@ -141,10 +141,8 @@ const pagePatches: Record<
       `You can do it right
 here:
 
-<ObscureTool />
-
-Or do the same with Node:`,
-      "For example, with Node:",
+<ObscureTool />`,
+      "",
     ],
   ],
   "dev/icons.md": [
