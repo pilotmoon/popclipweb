@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../config/config.json";
+import { withRetries } from "../helpers/retryingAxios.ts";
 
 // prepare api access
 const PILOTMOON_API_KEY = process.env.PILOTMOON_API_KEY;
@@ -13,9 +14,11 @@ const baseURL = process.env.PILOTMOON_API_ROOT || config.pilotmoon.apiRoot;
 if (baseURL !== config.pilotmoon.apiRoot) {
   console.warn(`Using API root override: ${baseURL}`);
 }
-export const api = axios.create({
-  baseURL,
-  headers: {
-    Authorization: `Bearer ${PILOTMOON_API_KEY}`,
-  },
-});
+export const api = withRetries(
+  axios.create({
+    baseURL,
+    headers: {
+      Authorization: `Bearer ${PILOTMOON_API_KEY}`,
+    },
+  }),
+);

@@ -6,7 +6,7 @@ import {
   type FileInfo,
   publicRoot,
 } from "../../src/data/extensionInfo.ts";
-import axios from "axios";
+import axios from "../../src/helpers/retryingAxios.ts";
 import pLimit from "p-limit";
 
 declare const paths: ExtInfo[];

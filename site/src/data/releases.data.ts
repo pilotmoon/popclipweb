@@ -1,5 +1,5 @@
-import axios from "axios";
 import MarkdownIt from "markdown-it";
+import axios from "../helpers/retryingAxios.ts";
 import { defineLoader } from "vitepress";
 import { z } from "zod";
 

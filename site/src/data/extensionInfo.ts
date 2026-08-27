@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { classicExtensions } from "./classic.ts";
 import * as config from "../config/config.json";
-import axios from "axios";
+import axios from "../helpers/retryingAxios.ts";
 import { api } from "./pilotmoonApi.ts";
 import { mp4Aspect } from "./mp4Dimensions.ts";
 import sanitizeHtml from "sanitize-html";

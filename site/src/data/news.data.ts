@@ -1,5 +1,5 @@
-import axios from "axios";
 import { defineLoader } from "vitepress";
+import axios from "../helpers/retryingAxios.ts";
 import { z } from "zod";
 
 const ZTopic = z.object({
