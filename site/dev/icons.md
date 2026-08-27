@@ -138,11 +138,11 @@ Symbols are always drawn in the monochrome variant.
 
 Examples:
 
-| Specifier string        | Icon generated                               |
-| ----------------------- | -------------------------------------------- |
-| `symbol:flame`          | <Icon spec="symbol:flame" />                 |
-| `symbol:hand.raised`    | <Icon spec="symbol:hand.raised" />           |
-| `symbol:signpost.right` | <Icon spec="rotate symbol:signpost.right" /> |
+| Specifier string        | Icon generated                        |
+| ----------------------- | ------------------------------------- |
+| `symbol:flame`          | <Icon spec="symbol:flame" />          |
+| `symbol:hand.raised`    | <Icon spec="symbol:hand.raised" />    |
+| `symbol:signpost.right` | <Icon spec="symbol:signpost.right" /> |
 
 ### SVG Icons
 
@@ -220,7 +220,7 @@ Examples:
 
 | Specifier string                                         | Icon generated                                                         |
 | -------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `symbol:signpost.right`                                  | <Icon spec="rotate symbol:signpost.right" />                           |
+| `symbol:signpost.right`                                  | <Icon spec="symbol:signpost.right" />                                  |
 | `flip-x symbol:signpost.right`                           | <Icon spec="flip_x symbol:signpost.right" />                           |
 | `move-y=-50 symbol:signpost.right`                       | <Icon spec="move_y=-50 symbol:signpost.right" />                       |
 | `scale=50 symbol:signpost.right`                         | <Icon spec="scale=50 symbol:signpost.right" />                         |

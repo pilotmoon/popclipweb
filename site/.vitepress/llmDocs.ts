@@ -148,8 +148,14 @@ here:
   "dev/icons.md": [
     [
       "<IconExplorer />",
-      "_(An interactive icon preview tool is available in the [online version" +
-        " of this page](https://www.popclip.app/dev/icons).)_",
+      // autolink form, not [label](url): the link rewriter would send a
+      // regular link to the .md twin, and this one must reach the rendered
+      // page where the tool actually is
+      "_(An interactive icon preview tool is available in the online" +
+        ` version of this page, at <${siteRoot}/dev/icons>. Alternatively, a` +
+        " PNG rendering of any icon specifier can be fetched from" +
+        ` \`${siteConfig.pilotmoon.iconsRoot}/icon?specifier=<url-encoded specifier>\`` +
+        " — the preview links in the tables below use this.)_",
     ],
   ],
   "kb/notes.md": [
@@ -350,7 +356,22 @@ function replaceComponents(text: string, ctx: CleanContext): string {
       return result.slice(tag.end, closeIndex);
     };
     switch (tag.name) {
-      case "Icon":
+      case "Icon": {
+        // Keep the icons page's "Icon generated" examples meaningful:
+        // link to the icon server's rendering of the spec, as Icon.vue
+        // requests it (minus color/height, whose defaults suit a preview).
+        const spec = /spec="([^"]*)"/.exec(tag.attrs)?.[1];
+        if (!spec) {
+          throw new Error(`llmDocs: Icon without spec in ${ctx.file}`);
+        }
+        // parens (e.g. the "()" text icon) would break the Markdown
+        // link; encodeURIComponent leaves them alone
+        const encoded = encodeURIComponent(spec)
+          .replaceAll("(", "%28")
+          .replaceAll(")", "%29");
+        replacement = `[preview](${siteConfig.pilotmoon.iconsRoot}/icon?specifier=${encoded})`;
+        break;
+      }
       case "InlineIcon":
       case "StatusIconInline":
       case "InfoBox":
