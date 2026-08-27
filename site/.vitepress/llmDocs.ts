@@ -519,6 +519,67 @@ function cleanInline(line: string, ctx: CleanContext, pageDir: string) {
   );
 }
 
+// Split a table row into its cells, respecting code spans (a cell can
+// contain a code span; a code span should never be mistaken for one, e.g.
+// `move-x=10` has no pipe, but a future cell might). Assumes the row has
+// leading and trailing pipes, as every table in these docs does.
+function splitTableRow(line: string): string[] {
+  const inner = line.trim().replace(/^\|/, "").replace(/\|$/, "");
+  const cells: string[] = [""];
+  for (const part of splitCodeSpans(inner)) {
+    if (part.isCode) {
+      cells[cells.length - 1] += part.text;
+      continue;
+    }
+    const pieces = part.text.split("|");
+    cells[cells.length - 1] += pieces[0];
+    for (const piece of pieces.slice(1)) {
+      cells.push(piece);
+    }
+  }
+  return cells.map((cell) => cell.trim());
+}
+
+// Re-pad a Markdown table's columns to line up, the way the source docs
+// are kept aligned by Prettier. Twins are generated text, never run
+// through a formatter, so a cell whose content changed during cleaning
+// (an <Icon /> becoming a much longer or shorter preview link, say) would
+// otherwise leave every row after it visibly ragged. Left-align only: no
+// table in these docs uses the `:---:`/`---:` alignment markers.
+function realignTables(text: string): string {
+  const lines = text.split("\n");
+  const isRow = (line: string) => /^\s*\|.*\|\s*$/.test(line);
+  const isSeparator = (line: string) => /^\s*\|(\s*-+\s*\|)+\s*$/.test(line);
+  const out: string[] = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (!isRow(lines[i]) || !isSeparator(lines[i + 1] ?? "")) {
+      out.push(lines[i]);
+      continue;
+    }
+    let end = i + 2;
+    while (end < lines.length && isRow(lines[end])) {
+      end++;
+    }
+    const bodyRows = [lines[i], ...lines.slice(i + 2, end)].map(
+      splitTableRow,
+    );
+    const columns = bodyRows[0].length;
+    const widths = Array.from({ length: columns }, (_, col) =>
+      Math.max(3, ...bodyRows.map((row) => (row[col] ?? "").length)),
+    );
+    const pad = (s: string, w: number) => s + " ".repeat(w - s.length);
+    const renderRow = (cells: string[]) =>
+      `| ${cells.map((cell, col) => pad(cell, widths[col])).join(" | ")} |`;
+    out.push(
+      renderRow(bodyRows[0]),
+      `| ${widths.map((w) => "-".repeat(w)).join(" | ")} |`,
+      ...bodyRows.slice(1).map(renderRow),
+    );
+    i = end - 1;
+  }
+  return out.join("\n");
+}
+
 /** Clean one page's VitePress Markdown into plain Markdown. */
 function cleanPage(source: string, ctx: CleanContext): string {
   let text = source;
@@ -654,10 +715,13 @@ function cleanPage(source: string, ctx: CleanContext): string {
     out.push(line.trimEnd());
   }
 
-  const cleaned = `${out
+  let cleaned = `${out
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim()}\n`;
+  if (ctx.mode === "twin") {
+    cleaned = realignTables(cleaned);
+  }
   verifyClean(cleaned, ctx);
   return cleaned;
 }
