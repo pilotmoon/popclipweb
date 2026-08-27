@@ -72,14 +72,19 @@ async function processReadme(ext: ExtInfo) {
 export default {
   async paths() {
     console.log("In paths loader");
-    console.time("load paths");
+    // Date.now(), not console.time/timeEnd: this loader can run more than
+    // once concurrently in the same process (e.g. dev-server rebuilds), and
+    // console's timer label is a shared global -- two overlapping calls
+    // stepping on the same label make the second timeEnd() warn that the
+    // label doesn't exist.
+    const start = Date.now();
     // load() returns the memoized shared array; clone before
     // processReadme swaps each readme url for rendered html, so the
     // html never leaks into the directory page's data payload
     const extensions = (await load()).map((ext) => ({ ...ext }));
     const limit = pLimit(30);
     await Promise.all(extensions.map((ext) => limit(() => processReadme(ext))));
-    console.timeEnd("load paths");
+    console.log(`load paths: ${Date.now() - start}ms`);
     return extensions.map((ext) => ({
       params: ext,
       content: ext.readme,
