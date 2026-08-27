@@ -1,6 +1,12 @@
 import axios from "axios";
+import MarkdownIt from "markdown-it";
 import { defineLoader } from "vitepress";
 import { z } from "zod";
+
+// Rendered server-side (in this Node-only loader) rather than in
+// Changelog.vue, so markdown-it -- and the Node-only punycode module its
+// mdurl dependency pulls in -- never ends up in the client bundle.
+const md = new MarkdownIt({ html: true });
 
 export const ZRelease = z.object({
   versionString: z.string(),
@@ -16,10 +22,10 @@ export const ZRelease = z.object({
   archs: z.array(z.string()).nullish(),
   eddsaSignature: z.string().nullish(),
 });
-export type Release = z.infer<typeof ZRelease>;
+export type Release = z.infer<typeof ZRelease> & { descriptionHtml: string };
 
 export const ZReleases = z.array(ZRelease);
-export type Releases = z.infer<typeof ZReleases>;
+export type Releases = Release[];
 
 export interface Data {
   production: Releases;
@@ -41,9 +47,14 @@ export async function load(): Promise<Data> {
   const { data: dataBeta } = await axios.get(
     "https://pilotmoon.com/meta/popclip-releases-beta.json",
   );
+  const withHtml = (releases: z.infer<typeof ZReleases>): Releases =>
+    releases.map((release) => ({
+      ...release,
+      descriptionHtml: md.render(release.description),
+    }));
   const result = {
-    production: ZReleases.parse(dataProd),
-    beta: ZReleases.parse(dataBeta),
+    production: withHtml(ZReleases.parse(dataProd)),
+    beta: withHtml(ZReleases.parse(dataBeta)),
   };
   return result;
 }

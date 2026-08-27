@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import MarkdownIt from "markdown-it";
 import { computed } from "vue";
 import { data } from "./data/releases.data";
 import { formatDate, formatSize } from "./helpers/formatters";
@@ -7,14 +6,6 @@ import { ElTag } from "element-plus";
 const props = defineProps<{
   channel?: "production" | "beta";
 }>();
-
-// markdown rendering (with html passed through)
-const md = new MarkdownIt({
-  html: true,
-});
-function renderMarkdown(markdown: string) {
-  return md.render(markdown);
-}
 
 const releases = computed(() => {
   return data[props.channel ?? "production"];
@@ -37,7 +28,7 @@ const releases = computed(() => {
         <ElTag v-if="release.archs?.includes('x86_64')" type="warning">Intel 64-bit</ElTag>
         <ElTag v-if="release.archs?.includes('arm64')" type="warning">Apple Silicon</ElTag>
       </div>
-      <div v-html="renderMarkdown(release.description)"></div>
+      <div v-html="release.descriptionHtml"></div>
     </div>
   </div>
 </template>
