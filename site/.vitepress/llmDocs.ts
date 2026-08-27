@@ -1,6 +1,5 @@
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
 import siteConfig from "../src/config/config.json";
 import {
@@ -29,9 +28,7 @@ import {
 // writeLlmDocs (called from buildEnd) and by a dev-server middleware, so
 // the URLs work under docs:dev too.
 
-// Not import.meta.dirname: this module is in the type-checked program (via
-// dev/[onepage].paths.ts), and the installed @types/node predates it.
-const siteDir = fileURLToPath(new URL("..", import.meta.url));
+const siteDir = path.join(import.meta.dirname, "..");
 
 // ---------------------------------------------------------------------------
 // Current release version, for substituting <PopClipVersion /> tags. Fetched
