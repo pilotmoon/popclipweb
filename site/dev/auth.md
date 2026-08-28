@@ -60,19 +60,20 @@ The [Pinboard extension](https://github.com/pilotmoon/PopClip-Extensions/tree/ma
 uses this pattern to retrieve the user's API token:
 
 ```ts
-export const options: Option[] = [
-  { identifier: "username", type: "string", label: "Username" },
-  { identifier: "password", type: "password", label: "Password" },
-];
-
-export const auth: AuthFunction = async (info) => {
-  // validate the credentials by fetching the user's API token
-  const response = await axios.get(
-    "https://api.pinboard.in/v1/user/api_token",
-    { auth: info, params: { format: "json" } }, // HTTP basic authentication
-  );
-  return response.data.result;
-};
+defineExtension({
+  options: [
+    { identifier: "username", type: "string", label: "Username" },
+    { identifier: "password", type: "password", label: "Password" },
+  ],
+  auth: async (info) => {
+    // validate the credentials by fetching the user's API token
+    const response = await axios.get(
+      "https://api.pinboard.in/v1/user/api_token",
+      { auth: info, params: { format: "json" } }, // HTTP basic authentication
+    );
+    return response.data.result;
+  },
+});
 ```
 
 ::: info `secret` vs `password` options
@@ -96,23 +97,25 @@ After the user approves, the service redirects the browser to the
 `flow` resolves with the query parameters you named in `expect`:
 
 ```ts
-export const auth: AuthFunction = async (info, flow) => {
-  // step 1: the user authorizes the extension in their browser
-  const { code } = await flow(
-    "https://example.com/oauth/authorize",
-    { client_id, redirect_uri: info.redirect },
-    ["code"],
-  );
-  // step 2: exchange the authorization code for an access token
-  const { data } = await axios.post("https://example.com/oauth/token", {
-    grant_type: "authorization_code",
-    code,
-    client_id,
-    client_secret,
-    redirect_uri: info.redirect,
-  });
-  return { secret: data.access_token, expiresIn: data.expires_in };
-};
+defineExtension({
+  auth: async (info, flow) => {
+    // step 1: the user authorizes the extension in their browser
+    const { code } = await flow(
+      "https://example.com/oauth/authorize",
+      { client_id, redirect_uri: info.redirect },
+      ["code"],
+    );
+    // step 2: exchange the authorization code for an access token
+    const { data } = await axios.post("https://example.com/oauth/token", {
+      grant_type: "authorization_code",
+      code,
+      client_id,
+      client_secret,
+      redirect_uri: info.redirect,
+    });
+    return { secret: data.access_token, expiresIn: data.expires_in };
+  },
+});
 ```
 
 The [Raindrop.io extension](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/RaindropIO.popclipext)
@@ -130,17 +133,19 @@ an error, so an action that requires sign-in fails with a "Not signed in"
 message rather than proceeding with an empty credential.
 
 ```ts
-export const action: Action = {
-  requirements: ["url"],
-  async code(input, options) {
-    await axios.post(
-      "https://example.com/api/save",
-      { url: input.data.urls[0] },
-      { headers: { Authorization: `Bearer ${options.authsecret}` } },
-    );
-    popclip.showSuccess();
+defineExtension({
+  action: {
+    requirements: ["url"],
+    async code(input, options) {
+      await axios.post(
+        "https://example.com/api/save",
+        { url: input.data.urls[0] },
+        { headers: { Authorization: `Bearer ${options.authsecret}` } },
+      );
+      popclip.showSuccess();
+    },
   },
-};
+});
 ```
 
 If the service rejects the stored secret — an expired or revoked token, say —

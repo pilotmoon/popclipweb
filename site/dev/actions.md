@@ -318,26 +318,30 @@ inline:
 // language: javascript
 // module: true
 
-exports.actions = [
-  {
-    title: "Comment",
-    code: (input) => popclip.pasteText(`<!-- ${input.text.trim()} -->`),
-    submenu: [
-      {
-        title: "Hash Comment",
-        code: (input) => popclip.pasteText(input.text.replaceAll(/^/gm, "# ")),
-      },
-      {
-        title: "Slash Comment",
-        code: (input) => popclip.pasteText(input.text.replaceAll(/^/gm, "// ")),
-      },
-      {
-        title: "CSS Comment",
-        code: (input) => popclip.pasteText(`/* ${input.text.trim()} */`),
-      },
-    ],
-  },
-];
+defineExtension({
+  actions: [
+    {
+      title: "Comment",
+      code: (input) => popclip.pasteText(`<!-- ${input.text.trim()} -->`),
+      submenu: [
+        {
+          title: "Hash Comment",
+          code: (input) =>
+            popclip.pasteText(input.text.replaceAll(/^/gm, "# ")),
+        },
+        {
+          title: "Slash Comment",
+          code: (input) =>
+            popclip.pasteText(input.text.replaceAll(/^/gm, "// ")),
+        },
+        {
+          title: "CSS Comment",
+          code: (input) => popclip.pasteText(`/* ${input.text.trim()} */`),
+        },
+      ],
+    },
+  ],
+});
 ```
 
 ### Submenu functions

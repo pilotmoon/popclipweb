@@ -34,6 +34,20 @@ Within an AppleScript, PopClip pre-processes the script to replace placeholders
 with strings. Placeholders look like this: `{popclip text}`,
 `{popclip browser title}`, `{popclip option foo}`, etc.
 
+### Examples
+
+Using variables in a shell script:
+
+```shell
+open "https://translate.google.com/?text=${POPCLIP_URLENCODED_TEXT}"
+```
+
+Using placeholders in an AppleScript:
+
+```applescript
+display dialog "{popclip text}" with title "Selected in {popclip app name}"
+```
+
 ### Available variables
 
 | Name                   | Description                                                                                                                                                                                                                   |

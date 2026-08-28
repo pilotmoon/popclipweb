@@ -1,6 +1,7 @@
 ---
 titleTemplate: :title — PopClip Developer
 ---
+
 # Service actions
 
 In a Service action, PopClip will invoke a macOS [Service](https://support.apple.com/en-gb/guide/mac-help/mchlp1012/mac) by name.
@@ -9,13 +10,13 @@ In a Service action, PopClip will invoke a macOS [Service](https://support.apple
 
 A service action is defined by the presence of a `service name` field, as follows:
 
-|Key|Type|Description|
-|---|----|-----------|
-|`service name`|String|The name of the macOS service to call. |
+| Key            | Type   | Description                            |
+| -------------- | ------ | -------------------------------------- |
+| `service name` | String | The name of the macOS service to call. |
 
 ::: tip Service names
 The service name is usually exactly as shown in the Services menu, for example `Add to Deliveries`. However, in some cases you may need to look into the Info.plist of the application to find the name defined in there under `NSServices` → `NSMenuItem`. An example of this is the `Make New Sticky Note` service which must be called as `Make Sticky`.
-::::
+:::
 
 ## Input and output
 
@@ -31,4 +32,17 @@ Simple snippet calling a service:
 #popclip
 name: "Deliveries"
 service name: "Add to Deliveries"
+```
+
+The following defines an extension that makes a new Stickies note from the
+selected text, using the `Make Sticky` service mentioned above. (This is the
+same action as the published
+[Make Sticky](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/MakeSticky.popclipext)
+extension.)
+
+```yaml
+#popclip
+name: Make Sticky
+icon: symbol:note.text
+service name: Make Sticky
 ```

@@ -37,6 +37,23 @@ Say.popclipext/                -- Package folder
 └── speechicon.png             -- Icon file
 ```
 
+### A minimal package
+
+At the other end of the scale, a package needs nothing more than a folder
+with a config file inside:
+
+```
+Uppercase.popclipext/
+└── Config.yaml
+```
+
+where `Config.yaml` contains, for example:
+
+```yaml
+name: Uppercase
+javascript: popclip.pasteText(popclip.input.text.toUpperCase())
+```
+
 ### Zipped `.popclipextz` files
 
 For distribution, an extension package folder may be zipped and renamed with the
