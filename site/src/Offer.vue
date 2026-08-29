@@ -211,10 +211,15 @@ type PriceFields = Pick<CardData, "listPrice" | "priceLabel" | "priceIsDiscount"
 
 function discountPricing(product: "popclip_lifetime" | "popclip_2year" | "popclip_1year", percentOff: number): PriceFields {
   const p = store.paddleProducts.value[product];
-  if (!p) return { priceLabel: "" };
+  // A free claim is free whatever the local price would have been, so it must
+  // still say so when prices didn't load. That is not a corner case: in the
+  // countries Paddle refuses to price, a free claim is the *only* thing on
+  // this page that can still be redeemed, and it was rendering with a blank
+  // price label. Only the struck-through list price needs the loaded price.
   if (percentOff >= 100) {
-    return { listPrice: roundPrice(p.displayPrice), priceLabel: "Free", priceIsDiscount: true };
+    return { listPrice: p ? roundPrice(p.displayPrice) : undefined, priceLabel: "Free", priceIsDiscount: true };
   }
+  if (!p) return { priceLabel: "" };
   const discountedMinor = Math.round(p.priceMinor * (1 - percentOff / 100));
   return {
     listPrice: percentOff > 0 ? roundPrice(p.displayPrice) : undefined,
@@ -240,16 +245,16 @@ function twoYearPricing(): PriceFields {
 // oneYearPricing() below but for the 2-year product.
 function freeTwoYearPricing(): PriceFields {
   const p = store.paddleProducts.value.popclip_2year;
-  if (!p) return { priceLabel: "" };
-  return { listPrice: roundPrice(p.displayPrice), priceLabel: "Free", priceIsDiscount: true };
+  // free with or without a loaded price — see discountPricing()
+  return { listPrice: p ? roundPrice(p.displayPrice) : undefined, priceLabel: "Free", priceIsDiscount: true };
 }
 
 // The 1-year license is offer-only (always given away at 100% off), so this only
 // ever renders the "Free" branch of the same logic lifetimePricing(100) uses.
 function oneYearPricing(): PriceFields {
   const p = store.paddleProducts.value.popclip_1year;
-  if (!p) return { priceLabel: "" };
-  return { listPrice: roundPrice(p.displayPrice), priceLabel: "Free", priceIsDiscount: true };
+  // free with or without a loaded price — see discountPricing()
+  return { listPrice: p ? roundPrice(p.displayPrice) : undefined, priceLabel: "Free", priceIsDiscount: true };
 }
 
 // License expiry (for the license-holder copy): the date, whether it has passed,
@@ -884,7 +889,10 @@ async function renewStandard(details: BuyerDetails) {
   couponError.value = false;
   busyOffer.value = "renew2year";
   try {
-    const priceId = store.paddleProducts.value.popclip_2year?.priceId;
+    // fall back to the price id the backend returns when it can't price for
+    // this location, so a missing price doesn't stand in for a refusal to sell
+    const priceId =
+      store.paddleProducts.value.popclip_2year?.priceId ?? store.checkoutPriceIds.value.popclip_2year;
     if (!priceId) throw new Error("popclip_2year product not loaded yet");
     await openCheckout({
       priceId,

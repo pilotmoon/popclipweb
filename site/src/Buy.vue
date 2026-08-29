@@ -20,6 +20,20 @@ const isLizhi = computed(() =>
      config.lizhi.countries.includes(store.countryCode.value),
 );
 const regionallyPriced = computed(() => isRegionallyPriced(store.countryCode.value));
+const isLoading = computed(() => store.isLoadedForCoupon.value === null && !store.loadFailed.value);
+const hasPrices = computed(() => Object.keys(store.paddleProducts.value).length > 0);
+// We couldn't get a price. That is the whole of what we know and the whole of
+// what the page says: the buy buttons stay live, and if Paddle won't sell to
+// this visitor it can say so itself at the checkout.
+const noPrice = computed(() => store.loadFailed.value && !hasPrices.value);
+// What to open the checkout with. Normally the loaded product; failing that,
+// the price id the backend hands back when it can't price for this location.
+function buyTarget(key) {
+  const product = store.paddleProducts.value[key];
+  if (product) return product;
+  const priceId = store.checkoutPriceIds.value[key];
+  return priceId ? { product: key, priceId } : undefined;
+}
 const { openCheckout } = usePaddleCheckout();
 const { openCheckout: openBillingCheckout, initForTransactionCheckout } = usePaddleBillingCheckout();
 const { interceptPurchase } = useOutstandingPurchase();
@@ -179,7 +193,7 @@ function trackBuy(button) {
         :class="$style.buybutton"
         @click="
           trackBuy('Paddle');
-          openPaddleCheckout(store.paddleProducts.value.popclip_2year);
+          openPaddleCheckout(buyTarget('popclip_2year'));
         "
         theme="brand"
         size="medium"
@@ -236,7 +250,7 @@ function trackBuy(button) {
         :class="$style.buybutton"
         @click="
           trackBuy('Paddle');
-          openPaddleCheckout(store.paddleProducts.value.popclip_lifetime);
+          openPaddleCheckout(buyTarget('popclip_lifetime'));
         "
         theme="brand"
         size="medium"
@@ -276,13 +290,14 @@ function trackBuy(button) {
       </div>
     </div>
   </div>
-  <div :class="store.isLoadedForCoupon !== null ? $style.infoLine : $style.infoLineLoading">
-    <template v-if="store.isLoadedForCoupon !== null">
+  <div :class="isLoading || noPrice ? $style.infoLineLoading : $style.infoLine">
+    <template v-if="isLoading">Loading prices...</template>
+    <template v-else-if="noPrice">Could not load prices.</template>
+    <template v-else>
       {{ `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` }}
       <span v-if="regionallyPriced" :class="$style.regionalNote">
         · <a href="/regional-pricing"><Icon :class="$style.regionalIcon"><GlobeAmericas /></Icon> Regional pricing applied</a></span>
     </template>
-    <template v-else>Loading prices...</template>
   </div>
   <!-- <div v-if="isLizhi" class="danger custom-block">
     <p class="custom-block-title">Warning: Avoid 🇨🇳 Chinese Scam Sellers!</p>

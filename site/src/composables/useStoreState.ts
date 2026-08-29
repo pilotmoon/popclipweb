@@ -13,6 +13,17 @@ const log = useLogger();
 
 export const useStoreState = createGlobalState(() => {
   const isLoadedForCoupon = ref<null | string>(null); // don't use storage for this because we want to reload on page refresh
+  // The price lookup didn't come back. Not persisted (like
+  // isLoadedForCoupon): a fresh page load should try again rather than
+  // inherit last time's outcome. Deliberately just a flag and not a reason
+  // — the page says only that there is no price to show, which is all we
+  // actually know. Whether this visitor can buy is Paddle's question to
+  // answer at the checkout, not ours to pre-empt here.
+  const loadFailed = ref(false);
+  // Price ids to sell against when we have no prices. The backend returns
+  // them when Paddle declines to price for the visitor's location, so the
+  // buy buttons keep working with the price left blank.
+  const checkoutPriceIds = ref<Record<string, string>>({});
   const countryCode = useStorage("popclip-store-countryCode", "");
   const countryName = useStorage("popclip-store-countryName", "");
   const paddleProducts = useStorage("popclip-store-paddleProducts", {});
@@ -34,6 +45,8 @@ export const useStoreState = createGlobalState(() => {
     lizhiLifetimePrice,
     lizhiUrl,
     isLoadedForCoupon,
+    loadFailed,
+    checkoutPriceIds,
   };
 });
 
@@ -99,6 +112,7 @@ export async function loadStore() {
   );
   if (!fetchResponse.ok) {
     log("Failed to load prices");
+    store.loadFailed.value = true;
     return;
   }
   const productData = ZProductsResult.parse(await fetchResponse.json());
@@ -106,6 +120,7 @@ export async function loadStore() {
   store.countryCode.value = productData.countryCode;
   store.countryName.value = countryInfo.countryName;
   store.paddleProducts.value = preprocessProducts(productData);
+  store.loadFailed.value = false;
   store.isLoadedForCoupon.value = loadKey;
   log(`Prices loaded for ${store.countryCode.value}`);
 }
@@ -173,6 +188,24 @@ export function formatMinorUnits(amountMinor: number, currencyCode: string) {
   return format.format(amountMinor / 10 ** digits);
 }
 
+// The one failure the backend can be specific about arrives as a JSON body,
+// `{"error":{"code":"country_not_supported"},"priceIds":{...}}` — Paddle
+// declining to price for this location, with the ids to sell against anyway.
+// Every other failure — a 5xx, the plain-text bodies the backend's generic
+// error handler produces, a body that isn't JSON at all — reads as null.
+const ZErrorBody = z.object({
+  error: z.object({ code: z.string() }),
+  priceIds: z.record(z.string(), z.string()).optional(),
+});
+async function readErrorBody(response: Response) {
+  try {
+    const parsed = ZErrorBody.safeParse(await response.json());
+    return parsed.success ? parsed.data : null;
+  } catch {
+    return null;
+  }
+}
+
 async function loadStoreBilling(
   store: ReturnType<typeof useStoreState>,
   coupon: string,
@@ -190,13 +223,45 @@ async function loadStoreBilling(
     : config.pilotmoon.frontendRoot;
   const mode = sandbox ? "test" : "live";
   log("Loading prices (billing)", { coupon, mode, country });
-  const fetchResponse = await fetch(
-    `${endpoint}/store/getProductsBilling?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupon=${coupon}&mode=${mode}${
-      country ? `&country=${encodeURIComponent(country)}` : ""
-    }`,
-  );
+  // clear any previous outcome so a reload shows the loading state
+  store.loadFailed.value = false;
+  let fetchResponse: Response;
+  try {
+    fetchResponse = await fetch(
+      `${endpoint}/store/getProductsBilling?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupon=${coupon}&mode=${mode}${
+        country ? `&country=${encodeURIComponent(country)}` : ""
+      }`,
+    );
+  } catch (e) {
+    // fetch itself rejected (offline, DNS, CORS)
+    log("Failed to load prices (billing)", e);
+    store.loadFailed.value = true;
+    return;
+  }
   if (!fetchResponse.ok) {
+    store.loadFailed.value = true;
+    const body = await readErrorBody(fetchResponse);
+    if (body?.error.code === "country_not_supported") {
+      log("No price available for this location");
+      // Forget what a previous visit remembered. These are localStorage
+      // values, so without this a visitor who once loaded prices elsewhere
+      // keeps seeing them — possibly in the wrong currency — long after
+      // they stopped being this visitor's prices. Showing no price is
+      // honest; showing a stale one isn't.
+      store.paddleProducts.value = {};
+      store.countryCode.value = "";
+      store.countryName.value = "";
+      // ...but keep selling: the price ids don't depend on the country, so
+      // the buy buttons still open a checkout and Paddle decides.
+      store.checkoutPriceIds.value = body.priceIds ?? {};
+      // A settled answer, not a hiccup: mark it loaded so we don't refetch
+      // until the coupon/country key actually changes.
+      store.isLoadedForCoupon.value = loadKey;
+      return;
+    }
     log("Failed to load prices (billing)");
+    // Keep any prices already loaded (almost certainly still right for this
+    // visitor) and leave isLoadedForCoupon unset so a reload re-fetches.
     return;
   }
   const result = ZBillingProductsResult.parse(await fetchResponse.json());
@@ -271,6 +336,8 @@ async function loadStoreBilling(
     ? getCountryInfo(result.countryCode).countryName
     : "";
   store.paddleProducts.value = z.record(ZProcessedProduct).parse(processed);
+  store.loadFailed.value = false;
+  store.checkoutPriceIds.value = {};
   store.isLoadedForCoupon.value = loadKey;
   log(`Prices loaded (billing) for '${store.countryCode.value}'`);
 }
