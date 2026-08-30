@@ -12,7 +12,8 @@ import { getFlagEmoji } from "./helpers/getFlagEmoji";
 import { infoBlock, supportMailtoHref } from "./helpers/supportMailto";
 import paddleCountries from "./helpers/countries/paddleCountries.json";
 import { isRegionallyPriced } from "./data/regionalPricing";
-import { GlobeAmericas } from "@vicons/fa";
+import { getRegionGlobe } from "./helpers/countries/getRegionGlobe";
+import { QuestionCircleRegular } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import OfferCard from "./OfferCard.vue";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
@@ -108,6 +109,8 @@ const busyOffer = ref<string | null>(null);
 // can be started at a time, so this backstops the busyOffer guard against double-clicks.
 const anyBusy = computed(() => busyOffer.value !== null);
 const regionallyPriced = computed(() => isRegionallyPriced(store.countryCode.value));
+// Show the globe whose face matches the region we are quoting prices for.
+const regionGlobe = computed(() => getRegionGlobe(store.countryCode.value));
 
 onMounted(() => {
   pageUrl.value = window.location.href;
@@ -564,7 +567,7 @@ function mas50Segment(): SegmentData {
 function studentIssueLine(): string {
   const sp = signedParams.value;
   if (!sp?.edu) return "";
-  const country = sp.cou ? (paddleCountries as Record<string, string>)[sp.cou] ?? sp.cou : "";
+  const country = sp.cou ? ((paddleCountries as Record<string, string>)[sp.cou] ?? sp.cou) : "";
   return `Student offer issued for institution "${escapeHtml(sp.edu)}"${country ? `, ${escapeHtml(country)}` : ""}. `;
 }
 
@@ -891,8 +894,7 @@ async function renewStandard(details: BuyerDetails) {
   try {
     // fall back to the price id the backend returns when it can't price for
     // this location, so a missing price doesn't stand in for a refusal to sell
-    const priceId =
-      store.paddleProducts.value.popclip_2year?.priceId ?? store.checkoutPriceIds.value.popclip_2year;
+    const priceId = store.paddleProducts.value.popclip_2year?.priceId ?? store.checkoutPriceIds.value.popclip_2year;
     if (!priceId) throw new Error("popclip_2year product not loaded yet");
     await openCheckout({
       priceId,
@@ -946,10 +948,17 @@ async function renewStandard(details: BuyerDetails) {
         {{ `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` }}
         <span v-if="regionallyPriced" :class="$style.regionalNote">
           ·
-          <a href="/regional-pricing"
-            ><Icon :class="$style.regionalIcon"><GlobeAmericas /></Icon> Regional pricing applied</a
-          ></span
-        >
+          <span :class="$style.regionalText"
+            ><Icon :class="$style.regionalIcon"><component :is="regionGlobe" /></Icon> Regional pricing applied
+            <a
+              :class="$style.regionalHelp"
+              href="/regional-pricing"
+              target="_blank"
+              rel="noopener"
+              aria-label="About regional pricing"
+              title="About regional pricing"
+              ><Icon :class="$style.regionalIcon"><QuestionCircleRegular /></Icon></a></span
+        ></span>
       </template>
       <template v-else>Loading prices...</template>
     </div>
@@ -1002,10 +1011,22 @@ async function renewStandard(details: BuyerDetails) {
   font-size: 0.85em;
 }
 
-/* Green for emphasis (matches the site's other green accents); the `.infoLine`
-   prefix raises specificity above VitePress's `.vp-doc a` link color. */
-.infoLine .regionalNote a {
-  color: var(--vp-c-green-1);
+/* Muted green so the note reads as a status, not something to click. */
+.regionalText {
+  color: var(--vp-c-green-2);
+}
+
+/* The help link is just a question-mark glyph in secondary text color: there
+   for anyone who wants the detail, quiet enough not to pull clicks off the buy
+   buttons. The `.infoLine` prefix raises specificity above VitePress's
+   `.vp-doc a`, which would otherwise color and underline it like body copy. */
+.infoLine .regionalNote a.regionalHelp {
+  color: var(--vp-c-text-2);
+  text-decoration: none;
+}
+
+.infoLine .regionalNote a.regionalHelp:hover {
+  color: var(--vp-c-brand-1);
 }
 
 /* Sit the glyph on the text baseline (icons render as inline SVG). */

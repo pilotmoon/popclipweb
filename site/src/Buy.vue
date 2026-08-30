@@ -8,11 +8,12 @@ import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePadd
 import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
-import { Paypal, ApplePay, CreditCard, GlobeAmericas } from "@vicons/fa";
+import { Paypal, ApplePay, CreditCard, QuestionCircleRegular } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
 import { isRegionallyPriced } from "./data/regionalPricing";
+import { getRegionGlobe } from "./helpers/countries/getRegionGlobe";
 
 const store = useStoreState();
 
@@ -20,6 +21,8 @@ const isLizhi = computed(() =>
      config.lizhi.countries.includes(store.countryCode.value),
 );
 const regionallyPriced = computed(() => isRegionallyPriced(store.countryCode.value));
+// Show the globe whose face matches the region we are quoting prices for.
+const regionGlobe = computed(() => getRegionGlobe(store.countryCode.value));
 const isLoading = computed(() => store.isLoadedForCoupon.value === null && !store.loadFailed.value);
 const hasPrices = computed(() => Object.keys(store.paddleProducts.value).length > 0);
 // We couldn't get a price. That is the whole of what we know and the whole of
@@ -296,7 +299,18 @@ function trackBuy(button) {
     <template v-else>
       {{ `Showing prices for ${getFlagEmoji(store.countryCode.value)} ${store.countryName.value}` }}
       <span v-if="regionallyPriced" :class="$style.regionalNote">
-        · <a href="/regional-pricing"><Icon :class="$style.regionalIcon"><GlobeAmericas /></Icon> Regional pricing applied</a></span>
+        ·
+        <span :class="$style.regionalText"
+          ><Icon :class="$style.regionalIcon"><component :is="regionGlobe" /></Icon> Regional pricing applied
+          <a
+            :class="$style.regionalHelp"
+            href="/regional-pricing"
+            target="_blank"
+            rel="noopener"
+            aria-label="About regional pricing"
+            title="About regional pricing"
+            ><Icon :class="$style.regionalIcon"><QuestionCircleRegular /></Icon></a></span
+      ></span>
     </template>
   </div>
   <!-- <div v-if="isLizhi" class="danger custom-block">
@@ -444,10 +458,22 @@ function trackBuy(button) {
   font-size: 0.85em;
 }
 
-/* Green for emphasis (matches the site's other green accents); the `.infoLine`
-   prefix raises specificity above VitePress's `.vp-doc a` link color. */
-.infoLine .regionalNote a {
-  color: var(--vp-c-green-1);
+/* Muted green so the note reads as a status, not something to click. */
+.regionalText {
+  color: var(--vp-c-green-2);
+}
+
+/* The help link is just a question-mark glyph in secondary text color: there
+   for anyone who wants the detail, quiet enough not to pull clicks off the buy
+   buttons. The `.infoLine` prefix raises specificity above VitePress's
+   `.vp-doc a`, which would otherwise color and underline it like body copy. */
+.infoLine .regionalNote a.regionalHelp {
+  color: var(--vp-c-text-2);
+  text-decoration: none;
+}
+
+.infoLine .regionalNote a.regionalHelp:hover {
+  color: var(--vp-c-brand-1);
 }
 
 /* Sit the glyph on the text baseline (icons render as inline SVG). */
