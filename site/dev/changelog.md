@@ -61,6 +61,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   ```js
   Buffer.from("hello?~").toString("base64url"); // aGVsbG8_fg
   ```
+- New `migrate from` key for `string` and `multiple` options: names a removed
+  option whose stored value carries over to this one if its
+  value is a non-empty string. Useful with `allow other` where a multiple
+  option with separate free text override was used by a previous extension version.
 
 ## Version 2026.8 (6159)
 
