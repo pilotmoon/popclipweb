@@ -33,6 +33,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 
 - JavaScript: new
+  [popclip.runShellScript()](/dev/api/interfaces/PopClip.html#runshellscript)
+  and
+  [popclip.runShellScriptFile()](/dev/api/interfaces/PopClip.html#runshellscriptfile)
+  methods run a shell script from a JavaScript action, with the `script`
+  entitlement. Set the interpreter, extra
+  environment variables, stdin and positional
+  arguments; the result is `{ stdout, stderr, status }`.
+  ```js
+  // #popclip speak definition example
+  // name: Speak Definition
+  // language: javascript
+  // entitlements: [script]
+  const word = popclip.input.text.trim();
+  const definition = util.getDictionaryDefinition(word) ?? "no definition";
+  await popclip.runShellScript("say $definition", {
+    interpreter: "zsh",
+    env: { definition },
+  });
+  ```
+- When running shell scripts, a new
+  [`shell mode`](/dev/shell-script-actions#shell-mode)/`shellMode` setting controls how the
+  script run is executed: `login` (via the user's shell as a
+  login shell), `nonlogin`, or `none` (no shell at all — direct execution).
+  For legacy compatibility, Shell Script actions default to `login`, but the new JavaScript methods default to `none`.
+- JavaScript: new
+  [util.shellEscape()](/dev/api/interfaces/Util.html#shellescape) method
+  escapes text for literal inclusion in a POSIX shell command line.
+- JavaScript: new
+  [popclip.performService()](/dev/api/interfaces/PopClip.html#performservice)
+  method performs a macOS Service by name, with string or content-dictionary
+  input.
+- JavaScript: new
   [util.hash()](/dev/api/interfaces/Util.html#hash)
   method computes a plain message digest. It is the counterpart to
   [util.hmac()](/dev/api/interfaces/Util.html#hmac) and supports the same
@@ -65,6 +97,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   option whose stored value carries over to this one if its
   value is a non-empty string. Useful with `allow other` where a multiple
   option with separate free text override was used by a previous extension version.
+
+### Changed
+
+- Installing an unsigned extension whose config declares the
+  `script` entitlement now shows the install confirmation. Previously,
+  a JavaScript module extension could declare `script` yet install without
+  confirmation, while the equivalent static shell script config prompted.
 
 ## Version 2026.8 (6159)
 

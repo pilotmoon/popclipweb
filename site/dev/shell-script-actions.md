@@ -8,6 +8,31 @@ A Shell Script action runs a shell script, either directly or from a file. The
 script can be written in any language that can be executed from the command
 line, such as Zsh, Python, Ruby, Perl, etc.
 
+::: tip Running a shell script from JavaScript
+
+Where possible, prefer JavaScript actions for general tasks like text manipulation,
+and only shell out if there is a specific task that JS cannot do. Call
+[`popclip.runShellScript()`](/dev/api/interfaces/PopClip.html#runshellscript) or
+[`runShellScriptFile()`](/dev/api/interfaces/PopClip.html#runshellscriptfile) from a
+[JavaScript action](./js-actions) with the `script` entitlement declared.
+
+```javascript
+// #popclip shell js example
+// name: Print in Uppercase
+// language: javascript
+// entitlements: [script]
+const printMe = popclip.input.text.trim().toUpperCase();
+const { stdout } = await popclip.runShellScript("lp <<< $printMe", {
+  interpreter: "zsh",
+  env: { printMe },
+});
+// e.g. "request id is Office_Printer-294 (1 file(s))"
+const requestId = stdout.match(/request id is (\S+)/)?.[1] ?? "unknown";
+popclip.showText(`Printing: ${requestId}`);
+```
+
+:::
+
 ::: warning Submitting to the directory
 Extensions submitted to the [Extensions Directory](/extensions/) should use
 JavaScript actions in preference to Shell Script actions. A submission with a
@@ -26,6 +51,7 @@ A Shell Script action is defined by the presence of either a `shell script` or
 | `shell script file` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                        |
 | `interpreter`       | String (optional) | Specify the interpreter to use for `shell script` or `shell script file`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`. |
 | `stdin`             | String (optional) | For script specified as `shell script file` only. Set the name of a [script variable](./script-variables) to pass via standard input (stdin). If omitted, no standard input is provided to the script.                                                                            |
+| `shell mode`        | String (optional) | How the script is executed: `login` (the default), `nonlogin` or `none`. See [Shell mode](#shell-mode).                                                                                                                                                                           |
 
 ### Shell script file execution
 
@@ -44,6 +70,18 @@ The `shell script file` will be executed as follows:
   because no interpreter has been specified.
 
 The current working directory will be set to the package directory.
+
+### Shell mode
+
+The `shell mode` field controls how the script run is executed:
+
+- `login` (the default): via the user's default shell as a login shell (`-l`), so the
+  script sees the user's usual `PATH` and profile environment.
+- `nonlogin`: via the user's shell without `-l` — for environments configured in
+  `.zshenv` alone, without profile side effects.
+- `none`: no shell at all — the interpreter (or the executable script file itself) is
+  executed directly, with a minimal environment (`PATH=/usr/bin:/bin:/usr/sbin:/sbin`
+  plus the `POPCLIP_*` variables). Fastest and most predictable.
 
 ## Input and output
 

@@ -6,6 +6,23 @@ titleTemplate: :title — PopClip Developer
 
 In a Service action, PopClip will invoke a macOS [Service](https://support.apple.com/en-gb/guide/mac-help/mchlp1012/mac) by name.
 
+::: tip Calling a macOS Service from JavaScript
+
+You can also call
+[`popclip.performService()`](/dev/api/interfaces/PopClip.html#performservice) from a
+[JavaScript action](./js-actions).
+
+```javascript
+// #popclip service js example
+// name: Dated Sticky
+// language: javascript
+const today = new Date().toLocaleDateString();
+const note = `${popclip.input.text}\n\nClipped ${today}`;
+await popclip.performService("Make Sticky", note);
+```
+
+:::
+
 ## Properties
 
 A service action is defined by the presence of a `service name` field, as follows:

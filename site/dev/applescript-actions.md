@@ -7,6 +7,15 @@ titleTemplate: :title — PopClip Developer
 An AppleScript action runs AppleScript code. AppleScript's strength is in
 automation, since it can be used to control other apps.
 
+::: tip Running AppleScript from JavaScript
+
+To run just a little bit of AppleScript as part of a larger extension, call
+[`popclip.runAppleScript()`](/dev/api/interfaces/PopClip.html#runapplescript) or
+[`runAppleScriptFile()`](/dev/api/interfaces/PopClip.html#runapplescriptfile) from a
+[JavaScript action](./js-actions) with the `script` entitlement declared.
+
+:::
+
 ## Properties
 
 An AppleScript action is defined by the presence of either an `applescript` or
