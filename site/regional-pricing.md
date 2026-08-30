@@ -25,3 +25,7 @@ rounding and local tax differences.
 <RegionalPricingTable />
 
 Prices in all other countries are at the standard level.
+
+Discounts apply on top of regional pricing. A student discount, upgrade offer or
+other promotion comes off your country's price, so half price in a country
+priced 40% lower means half of that lower price.
