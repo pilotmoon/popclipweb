@@ -18,6 +18,14 @@ export interface PurchaseAttempt {
   // set once this checkout's license has been shown to the buyer here, which
   // takes it out of the search below: it is not a purchase that went missing
   delivered?: boolean;
+  // set when Paddle reported checkout.payment.initiated for this checkout —
+  // the buyer has handed the payment off to their bank, PayPal or payment
+  // app, so money may well be moving even though nothing has been confirmed.
+  // Read only by the page-lifecycle beacons in usePaddleBillingCheckout,
+  // which report what becomes of this page while that is true.
+  paymentInitiated?: boolean;
+  // the payment method that was initiated (paypal, card, wechat_pay...)
+  method?: string | null;
 }
 
 // Attempts older than this are ignored. A payment that has not landed in two
@@ -77,6 +85,46 @@ export const usePurchaseInfo = createGlobalState(() => {
     );
   }
 
+  // Note that the buyer has handed this checkout off to a payment provider.
+  //
+  // Paddle reports a free claim as a payment too, with method "free". It is
+  // not one: nothing is captured, the license exists the moment the checkout
+  // completes, and there is nothing to wait on. The method is still worth
+  // recording, so the flag alone is withheld — which is what keeps a free
+  // claim from filling the request log with page-lifecycle beacons. Claiming
+  // the free year and then upgrading minutes later is a path we deliberately
+  // offer, so one of these is very often sitting in the browser of someone
+  // about to buy.
+  function notePaymentInitiated(
+    attemptFlowId: string | null | undefined,
+    method?: string | null,
+  ) {
+    if (!attemptFlowId) return;
+    noteAttempt(attemptFlowId);
+    const captures = method !== "free";
+    attempts.value = attempts.value.map((a) =>
+      a.flowId === attemptFlowId
+        ? {
+            ...a,
+            paymentInitiated: a.paymentInitiated || captures,
+            method: method ?? a.method ?? null,
+          }
+        : a,
+    );
+  }
+
+  // Note that a payment we were watching is not coming: the provider declined
+  // it. Clears the in-flight mark, so the lifecycle beacons stop reporting a
+  // page that has nothing left to wait for. The flag is set again if the
+  // buyer retries within the same checkout, which they often do — a card
+  // declining and PayPal being tried instead is one flow, not two.
+  function notePaymentSettled(attemptFlowId: string | null | undefined) {
+    if (!attemptFlowId) return;
+    attempts.value = attempts.value.map((a) =>
+      a.flowId === attemptFlowId ? { ...a, paymentInitiated: false } : a,
+    );
+  }
+
   // Note that this checkout's license has been shown to the buyer.
   function markDelivered(attempt: {
     flowId?: string | null;
@@ -97,6 +145,13 @@ export const usePurchaseInfo = createGlobalState(() => {
   function recentAttempts(): PurchaseAttempt[] {
     const cutoff = Date.now() - ATTEMPT_MAX_AGE_MS;
     return attempts.value.filter((a) => a.at >= cutoff).reverse();
+  }
+
+  // The newest checkout whose payment was handed off and which has never been
+  // shown to the buyer — the one this browser has money in flight for, as far
+  // as it knows. What the lifecycle beacons report against.
+  function outstandingPayment(): PurchaseAttempt | undefined {
+    return recentAttempts().find((a) => a.paymentInitiated && !a.delivered);
   }
 
   // The attempts worth asking the backend about, given whichever checkout is
@@ -143,8 +198,11 @@ export const usePurchaseInfo = createGlobalState(() => {
     attempts,
     noteAttempt,
     noteAttemptTransaction,
+    notePaymentInitiated,
+    notePaymentSettled,
     markDelivered,
     recentAttempts,
+    outstandingPayment,
     attemptsToSweep,
     adoptAttempt,
   };

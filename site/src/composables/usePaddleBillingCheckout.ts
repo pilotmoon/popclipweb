@@ -57,6 +57,10 @@ let lastCustomerCountry: string | null = null;
 // callback, while openCheckout — which must stop any watch still running —
 // may be called on the other instance.
 let watchTimer: ReturnType<typeof setInterval> | null = null;
+let lifecycleInstalled = false;
+
+// how long after a payment was handed off it is still worth reporting on
+const PENDING_PAYMENT_MAX_AGE_MS = 30 * 60 * 1000;
 
 // Paddle Billing checkout setup and post-checkout handling. Counterpart of
 // usePaddleCheckout (Classic), which it replaces at the migration cutover.
@@ -106,6 +110,14 @@ export function usePaddleBillingCheckout() {
           }
           if (event.name === "checkout.payment.initiated") {
             paymentInitiated = true;
+            // record it in storage as well as here: the buyer is now away at
+            // their bank, PayPal or payment app, and this page may not be
+            // what comes back
+            purchaseInfo.notePaymentInitiated(
+              currentFlowId,
+              event.data?.payment?.method_details?.type,
+            );
+            installLifecycleWatch();
             startPaymentWatch();
           }
           if (event.name === "checkout.closed") {
@@ -128,25 +140,95 @@ export function usePaddleBillingCheckout() {
   // go out as the tab is being closed; params in the query string because
   // sendBeacon can't send preflight-free JSON bodies.
   function beaconCheckoutEvent(name: string, data: any) {
-    if (!currentFlowId) return;
+    beaconEvent(name, {
+      flowId: currentFlowId,
+      transactionId: data?.transaction_id,
+      method: data?.payment?.method_details?.type,
+    });
+  }
+
+  // Report one event against one checkout. Split out from the Paddle event
+  // beacon above so the page-lifecycle beacons can use it: those fire against
+  // a checkout read back from storage, with no Paddle event payload to take
+  // ids out of.
+  function beaconEvent(
+    name: string,
+    about: {
+      flowId?: string | null;
+      transactionId?: string | null;
+      method?: string | null;
+    },
+  ) {
+    if (!about.flowId) return;
     try {
       const endpoint = sandbox
         ? config.pilotmoon.frontendRoot_sandbox
         : config.pilotmoon.frontendRoot;
       const params = new URLSearchParams({
-        flowId: currentFlowId,
+        flowId: about.flowId,
         mode: sandbox ? "test" : "live",
         event: name,
       });
-      if (data?.transaction_id) {
-        params.set("transactionId", data.transaction_id);
+      if (about.transactionId) {
+        params.set("transactionId", about.transactionId);
       }
-      const method = data?.payment?.method_details?.type;
-      if (method) params.set("method", method);
+      if (about.method) params.set("method", about.method);
       navigator.sendBeacon(`${endpoint}/store/checkoutEvent?${params}`, "");
     } catch (e) {
       log("[checkout] beacon failed", e);
     }
+  }
+
+  // Watch what happens to this page while a payment is in flight, and say so
+  // in the request log.
+  //
+  // Three PayPal buyers were stranded on 28 and 29 Aug 2026: the page polled
+  // steadily every four seconds and then simply stopped — seconds to minutes
+  // before the capture landed — with no checkout.closed, no checkout.completed
+  // and no further poll. Nothing in this file stops the watch at those times
+  // (other flows that same week polled for 300 s and 445 s and were
+  // delivered), so what ended it was the page itself going away. These
+  // beacons say which way it went — unloaded, put in the back/forward cache,
+  // or merely hidden behind PayPal's window — rather than leaving the next
+  // occurrence to be read out of a silence again.
+  //
+  // Observation only: nothing here changes what the page does. Only while a
+  // payment is outstanding, so an ordinary tab switch beacons nothing.
+  function installLifecycleWatch() {
+    if (lifecycleInstalled || typeof window === "undefined") return;
+    lifecycleInstalled = true;
+    document.addEventListener("visibilitychange", () => {
+      const attempt = pendingPayment();
+      if (!attempt) return;
+      beaconEvent(
+        document.visibilityState === "hidden" ? "page.hidden" : "page.visible",
+        attempt,
+      );
+    });
+    window.addEventListener("pagehide", (event) => {
+      const attempt = pendingPayment();
+      if (!attempt) return;
+      beaconEvent(event.persisted ? "page.cached" : "page.unload", attempt);
+    });
+    window.addEventListener("pageshow", (event) => {
+      if (!event.persisted) return;
+      const attempt = pendingPayment();
+      if (attempt) beaconEvent("page.restored", attempt);
+    });
+  }
+
+  // The checkout this browser has a payment in flight for, if any: handed off
+  // to a payment provider and never shown to the buyer, and recent enough
+  // that it may still land. The observed captures are seconds to a few
+  // minutes — the slowest deferred method Paddle documents is WeChat Pay at
+  // about ten — so half an hour is well past the point where watching is
+  // still watching for something.
+  function pendingPayment() {
+    if (completedFired) return undefined;
+    const attempt = purchaseInfo.outstandingPayment();
+    if (!attempt) return undefined;
+    if (Date.now() - attempt.at > PENDING_PAYMENT_MAX_AGE_MS) return undefined;
+    return attempt;
   }
 
   // Background watch, started once a payment is initiated: poll the backend
@@ -218,6 +300,16 @@ export function usePaddleBillingCheckout() {
       const res = await fetch(`${endpoint}/store/getLicense?${params}`);
       if (!res.ok) return false; // 404: no license, no payment attempt yet
       const body = await res.json();
+      if (
+        body?.object === "transactionStatus" &&
+        body.status === "failed" &&
+        attempt.flowId
+      ) {
+        // nothing left in flight on this one, so stop reporting the page's
+        // lifecycle against it; Paddle's own UI handles the retry, and a
+        // retry marks it in flight again
+        purchaseInfo.notePaymentSettled(attempt.flowId);
+      }
       const paid =
         body?.object === "licenseKey" ||
         (body?.object === "transactionStatus" &&
