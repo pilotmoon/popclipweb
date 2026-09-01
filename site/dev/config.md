@@ -14,6 +14,27 @@ interpreted. The properties themselves are documented on the
 [Top-level properties](./top-level-properties), [Action properties](./actions)
 and [Options](./options) pages.
 
+## Formats
+
+The config dictionary can be written in [YAML 1.2](https://yaml.org),
+[JSON](https://www.json.org/json-en.html) or Apple
+[XML Property List](https://en.wikipedia.org/wiki/Property_list) (plist)
+format:
+
+- **YAML** is the recommended format, and the most versatile: it works as a
+  standalone config file in a package (`Config.yaml`), as a
+  [config snippet](./snippets#config-snippets), and as the comment header of
+  a [code snippet](./snippets#inverted-syntax) or
+  [module](./js-modules) file.
+- **JSON** can be used for a package config file (`Config.json`) — and since
+  JSON is a subset of YAML, JSON syntax also works anywhere YAML does.
+- **Plist** is supported for package config files (`Config.plist`). It was
+  the original PopClip extension format, and is not recommended for new
+  extensions.
+
+See [The Config file](./packages#the-config-file) for how config files are
+named in a package.
+
 ## Key naming
 
 PopClip is very flexible about how you name keys. In this documentation you'll
