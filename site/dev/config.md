@@ -16,34 +16,20 @@ and [Options](./options) pages.
 
 ## Formats
 
-The recommended format for config is [YAML 1.2](https://yaml.org). It is the
+PopClip supports 3 config formats: [YAML](#yaml), [JSON](#json) and [plist](#plist).
+
+**The recommended format is YAML**. It is the
 most versatile: it works as a standalone config file in a package
 (`Config.yaml`), as a [config snippet](./snippets#config-snippets), and as
 the comment header of a [code snippet](./snippets#inverted-syntax) or
 [module](./js-modules) file. The examples in this documentation are YAML.
 
 [JSON](#json) and [plist](#plist) are also supported for package config
-files — see the notes at the end of this page, and
-[The Config file](./packages#the-config-file) for how config files are named
-in a package.
-
-## Key naming
-
-PopClip is very flexible about how you name keys. In this documentation you'll
-mostly see keys named in lowercase with spaces, for example `key name`. However,
-PopClip will treat `Key Name`, `keyName`, `KeyName`, `key_name`, `key-name` and
-`KEY_NAME` as equivalents.
-
-<!-- The full range of formats is as defined by
-[case-anything](https://github.com/mesqueeb/case-anything), which PopClip uses
-internally. -->
-
-I tend to use `key name` in YAML, and `keyName` in JSON, but you can use
-whatever you prefer.
+files.
 
 ## Example
 
-Before diving in to the details, let's look at an example config dictionary for
+Let's look at an example `Config.yaml` for
 a published extension. This is based on the
 [Yoink extension](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Yoink.popclipext):
 
@@ -130,12 +116,22 @@ name:
 
 :::
 
-## JSON
+## Format details
+
+### YAML
+
+PopClip's YAML parser expects [YAML 1.2](https://yaml.org). A package config
+file written in YAML should be named `Config.yaml`. Example:
+
+```yaml
+name: Yoink
+serviceName: Add Selected Text to Yoink
+```
+
+### JSON
 
 A package config file may be written in
-[JSON](https://www.json.org/json-en.html), named `Config.json`. And since
-JSON is a subset of YAML, JSON syntax also works anywhere YAML does. In JSON,
-it is natural to use camelCase key names:
+[JSON](https://www.json.org/json-en.html), named `Config.json`. Example:
 
 ```json
 {
@@ -144,9 +140,9 @@ it is natural to use camelCase key names:
 }
 ```
 
-## Plist
+### Plist
 
-Plist was the original config format for PopClip extensions, as Apple's own
+Plist was the original config format for PopClip extensions. It is Apple's own
 [XML Property List](https://en.wikipedia.org/wiki/Property_list) format, and
 many of the older extensions in the
 [PopClip-Extensions repo](https://github.com/pilotmoon/PopClip-Extensions)
@@ -168,15 +164,34 @@ recommend it for new extensions.
 ```
 
 One plist quirk to know about: plist has no native way to represent the
-`null` value of JSON and YAML. Use `<false />` in a plist where you would use
+`null` value of JSON and YAML. Use `<false />` in a plist where these docs call for
 `null`.
 
-## Key name mapping
+## Compatibility
+
+To preserve compatibility with old extension formats,
+PopClip allows properties in config files to be named in different ways.
+
+### Key naming
+
+PopClip is very flexible about how you name keys. In this documentation you'll
+mostly see keys named in lowercase with spaces, for example `key name`. However,
+PopClip will treat `Key Name`, `keyName`, `KeyName`, `key_name`, `key-name` and
+`KEY_NAME` as equivalents.
+
+<!-- The full range of formats is as defined by
+[case-anything](https://github.com/mesqueeb/case-anything), which PopClip uses
+internally. -->
+
+I tend to use `key name` in YAML, and `keyName` in JSON, but you can use
+whatever you prefer.
+
+### Key name mapping
 
 Some field names were different in older versions of PopClip. Others have
 alternative allowable spellings.
 
-To preserve backwards compatibility, key names in the config are transformed as
+To preserve backwards compatibility, key names in the config (all formats) are transformed as
 follows:
 
 1. First, the naming convention is standardized to lowercase with spaces. For
