@@ -130,6 +130,47 @@ name:
 
 :::
 
+## JSON
+
+A package config file may be written in
+[JSON](https://www.json.org/json-en.html), named `Config.json`. And since
+JSON is a subset of YAML, JSON syntax also works anywhere YAML does. In JSON,
+it is natural to use camelCase key names:
+
+```json
+{
+  "name": "Yoink",
+  "serviceName": "Add Selected Text to Yoink"
+}
+```
+
+## Plist
+
+Plist was the original config format for PopClip extensions, as Apple's own
+[XML Property List](https://en.wikipedia.org/wiki/Property_list) format, and
+many of the older extensions in the
+[PopClip-Extensions repo](https://github.com/pilotmoon/PopClip-Extensions)
+still use it, named `Config.plist`. It remains fully supported, but it is a
+legacy format — verbose, and harder to read and edit than YAML — and I don't
+recommend it for new extensions.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Name</key>
+  <string>Yoink</string>
+  <key>Service Name</key>
+  <string>Add Selected Text to Yoink</string>
+</dict>
+</plist>
+```
+
+One plist quirk to know about: plist has no native way to represent the
+`null` value of JSON and YAML. Use `<false />` in a plist where you would use
+`null`.
+
 ## Key name mapping
 
 Some field names were different in older versions of PopClip. Others have
@@ -181,44 +222,3 @@ will first standardize the case to `extension image file`. Then it will remove
 the `extension` prefix, leaving `image file`. Then it will map this to `icon`.
 
 :::
-
-## JSON
-
-A package config file may be written in
-[JSON](https://www.json.org/json-en.html), named `Config.json`. And since
-JSON is a subset of YAML, JSON syntax also works anywhere YAML does. In JSON,
-it is natural to use camelCase key names:
-
-```json
-{
-  "name": "Yoink",
-  "serviceName": "Add Selected Text to Yoink"
-}
-```
-
-## Plist
-
-Plist was the original config format for PopClip extensions, as Apple's own
-[XML Property List](https://en.wikipedia.org/wiki/Property_list) format, and
-many of the older extensions in the
-[PopClip-Extensions repo](https://github.com/pilotmoon/PopClip-Extensions)
-still use it, named `Config.plist`. It remains fully supported, but it is a
-legacy format — verbose, and harder to read and edit than YAML — and I don't
-recommend it for new extensions.
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Name</key>
-  <string>Yoink</string>
-  <key>Service Name</key>
-  <string>Add Selected Text to Yoink</string>
-</dict>
-</plist>
-```
-
-One plist quirk to know about: plist has no native way to represent the
-`null` value of JSON and YAML. Use `<false />` in a plist where you would use
-`null`.
