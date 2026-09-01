@@ -213,3 +213,9 @@ here:
 - [`auth service label`](./config#top-level-properties) — a label for the
   service, used in prompts such as "Sign in to your [label] account".
   Defaults to the extension's name.
+- [`auth keychain`](./config#top-level-properties) — which keychain the
+  sign-in secret goes in: `sync` (the default) shares one sign-in across the
+  user's devices via iCloud Keychain; `local` keeps it on the Mac where the
+  user signed in, so each device signs in separately. Declare `local` where
+  the service issues per-device credentials, such as OAuth flows with
+  rotating refresh tokens or dynamic client registration.

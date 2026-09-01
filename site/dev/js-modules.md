@@ -158,8 +158,8 @@ Alternatively, you can provide static config in another format (e.g.
 
 Certain properties of the extension can only be defined in the static config,
 and cannot be overriden by the module. These are `name`, `icon`, `identifier`,
-`popclipVersion`, `macosVersion`, `entitlements`, `module`, `showAs`,
-`authServiceLabel` and `offersMultipleInstances`.
+`popclipVersion`, `macosVersion`, `entitlements`, `module`, `showAs` and
+`offersMultipleInstances`.
 
 ## Module actions
 
