@@ -23,13 +23,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Beta / Unreleased
 
-### Fixed
-
-- JavaScript: [util.hmac()](/dev/api/interfaces/Util.html#hmac) read from the
-  start of the backing buffer when passed a `Uint8Array` view with a non-zero
-  offset, such as one made with `subarray()`, producing the wrong result. It
-  now reads the view's own bytes.
-
 ### Added
 
 - JavaScript: new
@@ -127,6 +120,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   confirmation, while the equivalent static shell script config prompted.
 - A module that mixes a default export with named exports is now a load
   error. Previously, the named exports were silently ignored.
+
+### Fixed
+
+- JavaScript: [util.hmac()](/dev/api/interfaces/Util.html#hmac) read from the
+  start of the backing buffer when passed a `Uint8Array` view with a non-zero
+  offset, such as one made with `subarray()`, producing the wrong result. It
+  now reads the view's own bytes.
 
 ## Version 2026.8 (6159)
 
