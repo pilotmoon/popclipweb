@@ -3,7 +3,7 @@ outline: deep
 titleTemplate: :title — PopClip Developer
 ---
 
-# Actions
+# Action properties
 
 Action properties can be placed either in an `action` dictionary, in an
 `actions` array, or at the top level. Properties set at the top level will apply
@@ -315,8 +315,6 @@ inline:
 // #popclip
 // name: Comment
 // icon: symbol:text.bubble
-// language: javascript
-// module: true
 
 defineExtension({
   actions: [

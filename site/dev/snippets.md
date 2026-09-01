@@ -9,9 +9,90 @@ A snippet is the simplest kind of PopClip extension, because it is just plain
 text. PopClip can load a snippet directly from a text selection, without the
 need for separate files or folders.
 
-## Example
+Snippets come in two forms:
 
-It is easiest to start with an example:
+- A **code snippet** is a script, with the extension's config in a comment
+  header.
+- A **config snippet** is config alone, in YAML format — most useful for the
+  [no-code action types](./index#no-code-actions).
+
+Either way, a snippet contains a `#popclip` (or `# popclip`) marker and can
+be up to 5000 characters long.
+
+## Code snippets {#inverted-syntax}
+
+Here is a complete code snippet:
+
+```javascript
+// #popclip
+// name: Hello
+const greeting = "Hello, " + popclip.input.text;
+popclip.showText(greeting);
+```
+
+When you select the whole block of text above, PopClip will detect the snippet
+and offer an "Install Extension" action.
+
+![](./media/shot-snippet-install-3.png "Installing a snippet.")
+
+The comment header is a run of comment lines starting at the `#popclip`
+marker, containing the extension's [config](./config.md) as YAML. Everything
+after the header is the script itself. This way, we get code syntax
+highlighting and autocomplete from our text editor, and we don't have to
+indent the script awkwardly inside YAML.
+
+Code snippets (formerly called _inverted syntax_) are supported for
+JavaScript, AppleScript and shell script actions. The whole text of the snippet becomes the `javascript file`,
+`module`, `applescript file` or `shell script file` for the extension, as
+follows:
+
+| To interpret as...  | Include these fields...                                                                                                                        |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `javascript file`   | Nothing needed: a body under a `//` comment header is TypeScript by default. Specify `language: javascript` to bypass the TypeScript pipeline. |
+| `module`            | Nothing needed: a body that exports is loaded as a module (see [Module detection](./js-modules#module-detection)).                             |
+| `shell script file` | Specify `interpreter` string (or start the body with a `#!` line).                                                                             |
+| `applescript file`  | Specify `language: applescript`.                                                                                                               |
+
+The config header should be added using the appropriate comment style for the
+source language, as in the examples below.
+
+### More code snippet examples
+
+Here is a Python example:
+
+```python
+# #popclip
+# { name: Hello Python, icon: hi, after: show-result, interpreter: python3 }
+import os
+print('Hello, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
+```
+
+An alternative way to specify a shell script's interpreter is to put a shebang
+(`#!`) line at the top, in which case, the `interpreter` field is not needed:
+
+```python
+#!/usr/bin/env python3
+# #popclip
+# { name: Hello Python 2, icon: hi, after: show-result }
+import os
+print('Hello again, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
+```
+
+An AppleScript example:
+
+```applescript
+-- # PopClip LaunchBar example
+-- { name: LaunchBar, icon: LB, language: applescript }
+tell application "LaunchBar"
+  set selection to "{popclip text}"
+end tell
+```
+
+## Config snippets
+
+A config snippet is parsed as [YAML 1.2](https://yaml.org/spec/1.2.2/). The
+body of the snippet defines the extension's [config dictionary](./config.md).
+For example:
 
 ```yaml
 #popclip
@@ -20,17 +101,6 @@ icon: UD
 url: https://www.urbandictionary.com/define.php?term=***
 ```
 
-When you select whole block of text above, PopClip will detect the snippet and
-offer an "Install Extension" action.
-
-![](./media/shot-snippet-install-3.png "Installing a snippet.")
-
-## Format
-
-A snippet always begins with `#popclip` (or `# popclip`) and can be up to 5000
-characters long. It is parsed as [YAML 1.2](https://yaml.org/spec/1.2.2/). The
-body of the snippet defines the extension's [config dictionary](./config.md).
-
 ::: tip Commments in snippets
 
 Note that `#` begins a YAML comment. Thus the entire snippet including the
@@ -38,42 +108,7 @@ Note that `#` begins a YAML comment. Thus the entire snippet including the
 
 :::
 
-<!-- ::: tip Writing snippets in JSON
-
-If you prefer, you can write your snippets in JSON syntax. (From PopClip's point
-of view it's still YAML, since JSON is a subset of YAML.)
-
-The following snippet is equivalent to the example above:
-
-```json
-#popclip (JSON example)
-{
-  "name": "Urban Dictionary",
-  "icon": "UD",
-  "url": "https://www.urbandictionary.com/define.php?term=***"
-}
-```
-
-Most of the examples in this guide are written in block-style YAML, but I've
-included JSON syntax here and there too.
-
-::: -->
-
-## Creating snippets
-
-PopClip will display any errors it encounters while trying to load the snippet
-in the PopClip bar itself.
-
-![](./media/shot-snippet-error-3.png "PopClip bar showing error message.")
-
-In the absence of an `identifier` field, the `name` acts as the identifier for
-the extension. Installing a snippet with the same name as an existing snippet
-will replace it.
-
-A snippet can do everything that a [package](./packages) extension can do. The
-only limitation is that it can't refer to any external files.
-
-## More examples
+### More config snippet examples
 
 A [Shortcuts](./shortcut-actions) example:
 
@@ -159,89 +194,28 @@ not use tabs for indenting. YAML does not allow it — use spaces instead.
 
 :::
 
-## Inverted syntax
+## Creating snippets
 
-PopClip also supports an "inside out" snippet syntax, which looks like this:
+PopClip will display any errors it encounters while trying to load the snippet
+in the PopClip bar itself.
 
-```javascript
-// #popclip
-// name: Hello JS
-// icon: Hi!
-// language: javascript
-const greeting = "Hello " + popclip.input.text;
-popclip.showText(greeting);
-```
+![](./media/shot-snippet-error-3.png "PopClip bar showing error message.")
 
-This method, which I call **inverted syntax**, offers several benefits: we get
-code syntax highlighting and autocomplete from our text editor, and we don't
-have to indent the script awkwardly in the YAML.
+In the absence of an `identifier` field, the `name` acts as the identifier for
+the extension. Installing a snippet with the same name as an existing snippet
+will replace it.
 
-The inverted syntax is supported for JavaScript, AppleScript and shell script
-actions.
+A snippet can do everything that a [package](./packages) extension can do. The
+only limitation is that it can't refer to any external files.
 
-When using the inverted syntax, the whole text of the snippet becomes the
-`javascript file`, `module`, `applescript file` or `shell script file` for the
-extension. The config header should be added using the appropriate comment style
-for the source language (see [examples](#inverted-syntax-examples) below).
+## Snippet files
 
-::: info When to use inverted syntax?
-
-Inverted syntax is most useful when the script is multiple lines long, or when
-you want to take advantage of the language syntax highlighting and autocomplete
-features of your text editor.
-
-:::
-
-### Inverted syntax config
-
-When using the inverted syntax, the whole snippet text will be interpreted as if
-it was a file specified in the root of the config, as follows:
-
-| To interpret as...  | Include these fields...                                                                                                                        |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `shell script file` | Specify `interpreter` string (or start the body with a `#!` line).                                                                             |
-| `applescript file`  | Specify `language: applescript`.                                                                                                               |
-| `javascript file`   | Nothing needed: a body under a `//` comment header is TypeScript by default. Specify `language: javascript` to bypass the TypeScript pipeline. |
-| `module`            | Nothing needed: a body that exports is loaded as a module (see [Module detection](./js-modules#module-detection)).                             |
-
-### Inverted syntax examples
-
-Here is a Python example:
-
-```python
-# #popclip
-# { name: Hello Python, icon: hi, after: show-result, interpreter: python3 }
-import os
-print('Hello, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
-```
-
-An alternative way to specify a shell script's interpreter is to put a shebang
-(`#!`) line at the top, in which case, the `interpreter` field is not needed:
-
-```python
-#!/usr/bin/env python3
-# #popclip
-# { name: Hello Python 2, icon: hi, after: show-result }
-import os
-print('Hello again, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
-```
-
-An AppleScript example:
-
-```applescript
--- # PopClip LaunchBar example
--- { name: LaunchBar, icon: LB, language: applescript }
-tell application "LaunchBar"
-  set selection to "{popclip text}"
-end tell
-```
-
-## `.popcliptxt` files
-
-You can save a snippet to a plain text file with a `.popcliptxt` extension. When
-you double-click such a file in Finder, PopClip will load the snippet from the
-file and install it. There is no size limit on the snippet when installed by
-this method.
+You can save a snippet to a plain text file with a `.popcliptxt` extension.
+Files with `.js`, `.ts` and `.yaml` extensions work too. When you open such a
+file — by double-clicking a `.popcliptxt` file, using the Open With menu, or
+dragging the file onto the PopClip menu bar icon — PopClip will load the
+snippet from the file and install it. There is no size limit on the snippet
+when installed by this method.
 
 ## Further examples
 

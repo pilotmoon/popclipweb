@@ -1,8 +1,5 @@
 ---
 outline: deep
-prev:
-  text: JavaScript environment
-  link: /dev/js-environment
 titleTemplate: :title — PopClip Developer
 ---
 
@@ -29,14 +26,12 @@ actions.
 
 ## Example
 
-The following JavaScript snippet defines a complete module-based extension:
+The following snippet defines a complete module-based extension:
 
 ```javascript
 // #popclip
 // name: Module Demo
 // after: show-result
-// language: javascript
-// module: true
 
 // this is only run once, at load time
 const theNumber = String(Math.floor(Math.random() * 100));
@@ -83,7 +78,7 @@ In `Config.js` and `Config.ts` a YAML comment header must be provided defining
 the extension's `name` and any other
 [static-only properties](#static-only-properties). The header is in the same
 format as for a snippet (see
-[Snippets - Inverted syntax](./snippets#inverted-syntax)). No `language` or
+[Code snippets](./snippets#inverted-syntax)). No `language` or
 `module` keys are needed: the file suffix selects the language, and the code's
 exports mark it as a module.
 
@@ -134,7 +129,7 @@ itself, so nothing is restated:
 
 ```typescript
 // #popclip
-// { name: Prefixer, lang: ts, module: true }
+// { name: Prefixer }
 
 // the options array is declared first so its type can be inferred
 const options = [
@@ -262,7 +257,7 @@ function, and it returns an array of action objects.
 
 ```javascript
 // #popclip dynamic example
-// { name: Dynamic Title, entitlements: [dynamic], lang: js, module: true }
+// { name: Dynamic Title, entitlements: [dynamic] }
 defineExtension({
   actions: (input, options, context) => {
     return [
@@ -277,7 +272,7 @@ defineExtension({
 });
 ```
 
-The same code works unchanged in TypeScript (`lang: ts`), where
+As a keyless snippet this loads through the TypeScript pipeline, so
 `defineExtension()` type-checks the population function and the actions it
 returns.
 
@@ -309,7 +304,7 @@ requires the `dynamic` entitlement.
 
 ```typescript
 // #popclip submenu function example
-// { name: Sub Demo, icon: circle filled 3, entitlements: [dynamic], lang: ts, module: true }
+// { name: Sub Demo, icon: circle filled 3, entitlements: [dynamic] }
 defineExtension({
   actions: [
     {
@@ -338,7 +333,7 @@ If the extension defines only a single action, it may be given as the
 
 ```javascript
 // #popclip
-// { name: Single Action, lang: js, module: true}
+// { name: Single Action}
 defineExtension({
   action: {
     code: () => {
@@ -355,7 +350,7 @@ function instead of an object. For example:
 
 ```javascript
 // #popclip
-// { name: Action Function, lang: js, module: true}
+// { name: Action Function}
 defineExtension({
   action: () => {
     popclip.showText("hi mom!");

@@ -277,8 +277,6 @@ the icon for any text string you select. (To see how to install this, see
 // #popclip
 // name: Icon Preview
 // entitlements: [dynamic]
-// language: javascript
-// module: true
 defineExtension({
   actions: () => {
     return [

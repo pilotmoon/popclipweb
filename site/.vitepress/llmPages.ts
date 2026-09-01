@@ -58,28 +58,22 @@ export const llmSections: LlmSection[] = [
           "Extension snippets — plain-text extensions that install directly from selected text",
       },
       {
-        file: "dev/packages.md",
-        title: "Packages",
+        file: "dev/js-actions.md",
+        title: "JavaScript actions",
         description:
-          "Extension packages — the .popclipext folder format, its files and installation",
+          "Actions that run JavaScript code in PopClip's JavaScript environment",
       },
       {
-        file: "dev/config.md",
-        title: "Config",
+        file: "dev/js-modules.md",
+        title: "Module extensions",
         description:
-          "The extension configuration dictionary: formats, top-level properties, options and localization",
+          "Defining a whole extension in JavaScript or TypeScript with defineExtension()",
       },
       {
-        file: "dev/icons.md",
-        title: "Icons",
+        file: "dev/js-environment.md",
+        title: "JavaScript environment",
         description:
-          "Icon specifier strings: text icons, modifiers, Iconify icons, SF Symbols, image files and SVG",
-      },
-      {
-        file: "dev/actions.md",
-        title: "Actions",
-        description:
-          "Properties common to all actions: titles, icons, requirements, before/after steps and submenus",
+          "PopClip's sandboxed JavaScript runtime: globals, modules, network access and utilities",
       },
       {
         file: "dev/url-actions.md",
@@ -104,12 +98,6 @@ export const llmSections: LlmSection[] = [
         description: "Actions that invoke a macOS Shortcut by name",
       },
       {
-        file: "dev/js-actions.md",
-        title: "JavaScript actions",
-        description:
-          "Actions that run JavaScript code in PopClip's JavaScript environment",
-      },
-      {
         file: "dev/applescript-actions.md",
         title: "AppleScript actions",
         description:
@@ -128,16 +116,28 @@ export const llmSections: LlmSection[] = [
           "The context variables PopClip passes to JavaScript, AppleScript and shell scripts",
       },
       {
-        file: "dev/js-environment.md",
-        title: "JavaScript environment",
+        file: "dev/config.md",
+        title: "Config",
         description:
-          "PopClip's sandboxed JavaScript runtime: globals, modules, network access and utilities",
+          "The extension configuration dictionary: formats, top-level properties, options and localization",
       },
       {
-        file: "dev/js-modules.md",
-        title: "Module-based extensions",
+        file: "dev/actions.md",
+        title: "Action properties",
         description:
-          "Defining a whole extension in JavaScript or TypeScript with defineExtension()",
+          "Properties common to all actions: titles, icons, requirements, before/after steps and submenus",
+      },
+      {
+        file: "dev/icons.md",
+        title: "Icons",
+        description:
+          "Icon specifier strings: text icons, modifiers, Iconify icons, SF Symbols, image files and SVG",
+      },
+      {
+        file: "dev/packages.md",
+        title: "Packages",
+        description:
+          "Extension packages — the .popclipext folder format, its files and installation",
       },
       {
         file: "dev/auth.md",

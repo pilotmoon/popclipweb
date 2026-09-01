@@ -118,7 +118,7 @@ extension demonstrates a packaged shell script extension.
 
 ::: info About these examples
 
-The examples are given using the [inverted syntax](./snippets#inverted-syntax).
+The examples are given as [code snippets](./snippets#inverted-syntax).
 
 :::
 

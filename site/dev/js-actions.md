@@ -5,16 +5,20 @@ titleTemplate: :title — PopClip Developer
 
 # JavaScript actions
 
-JavaScript actions run code in PopClip's own
-[JavaScript environment](./js-environment), which gives them access to PopClip's
-internal state and lets them interact with PopClip itself.
+A JavaScript action runs code in PopClip's own
+[JavaScript environment](./js-environment), with access to the selected text
+and to PopClip itself through the global `popclip` object. It is the simplest
+way to run code in PopClip. In a
+[code snippet](./snippets#inverted-syntax), everything after the header is
+the action's code, run when the action is clicked:
 
-::: tip Module-based extensions
-
-JavaScript actions provide a simplified way to run code in PopClip. To access the full power of JavaScript, use a
-[module-based extension](./js-modules).
-
-:::
+```javascript
+// #popclip
+// name: Uppercase
+// icon: square filled AB
+// after: paste-result
+return popclip.input.text.toUpperCase();
+```
 
 ## Properties
 
@@ -92,20 +96,57 @@ throw new Error("Settings error: missing API key");
 
 ## Examples
 
-::: info About these examples
+These examples are all complete [code snippets](./snippets#inverted-syntax) —
+select the whole block to install one.
 
-The examples are given as snippets using the
-[inverted syntax](./snippets#inverted-syntax).
-
-:::
-
-Uppercase the text:
+Paste the selected text, then press Return — two PopClip primitives chained
+with `await`:
 
 ```javascript
-// # popclip
-// name: Uppercase
-// icon: square filled AB
-// after: paste-result
-// language: javascript
-return popclip.input.text.toUpperCase();
+// #popclip
+// name: Paste & Enter
+// icon: symbol:return
+// requirements: [paste]
+await popclip.pasteText(popclip.input.text);
+await popclip.pressKey("return");
 ```
+
+Look up the selected word in the macOS dictionary, then speak the definition
+aloud through the `say` command:
+
+```javascript
+// #popclip
+// name: Speak Definition
+// icon: symbol:character.book.closed
+// entitlements: [script]
+const word = popclip.input.text.trim();
+const definition = util.getDictionaryDefinition(word) ?? "no definition found";
+await popclip.runShellScript("say $definition", {
+  interpreter: "zsh",
+  env: { definition },
+});
+```
+
+Fetch the page at the selected URL and show its title — network access, a
+bundled module, and the `after` step working together:
+
+```javascript
+// #popclip
+// name: Page Title
+// icon: symbol:globe
+// requirements: [url]
+// entitlements: [network]
+// after: show-result
+const axios = require("axios");
+const response = await axios.get(popclip.input.data.urls[0]);
+return String(response.data).match(/<title[^>]*>([^<]*)</i)?.[1] ?? "No title found";
+```
+
+## Growing into a module
+
+A JavaScript action is one script with static config around it. When you want
+code to define more of the extension — several actions, options, titles or
+icons computed at load time — export an extension object with
+`defineExtension({...})` instead. The file is then loaded as a
+[module extension](./js-modules): its top level runs once at load time to
+define the extension, and each action's `code` function runs at click time.

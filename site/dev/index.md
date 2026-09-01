@@ -41,40 +41,55 @@ A PopClip extension can be either a [snippet](./snippets.md) or a
 
 |                 | Snippet                                                           | Package                                                                                            |
 | --------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| What is it?     | Plain text in YAML format.                                        | A folder containing a config file plus other files such as icons, source files, and a readme file. |
+| What is it?     | Plain text: a script with a config comment header, or YAML config alone. | A folder containing a config file plus other files such as icons, source files, and a readme file. |
 | Install method  | PopClip can load it directly from a text selection.               | Double-clicking it will open it in PopClip.                                                        |
 | Distribution    | Can be copied and pasted as text, e.g. on forums, pastebins, etc. | Can be downloaded as a file.                                                                       |
 | Signing         | Not signed.                                                       | Can be signed.                                                                                     |
 | Advantages      | Easy to create and informally share. No need for separate files.  | Easy for end user to install. Allows modular source code with complex functionality.               |
 | Disadvantages   | Limited to what can be done with a single text file.              | More complex to create. Steeper learning curve.                                                    |
-| File extensions | None (direct selection)<br> `.popcliptxt` (text file)             | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
+| File extensions | None (direct selection)<br> `.popcliptxt`, `.js`, `.ts`, `.yaml` (text file) | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
 
-### Types of actions
+### Actions run JavaScript
 
-An extension defines one or more actions. Each action can be one of seven
-types. Three are script types, which run code that you provide:
+An extension defines one or more actions. At heart, an action runs JavaScript
+(or TypeScript) in PopClip's [JavaScript environment](./js-environment.md).
+The simplest complete extension is a few lines of text:
 
-| Action Type                               | Description                            |
-| ----------------------------------------- | -------------------------------------- |
-| [JavaScript](./js-actions.md)             | Run a JavaScript or TypeScript script. |
-| [AppleScript](./applescript-actions.md)   | Run an AppleScript script.             |
-| [Shell Script](./shell-script-actions.md) | Run a shell script.                    |
+```js
+// #popclip
+// name: Say Hi
+popclip.showText("hi mom!");
+```
 
-JavaScript is the recommended script type. JavaScript actions have full access
-to PopClip's [JavaScript environment](./js-environment.md), and a
-[module-based extension](./js-modules.md) can define everything it does in
-JavaScript or TypeScript. Use the AppleScript and Shell Script types only when
-the job can't be done with JavaScript alone.
+That is a [snippet](./snippets.md) defining a
+[JavaScript action](./js-actions.md) — the code runs when the action is
+clicked. From there, a [module extension](./js-modules.md) can define
+everything in code: multiple actions, options, and dynamic behavior, via
+`defineExtension()`.
 
-The other four types are ready-made conveniences for performing common tasks,
-with no code needed:
+### No-code actions
 
-| Action Type                         | Description                                             |
-| ----------------------------------- | ------------------------------------------------------- |
-| [URL](./url-actions.md)             | Open a URL, with the selected text inserted as a query. |
-| [Key Press](./key-press-actions.md) | Press a key combination.                                |
-| [Service](./service-actions)        | Send the selected text to a macOS Service.              |
-| [Shortcut](./shortcut-actions)      | Send the selected text to a macOS Shortcut.             |
+For common tasks, you don't need to write code at all. Four action types are
+ready-made conveniences — declarative wrappers around things that can also be
+done in JavaScript:
+
+| Action Type                         | Description                                             | JavaScript equivalent      |
+| ----------------------------------- | ------------------------------------------------------- | -------------------------- |
+| [URL](./url-actions.md)             | Open a URL, with the selected text inserted as a query. | `popclip.openUrl()`        |
+| [Key Press](./key-press-actions.md) | Press a key combination.                                | `popclip.pressKey()`       |
+| [Service](./service-actions)        | Send the selected text to a macOS Service.              | `popclip.performService()` |
+| [Shortcut](./shortcut-actions)      | Send the selected text to a macOS Shortcut.             | `popclip.runShortcut()`    |
+
+### Classic script actions
+
+Two further action types run a script that you provide in another language.
+They predate the JavaScript environment, which can now do both jobs itself —
+but they remain fully supported, and are handy for quick one-liners:
+
+| Action Type                               | Description                | JavaScript equivalent      |
+| ----------------------------------------- | -------------------------- | -------------------------- |
+| [AppleScript](./applescript-actions.md)   | Run an AppleScript script. | `popclip.runAppleScript()` |
+| [Shell Script](./shell-script-actions.md) | Run a shell script.        | `popclip.runShellScript()` |
 
 ## Extension signing
 

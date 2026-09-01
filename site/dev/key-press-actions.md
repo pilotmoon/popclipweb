@@ -8,6 +8,14 @@ outline: deep
 In a Key Press action, PopClip will simulate a key press, or sequence of
 presses, as if it was performed by the user.
 
+::: tip Pressing a key from JavaScript
+
+You can also use
+[`popclip.pressKey()`](/dev/api/interfaces/PopClip.html#presskey)
+within a [JavaScript action](./js-actions).
+
+:::
+
 ## Properties
 
 A Key Press action is defined by the presence of a `key combo` or `key combos`

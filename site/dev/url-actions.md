@@ -12,6 +12,14 @@ the current app to open the URL.
 
 In all other cases, PopClip will ask macOS to open the URL in the default app app for its URL scheme.
 
+::: tip Opening a URL from JavaScript
+
+You can also use
+[`popclip.openUrl()`](/dev/api/interfaces/PopClip.html#openurl)
+within a [JavaScript action](./js-actions).
+
+:::
+
 ## Properties
 
 An Open URL action is defined by the presence of a `url` field, plus additional

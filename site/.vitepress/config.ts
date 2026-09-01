@@ -196,39 +196,15 @@ export default defineConfig({
           items: [
             { text: "Introduction", link: "/dev/" },
             { text: "Snippets", link: "/dev/snippets" },
-            { text: "Packages", link: "/dev/packages" },
-
             {
-              text: "Config",
-              link: "/dev/config",
-            },
-            { text: "Icons", link: "/dev/icons" },
-            {
-              text: "Actions",
-              link: "/dev/actions",
+              text: "JavaScript",
               items: [
-                { text: "Open URL actions", link: "/dev/url-actions" },
-                { text: "Key Press actions", link: "/dev/key-press-actions" },
-                { text: "Service actions", link: "/dev/service-actions" },
-                { text: "Shortcut actions", link: "/dev/shortcut-actions" },
                 { text: "JavaScript actions", link: "/dev/js-actions" },
+                { text: "Module extensions", link: "/dev/js-modules" },
                 {
-                  text: "AppleScript actions",
-                  link: "/dev/applescript-actions",
+                  text: "JavaScript environment",
+                  link: "/dev/js-environment",
                 },
-                {
-                  text: "Shell Script actions",
-                  link: "/dev/shell-script-actions",
-                },
-              ],
-            },
-
-            { text: "Script variables", link: "/dev/script-variables" },
-
-            {
-              text: "JavaScript environment",
-              link: "/dev/js-environment",
-              items: [
                 {
                   text: "API reference",
                   link: "/dev/api/",
@@ -242,9 +218,37 @@ export default defineConfig({
               ],
             },
             {
-              text: "Module-based extensions",
-              link: "/dev/js-modules",
+              text: "No-code actions",
+              items: [
+                { text: "Open URL", link: "/dev/url-actions" },
+                { text: "Key Press", link: "/dev/key-press-actions" },
+                { text: "Service", link: "/dev/service-actions" },
+                { text: "Shortcut", link: "/dev/shortcut-actions" },
+              ],
             },
+            {
+              text: "Classic script actions",
+              items: [
+                {
+                  text: "AppleScript",
+                  link: "/dev/applescript-actions",
+                },
+                {
+                  text: "Shell Script",
+                  link: "/dev/shell-script-actions",
+                },
+                { text: "Script variables", link: "/dev/script-variables" },
+              ],
+            },
+            {
+              text: "Config reference",
+              items: [
+                { text: "Config", link: "/dev/config" },
+                { text: "Action properties", link: "/dev/actions" },
+              ],
+            },
+            { text: "Icons", link: "/dev/icons" },
+            { text: "Packages", link: "/dev/packages" },
             { text: "Authentication", link: "/dev/auth" },
             { text: "Changelog", link: "/dev/changelog" },
           ],

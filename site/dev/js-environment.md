@@ -1,8 +1,5 @@
 ---
 outline: deep
-next:
-  text: Module-based extensions
-  link: /dev/js-modules
 titleTemplate: :title — PopClip Developer
 ---
 
@@ -275,7 +272,6 @@ function to complete. For example:
 // # popclip setTimeout example
 // name: setTimeout Test
 // after: show-result
-// language: javascript
 setTimeout(() => {
   return "bar";
 }, 1000); // 1 second delay
