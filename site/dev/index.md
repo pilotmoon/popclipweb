@@ -24,30 +24,7 @@ will be happy to help you there.
 
 :::
 
-::: info Markdown for LLMs
-
-Every page here has a plain Markdown twin — add `.md` to its URL. The whole
-reference is in one file at [/dev/all.md](/dev/all.md); see also
-[/llms.txt](/llms.txt).
-
-:::
-
 ## Extensions Overview
-
-### Snippets and Packages
-
-A PopClip extension can be either a [snippet](./snippets.md) or a
-[package](./packages.md). The following table summarizes the differences:
-
-|                 | Snippet                                                           | Package                                                                                            |
-| --------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| What is it?     | Plain text: a script with a config comment header, or YAML config alone. | A folder containing a config file plus other files such as icons, source files, and a readme file. |
-| Install method  | PopClip can load it directly from a text selection.               | Double-clicking it will open it in PopClip.                                                        |
-| Distribution    | Can be copied and pasted as text, e.g. on forums, pastebins, etc. | Can be downloaded as a file.                                                                       |
-| Signing         | Not signed.                                                       | Can be signed.                                                                                     |
-| Advantages      | Easy to create and informally share. No need for separate files.  | Easy for end user to install. Allows modular source code with complex functionality.               |
-| Disadvantages   | Limited to what can be done with a single text file.              | More complex to create. Steeper learning curve.                                                    |
-| File extensions | None (direct selection)<br> `.popcliptxt`, `.js`, `.ts`, `.yaml` (text file) | `.popclipext` (folder)<br> `.popclipextz` (zipped folder)                                          |
 
 ### Actions run JavaScript
 
@@ -58,12 +35,11 @@ The simplest complete extension is a few lines of text:
 ```js
 // #popclip
 // name: Say Hi
-popclip.showText("hi mom!");
+popclip.showText("hi!");
 ```
 
 That is a [snippet](./snippets.md) defining a
-[JavaScript action](./js-actions.md) — the code runs when the action is
-clicked. From there, a [module extension](./js-modules.md) can define
+[JavaScript action](./js-actions.md). For more advanced functionality, a [module extension](./js-modules.md) can define
 everything in code: multiple actions, options, and dynamic behavior, via
 `defineExtension()`.
 
@@ -82,55 +58,70 @@ done in JavaScript:
 
 ### Classic script actions
 
-Two further action types run a script that you provide in another language.
-They predate the JavaScript environment, which can now do both jobs itself —
-but they remain fully supported, and are handy for quick one-liners:
+Two further action types run a script that you provide to be run outside PopClip.
+They predate the JavaScript environment, but they remain supported.
 
 | Action Type                               | Description                | JavaScript equivalent      |
 | ----------------------------------------- | -------------------------- | -------------------------- |
 | [AppleScript](./applescript-actions.md)   | Run an AppleScript script. | `popclip.runAppleScript()` |
 | [Shell Script](./shell-script-actions.md) | Run a shell script.        | `popclip.runShellScript()` |
 
-## Extension signing
+## Snippets and Packages
 
-Please be aware that PopClip extensions can contain arbitrary executable code.
-Be careful about the extensions you create, and be wary about loading extensions
-you get from elsewhere.
+A PopClip extension can be either a [snippet](./snippets.md) or a
+[package](./packages.md). The following table summarizes the differences:
 
-PopClip extension packages published in the [directory](/extensions/) are
-digitally signed. PopClip will install signed extensions without showing any
+|                 | Snippet                                                                    | Package                                                                                            |
+| --------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| What is it?     | Plain text: a script with a config comment header, or YAML config alone.   | A folder containing a config file plus other files such as icons, source files, and a readme file. |
+| Install method  | PopClip can load it directly from a text selection.                        | Double-clicking it will open it in PopClip.                                                        |
+| Distribution    | Can be copied and pasted as text, e.g. on forums, pastebins, etc.          | Can be downloaded as a file.                                                                       |
+| Signing         | Not signed.                                                                | Can be signed.                                                                                     |
+| Advantages      | Easy to create and informally share. No need for separate files.           | Easy for end user to install. Allows modular source code with complex functionality.               |
+| Disadvantages   | Limited to what can be done with a single text file.                       | More complex to create. Steeper learning curve.                                                    |
+| File extensions | None (direct selection); `.popcliptxt`, `.js`, `.ts`, `.yaml` (text files) | `.popclipext`&nbsp;(folder); `.popclipextz`&nbsp;(zipped folder)                                   |
+
+### Package signing
+
+Packages published in the [directory](/extensions/) are
+digitally signed. Signing tells PopClip it can trust the extension. PopClip will install signed extensions without showing any
 warning to the user.
 
-If you create your own extension, it will be unsigned. If an unsigned extension
-contains Shell Script actions or AppleScript actions, or has entitlements,
+If you create your own extension — whether snippet or package — it will be unsigned.
+
+If an unsigned extension contains Shell Script actions or AppleScript actions, or has entitlements,
 PopClip will display a warning dialog when you try to install it:
 
 ![Example unsigned warning.](../guide/media/shot-unsigned-warning.png#pref "Unsigned extension warning.")
 
-## Development environment
+If an unsigned extension is purely JavaScript (with no entitlements)
+or contains only the [no-code action types](#no-code-actions), PopClip installs the extension without showing the warning.
 
-You can create extensions using any text editor. The macOS-included app TextEdit
-will suffice for simple snippets, but otherwise, I recommend using a dedicated
-code editor such as [BBEdit](https://www.barebones.com/products/bbedit/), [Nova](https://nova.app/),
-[Sublime Text](https://www.sublimetext.com/), [VS Code](https://code.visualstudio.com/), or [Zed](https://zed.dev/).
+## Development environment
 
 ### Type definitions
 
 The complete TypeScript definitions for PopClip's JavaScript API are published
-as a single file:
-
-[**popclip.d.ts**](/dev/popclip.d.ts)
+as a single file, [popclip.d.ts](/dev/popclip.d.ts). The same definitions are available as the
+[`@popclip/types`](https://www.npmjs.com/package/@popclip/types) npm package,
+and as browsable HTML in the
+[JavaScript API Reference](/dev/api/).
 
 As well as the `popclip` object and other globals available to scripts, this
-file describes the extension config format itself — see the `ActionProperties`,
-`Extension`, `Option` and `Requirement` types. Point your editor at it for
-autocomplete and type checking, or give it to an AI coding assistant as a
-complete reference for writing extensions.
+definitions file describes the extension config format itself.
 
-The same definitions are available as the
-[`@popclip/types`](https://www.npmjs.com/package/@popclip/types) npm package,
-and browsable as HTML in the
-[JavaScript API Reference](/dev/api/).
+To point your editor at the definitions, for autocomplete and type checking:
+
+1. Install the package: `npm install --dev @popclip/types`
+2. Configure `tsconfig.json`:
+   ```json
+   compilerOptions: {
+     // ...
+     types: ["@popclip/types"],
+   }
+   ```
+
+For more details, see [TypeScript support](/dev/js-environment#typescript-support).
 
 ### Turn off unsigned warning
 
@@ -140,8 +131,7 @@ restart PopClip:
 
 `defaults write com.pilotmoon.popclip LoadUnsignedExtensions -bool YES`
 
-And if you are working on fixing an extension with the `com.pilotmoon.`
-identifier prefix:
+And if you are working on an extension with the `com.pilotmoon.` identifier prefix:
 
 `defaults write com.pilotmoon.popclip AllowUnsignedReservedPrefixes -bool YES`
 

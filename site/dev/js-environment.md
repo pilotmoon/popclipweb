@@ -5,7 +5,7 @@ titleTemplate: :title — PopClip Developer
 
 # JavaScript environment
 
-JavaScript actions and module-based extensions run inside PopClip's JavaScript
+JavaScript actions and module extensions run inside PopClip's JavaScript
 environment. This environment provides provides properties and functions that
 let your scripts interact with PopClip. Scripts run in a secure JavaScript
 sandbox that cannot access the filesystem.
@@ -382,10 +382,10 @@ autocomplete and type-checking in TypeScript-aware editors.
 
 Use an NPM-compatible JavaScript package manager to install both `typescript`
 itself and the types package in the directory where you are writing your
-extension code. I recommend [Bun](https://bun.sh/):
+extension code.:
 
 ```bash
-bun install --dev typescript @popclip/types
+npm install --dev typescript @popclip/types
 ```
 
 And then, in your `tsconfig.json` file, add an explicit reference to the types:
@@ -402,7 +402,7 @@ Once this is done, you should get autocomplete and type-checking in your editor
 and TypeScript's `tsc` will check your code for type errors:
 
 ```bash
-bun run tsc --noEmit
+npm run tsc --noEmit
 ```
 
 ## Test Harness

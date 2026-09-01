@@ -25,7 +25,7 @@ sign-in — use the `auth` function.
 
 ## The `auth` function
 
-A [module-based extension](./js-modules) can define an
+A [module extension](./js-modules) can define an
 [`auth` function](/dev/api/interfaces/Extension.html#auth). When it does,
 PopClip shows a **Sign in** button in the action's settings UI, and calls the
 function when the user clicks it:

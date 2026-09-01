@@ -3,9 +3,9 @@ outline: deep
 titleTemplate: :title — PopClip Developer
 ---
 
-# Module-based extensions
+# Module extensions
 
-Module-based extensions let you use the full power of JavaScript or TypeScript
+Module extensions let you use the full power of JavaScript or TypeScript
 to define your PopClip extension. This allows you use code to construct
 properties like `options` at load time, and to define `actions` dynamically, for
 example to generate titles or icons in response to the input text.
@@ -26,7 +26,7 @@ actions.
 
 ## Example
 
-The following snippet defines a complete module-based extension:
+The following snippet defines a complete module extension:
 
 ```javascript
 // #popclip

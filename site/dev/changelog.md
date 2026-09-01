@@ -444,7 +444,7 @@ There were no changes to the extension programming interface in this release.
 ### Added
 
 - TypeScript can now be used as the source language for JavaScript actions and
-  module-based extensions. This is done by specifying a file with the `.ts`
+  module extensions. This is done by specifying a file with the `.ts`
   extension in the `javascript file` or `module` field. For snippets, specify
   `typescript` in the `language` field.
 - ~~PopClip ships with a TypeScript type definitions file, `popclip.d.ts`,
@@ -484,7 +484,7 @@ There were no changes to the extension programming interface in this release.
 - The previous single README was split into multiple pages.
 - All parts revised and updated; more examples added.
 - Added brand new documentation for
-  [Module-based extensions](https://www.popclip.app/dev/js-modules).
+  [Module extensions](https://www.popclip.app/dev/js-modules).
 
 ## PopClip 2023.7 (4151)
 

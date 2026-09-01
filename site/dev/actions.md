@@ -307,7 +307,7 @@ config do not act as fallback values for the actions in a `submenu`.
 ### Example: JavaScript module version
 
 Here is the same extension expressed as a
-[module-based](./js-modules) snippet, in JavaScript. In a module, there is no
+[module](./js-modules) snippet, in JavaScript. In a module, there is no
 need for action identifiers — each action supplies its own `code` function
 inline:
 

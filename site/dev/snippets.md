@@ -46,12 +46,12 @@ JavaScript, AppleScript and shell script actions. The whole text of the snippet 
 `module`, `applescript file` or `shell script file` for the extension, as
 follows:
 
-| To interpret as...  | Include these fields...                                                                                                                        |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `javascript file`   | Nothing needed: a body under a `//` comment header is TypeScript by default. Specify `language: javascript` to bypass the TypeScript pipeline. |
-| `module`            | Nothing needed: a body that exports is loaded as a module (see [Module detection](./js-modules#module-detection)).                             |
-| `shell script file` | Specify `interpreter` string (or start the body with a `#!` line).                                                                             |
-| `applescript file`  | Specify `language: applescript`.                                                                                                               |
+| To interpret as...  | Include these fields...                                                                                                                         |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `javascript file`   | Nothing needed: a body under a `//` comment header is TypeScript by default. Specify `language: javascript` to bypass TypeScript transpilation. |
+| `module`            | Nothing needed: a body that exports is loaded as a module (see [Module detection](./js-modules#module-detection)).                              |
+| `shell script file` | Specify `interpreter` string (or start the file with a `#!` line).                                                                              |
+| `applescript file`  | Specify `language: applescript`.                                                                                                                |
 
 The config header should be added using the appropriate comment style for the
 source language, as in the examples below.
