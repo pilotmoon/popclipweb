@@ -103,7 +103,7 @@ the call is checked and autocompleted in your editor, with no type
 annotations needed anywhere. This is the form we use for our own extensions.
 
 The exported property names and types are the same as defined in
-[Config](./config), with the exception of `actions` which has special handling —
+[Top-level properties](./top-level-properties), with the exception of `actions` which has special handling —
 see [Module actions](#module-actions).
 
 #### Other export styles

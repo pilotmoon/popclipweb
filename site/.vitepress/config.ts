@@ -243,8 +243,13 @@ export default defineConfig({
             {
               text: "Config reference",
               items: [
-                { text: "Config", link: "/dev/config" },
+                { text: "Config format", link: "/dev/config" },
+                {
+                  text: "Top-level properties",
+                  link: "/dev/top-level-properties",
+                },
                 { text: "Action properties", link: "/dev/actions" },
+                { text: "Options", link: "/dev/options" },
               ],
             },
             { text: "Icons", link: "/dev/icons" },

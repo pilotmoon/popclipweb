@@ -117,15 +117,27 @@ export const llmSections: LlmSection[] = [
       },
       {
         file: "dev/config.md",
-        title: "Config",
+        title: "Config format",
         description:
-          "The extension configuration dictionary: formats, top-level properties, options and localization",
+          "The config dictionary's format: key naming styles, localized strings, null values and key mapping",
+      },
+      {
+        file: "dev/top-level-properties.md",
+        title: "Top-level properties",
+        description:
+          "The top-level config properties of an extension, including the identifier field",
       },
       {
         file: "dev/actions.md",
         title: "Action properties",
         description:
           "Properties common to all actions: titles, icons, requirements, before/after steps and submenus",
+      },
+      {
+        file: "dev/options.md",
+        title: "Options",
+        description:
+          "User-settable extension options: option properties and option types",
       },
       {
         file: "dev/icons.md",

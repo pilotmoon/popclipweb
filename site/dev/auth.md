@@ -16,7 +16,7 @@ signing in to services and storing secrets.
 ## API key authentication
 
 If the service just needs an API key that the user can obtain and paste in,
-you don't need any special machinery. Define an [option](./config#the-options-array)
+you don't need any special machinery. Define an [option](./options)
 of type `secret`: it appears as a concealed text field, and PopClip stores
 the value in the user's keychain.
 
@@ -210,10 +210,10 @@ here:
 
 ## Related config keys
 
-- [`auth service label`](./config#top-level-properties) — a label for the
+- [`auth service label`](./top-level-properties) — a label for the
   service, used in prompts such as "Sign in to your [label] account".
   Defaults to the extension's name.
-- [`auth keychain`](./config#top-level-properties) — which keychain the
+- [`auth keychain`](./top-level-properties) — which keychain the
   sign-in secret goes in: `sync` (the default) shares one sign-in across the
   user's devices via iCloud Keychain; `local` keeps it on the Mac where the
   user signed in, so each device signs in separately. Declare `local` where
