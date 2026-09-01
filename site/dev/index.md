@@ -26,7 +26,7 @@ will be happy to help you there.
 
 ## Extensions Overview
 
-### Actions run JavaScript
+### Extensions run JavaScript
 
 An extension defines one or more actions. At heart, an action runs JavaScript
 (or TypeScript) in PopClip's [JavaScript environment](./js-environment.md).
