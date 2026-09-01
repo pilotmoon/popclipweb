@@ -33,6 +33,15 @@ export const NEW_WINDOW_DAYS = 21;
 // (mp4 only, by decision: gifs are excluded even where one exists.)
 export const FEATURED_RANK_FRACTION = 0.75;
 
+// the box works through that pool one extension a day, in laps of this
+// many days: each lap draws a fresh order and marches forward through
+// it, one place a day. a lap shorter than the pool means some members
+// sit out -- a different set each lap -- and a lap longer than the pool
+// means some get two days running, so keep this near the pool size and
+// err on the short side. (the pool is currently a few dozen; the
+// eligible count is worth a look before changing this.)
+export const FEATURED_LAP_DAYS = 30;
+
 // demo aspect ratios vary (the house format is 2:1; a few are ultra-
 // wide strips). the Featured box admits width/height within this range
 export const FEATURED_MIN_ASPECT = 1.5;

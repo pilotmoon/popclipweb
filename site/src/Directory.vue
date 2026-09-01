@@ -12,6 +12,7 @@ import { useDebounceFn } from "@vueuse/core";
 
 import {
   DEFAULT_CATEGORY_LIMIT,
+  FEATURED_LAP_DAYS,
   FEATURED_MAX_ASPECT,
   FEATURED_MIN_ASPECT,
   FEATURED_RANK_FRACTION,
@@ -101,12 +102,22 @@ function isNewlyListed(e: ExtInfo & { firstListed?: unknown }) {
 
 // the Featured box: one extension a day from the pool of listed
 // extensions with an mp4 demo of a box-friendly aspect ratio, in the
-// top fraction of the ranking. a
-// deterministic daily ROUND-ROBIN rather than a random draw, so every
-// eligible extension gets its turn (random would repeat and skip); the
-// pool is sorted by identifier so the sequence is stable as it changes.
-// seeded from the build date like the serendipity picks, so server and
-// client agree.
+// top fraction of the ranking.
+//
+// the pool is not stable: the rank cutoff moves whenever ANYTHING is
+// published, and ranks shift daily, so members join and leave it for
+// reasons that have nothing to do with demos. so the day's position is
+// held as a fraction of a fixed-length lap and only then turned into an
+// index -- a pool that gains or loses a member then moves the pick by
+// at most one place, forwards or back. (indexing the pool directly, as
+// `dayIndex % pool.length`, instead re-mapped the entire schedule on
+// every such change, dayIndex being some 20,000: the rotation jumped to
+// an unrelated point in the order, as often as not backwards.)
+//
+// each lap draws its own order, seeded by the lap number, so that a
+// pool larger than the lap sits a different set out each time rather
+// than the same members forever. seeded from the build date like the
+// serendipity picks, so server and client agree.
 const featured = computed<ExtInfo | null>(() => {
   const listed = [...allMap.values()].filter((e) => !e.unlisted);
   const rankedCount = listed.filter((e) => e.popularity).length;
@@ -121,11 +132,21 @@ const featured = computed<ExtInfo | null>(() => {
         e.demoAspect <= FEATURED_MAX_ASPECT &&
         e.popularity != null &&
         e.popularity.rank <= cutoff,
-    )
-    .sort((a, b) => a.identifier.localeCompare(b.identifier));
+    );
   if (pool.length === 0) return null;
   const dayIndex = Math.floor(Date.parse(directoryData.day) / 86_400_000);
-  return pool[dayIndex % pool.length];
+  const lap = Math.floor(dayIndex / FEATURED_LAP_DAYS);
+  const dayInLap = dayIndex - lap * FEATURED_LAP_DAYS;
+  // this lap's running order: a stable shuffle, so that a member
+  // joining or leaving inserts or removes itself without disturbing
+  // where everyone else stands
+  const order = pool
+    .map((e) => ({ e, key: seededRandom(`featured:${lap}:${e.identifier}`)() }))
+    .sort(
+      (a, b) => a.key - b.key || a.e.identifier.localeCompare(b.e.identifier),
+    )
+    .map(({ e }) => e);
+  return order[Math.floor((dayInLap * order.length) / FEATURED_LAP_DAYS)];
 });
 
 // define the arrangements
