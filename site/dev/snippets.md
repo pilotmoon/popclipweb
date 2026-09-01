@@ -81,7 +81,7 @@ A [Shortcuts](./shortcut-actions) example:
 # popclip shortcuts example
 name: Run My Shortcut
 icon: symbol:moon.stars # Apple SF Symbols
-macos version: '12.0' # shortcuts only work on Monterey and above!
+macos version: "12.0" # shortcuts only work on Monterey and above!
 shortcut name: My Shortcut Name
 ```
 
@@ -104,7 +104,7 @@ key combo: command option J
 An [shell script](./shell-script-actions) example:
 
 ```yaml
-#popclip shellscript example  
+#popclip shellscript example
 name: Say
 interpreter: zsh
 shell script: say -v Daniel $POPCLIP_TEXT
@@ -119,12 +119,12 @@ A [JavaScript](./js-actions) example, including multiple actions:
 name: Markdown Formatting
 requirements: [text, paste]
 actions:
-- title: Markdown Bold # note: actions have a `title`, not a `name`
-  icon: circle filled B
-  javascript: popclip.pasteText('**' + popclip.input.text + '**')
-- title: Markdown Italic
-  icon: circle filled I
-  javascript: popclip.pasteText('*' + popclip.input.text + '*')
+  - title: Markdown Bold # note: actions have a `title`, not a `name`
+    icon: circle filled B
+    javascript: popclip.pasteText('**' + popclip.input.text + '**')
+  - title: Markdown Italic
+    icon: circle filled I
+    javascript: popclip.pasteText('*' + popclip.input.text + '*')
 ```
 
 ```json
@@ -197,12 +197,12 @@ features of your text editor.
 When using the inverted syntax, the whole snippet text will be interpreted as if
 it was a file specified in the root of the config, as follows:
 
-| To intepret as...   | Include these fields...                                                           |
-| ------------------- | --------------------------------------------------------------------------------- |
-| `shell script file` | Specify `interpreter` string.                                                     |
-| `applescript file`  | Specify `language: applescript`.                                                  |
-| `javascript file`   | Specify `language: javascript` or `language: typescript` and omit `module` field. |
-| `module`            | Specify `language: javascript` or `language: typescript` with `module: true`.<br> |
+| To interpret as...  | Include these fields...                                                                                                                        |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shell script file` | Specify `interpreter` string (or start the body with a `#!` line).                                                                             |
+| `applescript file`  | Specify `language: applescript`.                                                                                                               |
+| `javascript file`   | Nothing needed: a body under a `//` comment header is TypeScript by default. Specify `language: javascript` to bypass the TypeScript pipeline. |
+| `module`            | Nothing needed: a body that exports is loaded as a module (see [Module detection](./js-modules#module-detection)).                             |
 
 ### Inverted syntax examples
 

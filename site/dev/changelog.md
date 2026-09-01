@@ -97,6 +97,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   option whose stored value carries over to this one if its
   value is a non-empty string. Useful with `allow other` where a multiple
   option with separate free text override was used by a previous extension version.
+- Snippets: the `language` and `module` header keys are now optional for
+  JavaScript and TypeScript. A code body under a `//` comment header is
+  treated as TypeScript by default, and PopClip
+  [detects](/dev/js-modules#module-detection) that the the code is a module
+  if it uses ES module `export` syntax, a `defineExtension()`
+  call, or a reference to `module` or `exports`. A complete module snippet is
+  now just:
+  ```js
+  // #popclip
+  // name: Minimal
+  defineExtension({ action: () => popclip.showText("hi mom!") });
+  ```
+  Use `language: javascript` to bypass the TypeScript pipeline, and
+  `module: false` (or `true`) to override the module detection. Named ES
+  module exports (`export const actions = ...`) are supported as an
+  alternative to a default export.
+- Module detection also applies to `Config.js`/`Config.ts` files in packages,
+  and to `.js`/`.ts` files opened as snippets. For a real file, the suffix
+  determines the language: `.js` files are plain JavaScript (never
+  transpiled), `.ts` files go through the TypeScript pipeline. The TypeScript
+  default applies only to nameless text such as a selected snippet or `.popcliptxt` body.
 
 ### Changed
 
@@ -104,6 +125,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `script` entitlement now shows the install confirmation. Previously,
   a JavaScript module extension could declare `script` yet install without
   confirmation, while the equivalent static shell script config prompted.
+- A module that mixes a default export with named exports is now a load
+  error. Previously, the named exports were silently ignored.
 
 ## Version 2026.8 (6159)
 

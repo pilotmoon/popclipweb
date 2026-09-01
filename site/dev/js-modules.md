@@ -13,11 +13,12 @@ to define your PopClip extension. This allows you use code to construct
 properties like `options` at load time, and to define `actions` dynamically, for
 example to generate titles or icons in response to the input text.
 
-When you provide a config file called `Config.js` or `Config.ts`, PopClip treats
-this as a JavaScript or TypeScript module and looks for the extension's
-properties in the exported object, after first loading static properties from
-YAML in a comment header. The recommended way to define the exported object is
-to call [`defineExtension()`](#module-format) with it.
+If the extension's JS code exports anything — such as via [`defineExtension()`](#module-format) or `export ...` —
+PopClip loads it as a module and looks for extension properties in the
+exported object, after first loading static properties from YAML in the comment header.
+(A file that exports nothing is
+instead treated as a simple (non-module) JavaScript action, run at
+click time — see [JavaScript actions](./js-actions).)
 
 All properties exported by the module will be merged into the extension's
 config, overriding any static properties with the same name (except for the
@@ -25,12 +26,6 @@ config, overriding any static properties with the same name (except for the
 
 The module can also define a population function to dynamically populate the
 actions.
-
-::: info Snippets as modules
-
-You can also define a module in a snippet by setting `module: true`.
-
-:::
 
 ## Example
 
@@ -88,9 +83,18 @@ In `Config.js` and `Config.ts` a YAML comment header must be provided defining
 the extension's `name` and any other
 [static-only properties](#static-only-properties). The header is in the same
 format as for a snippet (see
-[Snippets - Inverted syntax](./snippets#inverted-syntax)) except that you do not
-specify `language` or `module` in the header. The file is automatically loaded
-as a module.
+[Snippets - Inverted syntax](./snippets#inverted-syntax)). No `language` or
+`module` keys are needed: the file suffix selects the language, and the code's
+exports mark it as a module.
+
+### Module detection
+
+PopClip loads a JavaScript or TypeScript file (or snippet body) as a module
+when the code contains ES module `export` syntax, a call to
+`defineExtension()` or `define()`, or a reference to `module` or `exports`.
+Comments and strings don't count, and top-level `import` alone does not make a
+module — an action's code may import libraries too. Set `module: true` or
+`module: false` in the header to override the detection.
 
 ### Module format
 
@@ -117,7 +121,9 @@ individual properties like `exports.foo = ...`. TypeScript files can
 additionally use
 [ES Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html#es-module-syntax)
 syntax such as `export const action = ...`, which is transpiled to CommonJS
-under the hood. (JavaScript files may not use ES Modules syntax.)
+under the hood. (JavaScript files may not use ES Modules syntax.) Export
+either a single default object (`export default {...}`) or named members —
+mixing both is a load error.
 
 #### Typed options
 
