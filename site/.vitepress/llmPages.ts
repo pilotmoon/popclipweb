@@ -119,7 +119,7 @@ export const llmSections: LlmSection[] = [
         file: "dev/config.md",
         title: "Config format",
         description:
-          "The config dictionary's format: key naming styles, localized strings, null values and key mapping",
+          "The config dictionary's format: YAML/JSON/plist, key naming styles, localized strings and key mapping",
       },
       {
         file: "dev/top-level-properties.md",

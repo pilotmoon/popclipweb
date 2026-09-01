@@ -77,10 +77,8 @@ looking in the root of the package directory for a file with base name `Config`
 
 ::: info Historical note
 
-Plist was the original format for PopClip extensions, and many of the older
-extensions in <AaLink href="https://github.com/pilotmoon/PopClip-Extensions" />
-are in Plist format. I recommend avoiding Plist for new extensions, as it is
-verbose and harder to read and edit than JSON or YAML.
+Plist was the original format for PopClip extensions. It is not recommended
+for new extensions — see [Plist](./config#plist).
 
 :::
 
