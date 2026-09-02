@@ -47,6 +47,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   defineExtension({ action: () => popclip.showText("hi friends!") });
   ```
 
+- JavaScript: `import` and `export` statements now work in plain JavaScript
+  code, as they already did in TypeScript. This applies everywhere JavaScript
+  runs: `.js` files, snippets and inline `javascript` keys.
+
 - JavaScript: new
   [popclip.runShellScript()](/dev/api/interfaces/PopClip.html#runshellscript)
   and
