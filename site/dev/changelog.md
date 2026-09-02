@@ -25,34 +25,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Snippets: the `language` key is now optional. A code body under a `//` comment header is treated as TypeScript by default:
+
+  ```js
+  // #popclip
+  // name: Minimal JS/TS Snippet
+  popclip.showText("hi friends!");
+  ```
+
+  Likewise, code with a `--` comment header is AppleScript by default. For real files (`.js`/`.ts` files in packages or opened as snippets) the suffix still determines the language.
+
+- Snippets: `module: true` is no longer required. PopClip now
+  [detects](/dev/js-modules#module-detection) that the code is a module
+  if it uses `export` syntax, a `defineExtension()`
+  call, or a reference to `module` or `exports`. A complete module snippet is
+  now just:
+
+  ```js
+  // #popclip
+  // name: Minimal Module Snippet
+  defineExtension({ action: () => popclip.showText("hi friends!") });
+  ```
+
 - JavaScript: new
   [popclip.runShellScript()](/dev/api/interfaces/PopClip.html#runshellscript)
   and
   [popclip.runShellScriptFile()](/dev/api/interfaces/PopClip.html#runshellscriptfile)
-  methods run a shell script from a JavaScript action, with the `script`
-  entitlement. Set the interpreter, extra
-  environment variables, stdin and positional
-  arguments; the result is `{ stdout, stderr, status }`.
+  methods, for running a script with the `script` entitlement.
+  Set the interpreter, environment variables, a prefix line, stdin and positional arguments.
+  ```js
+  const { stdout } = await popclip.runShellScript("print(2 ** 100)", {
+    interpreter: "python3",
+  });
+  ```
+- JavaScript: a new global template function `$` — the
+  [shell tag](/dev/api/interfaces/ShellTag.html), a convenience shorthand for running shell commands from
+  JavaScript. It runs the template text with `/bin/zsh` in strict mode (`set -euo pipefail`), and
+  interpolated values are shell-escaped.
+
   ```js
   // #popclip speak definition example
   // name: Speak Definition
-  // language: javascript
   // entitlements: [script]
   const word = popclip.input.text.trim();
   const definition = util.getDictionaryDefinition(word) ?? "no definition";
-  await popclip.runShellScript("say $definition", {
-    interpreter: "zsh",
-    env: { definition },
-  });
+  await $`say ${definition}`;
   ```
+
 - When running shell scripts, a new
   [`shell mode`](/dev/shell-script-actions#shell-mode)/`shellMode` setting controls how the
   script run is executed: `login` (via the user's shell as a
   login shell), `nonlogin`, or `none` (no shell at all — direct execution).
-  For legacy compatibility, Shell Script actions default to `login`, but the new JavaScript methods default to `none`.
-- JavaScript: new
-  [util.shellEscape()](/dev/api/interfaces/Util.html#shellescape) method
-  escapes text for literal inclusion in a POSIX shell command line.
+  For legacy compatibility, classic Shell Script actions default to `login`, but the new JavaScript methods default to `none`.
 - JavaScript: new
   [popclip.performService()](/dev/api/interfaces/PopClip.html#performservice)
   method performs a macOS Service by name, with string or content-dictionary
@@ -90,34 +114,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   option whose stored value carries over to this one if its
   value is a non-empty string. Useful with `allow other` where a multiple
   option with separate free text override was used by a previous extension version.
-- Snippets: the `language` and `module` header keys are now optional for
-  JavaScript and TypeScript. A code body under a `//` comment header is
-  treated as TypeScript by default, and PopClip
-  [detects](/dev/js-modules#module-detection) that the the code is a module
-  if it uses ES module `export` syntax, a `defineExtension()`
-  call, or a reference to `module` or `exports`. A complete module snippet is
-  now just:
-  ```js
-  // #popclip
-  // name: Minimal
-  defineExtension({ action: () => popclip.showText("hi mom!") });
-  ```
-  Use `language: javascript` to bypass the TypeScript pipeline, and
-  `module: false` (or `true`) to override the module detection. Named ES
-  module exports (`export const actions = ...`) are supported as an
-  alternative to a default export.
-- Module detection also applies to `Config.js`/`Config.ts` files in packages,
-  and to `.js`/`.ts` files opened as snippets. For a real file, the suffix
-  determines the language: `.js` files are plain JavaScript (never
-  transpiled), `.ts` files go through the TypeScript pipeline. The TypeScript
-  default applies only to nameless text such as a selected snippet or `.popcliptxt` body.
 
 ### Changed
 
 - Installing an unsigned extension whose config declares the
-  `script` entitlement now shows the install confirmation. Previously,
-  a JavaScript module extension could declare `script` yet install without
-  confirmation, while the equivalent static shell script config prompted.
+  `script` entitlement now shows the install confirmation.
 - A module that mixes a default export with named exports is now a load
   error. Previously, the named exports were silently ignored.
 
@@ -125,8 +126,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - JavaScript: [util.hmac()](/dev/api/interfaces/Util.html#hmac) read from the
   start of the backing buffer when passed a `Uint8Array` view with a non-zero
-  offset, such as one made with `subarray()`, producing the wrong result. It
-  now reads the view's own bytes.
+  offset, such as one made with `subarray()`, producing the wrong result.
 
 ## Version 2026.8 (6159)
 
@@ -222,7 +222,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Documentation: removed the documented claim that population functions may not
   read `popclip.context.browserUrl` and `popclip.context.browserTitle`, which was incorrect.
 - Documentation: added the previously undocumented `keywords` config field to
-  the [top level properties](config#top-level-properties) table. It supplies
+  the [top level properties](top-level-properties) table. It supplies
   extra search words for the extension's directory listing.
 
 ## PopClip 2026.7 (5992)
@@ -239,7 +239,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     the action's settings UI.
   - `offers multiple instances`: controls whether the user can duplicate the action
     to create multiple instances.
-- New keys for [option](config#the-options-array) dictionaries:
+- New keys for [option](options) dictionaries:
   - `multiline`: for `string` options, show a multi-line text field.
   - `allow other`: for `multiple` options, adds an "Other…" choice allowing
     the user to enter a free-text value.
@@ -444,7 +444,7 @@ There were no changes to the extension programming interface in this release.
 ### Added
 
 - TypeScript can now be used as the source language for JavaScript actions and
-  module-based extensions. This is done by specifying a file with the `.ts`
+  module extensions. This is done by specifying a file with the `.ts`
   extension in the `javascript file` or `module` field. For snippets, specify
   `typescript` in the `language` field.
 - ~~PopClip ships with a TypeScript type definitions file, `popclip.d.ts`,
@@ -484,7 +484,7 @@ There were no changes to the extension programming interface in this release.
 - The previous single README was split into multiple pages.
 - All parts revised and updated; more examples added.
 - Added brand new documentation for
-  [Module-based extensions](https://www.popclip.app/dev/js-modules).
+  [Module extensions](https://www.popclip.app/dev/js-modules).
 
 ## PopClip 2023.7 (4151)
 
