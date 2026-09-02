@@ -83,7 +83,6 @@ Scripting another app:
 -- #popclip
 -- name: LaunchBar
 -- icon: LB
--- language: applescript
 tell application "LaunchBar"
   set selection to "{popclip text}"
 end tell
@@ -94,9 +93,8 @@ Returning text from the script:
 ```applescript
 -- #popclip
 -- name: AppleScript HTML
--- capture html: true
+-- captureHtml: true
 -- after: show-result
--- language: applescript
 return "Your HTML: " & "{popclip html}"
 ```
 

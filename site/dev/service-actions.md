@@ -15,7 +15,6 @@ You can also call
 ```javascript
 // #popclip service js example
 // name: Dated Sticky
-// language: javascript
 const today = new Date().toLocaleDateString();
 const note = `${popclip.input.text}\n\nClipped ${today}`;
 await popclip.performService("Make Sticky", note);

@@ -326,7 +326,6 @@ and copies it to the clipboard:
 // requirements: [url]
 // entitlements: [network]
 // after: copy-result
-// language: javascript
 const axios = require("axios");
 const response = await axios.get(popclip.input.data.urls[0]);
 /* note: there is no particular need to check the return status here.
@@ -341,7 +340,6 @@ return response.data;
 // requirements: [url]
 // entitlements: [network]
 // after: copy-result
-// language: typescript
 import axios from "axios";
 const response = await axios.get(popclip.input.data.urls[0]);
 /* note: there is no particular need to check the return status here.

@@ -16,7 +16,6 @@ within a [JavaScript action](./js-actions).
 ```javascript
 // #popclip shortcut js example
 // name: Summarize
-// language: javascript
 const summary = await popclip.runShortcut("Summarize Text", {
   input: popclip.input.text,
 });

@@ -385,7 +385,6 @@ The same action as JavaScript:
 ```js
 // #popclip
 // name: Lucky Repo (js)
-// language: javascript
 // entitlements: [network]
 const axios = require("axios");
 const response = await axios.get("https://api.github.com/search/repositories", {
