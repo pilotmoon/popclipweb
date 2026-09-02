@@ -73,7 +73,7 @@ Here is a Python example, using `#` for the comment header:
 ```python
 # #popclip
 # name: Hello Python
-# icon: hi
+# icon: circle hi
 # after: show-result
 # interpreter: python3
 import os
@@ -81,20 +81,19 @@ print('Hello, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
 ```
 
 An alternative way to specify a shell script's interpreter is to put a shebang
-(`#!`) line at the top, before the `#popclip` marker line. Then the `interpreter` field is not needed:
+(`#!`) line at the top of the snippet, before the `#popclip` marker line. Then the `interpreter` field is not needed:
 
 ```python
 #!/usr/bin/env python3
 # #popclip
-# name: Hello Python 2
-# icon: hi
+# name: Hello Python (shebang)
+# icon: circle hi
 # after: show-result
 import os
 print('Hello again, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
 ```
 
-For AppleScript, use the `--` comment prefix — which is also what marks the
-body as AppleScript:
+Using the `--` comment prefix without specifying an interpreter tells PopClip that the body is AppleScript:
 
 ```applescript
 -- #popclip
@@ -196,16 +195,5 @@ the extension. Installing a snippet with the same name as an existing snippet
 will replace it.
 
 A snippet can do everything that a [package](./packages) extension can do. The
-only limitation is that it can't refer to any external files.
-
-## Further examples
-
-There are lots of snippet examples posted in the
-[PopClip Forum](https://forum.popclip.app/). Here are a few interesting ones
-that demonstrate various techniques:
-
-- [Markdown highlighting](https://forum.popclip.app/t/markdown-highlighting/556)
-- [A PopClip Extension for ChatGPT](https://forum.popclip.app/t/a-popclip-extension-for-chatgpt/1283)
-- [Text-to-speech with Azure API](https://forum.popclip.app/t/new-snippet-azure-text-to-speech/1790)
-- [Search DuchDuckGo in DuckDuckGo Browser](https://forum.popclip.app/t/snippet-search-duckduckgo-in-duckduckgo-browser/1763)
-- [S p a c e d w o r d s](https://forum.popclip.app/t/s-p-a-c-e-d-w-o-r-d-s/1705)
+only limitation is that it is completely self-contained: it can't refer to any additional files.
+If you want to include a custom icon file, additional source files, or resource files, use a package instead.
