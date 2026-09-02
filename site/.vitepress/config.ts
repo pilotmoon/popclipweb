@@ -206,6 +206,10 @@ export default defineConfig({
                   link: "/dev/js-environment",
                 },
                 {
+                  text: "Calling external scripts",
+                  link: "/dev/external-scripts",
+                },
+                {
                   text: "API reference",
                   link: "/dev/api/",
                   target: "_self",

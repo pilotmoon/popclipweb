@@ -125,7 +125,8 @@ await popclip.pressKey("return");
 ```
 
 Look up the selected word in the macOS dictionary, then speak the definition
-aloud through the `say` command:
+aloud through the `say` command — using the
+[`$` shell tag](./external-scripts):
 
 ```javascript
 // #popclip
@@ -134,10 +135,7 @@ aloud through the `say` command:
 // entitlements: [script]
 const word = popclip.input.text.trim();
 const definition = util.getDictionaryDefinition(word) ?? "no definition found";
-await popclip.runShellScript("say $definition", {
-  interpreter: "zsh",
-  env: { definition },
-});
+await $`say ${definition}`;
 ```
 
 Fetch the page at the selected URL and show its title — network access, a

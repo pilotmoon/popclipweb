@@ -76,6 +76,12 @@ export const llmSections: LlmSection[] = [
           "PopClip's sandboxed JavaScript runtime: globals, modules, network access and utilities",
       },
       {
+        file: "dev/external-scripts.md",
+        title: "Calling external scripts",
+        description:
+          "Running shell scripts and AppleScript from JavaScript: the $ shell tag and the run functions",
+      },
+      {
         file: "dev/url-actions.md",
         title: "Open URL actions",
         description:

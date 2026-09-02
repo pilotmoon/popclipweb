@@ -23,6 +23,8 @@ const requestId = stdout.match(/request id is (\S+)/)?.[1] ?? "unknown";
 popclip.showText(`Printing: ${requestId}`);
 ```
 
+See [Calling external scripts](./external-scripts) for the full story.
+
 :::
 
 ::: warning Submitting to the directory

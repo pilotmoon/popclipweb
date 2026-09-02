@@ -13,6 +13,7 @@ To run just a little bit of AppleScript as part of a larger extension, call
 [`popclip.runAppleScript()`](/dev/api/interfaces/PopClip.html#runapplescript) or
 [`runAppleScriptFile()`](/dev/api/interfaces/PopClip.html#runapplescriptfile) from a
 [JavaScript action](./js-actions) with the `script` entitlement declared.
+See [Calling external scripts](./external-scripts) for the full story.
 
 :::
 
