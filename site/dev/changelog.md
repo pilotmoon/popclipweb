@@ -132,7 +132,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   start of the backing buffer when passed a `Uint8Array` view with a non-zero
   offset, such as one made with `subarray()`, producing the wrong result.
 
-### Documentation
+## Documentation Update, September 2026
 
 - These docs have been generally reorganized to present JavaScript as the
   primary language for authoring extensions, with the other action types
@@ -153,6 +153,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `javaScriptFile` — matching API function names such as
   `popclip.runAppleScript()`. These spellings have always been accepted via
   [key name mapping](/dev/config#key-name-mapping).
+- The documentation website is now LLM-friendly: every page has a plain
+  Markdown twin (add `.md` to its URL), and the whole reference is available
+  as [/llms.txt](/llms.txt) and [/dev/all.md](/dev/all.md).
 
 ## Version 2026.8 (6159)
 
