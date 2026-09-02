@@ -28,7 +28,7 @@ A JavaScript action is defined by the presence of either a `javaScript` or
 | Key               | Type   | Description                                                                       |
 | ----------------- | ------ | --------------------------------------------------------------------------------- |
 | `javaScript`      | String | A JavaScript text string to load.                                                 |
-| `javaScriptFile` | String | Path to a JavaScript (`.js`) or TypeScript (`.ts`) file in the package directory. |
+| `javaScriptFile` | String | Path to a `.js` or `.ts` file in the package directory. |
 
 ### Script format
 
@@ -60,7 +60,7 @@ arguments.
 :::
 
 In addition to pure JavaScript, PopClip can load TypeScript from files named
-with a a `.ts` extension. See
+with a `.ts` extension. See
 [TypeScript support](./js-environment.md#typescript-support).
 
 ## Input and output

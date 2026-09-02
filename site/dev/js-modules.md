@@ -5,7 +5,7 @@ titleTemplate: :title — PopClip Developer
 
 # Module extensions
 
-Module extensions let you use the full power of JavaScript or TypeScript
+Module extensions let you use the full power of JavaScript
 to define your PopClip extension. This allows you use code to construct
 properties like `options` at load time, and to define `actions` dynamically, for
 example to generate titles or icons in response to the input text.
@@ -84,7 +84,7 @@ exports mark it as a module.
 
 ### Module detection
 
-PopClip loads a JavaScript or TypeScript file (or snippet body) as a module
+PopClip loads a JavaScript file (or snippet body) as a module
 when the code contains ES module `export` syntax, a call to
 `defineExtension()` or `define()`, or a reference to `module` or `exports`.
 Comments and strings don't count, and top-level `import` alone does not make a
@@ -153,7 +153,7 @@ Alternatively, you can provide static config in another format (e.g.
 
 | Key      | Type   | Description                                                          |
 | -------- | ------ | -------------------------------------------------------------------- |
-| `module` | String | The path to a JavaScript (`.js`) or TypeScript (`.ts`) file to load. |
+| `module` | String | The path to a `.js` or `.ts` file to load. |
 
 ## Static-only properties
 

@@ -405,7 +405,7 @@ npm run tsc --noEmit
 
 ## Test Harness
 
-PopClip has a command-line mode that loads a JavaScript or TypeScript file into
+PopClip has a command-line mode that loads a JavaScript file into
 the PopClip environment and runs it. Optionally, if the file is a module, it can
 then call one of the module's exported functions.
 

@@ -29,8 +29,10 @@ will be happy to help you there.
 ### Extensions run JavaScript
 
 An extension defines one or more actions. At heart, an action runs JavaScript
-(or TypeScript) in PopClip's [JavaScript environment](./js-environment.md).
-The simplest complete extension is a few lines of text:
+in PopClip's [JavaScript environment](./js-environment.md). (Wherever these
+docs say JavaScript, that includes
+[TypeScript](/dev/js-environment#typescript-support), which PopClip supports
+natively.) The simplest complete extension is a few lines of text:
 
 ```js
 // #popclip
