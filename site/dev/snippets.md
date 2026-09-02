@@ -59,7 +59,7 @@ follows:
 | To interpret as...            | Include these fields...                                                                                                                                                                                                                                                                              |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `javascript file` or `module` | Nothing needed: a code body under a `//` comment header is treated as TypeScript by default. (Specify `language: javascript` to treat as raw JavaScript instead.) A body that exports is loaded as `module` (see [Module detection](./js-modules#module-detection)), otherwise as `javascript file`. |
-| `applescript file`            | Specify `language: applescript`.                                                                                                                                                                                                                                                                     |
+| `applescript file`            | Nothing needed: a body under a `--` comment header is treated as AppleScript.                                                                                                                                                                                                                        |
 | `shell script file`           | Specify `interpreter`, or start the snippet with a `#!` line.                                                                                                                                                                                                                                        |
 
 ### Non-JavaScript snippets
@@ -93,13 +93,13 @@ import os
 print('Hello again, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
 ```
 
-For AppleScript, use the `--` comment prefix. Add `language: applescript` in the config header:
+For AppleScript, use the `--` comment prefix — which is also what marks the
+body as AppleScript:
 
 ```applescript
--- # PopClip LaunchBar example
+-- #popclip
 -- name: LaunchBar
 -- icon: LB
--- language: applescript
 tell application "LaunchBar"
   set selection to "{popclip text}"
 end tell
@@ -133,7 +133,6 @@ A [Shortcuts](./shortcut-actions) example:
 # popclip shortcuts example
 name: Run My Shortcut
 icon: symbol:moon.stars # Apple SF Symbols
-macos version: "12.0" # shortcuts only work on Monterey and above!
 shortcut name: My Shortcut Name
 ```
 
@@ -142,7 +141,8 @@ with braces):
 
 ```yaml
 #popclip service example
-{ name: Stickies, service name: Make Sticky }
+name: Stickies
+service name: Make Sticky
 ```
 
 A [Key Press](./key-press-actions) example:
@@ -164,8 +164,6 @@ shell script: say -v Daniel $POPCLIP_TEXT
 
 A [JavaScript](./js-actions) example, including multiple actions:
 
-::: code-group
-
 ```yaml
 #popclip js + multi action example
 name: Markdown Formatting
@@ -179,31 +177,6 @@ actions:
     javascript: popclip.pasteText('*' + popclip.input.text + '*')
 ```
 
-```json
-#popclip js + multi action example
-{
-  "name": "Markdown Formatting",
-  "requirements": [
-    "text",
-    "paste"
-  ],
-  "actions": [
-    {
-      "title": "Markdown Bold",
-      "icon": "circle filled B",
-      "javascript": "popclip.pasteText('**' + popclip.input.text + '**')"
-    },
-    {
-      "title": "Markdown Italic",
-      "icon": "circle filled I",
-      "javascript": "popclip.pasteText('*' + popclip.input.text + '*')"
-    }
-  ]
-}
-```
-
-:::
-
 ::: warning #1 rule of YAML: Do not indent with tabs!
 
 When writing snippets in YAML with indented parts, as in the example above, do
@@ -211,7 +184,7 @@ not use tabs for indenting. YAML does not allow it — use spaces instead.
 
 :::
 
-## Creating snippets
+## Developing with snippets
 
 PopClip will display any errors it encounters while trying to load the snippet
 in the PopClip bar itself.

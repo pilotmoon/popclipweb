@@ -25,9 +25,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- Snippets: the `language` and `module` header keys are now optional for
-  JavaScript and TypeScript. A code body under a `//` comment header is
-  treated as TypeScript by default, and PopClip
+- Snippets: the `language` and `module` header keys are now optional. A code
+  body under a `//` comment header is treated as TypeScript by default, a
+  `--` header implies AppleScript, and PopClip
   [detects](/dev/js-modules#module-detection) that the code is a module
   if it uses ES module `export` syntax, a `defineExtension()`
   call, or a reference to `module` or `exports`. A complete module snippet is
