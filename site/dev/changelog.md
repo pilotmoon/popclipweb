@@ -55,7 +55,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   ```js
   // #popclip speak definition example
   // name: Speak Definition
-  // language: javascript
   // entitlements: [script]
   const word = popclip.input.text.trim();
   const definition = util.getDictionaryDefinition(word) ?? "no definition";
