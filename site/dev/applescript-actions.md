@@ -18,14 +18,19 @@ To run just a little bit of AppleScript as part of a larger extension, call
 
 ## Properties
 
-An AppleScript action is defined by the presence of either an `appleScript` or
-`appleScriptFile` field, with optional `appleScriptCall` field, as follows:
+An AppleScript action is defined by a code snippet whose config header uses
+the `--` comment prefix. Alternatively, a config snippet may define an
+`appleScript` or `appleScriptFile` field, with optional `appleScriptCall`
+field, as follows:
 
 | Key                | Type                  | Description                                                         |
 | ------------------ | --------------------- | ------------------------------------------------------------------- |
 | `appleScript`      | String                | A text string to interpret directly as AppleScript source.          |
 | `appleScriptFile` | String                | Path to an `.applescript` or `.scpt` file in the package directory. |
 | `appleScriptCall` | Dictionary (optional) | A named handler to call.                                            |
+
+A code snippet is equivalent to a config snippet whose `appleScriptFile` is
+the snippet itself.
 
 ### The `appleScriptCall` dictionary
 

@@ -22,13 +22,25 @@ return popclip.input.text.toUpperCase();
 
 ## Properties
 
-A JavaScript action is defined by the presence of either a `javaScript` or
-`javaScriptFile` field, as follows:
+A JavaScript action is defined by a code snippet whose config header uses the `//` comment prefix.
+Alternatively, a config snippet may define a `javaScript` or `javaScriptFile` field, as follows:
 
-| Key               | Type   | Description                                                                       |
-| ----------------- | ------ | --------------------------------------------------------------------------------- |
-| `javaScript`      | String | A JavaScript text string to load.                                                 |
+| Key              | Type   | Description                                             |
+| ---------------- | ------ | ------------------------------------------------------- |
+| `javaScript`     | String | A JavaScript text string to load.                       |
 | `javaScriptFile` | String | Path to a `.js` or `.ts` file in the package directory. |
+
+A code snippet is equivalent to a config snippet whose `javaScriptFile` is the snippet itself.
+
+For example, here is a config snippet with the action's code inline in the
+`javaScript` field:
+
+```yaml
+#popclip
+name: Word Count
+icon: square 123
+javaScript: popclip.showText(popclip.input.text.split(/\s+/).length + " words")
+```
 
 ### Script format
 
@@ -139,7 +151,9 @@ bundled module, and the `after` step working together:
 // after: show-result
 const axios = require("axios");
 const response = await axios.get(popclip.input.data.urls[0]);
-return String(response.data).match(/<title[^>]*>([^<]*)</i)?.[1] ?? "No title found";
+return (
+  String(response.data).match(/<title[^>]*>([^<]*)</i)?.[1] ?? "No title found"
+);
 ```
 
 ## Growing into a module

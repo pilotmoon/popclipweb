@@ -34,7 +34,9 @@ Shell Script action must include a
 
 ## Properties
 
-A Shell Script action is defined by the presence of either a `shellScript` or
+A Shell Script action is defined by a code snippet that specifies an
+`interpreter` in its config header, or starts with a `#!` line.
+Alternatively, a config snippet may define a `shellScript` or
 `shellScriptFile` field, as follows:
 
 | Key                 | Type              | Description                                                                                                                                                                                                                                                                       |
