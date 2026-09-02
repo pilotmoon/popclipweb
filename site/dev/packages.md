@@ -9,7 +9,7 @@ A PopClip extension package bundles together all the files needed for an
 extension in a folder. A package wraps up an extension
 so that it can be published as a file download, then installed with a double-click.
 
-Packages are the format used by the [PopClip extensions directory](/extensions).
+Packages are the format used by the [PopClip extensions directory](/extensions/).
 
 ## The package folder
 

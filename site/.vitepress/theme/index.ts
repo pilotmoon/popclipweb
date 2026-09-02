@@ -10,6 +10,7 @@ import AaLink from "../../src/AaLink.vue";
 import DownloadButton from "../../src/DownloadButton.vue";
 import HomeFooter from "../../src/HomeFooter.vue";
 import MarkdownTwinLink from "../../src/MarkdownTwinLink.vue";
+import ScriptVariablesTable from "../../src/ScriptVariablesTable.vue";
 import StoreLoader from "../../src/StoreLoader.vue";
 import SupportEmailLink from "../../src/SupportEmailLink.vue";
 
@@ -38,6 +39,7 @@ export default {
     app.component("AaButton", AaButton);
     app.component("AaLink", AaLink);
     app.component("DownloadButton", DownloadButton);
+    app.component("ScriptVariablesTable", ScriptVariablesTable);
     app.component("SupportEmailLink", SupportEmailLink);
   },
 };

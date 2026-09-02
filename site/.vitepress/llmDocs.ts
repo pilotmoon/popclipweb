@@ -12,6 +12,11 @@ import {
   llmSections,
   siteRoot,
 } from "./llmPages.ts";
+import {
+  applescriptPlaceholder,
+  scriptVariables,
+  shellVariableName,
+} from "../src/scriptVariables.ts";
 
 // Plain-Markdown twins of the documentation pages, for LLM (and human)
 // consumption, generated from the same sources VitePress renders. Each page
@@ -389,6 +394,20 @@ function replaceComponents(text: string, ctx: CleanContext): string {
       case "SupportEmailLink":
         replacement = "[support@pilotmoon.com](mailto:support@pilotmoon.com)";
         break;
+      case "ScriptVariablesTable": {
+        // The twins get the same data as a static table, with both name
+        // forms in place of the page's interactive switcher.
+        const rows = scriptVariables.map(
+          (v) =>
+            `| \`${shellVariableName(v.key)}\` | \`${applescriptPlaceholder(v.key)}\` | ${v.description} |`,
+        );
+        replacement = [
+          "| Shell Script | AppleScript | Description |",
+          "| ------------ | ----------- | ----------- |",
+          ...rows,
+        ].join("\n");
+        break;
+      }
       case "AaLink": {
         const href = /href="([^"]*)"/.exec(tag.attrs)?.[1];
         const cfg = /cfg="([^"]*)"/.exec(tag.attrs)?.[1];
