@@ -12,8 +12,8 @@ app from within a [JavaScript action](./js-actions) or
 [Shell Script](./shell-script-actions) or
 [AppleScript](./applescript-actions) action.
 
-All the facilities on this page require the `script`
-[entitlement](./top-level-properties) in the extension's config, and may only
+All the facilities on this page require the
+`script` [entitlement](./top-level-properties) in the extension's config, and may only
 be used during the action phase — that is, from an action's code, not at load
 or population time. There is no timeout: a run ends when the script exits, or
 when the user cancels the action by clicking the spinner, which kills the
