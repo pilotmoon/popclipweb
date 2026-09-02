@@ -4,7 +4,7 @@ titleTemplate: :title — PopClip Developer
 
 # AppleScript actions
 
-An AppleScript action runs AppleScript code. AppleScript's strength is in
+A classic AppleScript action runs AppleScript code. AppleScript's strength is in
 automation, since it can be used to control other apps.
 
 ::: tip Running AppleScript from JavaScript
