@@ -194,7 +194,7 @@ follows:
 1. First, the naming convention is standardized to lowercase with spaces. For
    example, `RequiredApps` becomes `required apps`.
 
-2. Then, if the field name has the prefix `extension` or `option` (which were
+2. Then, if the first word is `extension` or `option` (which were
    expected by older versions of PopClip), it is removed.
 
 3. Finally, PopClip applies the following mapping:
@@ -231,6 +231,6 @@ follows:
 
 An old extension uses the key `Extension Image File` to define its icon. PopClip
 will first standardize the case to `extension image file`. Then it will remove
-the `extension` prefix, leaving `image file`. Then it will map this to `icon`.
+the word `extension`, leaving `image file`. Then it will map this to `icon`.
 
 :::
