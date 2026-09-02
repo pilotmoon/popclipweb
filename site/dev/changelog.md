@@ -138,6 +138,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   primary language for authoring extensions, with the other action types
   covered as supplementary material. Page order, navigation and examples
   have been updated throughout.
+- Some renamed terminology: "module-based extensions" are now simply
+  [module extensions](/dev/js-modules), and what was called "inverted syntax"
+  is now a [code snippet](/dev/snippets#inverted-syntax) — with a config-only
+  snippet now called a [config snippet](/dev/snippets#config-snippets) to
+  distinguish the two.
 - These docs now name every config key in camelCase (`serviceName`,
   `keyCombo`, `popclipVersion`), where previously they used lowercase with
   spaces (`service name`). This is a documentation convention only: PopClip
