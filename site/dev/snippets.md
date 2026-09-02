@@ -11,11 +11,12 @@ text. A snippet begins with a `#popclip` (or `# popclip`) marker line.
 ```javascript
 // #popclip
 // name: Hello
+// icon: iconify:mingcute:wave-hand-line
 const greeting = "Hello, " + popclip.input.text;
 popclip.showText(greeting);
 ```
 
-When you select the text of a snippet, PopClip offers an "Install" action.
+When you select the text of a snippet, PopClip offers an "Install" action. (Try it!)
 
 ![](./media/anim-install-snippet-4.mp4 "Installing a snippet by selecting its text.")
 
@@ -46,54 +47,59 @@ Here is a complete code snippet:
 popclip.pasteText(popclip.input.text.toUpperCase());
 ```
 
-The comment header is a run of comment lines starting at the `#popclip`
+The config header is a run of comment lines starting at the `#popclip`
 marker, containing the extension's [config](./config.md) as YAML. Everything
-after the header is the script itself. This way, we get code syntax
-highlighting and autocomplete from our text editor, and we don't have to
-indent the script awkwardly inside YAML.
+after the header is the script itself.
 
 Code snippets (formerly called _inverted syntax_) are supported for
 JavaScript, AppleScript and shell script actions. The whole text of the snippet becomes the `javascript file`,
 `module`, `applescript file` or `shell script file` for the extension, as
 follows:
 
-| To interpret as...  | Include these fields...                                                                                                                         |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `javascript file`   | Nothing needed: a body under a `//` comment header is TypeScript by default. Specify `language: javascript` to bypass TypeScript transpilation. |
-| `module`            | Nothing needed: a body that exports is loaded as a module (see [Module detection](./js-modules#module-detection)).                              |
-| `shell script file` | Specify `interpreter` string (or start the file with a `#!` line).                                                                              |
-| `applescript file`  | Specify `language: applescript`.                                                                                                                |
+| To interpret as...            | Include these fields...                                                                                                                                                                                                                                                                              |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `javascript file` or `module` | Nothing needed: a code body under a `//` comment header is treated as TypeScript by default. (Specify `language: javascript` to treat as raw JavaScript instead.) A body that exports is loaded as `module` (see [Module detection](./js-modules#module-detection)), otherwise as `javascript file`. |
+| `applescript file`            | Specify `language: applescript`.                                                                                                                                                                                                                                                                     |
+| `shell script file`           | Specify `interpreter`, or start the snippet with a `#!` line.                                                                                                                                                                                                                                        |
 
+### Non-JavaScript snippets
+
+Code snippets are not just for JavaScript — they can also be used with shell scripts and with AppleScript.
 The config header should be added using the appropriate comment style for the
 source language, as in the examples below.
 
-### More code snippet examples
-
-Here is a Python example:
+Here is a Python example, using `#` for the comment header:
 
 ```python
 # #popclip
-# { name: Hello Python, icon: hi, after: show-result, interpreter: python3 }
+# name: Hello Python
+# icon: hi
+# after: show-result
+# interpreter: python3
 import os
 print('Hello, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
 ```
 
 An alternative way to specify a shell script's interpreter is to put a shebang
-(`#!`) line at the top, in which case, the `interpreter` field is not needed:
+(`#!`) line at the top, before the `#popclip` marker line. Then the `interpreter` field is not needed:
 
 ```python
 #!/usr/bin/env python3
 # #popclip
-# { name: Hello Python 2, icon: hi, after: show-result }
+# name: Hello Python 2
+# icon: hi
+# after: show-result
 import os
 print('Hello again, ' + os.environ['POPCLIP_TEXT'] + '!', end='')
 ```
 
-An AppleScript example:
+For AppleScript, use the `--` comment prefix. Add `language: applescript` in the config header:
 
 ```applescript
 -- # PopClip LaunchBar example
--- { name: LaunchBar, icon: LB, language: applescript }
+-- name: LaunchBar
+-- icon: LB
+-- language: applescript
 tell application "LaunchBar"
   set selection to "{popclip text}"
 end tell
@@ -112,7 +118,7 @@ icon: UD
 url: https://www.urbandictionary.com/define.php?term=***
 ```
 
-::: tip Commments in snippets
+::: tip Comments in snippets
 
 Note that `#` begins a YAML comment. Thus the entire snippet including the
 `#popclip` line parses as valid YAML.
@@ -147,7 +153,7 @@ name: Key Press Example
 key combo: command option J
 ```
 
-An [shell script](./shell-script-actions) example:
+A [shell script](./shell-script-actions) example:
 
 ```yaml
 #popclip shellscript example
@@ -218,15 +224,6 @@ will replace it.
 
 A snippet can do everything that a [package](./packages) extension can do. The
 only limitation is that it can't refer to any external files.
-
-## Snippet files
-
-You can save a snippet to a plain text file with a `.popcliptxt` extension.
-Files with `.js`, `.ts` and `.yaml` extensions work too. When you open such a
-file — by double-clicking a `.popcliptxt` file, using the Open With menu, or
-dragging the file onto the PopClip menu bar icon — PopClip will load the
-snippet from the file and install it. There is no size limit on the snippet
-when installed by this method.
 
 ## Further examples
 
