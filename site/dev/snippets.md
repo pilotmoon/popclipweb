@@ -6,22 +6,7 @@ titleTemplate: :title — PopClip Developer
 # Snippets
 
 A snippet is the simplest kind of PopClip extension, because it is just plain
-text. PopClip can load a snippet directly from a text selection, without the
-need for separate files or folders.
-
-Snippets come in two forms:
-
-- A **code snippet** is a script, with the extension's config in a comment
-  header.
-- A **config snippet** is config alone, in YAML format — most useful for the
-  [no-code action types](./index#no-code-actions).
-
-Either way, a snippet contains a `#popclip` (or `# popclip`) marker and can
-be up to 5000 characters long.
-
-## Code snippets {#inverted-syntax}
-
-Here is a complete code snippet:
+text. A snippet begins with a `#popclip` (or `# popclip`) marker line.
 
 ```javascript
 // #popclip
@@ -30,10 +15,36 @@ const greeting = "Hello, " + popclip.input.text;
 popclip.showText(greeting);
 ```
 
-When you select the whole block of text above, PopClip will detect the snippet
-and offer an "Install Extension" action.
+When you select the text of a snippet, PopClip offers an "Install" action.
 
-![](./media/shot-snippet-install-3.png "Installing a snippet.")
+![](./media/anim-install-snippet-4.mp4 "Installing a snippet by selecting its text.")
+
+::: tip Size limit, and snippet files
+
+When installed via text selection, snippets can be up to 5,000 characters long. Snippet files, on the other hand, have no maximum length.
+To install a snippet from a file, save it as a text file with one of these extensions: `.ts`, `.js`, `.yaml` and send it
+to PopClip using "Open With" in Finder, or drag the file onto PopClip's menu bar icon. A special file
+extension, `.popcliptxt`, can also be used: PopClip opens it when you double-click it.
+
+:::
+
+Snippets come in two forms:
+
+- A **code snippet** is a script, with the extension's config in a comment
+  header.
+- A **config snippet** is config alone, in YAML format — most useful for the
+  [no-code action types](./index#no-code-actions).
+
+## Code snippets {#inverted-syntax}
+
+Here is a complete code snippet:
+
+```javascript
+// #popclip
+// name: Uppercase
+// icon: square filled AB
+popclip.pasteText(popclip.input.text.toUpperCase());
+```
 
 The comment header is a run of comment lines starting at the `#popclip`
 marker, containing the extension's [config](./config.md) as YAML. Everything
