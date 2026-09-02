@@ -18,18 +18,18 @@ To run just a little bit of AppleScript as part of a larger extension, call
 
 ## Properties
 
-An AppleScript action is defined by the presence of either an `applescript` or
-`applescriptFile` field, with optional `applescriptCall` field, as follows:
+An AppleScript action is defined by the presence of either an `appleScript` or
+`appleScriptFile` field, with optional `appleScriptCall` field, as follows:
 
 | Key                | Type                  | Description                                                         |
 | ------------------ | --------------------- | ------------------------------------------------------------------- |
-| `applescript`      | String                | A text string to interpret directly as AppleScript source.          |
-| `applescriptFile` | String                | Path to an `.applescript` or `.scpt` file in the package directory. |
-| `applescriptCall` | Dictionary (optional) | A named handler to call.                                            |
+| `appleScript`      | String                | A text string to interpret directly as AppleScript source.          |
+| `appleScriptFile` | String                | Path to an `.applescript` or `.scpt` file in the package directory. |
+| `appleScriptCall` | Dictionary (optional) | A named handler to call.                                            |
 
-### The `applescriptCall` dictionary
+### The `appleScriptCall` dictionary
 
-The `applescriptCall` dictionary lets you call a named handler within the
+The `appleScriptCall` dictionary lets you call a named handler within the
 script.
 
 | Key          | Type             | Description                                                                                                                                                                                                                                                                           |
@@ -117,7 +117,7 @@ end tell
 ```json [Config.json]
 {
   "name": "TextEdit Clip",
-  "applescriptFile": "TextEditClip.applescript"
+  "appleScriptFile": "TextEditClip.applescript"
 }
 ```
 
@@ -142,8 +142,8 @@ end newDocument
 ```json [Config.json]
 {
   "name": "TextEdit Clip",
-  "applescriptFile": "TextEditClip.scpt",
-  "applescriptCall": {
+  "appleScriptFile": "TextEditClip.scpt",
+  "appleScriptCall": {
     "handler": "newDocument",
     "parameters": ["text", "browser url"]
   }

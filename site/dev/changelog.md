@@ -586,7 +586,7 @@ There were no changes to the extension programming interface in this release.
 - Field names for use in the Config files are now defined in a spaced lowercase
   form such as `applescript file`. However, PopClip will accept field names in
   all common forms including the original "spaced capitalized" form (e.g.
-  `AppleScript File`) and camel case (e.g. `applescriptFile`).
+  `AppleScript File`) and camel case (e.g. `appleScriptFile`).
 - The `URL` field for Search extensions will now accept `***` in addition to
   `{popclip text}` as the placeholder.
 - The text-based icon format has a new "magnifying glass" style, intended for

@@ -52,14 +52,14 @@ marker, containing the extension's [config](./config.md) as YAML. Everything
 after the header is the script itself.
 
 Code snippets (formerly called _inverted syntax_) are supported for
-JavaScript, AppleScript and shell script actions. The whole text of the snippet becomes the `javascriptFile`,
-`module`, `applescriptFile` or `shellScriptFile` for the extension, as
+JavaScript, AppleScript and shell script actions. The whole text of the snippet becomes the `javaScriptFile`,
+`module`, `appleScriptFile` or `shellScriptFile` for the extension, as
 follows:
 
 | To interpret as...            | Include these fields...                                                                                                                                                                                                                                                                              |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `javascriptFile` or `module` | Nothing needed: a code body under a `//` comment header is treated as TypeScript by default. (Specify `language: javascript` to treat as raw JavaScript instead.) A body that exports is loaded as `module` (see [Module detection](./js-modules#module-detection)), otherwise as `javascriptFile`. |
-| `applescriptFile`            | Nothing needed: a body under a `--` comment header is treated as AppleScript.                                                                                                                                                                                                                        |
+| `javaScriptFile` or `module` | Nothing needed: a code body under a `//` comment header is treated as TypeScript by default. (Specify `language: javascript` to treat as raw JavaScript instead.) A body that exports is loaded as `module` (see [Module detection](./js-modules#module-detection)), otherwise as `javaScriptFile`. |
+| `appleScriptFile`            | Nothing needed: a body under a `--` comment header is treated as AppleScript.                                                                                                                                                                                                                        |
 | `shellScriptFile`           | Specify `interpreter`, or start the snippet with a `#!` line.                                                                                                                                                                                                                                        |
 
 ### Non-JavaScript snippets
@@ -170,10 +170,10 @@ requirements: [text, paste]
 actions:
   - title: Markdown Bold # note: actions have a `title`, not a `name`
     icon: circle filled B
-    javascript: popclip.pasteText('**' + popclip.input.text + '**')
+    javaScript: popclip.pasteText('**' + popclip.input.text + '**')
   - title: Markdown Italic
     icon: circle filled I
-    javascript: popclip.pasteText('*' + popclip.input.text + '*')
+    javaScript: popclip.pasteText('*' + popclip.input.text + '*')
 ```
 
 ::: warning #1 rule of YAML: Do not indent with tabs!

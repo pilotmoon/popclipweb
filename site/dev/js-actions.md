@@ -22,13 +22,13 @@ return popclip.input.text.toUpperCase();
 
 ## Properties
 
-A JavaScript action is defined by the presence of either a `javascript` or
-`javascriptFile` field, as follows:
+A JavaScript action is defined by the presence of either a `javaScript` or
+`javaScriptFile` field, as follows:
 
 | Key               | Type   | Description                                                                       |
 | ----------------- | ------ | --------------------------------------------------------------------------------- |
-| `javascript`      | String | A JavaScript text string to load.                                                 |
-| `javascriptFile` | String | Path to a JavaScript (`.js`) or TypeScript (`.ts`) file in the package directory. |
+| `javaScript`      | String | A JavaScript text string to load.                                                 |
+| `javaScriptFile` | String | Path to a JavaScript (`.js`) or TypeScript (`.ts`) file in the package directory. |
 
 ### Script format
 
@@ -38,7 +38,7 @@ PopClip calls the function.
 
 ::: details Function wrapper detail
 
-As an example, imagine the following JavaScript is provided in the `javascript`
+As an example, imagine the following JavaScript is provided in the `javaScript`
 field:
 
 ```javascript

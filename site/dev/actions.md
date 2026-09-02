@@ -21,12 +21,12 @@ actions:
     icon: iconA.png
     captureHtml: true // [!code focus:2]
     after: show-result
-    javascript: return "Hi from Action A - " + popclip.input.html
+    javaScript: return "Hi from Action A - " + popclip.input.html
   - title: Action B
     icon: iconB.png
     captureHtml: true // [!code focus:2]
     after: show-result
-    javascript: return "Hi from Action B - " + popclip.input.html
+    javaScript: return "Hi from Action B - " + popclip.input.html
 ```
 
 Since the `captureHtml` and `after` properties are the same for both actions,
@@ -40,10 +40,10 @@ after: show-result
 actions:
   - title: Action A
     icon: iconA.png
-    javascript: return "Hi from Action A - " + popclip.input.html
+    javaScript: return "Hi from Action A - " + popclip.input.html
   - title: Action B
     icon: iconB.png
-    javascript: return "Hi from Action B - " + popclip.input.html
+    javaScript: return "Hi from Action B - " + popclip.input.html
 ```
 
 :::
@@ -169,7 +169,7 @@ JavaScript variant using the capture array:
 name: Domain WHOIS 2
 requirements: [url]
 regex: https?:\/\/([^\/]+)
-javascript: popclip.openUrl('https://www.whois.com/whois/' + encodeURIComponent(popclip.input.regexResult[1]))
+javaScript: popclip.openUrl('https://www.whois.com/whois/' + encodeURIComponent(popclip.input.regexResult[1]))
 ```
 
 Here, the full URL is the regex match, and the domain is taken from capture
