@@ -6,12 +6,15 @@ titleTemplate: :title — PopClip Developer
 # Packages
 
 A PopClip extension package bundles together all the files needed for an
-extension in a folder. Packages are the format used by the [PopClip extensions directory](/extensions),
+extension in a folder. A package wraps up an extension
+so that it can be published as a file download, then installed with a double-click.
+
+Packages are the format used by the [PopClip extensions directory](/extensions).
 
 ## The package folder
 
-A PopClip extension package consists of a config file plus (optional) additional
-files such as icons and scripts, all contained in a directory whose name ends
+A PopClip extension package consists of a config file plus optional additional files,
+all contained in a directory whose name ends
 with `.popclipext`.
 
 When you double-click a `.popclipext` package, macOS will open it with PopClip,
@@ -40,26 +43,34 @@ Say.popclipext/                -- Package folder
 ### A minimal package
 
 At the other end of the scale, a package needs nothing more than a folder
-with a config file inside:
+with a snippet inside:
 
 ```
 Uppercase.popclipext/
-└── Config.yaml
+└── Config.js
 ```
 
-where `Config.yaml` contains, for example:
+where `Config.js` contains, for example:
 
-```yaml
-name: Uppercase
-javascript: popclip.pasteText(popclip.input.text.toUpperCase())
+```javascript
+// #popclip
+// name: Uppercase
+popclip.pasteText(popclip.input.text.toUpperCase());
 ```
 
 ### Zipped `.popclipextz` files
 
 For distribution, an extension package folder may be zipped and renamed with the
-extension `.popclipextz`. You can examine an existing PopClip extension by
+extension `.popclipextz`. Double-clicking these files opens them directly with PopClip.
+You can examine an existing PopClip extension by
 renaming it with a `.zip` extension and unzipping it, to reveal a `.popclipext`
 package.
+
+::: info Tidying up
+
+After PopClip installs an extension from a `.popclipextz` file, it deletes the file.
+
+:::
 
 ## The Config file
 
