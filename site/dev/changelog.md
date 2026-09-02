@@ -222,7 +222,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Documentation: removed the documented claim that population functions may not
   read `popclip.context.browserUrl` and `popclip.context.browserTitle`, which was incorrect.
 - Documentation: added the previously undocumented `keywords` config field to
-  the [top level properties](top-level-properties) table. It supplies
+  the top level properties table. It supplies
   extra search words for the extension's directory listing.
 
 ## PopClip 2026.7 (5992)
@@ -239,7 +239,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     the action's settings UI.
   - `offers multiple instances`: controls whether the user can duplicate the action
     to create multiple instances.
-- New keys for [option](options) dictionaries:
+- New keys for option dictionaries:
   - `multiline`: for `string` options, show a multi-line text field.
   - `allow other`: for `multiple` options, adds an "Other…" choice allowing
     the user to enter a free-text value.
