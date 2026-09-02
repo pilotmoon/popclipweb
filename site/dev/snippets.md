@@ -52,15 +52,15 @@ marker, containing the extension's [config](./config.md) as YAML. Everything
 after the header is the script itself.
 
 Code snippets (formerly called _inverted syntax_) are supported for
-JavaScript, AppleScript and shell script actions. The whole text of the snippet becomes the `javascript file`,
-`module`, `applescript file` or `shell script file` for the extension, as
+JavaScript, AppleScript and shell script actions. The whole text of the snippet becomes the `javascriptFile`,
+`module`, `applescriptFile` or `shellScriptFile` for the extension, as
 follows:
 
 | To interpret as...            | Include these fields...                                                                                                                                                                                                                                                                              |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `javascript file` or `module` | Nothing needed: a code body under a `//` comment header is treated as TypeScript by default. (Specify `language: javascript` to treat as raw JavaScript instead.) A body that exports is loaded as `module` (see [Module detection](./js-modules#module-detection)), otherwise as `javascript file`. |
-| `applescript file`            | Nothing needed: a body under a `--` comment header is treated as AppleScript.                                                                                                                                                                                                                        |
-| `shell script file`           | Specify `interpreter`, or start the snippet with a `#!` line.                                                                                                                                                                                                                                        |
+| `javascriptFile` or `module` | Nothing needed: a code body under a `//` comment header is treated as TypeScript by default. (Specify `language: javascript` to treat as raw JavaScript instead.) A body that exports is loaded as `module` (see [Module detection](./js-modules#module-detection)), otherwise as `javascriptFile`. |
+| `applescriptFile`            | Nothing needed: a body under a `--` comment header is treated as AppleScript.                                                                                                                                                                                                                        |
+| `shellScriptFile`           | Specify `interpreter`, or start the snippet with a `#!` line.                                                                                                                                                                                                                                        |
 
 ### Non-JavaScript snippets
 
@@ -132,7 +132,7 @@ A [Shortcuts](./shortcut-actions) example:
 # popclip shortcuts example
 name: Run My Shortcut
 icon: symbol:moon.stars # Apple SF Symbols
-shortcut name: My Shortcut Name
+shortcutName: My Shortcut Name
 ```
 
 A [Service](./service-actions) example (this time using flow-style YAML markup,
@@ -141,7 +141,7 @@ with braces):
 ```yaml
 #popclip service example
 name: Stickies
-service name: Make Sticky
+serviceName: Make Sticky
 ```
 
 A [Key Press](./key-press-actions) example:
@@ -149,7 +149,7 @@ A [Key Press](./key-press-actions) example:
 ```yaml
 #popclip key press example
 name: Key Press Example
-key combo: command option J
+keyCombo: command option J
 ```
 
 A [shell script](./shell-script-actions) example:
@@ -158,7 +158,7 @@ A [shell script](./shell-script-actions) example:
 #popclip shellscript example
 name: Say
 interpreter: zsh
-shell script: say -v Daniel $POPCLIP_TEXT
+shellScript: say -v Daniel $POPCLIP_TEXT
 ```
 
 A [JavaScript](./js-actions) example, including multiple actions:

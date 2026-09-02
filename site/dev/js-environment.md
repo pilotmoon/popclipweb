@@ -38,9 +38,9 @@ Commonly used properties are:
   regex
 - `popclip.input.regexResult`: if regex was specified, this is an array
   containing the full result of the match, including any capture groups
-- `popclip.input.html`: the html backing the selection (if `capture html` is
+- `popclip.input.html`: the html backing the selection (if `captureHtml` is
   set)
-- `popclip.input.markdown`: the markdownified html (if `capture html` is set)
+- `popclip.input.markdown`: the markdownified html (if `captureHtml` is set)
 - `popclip.input.data.urls`: array of detected web URLs
 - `popclip.context.browserUrl`, `popclip.context.browserTitle`: browser page URL
   and title, if available

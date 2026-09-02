@@ -113,7 +113,7 @@ Your extension's Config **must** contain all of the following, or it will be rej
 
 Additionally, for extensions with Shell Script actions:
 
-- `shell script rationale` — an explanation of why the extension needs to use a shell script and
+- `shellScriptRationale` — an explanation of why the extension needs to use a shell script and
   can't be implemented with JavaScript. See [Shell script policy](#shell-script-policy).
 
 ### Limits
@@ -337,11 +337,11 @@ genuinely needs one to do something that would be impossible with PopClip's
 internal JavaScript API.
 
 If your extension does have a Shell Script action, its Config must include a
-`shell script rationale` field giving a brief explanation (at least 20 characters) of why the
+`shellScriptRationale` field giving a brief explanation (at least 20 characters) of why the
 action needs a shell script:
 
 ```yaml
-shell script rationale: Sends the selected text to the printer using lpr.
+shellScriptRationale: Sends the selected text to the printer using lpr.
 ```
 
 **A submission with a shell script action and no rationale is rejected
@@ -413,4 +413,4 @@ This policy applies not just to Bash/Zsh etc., but any script executed using the
 - The tag must match your `versionPrefix`, if you set one.
 - You must actually push the tag to GitHub as well as the commit.
 - An extension with a shell script action must have a
-  [shell script rationale](#shell-script-policy) in its Config.
+  [shellScriptRationale](#shell-script-policy) in its Config.

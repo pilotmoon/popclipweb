@@ -27,11 +27,11 @@ popclip.pasteText(`Summary:\n${summary}\n\nFull text:\n${popclip.input.text}`);
 
 ## Properties
 
-A shortcut action is defined by the presence of a `shortcut name` field, as follows:
+A shortcut action is defined by the presence of a `shortcutName` field, as follows:
 
 | Key             | Type   | Description                                                                                    |
 | --------------- | ------ | ---------------------------------------------------------------------------------------------- |
-| `shortcut name` | String | The name of the macOS Shortcut to call. This must exactly match its name in the Shortcuts app. |
+| `shortcutName` | String | The name of the macOS Shortcut to call. This must exactly match its name in the Shortcuts app. |
 
 ## Input and output
 
@@ -44,5 +44,5 @@ The following example snippet defines an extension with a single shortcut action
 ```yaml
 #popclip shortcut example
 name: Run My Shortcut
-shortcut name: My Shortcut Name
+shortcutName: My Shortcut Name
 ```

@@ -19,17 +19,17 @@ To run just a little bit of AppleScript as part of a larger extension, call
 ## Properties
 
 An AppleScript action is defined by the presence of either an `applescript` or
-`applescript file` field, with optional `applescript call` field, as follows:
+`applescriptFile` field, with optional `applescriptCall` field, as follows:
 
 | Key                | Type                  | Description                                                         |
 | ------------------ | --------------------- | ------------------------------------------------------------------- |
 | `applescript`      | String                | A text string to interpret directly as AppleScript source.          |
-| `applescript file` | String                | Path to an `.applescript` or `.scpt` file in the package directory. |
-| `applescript call` | Dictionary (optional) | A named handler to call.                                            |
+| `applescriptFile` | String                | Path to an `.applescript` or `.scpt` file in the package directory. |
+| `applescriptCall` | Dictionary (optional) | A named handler to call.                                            |
 
-### The `applescript call` dictionary
+### The `applescriptCall` dictionary
 
-The `applescript call` dictionary lets you call a named handler within the
+The `applescriptCall` dictionary lets you call a named handler within the
 script.
 
 | Key          | Type             | Description                                                                                                                                                                                                                                                                           |

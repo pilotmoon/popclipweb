@@ -29,32 +29,32 @@ popclip.showText(`Printing: ${requestId}`);
 Extensions submitted to the [Extensions Directory](/extensions/) should use
 JavaScript actions in preference to Shell Script actions. A submission with a
 Shell Script action must include a
-[`shell script rationale`](/extensions/submit#shell-script-policy) in its Config.
+[`shellScriptRationale`](/extensions/submit#shell-script-policy) in its Config.
 :::
 
 ## Properties
 
-A Shell Script action is defined by the presence of either a `shell script` or
-`shell script file` field, as follows:
+A Shell Script action is defined by the presence of either a `shellScript` or
+`shellScriptFile` field, as follows:
 
 | Key                 | Type              | Description                                                                                                                                                                                                                                                                       |
 | ------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `shell script`      | String            | A string to be run as a shell script. The string will be passed via standard input to the specified `interpreter`, invoked without arguments.                                                                                                                                     |
-| `shell script file` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                        |
-| `interpreter`       | String (optional) | Specify the interpreter to use for `shell script` or `shell script file`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`. |
-| `stdin`             | String (optional) | For script specified as `shell script file` only. Set the name of a [script variable](./script-variables) to pass via standard input (stdin). If omitted, no standard input is provided to the script.                                                                            |
-| `shell mode`        | String (optional) | How the script is executed: `login` (the default), `nonlogin` or `none`. See [Shell mode](#shell-mode).                                                                                                                                                                           |
+| `shellScript`      | String            | A string to be run as a shell script. The string will be passed via standard input to the specified `interpreter`, invoked without arguments.                                                                                                                                     |
+| `shellScriptFile` | String            | The name of a file in the extension's package directory. See [Shell script file execution](#shell-script-file-execution) for more details.                                                                                                                                        |
+| `interpreter`       | String (optional) | Specify the interpreter to use for `shellScript` or `shellScriptFile`. You can specify a bare executable name, for example `ruby`, and PopClip will look for it in the `PATH` of the user's default shell. Alternatively, you can specify an absolute path such as `/bin/zsh`. |
+| `stdin`             | String (optional) | For script specified as `shellScriptFile` only. Set the name of a [script variable](./script-variables) to pass via standard input (stdin). If omitted, no standard input is provided to the script.                                                                            |
+| `shellMode`        | String (optional) | How the script is executed: `login` (the default), `nonlogin` or `none`. See [Shell mode](#shell-mode).                                                                                                                                                                           |
 
 ### Shell script file execution
 
-The `shell script file` will be executed as follows:
+The `shellScriptFile` will be executed as follows:
 
 - If an `interpreter` is specified, then PopClip will call this interpreter with
   the script file path as argument.
 - Otherwise, if the script file has executable permissions set (with `chmod +x`)
   and the first line of the file starts with `#!`, then PopClip will execute the
   file directly.
-- Otherwise, if the extension has a `popclip version` and it is set to a value
+- Otherwise, if the extension has a `popclipVersion` and it is set to a value
   less than `4035`, or if the script file name ends with `.sh`, the script will
   be executed with `/bin/sh`. (This behaviour is for backward compatibility with
   existing extensions.)
@@ -65,7 +65,7 @@ The current working directory will be set to the package directory.
 
 ### Shell mode
 
-The `shell mode` field controls how the script run is executed:
+The `shellMode` field controls how the script run is executed:
 
 - `login` (the default): via the user's default shell as a login shell (`-l`), so the
   script sees the user's usual `PATH` and profile environment.

@@ -35,19 +35,19 @@ a published extension. This is based on the
 
 ```yaml
 identifier: at.EternalStorms.Yoink.PopClipExtension
-popclip version: 3785
+popclipVersion: 3785
 name: Yoink
 icon: yoink.png
 app:
   name: Yoink
   link: https://eternalstorms.at/yoink/mac
-  check installed: true
-  bundle identifiers:
+  checkInstalled: true
+  bundleIdentifiers:
     - at.EternalStorms.Yoink
     - at.EternalStorms.Yoink-setapp
     - at.EternalStorms.Yoink-demo
-service name: Add Selected Text to Yoink
-capture html: true
+serviceName: Add Selected Text to Yoink
+captureHtml: true
 description: Add the selected text to Yoink.
 ```
 
@@ -58,7 +58,7 @@ provides:
 
 ```yaml
 name: Yoink
-service name: Add Selected Text to Yoink
+serviceName: Add Selected Text to Yoink
 ```
 
 ::: tip Minimal or maximal?
@@ -174,17 +174,14 @@ PopClip allows properties in config files to be named in different ways.
 
 ### Key naming
 
-PopClip is very flexible about how you name keys. In this documentation you'll
-mostly see keys named in lowercase with spaces, for example `key name`. However,
-PopClip will treat `Key Name`, `keyName`, `KeyName`, `key_name`, `key-name` and
-`KEY_NAME` as equivalents.
+PopClip is very flexible about how you name keys. These docs name every key in
+camelCase, for example `keyName` — but PopClip treats `key name`, `Key Name`,
+`KeyName`, `key_name`, `key-name` and `KEY_NAME` as equivalents, so configs
+written in any of those styles work identically.
 
 <!-- The full range of formats is as defined by
 [case-anything](https://github.com/mesqueeb/case-anything), which PopClip uses
 internally. -->
-
-I tend to use `key name` in YAML, and `keyName` in JSON, but you can use
-whatever you prefer.
 
 ### Key name mapping
 

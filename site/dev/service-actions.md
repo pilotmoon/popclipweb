@@ -25,11 +25,11 @@ await popclip.performService("Make Sticky", note);
 
 ## Properties
 
-A service action is defined by the presence of a `service name` field, as follows:
+A service action is defined by the presence of a `serviceName` field, as follows:
 
 | Key            | Type   | Description                            |
 | -------------- | ------ | -------------------------------------- |
-| `service name` | String | The name of the macOS service to call. |
+| `serviceName` | String | The name of the macOS service to call. |
 
 ::: tip Service names
 The service name is usually exactly as shown in the Services menu, for example `Add to Deliveries`. However, in some cases you may need to look into the Info.plist of the application to find the name defined in there under `NSServices` → `NSMenuItem`. An example of this is the `Make New Sticky Note` service which must be called as `Make Sticky`.
@@ -37,7 +37,7 @@ The service name is usually exactly as shown in the Services menu, for example `
 
 ## Input and output
 
-The selected plain text will be sent as input to the service. If `capture html` is set to `true`, then the HTML version of the selected text will also be sent as input to the service.
+The selected plain text will be sent as input to the service. If `captureHtml` is set to `true`, then the HTML version of the selected text will also be sent as input to the service.
 
 Service actions never return any output.
 
@@ -48,7 +48,7 @@ Simple snippet calling a service:
 ```yaml
 #popclip
 name: "Deliveries"
-service name: "Add to Deliveries"
+serviceName: "Add to Deliveries"
 ```
 
 The following defines an extension that makes a new Stickies note from the
@@ -61,5 +61,5 @@ extension.)
 #popclip
 name: Make Sticky
 icon: symbol:note.text
-service name: Make Sticky
+serviceName: Make Sticky
 ```

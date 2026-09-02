@@ -77,7 +77,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   ```
 
 - When running shell scripts, a new
-  [`shell mode`](/dev/shell-script-actions#shell-mode)/`shellMode` setting controls how the
+  [`shellMode`](/dev/shell-script-actions#shell-mode) setting controls how the
   script run is executed: `login` (via the user's shell as a
   login shell), `nonlogin`, or `none` (no shell at all — direct execution).
   For legacy compatibility, classic Shell Script actions default to `login`, but the new JavaScript methods default to `none`.
@@ -114,9 +114,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   ```js
   Buffer.from("hello?~").toString("base64url"); // aGVsbG8_fg
   ```
-- New `migrate from` key for `string` and `multiple` options: names a removed
+- New `migrateFrom` key for `string` and `multiple` options: names a removed
   option whose stored value carries over to this one if its
-  value is a non-empty string. Useful with `allow other` where a multiple
+  value is a non-empty string. Useful with `allowOther` where a multiple
   option with separate free text override was used by a previous extension version.
 
 ### Changed

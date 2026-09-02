@@ -32,7 +32,7 @@ export const scriptVariables: ScriptVariable[] = [
   {
     key: "html",
     description:
-      "Sanitized HTML for the selection. CSS is removed, potentially unsafe tags are removed and markup is corrected. (`Capture HTML` must be specified.)",
+      "Sanitized HTML for the selection. CSS is removed, potentially unsafe tags are removed and markup is corrected. (`captureHtml` must be specified.)",
   },
   {
     key: "urlencoded text",
@@ -41,12 +41,12 @@ export const scriptVariables: ScriptVariable[] = [
   {
     key: "raw html",
     description:
-      "The original unsanitized HTML, if available. (`Capture HTML` must be specified.)",
+      "The original unsanitized HTML, if available. (`captureHtml` must be specified.)",
   },
   {
     key: "markdown",
     description:
-      "A conversion of the HTML to Markdown. (`Capture HTML` must be specified.)",
+      "A conversion of the HTML to Markdown. (`captureHtml` must be specified.)",
   },
   {
     key: "urls",

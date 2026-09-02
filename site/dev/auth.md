@@ -210,10 +210,10 @@ here:
 
 ## Related config keys
 
-- [`auth service label`](./top-level-properties) — a label for the
+- [`authServiceLabel`](./top-level-properties) — a label for the
   service, used in prompts such as "Sign in to your [label] account".
   Defaults to the extension's name.
-- [`auth keychain`](./top-level-properties) — which keychain the
+- [`authKeychain`](./top-level-properties) — which keychain the
   sign-in secret goes in: `sync` (the default) shares one sign-in across the
   user's devices via iCloud Keychain; `local` keeps it on the Mac where the
   user signed in, so each device signs in separately. Declare `local` where

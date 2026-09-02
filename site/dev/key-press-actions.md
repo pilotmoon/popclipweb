@@ -18,18 +18,18 @@ within a [JavaScript action](./js-actions).
 
 ## Properties
 
-A Key Press action is defined by the presence of a `key combo` or `key combos`
+A Key Press action is defined by the presence of a `keyCombo` or `keyCombos`
 field, as follows:
 
 | Key                | Type   | Description                                                                                                     |
 | ------------------ | ------ | --------------------------------------------------------------------------------------------------------------- |
-| `key combo`        | String | The key combination to press, as defined in [String format](#string-format).                                    |
-| `key combos`       | Array  | Instead of a single key combo, you can supply array of them. PopClip will press all the key combos in sequence. |
-| `key combo target` | String | Where to post the presses: `session` (the default), `app` or `hid`. See [Target](#target).                      |
+| `keyCombo`        | String | The key combination to press, as defined in [String format](#string-format).                                    |
+| `keyCombos`       | Array  | Instead of a single key combo, you can supply array of them. PopClip will press all the key combos in sequence. |
+| `keyComboTarget` | String | Where to post the presses: `session` (the default), `app` or `hid`. See [Target](#target).                      |
 
 ## Target
 
-The `key combo target` field says where PopClip posts the key events:
+The `keyComboTarget` field says where PopClip posts the key events:
 
 | Value     | Description                                                                            |
 | --------- | -------------------------------------------------------------------------------------- |
@@ -45,9 +45,9 @@ some cases where posting to `session` fails.
 ```yaml
 #popclip
 name: Bold
-key combo: command b
-key combo target: app
-stay visible: true
+keyCombo: command b
+keyComboTarget: app
+stayVisible: true
 ```
 
 ## Input and output
@@ -243,7 +243,7 @@ enum {
 ## Wait between key presses
 
 By default, PopClip does not wait between key presses. To add a delay, put
-`wait <milliseconds>` in the `key combos` array. For example, `wait 100` will
+`wait <milliseconds>` in the `keyCombos` array. For example, `wait 100` will
 wait 100 milliseconds. (See example below.)
 
 ## Examples
@@ -254,7 +254,7 @@ A simple key press to make text bold in most editors:
 #popclip
 name: Bold
 icon: B
-key combo: command b
+keyCombo: command b
 ```
 
 Pressing a sequence of keys:
@@ -264,7 +264,7 @@ Pressing a sequence of keys:
 name: Paste and Enter
 icon: square monospaced ↵
 requirements: [paste] # only show action when there is something to paste
-key combos:
+keyCombos:
   - command v
   - return
 ```
@@ -275,7 +275,7 @@ Pressing a sequence of keys, with a wait included:
 #popclip
 name: Spotlight
 before: copy # puts selected text on the clipboard
-key combos:
+keyCombos:
   - command space
   - wait 50 # waits 50 milliseconds
   - command v
@@ -288,8 +288,8 @@ A "Superscript" extension, supporting a couple of different apps:
 name: Superscript
 icon: iconify:tabler:superscript
 actions:
-  - required apps: [com.microsoft.Word]
-    key combo: command shift =
-  - required apps: [com.apple.iWork.Pages]
-    key combo: command control +
+  - requiredApps: [com.microsoft.Word]
+    keyCombo: command shift =
+  - requiredApps: [com.apple.iWork.Pages]
+    keyCombo: command control +
 ```

@@ -28,8 +28,8 @@ optional fields, as follows:
 | Key              | Type               | Description                                                                                                                                                  |
 | ---------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `url`            | String             | The URL to open when the user clicks the action. Use either `{popclip text}` or `***` as placeholder for the selected text.                                  |
-| `clean query`    | Boolean (Optional) | If `true`, newlines and tabs in the text will be replaced with a space, and consecutive spaces will be collapsed to a single space. Default is `false`.      |
-| `spaces as plus` | Boolean (Optional) | If `true`, spaces in the inserted text are encoded as `+` instead of `%20`. Some search engines (for example Amazon) expect this format. Default is `false`. |
+| `cleanQuery`    | Boolean (Optional) | If `true`, newlines and tabs in the text will be replaced with a space, and consecutive spaces will be collapsed to a single space. Default is `false`.      |
+| `spacesAsPlus` | Boolean (Optional) | If `true`, spaces in the inserted text are encoded as `+` instead of `%20`. Some search engines (for example Amazon) expect this format. Default is `false`. |
 
 ::: info Verbatim search with the Option key
 
@@ -37,7 +37,7 @@ If the user holds Option (⌥) when invoking the action, PopClip wraps the
 inserted text in double quotes, so that search engines treat it as an
 exact-phrase search.
 
-_The `alternate url` property supported by earlier versions of PopClip was
+_The `alternateUrl` property supported by earlier versions of PopClip was
 removed in PopClip 2026.7. If present in a config, it is now ignored._
 
 :::
@@ -47,7 +47,7 @@ removed in PopClip 2026.7. If present in a config, it is now ignored._
 The selected plain text will be inserted into the URL, replacing the
 `{popclip text}` or `***` placeholder if present. PopClip will always trim leading and
 trailing whitespace and newlines, and URL-encode the text. Optionally, PopClip
-will perform further whitespace cleanup with the `clean query` flag.
+will perform further whitespace cleanup with the `cleanQuery` flag.
 
 Option parameters can be inserted in the URL, in the same format as for
 AppleScript actions. See [example](#use-of-option-parameter).
