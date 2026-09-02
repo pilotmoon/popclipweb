@@ -30,8 +30,6 @@ Alternatively, a config snippet may define a `javaScript` or `javaScriptFile` fi
 | `javaScript`     | String | A JavaScript text string to load.                       |
 | `javaScriptFile` | String | Path to a `.js` or `.ts` file in the package directory. |
 
-A code snippet is equivalent to a config snippet whose `javaScriptFile` is the snippet itself.
-
 For example, here is a config snippet with the action's code inline in the
 `javaScript` field:
 
@@ -41,6 +39,8 @@ name: Word Count
 icon: square 123
 javaScript: popclip.showText(popclip.input.text.split(/\s+/).length + " words")
 ```
+
+A code snippet is equivalent to a config snippet whose `javaScriptFile` is the snippet itself.
 
 ### Script format
 
@@ -61,7 +61,8 @@ Internally, this will be wrapped in an async arrow function definition like
 this:
 
 ```javascript
-const main = async () => { // [!code focus:1]
+const main = async () => {
+  // [!code focus:1]
   return "foo";
 }; // [!code focus:1]
 ```
