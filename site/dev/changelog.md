@@ -25,52 +25,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- Snippets: the `language` and `module` header keys are now optional. A code
-  body under a `//` comment header is treated as TypeScript by default, a
-  `--` header implies AppleScript, and PopClip
-  [detects](/dev/js-modules#module-detection) that the code is a module
-  if it uses ES module `export` syntax, a `defineExtension()`
-  call, or a reference to `module` or `exports`. A complete module snippet is
-  now just:
+- Snippets: the `language` key is now optional. A code body under a `//` comment header is treated as TypeScript by default:
+
   ```js
   // #popclip
-  // name: Minimal
+  // name: Minimal JS/TS Snippet
+  popclip.showText("hi friends!");
+  ```
+
+  Likewise, code with a `--` comment header is AppleScript by default. For real files (`.js`/`.ts` files in packages or opened as snippets) the suffix still determines the language.
+
+- Snippets: `module: true` is no longer required. PopClip now
+  [detects](/dev/js-modules#module-detection) that the code is a module
+  if it uses `export` syntax, a `defineExtension()`
+  call, or a reference to `module` or `exports`. A complete module snippet is
+  now just:
+
+  ```js
+  // #popclip
+  // name: Minimal Module Snippet
   defineExtension({ action: () => popclip.showText("hi friends!") });
   ```
-  Use `language: javascript` to bypass the TypeScript pipeline, and
-  `module: false` (or `true`) to override the module detection.
-- Module detection also applies to `Config.js`/`Config.ts` files in packages,
-  and to `.js`/`.ts` files opened as snippets. For a real file, the suffix
-  determines the language: `.js` files are plain JavaScript (never
-  transpiled), `.ts` files go through the TypeScript pipeline. The TypeScript
-  default applies only to nameless text such as a selected snippet or `.popcliptxt` body.
+
 - JavaScript: new
   [popclip.runShellScript()](/dev/api/interfaces/PopClip.html#runshellscript)
   and
   [popclip.runShellScriptFile()](/dev/api/interfaces/PopClip.html#runshellscriptfile)
-  methods run a shell script from a JavaScript action, with the `script`
-  entitlement. Set the interpreter, extra
-  environment variables, stdin and positional
-  arguments; the result is `{ stdout, stderr, status }`.
+  methods, for running a script with the `script` entitlement.
+  Set the interpreter, environment variables, a prefix line, stdin and positional arguments.
+  ```js
+  const { stdout } = await popclip.runShellScript("print(2 ** 100)", {
+    interpreter: "python3",
+  });
+  ```
+- JavaScript: a new global template function `$` — the
+  [shell tag](/dev/api/interfaces/ShellTag.html), a convenience shorthand for running shell commands from
+  JavaScript. It runs the template text with `/bin/zsh` in strict mode (`set -euo pipefail`), and
+  interpolated values are shell-escaped.
+
   ```js
   // #popclip speak definition example
   // name: Speak Definition
   // entitlements: [script]
   const word = popclip.input.text.trim();
   const definition = util.getDictionaryDefinition(word) ?? "no definition";
-  await popclip.runShellScript("say $definition", {
-    interpreter: "zsh",
-    env: { definition },
-  });
+  await $`say ${definition}`;
   ```
+
 - When running shell scripts, a new
   [`shell mode`](/dev/shell-script-actions#shell-mode)/`shellMode` setting controls how the
   script run is executed: `login` (via the user's shell as a
   login shell), `nonlogin`, or `none` (no shell at all — direct execution).
-  For legacy compatibility, Shell Script actions default to `login`, but the new JavaScript methods default to `none`.
-- JavaScript: new
-  [util.shellEscape()](/dev/api/interfaces/Util.html#shellescape) method
-  escapes text for literal inclusion in a POSIX shell command line.
+  For legacy compatibility, classic Shell Script actions default to `login`, but the new JavaScript methods default to `none`.
 - JavaScript: new
   [popclip.performService()](/dev/api/interfaces/PopClip.html#performservice)
   method performs a macOS Service by name, with string or content-dictionary
