@@ -13,27 +13,21 @@ In JavaScript, variables are on the [`popclip` global object](js-environment).
 
 :::
 
-## Shell Script variables
+### Shell Script variables
 
 All values are provided as strings. Where no value is available, it will be set
-to an empty string.
-
-Within a shell script, PopClip sets script variables named like this:
+to an empty string. PopClip sets script variables named like this:
 `POPCLIP_TEXT`, `POPCLIP_BROWSER_TITLE`, `POPCLIP_OPTION_FOO`, etc.
-
-Example of using variables in a shell script:
 
 ```shell
 open "https://translate.google.com/?text=${POPCLIP_URLENCODED_TEXT}"
 ```
 
-## AppleScript variables
+### AppleScript variables
 
 Within an AppleScript, PopClip pre-processes the script to replace placeholders
 with strings. Placeholders look like this: `{popclip text}`,
 `{popclip browser title}`, `{popclip option foo}`, etc.
-
-Example of using placeholders in an AppleScript:
 
 ```applescript
 display dialog "{popclip text}" with title "Selected in {popclip app name}"
