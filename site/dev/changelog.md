@@ -132,6 +132,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   start of the backing buffer when passed a `Uint8Array` view with a non-zero
   offset, such as one made with `subarray()`, producing the wrong result.
 
+### Documentation
+
+- These docs now name every config key in camelCase (`serviceName`,
+  `keyCombo`, `popclipVersion`), where previously they used lowercase with
+  spaces (`service name`). This is a documentation convention only: PopClip
+  treats all [key naming styles](/dev/config#key-naming) as equivalent, so
+  existing configs are unaffected.
+- The AppleScript and JavaScript compound keys are documented with a capital
+  S — `appleScript`, `appleScriptFile`, `appleScriptCall`, `javaScript`,
+  `javaScriptFile` — matching API function names such as
+  `popclip.runAppleScript()`. These spellings have always been accepted via
+  [key name mapping](/dev/config#key-name-mapping).
+
 ## Version 2026.8 (6159)
 
 ### Added
