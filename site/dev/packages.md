@@ -6,7 +6,7 @@ titleTemplate: :title — PopClip Developer
 # Packages
 
 A PopClip extension package bundles together all the files needed for an
-extension in a folder.
+extension in a folder. Packages are the format used by the [PopClip extensions directory](/extensions),
 
 ## The package folder
 
@@ -63,17 +63,16 @@ package.
 
 ## The Config file
 
-Every package must include a [config dictionary](./config.md). PopClip will try
+Every package must include a [config file](./config.md). PopClip will try
 looking in the root of the package directory for a file with base name `Config`
 (case sensitive). The file is interpreted according to its extension:
 
-| File Name                                 | Format                 | Interpretation                                                                  |
-| ----------------------------------------- | ---------------------- | ------------------------------------------------------------------------------- |
-| `Config.plist`                            | Plist                  | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file. |
-| `Config.json`                             | JSON                   | A [JSON](https://www.json.org/json-en.html) file.                               |
-| `Config.yaml`                             | YAML                   | A [YAML 1.2](https://yaml.org) file.                                            |
-| `Config.js`, `Config.ts`                  | JavaScript, TypeScript | [JavaScript or TypeScript module](./js-modules.md).                             |
-| `Config.<anything else>` or just `Config` | Snippet                | Interpreted as [snippet](./snippets).                                           |
+| File Name                                                                                             | Format  | Interpretation                                                                  |
+| ----------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------- |
+| `Config.plist`                                                                                        | Plist   | An Apple [XML Property List](https://en.wikipedia.org/wiki/Property_list) file. |
+| `Config.json`                                                                                         | JSON    | A [JSON](https://www.json.org/json-en.html) file.                               |
+| `Config.yaml`                                                                                         | YAML    | A [YAML 1.2](https://yaml.org) file.                                            |
+| `Config.js`<br>`Config.ts`<br>`Config.applescript`<br>`Config.<anything else>`<br>...or just `Config` | Snippet | Interpreted as [snippet](./snippets).                                           |
 
 ::: info Historical note
 
@@ -88,6 +87,10 @@ Apart from the config file, an extension package may contain any number of other
 files. You are free to name these however you like, except for the reserved
 names `Config[.*]` and `_Signature.plist`. You can also use subfolders to
 organise your files.
+
+You can prefix file or folder names with an underscore `_` or dot `.` to [exclude](/extensions/submit#excluded-files)
+them from the final package delivered by the PopClip extensions directory.
+Handy for test files or documentation.
 
 ## Examples
 

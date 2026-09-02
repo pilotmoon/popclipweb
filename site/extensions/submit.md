@@ -171,7 +171,7 @@ I encourage you to include a changelog to let users know what has changed in eac
 - 2026-07-02: Initial release.
 ```
 
-### Hidden files
+### Excluded files
 
 Any file or folder within the source package whose name starts with `.` or `_` is automatically excluded
 from the final packaged extension.
