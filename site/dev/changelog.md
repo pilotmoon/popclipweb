@@ -134,6 +134,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Documentation
 
+- These docs have been generally reorganized to present JavaScript as the
+  primary language for authoring extensions, with the other action types
+  covered as supplementary material. Page order, navigation and examples
+  have been updated throughout.
 - These docs now name every config key in camelCase (`serviceName`,
   `keyCombo`, `popclipVersion`), where previously they used lowercase with
   spaces (`service name`). This is a documentation convention only: PopClip
