@@ -134,6 +134,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Documentation Update, September 2026
 
+- New page: [Calling external scripts](/dev/external-scripts), covering the `$` shell
+  tag and the shell script and AppleScript functions.
 - These docs have been generally reorganized to present JavaScript as the
   primary language for authoring extensions, with the other action types
   covered as supplementary material. Page order, navigation and examples

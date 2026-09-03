@@ -11,7 +11,9 @@ presses, as if it was performed by the user.
 ::: tip Pressing a key from JavaScript
 
 You can also use
-[`popclip.pressKey()`](/dev/api/interfaces/PopClip.html#presskey)
+[`popclip.pressKey()`](/dev/api/interfaces/PopClip.html#presskey) — or
+[`popclip.pressKeys()`](/dev/api/interfaces/PopClip.html#presskeys), for a
+sequence of combos with optional waits —
 within a [JavaScript action](./js-actions).
 
 :::

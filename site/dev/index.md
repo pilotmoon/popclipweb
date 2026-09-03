@@ -108,18 +108,8 @@ and as browsable HTML in the
 As well as the `popclip` object and other globals available to scripts, this
 definitions file describes the extension config format itself.
 
-To point your editor at the definitions, for autocomplete and type checking:
-
-1. Install the package: `npm install -D @popclip/types`
-2. Configure `tsconfig.json`:
-   ```json
-   compilerOptions: {
-     // ...
-     types: ["@popclip/types"],
-   }
-   ```
-
-For more details, see [TypeScript support](/dev/js-environment#typescript-support).
+To set up your editor with the definitions, for autocomplete and type
+checking, see [TypeScript support](/dev/js-environment#typescript-support).
 
 ### Turn off unsigned warning
 
