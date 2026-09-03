@@ -76,11 +76,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   await $`say ${definition}`;
   ```
 
-- When running shell scripts, a new
-  [`shellMode`](/dev/shell-script-actions#shell-mode) setting controls how the
-  script run is executed: `login` (via the user's shell as a
-  login shell), `nonlogin`, or `none` (no shell at all — direct execution).
-  For legacy compatibility, classic Shell Script actions default to `login`, but the new JavaScript methods default to `none`.
 - JavaScript: new
   [popclip.performService()](/dev/api/interfaces/PopClip.html#performservice)
   method performs a macOS Service by name, with string or content-dictionary
@@ -111,13 +106,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `"base64url"` encoding, both as a global and via `require("buffer")`. It
   uses the standard URL-safe alphabet (`+/` → `-_`) and no padding when
   encoding, and is interchangeable with `"base64"` when decoding.
+
   ```js
   Buffer.from("hello?~").toString("base64url"); // aGVsbG8_fg
   ```
-- New `migrateFrom` key for `string` and `multiple` options: names a removed
+
+- Shell scripts: when running shell scripts, a new
+  [`shellMode`](/dev/shell-script-actions#shell-mode) setting controls how the
+  script run is executed: `login` (via the user's shell as a
+  login shell), `nonlogin`, or `none` (no shell at all — direct execution).
+  For legacy compatibility, classic Shell Script actions default to `login`, but the new JavaScript methods default to `none`.
+- Options: new `migrateFrom` key for `string` and `multiple` options: names a removed
   option whose stored value carries over to this one if its
   value is a non-empty string. Useful with `allowOther` where a multiple
   option with separate free text override was used by a previous extension version.
+
+- You can now install snippets by dragging the text onto the PopClip menu bar icon.
 
 ### Changed
 
@@ -132,20 +136,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   start of the backing buffer when passed a `Uint8Array` view with a non-zero
   offset, such as one made with `subarray()`, producing the wrong result.
 
-## Documentation Update, September 2026
+### Documentation
 
-- New page: [Calling external scripts](/dev/external-scripts), covering the `$` shell
-  tag and the shell script and AppleScript functions.
-- These docs have been generally reorganized to present JavaScript as the
+- The developer documentation has been generally reorganized to present JavaScript as the
   primary language for authoring extensions, with the other action types
   covered as supplementary material. Page order, navigation and examples
   have been updated throughout.
-- Some renamed terminology: "module-based extensions" are now simply
-  [module extensions](/dev/js-modules), and what was called "inverted syntax"
-  is now a [code snippet](/dev/snippets#inverted-syntax) — with a config-only
-  snippet now called a [config snippet](/dev/snippets#config-snippets) to
-  distinguish the two.
-- These docs now name every config key in camelCase (`serviceName`,
+- The docs are now LLM-friendly: every page has a plain
+  Markdown twin (add `.md` to its URL), and the whole reference is available
+  as [/llms.txt](/llms.txt) and [/dev/all.md](/dev/all.md).
+- The docs name every config key in camelCase (`serviceName`,
   `keyCombo`, `popclipVersion`), where previously they used lowercase with
   spaces (`service name`). This is a documentation convention only: PopClip
   treats all [key naming styles](/dev/config#key-naming) as equivalent, so
@@ -155,9 +155,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `javaScriptFile` — matching API function names such as
   `popclip.runAppleScript()`. These spellings have always been accepted via
   [key name mapping](/dev/config#key-name-mapping).
-- The documentation website is now LLM-friendly: every page has a plain
-  Markdown twin (add `.md` to its URL), and the whole reference is available
-  as [/llms.txt](/llms.txt) and [/dev/all.md](/dev/all.md).
+- Some renamed terminology: "module-based extensions" are now simply
+  [module extensions](/dev/js-modules), and what was called "inverted syntax"
+  is now a [code snippet](/dev/snippets#inverted-syntax) — with a config-only
+  snippet now called a [config snippet](/dev/snippets#config-snippets) to
+  distinguish the two.
+- New page: [Calling external scripts](/dev/external-scripts), covering the `$` shell
+  tag and the shell script and AppleScript functions.
+
+- The [JavaScript API Reference](/dev/api/) is now hosted directly on this site instead of on GitHub Pages.
 
 ## Version 2026.8 (6159)
 
