@@ -9,7 +9,7 @@ prev:
 
 <!-- markdownlint-disable MD025 -->
 
-# :robot: PopClip Extensions Developer Documentation
+# PopClip Extensions Developer Documentation :robot:
 
 ## Getting started
 

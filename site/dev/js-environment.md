@@ -101,7 +101,7 @@ and time zone information, and macOS dictionary and spelling lookups.
 
 Unlike the methods on `popclip`, these can be called from a
 [population function](./js-modules#population-function) — see
-[Queries during population](./js-modules#queries-during-population).
+[Restrictions during population](./js-modules#restrictions-during-population).
 
 ### Global `pasteboard` object
 
@@ -126,8 +126,8 @@ PopClip's JavaScript engine is Apple's
 [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),
 which is part of macOS. Language features will vary depending on the macOS
 version PopClip is running on. However, you can assume availability of language
-features up to at least ES2018 on all macOS versions that PopClip supports
-(10.15+).
+features up to at least ES2021 on all macOS versions that PopClip supports
+(13.0+).
 
 ::: tip JavaScript reference
 
@@ -338,10 +338,10 @@ autocomplete and type-checking in TypeScript-aware editors.
 
 Use an NPM-compatible JavaScript package manager to install both `typescript`
 itself and the types package in the directory where you are writing your
-extension code.:
+extension code:
 
 ```bash
-npm install --dev typescript @popclip/types
+npm install -D typescript @popclip/types
 ```
 
 And then, in your `tsconfig.json` file, add an explicit reference to the types:
@@ -358,7 +358,7 @@ Once this is done, you should get autocomplete and type-checking in your editor
 and TypeScript's `tsc` will check your code for type errors:
 
 ```bash
-npm run tsc --noEmit
+npx tsc --noEmit
 ```
 
 ## Test Harness
