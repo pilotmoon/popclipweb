@@ -57,21 +57,39 @@ to the `auth` function in `info`. An option of type `password` is never
 stored — it exists only to be passed to the `auth` function.
 
 The [Pinboard extension](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Pinboard.popclipext)
-uses this pattern to retrieve the user's API token:
+uses this pattern to retrieve the user's API token. Here is a compact but
+complete version of it, as an installable snippet — the `auth` function
+signs in, and the action then uses the stored `authsecret` to bookmark the
+selected URL:
 
-```ts
+```javascript
+// #popclip
+// name: Pinboard
+// icon: iconify:simple-icons:pinboard
+// entitlements: [network]
+// after: show-status
+import axios from "axios";
+const api = axios.create({
+  baseURL: "https://api.pinboard.in/v1/",
+  params: { format: "json" },
+});
 defineExtension({
   options: [
     { identifier: "username", type: "string", label: "Username" },
     { identifier: "password", type: "password", label: "Password" },
   ],
   auth: async (info) => {
-    // validate the credentials by fetching the user's API token
-    const response = await axios.get(
-      "https://api.pinboard.in/v1/user/api_token",
-      { auth: info, params: { format: "json" } }, // HTTP basic authentication
-    );
+    // validate the credentials by fetching the user's API token,
+    // using HTTP basic authentication
+    const response = await api.get("user/api_token", { auth: info });
     return response.data.result;
+  },
+  action: async (input, options, context) => {
+    // bookmark the selected URL
+    const url = input.data.urls[0];
+    const description = context.browserUrl === url ? context.browserTitle : url;
+    const auth_token = `${options.username}:${options.authsecret}`;
+    await api.get("posts/add", { params: { url, description, auth_token } });
   },
 });
 ```
