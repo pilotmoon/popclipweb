@@ -22,7 +22,7 @@ which will attempt to load and install it.
 
 ::: tip Viewing package contents
 
-macOS treats `.popclipext`directories as packages. To view the contents of a
+macOS treats `.popclipext` directories as packages. To view the contents of a
 package, right-click it in Finder and choose Show Package Contents.
 
 :::

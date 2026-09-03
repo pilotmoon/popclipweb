@@ -43,7 +43,7 @@ Here are some examples:
 | `T`                              | <Icon spec="T" />                              | Here, `T` specifies the base icon as a [text icon](#text-icons).                                              |
 | `square T`                       | <Icon spec="square T" />                       | Here, `square` is a modifier that encloses the base icon in a square.                                         |
 | `square filled T`                | <Icon spec="square filled T" />                | Combining two modifiers; `filled` specifies that the square is a solid shape.                                 |
-| `circle filled T`                | <Icon spec="circle filled T" />                | Here we use a non-Ascii character as the base icon. The `circle` modifier encloses the base icon in a circle. |
+| `circle filled T`                | <Icon spec="circle filled T" />                | The `circle` modifier encloses the base icon in a circle. |
 | `search filled T`                | <Icon spec="search filled T" />                | The `search` modifier encloses the base icon in a magnifying glass shape.                                     |
 | `iconify:mdi:home`               | <Icon spec="iconify:mdi:home" />               | Here, the base icon is an [Iconify icon](#iconify-icons).                                                     |
 | `square filled iconify:mdi:home` | <Icon spec="square filled iconify:mdi:home" /> | We put the home icon in a filled square.                                                                      |

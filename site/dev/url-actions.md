@@ -56,7 +56,7 @@ URL actions never return any output.
 
 ::: tip Advanced behaviours
 
-If a plain Open URL action isn't enough, use a [JavaScript action](./js-actions). There are two functions:.
+If a plain Open URL action isn't enough, use a [JavaScript action](./js-actions). There are two functions:
 
 - [`popclip.openUrl()`](/dev/api/interfaces/PopClip.html#openurl) opens a URL you have built yourself.
 - [`popclip.openTemplateUrl()`](/dev/api/interfaces/PopClip.html#opentemplateurl) takes the same `***` placeholder as the `url` property and does the encoding for you.

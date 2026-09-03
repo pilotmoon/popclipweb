@@ -6,7 +6,7 @@ titleTemplate: :title — PopClip Developer
 # JavaScript environment
 
 JavaScript actions and module extensions run inside PopClip's JavaScript
-environment. This environment provides provides properties and functions that
+environment. This environment provides properties and functions that
 let your scripts interact with PopClip. Scripts run in a secure JavaScript
 sandbox that cannot access the filesystem.
 

@@ -62,9 +62,8 @@ this:
 
 ```javascript
 const main = async () => {
-  // [!code focus:1]
   return "foo";
-}; // [!code focus:1]
+};
 ```
 
 When the action is run, PopClip calls this internal `main` function with no
