@@ -66,6 +66,7 @@ selected URL:
 // #popclip
 // name: Pinboard
 // icon: iconify:simple-icons:pinboard
+// requirements: [url]
 // entitlements: [network]
 // after: show-status
 import axios from "axios";
