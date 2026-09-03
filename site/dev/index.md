@@ -110,7 +110,7 @@ definitions file describes the extension config format itself.
 
 To point your editor at the definitions, for autocomplete and type checking:
 
-1. Install the package: `npm install --dev @popclip/types`
+1. Install the package: `npm install -D @popclip/types`
 2. Configure `tsconfig.json`:
    ```json
    compilerOptions: {
