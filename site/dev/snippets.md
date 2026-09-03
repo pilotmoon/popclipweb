@@ -10,15 +10,17 @@ text. A snippet begins with a `#popclip` (or `# popclip`) marker line.
 
 ```javascript
 // #popclip
-// name: Hello
-// icon: iconify:mingcute:wave-hand-line
-const greeting = "Hello, " + popclip.input.text;
-popclip.showText(greeting);
+// name: Title Case
+// icon: scale=120 move-x=3 circle filled Tc
+const titled = popclip.input.text.replace(
+  /\S+/g,
+  (word) => word[0].toUpperCase() + word.slice(1).toLowerCase(),
+);
+popclip.pasteText(titled);
 ```
 
-When you select the text of a snippet, PopClip offers an "Install" action. (Try it!)
-
-![](./media/anim-install-snippet-4.mp4 "Installing a snippet by selecting its text.")
+When you select the text of a snippet, PopClip offers an "Install" action, as
+shown in the [introduction](./index). (Try it!)
 
 ::: tip Size limit, and snippet files
 
@@ -56,11 +58,11 @@ JavaScript, AppleScript and shell script actions. The whole text of the snippet 
 `module`, `appleScriptFile` or `shellScriptFile` for the extension, as
 follows:
 
-| To interpret as...            | Include these fields...                                                                                                                                                                                                                                                                              |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| To interpret as...           | Include these fields...                                                                                                                                                                                                                                                                             |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `javaScriptFile` or `module` | Nothing needed: a code body under a `//` comment header is treated as TypeScript by default. (Specify `language: javascript` to treat as raw JavaScript instead.) A body that exports is loaded as `module` (see [Module detection](./js-modules#module-detection)), otherwise as `javaScriptFile`. |
-| `appleScriptFile`            | Nothing needed: a body under a `--` comment header is treated as AppleScript.                                                                                                                                                                                                                        |
-| `shellScriptFile`           | Specify `interpreter`, or start the snippet with a `#!` line.                                                                                                                                                                                                                                        |
+| `appleScriptFile`            | Nothing needed: a body under a `--` comment header is treated as AppleScript.                                                                                                                                                                                                                       |
+| `shellScriptFile`            | Specify `interpreter`, or start the snippet with a `#!` line.                                                                                                                                                                                                                                       |
 
 ### Non-JavaScript snippets
 

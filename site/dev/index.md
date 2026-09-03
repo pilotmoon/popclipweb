@@ -11,41 +11,37 @@ prev:
 
 # :robot: PopClip Extensions Developer Documentation
 
-This section of the website provides a detailed specification of PopClip's
-extension system. With this information, you can create your own
-extensions.
+## Getting started
 
-::: tip Getting help
-
-If you have any questions about the specification or need help with developing
-an extension, I encourage you to post to the
-[PopClip Forum](https://forum.popclip.app). I frequently check the forum and
-will be happy to help you there.
-
-:::
-
-## Extensions Overview
-
-### Extensions run JavaScript
-
-An extension defines one or more actions. At heart, an action runs JavaScript
-in PopClip's [JavaScript environment](./js-environment.md). (Wherever these
-docs say JavaScript, that includes
-[TypeScript](/dev/js-environment#typescript-support), which PopClip supports
-natively.) The simplest complete extension is a few lines of text:
+Here is a complete PopClip extension. To install it, select the whole block
+of text, and PopClip will offer an "Install" action:
 
 ```js
 // #popclip
-// name: Say Hi
-popclip.showText("hi!");
+// name: Hello
+// icon: iconify:mingcute:wave-hand-line
+const greeting = "Hello, " + popclip.input.text;
+popclip.showText(greeting);
 ```
 
-That is a [snippet](./snippets.md) defining a
-[JavaScript action](./js-actions.md). For more advanced functionality, a [module extension](./js-modules.md) can define
-everything in code: multiple actions, options, and dynamic behavior, via
-`defineExtension()`.
+![](./media/anim-install-snippet-4.mp4 "Installing the extension by selecting its text.")
 
-### No-code actions
+That is a [snippet](./snippets.md): plain text that PopClip installs straight
+from a text selection. This one defines a
+[JavaScript action](./js-actions.md) — everything after the comment header is
+code, run when the action is clicked, in PopClip's
+[JavaScript environment](./js-environment.md), with access to the selected
+text and to PopClip itself through the global `popclip` object. (Wherever
+these docs say JavaScript, that includes
+[TypeScript](/dev/js-environment#typescript-support), which PopClip supports
+natively.)
+
+An extension defines one or more actions. The Hello extension above is the
+simplest form: one action, whose code is the snippet body. From there, a
+[module extension](./js-modules.md) can define everything in code — multiple
+actions, options, and dynamic behavior, via `defineExtension()`.
+
+## No-code actions
 
 For common tasks, you don't need to write code at all. Four action types are
 ready-made conveniences — declarative wrappers around things that can also be
@@ -58,7 +54,7 @@ done in JavaScript:
 | [Service](./service-actions)        | Send the selected text to a macOS Service.              | `popclip.performService()` |
 | [Shortcut](./shortcut-actions)      | Send the selected text to a macOS Shortcut.             | `popclip.runShortcut()`    |
 
-### Classic script actions
+## Classic script actions
 
 Two further action types run a script that you provide to be run outside PopClip.
 They predate the JavaScript environment, but they remain supported.
@@ -162,3 +158,9 @@ If you create an extension that others might find useful, you are welcome to
 submit it for publication in the
 [PopClip Extensions Directory](/extensions/). See
 [Submit an Extension](/extensions/submit) for how it works.
+
+## Getting help
+
+If you have any questions or need help with developing an extension, post to
+the [PopClip Forum](https://forum.popclip.app). I frequently check the forum
+and will be happy to help you there.

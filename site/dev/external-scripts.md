@@ -24,14 +24,17 @@ script.
 The global [`$`](/dev/api/interfaces/ShellTag.html) is the convenient way to
 run a shell command. Write the command as a
 [template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals),
-and await the result:
+and await the result. For example, here is an extension to paste the Mac's
+local IP address — information that JavaScript alone cannot reach:
 
 ```javascript
 // #popclip
-// name: What Day
+// name: Paste IP Address
+// icon: IP
 // entitlements: [script]
-const result = await $`date +%A`;
-popclip.showText(`Today is ${result}`);
+// requirements: [paste]
+const ip = await $`ipconfig getifaddr en0 || ipconfig getifaddr en1`;
+popclip.pasteText(`${ip}`);
 ```
 
 The command runs with `/bin/zsh` in strict mode (`set -euo pipefail`). The
@@ -69,7 +72,7 @@ kept and reused — even for other interpreters:
 // #popclip
 // name: Python Upper
 // entitlements: [script]
-const py = $({ interpreter: "python3", quote: JSON.stringify, prefix: null });
+const py = $({ interpreter: "python3", quote: JSON.stringify });
 const result = await py`print(${popclip.input.text}.upper())`;
 popclip.showText(`${result}`);
 ```
@@ -113,8 +116,6 @@ Points to note:
 - To pass data into the script, use the `env`, `stdin` or `arguments` options
   — they need no escaping. Avoid composing data into the script source
   itself; that is the `$` tag's job, since it escapes its interpolations.
-  (For building command strings by hand, there is also
-  [`util.shellEscape()`](/dev/api/interfaces/Util.html#shellescape).)
 - A successful run resolves with `{ stdout, stderr, status }`. A script that
   exits nonzero (or is killed by a signal) rejects the promise, with the same
   fields carried on the error.
