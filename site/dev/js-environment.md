@@ -126,8 +126,8 @@ PopClip's JavaScript engine is Apple's
 [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),
 which is part of macOS. Language features will vary depending on the macOS
 version PopClip is running on. However, you can assume availability of language
-features up to at least ES2021 on all macOS versions that PopClip supports
-(13.0+).
+features up to at least ES2023 on all macOS versions that PopClip supports
+(macOS 13 and later).
 
 ::: tip JavaScript reference
 

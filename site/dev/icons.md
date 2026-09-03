@@ -24,9 +24,9 @@ Icons are specified by using a text string to describe an icon.
 ::: tip Icon Picker in the app
 
 PopClip has a built-in icon browser: choose **Icon Picker** from the Tools
-menu in PopClip's settings window (or press ⌥⌘I). Search text icons, SF
-Symbols and the Iconify libraries, preview modifiers live, and copy the
-resulting specifier string for use in your config.
+menu in PopClip's settings window (or press ⌥⌘I). Search the Iconify icon
+libraries, preview any icon specifier with modifiers live, and copy the
+resulting string for use in your config.
 
 :::
 
