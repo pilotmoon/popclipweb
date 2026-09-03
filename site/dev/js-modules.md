@@ -10,7 +10,7 @@ to define your PopClip extension. This allows you use code to construct
 properties like `options` at load time, and to define `actions` dynamically, for
 example to generate titles or icons in response to the input text.
 
-If the extension's JS code exports anything via [`defineExtension()`](#module-format) (or `export ...`),
+If the extension's JS code exports anything via [`defineExtension()`](#module-format) (or `export`),
 PopClip loads it as a module and looks for extension properties in the
 exported object, after first loading static properties from YAML in the comment header.
 (A file that exports nothing is
