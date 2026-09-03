@@ -64,6 +64,17 @@ follows:
 | `appleScriptFile`            | Nothing needed: a body under a `--` comment header is treated as AppleScript.                                                                                                                                                                                                                       |
 | `shellScriptFile`            | Specify `interpreter`, or start the snippet with a `#!` line.                                                                                                                                                                                                                                       |
 
+<!-- TODO: confirm final release build number before publishing (6215 is a placeholder; last beta was 6214) -->
+
+::: tip Inference is new
+
+Language and module inference is new in PopClip 2026.8.1. If you try to install
+a code snippet that specifies no `language`, `interpreter` or `module` on an older version of
+PopClip, it will fail with the error message "Specify language or
+interpreter".
+
+:::
+
 ### Non-JavaScript snippets
 
 Code snippets are not just for JavaScript — they can also be used with shell scripts and with AppleScript.
