@@ -196,67 +196,56 @@ app itself, and are available to load by scripts. These are:
 | `turndown`                   | 7.2.1   | HTML to Markdown converter               |
 | `valibot`                    | 1.1.0   | Validation and parsing library           |
 
-Library modules may be loaded by name, for example:
+Library modules are imported by name — see below.
 
-::: code-group
+## Importing other modules {#using-require}
+
+A script can import the [bundled libraries](#bundled-libraries), and other
+files from the extension package, using `import` syntax:
+
+```javascript
+import axios from "axios"; // a bundled library
+import { helper } from "./helper.js"; // another file in the package
+import strings from "./data/strings.json"; // JSON parses to an object
+```
+
+Equivalently, you can call the `require()` function — `import` statements are
+converted to `require()` calls under the hood:
 
 ```javascript
 const axios = require("axios");
 ```
 
-```typescript
-import axios from "axios";
-```
+### Module resolution
 
-:::
+The module specifier string is interpreted as follows:
 
-## Using `require()`
+- If it starts with `./` or `../`, it is a path to a file in the package
+  directory, relative to the current file.
+- Otherwise, it is tried as a path relative to the root of the package
+  directory; if no file is found there, it is then matched against the names
+  of the [bundled libraries](#bundled-libraries).
 
-PopClip has a `require()` function for loading modules and JSON data from other
-files. It takes a single string argument, interpreted as follows:
+Paths beginning with `/`, or using `..` to go up outside the package
+directory, are not valid.
 
-- If the string starts with `./` or `../`, it is interpreted as a path to a file
-  in the package directory, relative the current file.
-- Otherwise, the string is interpreted as a path relative to the root of the
-  package directory.
-- If no file is found in the package directory, the string is then checked
-  against the names of the [bundled libraries](#bundled-libraries). If found,
-  the library module is loaded and returned.
-
-The return value of `require()` is the exported value of the module, or the
-parsed JSON object. If the specified file or library module is not found, or an
-invalid path is supplied, `undefined` is returned.
-
-Results are cached, and subsequent calls to `require()` with the same argument
-will return the same object instance that was returned the first time.
-
-File paths beginning with `/` or using `..` to go up a directory level outside
-the package directory are not valid.
-
-TypeScript files can use `import` syntax to load modules, which will be
-transpiled to `require()` calls under the hood.
+The imported value is the module's exported value, or the parsed JSON object.
+Results are cached: importing the same specifier again returns the same
+instance. If nothing is found, or the path is invalid, the value is
+`undefined`.
 
 ### Supported file types
 
-The `require()` function can load the following file types:
+The module loader can load the following file types:
 
-| File extension | Description                                                                                                                                        |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.js`          | A JavaScript module in [CommonJS](https://www.typescriptlang.org/docs/handbook/2/modules.html#commonjs-syntax) format.                             |
-| `.ts`          | A TypeScript module. TypeScript modules may use [ES Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html#es-module-syntax) syntax. |
-| `.json`        | A JSON file parsed into a JavaScript object.                                                                                                       |
+| File extension | Description                                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.js`          | A JavaScript module, in [ES module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) or [CommonJS](https://www.typescriptlang.org/docs/handbook/2/modules.html#commonjs-syntax) format. |
+| `.ts`          | A TypeScript module, likewise in either format.                                                                                                                                                               |
+| `.json`        | A JSON file parsed into a JavaScript object.                                                                                                                                                                  |
 
 If no file name extension is specified, PopClip will try `.js`, `.ts`, `.json`
 in order.
-
-::: info Note on `.lzfse` files
-
-The `require()` loader also looks for the `.js.lsfze` file extension. These are
-compressed javascript files. It's how the internal modules are stored in the app
-package. A couple of my published extensions also use this format but I haven't
-documented it yet.
-
-:::
 
 ## Asynchronous operations and async/await
 

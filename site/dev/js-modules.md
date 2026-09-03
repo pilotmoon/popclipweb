@@ -10,7 +10,7 @@ to define your PopClip extension. This allows you use code to construct
 properties like `options` at load time, and to define `actions` dynamically, for
 example to generate titles or icons in response to the input text.
 
-If the extension's JS code exports anything — such as via [`defineExtension()`](#module-format) or `export ...` —
+If the extension's JS code exports anything via [`defineExtension()`](#module-format) (or `export ...`),
 PopClip loads it as a module and looks for extension properties in the
 exported object, after first loading static properties from YAML in the comment header.
 (A file that exports nothing is
@@ -96,11 +96,10 @@ module — an action's code may import libraries too. Set `module: true` or
 The module file may be written in JavaScript (`.js`) or TypeScript (`.ts`).
 
 The recommended way to define the extension is to call `defineExtension()`,
-passing the extension object. At runtime this is simply
-`module.exports = extension` — the difference is entirely one of types.
-Because the parameter is typed, every property of the object written inside
-the call is checked and autocompleted in your editor, with no type
-annotations needed anywhere. This is the form we use for our own extensions.
+passing the extension object. Because the parameter is typed, every property
+of the object written inside the call is checked and autocompleted in your
+editor, with no type annotations needed anywhere. This is the form we use
+for our own extensions.
 
 The exported property names and types are the same as defined in
 [Top-level properties](./top-level-properties), with the exception of `actions` which has special handling —
@@ -108,17 +107,25 @@ see [Module actions](#module-actions).
 
 #### Other export styles
 
-Exporting the properties directly is also fully supported. The module format
-is
-[CommonJS](https://www.typescriptlang.org/docs/handbook/2/modules.html#commonjs-syntax):
-you can export a single object with `module.exports = ...` or export
-individual properties like `exports.foo = ...`. TypeScript files can
-additionally use
-[ES Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html#es-module-syntax)
-syntax such as `export const action = ...`, which is transpiled to CommonJS
-under the hood. (JavaScript files may not use ES Modules syntax.) Export
-either a single default object (`export default {...}`) or named members —
-mixing both is a load error.
+Instead of `defineExtension()`, you can use
+[ES module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+`export` syntax. Export a single default extension object:
+
+```javascript
+export default { action: () => popclip.showText("hi!") };
+```
+
+or export individual properties as named exports:
+
+```javascript
+export const action = () => popclip.showText("hi!");
+```
+
+— one or the other, not both (mixing them is a load error).
+
+CommonJS style (`module.exports = ...`, `exports.action = ...`) is also
+supported. In fact, at runtime `defineExtension(obj)` is simply
+`module.exports = obj` — the difference is entirely one of types.
 
 #### Typed options
 
@@ -151,8 +158,8 @@ The module does not have to be loaded from `Config.js`/`Config.ts`.
 Alternatively, you can provide static config in another format (e.g.
 `Config.json`) and specify a module file name as follows:
 
-| Key      | Type   | Description                                                          |
-| -------- | ------ | -------------------------------------------------------------------- |
+| Key      | Type   | Description                                |
+| -------- | ------ | ------------------------------------------ |
 | `module` | String | The path to a `.js` or `.ts` file to load. |
 
 ## Static-only properties

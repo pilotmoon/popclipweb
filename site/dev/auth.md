@@ -122,7 +122,7 @@ The [Raindrop.io extension](https://github.com/pilotmoon/PopClip-Extensions/tree
 is a complete working example of this pattern.
 
 For services still using OAuth 1.0a request signing, the
-[`oauth-1.0a`](./js-environment#using-require) library is bundled in
+[`oauth-1.0a`](./js-environment#bundled-libraries) library is bundled in
 PopClip's JavaScript environment.
 
 ## Using the stored secret
