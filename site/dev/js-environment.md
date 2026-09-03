@@ -249,36 +249,21 @@ in order.
 
 ## Asynchronous operations and async/await
 
-PopClip provides implementations of `XMLHttpRequest` and `setTimeout`, which are
-asynchronous. If a script uses these, PopClip will show its spinner and wait
-until the last asynchronous operation has finished. During asynchronous
-operations, clicking PopClip's spinner will cancel all current operations.
+Asynchronous operations are fully supported: your functions can be `async`,
+and you can use the `await` keyword when calling any function that returns a
+Promise. If a script starts asynchronous work — a network request, a timer —
+PopClip shows its spinner and waits until the last operation has finished.
+Clicking the spinner cancels all current operations.
 
-The returned value from the script (if any) is the return value of the last
-function to complete. For example:
+The action's result is always the script's own return value; values produced
+inside callbacks or timers do not become the result.
 
-```javascript
-// # popclip setTimeout example
-// name: setTimeout Test
-// after: show-result
-setTimeout(() => {
-  return "bar";
-}, 1000); // 1 second delay
-return "foo";
-// result shown will be 'bar', not 'foo'
-```
-
-Your functions can be `async`, and you can use the `await` keyword when calling
-any function that returns a Promise. PopClip handles the details of resolving
-promises internally.
-
-As a convenience, PopClip supplies a global function `sleep()` as a
+As a convenience, PopClip supplies a global function `sleep()`, a
 promise-based wrapper around `setTimeout()`:
 
 ```javascript
-// # popclip await example
+// #popclip
 // name: Await Test
-// language: js
 await sleep(5000); // 5 second delay
 popclip.showText("Boo!");
 ```
@@ -297,33 +282,19 @@ PopClip provides its own implementation of
 (XHR). This is the only way for JavaScript code to access the network.
 
 PopClip is also bundled with the HTTP library
-[axios](https://axios.rest/pages/getting-started/examples/commonjs.html), which is an easier to use wrapper
+[axios](https://axios-http.com/), which is an easier to use wrapper
 around XHR.
 
-Due to macOS's App Transport Security, PopClip can only access `https:` URLs.
-Attempts to access `http:` URLs will throw a network error.
+Due to macOS's App Transport Security, requests to a named host must use
+`https:` — plain `http:` URLs throw a network error. The exception is that
+`http:` works for `localhost` and for numeric IP addresses, which is handy
+for talking to a server on the local machine or network.
 
 Here's an example extension snippet that downloads a selected URL's contents,
 and copies it to the clipboard:
 
-::: code-group
-
 ```javascript
-// # popclip JS network example
-// name: Download Text
-// icon: symbol:square.and.arrow.down.fill
-// requirements: [url]
-// entitlements: [network]
-// after: copy-result
-const axios = require("axios");
-const response = await axios.get(popclip.input.data.urls[0]);
-/* note: there is no particular need to check the return status here.
-   axios calls will throw an error if the HTTP status is not 200/2xx. */
-return response.data;
-```
-
-```typescript
-// # popclip TS network example
+// #popclip
 // name: Download Text
 // icon: symbol:square.and.arrow.down.fill
 // requirements: [url]
@@ -335,8 +306,6 @@ const response = await axios.get(popclip.input.data.urls[0]);
    axios calls will throw an error if the HTTP status is not 200/2xx. */
 return response.data;
 ```
-
-:::
 
 For a more substantial axios example, see for example
 [Instant Translate](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/InstantTranslate.popclipext).
