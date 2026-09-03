@@ -28,16 +28,15 @@ package, right-click it in Finder and choose Show Package Contents.
 :::
 
 Here is an example package structure, the
-[Say](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/Say.popclipext)
+[DeepL Translator](https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/DeepLTranslator.popclipext)
 extension:
 
 ```
-Say.popclipext/                -- Package folder
+DeepLTranslator.popclipext/    -- Package folder
 │
-├── Config.json                -- Config file
-├── README.md                  -- Readme file
-├── say.zsh                    -- Script file
-└── speechicon.png             -- Icon file
+├── Config.ts                  -- Config and code, in one TypeScript file
+├── Readme.md                  -- Readme file
+└── deepl.png                  -- Icon file
 ```
 
 ### A minimal package
