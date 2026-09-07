@@ -68,7 +68,7 @@ follows:
 
 ::: tip Inference is new
 
-Language and module inference is new in PopClip 2026.8.1. If you try to install
+Language and module inference is new in PopClip 2026.8.1 (6221). If you try to install
 a code snippet that specifies no `language`, `interpreter` or `module` on an older version of
 PopClip, it will fail with the error message "Specify language or
 interpreter".

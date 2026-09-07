@@ -96,6 +96,7 @@ Do not submit a zipped `.popclipextz` file — it will not work.
 ::: warning Paths must not change
 After you submit an extension for the first time, its source repo and path must not change.
 If you rename a package folder, move it within the repo, or move it to a different repo, your next submission will fail.
+(You _can_ rename the repo or change your github username, since the directory uses numerical github IDs.)
 :::
 
 ### Required fields
