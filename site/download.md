@@ -51,7 +51,7 @@ subscriber, PopClip is included in your subscription. You can install PopClip
 from the Setapp app.
 
 If you use [Homebrew](https://brew.sh/), you can install PopClip with the
-command `brew install popclip`.
+command `brew install --cask popclip`.
 
 :::
 
