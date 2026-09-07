@@ -2,7 +2,7 @@
 import { withBase } from "vitepress";
 import { computed } from "vue";
 import Icon from "./Icon.vue";
-import type { ExtInfo } from "./data/extensionInfo";
+import type { DirectoryExtInfo } from "./data/extensions.data";
 import {
   authorByOwner,
   authorName,
@@ -12,7 +12,7 @@ import {
 import { data as authors } from "./data/authors.data";
 import { data as directoryData } from "./data/directory.data";
 
-const props = defineProps<{ ext: ExtInfo }>();
+const props = defineProps<{ ext: DirectoryExtInfo }>();
 const href = computed(() => withBase(`/extensions/x/${props.ext.shortcode}`));
 // same attribution rule as everywhere else: contributed extensions get
 // a byline, our own do not

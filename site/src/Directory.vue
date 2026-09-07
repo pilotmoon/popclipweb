@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ExtInfo } from "./data/extensionInfo";
+import type { DirectoryExtInfo } from "./data/extensions.data";
 import { data as exts } from "./data/extensions.data";
 import { data as directoryData, type Section } from "./data/directory.data";
 import { IconLink, IconSearch } from "@tabler/icons-vue";
@@ -79,7 +79,7 @@ function seededRandom(seedString: string) {
 }
 
 // a seeded random pick of n items
-function randomPick(list: ExtInfo[], n: number, salt: string): ExtInfo[] {
+function randomPick(list: DirectoryExtInfo[], n: number, salt: string): DirectoryExtInfo[] {
   if (n <= 0) return [];
   if (list.length <= n) return [...list];
   const rand = seededRandom(`${directoryData.day}:${salt}`);
@@ -94,7 +94,7 @@ function randomPick(list: ExtInfo[], n: number, salt: string): ExtInfo[] {
 // newly listed, relative to the build date
 const newCutoff =
   new Date(directoryData.day).getTime() - NEW_WINDOW_DAYS * 24 * 3600 * 1000;
-function isNewlyListed(e: ExtInfo & { firstListed?: unknown }) {
+function isNewlyListed(e: DirectoryExtInfo & { firstListed?: unknown }) {
   return (
     e.firstListed != null && new Date(e.firstListed as string | Date).getTime() > newCutoff
   );
@@ -118,7 +118,7 @@ function isNewlyListed(e: ExtInfo & { firstListed?: unknown }) {
 // pool larger than the lap sits a different set out each time rather
 // than the same members forever. seeded from the build date like the
 // serendipity picks, so server and client agree.
-const featured = computed<ExtInfo | null>(() => {
+const featured = computed<DirectoryExtInfo | null>(() => {
   const listed = [...allMap.values()].filter((e) => !e.unlisted);
   const rankedCount = listed.filter((e) => e.popularity).length;
   const cutoff = Math.ceil(rankedCount * FEATURED_RANK_FRACTION);
@@ -178,7 +178,7 @@ const updatedSection = computed<Section>(() => ({
 // the tail sections (Not Categorized, Unlisted): flagships first, then
 // the rest, each group A-Z. category sections order by popularity
 // instead -- see categoriesIndex
-function sectionOrder(list: ExtInfo[]): string[] {
+function sectionOrder(list: DirectoryExtInfo[]): string[] {
   return list
     .sort(
       (a, b) => (b.flagship ? 1 : 0) - (a.flagship ? 1 : 0) || byName(a, b),
@@ -196,7 +196,7 @@ const categoriesIndex = computed<Section[]>(() => {
   // group the listed extensions by category slug. an unlisted extension
   // may carry a category (staged for when it is listed), but while
   // unlisted it appears only in search results
-  const bySlug = new Map<string, ExtInfo[]>();
+  const bySlug = new Map<string, DirectoryExtInfo[]>();
   for (const ext of extsMap.value.values()) {
     if (ext.unlisted || !ext.category) continue;
     const list = bySlug.get(ext.category) ?? [];
@@ -395,7 +395,7 @@ const filteredIndex = computed(() => {
     link?: string;
     linkText?: string;
     pageLink?: string;
-    extensions: ExtInfo[];
+    extensions: DirectoryExtInfo[];
   }[] = [];
   const all = new Set<string>(arrangements.value.get("alpha")?.index[0].members);
   const filterValue = filter.value.toLowerCase();
@@ -416,7 +416,7 @@ const filteredIndex = computed(() => {
       filterValue && section.fullMembers
         ? section.fullMembers
         : section.members;
-    const extensions: ExtInfo[] = [];
+    const extensions: DirectoryExtInfo[] = [];
     for (const identifier of memberList) {
       const ext = extsMap.value.get(identifier);
       if (ext && matches(ext.filterTerms)) {
@@ -444,7 +444,7 @@ const filteredIndex = computed(() => {
   }
   // if user has typed a search filter, add any remaining extensions in extras section
   if (filterValue && all.size > 0) {
-    const extensions: ExtInfo[] = [];
+    const extensions: DirectoryExtInfo[] = [];
     for (const identifier of all) {
       const ext = extsMap.value.get(identifier);
       if (ext && matches(ext.filterTerms)) {

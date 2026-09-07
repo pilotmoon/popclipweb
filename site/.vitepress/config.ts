@@ -1,7 +1,7 @@
 import { html5Media } from "markdown-it-html5-media";
 import imageFigures from "markdown-it-image-figures";
 import ElementPlus from "unplugin-element-plus/vite";
-import { defineConfig, type HeadConfig } from "vitepress";
+import { type HeadConfig, defineConfig } from "vitepress";
 import siteConfig from "../src/config/config.json";
 import { querifyDescriptor } from "../src/helpers/iconDescriptor.js";
 import { llmDocsPlugin, writeLlmDocs } from "./llmDocs.ts";
@@ -382,6 +382,11 @@ export default defineConfig({
     },
   },
   vite: {
+    build: {
+      // /dev/all intentionally contains the entire developer docs, including
+      // highlighted code (~516 kB minified). Allow modest room for it to grow.
+      chunkSizeWarningLimit: 600,
+    },
     ssr: {
       noExternal: ["element-plus"],
     },

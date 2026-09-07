@@ -2,14 +2,14 @@
 import { computed } from "vue";
 import { authorName, authorPath } from "./data/authorLinks.js";
 import { data as authors } from "./data/authors.data";
-import type { ExtInfo } from "./data/extensionInfo.js";
+import type { DirectoryExtInfo } from "./data/extensions.data";
 import { data as exts } from "./data/extensions.data";
 
 // authors with at least one published extension, alphabetically. counts
 // include unlisted extensions, matching what each author's page shows.
 const rows = computed(() => {
   const counts = new Map<number, number>();
-  for (const ext of exts as ExtInfo[]) {
+  for (const ext of exts as DirectoryExtInfo[]) {
     const id = Number(ext.owner?.match(/^github:(\d+)$/)?.[1]);
     if (id) counts.set(id, (counts.get(id) ?? 0) + 1);
   }

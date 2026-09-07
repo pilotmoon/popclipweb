@@ -2,7 +2,7 @@
 import { useData } from "vitepress";
 import { computed } from "vue";
 import type { CategoryPageDef } from "../extensions/categories/[slug].paths";
-import type { ExtInfo } from "./data/extensionInfo.js";
+import type { DirectoryExtInfo } from "./data/extensions.data";
 import { data as exts } from "./data/extensions.data";
 import DirectoryEntry from "./DirectoryEntry.vue";
 import { byRank } from "./directoryOrder.js";
@@ -15,8 +15,8 @@ const category = params.value as unknown as CategoryPageDef;
 // here. ordered by popularity, unranked last, the same as the front
 // page's section -- so that section reads as a prefix of this page,
 // and "View all N" continues the row rather than re-sorting it
-const extensions = computed<ExtInfo[]>(() =>
-  (exts as ExtInfo[])
+const extensions = computed<DirectoryExtInfo[]>(() =>
+  (exts as DirectoryExtInfo[])
     .filter((ext) => !ext.unlisted && ext.category === category.slug)
     .sort(byRank),
 );

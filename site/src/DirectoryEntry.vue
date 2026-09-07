@@ -2,7 +2,7 @@
 import Icon from "./Icon.vue";
 import { withBase } from "vitepress";
 import { computed } from "vue";
-import type { ExtInfo } from "./data/extensionInfo";
+import type { DirectoryExtInfo } from "./data/extensions.data";
 import {
   authorByOwner,
   authorName,
@@ -13,7 +13,7 @@ import { data as authors } from "./data/authors.data";
 import { NEW_WINDOW_DAYS } from "./directoryTuning.js";
 const props = withDefaults(
   defineProps<{
-    ext: ExtInfo;
+    ext: DirectoryExtInfo;
     // author pages pass false: every entry there shares one author
     byline?: boolean;
   }>(),
@@ -35,7 +35,7 @@ const newDate = Date.now() - NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000;
 // and the badge should not have burned out by then. never-listed
 // extensions (e.g. on author pages) get no badge. firstListed may arrive
 // as a Date or, via a data loader's JSON round-trip, a string.
-function isNew(ext: ExtInfo) {
+function isNew(ext: DirectoryExtInfo) {
   return (
     ext.firstListed != null && new Date(ext.firstListed).getTime() > newDate
   );

@@ -2,6 +2,10 @@
 titleTemplate: :title — PopClip Developer
 ---
 
+<script setup>
+import ScriptVariablesTable from '../src/ScriptVariablesTable.vue';
+</script>
+
 # Script variables
 
 When calling a shell script or AppleScript from a classic PopClip script action (not from JavaScript),

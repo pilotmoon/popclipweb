@@ -4,7 +4,7 @@ import { computed } from "vue";
 import { ShieldTask16Filled } from "@vicons/fluent";
 import { ElPopover } from "element-plus";
 import type { AuthorInfo } from "./data/authorInfo.js";
-import type { ExtInfo } from "./data/extensionInfo.js";
+import type { DirectoryExtInfo } from "./data/extensions.data";
 import { data as exts } from "./data/extensions.data";
 import DirectoryEntry from "./DirectoryEntry.vue";
 
@@ -14,8 +14,8 @@ const author = params.value as unknown as AuthorInfo;
 // this author's extensions, newest first. unlisted ones are included:
 // this page is where an author's work lives, whether or not it has been
 // added to the directory index.
-const extensions = computed<ExtInfo[]>(() =>
-  (exts as ExtInfo[])
+const extensions = computed<DirectoryExtInfo[]>(() =>
+  (exts as DirectoryExtInfo[])
     .filter((ext) => ext.owner === `github:${author.githubId}`)
     .map((ext) => ({
       ...ext,
