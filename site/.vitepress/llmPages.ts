@@ -19,10 +19,14 @@ export const siteRoot = "https://www.popclip.app";
 export const ALL_MD_PATH = "/dev/all.md";
 export const LLMS_TXT_PATH = "/llms.txt";
 export const LLMS_FULL_PATH = "/llms-full.txt";
+// The agent skill for extension authoring: a plain file served from
+// site/public, not a twin, but linked from llms.txt and the sidebar.
+export const SKILL_PATH = "/dev/skills/popclip-extension-authoring/SKILL.md";
 export const llmFilePaths: string[] = [
   ALL_MD_PATH,
   LLMS_TXT_PATH,
   LLMS_FULL_PATH,
+  SKILL_PATH,
 ];
 
 export interface LlmPage {

@@ -6,6 +6,7 @@ import {
   ALL_MD_PATH,
   LLMS_FULL_PATH,
   LLMS_TXT_PATH,
+  SKILL_PATH,
   type LlmPage,
   llmFilePaths,
   llmPages,
@@ -950,6 +951,7 @@ Key resources for extension development:
 - [Type definitions](${siteRoot}/dev/popclip.d.ts): Complete TypeScript definitions for PopClip's JavaScript API and extension config format
 - [Developer docs in one file](${siteRoot}${ALL_MD_PATH}): The whole extension developer docs as a single Markdown file
 - [All docs in one file](${siteRoot}${LLMS_FULL_PATH}): Developer docs, user guide and knowledge base as a single file
+- [Extension authoring skill](${siteRoot}${SKILL_PATH}): An agent skill (SKILL.md) for writing, modernizing and maintaining PopClip extensions
 
 The pages below are Markdown twins of the pages at the same URL without the
 \`.md\` suffix.
@@ -1015,6 +1017,16 @@ export function llmDocsPlugin(): Plugin {
           } else if (twinPaths.has(url)) {
             const pages = await cleanAllPages();
             content = pages.get(url.slice(1))?.content;
+          } else if (decodeURIComponent(url) === SKILL_PATH) {
+            // A plain file in site/public. Vite would serve it as
+            // text/markdown with no charset, which browsers render as
+            // Latin-1; the deployed site serves .md as text/plain UTF-8.
+            // Decoded because the sidebar links it with the dot encoded
+            // (see config.ts), which nginx decodes but Vite does not.
+            content = readFileSync(
+              path.join(siteDir, "public", SKILL_PATH),
+              "utf8",
+            );
           }
         } catch (error) {
           res.statusCode = 500;

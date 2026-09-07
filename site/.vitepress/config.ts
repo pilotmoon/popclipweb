@@ -5,7 +5,7 @@ import { type HeadConfig, defineConfig } from "vitepress";
 import siteConfig from "../src/config/config.json";
 import { querifyDescriptor } from "../src/helpers/iconDescriptor.js";
 import { llmDocsPlugin, writeLlmDocs } from "./llmDocs.ts";
-import { llmFilePaths, twinFiles } from "./llmPages.ts";
+import { llmFilePaths, SKILL_PATH, twinFiles } from "./llmPages.ts";
 import mediaFigures from "./markdown/mediaFigures.ts";
 import { popclipTypesPlugin, writePopClipTypes } from "./popclipTypes.ts";
 import {
@@ -187,9 +187,12 @@ export default defineConfig({
           link: "/dev/all",
         },
         {
-          text: "llms.txt",
-          link: "/llms.txt",
-          target: "_self",
+          // A plain file in site/public, not a page. VitePress strips ".md"
+          // from internal sidebar links (normalizeLink), so the dot is
+          // percent-encoded to keep the suffix; the server decodes it.
+          text: "Agent skill (SKILL.md)",
+          link: SKILL_PATH.replace(/\.md$/, "%2Emd"),
+          target: "_blank",
         },
         {
           text: "Developer Docs",
@@ -215,7 +218,7 @@ export default defineConfig({
                   target: "_self",
                 },
                 {
-                  text: "Type definitions",
+                  text: "Type definitions (popclip.d.ts)",
                   link: "/dev/popclip.d.ts",
                   target: "_blank",
                 },
