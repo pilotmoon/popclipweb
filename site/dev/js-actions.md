@@ -123,6 +123,25 @@ await popclip.pasteText(popclip.input.text);
 await popclip.pressKey("return");
 ```
 
+Send the selection to a web app that has no query parameter for it. A
+[URL action](./url-actions) can't help here, so instead the script opens the
+page, waits with
+[`sleep()`](./js-environment#asynchronous-operations-and-async-await) for it
+to load, puts the text on the clipboard and pastes it with a key press. A
+workaround, but it works:
+
+```javascript
+// #popclip
+// name: Gemini
+// icon: symbol:sparkles
+// description: Open Gemini and paste the selection.
+// popclipVersion: 6221
+await popclip.openUrl("https://gemini.google.com/app");
+await sleep(1000);
+pasteboard.text = popclip.input.text;
+await popclip.pressKey("command v");
+```
+
 Look up the selected word in the macOS dictionary, then speak the definition
 aloud through the `say` command — using the
 [`$` shell tag](./external-scripts):
