@@ -50,10 +50,7 @@ without saying so. Work out which before writing anything.
   to select; a pasted snippet may be up to 5,000 characters. A snippet cannot
   carry files, so icons must be text, Iconify or SF Symbols, and there is no
   readme. `identifier`, `description` and `keywords` are optional; a
-  reinstall with the same `name` replaces the old copy. Pasted snippets rely
-  on language and module inference, so either set `popclipVersion` to 6221
-  or later, or add `language: typescript` and `module: true` to the header
-  for older versions.
+  reinstall with the same `name` replaces the old copy.
 - **A package** is a `Name.popclipext` folder. Choose this when working
   inside a repository, especially one that already holds `.popclipext`
   folders or a `popclip-directory.yaml`, when the user wants to publish or
@@ -262,7 +259,5 @@ When rewriting a plist, YAML or shell-script extension as a `Config.ts`:
   feature appeared in when that is the point; otherwise look it up.
 - Copying doc pages into an extension's readme. Link, and keep the readme
   focused on usage.
-- Manual quoting or `util.shellEscape()` inside a `$` template; it double
-  escapes. `util.shellEscape()` is for building a command string by hand.
 - Network or script work in a population function, or reading `secret`
   options there; both are refused.
