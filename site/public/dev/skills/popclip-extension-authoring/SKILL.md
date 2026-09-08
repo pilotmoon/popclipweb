@@ -241,14 +241,163 @@ actions; JavaScript with the `script` entitlement is the preferred route.
 - **Validation changes** deserve a table of cases: default and blank, each
   boundary, a value just outside each boundary, non-numeric and non-finite
   input, and confirmation that invalid input throws before any command runs.
-- **Say what was actually tested.** A mocked `popclip` or `$` in Node
-  exercises your logic but not PopClip. Real runtime checks are: installing
-  the package (double-click) and clicking the action; the test harness
-  `/Applications/PopClip.app/Contents/MacOS/PopClip run file.ts fn` (blank
-  `popclip` data, `print()` for output); and the debug log
-  (`defaults write com.pilotmoon.popclip EnableExtensionDebug -bool YES`,
-  restart PopClip, then Console.app filtered to process PopClip, category
-  Extension).
+### Test in PopClip's own harness, not Node
+
+PopClip has a command-line test harness that loads a file in the real
+extension environment (same globals, bundled libraries and transpiler),
+calls a named exported function (an `async` one is awaited), and exits 0 on
+success or 1 if loading fails or the function throws. Report with
+`print()`, not `console.log()`, and throw to fail. Run it from inside the
+package directory with the relative file name; that is the form that
+resolves the package reliably.
+
+Two layouts, by size:
+
+- **Simple extensions: put the test in the config.** The extension object
+  has a reserved `test` property (typed `TestFunction`, returning `void` or
+  `Promise<void>`) for exactly this. Test data and test function sit next to
+  the code they exercise, in the one file, and run with:
+
+  ```
+  cd Slugify.popclipext
+  /Applications/PopClip.app/Contents/MacOS/PopClip run Config.ts test
+  ```
+
+  The worked example below is in this form.
+- **Larger extensions: a module plus a test file.** Move the logic into its
+  own module (say `slug.ts`), import it from `Config.ts`, and write a
+  `_test.ts` that imports it too (the `_` keeps the test out of the
+  published package); run with `PopClip run _test.ts test`. Do not import
+  `Config.ts` from the test: `defineExtension()` replaces `module.exports`,
+  so named exports beside it come back `undefined`.
+
+In either layout:
+
+- Write the logic as functions of their inputs. In the harness
+  `popclip.input.text` is empty and `popclip.options` is undefined, so code
+  that reads the globals cannot be exercised, while `(text, options)`
+  functions can be called with any values.
+- Observed in PopClip 2026.8.1: `popclip.settingsRequiredError()`, the `$`
+  tag and network requests all work in the harness (the docs promise
+  network; treat the rest as current behaviour). Anything that acts on the
+  Mac, such as pasting or key presses, does not.
+- Do not write Node tests (`.cjs` or `.mjs` files, `node:test`, vitest,
+  jest). They run a different runtime with different globals and module
+  resolution, so they need mocks of `popclip`, `$` and the libraries, and
+  they pass or fail for reasons unrelated to PopClip. If a mock is
+  unavoidable, say so plainly when reporting results.
+- The harness is not a click. For anything involving the pasteboard, the
+  frontmost app or timing, install the package, click the action, and watch
+  the debug log (`defaults write com.pilotmoon.popclip EnableExtensionDebug
+  -bool YES`, restart PopClip, then Console.app filtered to process PopClip,
+  category Extension).
+
+## Worked example: a single-file package with a test
+
+A text transform with two options, and its test in the same file via the
+reserved `test` export. Type-checked and run through the harness on PopClip
+2026.8.1.
+
+```
+Slugify.popclipext/
+├── Config.ts    header, options, logic, action and test
+└── Readme.md
+```
+
+The action returns a string, which the `after` step in the header pastes
+over the selection. The logic is a plain function of its inputs, so the test
+can call it with whatever it likes:
+
+```typescript
+// #popclip
+// identifier: com.example.slugify
+// name: Slugify
+// icon: iconify:tabler:link
+// popclipVersion: 6221
+// description: Turn the selected text into a URL slug and paste it in place.
+// keywords: slug url kebab
+// requirements: [text, paste]
+// after: paste-result
+
+const options = [
+  {
+    identifier: "separator",
+    label: "Separator",
+    type: "multiple",
+    values: ["-", "_"],
+    valueLabels: ["Hyphen", "Underscore"],
+    defaultValue: "-",
+  },
+  {
+    identifier: "lowercase",
+    label: "Convert to lowercase",
+    type: "boolean",
+    defaultValue: true,
+  },
+] as const;
+
+type SlugifyOptions = InferOptions<typeof options>;
+
+// Strip accents, keep letters and digits, join the words with the separator.
+function slugify(text: string, options: SlugifyOptions): string {
+  let s = text.normalize("NFKD").replace(/\p{M}+/gu, "");
+  if (options.lowercase) {
+    s = s.toLowerCase();
+  }
+  return s
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter((word) => word.length > 0)
+    .join(options.separator);
+}
+
+defineExtension<SlugifyOptions>({
+  options,
+  // returning a string hands it to the `after` step, here paste-result
+  action: (input, options) => slugify(input.text, options),
+  // the reserved `test` export: run with `PopClip run Config.ts test`
+  test() {
+    const cases: [string, string][] = [
+      ["Hello, World!", "hello-world"],
+      ["  Crème Brûlée  ", "creme-brulee"],
+      ["already-a-slug", "already-a-slug"],
+      ["", ""],
+    ];
+    let failures = 0;
+    for (const [input, expected] of cases) {
+      const actual = slugify(input, { separator: "-", lowercase: true });
+      if (actual !== expected) failures++;
+      print(
+        `${actual === expected ? "ok  " : "FAIL"} ${JSON.stringify(input)} -> ${JSON.stringify(actual)}`,
+      );
+    }
+    const kept = slugify("Hello World", { separator: "_", lowercase: false });
+    if (kept !== "Hello_World") {
+      failures++;
+      print(`FAIL underscore, case kept: ${kept}`);
+    }
+    if (failures > 0) throw new Error(`${failures} case(s) failed`);
+    print("all passed");
+  },
+});
+```
+
+Running it:
+
+```
+$ cd Slugify.popclipext
+$ /Applications/PopClip.app/Contents/MacOS/PopClip run Config.ts test
+> PopClip JavaScript Test Harness [2026.8.1 (6221), macOS 26.6.2]
+ok   "Hello, World!" -> "hello-world"
+ok   "  Crème Brûlée  " -> "creme-brulee"
+ok   "already-a-slug" -> "already-a-slug"
+ok   "" -> ""
+all passed
+> Done
+```
+
+Running `Config.ts` with no function name checks only that the extension
+loads. As the extension grows, `slugify()` moves to `slug.ts` and the test to
+`_test.ts`, both importing it, with nothing else changing.
 
 ## Migrating an old extension
 
