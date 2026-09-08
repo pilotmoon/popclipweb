@@ -182,18 +182,18 @@ export default defineConfig({
     ],
     sidebar: {
       "/dev/": [
-        {
-          text: "One Page",
-          link: "/dev/all",
-        },
-        {
-          // A plain file in site/public, not a page. VitePress strips ".md"
-          // from internal sidebar links (normalizeLink), so the dot is
-          // percent-encoded to keep the suffix; the server decodes it.
-          text: "Agent skill (SKILL.md)",
-          link: SKILL_PATH.replace(/\.md$/, "%2Emd"),
-          target: "_blank",
-        },
+        // {
+        //   text: "One Page",
+        //   link: "/dev/all",
+        // },
+        // {
+        //   // A plain file in site/public, not a page. VitePress strips ".md"
+        //   // from internal sidebar links (normalizeLink), so the dot is
+        //   // percent-encoded to keep the suffix; the server decodes it.
+        //   text: "Agent skill (SKILL.md)",
+        //   link: SKILL_PATH.replace(/\.md$/, "%2Emd"),
+        //   target: "_blank",
+        // },
         {
           text: "Developer Docs",
           items: [
