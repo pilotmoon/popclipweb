@@ -186,6 +186,21 @@ also clears the stored credential. The optional message is for logs and
 diagnostics. Do not rely on it being shown to the user; put the explanation
 the user needs in the option's `description`.
 
+## Libraries: only the bundled ones exist
+
+PopClip's JavaScript runtime is its own sandbox, not Node. `import` and
+`require()` resolve only to files inside the extension package and to the
+libraries PopClip itself bundles. Nothing from npm or `node_modules` is
+available at runtime, even if it is installed in the project and `tsc`
+accepts the import. The most used bundled libraries are `axios` for HTTP and
+`valibot` for validation and parsing (so valibot, not zod). The full list,
+with versions, is the bundled libraries table in
+https://www.popclip.app/dev/js-environment.md, also typed as `BundledModule`
+in `popclip.d.ts`; check it before importing anything else. A package can
+vendor a library by bundling it into a single `.js` file in the package (the
+official repo does this with esbuild) and importing that file by relative
+path. A snippet has no such option.
+
 ## Running shell commands from JavaScript
 
 Prefer a JavaScript action that calls out over a classic Shell Script action.
