@@ -62,6 +62,11 @@ By submitting an extension, you agree to the following. If you don't agree, plea
   Respect their privacy, too: if your extension sends the selected text, or any
   other data, to you or to a third-party service, say so plainly in your readme. Never
   collect or transmit anything the user wouldn't expect.
+- **It must be reviewable.** I read every extension before signing it, so
+  everything in the package must be readable source. Pre-compiled binaries
+  can't be reviewed and won't be published.
+- **Some content is off limits.** Extensions relating to gambling, adult content
+  or illegal file sharing will not be published.
 - **Publishing and listing are at my discretion.** I decide what gets published, and what
   is listed on the front page, and I may unpublish anything at any time. See the
   [listing guidelines](#listing-guidelines) for what I look for.
@@ -314,6 +319,8 @@ You'll also get a **comment on the commit** — and an email, if you have GitHub
 ## 6. Review and publication
 
 Submissions aren't published automatically — each one is reviewed by hand. This may take several days, or longer, so please be patient.
+The review checks that the extension works, does what its readme says, and complies with the
+[submission agreement](#submission-agreement).
 
 Once published, your extension gets a page of its own and becomes downloadable as a signed `.popclipextz` file.
 
@@ -331,16 +338,7 @@ author page link works either way, so you can share your extension immediately.
 All published extensions (whether listed on the front page or not) are eligible for automatic updates within the PopClip app.
 Updates are subject to the same review as initial submissions.
 
-## Publication guidelines
-
-Beyond "do no harm", publication to the directory as an unlisted extension requires:
-
-- **No pre-compiled binaries.** The extension must not include a pre-compiled binary.
-- **No gambling, adult content or illegal file sharing.** Extensions relating to these categories will not be published.
-
 ## Listing guidelines
-
-Once published, the extension will initially be shown only on your author page.
 
 The front page of the directory is curated by hand and the quality bar for listing is higher than for mere publication on your author page. This is what I look for:
 
