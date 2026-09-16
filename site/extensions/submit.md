@@ -62,8 +62,7 @@ By submitting an extension, you agree to the following. If you don't agree, plea
   Respect their privacy, too: if your extension sends the selected text, or any
   other data, to you or to a third-party service, say so plainly in your readme. Never
   collect or transmit anything the user wouldn't expect.
-- **It must be reviewable.** I read every extension before signing it, so
-  everything in the package must be readable source. Pre-compiled binaries
+- **It must be reviewable.** Everything in the package must be readable source. Minified source or pre-compiled binaries
   can't be reviewed and won't be published.
 - **Some content is off limits.** Extensions relating to gambling, adult content
   or illegal file sharing will not be published.
@@ -355,8 +354,6 @@ The front page of the directory is curated by hand and the quality bar for listi
   have the app installed (when `checkInstalled` is set), but it will also link the app name in the description to the website.
 - **Linked apps must be notarized.** An extension which links to an app will only be listed
   if the app is Developer ID signed and notarized by Apple.
-- **JavaScript over shell scripts.** See the [shell script policy](#shell-script-policy).
-- **Include a changelog.** Listed extensions should include a simple changelog at the foot of the readme.
 
 The above is a partial list of guidelines. Meeting these guidelines makes listing on the front page more likely, but there are no guarantees.
 Listing is at my discretion.
