@@ -62,8 +62,9 @@ By submitting an extension, you agree to the following. If you don't agree, plea
   Respect their privacy, too: if your extension sends the selected text, or any
   other data, to you or to a third-party service, say so plainly in your readme. Never
   collect or transmit anything the user wouldn't expect.
-- **Publication is at my discretion.** I decide what gets published and what
-  appears on the front page, and I may unpublish anything at any time.
+- **Publishing and listing are at my discretion.** I decide what gets published, and what
+  is listed on the front page, and I may unpublish anything at any time. See the
+  [listing guidelines](#listing-guidelines) for what I look for.
 - **Withdrawal.** [Contact me](/support) if you want your extension unpublished.
   Copies already installed by users are unaffected.
 - **No guarantees.** I provide this directory free of charge and as-is, with no
@@ -142,7 +143,7 @@ Externally hosted images are not allowed and will be replaced with a "\[Remote i
 :::
 
 ::: tip The Featured slot
-The directory's front page opens with a Featured box showing one extension a day. To be eligible, an extension needs a demo in **MP4** format (not GIF) with an aspect ratio of roughly 2:1 — anywhere between 3:2 and 5:2 is accepted. Editorial criteria also apply.
+The directory's front page opens with a Featured box showing one extension a day. To be eligible, an extension needs a demo video in **MP4** format (not GIF). See [Featured slot](#featured-slot) for the requirements.
 :::
 
 ### Keywords
@@ -322,13 +323,49 @@ Your **author page** lists everything you've contributed and is yours to share:
 https://www.popclip.app/extensions/authors/your-github-username
 ```
 
-Extensions on your author page are not listed in the directory's main index right
-away. The index is curated: extensions are added to it selectively. A well-named, thoughtfully-designed extension,
-with a good icon, a clear open-source licence and a helpful readme makes that more likely, but there are no guarantees. Your
+Extensions on your author page are not listed on the directory's front page right
+away. The front page is curated: extensions are added to it selectively, following the
+[listing guidelines](#listing-guidelines) below. Your
 author page link works either way, so you can share your extension immediately.
 
-All published extensions (whether listed in the main index or not) are eligible for automatic updates within the PopClip app.
+All published extensions (whether listed on the front page or not) are eligible for automatic updates within the PopClip app.
 Updates are subject to the same review as initial submissions.
+
+## Publication guidelines
+
+Beyond "do no harm", publication to the directory as an unlisted extension requires:
+
+- **No pre-compiled binaries.** The extension must not include a pre-compiled binary.
+- **No gambling, adult content or illegal file sharing.** Extensions relating to these categories will not be published.
+
+## Listing guidelines
+
+Once published, the extension will initially be shown only on your author page.
+
+The front page of the directory is curated by hand and the quality bar for listing is higher than for mere publication on your author page. This is what I look for:
+
+- **A clear single purpose.** The extension should do one thing that is genuinely
+  useful, and the name and description should make it obvious what that is.
+- **Good presentation.** A well-chosen icon, a helpful readme, and a
+  concise description that reads well in the directory listing.
+- **Works out of the box.** A listed extension must not require the user to install helper executables that aren't
+  included in a stock macOS installation, such as the Xcode command line tools or scripting languages like python3.
+- **A clear open-source license.** Include a license file in the repository.
+- **Link the app name and website in the metadata.** If the extension works with another app or website,
+  use [`app`](/dev/actions#the-app-dictionary) to specify the app name, website,
+  and — for native apps — bundle identifier(s). Not only can this helpfully prompt the user to visit the website if they don't already
+  have the app installed (when `checkInstalled` is set), but it will also link the app name in the description to the website.
+- **Linked apps must be notarized.** An extension which links to an app will only be listed
+  if the app is Developer ID signed and notarized by Apple.
+- **JavaScript over shell scripts.** See the [shell script policy](#shell-script-policy).
+- **Include a changelog.** Listed extensions should include a simple changelog at the foot of the readme.
+
+The above is a partial list of guidelines. Meeting these guidelines makes listing on the front page more likely, but there are no guarantees.
+Listing is at my discretion.
+
+### Featured slot
+
+The Featured box on the directory's front page shows one extension a day. To be eligible, an extension needs a demo video in MP4 format (not GIF) with an aspect ratio of roughly 2:1 — anywhere between 3:2 and 5:2 is accepted — not more than about 10 seconds long, and with no sound. The demo video must show what actually happens when you click your extension's action; a video of the PopClip bar appearing and showing your action icon is not sufficient.
 
 ## Shell script policy
 
