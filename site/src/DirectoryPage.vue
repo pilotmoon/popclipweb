@@ -147,14 +147,6 @@ function formatActionTypes(ext: ExtInfo) {
         </ClientOnly>
       </div>
     </div>
-
-    <div v-if="ext.altStrings" :class="$style.AltStrings" style="color: var(--vp-c-text-2)">
-      <span v-for="alt in ext.altStrings" :key="alt.lang">
-        <span :class="$style.Subdued">{{ alt.lang }}</span>
-        <b v-if="alt.name">{{ alt.name }}</b>
-        <span v-if="alt.description">{{ alt.description }}</span>
-      </span>
-    </div>
   </div>
 
   <div v-if="ext.popclipVersionIsBeta" class="warning custom-block">
@@ -286,12 +278,6 @@ function formatActionTypes(ext: ExtInfo) {
   line-height: 1.4;
   overflow-wrap: anywhere;
 }
-.Subdued {
-  color: var(--vp-c-text-2);
-}
-a.Subdued {
-  color: var(--vp-c-text-1);
-}
 
 .Breadcrumb {
   color: var(--vp-c-text-2);
@@ -371,25 +357,6 @@ a.Subdued {
   margin-left: -3px;
   height: 18px;
   color: var(--vp-c-green-1);
-}
-
-.AltStrings {
-  margin: 16px 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: flex-start;
-  gap: 0 16px;
-}
-
-.AltStrings > span {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: flex-start;
-  gap: 8px;
 }
 
 @media (max-width: 550px) {
