@@ -148,7 +148,10 @@ async function loadFromApi() {
       throw new Error("Failed to parse extensions info");
     }
     for (const ext of parseResult.data) {
-      ext.name = sanitizeHtml(ext.name.trim());
+      // the name is plain text, not html: every consumer (vue text
+      // interpolation, vitepress title and meta tags) escapes it, so
+      // sanitizing here would double-encode "&" as "&amp;amp;"
+      ext.name = ext.name.trim();
       ext.firstCreated = adjustFirstCreated(ext.firstCreated, ext.identifier);
       // enforce period at end od description
       ext.description = `${
@@ -174,7 +177,7 @@ async function loadFromApi() {
       ext.popclipVersionIsBeta = isBeta;
       for (const prev of ext.previousVersions) {
         prev.download = adjustPublicPath(prev.download);
-        prev.name = sanitizeHtml(prev.name.trim());
+        prev.name = prev.name.trim();
       }
       exts.push(ext);
     }
