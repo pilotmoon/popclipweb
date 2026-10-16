@@ -22,6 +22,7 @@ import {
   WILDCARD_PER_CATEGORY_LIMIT,
 } from "./directoryTuning.js";
 import { byName, byRank } from "./directoryOrder.js";
+import { supportMailtoHref } from "./helpers/supportMailto";
 
 const categoryDefs = directoryData.categories;
 
@@ -37,6 +38,16 @@ const arrange = ref(defaultArrange);
 // only -- there is deliberately no browse toggle for unlisted; the
 // trailing Unlisted Extensions section exists only in search results.
 const searching = computed(() => filter.value !== defaultFilter);
+
+// "suggest an extension" is a plain email to support; the search term, if
+// any, goes along as context (it's likely what they were looking for)
+const suggestHref = computed(() =>
+  supportMailtoHref({
+    subject: "PopClip Extension Suggestion",
+    body: "I have a great idea for an extension!",
+    footer: searching.value ? `(I searched the directory for "${filter.value}".)` : undefined,
+  }),
+);
 
 // every published extension, keyed by identifier
 const allMap = new Map(
@@ -55,10 +66,7 @@ const allMap = new Map(
 );
 
 // the extensions currently in play
-const extsMap = computed(
-  () =>
-    new Map([...allMap].filter(([, e]) => searching.value || !e.unlisted)),
-);
+const extsMap = computed(() => new Map([...allMap].filter(([, e]) => searching.value || !e.unlisted)));
 
 // deterministic per-build randomness: seeded from the build date and a
 // salt, so server render and client hydration agree exactly, while the
@@ -92,12 +100,9 @@ function randomPick(list: DirectoryExtInfo[], n: number, salt: string): Director
 }
 
 // newly listed, relative to the build date
-const newCutoff =
-  new Date(directoryData.day).getTime() - NEW_WINDOW_DAYS * 24 * 3600 * 1000;
+const newCutoff = new Date(directoryData.day).getTime() - NEW_WINDOW_DAYS * 24 * 3600 * 1000;
 function isNewlyListed(e: DirectoryExtInfo & { firstListed?: unknown }) {
-  return (
-    e.firstListed != null && new Date(e.firstListed as string | Date).getTime() > newCutoff
-  );
+  return e.firstListed != null && new Date(e.firstListed as string | Date).getTime() > newCutoff;
 }
 
 // the Featured box: one extension a day from the pool of listed
@@ -122,17 +127,16 @@ const featured = computed<DirectoryExtInfo | null>(() => {
   const listed = [...allMap.values()].filter((e) => !e.unlisted);
   const rankedCount = listed.filter((e) => e.popularity).length;
   const cutoff = Math.ceil(rankedCount * FEATURED_RANK_FRACTION);
-  const pool = listed
-    .filter(
-      (e) =>
-        e.featurable !== false && // the curation veto, on the family
-        e.demo?.endsWith(".mp4") &&
-        e.demoAspect != null &&
-        e.demoAspect >= FEATURED_MIN_ASPECT &&
-        e.demoAspect <= FEATURED_MAX_ASPECT &&
-        e.popularity != null &&
-        e.popularity.rank <= cutoff,
-    );
+  const pool = listed.filter(
+    (e) =>
+      e.featurable !== false && // the curation veto, on the family
+      e.demo?.endsWith(".mp4") &&
+      e.demoAspect != null &&
+      e.demoAspect >= FEATURED_MIN_ASPECT &&
+      e.demoAspect <= FEATURED_MAX_ASPECT &&
+      e.popularity != null &&
+      e.popularity.rank <= cutoff,
+  );
   if (pool.length === 0) return null;
   const dayIndex = Math.floor(Date.parse(directoryData.day) / 86_400_000);
   const lap = Math.floor(dayIndex / FEATURED_LAP_DAYS);
@@ -142,9 +146,7 @@ const featured = computed<DirectoryExtInfo | null>(() => {
   // where everyone else stands
   const order = pool
     .map((e) => ({ e, key: seededRandom(`featured:${lap}:${e.identifier}`)() }))
-    .sort(
-      (a, b) => a.key - b.key || a.e.identifier.localeCompare(b.e.identifier),
-    )
+    .sort((a, b) => a.key - b.key || a.e.identifier.localeCompare(b.e.identifier))
     .map(({ e }) => e);
   return order[Math.floor((dayInLap * order.length) / FEATURED_LAP_DAYS)];
 });
@@ -165,25 +167,17 @@ const popularSection = computed<Section>(() => ({
 // extensions, when shown, order by their first-publication fallback
 const newestSection = computed<Section>(() => ({
   title: "All Extensions (Newest first)",
-  members: [...extsMap.value.values()]
-    .sort((a, b) => b.listedDate.getTime() - a.listedDate.getTime())
-    .map((e) => e.identifier),
+  members: [...extsMap.value.values()].sort((a, b) => b.listedDate.getTime() - a.listedDate.getTime()).map((e) => e.identifier),
 }));
 const updatedSection = computed<Section>(() => ({
   title: "All Extensions (Recently updated first)",
-  members: [...extsMap.value.values()]
-    .sort((a, b) => b.updatedDate.getTime() - a.updatedDate.getTime())
-    .map((e) => e.identifier),
+  members: [...extsMap.value.values()].sort((a, b) => b.updatedDate.getTime() - a.updatedDate.getTime()).map((e) => e.identifier),
 }));
 // the tail sections (Not Categorized, Unlisted): flagships first, then
 // the rest, each group A-Z. category sections order by popularity
 // instead -- see categoriesIndex
 function sectionOrder(list: DirectoryExtInfo[]): string[] {
-  return list
-    .sort(
-      (a, b) => (b.flagship ? 1 : 0) - (a.flagship ? 1 : 0) || byName(a, b),
-    )
-    .map((e) => e.identifier);
+  return list.sort((a, b) => (b.flagship ? 1 : 0) - (a.flagship ? 1 : 0) || byName(a, b)).map((e) => e.identifier);
 }
 
 const categoriesIndex = computed<Section[]>(() => {
@@ -224,15 +218,9 @@ const categoriesIndex = computed<Section[]>(() => {
       // compete for the remaining slots like everyone else
       const fresh = members
         .filter((m) => !m.flagship && isNewlyListed(m))
-        .sort(
-          (a, b) =>
-            new Date(b.firstListed as string | Date).getTime() -
-            new Date(a.firstListed as string | Date).getTime(),
-        )
+        .sort((a, b) => new Date(b.firstListed as string | Date).getTime() - new Date(a.firstListed as string | Date).getTime())
         .slice(0, NEW_PER_CATEGORY_LIMIT);
-      const rest = members.filter(
-        (m) => !m.flagship && !fresh.includes(m),
-      );
+      const rest = members.filter((m) => !m.flagship && !fresh.includes(m));
       const slots = Math.max(0, limit - flagships.length - fresh.length);
       const byPopularity = [...rest].sort(byRank);
       // reserve the wildcard slots, but only if there is anyone left to
@@ -240,17 +228,11 @@ const categoriesIndex = computed<Section[]>(() => {
       // the pool is everyone below the RANKED cut -- including the two
       // the wildcards displaced -- so every member not shown on merit
       // has the same chance, and nobody is permanently buried
-      const wildcardSlots = Math.min(
-        WILDCARD_PER_CATEGORY_LIMIT,
-        slots,
-        Math.max(0, byPopularity.length - slots),
-      );
+      const wildcardSlots = Math.min(WILDCARD_PER_CATEGORY_LIMIT, slots, Math.max(0, byPopularity.length - slots));
       const ranked = byPopularity.slice(0, slots - wildcardSlots);
       const pool = byPopularity.slice(slots - wildcardSlots);
       const wildcards = randomPick(pool, wildcardSlots, `${def.slug}:wild`);
-      const visible = [...flagships, ...fresh, ...ranked, ...wildcards].sort(
-        byRank,
-      );
+      const visible = [...flagships, ...fresh, ...ranked, ...wildcards].sort(byRank);
       // the footer link only exists when there is genuinely more to see,
       // and its count says so: "View all 17 in ..."
       const truncated = visible.length < members.length;
@@ -276,10 +258,7 @@ const categoriesIndex = computed<Section[]>(() => {
   // always-visible tail section: anything listed but not claimed by a
   // category above (no category, or a slug that no longer exists) --
   // this is where curation gaps show themselves. never truncated.
-  const leftovers = [
-    ...[...bySlug.values()].flat(),
-    ...[...extsMap.value.values()].filter((e) => !e.unlisted && !e.category),
-  ];
+  const leftovers = [...[...bySlug.values()].flat(), ...[...extsMap.value.values()].filter((e) => !e.unlisted && !e.category)];
   if (leftovers.length) {
     sections.push({
       title: "Not Categorized",
@@ -290,9 +269,7 @@ const categoriesIndex = computed<Section[]>(() => {
   // them only while searching), as a section of their own at the bottom
   // so curated matches lead
   const unlisted = [...extsMap.value.values()].filter((e) => e.unlisted);
-  const unlistedSection: Section[] = unlisted.length
-    ? [{ title: "Unlisted Extensions", members: sectionOrder(unlisted) }]
-    : [];
+  const unlistedSection: Section[] = unlisted.length ? [{ title: "Unlisted Extensions", members: sectionOrder(unlisted) }] : [];
   return [newest, ...sections, ...unlistedSection];
 });
 const arrangements = computed(
@@ -404,18 +381,14 @@ const filteredIndex = computed(() => {
   // "html markdown" find the same things, and a half-typed word matches
   // as you go). splitting also makes stray whitespace harmless
   const words = filterValue.split(/\s+/).filter(Boolean);
-  const matches = (terms: string | null | undefined) =>
-    words.every((w) => terms?.includes(w));
+  const matches = (terms: string | null | undefined) => words.every((w) => terms?.includes(w));
   for (const section of selectedIndex.value) {
     if (filterValue && section.special) {
       continue;
     }
     // searching covers the complete membership; browsing shows the
     // (possibly truncated) selection. no limits apply while searching.
-    const memberList =
-      filterValue && section.fullMembers
-        ? section.fullMembers
-        : section.members;
+    const memberList = filterValue && section.fullMembers ? section.fullMembers : section.members;
     const extensions: DirectoryExtInfo[] = [];
     for (const identifier of memberList) {
       const ext = extsMap.value.get(identifier);
@@ -434,8 +407,7 @@ const filteredIndex = computed(() => {
           ? {}
           : {
               link: section.link,
-              linkText:
-                section.linkText ?? `View all in "${section.title}" →`,
+              linkText: section.linkText ?? `View all in "${section.title}" →`,
             }),
         pageLink: section.pageLink,
         extensions,
@@ -465,8 +437,7 @@ const filteredIndex = computed(() => {
 
 <template>
   <div :class="$style.Links">
-    <a href="/extensions/submit">Submit</a> ·
-    <a href="/extensions/authors/">Authors</a> ·
+    <a :href="suggestHref"><strong>Suggest an Extension</strong></a> · <a href="/extensions/submit">Submit</a> · <a href="/extensions/authors/">Authors</a> ·
     <a href="https://public.popclip.app/extensions/popclip.rss">RSS</a>
   </div>
   <h1>PopClip Extensions Directory</h1>
@@ -476,62 +447,38 @@ const filteredIndex = computed(() => {
         Arrange:
         <!-- tabs come from the arrangements map, in its order -->
         <ElRadioGroup v-model="arrange">
-          <ElRadioButton
-            v-for="[key, { label }] in arrangements"
-            :key="key"
-            :label="key"
-            >{{ label }}</ElRadioButton
-          >
+          <ElRadioButton v-for="[key, { label }] in arrangements" :key="key" :label="key">{{ label }}</ElRadioButton>
         </ElRadioGroup>
       </div>
       <div :class="$style.Control">
         Search:
-        <ElInput
-          v-model="filter"
-          placeholder="Type to search"
-          :prefix-icon="IconSearch"
-        />
+        <ElInput v-model="filter" placeholder="Type to search" :prefix-icon="IconSearch" />
       </div>
     </div>
     <div :class="$style.Info">
       Showing {{ filteredIndex.count }} of {{ total }} extensions
-      <ElTag v-if="filter" closable @close="filter = ''"
-        >Search: {{ filter }}</ElTag
-      >
+      <ElTag v-if="filter" closable @close="filter = ''">Search: {{ filter }}</ElTag>
       <!-- browsing shows the curated index only; state the search rule
            exactly when it applies -->
-      <span v-if="searching" :class="$style.SearchNote"
-        >search includes unlisted extensions</span
-      >
+      <span v-if="searching" :class="$style.SearchNote">search includes unlisted extensions</span>
     </div>
     <!-- the featured box belongs to browsing the default index: it gives
          way to search results and to the other arrangements. it sits
          below the controls, so their position never depends on it -->
-    <FeaturedExtension
-      v-if="featured && !searching && arrange === defaultArrange"
-      :ext="featured"
-    />
-    <div
-      v-for="{ title, extensions, link, linkText, pageLink } in filteredIndex.index"
-    >
+    <FeaturedExtension v-if="featured && !searching && arrange === defaultArrange" :ext="featured" />
+    <div v-for="{ title, extensions, link, linkText, pageLink } in filteredIndex.index">
       <h2 :class="$style.SectionHeading">
-        {{ title
-        }}<a
-          v-if="pageLink"
-          :href="pageLink"
-          :class="$style.PageLink"
-          :aria-label="`${title} category page`"
-          ><IconLink :size="16"
-        /></a>
+        {{ title }}<a v-if="pageLink" :href="pageLink" :class="$style.PageLink" :aria-label="`${title} category page`"><IconLink :size="16" /></a>
       </h2>
-      <DirectoryEntry
-        v-for="ext in extensions"
-        :key="ext.identifier"
-        :ext="ext"
-      />
+      <DirectoryEntry v-for="ext in extensions" :key="ext.identifier" :ext="ext" />
       <span :class="$style.Link" v-if="link"
         ><a :href="link">{{ linkText }}</a></span
       >
+    </div>
+    <!-- always at the end of the list, whether the search found anything or not -->
+    <div :class="$style.Suggest">
+      Can't find what you want?
+      <a :href="suggestHref">Suggest an extension</a>
     </div>
   </div>
 </template>
@@ -592,6 +539,18 @@ const filteredIndex = computed(() => {
   text-decoration: none;
 }
 
+.Suggest {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--vp-c-divider);
+  text-align: center;
+  color: var(--vp-c-text-2);
+}
+.Suggest a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
 /* sits at the right of the info row, under the search field */
 .SearchNote {
   margin-left: auto;
@@ -618,5 +577,4 @@ const filteredIndex = computed(() => {
 .PageLink:hover {
   color: var(--vp-c-brand-1);
 }
-
 </style>
