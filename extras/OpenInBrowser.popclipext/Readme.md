@@ -27,6 +27,7 @@ The extension has an action for each of the following browsers:
 - Tor Browser
 - Vivaldi
 - Waterfox
+- Yab
 - Zen
 
 A checkbox in settings shows or hides each browser's action in the PopClip bar.
@@ -49,6 +50,7 @@ Compass icon for ChatGPT Atlas is `location-compass-1` by
 ### 2026-10-28
 
 - Add Crest browser.
+- Add Yab browser.
 
 ### 2026-06-17
 

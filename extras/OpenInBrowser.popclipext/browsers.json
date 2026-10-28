@@ -478,6 +478,18 @@
       "homepageUrl": "https://sigmaos.com/"
     },
     {
+      "name": "Yab",
+      "group": "arc",
+      "supportsAware": false,
+      "supportsPageInfo": false,
+      "supportsAddressBar": false,
+      "supportsBackgroundTab": false,
+      "supportsOpenIn": true,
+      "bundleId": "dev.serafim.fast",
+      "homepageUrl": "https://yetanotherbrowser.com/",
+      "icon": "icons/yab.svg"
+    },
+    {
       "name": "Zen",
       "group": "firefox",
       "supportsAware": true,

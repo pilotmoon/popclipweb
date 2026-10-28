@@ -7,10 +7,10 @@
 // description: >-
 //   Open URLs in a specific browser. Supports Safari, ChatGPT Atlas, Chrome, Chromium, Firefox, Arc, Brave, Comet,
 //   Crest, Dia, DEVONagent Pro, DuckDuckGo, Ecosia, Edge, Helium, iCab, Mullvad, Opera, Orion, Quark, Tor Browser,
-//   Vivaldi, Waterfox and Zen.
+//   Vivaldi, Waterfox, Yab and Zen.
 // keywords: >-
 //   Safari Chrome Chromium Firefox Arc Brave ChatGPT Atlas Comet Crest Dia DEVONagent Pro DuckDuckGo Edge Helium iCab
-//   Ecosia Mullvad Opera Orion Quark Tor Browser Vivaldi Waterfox Zen
+//   Ecosia Mullvad Opera Orion Quark Tor Browser Vivaldi Waterfox Yab Zen
 
 import { browsers } from "./browsers.json";
 
