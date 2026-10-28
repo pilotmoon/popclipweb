@@ -85,6 +85,18 @@
       "icon": "icons/comet-browser.svg"
     },
     {
+      "name": "Crest",
+      "group": "chromium",
+      "supportsAware": false,
+      "supportsPageInfo": false,
+      "supportsAddressBar": false,
+      "supportsBackgroundTab": false,
+      "supportsOpenIn": true,
+      "bundleId": "com.pauldavis.crest",
+      "homepageUrl": "https://crestbrowser.com",
+      "icon": "icons/crest.svg"
+    },
+    {
       "name": "DEVONagent Pro",
       "group": "other",
       "supportsAware": true,
