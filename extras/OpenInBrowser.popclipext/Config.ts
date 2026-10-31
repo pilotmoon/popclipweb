@@ -56,6 +56,14 @@ function makeAction(browser: BrowserDefinition): Action {
 // return options with title
 export const options: Option[] = [
   {
+    identifier: "showCurrentBrowser",
+    label: "Show Current Browser",
+    type: "boolean",
+    defaultValue: false,
+    description:
+      "Show the action for opening in the current browser, when enabled.",
+  },
+  {
     identifier: "heading",
     label: "Enabled Browsers",
     type: "heading",
@@ -63,14 +71,7 @@ export const options: Option[] = [
   ...(browsers as BrowserDefinition[])
     .filter((browser) => browser.supportsOpenIn === true)
     .map(makeOption),
-  {
-    identifier: "showCurrentBrowser",
-    label: "Show Current Browser",
-    type: "boolean",
-    defaultValue: false,
-    description:
-      "Show the action for the browser you are selecting text in, if it is enabled.",
-  },
+
 ];
 
 // dynamically generate the actions
