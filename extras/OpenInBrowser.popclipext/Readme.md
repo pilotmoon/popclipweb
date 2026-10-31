@@ -33,7 +33,7 @@ The extension has an action for each of the following browsers:
 A checkbox in settings shows or hides each browser's action in the PopClip bar.
 
 When selecting a URL inside a browser, the action for opening in that browser
-will not appear.
+will not appear, unless you turn on the _Show Current Browser_ option.
 
 ## Acknowledgements
 
@@ -46,6 +46,10 @@ Compass icon for ChatGPT Atlas is `location-compass-1` by
 [Streamline](https://www.streamlinehq.com/).
 
 ## Changelog
+
+### 2026-10-31
+
+- Add option to show the action for the current browser.
 
 ### 2026-10-28
 

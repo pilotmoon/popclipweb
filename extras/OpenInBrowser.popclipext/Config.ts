@@ -63,6 +63,14 @@ export const options: Option[] = [
   ...(browsers as BrowserDefinition[])
     .filter((browser) => browser.supportsOpenIn === true)
     .map(makeOption),
+  {
+    identifier: "showCurrentBrowser",
+    label: "Show Current Browser",
+    type: "boolean",
+    defaultValue: false,
+    description:
+      "Show the action for the browser you are selecting text in, if it is enabled.",
+  },
 ];
 
 // dynamically generate the actions
@@ -72,7 +80,8 @@ export const actions: PopulationFunction = (input, options, context) => {
       return (
         input.data.urls.length > 0 &&
         options[browser.bundleId] === true &&
-        context.appIdentifier !== browser.bundleId
+        (options.showCurrentBrowser === true ||
+          context.appIdentifier !== browser.bundleId)
       );
     })
     .map(makeAction);
