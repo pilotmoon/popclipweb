@@ -8,7 +8,7 @@ import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePadd
 import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
-import { Paypal, ApplePay, CreditCard, QuestionCircleRegular } from "@vicons/fa";
+import { QuestionCircleRegular } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
@@ -181,7 +181,7 @@ function trackBuy(button) {
     <div :class="$style.box">
       <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
       <span :class="$style.title">Standard License</span><br />
-      <span :class="$style.subtitle">✅ 2 years of free updates<br /></span>
+      <span :class="$style.subtitle">2️⃣ 2 years of free updates<br /></span>
       <!-- <span :class="$style.subtitle">✅ Use on up to 5 Macs<br /></span> -->
       <span :class="$style.subtitle">✅ Keep the last version you receive<br /></span>
       <div :class="$style.features">
@@ -201,10 +201,7 @@ function trackBuy(button) {
         theme="brand"
         size="medium"
       >
-        Buy with
-        <Icon size="18"><CreditCard /></Icon>
-        <Icon size="18"><Paypal /></Icon>
-        <Icon size="32"><ApplePay /></Icon> </AaButton
+        Buy Standard</AaButton
       ><br />
       <div :class="$style.prices">
         <span v-if="store.paddleProducts.value.popclip_2year?.isDiscounted" :class="$style.listPrice">{{
@@ -258,10 +255,7 @@ function trackBuy(button) {
         theme="brand"
         size="medium"
       >
-        Buy with
-        <Icon size="18"><CreditCard /></Icon>
-        <Icon size="18"><Paypal /></Icon>
-        <Icon size="32"><ApplePay /></Icon> </AaButton
+        Buy Lifetime</AaButton
       ><br />
       <div :class="$style.prices">
         <span v-if="store.paddleProducts.value.popclip_lifetime?.isDiscounted" :class="$style.listPrice">{{
@@ -400,6 +394,7 @@ function trackBuy(button) {
 
 .box .buybutton {
   margin: 8px 0 6px 0;
+  min-width: 10em;
   text-decoration: none;
 }
 

@@ -27,6 +27,14 @@ export const useStoreState = createGlobalState(() => {
   const countryCode = useStorage("popclip-store-countryCode", "");
   const countryName = useStorage("popclip-store-countryName", "");
   const paddleProducts = useStorage("popclip-store-paddleProducts", {});
+  // Paddle's identifiers for the payment methods its checkout offers at the
+  // quoted price and location ("card", "paypal", "upi", ...), in Paddle's
+  // order. Persisted and replaced alongside the prices it came with. Says
+  // nothing about the browser: "apple_pay" is listed regardless.
+  const paymentMethods = useStorage<string[]>(
+    "popclip-store-paymentMethods",
+    [],
+  );
   // const masPrice = useStorage("popclip-store-masPrice", "");
   // const masUrl = useStorage(
   //   "popclip-store-masUrl",
@@ -39,6 +47,7 @@ export const useStoreState = createGlobalState(() => {
     countryCode,
     countryName,
     paddleProducts,
+    paymentMethods,
     // masPrice,
     // masUrl,
     lizhiStandardPrice,
@@ -98,7 +107,9 @@ export async function loadStore() {
   // contains a pipe.
   const loadKey = `${coupon}|${country}`;
   if (store.isLoadedForCoupon.value === loadKey) {
-    log(`Store already loaded for ${store.countryCode.value} (key '${loadKey}')`);
+    log(
+      `Store already loaded for ${store.countryCode.value} (key '${loadKey}')`,
+    );
     return;
   }
 
@@ -163,6 +174,8 @@ const ZBillingProductsResult = z.object({
   discount: z
     .object({ id: z.string(), code: z.string().nullable() })
     .nullable(),
+  // optional so the page still loads against a backend that predates it
+  paymentMethods: z.array(z.string()).optional(),
   products: z.record(
     z.string(),
     z.object({
@@ -249,6 +262,7 @@ async function loadStoreBilling(
       // they stopped being this visitor's prices. Showing no price is
       // honest; showing a stale one isn't.
       store.paddleProducts.value = {};
+      store.paymentMethods.value = [];
       store.countryCode.value = "";
       store.countryName.value = "";
       // ...but keep selling: the price ids don't depend on the country, so
@@ -336,6 +350,7 @@ async function loadStoreBilling(
     ? getCountryInfo(result.countryCode).countryName
     : "";
   store.paddleProducts.value = z.record(ZProcessedProduct).parse(processed);
+  store.paymentMethods.value = result.paymentMethods ?? [];
   store.loadFailed.value = false;
   store.checkoutPriceIds.value = {};
   store.isLoadedForCoupon.value = loadKey;
