@@ -201,7 +201,7 @@ function trackBuy(button) {
         theme="brand"
         size="medium"
       >
-        Buy Standard</AaButton
+        Buy Standard License</AaButton
       ><br />
       <div :class="$style.prices">
         <span v-if="store.paddleProducts.value.popclip_2year?.isDiscounted" :class="$style.listPrice">{{
@@ -255,7 +255,7 @@ function trackBuy(button) {
         theme="brand"
         size="medium"
       >
-        Buy Lifetime</AaButton
+        Buy Lifetime License</AaButton
       ><br />
       <div :class="$style.prices">
         <span v-if="store.paddleProducts.value.popclip_lifetime?.isDiscounted" :class="$style.listPrice">{{
