@@ -8,7 +8,7 @@ import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePadd
 import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
-import { Paypal, ApplePay, GooglePay, CreditCard, Ideal, Alipay, Weixin, QuestionCircleRegular } from "@vicons/fa";
+import { Paypal, ApplePay, CreditCard, Ideal, Alipay, Weixin, QuestionCircleRegular } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
@@ -39,8 +39,15 @@ function buyTarget(key) {
 }
 // The "Pay by ..." line: the methods Paddle offers here, as far as we can
 // name them honestly. Local methods (the ones Paddle itself lists first)
-// lead, then card, PayPal, Apple Pay and Google Pay. The Korean wallets are
-// left out to keep the line short; the checkout still offers them.
+// lead, then card, PayPal and Apple Pay. The Korean wallets are left out to
+// keep the line short; the checkout still offers them.
+//
+// Google Pay is left out too, though Paddle offers it in Chrome: there's no
+// telling Chrome apart from de-Googled Chromium browsers such as Helium,
+// which claim the "Google Chrome" brand and answer yes to a Google Pay
+// PaymentRequest query, yet Paddle's checkout doesn't show it there
+// (checked Nov 2026). Better to under-claim than name a method that
+// isn't offered.
 const PAYMENT_METHOD_NAMES = {
   upi: "UPI",
   pix: "Pix",
@@ -53,7 +60,6 @@ const PAYMENT_METHOD_NAMES = {
   card: "card",
   paypal: "PayPal",
   apple_pay: "Apple Pay",
-  google_pay: "Google Pay",
 };
 // Icons where Font Awesome has one; the rest are named in text only.
 // (Weixin is WeChat's own logo, standing in for WeChat Pay.)
@@ -64,20 +70,15 @@ const PAYMENT_METHOD_ICONS = {
   card: CreditCard,
   paypal: Paypal,
   apple_pay: ApplePay,
-  google_pay: GooglePay,
 };
-const GLOBAL_METHODS = ["card", "paypal", "apple_pay", "google_pay"];
-// Paddle lists the wallets whatever the browser, so only claim them where
-// the browser can actually use them: Apple Pay where Apple Pay on the web is
-// available (Safari), Google Pay in Google Chrome, which is where Paddle's
-// checkout shows it. Checked on mount: there is no `window` during the
-// build's server render.
+const GLOBAL_METHODS = ["card", "paypal", "apple_pay"];
+// Paddle lists apple_pay whatever the browser, so only claim it where the
+// browser can actually use it. Checked on mount: there is no `window`
+// during the build's server render.
 const canApplePay = ref(false);
-const canGooglePay = ref(false);
-const WALLET_AVAILABLE = { apple_pay: canApplePay, google_pay: canGooglePay };
 const paymentMethods = computed(() => {
   const listed = store.paymentMethods.value.filter(
-    (m) => m in PAYMENT_METHOD_NAMES && (WALLET_AVAILABLE[m]?.value ?? true),
+    (m) => m in PAYMENT_METHOD_NAMES && (m !== "apple_pay" || canApplePay.value),
   );
   const local = listed.filter((m) => !GLOBAL_METHODS.includes(m));
   const global = GLOBAL_METHODS.filter((m) => listed.includes(m));
@@ -105,10 +106,6 @@ onMounted(() => {
   } catch {
     // throws on an insecure origin; no Apple Pay there anyway
   }
-  // Chrome reports itself as the "Google Chrome" brand; other Chromium
-  // browsers (Edge, Brave, Opera) report their own names, and Safari and
-  // Firefox don't implement userAgentData at all.
-  canGooglePay.value = Boolean(navigator.userAgentData?.brands?.some((b) => b.brand === "Google Chrome"));
   loadStore();
   // Re-fetch prices when the URL fragment changes (e.g. #country=JP) so the
   // display reacts live without a reload; loadStore's guard no-ops when the
@@ -354,7 +351,7 @@ function trackBuy(button) {
        only the ones Paddle offers here (see paymentMethods) -->
   <div v-if="payWithText && !noPrice" :class="$style.payWith">
     {{ payWithText }}
-    <Icon v-for="m in payWithIcons" :key="m" :size="m === 'apple_pay' || m === 'google_pay' ? 28 : 16"
+    <Icon v-for="m in payWithIcons" :key="m" :size="m === 'apple_pay' ? 28 : 16"
       ><component :is="PAYMENT_METHOD_ICONS[m]"
     /></Icon>
   </div>
