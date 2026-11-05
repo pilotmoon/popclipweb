@@ -21,6 +21,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 </div>
 
+## Beta / Unreleased
+
+### Fixed
+
+- Fixed `popclip.openUrl` (and `openTemplateUrl`) throwing "not a valid url" when passed a `URL` object (regression in 2026.8.1).
+
+### Changed
+
+- Stay-visible actions only stay visible when the popclip was shown by mouse selectio. In keyboard mode, it dismisses.
+
 ## 2026.8.1 (6221)
 
 ### Added
