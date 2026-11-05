@@ -8,7 +8,7 @@ import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePadd
 import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
-import { Paypal, ApplePay, CreditCard, QuestionCircleRegular } from "@vicons/fa";
+import { Paypal, ApplePay, GooglePay, CreditCard, QuestionCircleRegular } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
@@ -39,8 +39,8 @@ function buyTarget(key) {
 }
 // The "Pay by ..." line: the methods Paddle offers here, as far as we can
 // name them honestly. Local methods (the ones Paddle itself lists first)
-// lead, then card, PayPal and Apple Pay. Google Pay and the Korean wallets
-// are left out to keep the line short; the checkout still offers them.
+// lead, then card, PayPal, Apple Pay and Google Pay. The Korean wallets are
+// left out to keep the line short; the checkout still offers them.
 const PAYMENT_METHOD_NAMES = {
   upi: "UPI",
   pix: "Pix",
@@ -53,16 +53,21 @@ const PAYMENT_METHOD_NAMES = {
   card: "card",
   paypal: "PayPal",
   apple_pay: "Apple Pay",
+  google_pay: "Google Pay",
 };
-const PAYMENT_METHOD_ICONS = { card: CreditCard, paypal: Paypal, apple_pay: ApplePay };
-const GLOBAL_METHODS = ["card", "paypal", "apple_pay"];
-// Paddle lists apple_pay whatever the browser, so only claim it where the
-// browser can actually use it. Checked on mount: there is no `window`
-// during the build's server render.
+const PAYMENT_METHOD_ICONS = { card: CreditCard, paypal: Paypal, apple_pay: ApplePay, google_pay: GooglePay };
+const GLOBAL_METHODS = ["card", "paypal", "apple_pay", "google_pay"];
+// Paddle lists the wallets whatever the browser, so only claim them where
+// the browser can actually use them: Apple Pay where Apple Pay on the web is
+// available (Safari), Google Pay in Google Chrome, which is where Paddle's
+// checkout shows it. Checked on mount: there is no `window` during the
+// build's server render.
 const canApplePay = ref(false);
+const canGooglePay = ref(false);
+const WALLET_AVAILABLE = { apple_pay: canApplePay, google_pay: canGooglePay };
 const paymentMethods = computed(() => {
   const listed = store.paymentMethods.value.filter(
-    (m) => m in PAYMENT_METHOD_NAMES && (m !== "apple_pay" || canApplePay.value),
+    (m) => m in PAYMENT_METHOD_NAMES && (WALLET_AVAILABLE[m]?.value ?? true),
   );
   const local = listed.filter((m) => !GLOBAL_METHODS.includes(m));
   const global = GLOBAL_METHODS.filter((m) => listed.includes(m));
@@ -90,6 +95,10 @@ onMounted(() => {
   } catch {
     // throws on an insecure origin; no Apple Pay there anyway
   }
+  // Chrome reports itself as the "Google Chrome" brand; other Chromium
+  // browsers (Edge, Brave, Opera) report their own names, and Safari and
+  // Firefox don't implement userAgentData at all.
+  canGooglePay.value = Boolean(navigator.userAgentData?.brands?.some((b) => b.brand === "Google Chrome"));
   loadStore();
   // Re-fetch prices when the URL fragment changes (e.g. #country=JP) so the
   // display reacts live without a reload; loadStore's guard no-ops when the
@@ -335,7 +344,7 @@ function trackBuy(button) {
        only the ones Paddle offers here (see paymentMethods) -->
   <div v-if="payWithText && !noPrice" :class="$style.payWith">
     {{ payWithText }}
-    <Icon v-for="m in payWithIcons" :key="m" :size="m === 'apple_pay' ? 28 : 16"
+    <Icon v-for="m in payWithIcons" :key="m" :size="m === 'apple_pay' || m === 'google_pay' ? 28 : 16"
       ><component :is="PAYMENT_METHOD_ICONS[m]"
     /></Icon>
   </div>
