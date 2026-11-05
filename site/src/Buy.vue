@@ -8,7 +8,7 @@ import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePadd
 import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
-import { Paypal, ApplePay, GooglePay, CreditCard, QuestionCircleRegular } from "@vicons/fa";
+import { Paypal, ApplePay, GooglePay, CreditCard, Ideal, Alipay, Weixin, QuestionCircleRegular } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
@@ -55,7 +55,17 @@ const PAYMENT_METHOD_NAMES = {
   apple_pay: "Apple Pay",
   google_pay: "Google Pay",
 };
-const PAYMENT_METHOD_ICONS = { card: CreditCard, paypal: Paypal, apple_pay: ApplePay, google_pay: GooglePay };
+// Icons where Font Awesome has one; the rest are named in text only.
+// (Weixin is WeChat's own logo, standing in for WeChat Pay.)
+const PAYMENT_METHOD_ICONS = {
+  ideal: Ideal,
+  wechat_pay: Weixin,
+  alipay: Alipay,
+  card: CreditCard,
+  paypal: Paypal,
+  apple_pay: ApplePay,
+  google_pay: GooglePay,
+};
 const GLOBAL_METHODS = ["card", "paypal", "apple_pay", "google_pay"];
 // Paddle lists the wallets whatever the browser, so only claim them where
 // the browser can actually use them: Apple Pay where Apple Pay on the web is
