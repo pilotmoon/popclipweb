@@ -8,7 +8,7 @@ import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePadd
 import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
-import { QuestionCircleRegular } from "@vicons/fa";
+import { Paypal, ApplePay, CreditCard, QuestionCircleRegular } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
@@ -37,6 +37,45 @@ function buyTarget(key) {
   const priceId = store.checkoutPriceIds.value[key];
   return priceId ? { product: key, priceId } : undefined;
 }
+// The "Pay by ..." line: the methods Paddle offers here, as far as we can
+// name them honestly. Local methods (the ones Paddle itself lists first)
+// lead, then card, PayPal and Apple Pay. Google Pay and the Korean wallets
+// are left out to keep the line short; the checkout still offers them.
+const PAYMENT_METHOD_NAMES = {
+  upi: "UPI",
+  pix: "Pix",
+  blik: "BLIK",
+  mb_way: "MB WAY",
+  ideal: "iDEAL",
+  bancontact: "Bancontact",
+  wechat_pay: "WeChat Pay",
+  alipay: "Alipay",
+  card: "card",
+  paypal: "PayPal",
+  apple_pay: "Apple Pay",
+};
+const PAYMENT_METHOD_ICONS = { card: CreditCard, paypal: Paypal, apple_pay: ApplePay };
+const GLOBAL_METHODS = ["card", "paypal", "apple_pay"];
+// Paddle lists apple_pay whatever the browser, so only claim it where the
+// browser can actually use it. Checked on mount: there is no `window`
+// during the build's server render.
+const canApplePay = ref(false);
+const paymentMethods = computed(() => {
+  const listed = store.paymentMethods.value.filter(
+    (m) => m in PAYMENT_METHOD_NAMES && (m !== "apple_pay" || canApplePay.value),
+  );
+  const local = listed.filter((m) => !GLOBAL_METHODS.includes(m));
+  const global = GLOBAL_METHODS.filter((m) => listed.includes(m));
+  return [...local, ...global];
+});
+const payWithText = computed(() => {
+  const names = paymentMethods.value.map((m) => PAYMENT_METHOD_NAMES[m]);
+  if (names.length === 0) return "";
+  const last = names.pop();
+  return `Pay by ${names.length ? `${names.join(", ")} or ` : ""}${last}`;
+});
+const payWithIcons = computed(() => paymentMethods.value.filter((m) => m in PAYMENT_METHOD_ICONS));
+
 const { openCheckout } = usePaddleCheckout();
 const { openCheckout: openBillingCheckout, initForTransactionCheckout } = usePaddleBillingCheckout();
 const { interceptPurchase } = useOutstandingPurchase();
@@ -46,6 +85,11 @@ function queryBool(val) {
 }
 
 onMounted(() => {
+  try {
+    canApplePay.value = Boolean(window.ApplePaySession?.canMakePayments());
+  } catch {
+    // throws on an insecure origin; no Apple Pay there anyway
+  }
   loadStore();
   // Re-fetch prices when the URL fragment changes (e.g. #country=JP) so the
   // display reacts live without a reload; loadStore's guard no-ops when the
@@ -287,6 +331,14 @@ function trackBuy(button) {
       </div>
     </div>
   </div>
+  <!-- payment methods, listed once rather than inside every button, and
+       only the ones Paddle offers here (see paymentMethods) -->
+  <div v-if="payWithText && !noPrice" :class="$style.payWith">
+    {{ payWithText }}
+    <Icon v-for="m in payWithIcons" :key="m" :size="m === 'apple_pay' ? 28 : 16"
+      ><component :is="PAYMENT_METHOD_ICONS[m]"
+    /></Icon>
+  </div>
   <div :class="isLoading || noPrice ? $style.infoLineLoading : $style.infoLine">
     <template v-if="isLoading">Loading prices...</template>
     <template v-else-if="noPrice">Could not load prices.</template>
@@ -396,6 +448,16 @@ function trackBuy(button) {
   margin: 8px 0 6px 0;
   min-width: 10em;
   text-decoration: none;
+}
+
+.payWith {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  margin-bottom: 4px;
 }
 
 .box div.prices {
