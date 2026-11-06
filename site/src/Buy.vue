@@ -349,12 +349,10 @@ function trackBuy(button) {
   </div>
   <!-- payment methods, listed once rather than inside every button, and
        only the ones Paddle offers here (see paymentMethods) -->
-  <div v-if="payWithText && !noPrice" :class="$style.payWith">
+  <!-- <div v-if="payWithText && !noPrice" :class="$style.payWith">
     {{ payWithText }}
-    <Icon v-for="m in payWithIcons" :key="m" :size="m === 'apple_pay' ? 28 : 16"
-      ><component :is="PAYMENT_METHOD_ICONS[m]"
-    /></Icon>
-  </div>
+    <Icon v-for="m in payWithIcons" :key="m" :size="m === 'apple_pay' ? 28 : 16"><component :is="PAYMENT_METHOD_ICONS[m]" /></Icon>
+  </div> -->
   <div :class="isLoading || noPrice ? $style.infoLineLoading : $style.infoLine">
     <template v-if="isLoading">Loading prices...</template>
     <template v-else-if="noPrice">Could not load prices.</template>
@@ -375,20 +373,6 @@ function trackBuy(button) {
       ></span>
     </template>
   </div>
-  <!-- <div v-if="isLizhi" class="danger custom-block">
-    <p class="custom-block-title">Warning: Avoid 🇨🇳 Chinese Scam Sellers!</p>
-    <p>
-      Please note that the <b>only authorized company</b> to sell PopClip licenses in China is <b>DIGITALYCHEE (数码荔枝)</b>. Their official websites are: ✅
-      <a href="https://lizhi.shop">lizhi.shop</a>, ✅ <a href="https://digitalychee.taobao.com">digitalychee.taobao.com</a>.
-    </p>
-
-    <p>
-      ❌🙅 Any other seller offering a license key is unauthorized. The seller will claim that the license is genuine, but in fact they obtained a single
-      license key and sold it to multiple individuals. This is in violation of the terms of sale. The seller keeps all your money and does not pay me. All such
-      license keys discovered will be canceled. For more information, please see the
-      <a href="/ipr-china">Intellectual Property Rights Statement</a>.
-    </p>
-  </div> -->
 </template>
 
 <style module>
