@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 </div>
 
-## Beta / Unreleased
+## 2026.11
 
 ### Fixed
 
@@ -29,7 +29,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- Stay-visible actions only stay visible when the popclip was shown by mouse selectio. In keyboard mode, it dismisses.
+- Stay-visible actions only stay visible when the popclip was shown by mouse selection. In keyboard mode, it dismisses.
+- PopClip's internal Markdown conversion now supports HTML tables and also handles content selected from terminals and code editors better.
 
 ## 2026.8.1 (6221)
 

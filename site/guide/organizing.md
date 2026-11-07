@@ -91,6 +91,8 @@ A separator has two styles, chosen from its right-click menu:
 - **Page Break**: forces the following actions onto the next page of the bar,
   so you can control exactly where the bar splits.
 
+You can use one separator to choose where newly installed actions go. Select **Insert New Actions Above** or **Insert New Actions Below** from its right click menu.
+
 ## Show as icon or text
 
 Each action button in the PopClip bar can be displayed as an icon or as a text
