@@ -7,6 +7,7 @@
     "docs:build": "npm run check && ./makeEnv && source .env && npm run docs:build-ci",
     "docs:build-ci": "npx patch-package && vitepress build site",
     "check": "tsc --noEmit",
+    "tweaks:sync": "cp ../PopClip/Docs/tweaks.json extras/tweaks.json",
     "format:md": "prettier --write \"**/*.md\"",
     "types:link": "npm --prefix ../popclip-types run build && npm install --no-save ../popclip-types && readlink node_modules/@popclip/types",
     "types:unlink": "npm install && npm ls @popclip/types"

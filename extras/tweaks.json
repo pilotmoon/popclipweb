@@ -1,0 +1,215 @@
+{
+  "tweaks" : [
+    {
+      "default" : true,
+      "key" : "KeepPastedTextOnClipboard",
+      "listing" : "general",
+      "summary" : "Turn this off to put the previous clipboard contents back after a paste action. An extension can still choose for itself with the `restore` option.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "CopyOnSearch",
+      "listing" : "general",
+      "summary" : "Search actions also copy the selected text. An extension can still choose for itself with the `copy` option.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "CopyOnShow",
+      "listing" : "general",
+      "summary" : "When a PopClip action shows text, it also copies it.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "NewTabsAtEnd",
+      "listing" : "general",
+      "summary" : "When a link opens in the current browser, the new tab goes at the end of the tab bar instead of to the right of the current tab.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "AlwaysRespectPositionSetting",
+      "listing" : "general",
+      "summary" : "The bar always appears above or below the selection as set in Appearance, whichever way you dragged to select.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "IgnoreAutoSelect",
+      "listing" : "general",
+      "summary" : "PopClip doesn't appear when a single click into a field selects its contents, such as a browser address bar.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : 40,
+      "key" : "PopupDismissDistance",
+      "listing" : "general",
+      "max" : 400,
+      "min" : 0,
+      "summary" : "How far the pointer can move away from the bar before it starts to dismiss.",
+      "timing" : "live",
+      "type" : "number",
+      "unit" : "pt"
+    },
+    {
+      "default" : 0.5,
+      "key" : "PopupDismissTime",
+      "listing" : "general",
+      "max" : 10,
+      "min" : 0,
+      "summary" : "How long the bar waits to dismiss once the pointer is beyond the dismiss distance.",
+      "timing" : "live",
+      "type" : "number",
+      "unit" : "s"
+    },
+    {
+      "default" : 0.95,
+      "key" : "PopupWidthFactor",
+      "listing" : "general",
+      "max" : 1,
+      "min" : 0.1,
+      "summary" : "The widest the bar can be, as a fraction of the screen width.",
+      "timing" : "live",
+      "type" : "number"
+    },
+    {
+      "default" : 1350,
+      "key" : "PopupMaxWidth",
+      "listing" : "general",
+      "max" : 10000,
+      "min" : 0,
+      "summary" : "The widest the bar can be, in points. 0 means no limit.",
+      "timing" : "live",
+      "type" : "number",
+      "unit" : "pt"
+    },
+    {
+      "default" : false,
+      "key" : "PopupRevealContextMenuOnHover",
+      "listing" : "general",
+      "summary" : "Context-style submenus open when the pointer rests on them, not only on click.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "ClassicStatusIcon",
+      "listing" : "general",
+      "summary" : "Use the original menu bar icon.",
+      "timing" : "restart",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableToolTips",
+      "listing" : "general",
+      "summary" : "Don't show tooltips when hovering over the bar's buttons.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "ScreenshotMode",
+      "listing" : "general",
+      "summary" : "Key presses don't dismiss the bar, so screenshot shortcuts can capture it.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "EnableSettableDetection",
+      "listing" : "experiments",
+      "summary" : "Hide Cut and Paste when Accessibility reports that a field isn't editable. Off by default because some apps report it wrongly.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DeepCapture",
+      "listing" : "troubleshooting",
+      "summary" : "Grab the rich clipboard copy even when Accessibility already returned the text. Try this if actions lose formatting in a particular app.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableTargetedKeys",
+      "listing" : "troubleshooting",
+      "summary" : "Send synthetic key presses through the session event tap instead of directly to the app being acted on.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableBrowserProcessTargeting",
+      "listing" : "troubleshooting",
+      "summary" : "Address browsers by bundle ID only, without telling apart several running copies of the same browser by process.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableBrowserTabScripts",
+      "listing" : "troubleshooting",
+      "summary" : "Open links the standard way, without using AppleScript to place the new tab.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableBrowserInfoCapture",
+      "listing" : "troubleshooting",
+      "summary" : "Don't fetch the current browser page's URL and title for actions.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableInitialDisplay",
+      "listing" : "troubleshooting",
+      "summary" : "Always open the bar at the top level, ignoring submenus that ask to open straight away.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableScriptRunnerXPC",
+      "listing" : "troubleshooting",
+      "summary" : "Run AppleScript actions inside PopClip instead of in the separate, cancellable script runner.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableIconCache",
+      "listing" : "troubleshooting",
+      "summary" : "Render icons fresh every time instead of using the memory and disk caches.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "DisableEntitlementSniff",
+      "listing" : "troubleshooting",
+      "summary" : "Don't scan JavaScript for APIs that need an entitlement. This only affects diagnostics.",
+      "timing" : "live",
+      "type" : "bool"
+    },
+    {
+      "default" : false,
+      "key" : "NoLoginShell",
+      "listing" : "troubleshooting",
+      "summary" : "Shell script actions run in a plain shell, so profile files such as `.zprofile` aren't read.",
+      "timing" : "live",
+      "type" : "bool"
+    }
+  ]
+}
