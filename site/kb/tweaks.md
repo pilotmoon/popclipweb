@@ -8,7 +8,7 @@ import { data } from './tweaks.data';
 
 # Tweaks
 
-Tweaks are extra settings that don't appear in PopClip's settings window (because I don't like the settings to be cluttered up with too many confusing options!) They are for fine-tuning, experiments and troubleshooting.You can change them with the `defaults` command in Terminal.
+Tweaks are extra settings that don't appear in PopClip's settings window. They are for fine-tuning, experiments and troubleshooting. You can change them with the `defaults` command in Terminal.
 
 Settings that are currently tweaks could become main options in the future. If you find a setting is particularly useful for you, please [let me know](/support)! Your feedback always shapes the app.
 
