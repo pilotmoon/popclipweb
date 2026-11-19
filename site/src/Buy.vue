@@ -17,6 +17,11 @@ import { getRegionGlobe } from "./helpers/countries/getRegionGlobe";
 
 const store = useStoreState();
 
+// Short purple note shown under a product's price (once prices have loaded).
+const PRICE_MESSAGES = {
+  popclip_lifetime: "★ Great Deal ★",
+};
+
 const isLizhi = computed(() =>
      config.lizhi.countries.includes(store.countryCode.value),
 );
@@ -273,8 +278,8 @@ function trackBuy(button) {
           store.paddleProducts.value.popclip_2year.taxNote
         }}</span>
       </div>
-      <div v-if="store.paddleProducts.value.popclip_2year?.message && !isLizhi" :class="$style.priceMessage">
-        <span>{{ store.paddleProducts.value.popclip_2year?.message }}</span>
+      <div v-if="PRICE_MESSAGES.popclip_2year && store.paddleProducts.value.popclip_2year && !isLizhi" :class="$style.priceMessage">
+        <span>{{ PRICE_MESSAGES.popclip_2year }}</span>
       </div>
       <div v-if="store.paddleProducts.value.popclip_2year?.coupon" :class="$style.couponInfo">
         <span>{{ `Coupon "${store.paddleProducts.value.popclip_2year?.coupon ?? ""}" applied` }}</span>
@@ -327,8 +332,8 @@ function trackBuy(button) {
           store.paddleProducts.value.popclip_lifetime.taxNote
         }}</span>
       </div>
-      <div v-if="store.paddleProducts.value.popclip_lifetime?.message && !isLizhi" :class="$style.priceMessage">
-        <span>{{ store.paddleProducts.value.popclip_lifetime?.message }}</span>
+      <div v-if="PRICE_MESSAGES.popclip_lifetime && store.paddleProducts.value.popclip_lifetime && !isLizhi" :class="$style.priceMessage">
+        <span>{{ PRICE_MESSAGES.popclip_lifetime }}</span>
       </div>
       <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon" :class="$style.couponInfo">
         <span>{{ `Coupon "${store.paddleProducts.value.popclip_lifetime?.coupon ?? ""}" applied` }}</span>
