@@ -96,11 +96,22 @@ const ZProductsResult = z.object({
 });
 type ProductsResult = z.infer<typeof ZProductsResult>;
 
+// The coupon to price with: one named in the URL (#coupon=) wins, otherwise
+// the caller's default (the buy page passes the running sale's code, if any).
+// Paddle applies only one discount, so the two never combine.
+export function effectiveCoupon(defaultCoupon?: string | null) {
+  return readParams().get("coupon") ?? defaultCoupon ?? "";
+}
+
 // don't call this during SSR!
-export async function loadStore() {
+//
+// The default coupon is part of the guard key below, so moving from the buy
+// page (sale prices) to a page that loads without it (offer, student discount)
+// re-fetches undiscounted prices rather than reusing the sale ones.
+export async function loadStore(defaultCoupon?: string | null) {
   const store = useStoreState();
 
-  const coupon = readParams().get("coupon") ?? "";
+  const coupon = effectiveCoupon(defaultCoupon);
   const country = readParams().get("country") ?? "";
   // Guard key includes country so a #country= change re-fetches (it doesn't
   // change the coupon). Pipe-joined; neither a coupon nor a country code

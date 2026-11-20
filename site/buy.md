@@ -17,7 +17,7 @@ PopClip is available as a one-time purchase by buying a license key.
 
 <Buy />
 
-::: tip Summary of terms
+<!--::: tip Summary of terms
 
 **2 years of free updates** means you will receive free updates to all versions
 of PopClip released within 2 years of the purchase date. After that, you can
@@ -31,14 +31,14 @@ versions of PopClip.
 can use PopClip on up to 5 personal Macs at the same time, at home and at work.
 You may not share the license key with others.
 
-:::
+:::-->
 
 ::: info 📝 Message from the developer
 
 _Hi, this is Nick, the developer of PopClip. I have been maintaining PopClip for
 [15 years](https://forum.popclip.app/t/happy-15th-birthday-to-popclip/3846) already and am committed to keeping it updated and improving it for
 many years to come. I hope you will consider supporting my work by buying a
-license. Thank you._
+license. Thank you!_
 
 :::
 
@@ -68,7 +68,7 @@ license key at a discounted rate. Please [email me](/support) for a quote.
 
 ## Student Discount
 
-Students in full-time education can claim a half-price 2-year Standard License, which
+Students in full-time education can claim a 2-year Standard License for only $6, which
 also comes with a 25% discount on a Lifetime License upgrade afterwards. To
 claim the student discount, go to the [student discount page](/student-discount).
 

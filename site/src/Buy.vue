@@ -2,13 +2,14 @@
 import { onMounted, onUnmounted, computed, ref } from "vue";
 import { useSessionStorage } from "@vueuse/core";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
-import { loadStore, useStoreState, roundPrice } from "./composables/useStoreState";
+import { loadStore, useStoreState, roundPrice, effectiveCoupon } from "./composables/useStoreState";
+import { SALE, activeSaleCoupon, saleLastDayLabel } from "./data/sale";
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
 import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePaddleBillingCheckout";
 import { useOutstandingPurchase } from "./composables/useOutstandingPurchase";
 import OutstandingPurchase from "./OutstandingPurchase.vue";
 import PreCheckoutDialog from "./PreCheckoutDialog.vue";
-import { Paypal, ApplePay, CreditCard, Ideal, Alipay, Weixin, QuestionCircleRegular } from "@vicons/fa";
+import { Paypal, ApplePay, CreditCard, Ideal, Alipay, Weixin, QuestionCircleRegular, Check } from "@vicons/fa";
 import { Icon } from "@vicons/utils";
 import config from "./config/config.json";
 import { readParams } from "./helpers/readParams";
@@ -17,7 +18,23 @@ import { getRegionGlobe } from "./helpers/countries/getRegionGlobe";
 
 const store = useStoreState();
 
+// The running sale's code (null outside the sale window), applied by default
+// to prices and checkout unless the URL names another coupon. Settled on
+// mount: there is no clock or hostname worth trusting during the build's
+// server render.
+const saleCoupon = ref(null);
+// What to say under a discounted price: the sale's name for the sale code,
+// otherwise the code itself.
+function couponLabel(code) {
+  return code === SALE.coupon ? SALE.label : `Coupon "${code}" applied`;
+}
+
+// Whether the Standard (2-year) License is offered on this page. Hidden
+// for now: only Lifetime is on sale.
+const SHOW_STANDARD = false;
+
 // Short purple note shown under a product's price (once prices have loaded).
+// Hidden while a sale is running, so it doesn't compete with the sale label.
 const PRICE_MESSAGES = {
   popclip_lifetime: "★ Great Deal ★",
 };
@@ -111,11 +128,12 @@ onMounted(() => {
   } catch {
     // throws on an insecure origin; no Apple Pay there anyway
   }
-  loadStore();
+  saleCoupon.value = activeSaleCoupon();
+  loadStore(saleCoupon.value);
   // Re-fetch prices when the URL fragment changes (e.g. #country=JP) so the
   // display reacts live without a reload; loadStore's guard no-ops when the
   // coupon+country key is unchanged.
-  const reloadOnHashChange = () => loadStore();
+  const reloadOnHashChange = () => loadStore(saleCoupon.value);
   window.addEventListener("hashchange", reloadOnHashChange);
   onUnmounted(() => window.removeEventListener("hashchange", reloadOnHashChange));
   // #name= and #email= params (e.g. from the PopClip upgrade flow) seed
@@ -189,7 +207,7 @@ async function openPaddleCheckout(product) {
 }
 
 async function openBillingCheckoutFor(product, { email, name, ownerEmail }) {
-  const coupon = readParams().get("coupon") ?? null;
+  const coupon = effectiveCoupon(saleCoupon.value) || null;
   await openBillingCheckout({
     priceId: product.priceId,
     discountCode: coupon,
@@ -243,16 +261,26 @@ function trackBuy(button) {
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
         </div> -->
-    <div :class="$style.box">
+    <div v-if="SHOW_STANDARD" :class="$style.box">
       <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
       <span :class="$style.title">Standard License</span><br />
-      <span :class="$style.subtitle">2️⃣ 2 years of free updates<br /></span>
-      <!-- <span :class="$style.subtitle">✅ Use on up to 5 Macs<br /></span> -->
-      <span :class="$style.subtitle">✅ Keep the last version you receive<br /></span>
-      <div :class="$style.features">
-        <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on up to 5 Macs</span>
-        <span :class="$style.feature"><span :class="$style.featureIcon">☁️</span> Free iCloud sync</span>
-      </div>
+      <ul :class="$style.checklist">
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span><b>2 years</b> of free updates</span>
+        </li>
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span>Keep the last version you receive</span>
+        </li>
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span>Use on up to <b>5 Macs</b></span>
+        </li>
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span>Free iCloud sync</span>
+        </li>
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span><b>30-day</b> no-questions-asked refund</span>
+        </li>
+      </ul>
       <span :class="$style.small"><a href="/terms">Full license terms</a><br /></span>
 
       <hr v-if="isLizhi" />
@@ -278,11 +306,11 @@ function trackBuy(button) {
           store.paddleProducts.value.popclip_2year.taxNote
         }}</span>
       </div>
-      <div v-if="PRICE_MESSAGES.popclip_2year && store.paddleProducts.value.popclip_2year && !isLizhi" :class="$style.priceMessage">
+      <div v-if="PRICE_MESSAGES.popclip_2year && !saleCoupon && store.paddleProducts.value.popclip_2year && !isLizhi" :class="$style.priceMessage">
         <span>{{ PRICE_MESSAGES.popclip_2year }}</span>
       </div>
       <div v-if="store.paddleProducts.value.popclip_2year?.coupon" :class="$style.couponInfo">
-        <span>{{ `Coupon "${store.paddleProducts.value.popclip_2year?.coupon ?? ""}" applied` }}</span>
+        <span>{{ couponLabel(store.paddleProducts.value.popclip_2year.coupon) }}</span>
       </div>
       <span :class="$style.subtitle">One-time purchase<br /></span>
 
@@ -292,22 +320,31 @@ function trackBuy(button) {
         <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
           <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store" /> </a
         ><br />
-        <span :class="$style.price">{{ roundPrice(store.lizhiStandardPrice.value) }}</span
-        ><br />
+        <span :class="$style.price">{{ roundPrice(store.lizhiStandardPrice.value) }}</span><br />
         <span :class="$style.subtitle">One-time purchase<br /></span>
       </div>
     </div>
 
-    <div :class="$style.box">
+    <div :class="[$style.box, $style.featured]">
       <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
       <span :class="$style.title">Lifetime License</span><br />
-      <span :class="$style.subtitle">✅ Lifetime free updates<br /></span>
-      <!-- <span :class="$style.subtitle">✅ Use on up to 5 Macs<br /></span> -->
-      <span :class="$style.subtitle">✅ Never expires<br /></span>
-      <div :class="$style.features">
-        <span :class="$style.feature"><span :class="$style.featureIcon">💻</span> Use on up to 5 Macs</span>
-        <span :class="$style.feature"><span :class="$style.featureIcon">☁️</span> Free iCloud sync</span>
-      </div>
+      <ul :class="$style.checklist">
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span>Pay once, use forever — no subscription</span>
+        </li>
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span><b>Lifetime</b> free updates</span>
+        </li>
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span>Use on up to <b>5 Macs</b></span>
+        </li>
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span>Free iCloud sync</span>
+        </li>
+        <li>
+          <Icon :class="$style.check"><Check /></Icon><span>30-day no-questions-asked refund</span>
+        </li>
+      </ul>
       <span :class="$style.small"><a href="/terms">Full license terms</a><br /></span>
       <hr v-if="isLizhi" />
       <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br /></span>
@@ -318,7 +355,7 @@ function trackBuy(button) {
           openPaddleCheckout(buyTarget('popclip_lifetime'));
         "
         theme="brand"
-        size="medium"
+        size="big"
       >
         Buy Lifetime License</AaButton
       ><br />
@@ -332,13 +369,13 @@ function trackBuy(button) {
           store.paddleProducts.value.popclip_lifetime.taxNote
         }}</span>
       </div>
-      <div v-if="PRICE_MESSAGES.popclip_lifetime && store.paddleProducts.value.popclip_lifetime && !isLizhi" :class="$style.priceMessage">
+      <div v-if="PRICE_MESSAGES.popclip_lifetime && !saleCoupon && store.paddleProducts.value.popclip_lifetime && !isLizhi" :class="$style.priceMessage">
         <span>{{ PRICE_MESSAGES.popclip_lifetime }}</span>
       </div>
       <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon" :class="$style.couponInfo">
-        <span>{{ `Coupon "${store.paddleProducts.value.popclip_lifetime?.coupon ?? ""}" applied` }}</span>
+        <span>{{ couponLabel(store.paddleProducts.value.popclip_lifetime.coupon) }}</span>
       </div>
-      <span :class="$style.subtitle">One-time purchase<br /></span>
+      <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon === SALE.coupon" :class="$style.saleEnds">Offer until {{ saleLastDayLabel() }}</div>
 
       <div v-if="isLizhi">
         <hr />
@@ -346,9 +383,7 @@ function trackBuy(button) {
         <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
           <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store" /> </a
         ><br />
-        <span :class="$style.price">{{ roundPrice(store.lizhiLifetimePrice.value) }}</span
-        ><br />
-        <span :class="$style.subtitle">One-time purchase<br /></span>
+        <span :class="$style.price">{{ roundPrice(store.lizhiLifetimePrice.value) }}</span><br />
       </div>
     </div>
   </div>
@@ -424,25 +459,31 @@ function trackBuy(button) {
   font-size: 14px;
 }
 
-.features {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  font-size: 13px;
-  color: var(--vp-c-text-2);
-  margin: 4px 0 6px;
+/* What's included: a left-aligned list, centred as a block in the box.
+   `.box ul` outranks VitePress's `.vp-doc ul` / `.vp-doc li + li`, which
+   would otherwise add bullets, indent and spacing. */
+.box ul.checklist {
+  width: fit-content;
+  list-style: none;
+  text-align: left;
+  padding: 0;
+  margin: 6px auto 8px;
+  font-size: 14px;
 }
 
-.feature {
+.box ul.checklist li {
   display: flex;
-  align-items: center;
-  gap: 4px;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 3px 0;
 }
 
-.featureIcon {
+/* top-aligned with the item's first line (24px line, 13px icon) */
+.check {
+  flex-shrink: 0;
+  margin-top: 5px;
   font-size: 13px;
-  filter: grayscale(1);
-  opacity: 0.65;
+  color: var(--vp-c-green-2);
 }
 
 .box span.small {
@@ -493,6 +534,12 @@ function trackBuy(button) {
 .box div.couponInfo {
   font-size: 14px;
   font-weight: 600;
+  color: var(--vp-c-green-1);
+}
+
+/* Same green as the sale label above it, but not bold. */
+.box div.saleEnds {
+  font-size: 14px;
   color: var(--vp-c-green-1);
 }
 
@@ -547,6 +594,44 @@ function trackBuy(button) {
   text-align: center;
 
   color: var(--vp-c-text-2);
+}
+
+/* The featured product: bigger, with the brand-coloured border used on the
+   offer pages' main card (OfferCard). */
+.box.featured {
+  width: 100%;
+  max-width: 32em;
+  padding: 20px 20px 24px;
+  border: 2px solid var(--vp-c-brand-1);
+  border-radius: 12px;
+}
+
+.box.featured span.title {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 2px 0 4px;
+}
+
+.box.featured ul.checklist {
+  font-size: 15px;
+}
+
+.box.featured span.price {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.box.featured span.listPrice {
+  font-size: 17px;
+  color: var(--vp-c-text-2);
+}
+
+/* Just under the 22px price, so the sale reads as part of the price. */
+.box.featured div.couponInfo {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 2px;
 }
 
 @media (max-width: 768px) {
