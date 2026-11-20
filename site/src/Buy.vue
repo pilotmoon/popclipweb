@@ -330,7 +330,7 @@ function trackBuy(button) {
       <span :class="$style.title">Lifetime License</span><br />
       <ul :class="$style.checklist">
         <li>
-          <Icon :class="$style.check"><Check /></Icon><span>Pay once, use forever — no subscription</span>
+          <Icon :class="$style.check"><Check /></Icon><span><b>Pay once, use forever</b> — no subscription</span>
         </li>
         <li>
           <Icon :class="$style.check"><Check /></Icon><span><b>Lifetime</b> free updates</span>
