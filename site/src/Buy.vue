@@ -36,6 +36,35 @@ const PRICE_MESSAGES = {
   popclip_lifetime: "★ Great Deal ★",
 };
 
+// The licenses on offer, in the order shown (cheapest first; on narrow
+// screens the featured one moves to the top). Feature lines are trusted
+// static HTML, kept parallel so the cards compare line for line. A feature
+// is a string, or { html, highlight } for the line that sets a plan apart.
+const PLANS = [
+  {
+    key: "popclip_2year",
+    title: "Standard License",
+    features: [
+      "<b>2 years</b> of free updates,<br>keep the last version you receive",
+      "Use on up to <b>5 Macs</b>",
+      "Free iCloud sync",
+    ],
+    lizhiPrice: () => store.lizhiStandardPrice.value,
+  },
+  {
+    key: "popclip_lifetime",
+    title: "Lifetime License",
+    featured: true,
+    badge: "Best value",
+    features: [
+      { html: "<b>Lifetime</b> free updates", highlight: true },
+      "Use on up to <b>5 Macs</b>",
+      "Free iCloud sync",
+    ],
+    lizhiPrice: () => store.lizhiLifetimePrice.value,
+  },
+];
+
 const isLizhi = computed(() =>
      config.lizhi.countries.includes(store.countryCode.value),
 );
@@ -278,102 +307,56 @@ function trackBuy(button) {
             <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
         </div> -->
 
-    <div :class="[$style.box, $style.featured]">
-      <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
-      <span :class="$style.title">Lifetime License</span><br />
+    <!-- The two licenses side by side, same layout, so they compare line
+         for line. Lifetime gets a slight lead: brand border, a badge and
+         the brand-coloured button. -->
+    <div v-for="plan in PLANS" :key="plan.key" :class="[$style.box, plan.featured && $style.featured]">
+      <div v-if="plan.badge" :class="$style.badge">{{ plan.badge }}</div>
+      <div :class="$style.title">{{ plan.title }}</div>
+      <div :class="$style.prices">
+        <span v-if="products[plan.key]?.isDiscounted" :class="$style.listPrice">{{ roundPrice(products[plan.key].displayListPrice ?? "") }}</span>
+        <span :class="$style.price">{{ roundPrice(products[plan.key]?.displayPrice ?? "") || "\u00a0" }}</span>
+        <span v-if="products[plan.key]?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
+        <span v-else-if="products[plan.key]?.taxNote && !isLizhi" :class="$style.tax">{{ products[plan.key].taxNote }}</span>
+      </div>
+      <div v-if="PRICE_MESSAGES[plan.key] && !saleCoupon && products[plan.key] && !isLizhi" :class="$style.priceMessage">
+        <span>{{ PRICE_MESSAGES[plan.key] }}</span>
+      </div>
+      <div v-if="products[plan.key]?.coupon" :class="$style.couponInfo">
+        <span>{{ couponLabel(products[plan.key].coupon) }}</span>
+      </div>
+      <div v-if="products[plan.key]?.coupon === SALE.coupon" :class="$style.saleEnds">Offer until {{ saleLastDayLabel() }}</div>
       <ul :class="$style.checklist">
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span><b>Pay once, use forever</b> — no subscription</span>
-        </li>
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span><b>Lifetime</b> free updates</span>
-        </li>
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span>Use on up to <b>5 Macs</b></span>
-        </li>
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span>Free iCloud sync</span>
-        </li>
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span>30-day no-questions-asked refund</span>
+        <li v-for="feature in plan.features" :key="feature.html ?? feature" :class="feature.highlight && $style.highlight">
+          <Icon :class="$style.check"><Check /></Icon><span v-html="feature.html ?? feature" />
         </li>
       </ul>
-      <span :class="$style.small"><a href="/terms">Full license terms</a><br /></span>
-      <hr v-if="isLizhi" />
-      <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br /></span>
-      <AaButton
-        :class="$style.buybutton"
-        @click="
-          trackBuy('Paddle');
-          openPaddleCheckout(buyTarget('popclip_lifetime'));
-        "
-        theme="brand"
-        size="big"
-      >
-        Buy Lifetime License</AaButton
-      ><br />
-      <div :class="$style.prices">
-        <span v-if="products.popclip_lifetime?.isDiscounted" :class="$style.listPrice">{{
-          roundPrice(products.popclip_lifetime.displayListPrice ?? "")
-        }}</span>
-        <span :class="$style.price">{{ roundPrice(products.popclip_lifetime?.displayPrice ?? "") }} </span>
-        <span v-if="products.popclip_lifetime?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
-        <span v-else-if="products.popclip_lifetime?.taxNote && !isLizhi" :class="$style.tax">{{
-          products.popclip_lifetime.taxNote
-        }}</span>
-      </div>
-      <div v-if="PRICE_MESSAGES.popclip_lifetime && !saleCoupon && products.popclip_lifetime && !isLizhi" :class="$style.priceMessage">
-        <span>{{ PRICE_MESSAGES.popclip_lifetime }}</span>
-      </div>
-      <div v-if="products.popclip_lifetime?.coupon" :class="$style.couponInfo">
-        <span>{{ couponLabel(products.popclip_lifetime.coupon) }}</span>
-      </div>
-      <div v-if="products.popclip_lifetime?.coupon === SALE.coupon" :class="$style.saleEnds">Offer until {{ saleLastDayLabel() }}</div>
-
-      <div v-if="isLizhi">
-        <hr />
-        <span :class="$style.subtitle">Buy from DIGITALYCHEE<br /></span>
-        <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
-          <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store" /> </a
-        ><br />
-        <span :class="$style.price">{{ roundPrice(store.lizhiLifetimePrice.value) }}</span><br />
-      </div>
-    </div>
-    <!-- Standard License: a quieter second option under the featured
-         Lifetime card -->
-    <div :class="[$style.box, $style.secondary]">
-      <div :class="$style.secondaryTitle">Standard License</div>
-      <div :class="$style.secondaryDesc">
-        2 years of free updates, then keep the last version you receive. Same 5 Macs, iCloud sync and 30-day refund.
-      </div>
-      <div :class="$style.secondaryBuy">
-        <span :class="$style.secondaryPrice">
-          <span v-if="products.popclip_2year?.isDiscounted" :class="$style.listPrice">{{
-            roundPrice(products.popclip_2year.displayListPrice ?? "")
-          }}</span>
-          {{ roundPrice(products.popclip_2year?.displayPrice ?? "") }}
-          <span v-if="products.popclip_2year?.taxNote && !isLizhi" :class="$style.tax">{{
-            products.popclip_2year.taxNote
-          }}</span>
-        </span>
+      <div :class="$style.buyArea">
+        <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br /></span>
         <AaButton
+          :class="$style.buybutton"
           @click="
             trackBuy('Paddle');
-            openPaddleCheckout(buyTarget('popclip_2year'));
+            openPaddleCheckout(buyTarget(plan.key));
           "
-          theme="alt"
-          size="small"
+          :theme="plan.featured ? 'brand' : 'alt'"
+          :size="plan.featured ? 'big' : 'medium'"
         >
-          Buy Standard License
-        </AaButton>
-      </div>
-      <div v-if="isLizhi" :class="$style.secondaryDesc">
-        Or buy from
-        <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">DIGITALYCHEE</a>
-        for {{ roundPrice(store.lizhiStandardPrice.value) }}
+          Buy {{ plan.title }}</AaButton
+        >
+        <div :class="$style.buyNote">One-time purchase, no subscription<br />30-day no-questions-asked refund</div>
+        <div v-if="isLizhi">
+          <hr />
+          <span :class="$style.subtitle">Buy from DIGITALYCHEE<br /></span>
+          <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
+            <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store" /> </a
+          ><br />
+          <span :class="$style.price">{{ roundPrice(plan.lizhiPrice()) }}</span>
+        </div>
       </div>
     </div>
   </div>
+  <div :class="$style.terms"><a href="/terms">Full license terms</a></div>
   <!-- payment methods, listed once rather than inside every button, and
        only the ones Paddle offers here (see paymentMethods) -->
   <!-- <div v-if="payWithText && !noPrice" :class="$style.payWith">
@@ -403,109 +386,96 @@ function trackBuy(button) {
 </template>
 
 <style module>
+/* Two cards side by side, the featured one wider and taller; one column on
+   narrow screens. */
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  /* center the boxes */
-  width: 100%;
+  display: grid;
+  grid-template-columns: 4fr 5fr;
+  gap: 16px;
+  align-items: center;
+  margin: 16px 0 8px;
 }
 
 .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
   background-color: var(--vp-c-bg-soft);
-  border-radius: 8px;
-  width: 49%;
-  padding: 12px;
-  margin: 8px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 24px 20px 20px;
   text-align: center;
   box-sizing: border-box;
 }
 
-.box div.product {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 8px;
-  gap: 4px;
+/* The lead offer: brand border, as on the offer pages' main card. */
+.box.featured {
+  border: 2px solid var(--vp-c-brand-1);
 }
 
-.box span.title {
-  font-size: 16px;
+/* The other offer: a step smaller all round. */
+.box:not(.featured) {
+  padding: 18px 16px 16px;
+}
+
+.box:not(.featured) div.title {
+  font-size: 18px;
+}
+
+.box:not(.featured) span.price {
+  font-size: 20px;
+}
+
+.box:not(.featured) ul.checklist {
+  font-size: 14px;
+}
+
+.box:not(.featured) .buybutton {
+  min-width: 0;
+}
+
+/* Sits on the top border. */
+.box div.badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 12px;
+  border-radius: 999px;
+  background-color: var(--vp-c-brand-1);
+  color: var(--vp-c-white);
+  font-size: 12px;
   font-weight: 600;
+  line-height: 22px;
+  white-space: nowrap;
 }
 
-.box img {
-  display: inline-block;
-  height: 24px;
+.box div.title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
 }
 
 .box span.subtitle {
   font-size: 14px;
 }
 
-/* What's included: a left-aligned list, centred as a block in the box.
-   `.box ul` outranks VitePress's `.vp-doc ul` / `.vp-doc li + li`, which
-   would otherwise add bullets, indent and spacing. */
-.box ul.checklist {
-  width: fit-content;
-  list-style: none;
-  text-align: left;
-  padding: 0;
-  margin: 6px auto 8px;
-  font-size: 14px;
-}
-
-.box ul.checklist li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin: 3px 0;
-}
-
-/* top-aligned with the item's first line (24px line, 13px icon) */
-.check {
-  flex-shrink: 0;
-  margin-top: 5px;
-  font-size: 13px;
-  color: var(--vp-c-green-2);
-}
-
-.box span.small {
-  font-size: 12px;
-}
-
-.box .buybutton {
-  margin: 8px 0 6px 0;
-  min-width: 10em;
-  text-decoration: none;
-}
-
-.payWith {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: var(--vp-c-text-2);
-  margin-bottom: 4px;
-}
-
 .box div.prices {
   display: flex;
   justify-content: center;
+  align-items: baseline;
   gap: 8px;
 }
 
 .box span.price {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .box span.listPrice {
-  font-size: 14px;
+  font-size: 17px;
+  color: var(--vp-c-text-2);
   text-decoration: line-through;
 }
 
@@ -519,8 +489,8 @@ function trackBuy(button) {
 }
 
 .box div.couponInfo {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--vp-c-green-1);
 }
 
@@ -530,20 +500,78 @@ function trackBuy(button) {
   color: var(--vp-c-green-1);
 }
 
-.box span.priceLoading {
-  font-size: 14px;
+/* What's included: a left-aligned list, centred as a block in the box.
+   `.box ul` outranks VitePress's `.vp-doc ul` / `.vp-doc li + li`, which
+   would otherwise add bullets, indent and spacing. */
+.box ul.checklist {
+  width: fit-content;
+  list-style: none;
+  text-align: left;
+  padding: 14px 0 0;
+  /* auto top margin: sits above the button, so the two cards' lists line
+     up even when only one has sale lines above it */
+  margin: auto auto 16px;
+  font-size: 15px;
+}
+
+.box ul.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 3px 0;
+}
+
+/* The line that sets a plan apart: all bold. */
+.box ul.checklist li.highlight {
+  font-weight: 600;
+}
+
+/* top-aligned with the item's first line (24px line, 13px icon) */
+.check {
+  flex-shrink: 0;
+  margin-top: 5px;
+  font-size: 13px;
+  color: var(--vp-c-green-2);
+}
+
+.box div.buyNote {
+  margin-top: 6px;
+  font-size: 13px;
   color: var(--vp-c-text-2);
-  display: inline-block;
+}
+
+.box div.buyArea {
+  width: 100%;
+}
+
+.box .buybutton {
+  min-width: 12em;
+  text-decoration: none;
 }
 
 .box img.buybadge {
   display: block;
-  margin: 8px 0 0px 0;
+  margin: 8px auto 0;
   height: 40px;
 }
 
 .box a {
   display: inline-block;
+}
+
+.terms {
+  text-align: center;
+  font-size: 13px;
+}
+
+.payWith {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  margin-bottom: 4px;
 }
 
 .infoLine {
@@ -579,97 +607,18 @@ function trackBuy(button) {
 
 .infoLineLoading {
   text-align: center;
-
   color: var(--vp-c-text-2);
 }
 
-/* The featured product: bigger, with the brand-coloured border used on the
-   offer pages' main card (OfferCard). */
-.box.featured {
-  width: 100%;
-  max-width: 32em;
-  padding: 20px 20px 24px;
-  border: 2px solid var(--vp-c-brand-1);
-  border-radius: 12px;
-}
+/* One column, with the featured card first. */
+@media (max-width: 640px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 
-.box.featured span.title {
-  display: inline-block;
-  font-size: 22px;
-  font-weight: 700;
-  margin: 2px 0 4px;
-}
-
-.box.featured ul.checklist {
-  font-size: 15px;
-}
-
-.box.featured span.price {
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.box.featured span.listPrice {
-  font-size: 17px;
-  color: var(--vp-c-text-2);
-}
-
-/* Just under the 22px price, so the sale reads as part of the price. */
-.box.featured div.couponInfo {
-  font-size: 19px;
-  font-weight: 700;
-  margin-top: 2px;
-}
-
-/* The secondary product: a plain, compact card under the featured one, with
-   a neutral border like the offer pages' secondary card. */
-.box.secondary {
-  width: 100%;
-  max-width: 32em;
-  padding: 14px 20px;
-  border: 1px solid var(--vp-c-border);
-  border-radius: 12px;
-}
-
-.secondaryTitle {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.box div.secondaryDesc {
-  margin: 2px 0 10px;
-  font-size: 14px;
-  color: var(--vp-c-text-2);
-}
-
-.box div.secondaryDesc:last-child {
-  margin: 8px 0 0;
-}
-
-.secondaryBuy {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-}
-
-.secondaryPrice {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.secondaryPrice span.listPrice,
-.secondaryPrice span.tax {
-  font-size: 14px;
-  font-weight: 400;
-}
-
-@media (max-width: 768px) {
-  .box {
-    width: 100%;
+  .box.featured {
+    order: -1;
   }
 }
 </style>

@@ -2,6 +2,7 @@
 titleTemplate: false
 editLink: false
 lastUpdated: false
+aside: false
 ---
 
 <script setup>
