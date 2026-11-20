@@ -29,9 +29,6 @@ function couponLabel(code) {
   return code === SALE.coupon ? SALE.label : `Coupon "${code}" applied`;
 }
 
-// Whether the Standard (2-year) License is offered on this page. Hidden
-// for now: only Lifetime is on sale.
-const SHOW_STANDARD = false;
 
 // Short purple note shown under a product's price (once prices have loaded).
 // Hidden while a sale is running, so it doesn't compete with the sale label.
@@ -280,69 +277,6 @@ function trackBuy(button) {
             </a><br>
             <span :class="$style.price">{{ roundPrice(store.masPrice.value) }}</span>
         </div> -->
-    <div v-if="SHOW_STANDARD" :class="$style.box">
-      <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
-      <span :class="$style.title">Standard License</span><br />
-      <ul :class="$style.checklist">
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span><b>2 years</b> of free updates</span>
-        </li>
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span>Keep the last version you receive</span>
-        </li>
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span>Use on up to <b>5 Macs</b></span>
-        </li>
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span>Free iCloud sync</span>
-        </li>
-        <li>
-          <Icon :class="$style.check"><Check /></Icon><span><b>30-day</b> no-questions-asked refund</span>
-        </li>
-      </ul>
-      <span :class="$style.small"><a href="/terms">Full license terms</a><br /></span>
-
-      <hr v-if="isLizhi" />
-      <span v-if="isLizhi" :class="$style.subtitle">Buy from Paddle<br /></span>
-      <AaButton
-        :class="$style.buybutton"
-        @click="
-          trackBuy('Paddle');
-          openPaddleCheckout(buyTarget('popclip_2year'));
-        "
-        theme="brand"
-        size="medium"
-      >
-        Buy Standard License</AaButton
-      ><br />
-      <div :class="$style.prices">
-        <span v-if="products.popclip_2year?.isDiscounted" :class="$style.listPrice">{{
-          roundPrice(products.popclip_2year.displayListPrice ?? "")
-        }}</span>
-        <span :class="$style.price">{{ roundPrice(products.popclip_2year?.displayPrice ?? "") }}</span>
-        <span v-if="products.popclip_2year?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
-        <span v-else-if="products.popclip_2year?.taxNote && !isLizhi" :class="$style.tax">{{
-          products.popclip_2year.taxNote
-        }}</span>
-      </div>
-      <div v-if="PRICE_MESSAGES.popclip_2year && !saleCoupon && products.popclip_2year && !isLizhi" :class="$style.priceMessage">
-        <span>{{ PRICE_MESSAGES.popclip_2year }}</span>
-      </div>
-      <div v-if="products.popclip_2year?.coupon" :class="$style.couponInfo">
-        <span>{{ couponLabel(products.popclip_2year.coupon) }}</span>
-      </div>
-      <span :class="$style.subtitle">One-time purchase<br /></span>
-
-      <div v-if="isLizhi">
-        <hr />
-        <span :class="$style.subtitle">Buy from DIGITALYCHEE<br /></span>
-        <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">
-          <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store" /> </a
-        ><br />
-        <span :class="$style.price">{{ roundPrice(store.lizhiStandardPrice.value) }}</span><br />
-        <span :class="$style.subtitle">One-time purchase<br /></span>
-      </div>
-    </div>
 
     <div :class="[$style.box, $style.featured]">
       <div :class="$style.product"><img src="/icon128.png" /> PopClip for macOS</div>
@@ -403,6 +337,40 @@ function trackBuy(button) {
           <img :class="$style.buybadge" src="/badge-lizhi.svg" alt="Buy from DIGITALYCHEE Store" /> </a
         ><br />
         <span :class="$style.price">{{ roundPrice(store.lizhiLifetimePrice.value) }}</span><br />
+      </div>
+    </div>
+    <!-- Standard License: a quieter second option under the featured
+         Lifetime card -->
+    <div :class="[$style.box, $style.secondary]">
+      <div :class="$style.secondaryTitle">Standard License</div>
+      <div :class="$style.secondaryDesc">
+        2 years of free updates, then keep the last version you receive. Same 5 Macs, iCloud sync and 30-day refund.
+      </div>
+      <div :class="$style.secondaryBuy">
+        <span :class="$style.secondaryPrice">
+          <span v-if="products.popclip_2year?.isDiscounted" :class="$style.listPrice">{{
+            roundPrice(products.popclip_2year.displayListPrice ?? "")
+          }}</span>
+          {{ roundPrice(products.popclip_2year?.displayPrice ?? "") }}
+          <span v-if="products.popclip_2year?.taxNote && !isLizhi" :class="$style.tax">{{
+            products.popclip_2year.taxNote
+          }}</span>
+        </span>
+        <AaButton
+          @click="
+            trackBuy('Paddle');
+            openPaddleCheckout(buyTarget('popclip_2year'));
+          "
+          theme="alt"
+          size="small"
+        >
+          Buy Standard License
+        </AaButton>
+      </div>
+      <div v-if="isLizhi" :class="$style.secondaryDesc">
+        Or buy from
+        <a :href="store.lizhiUrl.value" target="_blank" @click="trackBuy('DIGITALYCHEE')">DIGITALYCHEE</a>
+        for {{ roundPrice(store.lizhiStandardPrice.value) }}
       </div>
     </div>
   </div>
@@ -651,6 +619,52 @@ function trackBuy(button) {
   font-size: 19px;
   font-weight: 700;
   margin-top: 2px;
+}
+
+/* The secondary product: a plain, compact card under the featured one, with
+   a neutral border like the offer pages' secondary card. */
+.box.secondary {
+  width: 100%;
+  max-width: 32em;
+  padding: 14px 20px;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 12px;
+}
+
+.secondaryTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.box div.secondaryDesc {
+  margin: 2px 0 10px;
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+}
+
+.box div.secondaryDesc:last-child {
+  margin: 8px 0 0;
+}
+
+.secondaryBuy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.secondaryPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.secondaryPrice span.listPrice,
+.secondaryPrice span.tax {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 @media (max-width: 768px) {
