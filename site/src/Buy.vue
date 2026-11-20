@@ -339,7 +339,7 @@ function trackBuy(button) {
             trackBuy('Paddle');
             openPaddleCheckout(buyTarget(plan.key));
           "
-          :theme="plan.featured ? 'brand' : 'alt'"
+          theme="brand"
           :size="plan.featured ? 'big' : 'medium'"
         >
           Buy {{ plan.title }}</AaButton
