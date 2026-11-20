@@ -34,14 +34,14 @@ You may not share the license key with others.
 
 :::-->
 
-::: info 📝 Message from the developer
+<!--::: info 📝 Message from the developer
 
 _Hi, this is Nick, the developer of PopClip. I have been maintaining PopClip for
 15 years already and am committed to keeping it updated and improving it for
 many years to come. I hope you will consider supporting my work by buying a
 license. Thank you!_
 
-:::
+:::-->
 
 ## Setapp
 
