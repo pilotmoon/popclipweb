@@ -27,6 +27,10 @@ export const useStoreState = createGlobalState(() => {
   const countryCode = useStorage("popclip-store-countryCode", "");
   const countryName = useStorage("popclip-store-countryName", "");
   const paddleProducts = useStorage("popclip-store-paddleProducts", {});
+  // The load key (coupon|country) the stored products were priced for, so a
+  // page can tell whether remembered prices are the ones it wants (e.g. the
+  // buy page during a sale) before fresh ones arrive.
+  const paddleProductsKey = useStorage("popclip-store-paddleProductsKey", "");
   // Paddle's identifiers for the payment methods its checkout offers at the
   // quoted price and location ("card", "paypal", "upi", ...), in Paddle's
   // order. Persisted and replaced alongside the prices it came with. Says
@@ -47,6 +51,7 @@ export const useStoreState = createGlobalState(() => {
     countryCode,
     countryName,
     paddleProducts,
+    paddleProductsKey,
     paymentMethods,
     // masPrice,
     // masUrl,
@@ -103,45 +108,76 @@ export function effectiveCoupon(defaultCoupon?: string | null) {
   return readParams().get("coupon") ?? defaultCoupon ?? "";
 }
 
+// The key a load with this default coupon would use: the coupon actually
+// priced with and the #country= override. Pipe-joined; neither a coupon nor
+// a country code contains a pipe.
+export function storeLoadKey(defaultCoupon?: string | null) {
+  return `${effectiveCoupon(defaultCoupon)}|${readParams().get("country") ?? ""}`;
+}
+
+// The key of the latest load a page asked for, or null if none has yet.
+// Responses arrive in any order, so this decides which one gets applied.
+let wantedKey: string | null = null;
+
 // don't call this during SSR!
 //
 // The default coupon is part of the guard key below, so moving from the buy
 // page (sale prices) to a page that loads without it (offer, student discount)
 // re-fetches undiscounted prices rather than reusing the sale ones.
-export async function loadStore(defaultCoupon?: string | null) {
+//
+// `background` is for the site-wide prefetch in the layout (StoreLoader). It
+// runs on every page, alongside any load the page itself makes, and must
+// never win: on a fresh load of the buy page both fire at once, and if the
+// prefetch's undiscounted prices arrived last they would replace the sale
+// prices. So a background load is skipped once a page has asked for prices,
+// and its result is dropped if a page asks while it is in flight. Page loads
+// apply only if they are still the latest one asked for.
+export async function loadStore(
+  defaultCoupon?: string | null,
+  { background = false } = {},
+) {
   const store = useStoreState();
 
   const coupon = effectiveCoupon(defaultCoupon);
   const country = readParams().get("country") ?? "";
   // Guard key includes country so a #country= change re-fetches (it doesn't
-  // change the coupon). Pipe-joined; neither a coupon nor a country code
-  // contains a pipe.
-  const loadKey = `${coupon}|${country}`;
+  // change the coupon).
+  const loadKey = storeLoadKey(defaultCoupon);
+  if (background) {
+    if (wantedKey !== null) return;
+  } else {
+    wantedKey = loadKey;
+  }
   if (store.isLoadedForCoupon.value === loadKey) {
     log(
       `Store already loaded for ${store.countryCode.value} (key '${loadKey}')`,
     );
     return;
   }
+  const isCurrent = () =>
+    background ? wantedKey === null : wantedKey === loadKey;
 
   if (isBillingActive()) {
-    return loadStoreBilling(store, coupon, country, loadKey);
+    return loadStoreBilling(store, coupon, country, loadKey, isCurrent);
   }
 
   log("Loading prices", { coupon });
   const fetchResponse = await fetch(
     `${config.pilotmoon.frontendRoot}/store/getProducts?products=${Object.keys(config.pilotmoon.paddleProducts)}&coupons=${coupon}`,
   );
+  if (!isCurrent()) return;
   if (!fetchResponse.ok) {
     log("Failed to load prices");
     store.loadFailed.value = true;
     return;
   }
   const productData = ZProductsResult.parse(await fetchResponse.json());
+  if (!isCurrent()) return;
   const countryInfo = getCountryInfo(productData.countryCode);
   store.countryCode.value = productData.countryCode;
   store.countryName.value = countryInfo.countryName;
   store.paddleProducts.value = preprocessProducts(productData);
+  store.paddleProductsKey.value = loadKey;
   store.loadFailed.value = false;
   store.isLoadedForCoupon.value = loadKey;
   log(`Prices loaded for ${store.countryCode.value}`);
@@ -240,6 +276,9 @@ async function loadStoreBilling(
   // checkout screen. Allowed in production.
   country: string,
   loadKey: string,
+  // false once this load has been superseded; checked after every await,
+  // before anything is written to the store
+  isCurrent: () => boolean,
 ) {
   const sandbox = useDeploymentInfo().isLocalhost;
   const endpoint = sandbox
@@ -259,12 +298,15 @@ async function loadStoreBilling(
   } catch (e) {
     // fetch itself rejected (offline, DNS, CORS)
     log("Failed to load prices (billing)", e);
+    if (!isCurrent()) return;
     store.loadFailed.value = true;
     return;
   }
+  if (!isCurrent()) return;
   if (!fetchResponse.ok) {
-    store.loadFailed.value = true;
     const body = await readErrorBody(fetchResponse);
+    if (!isCurrent()) return;
+    store.loadFailed.value = true;
     if (body?.error.code === "country_not_supported") {
       log("No price available for this location");
       // Forget what a previous visit remembered. These are localStorage
@@ -273,6 +315,7 @@ async function loadStoreBilling(
       // they stopped being this visitor's prices. Showing no price is
       // honest; showing a stale one isn't.
       store.paddleProducts.value = {};
+      store.paddleProductsKey.value = loadKey;
       store.paymentMethods.value = [];
       store.countryCode.value = "";
       store.countryName.value = "";
@@ -290,6 +333,7 @@ async function loadStoreBilling(
     return;
   }
   const result = ZBillingProductsResult.parse(await fetchResponse.json());
+  if (!isCurrent()) return;
 
   const processed: Record<string, ProcessedProduct> = {};
   const configuredProducts = config.pilotmoon.paddleProducts;
@@ -361,6 +405,7 @@ async function loadStoreBilling(
     ? getCountryInfo(result.countryCode).countryName
     : "";
   store.paddleProducts.value = z.record(ZProcessedProduct).parse(processed);
+  store.paddleProductsKey.value = loadKey;
   store.paymentMethods.value = result.paymentMethods ?? [];
   store.loadFailed.value = false;
   store.checkoutPriceIds.value = {};

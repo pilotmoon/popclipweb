@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, computed, ref } from "vue";
 import { useSessionStorage } from "@vueuse/core";
 import { getFlagEmoji } from "./helpers/getFlagEmoji";
-import { loadStore, useStoreState, roundPrice, effectiveCoupon } from "./composables/useStoreState";
+import { loadStore, useStoreState, roundPrice, effectiveCoupon, storeLoadKey } from "./composables/useStoreState";
 import { SALE, activeSaleCoupon, saleLastDayLabel } from "./data/sale";
 import { usePaddleCheckout } from "./composables/usePaddleCheckout";
 import { usePaddleBillingCheckout, isBillingActive } from "./composables/usePaddleBillingCheckout";
@@ -45,8 +45,23 @@ const isLizhi = computed(() =>
 const regionallyPriced = computed(() => isRegionallyPriced(store.countryCode.value));
 // Show the globe whose face matches the region we are quoting prices for.
 const regionGlobe = computed(() => getRegionGlobe(store.countryCode.value));
-const isLoading = computed(() => store.isLoadedForCoupon.value === null && !store.loadFailed.value);
-const hasPrices = computed(() => Object.keys(store.paddleProducts.value).length > 0);
+// The load key (coupon|country) this page wants prices for: the sale code
+// during a sale, or a #coupon= / #country= from the URL. Set on mount and on
+// hash changes.
+const wantedKey = ref(null);
+// The prices to show: the stored ones, but only if they were priced for the
+// key we want. Remembered prices from another page or an earlier visit
+// would otherwise show full price for a moment before the sale prices
+// arrive; better to say "Loading prices..." until the right ones are here.
+// (A repeat visit during the sale still shows its remembered sale prices at
+// once.)
+const products = computed(() =>
+  wantedKey.value !== null && store.paddleProductsKey.value === wantedKey.value ? store.paddleProducts.value : {},
+);
+const isLoading = computed(
+  () => wantedKey.value === null || (store.isLoadedForCoupon.value !== wantedKey.value && !store.loadFailed.value),
+);
+const hasPrices = computed(() => Object.keys(products.value).length > 0);
 // We couldn't get a price. That is the whole of what we know and the whole of
 // what the page says: the buy buttons stay live, and if Paddle won't sell to
 // this visitor it can say so itself at the checkout.
@@ -129,11 +144,15 @@ onMounted(() => {
     // throws on an insecure origin; no Apple Pay there anyway
   }
   saleCoupon.value = activeSaleCoupon();
+  wantedKey.value = storeLoadKey(saleCoupon.value);
   loadStore(saleCoupon.value);
   // Re-fetch prices when the URL fragment changes (e.g. #country=JP) so the
   // display reacts live without a reload; loadStore's guard no-ops when the
   // coupon+country key is unchanged.
-  const reloadOnHashChange = () => loadStore(saleCoupon.value);
+  const reloadOnHashChange = () => {
+    wantedKey.value = storeLoadKey(saleCoupon.value);
+    loadStore(saleCoupon.value);
+  };
   window.addEventListener("hashchange", reloadOnHashChange);
   onUnmounted(() => window.removeEventListener("hashchange", reloadOnHashChange));
   // #name= and #email= params (e.g. from the PopClip upgrade flow) seed
@@ -297,20 +316,20 @@ function trackBuy(button) {
         Buy Standard License</AaButton
       ><br />
       <div :class="$style.prices">
-        <span v-if="store.paddleProducts.value.popclip_2year?.isDiscounted" :class="$style.listPrice">{{
-          roundPrice(store.paddleProducts.value.popclip_2year.displayListPrice ?? "")
+        <span v-if="products.popclip_2year?.isDiscounted" :class="$style.listPrice">{{
+          roundPrice(products.popclip_2year.displayListPrice ?? "")
         }}</span>
-        <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_2year?.displayPrice ?? "") }}</span>
-        <span v-if="store.paddleProducts.value.popclip_2year?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
-        <span v-else-if="store.paddleProducts.value.popclip_2year?.taxNote && !isLizhi" :class="$style.tax">{{
-          store.paddleProducts.value.popclip_2year.taxNote
+        <span :class="$style.price">{{ roundPrice(products.popclip_2year?.displayPrice ?? "") }}</span>
+        <span v-if="products.popclip_2year?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
+        <span v-else-if="products.popclip_2year?.taxNote && !isLizhi" :class="$style.tax">{{
+          products.popclip_2year.taxNote
         }}</span>
       </div>
-      <div v-if="PRICE_MESSAGES.popclip_2year && !saleCoupon && store.paddleProducts.value.popclip_2year && !isLizhi" :class="$style.priceMessage">
+      <div v-if="PRICE_MESSAGES.popclip_2year && !saleCoupon && products.popclip_2year && !isLizhi" :class="$style.priceMessage">
         <span>{{ PRICE_MESSAGES.popclip_2year }}</span>
       </div>
-      <div v-if="store.paddleProducts.value.popclip_2year?.coupon" :class="$style.couponInfo">
-        <span>{{ couponLabel(store.paddleProducts.value.popclip_2year.coupon) }}</span>
+      <div v-if="products.popclip_2year?.coupon" :class="$style.couponInfo">
+        <span>{{ couponLabel(products.popclip_2year.coupon) }}</span>
       </div>
       <span :class="$style.subtitle">One-time purchase<br /></span>
 
@@ -360,22 +379,22 @@ function trackBuy(button) {
         Buy Lifetime License</AaButton
       ><br />
       <div :class="$style.prices">
-        <span v-if="store.paddleProducts.value.popclip_lifetime?.isDiscounted" :class="$style.listPrice">{{
-          roundPrice(store.paddleProducts.value.popclip_lifetime.displayListPrice ?? "")
+        <span v-if="products.popclip_lifetime?.isDiscounted" :class="$style.listPrice">{{
+          roundPrice(products.popclip_lifetime.displayListPrice ?? "")
         }}</span>
-        <span :class="$style.price">{{ roundPrice(store.paddleProducts.value.popclip_lifetime?.displayPrice ?? "") }} </span>
-        <span v-if="store.paddleProducts.value.popclip_lifetime?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
-        <span v-else-if="store.paddleProducts.value.popclip_lifetime?.taxNote && !isLizhi" :class="$style.tax">{{
-          store.paddleProducts.value.popclip_lifetime.taxNote
+        <span :class="$style.price">{{ roundPrice(products.popclip_lifetime?.displayPrice ?? "") }} </span>
+        <span v-if="products.popclip_lifetime?.isTaxed && !isLizhi" :class="$style.tax">+ tax</span>
+        <span v-else-if="products.popclip_lifetime?.taxNote && !isLizhi" :class="$style.tax">{{
+          products.popclip_lifetime.taxNote
         }}</span>
       </div>
-      <div v-if="PRICE_MESSAGES.popclip_lifetime && !saleCoupon && store.paddleProducts.value.popclip_lifetime && !isLizhi" :class="$style.priceMessage">
+      <div v-if="PRICE_MESSAGES.popclip_lifetime && !saleCoupon && products.popclip_lifetime && !isLizhi" :class="$style.priceMessage">
         <span>{{ PRICE_MESSAGES.popclip_lifetime }}</span>
       </div>
-      <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon" :class="$style.couponInfo">
-        <span>{{ couponLabel(store.paddleProducts.value.popclip_lifetime.coupon) }}</span>
+      <div v-if="products.popclip_lifetime?.coupon" :class="$style.couponInfo">
+        <span>{{ couponLabel(products.popclip_lifetime.coupon) }}</span>
       </div>
-      <div v-if="store.paddleProducts.value.popclip_lifetime?.coupon === SALE.coupon" :class="$style.saleEnds">Offer until {{ saleLastDayLabel() }}</div>
+      <div v-if="products.popclip_lifetime?.coupon === SALE.coupon" :class="$style.saleEnds">Offer until {{ saleLastDayLabel() }}</div>
 
       <div v-if="isLizhi">
         <hr />
