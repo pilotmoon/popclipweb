@@ -251,8 +251,20 @@ async function openPaddleCheckout(product) {
   }
 }
 
+// The discount code to open a product's checkout with. The sale code goes
+// only to products the price preview actually discounted with it: the sale
+// discount may be restricted to some products (Lifetime), and Paddle shows an
+// error at the checkout when given a code that doesn't apply. A code from the
+// URL (#coupon=) is always passed through, as the visitor asked for it.
+function checkoutCoupon(product) {
+  const coupon = effectiveCoupon(saleCoupon.value);
+  if (!coupon) return null;
+  if (coupon === SALE.coupon && product.coupon !== coupon) return null;
+  return coupon;
+}
+
 async function openBillingCheckoutFor(product, { email, name, ownerEmail }) {
-  const coupon = effectiveCoupon(saleCoupon.value) || null;
+  const coupon = checkoutCoupon(product);
   await openBillingCheckout({
     priceId: product.priceId,
     discountCode: coupon,
