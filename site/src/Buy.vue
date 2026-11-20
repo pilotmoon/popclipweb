@@ -344,7 +344,7 @@ function trackBuy(button) {
         >
           Buy {{ plan.title }}</AaButton
         >
-        <div :class="$style.buyNote">One-time purchase, no subscription<br />30-day no-questions-asked refund</div>
+        <div :class="$style.buyNote">One-time purchase, no subscription</div>
         <div v-if="isLizhi">
           <hr />
           <span :class="$style.subtitle">Buy from DIGITALYCHEE<br /></span>
@@ -356,7 +356,7 @@ function trackBuy(button) {
       </div>
     </div>
   </div>
-  <div :class="$style.terms"><a href="/terms">Full license terms</a></div>
+  <div :class="$style.terms">All purchases come with a 30-day money-back guarantee. <a href="/terms">Full license terms</a></div>
   <!-- payment methods, listed once rather than inside every button, and
        only the ones Paddle offers here (see paymentMethods) -->
   <!-- <div v-if="payWithText && !noPrice" :class="$style.payWith">
@@ -574,12 +574,14 @@ function trackBuy(button) {
   margin-bottom: 4px;
 }
 
+/* Same small size as the guarantee line above it. */
 .infoLine {
   text-align: center;
+  font-size: 13px;
 }
 
 .regionalNote {
-  font-size: 0.85em;
+  font-size: inherit;
 }
 
 /* Muted green so the note reads as a status, not something to click. */
@@ -607,6 +609,7 @@ function trackBuy(button) {
 
 .infoLineLoading {
   text-align: center;
+  font-size: 13px;
   color: var(--vp-c-text-2);
 }
 
