@@ -99,8 +99,8 @@ Your entitlement to future updates depends on the type of license you have:
 ### Charges for additional features
 
 For all types of license, further purchases or subscription payments may
-be required to access additional features that were not part of the product
-at the time of purchase.
+be required to access services provided online such as API access (for example, AI or translation services),
+or to access additional features that were not part of the product at the time of purchase.
 
 ## App Store purchases
 
