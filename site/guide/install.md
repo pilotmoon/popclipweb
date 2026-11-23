@@ -78,27 +78,33 @@ By now, you should have a copy of the PopClip app in the Applications folder (or
 in the Setapp folder inside the Applications folder) on your Mac. Double-click
 the PopClip app to launch it.
 
-### Granting Accessibility permission
+### Granting Device Control and Data Access permission
 
 When you first launch PopClip, its settings window will appear on the on screen
-with the message: _Accessibility access is required._
+with the message: Device Control and Data Access access is required.
+
+::: tip "Accessibility"
+
+On macOS 26 and earlier, "Device Control and Data Access" is called "Accessibility". The screenshots in this guide show macOS 26.
+
+:::
 
 ![Accessibility request message](./media/shot-ax-request-2025.9.jpg "PopClip requesting Accessibility permission")
 
-#### Why is Accessibility permission needed?
+#### Why is Device Control and Data Access permission needed?
 
 PopClip uses a macOS feature called the Accessibility API to read the text you
-select in other apps. Since this is an essential part of PopClip's operation,
-you cannot use PopClip without enabling Accessibility access.
+select in other apps. In System Settings, the permission needed to access this is called "Device Control and Data Access". Since this is an essential part of PopClip's operation,
+you cannot use PopClip without enabling access.
 
 PopClip only uses the Accessibility API to read the text you select. All
 processing is done locally on your Mac and no selected text is stored or
 transmitted anywhere, except when you explicitly invoke an internet-connected
 action such as a web search. See also [Privacy Policy](/privacy).
 
-#### How to grant Accessibility permission
+#### How to grant Device Control and Data Access permission
 
-Click the Request Accessibility Access button and a macOS dialog appears:
+Click the Request Device Control and Data Access button and a macOS dialog appears:
 
 ![Accessibility request dialog](./media/shot-ax-dialog-tahoe.jpg "macOS Accessibility Access dialog")
 
