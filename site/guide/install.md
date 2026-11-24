@@ -83,13 +83,13 @@ the PopClip app to launch it.
 When you first launch PopClip, its settings window will appear on the on screen
 with the message: Device Control and Data Access access is required.
 
-::: tip "Accessibility"
+::: tip Also known as "Accessibility"
 
-On macOS 26 and earlier, "Device Control and Data Access" is called "Accessibility". The screenshots in this guide show macOS 26.
+On macOS 26 and earlier, "Device Control and Data Access" was called "Accessibility". The screenshots in this guide show macOS 27.
 
 :::
 
-![Accessibility request message](./media/shot-ax-request-2025.9.jpg "PopClip requesting Accessibility permission")
+![Accessibility request message](./media/shot-ax-request-2026.11.png "PopClip requesting Device Control And Data Access")
 
 #### Why is Device Control and Data Access permission needed?
 
@@ -106,12 +106,12 @@ action such as a web search. See also [Privacy Policy](/privacy).
 
 Click the Request Device Control and Data Access button and a macOS dialog appears:
 
-![Accessibility request dialog](./media/shot-ax-dialog-tahoe.jpg "macOS Accessibility Access dialog")
+![Accessibility request dialog](./media/shot-ax-dialog-goldengate.png "macOS Device Control And Data Access dialog")
 
 Now click Open System Settings and you will be taken to the Security & Privacy
 pane of System Settings. On macOS 26.0 and above it looks like this:
 
-![Accessibility settings](./media/shot-ax-settings-tahoe.jpg "macOS Accessibility settings in the Privacy & Security pane")
+![Accessibility settings](./media/shot-ax-settings-goldengate.png "macOS Device Control And Data Access settings in the Privacy & Security pane")
 
 Toggle the slider for PopClip to on. You will be prompted to enter your password
 to confirm the change.
